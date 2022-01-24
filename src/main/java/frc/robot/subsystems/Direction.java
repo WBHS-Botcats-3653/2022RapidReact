@@ -4,27 +4,33 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.util.sendable.Sendable;
+import edu.wpi.first.wpilibj.ADIS16470_IMU;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import ctre
-
-public class DriveTrain extends SubsystemBase {
-  /** Creates a new ExampleSubsystem. */
-  public DriveTrain() {
-
-    WPI_TalonSRX right;
-
-    WPI_TalonSRX left;
+/**
+ * Wrapper class to gyro on Roborio.
+ */
+public class Direction {
+  private static Direction m_singleton;
+  private ADIS16470_IMU m_gyro;
+  
+  private Direction() {
+    m_gyro=new ADIS16470_IMU();
+    m_gyro.calibrate();
   }
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
+  public Sendable getGyro() {
+    return m_gyro;
   }
 
-  @Override
-  public void simulationPeriodic() {
-    // This method will be called once per scheduler run during simulation
+  public double getAngle() {
+    return m_gyro.getAngle();
+  }
+
+  public static Direction getInstance() {
+    if (m_singleton==null) {
+      m_singleton=new Direction();
+    }
+    return m_singleton;
   }
 }
