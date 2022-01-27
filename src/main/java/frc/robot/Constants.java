@@ -12,4 +12,21 @@ package frc.robot;
  * <p>It is advised to statically import this class (or one of its inner classes) wherever the
  * constants are needed, to reduce verbosity.
  */
-public final class Constants {}
+public final class Constants {
+	/*Holds ALL the Motor Controller IDs
+	 *<String motorControllerName, int ID>
+	 *Feel free to change I thought a dictionary would be better than multiple variables but idk either way works (Remove if all good)
+	 *URGENT!!! ID NAMES HAVE NOT BEEN CONFIRMED. MUST UPDATE IDS. DO NOT RUN CODE ON ROBOT WITHOUT UPDATING WITH CORRECT IDS!
+	 *URGENT!!! ID NAMES HAVE NOT BEEN CONFIRMED. MUST UPDATE IDS. DO NOT RUN CODE ON ROBOT WITHOUT UPDATING WITH CORRECT IDS!
+	 *URGENT!!! ID NAMES HAVE NOT BEEN CONFIRMED. MUST UPDATE IDS. DO NOT RUN CODE ON ROBOT WITHOUT UPDATING WITH CORRECT IDS!
+	 *Remove the above 3 comments (and this one) when the IDs have been updated
+	 */
+	public static final Hashtable<String, Integer> MCID=new Hashtable<>() {{
+		put("Wheel Front Left", 0);
+		put("Wheel Front Right", 1);
+		put("Wheel Back Left", 2);
+		put("Wheel Back Right", 3);
+		put("Arm", 4);
+		put("Intake", 5);
+	}};
+}
