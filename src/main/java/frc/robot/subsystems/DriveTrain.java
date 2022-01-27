@@ -5,26 +5,62 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import ctre
+import edu.wpi.first.MotorSafety;
+import edu.wpi.first.motorcontrol.PWMMotorController;
+import edu.wpi.first.motorcontrol.PWMVictorSPX;
+import frc.robot.Constants;
+import frc.robot.OI;
 
 public class DriveTrain extends SubsystemBase {
-  /** Creates a new ExampleSubsystem. */
-  public DriveTrain() {
+	private DriveTrain driveTrain=null;
+	public OI input=OI.getInstance();
+	public DifferentialDrive diffDrive;
 
-    WPI_TalonSRX right;
+	//Constructor
+	public DriveTrain() {
+		//Left side wheel motors
+		VictorSPX driveFrontLeft=new VictorSPX(Constants.MCID.get("Wheel Front Left"));
+		VictorSPX driveBackLeft=new VictorSPX(Constants.MCID.get("Wheel Back Left"));
+		MotorControllerGroup driveLeft=new MotorControllerGroup(driveFrontLeft, driveBackLeft);
+		//Right side wheel motors
+		VictorSPX driveFrontRight=new VictorSPX(Constants.MCID.get("Wheel Front Right"));
+		VictorSPX driveBackRight=new VictorSPX(Constants.MCID.get("Wheel Back Right"));
+		MotorControllerGroup driveRight=new MotorControllerGroup(driveFrontRight, driveBackRight);
+		//Creates differential drive
+		diffDrive=new DifferentialDrive(driveLeft, driveRight);
+		//Reverses right motor direction
+		driveRight.Invert();
+	}
 
-    WPI_TalonSRX left;
-  }
+	//Initializes the the drive train if necessary and returns the drive train
+	public DriveTrain getDriveTrain() {
+		if(driveTrain==null) {
+			driveTrain=new DriveTrain();
+		}
+		return driveTrain;
+	}
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+	/*Instantiates the arcade drive
+	 *OVERLOADED FUNCTION
+	 */
+	public void ArcadeDrived() {  //Ruben, is this method named correctly???
+		getDriveTrain().diffDrive.arcadeDrive(input.getThrottle(), input.getSteering());
+	}
 
-  @Override
-  public void simulationPeriodic() {
-    // This method will be called once per scheduler run during simulation
-  }
+	/*Instantiates the arcade drive
+	 *OVERLOADED FUNCTION
+	 */
+	public void ArcadeDrived(DriveTrain train) {  //Ruben, is this method named correctly???
+		train.diffDrive.arcadeDrive(input.getThrottle(), input.getSteering());
+	}
+
+	@Override
+	public void periodic() {
+	// This method will be called once per scheduler run
+	}
+
+	@Override
+	public void simulationPeriodic() {
+	// This method will be called once per scheduler run during simulation
+	}
 }
