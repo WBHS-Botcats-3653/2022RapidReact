@@ -5,26 +5,25 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.MotorSafety;
+import edu.wpi.first.motorcontrol.PWMMotorController;
+import edu.wpi.first.motorcontrol.PWMVictorSPX;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import ctre
+public class Climber extends SubsystemBase {
 
-public class DriveTrain extends SubsystemBase {
-  /** Creates a new ExampleSubsystem. */
-  public DriveTrain() {
 
-    WPI_TalonSRX right;
+	//Constructor
+	public Climber() {
 
-    WPI_TalonSRX left;
-  }
+	}
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+	@Override
+	public void periodic() {
+		// This method will be called once per scheduler run
+	}
 
-  @Override
-  public void simulationPeriodic() {
-    // This method will be called once per scheduler run during simulation
-  }
+	@Override
+	public void simulationPeriodic() {
+		// This method will be called once per scheduler run during simulation
+	}
 }
