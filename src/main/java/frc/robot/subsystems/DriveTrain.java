@@ -4,17 +4,13 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-<<<<<<< HEAD
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
-import com.ctre.CANTalon.TalonControlMode;
-=======
-import edu.wpi.first.MotorSafety;
-import edu.wpi.first.motorcontrol.PWMMotorController;
-import edu.wpi.first.motorcontrol.PWMVictorSPX;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.OI;
->>>>>>> 784ca63c6959a96001594b0214752a57fdf0992d
 
 public class DriveTrain extends SubsystemBase {
 	private DriveTrain driveTrain=null;
@@ -34,7 +30,7 @@ public class DriveTrain extends SubsystemBase {
 		//Creates differential drive
 		diffDrive=new DifferentialDrive(driveLeft, driveRight);
 		//Reverses right motor direction
-		driveRight.Invert();
+		driveLeft.Invert();
 	}
 
 	//Initializes the the drive train if necessary and returns the drive train
