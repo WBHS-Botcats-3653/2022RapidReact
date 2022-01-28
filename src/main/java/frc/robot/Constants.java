@@ -21,7 +21,7 @@ public final class Constants {
 	 *URGENT!!! ID NAMES HAVE NOT BEEN CONFIRMED. MUST UPDATE IDS. DO NOT RUN CODE ON ROBOT WITHOUT UPDATING WITH CORRECT IDS!
 	 *URGENT!!! ID NAMES HAVE NOT BEEN CONFIRMED. MUST UPDATE IDS. DO NOT RUN CODE ON ROBOT WITHOUT UPDATING WITH CORRECT IDS!
 	 *URGENT!!! ID NAMES HAVE NOT BEEN CONFIRMED. MUST UPDATE IDS. DO NOT RUN CODE ON ROBOT WITHOUT UPDATING WITH CORRECT IDS!
-	 *Remove the above 3 comments (and this one) when the IDs have been updated
+	 *Remove the above 3 comments (and this one) when the IDs have been updated completely
 	 */
 	public static final Hashtable<String, Integer> MCID=new Hashtable<>() {{
 		put("Wheel Front Left", 0);
