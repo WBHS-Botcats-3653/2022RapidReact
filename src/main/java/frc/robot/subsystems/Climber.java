@@ -21,7 +21,7 @@ public class Climber extends SubsystemBase {
 	}
 
 	//Returns an instance of the climber
-	public static WPI_VictorSPX getInstance() {
+	public static Climber getInstance() {
 		if (m_singleton==null) {
 			m_singleton=new Climber();
 		}
