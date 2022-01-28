@@ -11,7 +11,6 @@ import frc.robot.OI;
 
 public class Climber extends SubsystemBase {
 	private WPI_VictorSPX arm;
-	private WPI_VictorSPX intake;
 
 	//Constructor
 	public Climber() {
