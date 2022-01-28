@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
 //import com.ctre.CANTalon.TalonControlMode;
-
+import com.ctre.*;
 //import edu.wpi.first.MotorSafety;
 //import edu.wpi.first.motorcontrol.PWMMotorController;
 //import edu.wpi.first.motorcontrol.PWMVictorSPX;

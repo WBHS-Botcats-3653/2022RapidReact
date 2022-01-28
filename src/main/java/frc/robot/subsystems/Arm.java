@@ -5,23 +5,23 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.MotorSafety;
-import edu.wpi.first.motorcontrol.PWMMotorController;
-import edu.wpi.first.motorcontrol.PWMVictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import frc.robot.Constants;
 import frc.robot.OI;
 
 public class Arm extends SubsystemBase {
-	public VictorSPX arm;
+	private WPI_VictorSPX arm;
+	private WPI_VictorSPX intake;
 
 	//Constructor
 	public Arm() {
 		//Creates VictorSPX motor controller for the arm
-		arm=new VictorSPX(Constants.MCID.get("Arm"));
+		arm=new WPI_VictorSPX(Constants.MCID.get("Arm"));
+		intake = new WPI_VictorSPX(Constants.MCID.get("Intake"))
 	}
 
 	//Returns the arm motor controller
-	public VictorSPX getMotor() {
+	public WPI_VictorSPX getMotor() {
 		return arm;
 	}
 }

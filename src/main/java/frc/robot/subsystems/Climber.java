@@ -5,9 +5,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.MotorSafety;
-import edu.wpi.first.motorcontrol.PWMMotorController;
-import edu.wpi.first.motorcontrol.PWMVictorSPX;
+
 
 public class Climber extends SubsystemBase {
 
