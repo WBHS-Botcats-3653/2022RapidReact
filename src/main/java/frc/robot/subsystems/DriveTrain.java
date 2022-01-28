@@ -6,16 +6,13 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import ctre
+import com.ctre.CANTalon.TalonControlMode;
 
 public class DriveTrain extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   public DriveTrain() {
 
-    WPI_TalonSRX right;
-
-    WPI_TalonSRX left;
+    
   }
 
   @Override
