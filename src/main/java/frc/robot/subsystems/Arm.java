@@ -8,22 +8,20 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.MotorSafety;
 import edu.wpi.first.motorcontrol.PWMMotorController;
 import edu.wpi.first.motorcontrol.PWMVictorSPX;
+import frc.robot.Constants;
+import frc.robot.OI;
 
-public class Climber extends SubsystemBase {
-
+public class Arm extends SubsystemBase {
+	public VictorSPX arm;
 
 	//Constructor
-	public Climber() {
-
+	public Arm() {
+		//Creates VictorSPX motor controller for the arm
+		arm=new VictorSPX(Constants.MCID.get("Arm"));
 	}
 
-	@Override
-	public void periodic() {
-		// This method will be called once per scheduler run
-	}
-
-	@Override
-	public void simulationPeriodic() {
-		// This method will be called once per scheduler run during simulation
+	//Returns the arm motor controller
+	public VictorSPX getMotor() {
+		return arm;
 	}
 }
