@@ -29,7 +29,8 @@ public final class Constants {
 		put("Wheel Back Left", 2);
 		put("Wheel Back Right", 3);
 		put("Arm", 4);
-		put("Intake Pivot", 5);
+		put("Pivot", 5);
 		put("Rollers", 6);
+		put("Belt", 7);
 	}};
 }
