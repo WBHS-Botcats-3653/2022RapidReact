@@ -4,22 +4,25 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-<<<<<<< HEAD
 
-import com.ctre.CANTalon.TalonControlMode;
-=======
-import edu.wpi.first.MotorSafety;
-import edu.wpi.first.motorcontrol.PWMMotorController;
-import edu.wpi.first.motorcontrol.PWMVictorSPX;
+
+//import com.ctre.CANTalon.TalonControlMode;
+
+//import edu.wpi.first.MotorSafety;
+//import edu.wpi.first.motorcontrol.PWMMotorController;
+//import edu.wpi.first.motorcontrol.PWMVictorSPX;
+
+
 import frc.robot.Constants;
 import frc.robot.OI;
->>>>>>> 784ca63c6959a96001594b0214752a57fdf0992d
+
 
 public class DriveTrain extends SubsystemBase {
 	private DriveTrain driveTrain=null;
-	public OI input=OI.getInstance();
-	public DifferentialDrive diffDrive;
+	public OI input= OI.getInstance();
+	private DifferentialDrive diffDrive;
 
 	//Constructor
 	public DriveTrain() {
@@ -45,10 +48,10 @@ public class DriveTrain extends SubsystemBase {
 		return driveTrain;
 	}
 
-<<<<<<< HEAD
+
     
   }
-=======
+
 	/*Instantiates the arcade drive
 	 *OVERLOADED FUNCTION
 	 */
@@ -62,7 +65,7 @@ public class DriveTrain extends SubsystemBase {
 	public void ArcadeDrived(DriveTrain train) {  //Ruben, is this method named correctly???
 		train.diffDrive.arcadeDrive(input.getThrottle(), input.getSteering());
 	}
->>>>>>> 784ca63c6959a96001594b0214752a57fdf0992d
+
 
 	@Override
 	public void periodic() {
