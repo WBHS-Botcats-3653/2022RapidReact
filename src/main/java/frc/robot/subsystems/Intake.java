@@ -14,14 +14,8 @@ import frc.robot.Constants;
 import frc.robot.OI;
 
 
-
-	//
-	
-
-
-
-
 public class Intake extends SubsystemBase{
+<<<<<<< Updated upstream
 	private static intake =null;
 =======
 package frc.robot.subsystems;
@@ -34,6 +28,9 @@ import frc.robot.Constants;
 public class Intake extends SubsystemBase {
 	private static Intake m_singleton=null;
 >>>>>>> 831bd9717004a8c19ca6d1f0b11fb748ea6ed4ca
+=======
+	private static Intake intake =null;
+>>>>>>> Stashed changes
 	private WPI_VictorSPX intakePivot;
 	private WPI_VictorSPX rollers;
 
@@ -52,7 +49,10 @@ public class Intake extends SubsystemBase {
 	}
 <<<<<<< HEAD
 
-
+	/**this helps with the singleton
+	 * 
+	 * @return
+	 */
 	public Intake getInstance(){
 		if(intake == null)
 			intake = new Intake();
@@ -66,6 +66,7 @@ public class Intake extends SubsystemBase {
 	public WPI_VictorSPX getRollerMotor() {
 		return rollers;
 
+<<<<<<< Updated upstream
 =======
 >>>>>>> 831bd9717004a8c19ca6d1f0b11fb748ea6ed4ca
 	//Returns an instance of the Intake
@@ -78,5 +79,7 @@ public class Intake extends SubsystemBase {
 =======
 		return m_singleton;
 >>>>>>> 831bd9717004a8c19ca6d1f0b11fb748ea6ed4ca
+=======
+>>>>>>> Stashed changes
 	}
 }

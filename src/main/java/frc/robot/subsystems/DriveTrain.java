@@ -9,7 +9,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
 
 =======
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
@@ -21,20 +21,16 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.OI;
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+=======
+>>>>>>> Stashed changes
 
 
-//import com.ctre.CANTalon.TalonControlMode;
-import com.ctre.*;
-//import edu.wpi.first.MotorSafety;
-//import edu.wpi.first.motorcontrol.PWMMotorController;
-//import edu.wpi.first.motorcontrol.PWMWPI_WPI_VictorSPX;
 
 
-import frc.robot.Constants;
-import frc.robot.OI;
 
 
 =======
