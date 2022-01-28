@@ -4,8 +4,9 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.OI;
 
@@ -21,7 +22,7 @@ public class Climber extends SubsystemBase {
 	}
 
 	//Returns an instance of the climber
-	public static WPI_VictorSPX getInstance() {
+	public static Climber getInstance() {
 		if (m_singleton==null) {
 			m_singleton=new Climber();
 		}

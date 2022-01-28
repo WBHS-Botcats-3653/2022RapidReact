@@ -4,41 +4,14 @@
 
 package frc.robot.subsystems;
 
-<<<<<<< HEAD
-
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-=======
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
->>>>>>> 7945652138508edd93b70f5d008570fb7e564c54
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.OI;
-<<<<<<< HEAD
 
-=======
->>>>>>> 7945652138508edd93b70f5d008570fb7e564c54
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-
-//import com.ctre.CANTalon.TalonControlMode;
-import com.ctre.*;
-//import edu.wpi.first.MotorSafety;
-//import edu.wpi.first.motorcontrol.PWMMotorController;
-//import edu.wpi.first.motorcontrol.PWMWPI_WPI_VictorSPX;
-
-
-import frc.robot.Constants;
-import frc.robot.OI;
-
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 7945652138508edd93b70f5d008570fb7e564c54
 public class DriveTrain extends SubsystemBase {
 	private static DriveTrain driveTrain=null;
 	public OI input= OI.getInstance();
@@ -69,10 +42,6 @@ public class DriveTrain extends SubsystemBase {
 		}
 		return driveTrain;
 	}
-
-
-    
-  
 
 	/*Instantiates the arcade drive
 	 *OVERLOADED FUNCTION
