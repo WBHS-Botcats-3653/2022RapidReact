@@ -4,15 +4,12 @@
 
 package frc.robot.subsystems;
 
-<<<<<<< HEAD
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.OI;
-=======
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -26,8 +23,6 @@ import com.ctre.*;
 
 import frc.robot.Constants;
 import frc.robot.OI;
-
->>>>>>> ee3fa6992441453660423ae4707e40103058302c
 
 public class DriveTrain extends SubsystemBase {
 	private DriveTrain driveTrain=null;
