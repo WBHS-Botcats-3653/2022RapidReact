@@ -10,17 +10,21 @@ import frc.robot.Constants;
 import frc.robot.OI;
 
 public class Climber extends SubsystemBase {
+	private static Climber m_singleton=null;
 	private WPI_VictorSPX arm;
 	private OI m_oi = OI.getInstance();
 
 	//Constructor
-	public Climber() {
+	private Climber() {
 		//Creates VictorSPX motor controller for the arm
 		arm=new WPI_VictorSPX(Constants.MCID.get("Arm"));
 	}
 
-	//Returns the arm motor controller
-	public WPI_VictorSPX getMotor() {
-		return arm;
+	//Returns an instance of the climber
+	public static WPI_VictorSPX getInstance() {
+		if (m_singleton==null) {
+			m_singleton=new Climber();
+		}
+		return m_singleton;
 	}
 }

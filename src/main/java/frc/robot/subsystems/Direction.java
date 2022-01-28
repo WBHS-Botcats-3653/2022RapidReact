@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.ADIS16470_IMU;
 /**
  * Wrapper class to gyro on Roborio.
  */
-public class Direction {
+public class Direction extends SubsystemBase {
 	private static Direction m_singleton;
 	private ADIS16470_IMU m_gyro;
 	
