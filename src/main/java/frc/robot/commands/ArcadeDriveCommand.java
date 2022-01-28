@@ -20,7 +20,7 @@ public class ArcadeDriveCommand extends CommandBase {
   public ArcadeDriveCommand() {
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements();
+    //addRequirements();
   }
 
   // Called when the command is initially scheduled.

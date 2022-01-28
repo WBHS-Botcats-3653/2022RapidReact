@@ -4,15 +4,15 @@
 
 package frc.robot.subsystems;
 
-<<<<<<< HEAD
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.OI;
-=======
+
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -21,37 +21,39 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.*;
 //import edu.wpi.first.MotorSafety;
 //import edu.wpi.first.motorcontrol.PWMMotorController;
-//import edu.wpi.first.motorcontrol.PWMVictorSPX;
+//import edu.wpi.first.motorcontrol.PWMWPI_WPI_VictorSPX;
 
 
 import frc.robot.Constants;
 import frc.robot.OI;
 
->>>>>>> ee3fa6992441453660423ae4707e40103058302c
+
 
 public class DriveTrain extends SubsystemBase {
-	private DriveTrain driveTrain=null;
+	private static DriveTrain driveTrain=null;
 	public OI input= OI.getInstance();
 	private DifferentialDrive diffDrive;
 
 	//Constructor
-	public DriveTrain() {
+	private DriveTrain() {
 		//Left side wheel motors
-		VictorSPX driveFrontLeft=new VictorSPX(Constants.MCID.get("Wheel Front Left"));
-		VictorSPX driveBackLeft=new VictorSPX(Constants.MCID.get("Wheel Back Left"));
+		WPI_VictorSPX driveFrontLeft=new WPI_VictorSPX(Constants.MCID.get("Wheel Front Left"));
+		WPI_VictorSPX driveBackLeft=new WPI_VictorSPX(Constants.MCID.get("Wheel Back Left"));
 		MotorControllerGroup driveLeft=new MotorControllerGroup(driveFrontLeft, driveBackLeft);
 		//Right side wheel motors
-		VictorSPX driveFrontRight=new VictorSPX(Constants.MCID.get("Wheel Front Right"));
-		VictorSPX driveBackRight=new VictorSPX(Constants.MCID.get("Wheel Back Right"));
+		WPI_VictorSPX driveFrontRight=new WPI_VictorSPX(Constants.MCID.get("Wheel Front Right"));
+		WPI_VictorSPX driveBackRight=new WPI_VictorSPX(Constants.MCID.get("Wheel Back Right"));
 		MotorControllerGroup driveRight=new MotorControllerGroup(driveFrontRight, driveBackRight);
 		//Creates differential drive
 		diffDrive=new DifferentialDrive(driveLeft, driveRight);
 		//Reverses right motor direction
-		driveLeft.Invert();
+		driveLeft.setInverted(true);
 	}
 
-	//Initializes the the drive train if necessary and returns the drive train
-	public DriveTrain getDriveTrain() {
+	/**Initializes the the drive train if necessary and returns the drive train
+	 * it is like a normal getInstance();
+	 */
+	public static DriveTrain getDriveTrain() {
 		if(driveTrain==null) {
 			driveTrain=new DriveTrain();
 		}
@@ -60,19 +62,19 @@ public class DriveTrain extends SubsystemBase {
 
 
     
-  }
+  
 
 	/*Instantiates the arcade drive
 	 *OVERLOADED FUNCTION
 	 */
-	public void ArcadeDrived() {  //Ruben, is this method named correctly???
+	public void ArcadeDrived() {  //Ruben, is this method named correctly??? yes
 		getDriveTrain().diffDrive.arcadeDrive(input.getThrottle(), input.getSteering());
 	}
 
 	/*Instantiates the arcade drive
 	 *OVERLOADED FUNCTION
 	 */
-	public void ArcadeDrived(DriveTrain train) {  //Ruben, is this method named correctly???
+	public void ArcadeDrived(DriveTrain train) {  //Ruben, is this method named correctly??? //kinda, you can change, but keep it up Daniel
 		train.diffDrive.arcadeDrive(input.getThrottle(), input.getSteering());
 	}
 
