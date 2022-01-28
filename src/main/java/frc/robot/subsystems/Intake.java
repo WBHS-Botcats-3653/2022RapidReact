@@ -15,10 +15,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
-
-
-	private static Intake intake =null;
-
+	private static Intake intake=null;
 	private WPI_VictorSPX pivot;
 	private WPI_VictorSPX rollers;
 	private WPI_VictorSPX belt;
@@ -27,10 +24,6 @@ public class Intake extends SubsystemBase {
 	 * it is a singleton
 	 */
 	public Intake() {
-
-
-
-
 		//Creates VictorSPX motor controller for the arm
 		//Creates WPI_VictorSPX motor controller for the arm
 		pivot=new WPI_VictorSPX(Constants.MCID.get("Pivot"));
