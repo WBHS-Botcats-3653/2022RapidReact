@@ -35,11 +35,10 @@ public class Intake extends SubsystemBase {
 	 * 
 	 * @return
 	 */
-<<<<<<< Updated upstream
-	public static Intake getIntake() {
-=======
+
+
 	public static Intake getIntake(){
->>>>>>> Stashed changes
+
 		if(intake == null)
 			intake = new Intake();
 		return intake;

@@ -13,10 +13,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.ArcadeDriveCommand;
 import frc.robot.commands.ClimberCommand;
 import frc.robot.commands.IntakeCommand;
-<<<<<<< Updated upstream
+
 import frc.robot.subsystems.Climber;
-=======
->>>>>>> Stashed changes
+
 //Imports subsystems
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
