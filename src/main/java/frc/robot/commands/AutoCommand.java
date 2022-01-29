@@ -10,4 +10,7 @@ public class AutoCommand extends CommandBase {
 	public AutoCommand() {
 
 	}
+
+
+	
 }

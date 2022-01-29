@@ -23,7 +23,8 @@ public class OI {
 	private static OI m_singleton = null;
 	private XboxController m_controller = null;
 	private double m_maxDriveSpeed;
-
+	private double m_maxArmSpeed;
+	private double m_maxIntakeSpeed;
 
 
 	private OI() {
@@ -45,7 +46,11 @@ public class OI {
 			m_maxDriveSpeed = maxspd;
 		}
 	}
+<<<<<<< HEAD
 
+=======
+	/
+>>>>>>> 87a62646ac4b79a7bfa3bef2d3fe4fec1e097dce
 	public void setMaxArmSpeed(double maxspd) {
 		if (0.0 < maxspd && maxspd <= 1.0) {
 			m_maxArmSpeed = maxspd;
@@ -80,6 +85,7 @@ public class OI {
 		} else if (0.1 < dn) {
 			ret_value = -dn;
 		}
+		
 		return ret_value * m_maxArmSpeed;
 	}
 
@@ -94,7 +100,7 @@ public class OI {
 
 		return ret_value * m_maxIntakeSpeed;
 	}
-
+	/*
 	public boolean getHatchEject() {
 		return m_controller.getAButtonPressed();
 	}
@@ -106,15 +112,16 @@ public class OI {
 	public boolean getClimbEject() {
 		return m_controller.getXButtonPressed();
 	}
-
+	
 	public int getArmPOV() {
 		return m_controller.getPOV();
 	}
-
+	
 
 	public void setRumble(boolean is_rumble) {
 		m_controller.setRumble(RumbleType.kLeftRumble, is_rumble ? 0.0 : 0.5);
 	}
+	*/
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	//// joystick.

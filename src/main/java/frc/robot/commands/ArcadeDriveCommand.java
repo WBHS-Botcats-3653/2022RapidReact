@@ -23,6 +23,7 @@ public class ArcadeDriveCommand extends CommandBase {
 	 */
 	public ArcadeDriveCommand() {
 		//Initializes instance variables with an instance of OI and DriveTrain
+		
 		m_oi = OI.getInstance();
 		m_drivetrain = DriveTrain.getDriveTrain();
 		// Use addRequirements() here to declare subsystem dependencies.
@@ -35,7 +36,9 @@ public class ArcadeDriveCommand extends CommandBase {
 
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
-	public void execute() {}
+	public void execute() {
+		m_drivetrain.ArcadeDrived();
+	}
 
 	// Called once the command ends or is interrupted.
 	@Override
