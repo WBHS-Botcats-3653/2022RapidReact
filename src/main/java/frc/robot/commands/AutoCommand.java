@@ -11,6 +11,5 @@ public class AutoCommand extends CommandBase {
 
 	}
 
-
 	
 }
