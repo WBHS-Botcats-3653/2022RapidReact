@@ -4,21 +4,29 @@
 
 package frc.robot.commands;
 
+//Import CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
+//Import OI
 import frc.robot.OI;
+//Import Intake subsystem
 import frc.robot.subsystems.Intake;
 
 public class IntakeCommand extends CommandBase {
+	//Holds instances of OI and Intake subsystem
 	private OI m_oi;
-	Intake m_intake;
+	private Intake m_intake;
+
 	/**
 	 * Creates a new IntakeCommand.
 	 *
 	 * @param subsystem The subsystem used by this command.
 	 */
 	public IntakeCommand() {
+		//Initializes instance variables with OI and Intake subsystem
 		m_oi=OI.GetInstance();
-		m_intake=OI.GetInstance();
+		m_intake=Intake.GetInstance();
+		// Use addRequirements() here to declare subsystem dependencies.
+		//addRequirements();
 	}
 
 	// Called when the command is initially scheduled.

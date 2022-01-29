@@ -4,21 +4,29 @@
 
 package frc.robot.commands;
 
+//Import CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
+//Import OI
 import frc.robot.OI;
+//Import Climber subsystem
 import frc.robot.subsystems.Climber;
 
 public class ClimberCommand extends CommandBase {
+	//Holds instances of OI and Climber subsystem
 	private OI m_oi;
-	Climber m_climber;
+	private Climber m_climber;
+
 	/**
 	 * Creates a new ClimberCommand.
 	 *
 	 * @param subsystem The subsystem used by this command.
 	 */
 	public ClimberCommand() {
+		//Initializes instance variables with instances of OI and Climber subsystem
 		m_oi=OI.GetInstance();
 		m_climber=Climber.getInstance();
+		// Use addRequirements() here to declare subsystem dependencies.
+		//addRequirements();
 	}
 
 	// Called when the command is initially scheduled.
