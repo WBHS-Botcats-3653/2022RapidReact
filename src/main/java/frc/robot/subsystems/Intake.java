@@ -35,9 +35,20 @@ public class Intake extends SubsystemBase {
 	 * @return
 	 */
 	public static Intake getIntake(){
-
 		if(intake == null)
 			intake = new Intake();
 		return intake;
+	}
+
+	public void spinRollers(double speed) {
+		rollers.setSpeed(speed);
+	}
+
+	public void dropIntake() {
+
+	}
+
+	public void raiseIntake() {
+		
 	}
 }

@@ -7,10 +7,11 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.XboxController;
-//import edu.wpi.first.wpilibj.GenericHID;
-//import edu.wpi.first.wpilibj.GenericHID.Hand;
-//import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -44,7 +45,7 @@ public class OI {
 			m_maxDriveSpeed = maxspd;
 		}
 	}
-	/*
+
 	public void setMaxArmSpeed(double maxspd) {
 		if (0.0 < maxspd && maxspd <= 1.0) {
 			m_maxArmSpeed = maxspd;
@@ -56,7 +57,7 @@ public class OI {
 			m_maxIntakeSpeed = maxspd;
 		}
 	}
-*/	
+	
 	/**this one will return what is commonly as the forward and back
 	 * 
 	 * @return double Throttle
@@ -68,7 +69,7 @@ public class OI {
 	public double getSteering() {
 		return -m_controller.getRightX() * m_maxDriveSpeed;// correct stearing (-)
 	}
-	
+
 	public double getArmCtrl() {
 		double ret_value = 0.0;
 		double up = m_controller.getRightTriggerAxis();
