@@ -68,7 +68,7 @@ public class OI {
 	public double getSteering() {
 		return -m_controller.getRightX() * m_maxDriveSpeed;// correct stearing (-)
 	}
-/*
+	
 	public double getArmCtrl() {
 		double ret_value = 0.0;
 		double up = m_controller.getRightTriggerAxis();
@@ -114,7 +114,6 @@ public class OI {
 	public void setRumble(boolean is_rumble) {
 		m_controller.setRumble(RumbleType.kLeftRumble, is_rumble ? 0.0 : 0.5);
 	}
-*/
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	//// joystick.
