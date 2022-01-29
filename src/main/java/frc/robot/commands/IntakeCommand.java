@@ -23,8 +23,8 @@ public class IntakeCommand extends CommandBase {
 	 */
 	public IntakeCommand() {
 		//Initializes instance variables with OI and Intake subsystem
-		m_oi=OI.GetInstance();
-		m_intake=Intake.GetIntake();
+		m_oi=OI.getInstance();
+		m_intake=Intake.getIntake();
 		// Use addRequirements() here to declare subsystem dependencies.
 		//addRequirements();
 	}

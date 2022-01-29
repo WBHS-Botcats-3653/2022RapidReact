@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 //Imports WPI_VictorSPX (MotorController)
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
 //Imports SubsystemBase
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 //Imports Constants
@@ -34,7 +35,7 @@ public class Intake extends SubsystemBase {
 	 * 
 	 * @return
 	 */
-	public Intake getIntake(){
+	public Intake getIntake() {
 		if(intake == null)
 			intake = new Intake();
 		return intake;

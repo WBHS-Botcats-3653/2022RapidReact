@@ -23,7 +23,7 @@ public class ClimberCommand extends CommandBase {
 	 */
 	public ClimberCommand() {
 		//Initializes instance variables with instances of OI and Climber subsystem
-		m_oi=OI.GetInstance();
+		m_oi=OI.getInstance();
 		m_climber=Climber.getClimber();
 		// Use addRequirements() here to declare subsystem dependencies.
 		//addRequirements();
