@@ -50,16 +50,19 @@ public class Robot extends TimedRobot {
 
 	/** This function is called once each time the robot enters Disabled mode. */
 	@Override
-	public void disabledInit() {}
+	public void disabledInit() {
+		//difDrive.reset();
+	}
 
 	@Override
-	public void disabledPeriodic() {}
+	public void disabledPeriodic() {
+		//Scheduler.getInstance().run();
+	}
 
 	/** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
 	@Override
 	public void autonomousInit() {
 		m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-
 		/*
 		 *String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		 *switch(autoSelected) {
@@ -71,7 +74,6 @@ public class Robot extends TimedRobot {
 		 *		break;
 		 *}
 		 */
-
 		// schedule the autonomous command (example)
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.schedule();
