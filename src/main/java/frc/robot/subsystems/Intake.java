@@ -21,7 +21,7 @@ public class Intake extends SubsystemBase {
 	/**Constructor
 	 * it is a singleton
 	 */
-	public Intake() {
+	private Intake() {
 		//Creates VictorSPX motor controller for the arm
 		//Creates WPI_VictorSPX motor controller for the arm
 		pivot=new WPI_VictorSPX(Constants.MCID.get("Pivot"));
@@ -35,7 +35,11 @@ public class Intake extends SubsystemBase {
 	 * 
 	 * @return
 	 */
+<<<<<<< Updated upstream
 	public static Intake getIntake() {
+=======
+	public static Intake getIntake(){
+>>>>>>> Stashed changes
 		if(intake == null)
 			intake = new Intake();
 		return intake;

@@ -13,7 +13,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.ArcadeDriveCommand;
 import frc.robot.commands.ClimberCommand;
 import frc.robot.commands.IntakeCommand;
+<<<<<<< Updated upstream
 import frc.robot.subsystems.Climber;
+=======
+>>>>>>> Stashed changes
 //Imports subsystems
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
@@ -26,9 +29,9 @@ import frc.robot.subsystems.Intake;
  */
 public class RobotContainer {
 	// The robot's subsystems and commands are defined here...
-	private final DriveTrain m_driveSubsystem=DriveTrain.getDriveTrain();
-	private final Climber m_climberSubsystem=Climber.getClimber();
-	private final Intake m_intakeSubsystem=Intake.getIntake();
+	private final DriveTrain m_driveSubsystem = DriveTrain.getDriveTrain();
+	private final Climber m_climberSubsystem = Climber.getClimber();
+	private final Intake m_intakeSubsystem = Intake.getIntake();
 
 	//private final ArcadeDriveCommand arcadeDriveCommand = new ArcadeDriveCommand();
 

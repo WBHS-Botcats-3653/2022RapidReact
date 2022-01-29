@@ -6,10 +6,13 @@ package frc.robot;
 
 //Imports TimedRobot
 import edu.wpi.first.wpilibj.TimedRobot;
+
+import edu.wpi.first.wpilibj.command.Scheduler;
 //Imports Command
 import edu.wpi.first.wpilibj2.command.Command;
 //Imports CommandScheduler
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.DriveTrain;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -21,6 +24,7 @@ public class Robot extends TimedRobot {
 	private Command m_autonomousCommand;
 	private RobotContainer m_robotContainer;
 
+	private DriveTrain train = DriveTrain.getDriveTrain();
 	/**
 	 * This function is run when the robot is first started up and should be used for any
 	 * initialization code.
