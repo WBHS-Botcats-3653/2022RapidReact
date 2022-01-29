@@ -34,7 +34,7 @@ public class IntakeCommand extends CommandBase {
 
 	// Called every time the scheduler runs while the command is scheduled.
 	public void execute() {
-		m_intake.intake(m_oi.getIntakeCtrl());
+		m_intake.spinRollers(m_oi.getIntakeCtrl());
 	}
 
 	// Called once the command ends or is interrupted.
