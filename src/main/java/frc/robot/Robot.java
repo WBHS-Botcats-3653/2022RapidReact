@@ -60,6 +60,18 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
+		/*
+		 *String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
+		 *switch(autoSelected) {
+		 *	case "My Auto": autonomousCommand=new MyAutoCommand();
+		 *		break;
+		 *	case "Default Auto":
+		 *	default:
+		 *		autonomousCommand=new ExampleCommand();
+		 *		break;
+		 *}
+		 */
+
 		// schedule the autonomous command (example)
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.schedule();
@@ -68,7 +80,9 @@ public class Robot extends TimedRobot {
 
 	/** This function is called periodically during autonomous. */
 	@Override
-	public void autonomousPeriodic() {}
+	public void autonomousPeriodic() {
+		Scheduler.getInstance().run();
+	}
 
 	@Override
 	public void teleopInit() {
@@ -83,7 +97,10 @@ public class Robot extends TimedRobot {
 
 	/** This function is called periodically during operator control. */
 	@Override
-	public void teleopPeriodic() {}
+	public void teleopPeriodic() {
+		Scheduler.getInstance().run();
+		train.ArcadeDrived();
+	}
 
 	@Override
 	public void testInit() {
