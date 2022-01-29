@@ -29,21 +29,15 @@ public class Intake extends SubsystemBase {
 		belt=new WPI_VictorSPX(Constants.MCID.get("Belt"));
 	}
 
-
 	/**Returns an instance of the Intake
 	 * this helps with the singleton
 	 * 
 	 * @return
 	 */
-
-
 	public static Intake getIntake(){
 
 		if(intake == null)
 			intake = new Intake();
 		return intake;
 	}
-
-	
-
 }

@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 //Imports WPI_VictorSPX (Motor Controller)
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
 //Imports DifferentialDrive
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 //Imports MotorControllerGroup
@@ -60,7 +61,6 @@ public class DriveTrain extends SubsystemBase {
 	public void ArcadeDrived(DriveTrain train) {
 		train.diffDrive.arcadeDrive(input.getThrottle(), input.getSteering());
 	}
-
 
 	@Override
 	public void periodic() {
