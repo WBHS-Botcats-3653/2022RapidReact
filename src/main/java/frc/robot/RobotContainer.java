@@ -7,16 +7,16 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 //Imports controller
 import edu.wpi.first.wpilibj.XboxController;
+//Imports Command
+import edu.wpi.first.wpilibj2.command.Command;
 //Imports commands
 import frc.robot.commands.ArcadeDriveCommand;
 import frc.robot.commands.ClimberCommand;
-import frc.robot.command.IntakeCommand;
+import frc.robot.commands.IntakeCommand;
+import frc.robot.subsystems.Climber;
 //Imports subsystems
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Intake;
-//Imports Command
-import edu.wpi.first.wpilibj2.command.Command;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -39,8 +39,8 @@ public class RobotContainer {
 		configureButtonBindings();
 		//Sets default commands for subsystems
 		m_driveSubsystem.setDefaultCommand(new ArcadeDriveCommand());
-		m_climberSystem.setDefaultCommand(new ClimberCommand());
-		m_intakeSystem.setDefaultCommand(new IntakeCommand());
+		m_climberSubsystem.setDefaultCommand(new ClimberCommand());
+		m_intakeSubsystem.setDefaultCommand(new IntakeCommand());
 	}
 
 	/**
