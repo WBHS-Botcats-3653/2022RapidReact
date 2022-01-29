@@ -4,10 +4,13 @@
 
 package frc.robot.subsystems;
 
+//Imports WPI_VictorSPX (Motor Controller)
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
+//Imports SubsystemBase
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+//Imports Constants
 import frc.robot.Constants;
+//Imports OI
 import frc.robot.OI;
 
 public class Climber extends SubsystemBase {
@@ -21,8 +24,8 @@ public class Climber extends SubsystemBase {
 		arm=new WPI_VictorSPX(Constants.MCID.get("Arm"));
 	}
 
-	//Returns an instance of the climber
-	public static Climber getInstance() {
+	//Returns an instance of the climber, creating an instance only when one does not already exist (singleton)
+	public static Climber getClimber() {
 		if (m_singleton==null) {
 			m_singleton=new Climber();
 		}

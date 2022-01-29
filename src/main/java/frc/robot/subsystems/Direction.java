@@ -4,8 +4,11 @@
 
 package frc.robot.subsystems;
 
+//Imports Sendable (Who even knows)
 import edu.wpi.first.util.sendable.Sendable;
+//Imports ADIS16470_IMU (Gyroscope)
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
+//Imports SubsystemBase
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 /**

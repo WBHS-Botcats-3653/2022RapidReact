@@ -4,16 +4,17 @@
 
 package frc.robot.subsystems;
 
-
-
+//Imports WPI_VictorSPX (Motor Controller)
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
-
-
+//Imports DifferentialDrive
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+//Imports MotorControllerGroup
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+//Imports Subsystem Base
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+//Imports Constants
 import frc.robot.Constants;
+//Imports OI
 import frc.robot.OI;
 
 
@@ -38,9 +39,7 @@ public class DriveTrain extends SubsystemBase {
 		driveLeft.setInverted(true);
 	}
 
-	/**Initializes the the drive train if necessary and returns the drive train
-	 * it is like a normal getInstance();
-	 */
+	//Returns an instance of the climber, creating an instance only when one does not already exist
 	public static DriveTrain getDriveTrain() {
 		if(driveTrain==null) {
 			driveTrain=new DriveTrain();
@@ -51,14 +50,14 @@ public class DriveTrain extends SubsystemBase {
 	/*Instantiates the arcade drive
 	 *OVERLOADED FUNCTION
 	 */
-	public void ArcadeDrived() {  //Ruben, is this method named correctly??? yes
+	public void ArcadeDrived() {
 		getDriveTrain().diffDrive.arcadeDrive(input.getThrottle(), input.getSteering());
 	}
 
 	/*Instantiates the arcade drive
 	 *OVERLOADED FUNCTION
 	 */
-	public void ArcadeDrived(DriveTrain train) {  //Ruben, is this method named correctly??? //kinda, you can change, but keep it up Daniel
+	public void ArcadeDrived(DriveTrain train) {
 		train.diffDrive.arcadeDrive(input.getThrottle(), input.getSteering());
 	}
 
