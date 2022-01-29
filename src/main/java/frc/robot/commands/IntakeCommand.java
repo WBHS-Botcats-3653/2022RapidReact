@@ -34,7 +34,17 @@ public class IntakeCommand extends CommandBase {
 
 	// Called every time the scheduler runs while the command is scheduled.
 	public void execute() {
+		if (/*OI HERE*/) {
+			//Drops the Intake
+			m_intake.dropIntake();
+		} else if (/*OI HERE*/) {
+			//Raises the intake
+			m_intake.raiseIntake();
+		}
+		//Spins the rollers
 		m_intake.spinRollers(m_oi.getIntakeCtrl());
+		//Rolls the belt
+		m_intake.raiseCargo(m_oi.getIntakeCtrl());
 	}
 
 	// Called once the command ends or is interrupted.

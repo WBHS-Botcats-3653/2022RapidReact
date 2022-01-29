@@ -31,4 +31,19 @@ public class Climber extends SubsystemBase {
 		}
 		return m_singleton;
 	}
+
+	//Raises the arm to it's fully extended position
+	public void raiseArm() {
+		
+	}
+
+	//Lowers the arm all the way down
+	public void lowerArm() {
+
+	}
+
+	//Lowers the arm
+	public void lowerArm(double speed) {
+		
+	}
 }

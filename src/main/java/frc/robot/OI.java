@@ -46,11 +46,7 @@ public class OI {
 			m_maxDriveSpeed = maxspd;
 		}
 	}
-<<<<<<< HEAD
 
-=======
-	/
->>>>>>> 87a62646ac4b79a7bfa3bef2d3fe4fec1e097dce
 	public void setMaxArmSpeed(double maxspd) {
 		if (0.0 < maxspd && maxspd <= 1.0) {
 			m_maxArmSpeed = maxspd;
@@ -100,16 +96,12 @@ public class OI {
 
 		return ret_value * m_maxIntakeSpeed;
 	}
-	/*
-	public boolean getHatchEject() {
-		return m_controller.getAButtonPressed();
-	}
 
 	public boolean getCargoEject() {
 		return m_controller.getBButton();
 	}
 
-	public boolean getClimbEject() {
+	/*public boolean getClimbEject() {
 		return m_controller.getXButtonPressed();
 	}
 	
@@ -117,7 +109,6 @@ public class OI {
 		return m_controller.getPOV();
 	}
 	
-
 	public void setRumble(boolean is_rumble) {
 		m_controller.setRumble(RumbleType.kLeftRumble, is_rumble ? 0.0 : 0.5);
 	}

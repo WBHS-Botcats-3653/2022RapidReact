@@ -33,7 +33,17 @@ public class ClimberCommand extends CommandBase {
 	public void initialize() {}
 
 	// Called every time the scheduler runs while the command is scheduled.
-	public void execute() {}
+	public void execute() {
+		if (/*OI HERE*/) {
+			//Fully extends the arm
+			m_climber.raiseArm();
+		} else if (/*OI HERE*/) {
+			//Lowers the arm completely
+			m_climber.raiseArm();
+		} else {
+			m_climber.lowerArm(/*OI HERE*/);
+		}
+	}
 
 	// Called once the command ends or is interrupted.
 	public void end(boolean interrupted) {}
