@@ -6,7 +6,6 @@ package frc.robot.subsystems;
 
 //Imports WPI_VictorSPX (MotorController)
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
 //Imports SubsystemBase
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 //Imports Constants
@@ -22,7 +21,6 @@ public class Intake extends SubsystemBase {
 	 * it is a singleton
 	 */
 	private Intake() {
-		//Creates VictorSPX motor controller for the arm
 		//Creates WPI_VictorSPX motor controller for the arm
 		pivot=new WPI_VictorSPX(Constants.MCID.get("Pivot"));
 		rollers=new WPI_VictorSPX(Constants.MCID.get("Rollers"));
@@ -34,7 +32,7 @@ public class Intake extends SubsystemBase {
 	 * 
 	 * @return
 	 */
-	public static Intake getIntake(){
+	public static Intake getIntake() {
 		if (intake == null)
 			intake = new Intake();
 		return intake;
