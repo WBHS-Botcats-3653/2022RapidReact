@@ -37,7 +37,7 @@ public class IntakeCommand extends CommandBase {
 		if (/*OI HERE*/ true) {
 			//Drops the Intake
 			m_intake.dropIntake();
-		} else if (/*OI HERE*/ true) {
+		} else if (/*OI HERE*/ false) {
 			//Raises the intake
 			m_intake.raiseIntake();
 		}
