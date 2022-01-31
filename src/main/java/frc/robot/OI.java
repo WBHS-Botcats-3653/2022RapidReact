@@ -90,8 +90,8 @@ public class OI {
 
 		if (m_controller.getRightBumper()) {
 			ret_value = -1;
-		} else if (m_controller.getYButton()) {
-			ret_value = 1;
+		} else if (m_controller.getLeftTriggerAxis() > 0) {
+			ret_value = m_controller.getLeftTriggerAxis();
 		}
 
 		return ret_value * m_maxIntakeSpeed;

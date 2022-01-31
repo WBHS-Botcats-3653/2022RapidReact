@@ -1,0 +1,11 @@
+To Do:
+1. OI (button binding)
+	a. Intake (Left Trigger)
+	b. Intske Reverse (Left Bumper)
+	c. Shoot (Right Trigger)
+	d. Climb (up down Dpad)
+	e. Traverse (left right Dpad)
+2. Auto
+3. Color Sensor
+4. Intake
+5. Climber
