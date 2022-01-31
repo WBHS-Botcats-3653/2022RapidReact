@@ -96,6 +96,10 @@ public class OI {
 
 		return ret_value * m_maxIntakeSpeed;
 	}
+
+	public double getShoot(){
+		return m_controller.getRightTriggerAxis();
+	}
 	/*
 	public boolean getHatchEject() {
 		return m_controller.getAButtonPressed();
