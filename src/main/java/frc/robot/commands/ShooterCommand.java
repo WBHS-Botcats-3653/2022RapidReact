@@ -11,12 +11,12 @@ import frc.robot.OI;
 //Import Shooter subsystem
 import frc.robot.subsystems.Shooter;
 
-public class Shooter extends CommandBase {
+public class ShooterCommand extends CommandBase {
 	//Holds instances of OI and Shooter subsystem
 	private OI m_oi;
 	private Shooter m_shooter;
 
-	public Shooter() {
+	public ShooterCommand() {
 		//Initializes instance variables with OI and Shooter subsystem
 		m_oi=OI.getInstance();
 		m_shooter=Shooter.getShooter();
