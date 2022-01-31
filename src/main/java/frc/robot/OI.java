@@ -7,11 +7,7 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID;
-
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -25,6 +21,8 @@ public class OI {
 	private double m_maxDriveSpeed;
 	private double m_maxArmSpeed;
 	private double m_maxIntakeSpeed;
+	private double m_maxShootSpeed;
+	public boolean isIntakeDown = false;
 
 
 	private OI() {
@@ -88,7 +86,7 @@ public class OI {
 	public double getIntakeCtrl() {
 		double ret_value = 0.0;
 
-		if (m_controller.getRightBumper()) {
+		if (m_controller.getLeftBumper()) {
 			ret_value = -1;
 		} else if (m_controller.getLeftTriggerAxis() > 0) {
 			ret_value = 1;
@@ -97,9 +95,25 @@ public class OI {
 		return ret_value * m_maxIntakeSpeed;
 	}
 
-	public double getShoot(){
-		return m_controller.getRightTriggerAxis();
+	public boolean getIntakeDown() {
+		return m_controller.getLeftTriggerAxis() > 0 && !isIntakeDown;
 	}
+
+	public boolean getIntakeUp() {
+		return m_controller.getLeftTriggerAxis() == 0 && isIntakeDown;
+	}
+
+	public double getShoot() {
+		if (m_controller.getRightTriggerAxis() > 0) {
+			return m_maxShootSpeed;
+		}
+		return 0;
+	}
+
+	public double getClimb() {
+		
+	}
+	
 	/*
 	public boolean getHatchEject() {
 		return m_controller.getAButtonPressed();

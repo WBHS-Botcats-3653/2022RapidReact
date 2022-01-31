@@ -8,23 +8,18 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 //Import OI
 import frc.robot.OI;
-//Import Intake subsystem
-import frc.robot.subsystems.Intake;
+//Import Shooter subsystem
+import frc.robot.subsystems.Shooter;
 
-public class IntakeCommand extends CommandBase {
-	//Holds instances of OI and Intake subsystem
+public class Shooter extends CommandBase {
+	//Holds instances of OI and Shooter subsystem
 	private OI m_oi;
-	private Intake m_intake;
+	private Shooter m_shooter;
 
-	/**
-	 * Creates a new IntakeCommand.
-	 *
-	 * @param subsystem The subsystem used by this command.
-	 */
-	public IntakeCommand() {
-		//Initializes instance variables with OI and Intake subsystem
+	public Shooter() {
+		//Initializes instance variables with OI and Shooter subsystem
 		m_oi=OI.getInstance();
-		m_intake=Intake.getIntake();
+		m_shooter=Shooter.getShooter();
 		// Use addRequirements() here to declare subsystem dependencies.
 		//addRequirements();
 	}
@@ -34,17 +29,7 @@ public class IntakeCommand extends CommandBase {
 
 	// Called every time the scheduler runs while the command is scheduled.
 	public void execute() {
-		if (m_oi.getIntakeDown()) {
-			//Drops the Intake
-			m_intake.dropIntake();
-		} else if (m_oi.getIntakeUp()) {
-			//Raises the intake
-			m_intake.raiseIntake();
-		}
-		//Spins the rollers
-		m_intake.spinRollers(m_oi.getIntakeCtrl());
-		//Rolls the belt
-		m_intake.raiseCargo(m_oi.getIntakeCtrl());
+		m_shooter.spinSpinner(m_oi.getShoot());
 	}
 
 	// Called once the command ends or is interrupted.
