@@ -42,7 +42,7 @@ public class Intake extends SubsystemBase {
 
 	//Spins the rollers on the intake
 	public void spinRollers(double speed) {
-		rollers.setSpeed(speed);
+		rollers.set(speed);
 	}
 
 	//Pivots the intake down
@@ -57,11 +57,11 @@ public class Intake extends SubsystemBase {
 
 	//Ejects cargo from intake
 	public void ejectCargo(double speed) {
-		rollers.setSpeed(-speed);
+		rollers.set(-speed);
 	}
 
 	//Raises the cargo up the intake system
 	public void raiseCargo(double speed) {
-		belt.setSpeed(speed);
+		belt.set(speed);
 	}
 }
