@@ -35,7 +35,7 @@ public class Intake extends SubsystemBase {
 	 * @return
 	 */
 	public static Intake getIntake(){
-		if(intake == null)
+		if (intake == null)
 			intake = new Intake();
 		return intake;
 	}

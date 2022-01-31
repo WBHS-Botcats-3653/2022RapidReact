@@ -45,7 +45,7 @@ public class DriveTrain extends SubsystemBase {
 
 	//Returns an instance of the climber, creating an instance only when one does not already exist
 	public static DriveTrain getDriveTrain() {
-		if(driveTrain==null) {
+		if (driveTrain==null) {
 			driveTrain=new DriveTrain();
 		}
 		return driveTrain;
