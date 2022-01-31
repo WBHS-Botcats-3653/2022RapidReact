@@ -32,7 +32,7 @@ public final class Constants {
 		put("Arm", 4);
 		put("Pivot", 5);
 		put("Rollers", 6);
-		put("Belt", 7);
+		put("Indexer", 7);
 		put("Spinner", 8);
 	}};
 }
