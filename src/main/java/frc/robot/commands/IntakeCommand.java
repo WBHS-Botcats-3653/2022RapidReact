@@ -34,10 +34,10 @@ public class IntakeCommand extends CommandBase {
 
 	// Called every time the scheduler runs while the command is scheduled.
 	public void execute() {
-		if (/*OI HERE*/ true) {
+		if (m_oi.getIntakeDown()) {
 			//Drops the Intake
 			m_intake.dropIntake();
-		} else if (/*OI HERE*/ false) {
+		} else if (m_oi.getIntakeUp()) {
 			//Raises the intake
 			m_intake.raiseIntake();
 		}
