@@ -24,6 +24,9 @@ public class DriveTrain extends SubsystemBase {
 	public OI input= OI.getInstance();
 	private DifferentialDrive diffDrive;
 
+	//documentation for WPI_VictorSPX: 
+	//https://robotpy.readthedocs.io/projects/ctre/en/stable/ctre/WPI_VictorSPX.html
+
 	//Constructor
 	private DriveTrain() {
 		//Left side wheel motors

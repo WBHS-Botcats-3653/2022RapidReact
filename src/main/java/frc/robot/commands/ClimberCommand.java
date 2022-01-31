@@ -34,10 +34,10 @@ public class ClimberCommand extends CommandBase {
 
 	// Called every time the scheduler runs while the command is scheduled.
 	public void execute() {
-		if (/*OI HERE*/) {
+		if (/*OI HERE*/ true) {
 			//Fully extends the arm
 			m_climber.raiseArm();
-		} else if (/*OI HERE*/) {
+		} else if (/*OI HERE*/ true) {
 			//Lowers the arm completely
 			m_climber.raiseArm();
 		} else {
