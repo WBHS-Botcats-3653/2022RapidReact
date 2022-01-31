@@ -25,7 +25,10 @@ public class OI {
 	private double m_maxShootSpeed;
 	public boolean isIntakeDown = false;
 
-
+	/**it is the constructor
+	 * 
+	 * take controll of you life!!!!
+	 */
 	private OI() {
 		m_controller = new XboxController(0);
 		m_maxDriveSpeed = 1.0;
