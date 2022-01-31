@@ -4,64 +4,29 @@
 
 package frc.robot.subsystems;
 
-//Imports WPI_VictorSPX (MotorController)
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
 //Imports SubsystemBase
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 //Imports Constants
 import frc.robot.Constants;
 
-public class Intake extends SubsystemBase {
-	private static Intake intake=null;
-	private WPI_VictorSPX pivot;
-	private WPI_VictorSPX rollers;
-	private WPI_VictorSPX belt;
+public class Dashboard extends SubsystemBase {
+	private static Dashboard Dashboard=null;
 
 	/**Constructor
 	 * it is a singleton
 	 */
-	private Intake() {
-		//Creates VictorSPX motor controller for the arm
-		//Creates WPI_VictorSPX motor controller for the arm
-		pivot=new WPI_VictorSPX(Constants.MCID.get("Pivot"));
-		rollers=new WPI_VictorSPX(Constants.MCID.get("Rollers"));
-		belt=new WPI_VictorSPX(Constants.MCID.get("Belt"));
+	private Dashboard() {
+
 	}
 
-	/**Returns an instance of the Intake
+	/**Returns an instance of the Dashboard
 	 * this helps with the singleton
 	 * 
 	 * @return
 	 */
-	public static Intake getIntake(){
-		if (intake == null)
-			intake = new Intake();
-		return intake;
-	}
-
-	//Spins the rollers on the intake
-	public void spinRollers(double speed) {
-		rollers.set(speed);
-	}
-
-	//Pivots the intake down
-	public void dropIntake() {
-		
-	}
-
-	//Pivots the intake up
-	public void raiseIntake() {
-
-	}
-
-	//Ejects cargo from intake
-	public void ejectCargo(double speed) {
-		rollers.set(-speed);
-	}
-
-	//Raises the cargo up the intake system
-	public void raiseCargo(double speed) {
-		belt.set(speed);
+	public static Dashboard getDashboard(){
+		if (Dashboard == null)
+			Dashboard = new Dashboard();
+		return Dashboard;
 	}
 }

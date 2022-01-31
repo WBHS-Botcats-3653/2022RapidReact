@@ -12,10 +12,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 //Imports commands
 import frc.robot.commands.ArcadeDriveCommand;
 import frc.robot.commands.ClimberCommand;
+import frc.robot.commands.DashboardCommand;
 import frc.robot.commands.IntakeCommand;
 
 import frc.robot.subsystems.Climber;
-
+import frc.robot.subsystems.Dashboard;
 //Imports subsystems
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
@@ -31,6 +32,7 @@ public class RobotContainer {
 	private final DriveTrain m_driveSubsystem = DriveTrain.getDriveTrain();
 	private final Climber m_climberSubsystem = Climber.getClimber();
 	private final Intake m_intakeSubsystem = Intake.getIntake();
+	private final Dashboard m_dashboardSubsystem = Dashboard.getDashboard();
 
 	//private final ArcadeDriveCommand arcadeDriveCommand = new ArcadeDriveCommand();
 
@@ -43,6 +45,7 @@ public class RobotContainer {
 		m_driveSubsystem.setDefaultCommand(new ArcadeDriveCommand());
 		m_climberSubsystem.setDefaultCommand(new ClimberCommand());
 		m_intakeSubsystem.setDefaultCommand(new IntakeCommand());
+		m_dashboardSubsystem.setDefaultCommand(new DashboardCommand());
 	}
 
 	/**

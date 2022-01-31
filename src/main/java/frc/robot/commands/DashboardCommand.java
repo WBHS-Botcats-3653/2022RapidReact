@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //Import CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
 //Import OI
@@ -35,7 +36,7 @@ public class DashboardCommand extends CommandBase {
 
 	// Called every time the scheduler runs while the command is scheduled.
 	public void execute() {
-		
+		SmartDashboard.putNumber("Joystick X value", m_oi.getThrottle());
 	}
 
 	// Called once the command ends or is interrupted.
