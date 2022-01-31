@@ -8,10 +8,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
-//Imports the XBox Controller
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
+
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 
 /**
@@ -27,22 +26,20 @@ public class OI {
 	private double m_maxArmSpeed;
 	private double m_maxIntakeSpeed;
 
-	//Constructor
+
 	private OI() {
 		m_controller = new XboxController(0);
 		m_maxDriveSpeed = 1.0;
 
 	}
 
-	//Returns an instance of OI
 	public static OI getInstance() {
 		if (m_singleton == null) {
 			m_singleton = new OI();
 		}
 		return m_singleton;
 	}
-	 
-	//Sets the max drive speed
+
 	public void setMaxDriveSpeed(double maxspd) {
 		System.out.println("setMaxDriveSpeed( " + maxspd + " )");
 		if (0.0 < maxspd && maxspd <= 1.0) {
@@ -50,14 +47,12 @@ public class OI {
 		}
 	}
 
-	//Sets the max arm speed
 	public void setMaxArmSpeed(double maxspd) {
 		if (0.0 < maxspd && maxspd <= 1.0) {
 			m_maxArmSpeed = maxspd;
 		}
 	}
 
-	//Sets the max intake speed
 	public void setMaxIntakeSpeed(double maxspd) {
 		if (0.0 < maxspd && maxspd <= 1.0) {
 			m_maxIntakeSpeed = maxspd;
@@ -72,7 +67,6 @@ public class OI {
 		return m_controller.getLeftY() * m_maxDriveSpeed;
 	}
 
-	//Gets drive left and right controls
 	public double getSteering() {
 		return -m_controller.getRightX() * m_maxDriveSpeed;// correct stearing (-)
 	}
@@ -102,12 +96,16 @@ public class OI {
 
 		return ret_value * m_maxIntakeSpeed;
 	}
+	/*
+	public boolean getHatchEject() {
+		return m_controller.getAButtonPressed();
+	}
 
 	public boolean getCargoEject() {
 		return m_controller.getBButton();
 	}
 
-	/*public boolean getClimbEject() {
+	public boolean getClimbEject() {
 		return m_controller.getXButtonPressed();
 	}
 	
@@ -115,6 +113,7 @@ public class OI {
 		return m_controller.getPOV();
 	}
 	
+
 	public void setRumble(boolean is_rumble) {
 		m_controller.setRumble(RumbleType.kLeftRumble, is_rumble ? 0.0 : 0.5);
 	}
