@@ -47,7 +47,7 @@ public class Intake extends SubsystemBase {
 
 	//Pivots the intake down
 	public void dropIntake() {
-
+		
 	}
 
 	//Pivots the intake up
