@@ -1,7 +1,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import java.util.*;
 
 public class AutoCommand extends CommandBase {
 	//Is red alliance or blue alliance
@@ -14,7 +13,7 @@ public class AutoCommand extends CommandBase {
 	 *"L", "M", or "R", and the third is whether it is the right, left, or middle cargo on that side "L", "M", or "R"
 	 *colorOccupying holds a single character which what alliance the cargo belongs to or if it is empty 'R', 'B', or 'E'
 	 */
-	private final Hashtable<String, ArrayList<E>> cargoPositions=new Hashtable<>() {{
+	/*private final Hashtable<String, ArrayList<E>> cargoPositions=new Hashtable<>() {{
 		put("RLL", new ArrayList<E>(){{
 			add('E');
 			add(0.0);
@@ -105,7 +104,7 @@ public class AutoCommand extends CommandBase {
 			add(0.0);
 			add(0.0);
 		}});
-	}};
+	}};*/
 
 	//Constructor
 	public AutoCommand() {
