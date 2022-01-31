@@ -103,7 +103,12 @@ public class OI {
 	public boolean getIntakeUp() {
 		return m_controller.getLeftTriggerAxis() == 0 && isIntakeDown;
 	}
-
+	/**Returns the value for the shoota
+	 * 
+	 * @return m_maxShootSpeed; or 0
+	 * 
+	 * life can feel meaningless, but you should always remember that this day will pass. 
+	 */
 	public double getShoot() {
 		if (m_controller.getRightTriggerAxis() > 0) {
 			return m_maxShootSpeed;
