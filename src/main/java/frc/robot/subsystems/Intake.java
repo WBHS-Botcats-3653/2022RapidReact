@@ -15,7 +15,7 @@ public class Intake extends SubsystemBase {
 	private static Intake intake=null;
 	private WPI_VictorSPX pivot;
 	private WPI_VictorSPX rollers;
-	private WPI_VictorSPX belt;
+	private WPI_VictorSPX indexer;
 
 	/**Constructor
 	 * it is a singleton
@@ -24,7 +24,7 @@ public class Intake extends SubsystemBase {
 		//Creates WPI_VictorSPX motor controller for the arm
 		pivot=new WPI_VictorSPX(Constants.MCID.get("Pivot"));
 		rollers=new WPI_VictorSPX(Constants.MCID.get("Rollers"));
-		belt=new WPI_VictorSPX(Constants.MCID.get("Belt"));
+		indexer=new WPI_VictorSPX(Constants.MCID.get("Indexer"));
 	}
 
 	/**Returns an instance of the Intake
@@ -45,7 +45,7 @@ public class Intake extends SubsystemBase {
 
 	//Pivots the intake down
 	public void dropIntake() {
-		
+
 	}
 
 	//Pivots the intake up
@@ -60,6 +60,6 @@ public class Intake extends SubsystemBase {
 
 	//Raises the cargo up the intake system
 	public void raiseCargo(double speed) {
-		belt.set(speed);
+		indexer.set(speed);
 	}
 }
