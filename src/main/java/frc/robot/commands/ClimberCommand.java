@@ -29,7 +29,8 @@ public class ClimberCommand extends CommandBase {
 		//addRequirements();
 	}
 
-	// Called when the command is initially scheduled.
+	/*Called when the command is initially scheduled.
+	 */
 	public void initialize() {}
 
 	// Called every time the scheduler runs while the command is scheduled.
