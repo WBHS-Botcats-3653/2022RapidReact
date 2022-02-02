@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import frc.robot.subsystems.DriveTrain;
 /**This command will run and will do 
@@ -28,8 +29,10 @@ public class AutoCommand extends CommandBase {
 		 * thus making the cut for the taxi drive part.
 		 */
 		new WaitUntilCommand(3)
-		.deadlineWith(new InstantCommand(() -> driveTrain.ArcadeDrived(0.5, 0), driveTrain))
-		.andThen(new InstantCommand(() -> driveTrain.ArcadeDrived(0, 0), driveTrain));
+		.deadlineWith(new StartEndCommand(
+		() -> driveTrain.ArcadeDrived(0.5, 0), 
+		() -> driveTrain.ArcadeDrived(0, 0),
+		 driveTrain));
 		// TODO Auto-generated method stub
 		//super.initialize();
 	}
