@@ -34,7 +34,6 @@ public class AutoCommand extends CommandBase {
 		//run when it ends
 		() -> driveTrain.ArcadeDrived(0, 0),
 		 driveTrain));
-		// TODO Auto-generated method stub
 		//super.initialize();
 	}
 
