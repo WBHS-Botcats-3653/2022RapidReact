@@ -28,9 +28,10 @@ public class AutoCommand extends CommandBase {
 		 * so it will basically go and .5 speed, straight, and it will last for 3 seconds, 
 		 * thus making the cut for the taxi drive part.
 		 */
-		new WaitUntilCommand(3)
-		.deadlineWith(new StartEndCommand(
+		new WaitUntilCommand(3).deadlineWith(new StartEndCommand(
+		//run when it starts
 		() -> driveTrain.ArcadeDrived(0.5, 0), 
+		//run when it ends
 		() -> driveTrain.ArcadeDrived(0, 0),
 		 driveTrain));
 		// TODO Auto-generated method stub
