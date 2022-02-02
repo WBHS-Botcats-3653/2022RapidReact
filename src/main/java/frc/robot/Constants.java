@@ -29,10 +29,10 @@ public final class Constants {
 		put("Wheel Front Right", 1);
 		put("Wheel Back Left", 2);
 		put("Wheel Back Right", 3);
-		put("Arm", 4);
-		put("Pivot", 5);
-		put("Rollers", 6);
-		put("Indexer", 7);
-		put("Spinner", 8);
+		put("Arm", 10);
+		put("Pivot", 20);
+		put("Rollers", 21);
+		put("Indexer", 22);
+		put("Spinner", 30);
 	}};
 }
