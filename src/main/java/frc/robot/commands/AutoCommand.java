@@ -29,12 +29,20 @@ public class AutoCommand extends CommandBase {
 		 * thus making the cut for the taxi drive part.
 		 */
 		new WaitUntilCommand(3).deadlineWith(new StartEndCommand(
+<<<<<<< HEAD
 			//run when it starts
 			() -> driveTrain.ArcadeDrived(0.5, 0), 
 			//run when it ends
 			() -> driveTrain.ArcadeDrived(0, 0),
 			driveTrain));
 		// TODO Auto-generated method stub
+=======
+		//run when it starts
+		() -> driveTrain.ArcadeDrived(0.5, 0), 
+		//run when it ends
+		() -> driveTrain.ArcadeDrived(0, 0),
+		 driveTrain));
+>>>>>>> d14905f9fcc8172ca3a5bddaf076b9125812ebac
 		//super.initialize();
 	}
 
