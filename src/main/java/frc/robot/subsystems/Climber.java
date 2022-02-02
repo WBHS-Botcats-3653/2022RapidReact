@@ -16,7 +16,6 @@ import frc.robot.OI;
 public class Climber extends SubsystemBase {
 	private static Climber m_singleton=null;
 	private WPI_VictorSPX arm;
-	private OI m_oi = OI.getInstance();
 
 	//Constructor
 	private Climber() {
