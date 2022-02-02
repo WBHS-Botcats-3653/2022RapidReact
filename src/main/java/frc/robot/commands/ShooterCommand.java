@@ -19,7 +19,7 @@ public class ShooterCommand extends CommandBase {
 	public ShooterCommand() {
 		//Initializes instance variables with OI and Shooter subsystem
 		m_oi=OI.getInstance();
-		m_shooter=Shooter.getShooter();
+		m_shooter = Shooter.getShooter();
 		// Use addRequirements() here to declare subsystem dependencies.
 		//addRequirements();
 	}

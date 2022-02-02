@@ -51,20 +51,29 @@ public class DriveTrain extends SubsystemBase {
 		return driveTrain;
 	}
 
-	/*Instantiates the arcade drive
+	/**Instantiates the arcade drive
 	 *OVERLOADED FUNCTION
 	 */
 	public void ArcadeDrived() {
 		getDriveTrain().diffDrive.arcadeDrive(input.getThrottle(), input.getSteering());
 	}
 
-	/*Instantiates the arcade drive
+	/**Instantiates the arcade drive
 	 *OVERLOADED FUNCTION
+	 * @param train
 	 */
 	public void ArcadeDrived(DriveTrain train) {
 		train.diffDrive.arcadeDrive(input.getThrottle(), input.getSteering());
 	}
 
+	/**Instantiates the arcade drive
+	 * OVERLOADED FUNCTION
+	 * @param speed
+	 * @param rotation
+	 */
+	public void ArcadeDrived(double speed, double rotation){
+		getDriveTrain().diffDrive.arcadeDrive(speed, rotation);
+	}
 	@Override
 	public void periodic() {
 	// This method will be called once per scheduler run
