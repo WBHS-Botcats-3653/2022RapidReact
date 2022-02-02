@@ -33,9 +33,7 @@ public class RobotContainer {
 	private final DriveTrain m_driveSubsystem = DriveTrain.getDriveTrain();
 	private final Climber m_climberSubsystem = Climber.getClimber();
 	private final Intake m_intakeSubsystem = Intake.getIntake();
-
 	private final Dashboard m_dashboardSubsystem = Dashboard.getDashboard();
-
 	private final Shooter m_shooterSubsystem = Shooter.getShooter();
 
 	//private final ArcadeDriveCommand arcadeDriveCommand = new ArcadeDriveCommand();
@@ -49,11 +47,10 @@ public class RobotContainer {
 		m_driveSubsystem.setDefaultCommand(new ArcadeDriveCommand());
 		m_climberSubsystem.setDefaultCommand(new ClimberCommand());
 		m_intakeSubsystem.setDefaultCommand(new IntakeCommand());
-
 		m_dashboardSubsystem.setDefaultCommand(new DashboardCommand());
-
 		m_shooterSubsystem.setDefaultCommand(new ShooterCommand());
-
+		m_dashboardSubsystem.setDefaultCommand(new DashboardCommand());
+		m_shooterSubsystem.setDefaultCommand(new ShooterCommand());
 	}
 
 	/**
