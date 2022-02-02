@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 //Imports commands
 import frc.robot.commands.ArcadeDriveCommand;
+import frc.robot.commands.AutoCommand;
 import frc.robot.commands.ClimberCommand;
 import frc.robot.commands.DashboardCommand;
 import frc.robot.commands.IntakeCommand;
@@ -68,8 +69,8 @@ public class RobotContainer {
 	 */
 	public Command getAutonomousCommand() {
 		// An ExampleCommand will run in autonomous
-		//TODO: add the command for autonomous
-		//todo el mudo me huebea
-		return null;
+		//DONE
+		//TODO: make the commands work, if they work -> be happy
+		return new AutoCommand();
 	}
 }
