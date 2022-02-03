@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 //Imports Command
 import edu.wpi.first.wpilibj2.command.Command;
-//Imports commands
 import frc.robot.commands.ArcadeDriveCommand;
 import frc.robot.commands.AutoCommand;
 import frc.robot.commands.ClimberCommand;
@@ -37,7 +36,16 @@ public class RobotContainer {
 	private final Dashboard m_dashboardSubsystem = Dashboard.getDashboard();
 	private final Shooter m_shooterSubsystem = Shooter.getShooter();
 	
+<<<<<<< HEAD
 
+=======
+	private final ArcadeDriveCommand m_arcadeDriveCommand=new ArcadeDriveCommand();
+	private final ClimberCommand m_climberCommand=new ClimberCommand();
+	private final IntakeCommand m_intakeCommand=new IntakeCommand();
+	private final DashboardCommand m_dashboardCommand=new DashboardCommand();
+	private final ShooterCommand m_shooterCommand=new ShooterCommand();
+	private final AutoCommand m_autoCommand=new AutoCommand();
+>>>>>>> 286d1305db74ed32cdf49516e580468ec125061f
 
 	//private final ArcadeDriveCommand arcadeDriveCommand = new ArcadeDriveCommand();
 
@@ -46,15 +54,6 @@ public class RobotContainer {
 	public RobotContainer() {
 		// Configure the button bindings
 		configureButtonBindings();
-		//Sets default commands for subsystems
-		m_driveSubsystem.setDefaultCommand(new ArcadeDriveCommand());
-		
-		m_climberSubsystem.setDefaultCommand(new ClimberCommand());
-		m_intakeSubsystem.setDefaultCommand(new IntakeCommand());
-		m_dashboardSubsystem.setDefaultCommand(new DashboardCommand());
-		m_shooterSubsystem.setDefaultCommand(new ShooterCommand());
-		m_dashboardSubsystem.setDefaultCommand(new DashboardCommand());
-		m_shooterSubsystem.setDefaultCommand(new ShooterCommand());
 	}
 
 	/**
