@@ -5,17 +5,20 @@
 package frc.robot.commands.subcommands.Indexersubcommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Storage;
 
 public class IndexerCommand extends CommandBase {
   /** Creates a new IndexerCommand. */
+  private Storage m_indexer;
   public IndexerCommand() {
     // Use addRequirements() here to declare subsystem dependencies.
+    m_indexer = Storage.getStorage();
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
+    m_indexer.raiseCargo(1.0);
     
   }
 
@@ -26,7 +29,7 @@ public class IndexerCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-
+    m_indexer.raiseCargo(0);
 
   }
 

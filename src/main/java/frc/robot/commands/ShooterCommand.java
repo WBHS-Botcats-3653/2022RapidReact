@@ -4,10 +4,13 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.command.InstantCommand;
 //Import CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 //Import OI
 import frc.robot.OI;
+import frc.robot.commands.subcommands.Indexersubcommands.IndexerCommand;
 //Import Shooter subsystem
 import frc.robot.subsystems.Shooter;
 
@@ -15,6 +18,7 @@ public class ShooterCommand extends CommandBase {
 	//Holds instances of OI and Shooter subsystem
 	private OI m_oi;
 	private Shooter m_shooter;
+	private double shoot;
 
 	public ShooterCommand() {
 		//Initializes instance variables with OI and Shooter subsystem
@@ -30,12 +34,14 @@ public class ShooterCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	public void execute() {
 		//m_shooter.spinSpinner(m_oi.getShoot());
+		shoot = m_oi.getShoot();
 		addCommands(
-			new InstantCommand(
-				() -> m_shooter.spinSpinner(m_oi.getShoot()),
+			new RunCommand(
+				() -> m_shooter.spinSpinner(shoot),
 					m_shooter
-			),
-			
+			)
+			.withInterrupt(() -> m_oi.getShoot() == 0),
+			new IndexerCommand().withInterrupt(() -> m_oi.getShoot() == 0)
 		);
 	}
 
