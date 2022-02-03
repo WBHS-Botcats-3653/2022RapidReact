@@ -4,12 +4,10 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.InstantCommand;
+
 //Import CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.StartEndCommand;
-import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
+
 //Import OI
 import frc.robot.OI;
 import frc.robot.commands.subcommands.Intakesubcommands.IntakeControlCommand;
@@ -40,15 +38,11 @@ public class IntakeCommand extends CommandBase {
 
 	// Called every time the scheduler runs while the command is scheduled.
 	public void execute() {
-
-
-
-
 		if (m_oi.getIntakeDown()) {
 			//Drops the Intake
 			//m_intake.dropIntake();
 			new IntakeControlCommand();
-			;
+			
 		} else if (m_oi.getIntakeUp()) {
 			//Raises the intake
 			

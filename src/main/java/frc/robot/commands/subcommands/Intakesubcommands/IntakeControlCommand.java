@@ -39,7 +39,12 @@ public class IntakeControlCommand extends ParallelCommandGroup {
       new StartEndCommand(
         () -> m_intake.spinRollers(1.0), 
         () -> m_intake.spinRollers(0),
-        m_intake)
+        m_intake
+      ),
+      new InstantCommand(
+        () -> m_intake.raiseCargo(1.0), 
+        m_intake
+      )
     );
   }
 }

@@ -6,6 +6,8 @@ package frc.robot.subsystems;
 
 //Imports WPI_VictorSPX (MotorController)
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
+import edu.wpi.first.wpilibj2.command.StartEndCommand;
 //Imports SubsystemBase
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 //Imports Constants
@@ -43,14 +45,26 @@ public class Intake extends SubsystemBase {
 		rollers.set(speed);
 	}
 
-	//Pivots the intake down
-	public void dropIntake() {
-
+	/**Pivots the intake down
+	 * NOTE: it doesn't stop the intake
+	 * to stop the intake (the pivot), use stopIntake()
+	 * @param speed
+	 */
+	public void dropIntake(double speed) {
+		pivot.set(speed);
 	}
-
-	//Pivots the intake up
-	public void raiseIntake() {
-
+	/**this method will set the speed of the pivot to 0
+	 * 
+	 */
+	public void stopIntake(){
+		pivot.set(0);
+	}
+	/**Pivots the intake up
+	 * @param speed
+	 * NOTE: the parameter speed is inverted, so don't input negative values
+	 */
+	public void raiseIntake(double speed) {
+		pivot.set(- speed);
 	}
 
 	//Ejects cargo from intake
