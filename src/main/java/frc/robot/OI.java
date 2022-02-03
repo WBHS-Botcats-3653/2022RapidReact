@@ -119,11 +119,8 @@ public class OI {
 		return 0;
 	}
 
-	public double getClimb() {
-		//TODO: add the rest, add something
-		//Daniel: you suck it!!
-		//Ruben: write that down, write that down
-		return 0;
+	public double POVIsUp() {
+		return m_controller.getPOV();
 	}
 	
 	/*
