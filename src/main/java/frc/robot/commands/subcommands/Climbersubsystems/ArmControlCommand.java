@@ -16,7 +16,7 @@ public class ArmControlCommand extends CommandBase {
   public ArmControlCommand(double speed) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_climber = Climber.getClimber();
-
+    this.speed = speed;
   }
 
   // Called when the command is initially scheduled.

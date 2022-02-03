@@ -25,6 +25,7 @@ public class LowerArmCommand extends InstantCommand {
     new ArmControlCommand(- m_oi.getMaxArmSpeed())
     .withInterrupt(
       () -> false /*this will depend with the encoder*/
-      );
+      )
+      .andThen(new ArmControlCommand(0));
   }
 }
