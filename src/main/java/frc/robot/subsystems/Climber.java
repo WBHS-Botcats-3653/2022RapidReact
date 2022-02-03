@@ -31,22 +31,9 @@ public class Climber extends SubsystemBase {
 	}
 
 	//Raises the arm to it's fully extended position
-	public void raiseArmFully(double speed) {
-		
+	public void setArmSpeed(double speed) {
+		arm.set(speed);
 	}
 
-	//Raises the arm
-	public void raiseArm(double speed) {
-		
-	}
 
-	//Lowers the arm all the way down
-	public void lowerArmFully(double speed) {
-
-	}
-
-	//Lowers the arm
-	public void lowerArm(double speed) {
-		
-	}
 }
