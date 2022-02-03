@@ -4,16 +4,14 @@
 
 package frc.robot.commands;
 
-<<<<<<< HEAD
-import edu.wpi.first.wpilibj.command.InstantCommand;
 //Import CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.RunCommand;
-=======
+
 //Import InstantCommand
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
->>>>>>> 6e7fcb9adaee3acbe950271b4fd4b8f72ea06ea2
+
 //Import OI
 import frc.robot.OI;
 import frc.robot.commands.subcommands.Indexersubcommands.IndexerCommand;
@@ -39,23 +37,23 @@ public class ShooterCommand extends ParallelCommandGroup {
 
 	// Called every time the scheduler runs while the command is scheduled.
 	public void execute() {
-<<<<<<< HEAD
+
 		//m_shooter.spinSpinner(m_oi.getShoot());
 		shoot = m_oi.getShoot();
-=======
->>>>>>> 6e7fcb9adaee3acbe950271b4fd4b8f72ea06ea2
+
+
 		addCommands(
 			new RunCommand(
 				() -> m_shooter.spinSpinner(shoot),
 					m_shooter
-<<<<<<< HEAD
+
 			)
 			.withInterrupt(() -> m_oi.getShoot() == 0),
-			new IndexerCommand().withInterrupt(() -> m_oi.getShoot() == 0)
-=======
-			),
 			new IndexerCommand()
->>>>>>> 6e7fcb9adaee3acbe950271b4fd4b8f72ea06ea2
+				.withInterrupt(
+					() -> m_oi.getShoot() == 0
+				)
+
 		);
 	}
 
