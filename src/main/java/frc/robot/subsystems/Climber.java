@@ -6,12 +6,11 @@ package frc.robot.subsystems;
 
 //Imports WPI_VictorSPX (Motor Controller)
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
 //Imports SubsystemBase
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 //Imports Constants
 import frc.robot.Constants;
-//Imports OI
-import frc.robot.OI;
 
 public class Climber extends SubsystemBase {
 	private static Climber m_singleton=null;

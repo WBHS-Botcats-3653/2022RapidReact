@@ -12,13 +12,10 @@ import frc.robot.OI;
 import frc.robot.commands.subcommands.Intakesubcommands.IntakeControlCommand;
 import frc.robot.commands.subcommands.Intakesubcommands.PostIntakeCommand;
 import frc.robot.commands.subcommands.Intakesubcommands.RaiseIntakeCommand;
-//Import Intake subsystem
-import frc.robot.subsystems.Intake;
 
 public class IntakeCommand extends CommandBase {
 	//Holds instances of OI and Intake subsystem
 	private OI m_oi;
-	private Intake m_intake;
 
 	/**
 	 * Creates a new IntakeCommand.
@@ -26,9 +23,8 @@ public class IntakeCommand extends CommandBase {
 	 * @param subsystem The subsystem used by this command.
 	 */
 	public IntakeCommand() {
-		//Initializes instance variables with OI and Intake subsystem
+		//Initializes instance variable with OI subsystem
 		m_oi=OI.getInstance();
-		m_intake=Intake.getIntake();
 		// Use addRequirements() here to declare subsystem dependencies.
 		//addRequirements();
 	}

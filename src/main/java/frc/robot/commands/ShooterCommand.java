@@ -31,7 +31,6 @@ public class ShooterCommand extends ParallelCommandGroup {
 
 	// Called every time the scheduler runs while the command is scheduled.
 	public void execute() {
-		//m_shooter.spinSpinner(m_oi.getShoot());
 		addCommands(
 			new InstantCommand(
 				() -> m_shooter.spinSpinner(m_oi.getShoot()),
