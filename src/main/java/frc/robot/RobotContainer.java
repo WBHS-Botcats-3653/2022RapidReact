@@ -36,6 +36,8 @@ public class RobotContainer {
 	private final Intake m_intakeSubsystem = Intake.getIntake();
 	private final Dashboard m_dashboardSubsystem = Dashboard.getDashboard();
 	private final Shooter m_shooterSubsystem = Shooter.getShooter();
+	
+
 
 	//private final ArcadeDriveCommand arcadeDriveCommand = new ArcadeDriveCommand();
 
