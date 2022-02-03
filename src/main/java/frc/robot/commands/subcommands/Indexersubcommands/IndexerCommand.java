@@ -4,7 +4,9 @@
 
 package frc.robot.commands.subcommands.Indexersubcommands;
 
+//Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
+//Imports Storage subsystem
 import frc.robot.subsystems.Storage;
 
 public class IndexerCommand extends CommandBase {
@@ -32,8 +34,6 @@ public class IndexerCommand extends CommandBase {
 	@Override
 	public void end(boolean interrupted) {
 		m_indexer.raiseCargo(0);
-
-
 	}
 
 	// Returns true when the command should end.

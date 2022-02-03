@@ -4,18 +4,20 @@
 
 package frc.robot.commands;
 
-//Import CommandBase
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.RunCommand;
-
-//Import InstantCommand
-import edu.wpi.first.wpilibj2.command.InstantCommand;
+//Imports ParallelCommandGroup
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+<<<<<<< HEAD
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 //Import OI
+=======
+//Imports RunCommand
+import edu.wpi.first.wpilibj2.command.RunCommand;
+//Imports OI
+>>>>>>> af52c7ebcb8fa419e6b0ceefd0a64f333aa7ae36
 import frc.robot.OI;
+//Imports IndexerCommand subcommand
 import frc.robot.commands.subcommands.Indexersubcommands.IndexerCommand;
-//Import Shooter subsystem
+//Imports Shooter subsystem
 import frc.robot.subsystems.Shooter;
 
 public class ShooterCommand extends ParallelCommandGroup {

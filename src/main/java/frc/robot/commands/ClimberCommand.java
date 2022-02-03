@@ -4,11 +4,11 @@
 
 package frc.robot.commands;
 
-//Import CommandBase
+//Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
-//Import OI
+//Imports OI
 import frc.robot.OI;
-//Import Climber subsystem
+//Imports Climber subsystem
 import frc.robot.subsystems.Climber;
 
 public class ClimberCommand extends CommandBase {
@@ -16,9 +16,7 @@ public class ClimberCommand extends CommandBase {
 	private OI m_oi;
 	private Climber m_climber;
 
-	/**
-	 * Creates a new ClimberCommand.
-	 *
+	/*Creates a new ClimberCommand.
 	 * @param subsystem The subsystem used by this command.
 	 */
 	public ClimberCommand() {

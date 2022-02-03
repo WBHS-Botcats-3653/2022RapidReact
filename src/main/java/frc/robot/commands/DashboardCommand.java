@@ -4,29 +4,27 @@
 
 package frc.robot.commands;
 
+//Imports SmartDashboard
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-//Import CommandBase
+//Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
-//Import OI
+//Imports OI
 import frc.robot.OI;
+//Imports Dashboard subsystem
 import frc.robot.subsystems.Dashboard;
-//Import Intake subsystem
-import frc.robot.subsystems.Intake;
 
 public class DashboardCommand extends CommandBase {
 	//Holds instances of OI and Intake subsystem
 	private OI m_oi;
 	private Dashboard m_dashboard;
 
-	/**
-	 * Creates a new DashboardCommand.
-	 *
+	/*Creates a new DashboardCommand.
 	 * @param subsystem The subsystem used by this command.
 	 */
 	public DashboardCommand() {
 		//Initializes instance variables with OI and Intake subsystem
 		m_oi=OI.getInstance();
-		m_dashboard= Dashboard.getDashboard();
+		m_dashboard=Dashboard.getDashboard();
 		// Use addRequirements() here to declare subsystem dependencies.
 		//addRequirements();
 	}

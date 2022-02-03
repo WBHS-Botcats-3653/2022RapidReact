@@ -9,15 +9,16 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 //Imports Command
 import edu.wpi.first.wpilibj2.command.Command;
+//Imports commands
 import frc.robot.commands.ArcadeDriveCommand;
 import frc.robot.commands.AutoCommand;
 import frc.robot.commands.ClimberCommand;
 import frc.robot.commands.DashboardCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.ShooterCommand;
+//Imports subsystems
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Dashboard;
-//Imports subsystems
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
