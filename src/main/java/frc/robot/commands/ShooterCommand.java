@@ -6,14 +6,13 @@ package frc.robot.commands;
 
 //Imports ParallelCommandGroup
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-<<<<<<< HEAD
+
 import edu.wpi.first.wpilibj2.command.PrintCommand;
-//Import OI
-=======
+
 //Imports RunCommand
 import edu.wpi.first.wpilibj2.command.RunCommand;
 //Imports OI
->>>>>>> af52c7ebcb8fa419e6b0ceefd0a64f333aa7ae36
+
 import frc.robot.OI;
 //Imports IndexerCommand subcommand
 import frc.robot.commands.subcommands.Indexersubcommands.IndexerCommand;
