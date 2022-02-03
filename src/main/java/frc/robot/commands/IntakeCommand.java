@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.OI;
 import frc.robot.commands.subcommands.Intakesubcommands.IntakeControlCommand;
 import frc.robot.commands.subcommands.Intakesubcommands.PosIntakeCommand;
+import frc.robot.commands.subcommands.Intakesubcommands.RaiseIntakeCommand;
 //Import Intake subsystem
 import frc.robot.subsystems.Intake;
 
@@ -45,9 +46,12 @@ public class IntakeCommand extends CommandBase {
 			
 		} else if (m_oi.getIntakeUp()) {
 			//Raises the intake
-			
+			new RaiseIntakeCommand()
+			.andThen(
 			//m_intake.raiseIntake();
-			new PosIntakeCommand();
+			new PosIntakeCommand()
+			
+			);
 		}
 		/* the commented code is an old version, but if the command based fails, we could use the if else
 		//Spins the rollers

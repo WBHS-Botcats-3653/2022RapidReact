@@ -46,12 +46,14 @@ public class RobotContainer {
 		configureButtonBindings();
 		//Sets default commands for subsystems
 		m_driveSubsystem.setDefaultCommand(new ArcadeDriveCommand());
+		/*
 		m_climberSubsystem.setDefaultCommand(new ClimberCommand());
 		m_intakeSubsystem.setDefaultCommand(new IntakeCommand());
 		m_dashboardSubsystem.setDefaultCommand(new DashboardCommand());
 		m_shooterSubsystem.setDefaultCommand(new ShooterCommand());
 		m_dashboardSubsystem.setDefaultCommand(new DashboardCommand());
 		m_shooterSubsystem.setDefaultCommand(new ShooterCommand());
+		*/
 	}
 
 	/**

@@ -32,10 +32,7 @@ public class IntakeControlCommand extends ParallelCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new InstantCommand(
-        ()-> m_intake.dropIntake(), 
-        m_intake
-      ), 
+      new DropIntakeCommand(), 
       new StartEndCommand(
         () -> m_intake.spinRollers(1.0), 
         () -> m_intake.spinRollers(0),

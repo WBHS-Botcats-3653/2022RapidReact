@@ -12,12 +12,12 @@ import frc.robot.subsystems.Intake;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class DropIntakeCommand extends InstantCommand {
+public class RaiseIntakeCommand extends InstantCommand {
   
   private OI m_oi;
 	private Intake m_intake;
 
-  public DropIntakeCommand() {
+  public RaiseIntakeCommand() {
     // Use addRequirements() here to declare subsystem dependencies.
     m_oi=OI.getInstance();
 		m_intake=Intake.getIntake();
@@ -31,7 +31,7 @@ public class DropIntakeCommand extends InstantCommand {
       ()-> m_intake.stopIntake(), 
       m_intake
     )
-    .withInterrupt(() -> false /*HERE goes the conditional of the encoder to drop */);
+    .withInterrupt(() -> false /*HERE goes the conditional of the encoder to raise */);
 
   }
 }
