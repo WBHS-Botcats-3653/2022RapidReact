@@ -6,9 +6,13 @@ package frc.robot.commands;
 
 //Imports ParallelCommandGroup
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+
+import edu.wpi.first.wpilibj2.command.PrintCommand;
+
 //Imports RunCommand
 import edu.wpi.first.wpilibj2.command.RunCommand;
 //Imports OI
+
 import frc.robot.OI;
 //Imports IndexerCommand subcommand
 import frc.robot.commands.subcommands.Indexersubcommands.IndexerCommand;
@@ -37,9 +41,10 @@ public class ShooterCommand extends ParallelCommandGroup {
 
 		//m_shooter.spinSpinner(m_oi.getShoot());
 		shoot = m_oi.getShoot();
-
+		
 
 		addCommands(
+			new PrintCommand("this is the speed: " + shoot),
 			new RunCommand(
 				() -> m_shooter.spinSpinner(shoot),
 					m_shooter
