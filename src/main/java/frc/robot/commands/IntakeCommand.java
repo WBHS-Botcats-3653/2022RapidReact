@@ -8,10 +8,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 //Imports OI
 import frc.robot.OI;
-//Imports Intake subcommands
-import frc.robot.commands.subcommands.Intakesubcommands.IntakeControlCommand;
-import frc.robot.commands.subcommands.Intakesubcommands.PostIntakeCommand;
-import frc.robot.commands.subcommands.Intakesubcommands.RaiseIntakeCommand;
+import frc.robot.commands.subcommands.intakeSubcommands.IntakeControlCommand;
+import frc.robot.commands.subcommands.intakeSubcommands.PostIntakeCommand;
+import frc.robot.commands.subcommands.intakeSubcommands.RaiseIntakeCommand;
 
 public class IntakeCommand extends CommandBase {
 	//Holds instances of OI and Intake subsystem

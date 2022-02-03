@@ -8,9 +8,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 //Imports OI
 import frc.robot.OI;
-import frc.robot.commands.subcommands.Climbersubsystems.LowerArmCommand;
-import frc.robot.commands.subcommands.Intakesubcommands.RaiseIntakeCommand;
 //Imports Climber subsystem
+import frc.robot.commands.subcommands.climberSubsystems.LowerArmCommand;
+import frc.robot.commands.subcommands.intakeSubcommands.RaiseIntakeCommand;
 
 public class ClimberCommand extends CommandBase {
 	//Holds instances of OI and Climber subsystem

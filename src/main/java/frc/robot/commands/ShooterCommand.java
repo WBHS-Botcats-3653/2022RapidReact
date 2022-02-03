@@ -11,8 +11,7 @@ import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 //Imports OI
 import frc.robot.OI;
-//Imports IndexerCommand subcommand
-import frc.robot.commands.subcommands.Indexersubcommands.IndexerCommand;
+import frc.robot.commands.subcommands.indexerSubcommands.IndexerCommand;
 //Imports Shooter subsystem
 import frc.robot.subsystems.Shooter;
 
