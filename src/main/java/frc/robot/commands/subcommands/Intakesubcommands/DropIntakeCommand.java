@@ -6,8 +6,6 @@ package frc.robot.commands.subcommands.Intakesubcommands;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
-//Imports OI
-import frc.robot.OI;
 //Imports Intake subsystem
 import frc.robot.subsystems.Intake;
 
@@ -15,25 +13,22 @@ import frc.robot.subsystems.Intake;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class DropIntakeCommand extends InstantCommand {
-  
-  private OI m_oi;
 	private Intake m_intake;
 
-  public DropIntakeCommand() {
-    // Use addRequirements() here to declare subsystem dependencies.
-    m_oi=OI.getInstance();
+	public DropIntakeCommand() {
+		// Use addRequirements() here to declare subsystem dependencies.
 		m_intake=Intake.getIntake();
-  }
+	}
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    new StartEndCommand(
-      ()-> m_intake.dropIntake(1.0), 
-      ()-> m_intake.stopIntake(), 
-      m_intake
-    )
-    .withInterrupt(() -> false /*HERE goes the conditional of the encoder to drop */);
+	// Called when the command is initially scheduled.
+	@Override
+	public void initialize() {
+		new StartEndCommand(
+			()-> m_intake.dropIntake(1.0), 
+			()-> m_intake.stopIntake(), 
+			m_intake
+		)
+		.withInterrupt(() -> false /*HERE goes the conditional of the encoder to drop */);
 
-  }
+	}
 }

@@ -7,8 +7,6 @@ package frc.robot.commands.subcommands.Intakesubcommands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
-//Import OI
-import frc.robot.OI;
 //Import Intake subsystem
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Storage;
@@ -18,7 +16,6 @@ import frc.robot.subsystems.Storage;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class IntakeControlCommand extends ParallelCommandGroup {
 	/** Creates a new IntakeControlCommand. */
-	private OI m_oi;
 	private Intake m_intake;
 	private Storage m_storage;
 
@@ -29,8 +26,7 @@ public class IntakeControlCommand extends ParallelCommandGroup {
 	 */
 	public IntakeControlCommand() {
 
-		//Initializes instance variables with OI and Intake subsystem
-		m_oi=OI.getInstance();
+		//Initializes instance variables with Intake and Storage subsystems
 		m_intake=Intake.getIntake();
 		m_storage=Storage.getStorage();
 		

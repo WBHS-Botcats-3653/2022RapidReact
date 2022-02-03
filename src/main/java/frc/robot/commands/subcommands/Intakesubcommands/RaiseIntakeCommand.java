@@ -6,8 +6,6 @@ package frc.robot.commands.subcommands.Intakesubcommands;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
-//Imports OI
-import frc.robot.OI;
 //Imports Intake subsystem
 import frc.robot.subsystems.Intake;
 
@@ -15,13 +13,10 @@ import frc.robot.subsystems.Intake;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class RaiseIntakeCommand extends InstantCommand {
-  
-  private OI m_oi;
 	private Intake m_intake;
 
   public RaiseIntakeCommand() {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_oi=OI.getInstance();
 		m_intake=Intake.getIntake();
   }
 

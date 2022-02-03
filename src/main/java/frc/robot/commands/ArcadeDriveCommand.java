@@ -6,14 +6,11 @@ package frc.robot.commands;
 
 //Import CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
-//Import OI
-import frc.robot.OI;
 //Import DriveTrain subsystem
 import frc.robot.subsystems.DriveTrain;
 
 public class ArcadeDriveCommand extends CommandBase {
 	//Holds instances of OI and DriveTrain subsystem
-	private OI m_oi;
 	private DriveTrain m_drivetrain;
 
 	/**
@@ -23,8 +20,6 @@ public class ArcadeDriveCommand extends CommandBase {
 	 */
 	public ArcadeDriveCommand() {
 		//Initializes instance variables with an instance of OI and DriveTrain
-		
-		m_oi = OI.getInstance();
 		m_drivetrain = DriveTrain.getDriveTrain();
 		// Use addRequirements() here to declare subsystem dependencies.
 		//addRequirements();
