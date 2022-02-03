@@ -39,7 +39,9 @@ public class OI {
 		if (m_singleton == null) {
 			m_singleton = new OI();
 		}
-		if(m_maxArmSpeed )
+		if(m_maxArmSpeed == 0) m_maxArmSpeed = 1.0;
+
+		if(m_maxIntakeSpeed == 0) m_maxArmSpeed = 1.0;
 		return m_singleton;
 	}
 
@@ -85,19 +87,6 @@ public class OI {
 		return -m_controller.getRightX() * m_maxDriveSpeed;// correct stearing (-)
 	}
 
-	public double getArmCtrl() {
-		double ret_value = 0.0;
-		double up = m_controller.getRightTriggerAxis();
-		double dn = m_controller.getLeftTriggerAxis();
-
-		if (0.1 < up) {
-			ret_value = up;
-		} else if (0.1 < dn) {
-			ret_value = -dn;
-		}
-		
-		return ret_value * m_maxArmSpeed;
-	}
 	/**
 	 * this one is for the rollers 
 	 * 
@@ -152,23 +141,6 @@ public class OI {
 	}
 	
 	/*
-	public boolean getHatchEject() {
-		return m_controller.getAButtonPressed();
-	}
-
-	public boolean getCargoEject() {
-		return m_controller.getBButton();
-	}
-
-	public boolean getClimbEject() {
-		return m_controller.getXButtonPressed();
-	}
-	
-	public int getArmPOV() {
-		return m_controller.getPOV();
-	}
-	
-
 	public void setRumble(boolean is_rumble) {
 		m_controller.setRumble(RumbleType.kLeftRumble, is_rumble ? 0.0 : 0.5);
 	}

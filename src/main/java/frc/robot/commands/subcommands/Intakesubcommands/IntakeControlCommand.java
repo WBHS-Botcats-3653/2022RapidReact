@@ -7,6 +7,7 @@ package frc.robot.commands.subcommands.Intakesubcommands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
+import frc.robot.OI;
 //Import Intake subsystem
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Storage;
@@ -18,7 +19,9 @@ public class IntakeControlCommand extends ParallelCommandGroup {
 	/** Creates a new IntakeControlCommand. */
 	private Intake m_intake;
 	private Storage m_storage;
+  private OI m_oi;
 
+  private double intakeSpeed;
 	/**this command will execute the first part of the intake.
 	 * 
 	 * this command was created to divide the work of the intake into 2 separate subcommands, 
@@ -29,13 +32,14 @@ public class IntakeControlCommand extends ParallelCommandGroup {
 		//Initializes instance variables with Intake and Storage subsystems
 		m_intake=Intake.getIntake();
 		m_storage=Storage.getStorage();
-		
+    m_oi = OI.getInstance();
+		intakeSpeed = m_oi.getIntakeCtrl();
 		// Add your commands in the addCommands() call, e.g.
 		// addCommands(new FooCommand(), new BarCommand());
 		addCommands(
 			new DropIntakeCommand(), 
 			new StartEndCommand(
-				() -> m_intake.spinRollers(1.0),
+				() -> m_intake.spinRollers(intakeSpeed),
 				() -> m_intake.spinRollers(0),
 				m_intake
 			),
