@@ -35,5 +35,4 @@ public final class Constants {
 		put("Indexer", 22);
 		put("Spinner", 30);
 	}};
-	
 }
