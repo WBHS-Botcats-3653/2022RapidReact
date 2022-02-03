@@ -4,8 +4,9 @@
 
 package frc.robot.subsystems;
 
-//Imports WPI_VictorSPX (MotorController)
+//Imports WPI_VictorSPX (Motor Controller)
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
 //Imports SubsystemBase
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 //Imports Constants

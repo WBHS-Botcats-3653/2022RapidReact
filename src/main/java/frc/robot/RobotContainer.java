@@ -12,16 +12,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 //Imports commands
 import frc.robot.commands.ArcadeDriveCommand;
 import frc.robot.commands.AutoCommand;
-import frc.robot.commands.ClimberCommand;
-import frc.robot.commands.DashboardCommand;
-import frc.robot.commands.IntakeCommand;
-import frc.robot.commands.ShooterCommand;
-import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.Dashboard;
 //Imports subsystems
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Shooter;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -32,10 +24,6 @@ import frc.robot.subsystems.Shooter;
 public class RobotContainer {
 	// The robot's subsystems and commands are defined here...
 	private final DriveTrain m_driveSubsystem = DriveTrain.getDriveTrain();
-	private final Climber m_climberSubsystem = Climber.getClimber();
-	private final Intake m_intakeSubsystem = Intake.getIntake();
-	private final Dashboard m_dashboardSubsystem = Dashboard.getDashboard();
-	private final Shooter m_shooterSubsystem = Shooter.getShooter();
 
 	//private final ArcadeDriveCommand arcadeDriveCommand = new ArcadeDriveCommand();
 
@@ -46,14 +34,6 @@ public class RobotContainer {
 		configureButtonBindings();
 		//Sets default commands for subsystems
 		m_driveSubsystem.setDefaultCommand(new ArcadeDriveCommand());
-		/*
-		m_climberSubsystem.setDefaultCommand(new ClimberCommand());
-		m_intakeSubsystem.setDefaultCommand(new IntakeCommand());
-		m_dashboardSubsystem.setDefaultCommand(new DashboardCommand());
-		m_shooterSubsystem.setDefaultCommand(new ShooterCommand());
-		m_dashboardSubsystem.setDefaultCommand(new DashboardCommand());
-		m_shooterSubsystem.setDefaultCommand(new ShooterCommand());
-		*/
 	}
 
 	/**
