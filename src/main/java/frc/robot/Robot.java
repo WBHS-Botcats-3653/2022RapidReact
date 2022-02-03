@@ -6,6 +6,7 @@ package frc.robot;
 
 //Imports TimedRobot
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.PrintCommand;
 //Imports Scheduler
 import edu.wpi.first.wpilibj.command.Scheduler;
 //Imports Command
@@ -109,6 +110,7 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 		train.ArcadeDrived();
 		//this might not work
+		new PrintCommand("this is the speed: ");
 		new ShooterCommand();
 	}
 
