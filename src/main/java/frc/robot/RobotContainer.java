@@ -36,16 +36,14 @@ public class RobotContainer {
 	private final Dashboard m_dashboardSubsystem = Dashboard.getDashboard();
 	private final Shooter m_shooterSubsystem = Shooter.getShooter();
 	
-<<<<<<< HEAD
 
-=======
 	private final ArcadeDriveCommand m_arcadeDriveCommand=new ArcadeDriveCommand();
 	private final ClimberCommand m_climberCommand=new ClimberCommand();
 	private final IntakeCommand m_intakeCommand=new IntakeCommand();
 	private final DashboardCommand m_dashboardCommand=new DashboardCommand();
 	private final ShooterCommand m_shooterCommand=new ShooterCommand();
 	private final AutoCommand m_autoCommand=new AutoCommand();
->>>>>>> 286d1305db74ed32cdf49516e580468ec125061f
+
 
 	//private final ArcadeDriveCommand arcadeDriveCommand = new ArcadeDriveCommand();
 
