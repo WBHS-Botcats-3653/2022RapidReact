@@ -31,12 +31,17 @@ public class Climber extends SubsystemBase {
 	}
 
 	//Raises the arm to it's fully extended position
-	public void raiseArm() {
+	public void raiseArmFully(double speed) {
+		
+	}
+
+	//Raises the arm
+	public void raiseArm(double speed) {
 		
 	}
 
 	//Lowers the arm all the way down
-	public void lowerArm() {
+	public void lowerArmFully(double speed) {
 
 	}
 

@@ -119,8 +119,20 @@ public class OI {
 		return 0;
 	}
 
-	public double POVIsUp() {
-		return m_controller.getPOV();
+	public boolean POVIsUp() {
+		return m_controller.getPOV()>=315||m_controller.getPOV()<=45;
+	}
+
+	public boolean POVIsDown() {
+		return m_controller.getPOV()>=135||m_controller.getPOV()<=225;
+	}
+
+	public boolean POVIsRight() {
+		return m_controller.getPOV()>45||m_controller.getPOV()<135;
+	}
+
+	public boolean POVIsLeft() {
+		return m_controller.getPOV()>225||m_controller.getPOV()<315;
 	}
 	
 	/*
