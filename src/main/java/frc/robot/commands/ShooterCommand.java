@@ -4,14 +4,16 @@
 
 package frc.robot.commands;
 
-//Import CommandBase
-import edu.wpi.first.wpilibj2.command.CommandBase;
+//Import InstantCommand
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 //Import OI
 import frc.robot.OI;
+import frc.robot.commands.subcommands.Indexersubcommands.IndexerCommand;
 //Import Shooter subsystem
 import frc.robot.subsystems.Shooter;
 
-public class ShooterCommand extends CommandBase {
+public class ShooterCommand extends ParallelCommandGroup {
 	//Holds instances of OI and Shooter subsystem
 	private OI m_oi;
 	private Shooter m_shooter;
@@ -35,7 +37,7 @@ public class ShooterCommand extends CommandBase {
 				() -> m_shooter.spinSpinner(m_oi.getShoot()),
 					m_shooter
 			),
-			
+			new IndexerCommand()
 		);
 	}
 
