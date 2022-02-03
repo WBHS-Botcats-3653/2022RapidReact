@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj2.command.Command;
 //Imports CommandScheduler
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.ShooterCommand;
 //Imports DriveTrain subsystem
 import frc.robot.subsystems.DriveTrain;
 
@@ -107,6 +108,8 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		train.ArcadeDrived();
+		//this might not work
+		new ShooterCommand();
 	}
 
 	@Override
