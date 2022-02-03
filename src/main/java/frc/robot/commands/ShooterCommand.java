@@ -30,6 +30,7 @@ public class ShooterCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	public void execute() {
 		m_shooter.spinSpinner(m_oi.getShoot());
+		
 	}
 
 	// Called once the command ends or is interrupted.
