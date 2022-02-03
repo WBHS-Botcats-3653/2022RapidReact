@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import frc.robot.subsystems.Climber;
 
 public class ArmControlCommand extends CommandBase {
-<<<<<<< HEAD
+
   private Climber m_climber;
 
   private double speed;
@@ -49,42 +49,5 @@ public class ArmControlCommand extends CommandBase {
   public boolean isFinished() {
     return false;
   }
-=======
-	private Climber m_climber;
-	private double speed;
-	
-	/** Creates a new ArmControlCommand. */
-	public ArmControlCommand(double speed) {
-		// Use addRequirements() here to declare subsystem dependencies.
-		m_climber = Climber.getClimber();
 
-	}
-
-	// Called when the command is initially scheduled.
-	@Override
-	public void initialize() {
-		
-	}
-
-	// Called every time the scheduler runs while the command is scheduled.
-	@Override
-	public void execute() {
-		new StartEndCommand(
-			() -> m_climber.setArmSpeed(speed),
-			() -> m_climber.setArmSpeed(0),
-			m_climber
-		)
-		.withInterrupt(() -> speed == 0);
-	}
-
-	// Called once the command ends or is interrupted.
-	@Override
-	public void end(boolean interrupted) {}
-
-	// Returns true when the command should end.
-	@Override
-	public boolean isFinished() {
-		return false;
-	}
->>>>>>> 1a9a20d3faf196a24b2e84219f13e2cf62550d23
 }
