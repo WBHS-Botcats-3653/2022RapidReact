@@ -42,14 +42,12 @@ public class IntakeCommand extends CommandBase {
 			//Drops the Intake
 			//m_intake.dropIntake();
 			new IntakeControlCommand();
-			
 		} else if (m_oi.getIntakeUp()) {
 			//Raises the intake
 			new RaiseIntakeCommand()
 			.andThen(
 			//m_intake.raiseIntake();
 			new PostIntakeCommand()
-			
 			);
 		}
 		/* the commented code is an old version, but if the command based fails, we could use the if else

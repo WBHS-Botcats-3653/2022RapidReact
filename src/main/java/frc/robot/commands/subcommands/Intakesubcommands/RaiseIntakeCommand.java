@@ -6,7 +6,9 @@ package frc.robot.commands.subcommands.Intakesubcommands;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
+//Imports OI
 import frc.robot.OI;
+//Imports Intake subsystem
 import frc.robot.subsystems.Intake;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
