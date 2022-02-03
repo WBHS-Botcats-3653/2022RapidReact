@@ -4,8 +4,12 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.command.InstantCommand;
 //Import CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.StartEndCommand;
+import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 //Import OI
 import frc.robot.OI;
 //Import Intake subsystem
@@ -34,11 +38,37 @@ public class IntakeCommand extends CommandBase {
 
 	// Called every time the scheduler runs while the command is scheduled.
 	public void execute() {
+//TODO: FIX IT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		new WaitUntilCommand(() -> !(m_oi.getIntakeDown()))
+		.deadlineWith(
+			new StartEndCommand(
+				new InstantCommand(
+					()-> m_intake.dropIntake(),
+					m_intake
+					)/*
+						.alongWith(
+							new RunCommand(() -> m_intake.spinRollers(1.0), m_intake), 
+							new RunCommand(() -> m_intake.raiseCargo(1.0), m_intake)
+						)
+				)*/,
+				new WaitUntilCommand(3)
+					.deadlineWith(
+						new StartEndCommand(
+							() -> m_intake.raiseCargo(1.0), 
+							() -> m_intake.raiseCargo(0),
+							m_intake
+						)
+					), 
+					m_intake
+			);
+
 		if (m_oi.getIntakeDown()) {
 			//Drops the Intake
 			m_intake.dropIntake();
+			;
 		} else if (m_oi.getIntakeUp()) {
 			//Raises the intake
+			
 			m_intake.raiseIntake();
 		}
 		//Spins the rollers
