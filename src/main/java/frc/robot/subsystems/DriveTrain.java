@@ -21,7 +21,7 @@ import frc.robot.OI;
 
 public class DriveTrain extends SubsystemBase {
 	private static DriveTrain driveTrain=null;
-	public OI input= OI.getInstance();
+	public OI input=OI.getInstance();
 	private DifferentialDrive diffDrive;
 
 	//documentation for WPI_VictorSPX: 
