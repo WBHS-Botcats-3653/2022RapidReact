@@ -35,14 +35,18 @@ public class ClimberCommand extends CommandBase {
 
 	// Called every time the scheduler runs while the command is scheduled.
 	public void execute() {
-		if (/*OI HERE*/ false) {
+		if (m_oi.POVIsUp()) {
 			//Fully extends the arm
-			m_climber.raiseArm();
-		} else if (/*OI HERE*/ true) {
+			m_climber.raiseArmFully(m_oi.getMaxArmSpeed());
+		} else if (m_oi.POVIsDown()) {
 			//Lowers the arm completely
-			m_climber.raiseArm();
-		} else {
-			m_climber.lowerArm(/*OI HERE*/);
+			m_climber.lowerArmFully(m_oi.getMaxArmSpeed());
+		} else if (m_oi.POVIsRight()) {
+			//Raises the arm
+			m_climber.raiseArm(m_oi.getMaxArmSpeed());
+		} else if (m_oi.POVIsLeft()) {
+			//Lowers the arm
+			m_climber.lowerArm(m_oi.getMaxArmSpeed());
 		}
 	}
 
