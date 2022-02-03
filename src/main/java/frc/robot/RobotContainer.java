@@ -5,9 +5,11 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+//Imports controller
 import edu.wpi.first.wpilibj.XboxController;
 //Imports Command
 import edu.wpi.first.wpilibj2.command.Command;
+//Imports commands
 import frc.robot.commands.ArcadeDriveCommand;
 import frc.robot.commands.AutoCommand;
 import frc.robot.commands.ClimberCommand;
@@ -44,6 +46,7 @@ public class RobotContainer {
 		configureButtonBindings();
 		//Sets default commands for subsystems
 		m_driveSubsystem.setDefaultCommand(new ArcadeDriveCommand());
+		
 		m_climberSubsystem.setDefaultCommand(new ClimberCommand());
 		m_intakeSubsystem.setDefaultCommand(new IntakeCommand());
 		m_dashboardSubsystem.setDefaultCommand(new DashboardCommand());
