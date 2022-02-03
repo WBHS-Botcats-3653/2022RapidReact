@@ -114,7 +114,7 @@ public class OI {
 
 		return ret_value * m_maxIntakeSpeed;
 	}
-	//Easter egg \o/
+
 	public boolean getIntakeDown() {
 		return m_controller.getLeftTriggerAxis() > 0 && !isIntakeDown;
 	}
@@ -134,7 +134,7 @@ public class OI {
 		}
 		return 0;
 	}
-
+	//Easter egg \o/
 	public boolean POVIsUp() {
 		return m_controller.getPOV()>=315||m_controller.getPOV()<=45;
 	}
