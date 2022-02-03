@@ -23,15 +23,13 @@ public class RaiseArmCommand extends InstantCommand {
 		//m_climber = Climber.getClimber();
 		m_oi = OI.getInstance();
 	}
-
-
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    new ArmControlCommand(m_oi.getMaxArmSpeed())
-    .withInterrupt(
-      () -> false /*this will depend with the encoder*/
-      );
-
-  }
+	
+	// Called when the command is initially scheduled.
+	@Override
+	public void initialize() {
+		new ArmControlCommand(m_oi.getMaxArmSpeed())
+		.withInterrupt(
+			() -> false /*this will depend with the encoder*/
+		);
+	}
 }

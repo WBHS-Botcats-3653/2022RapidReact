@@ -17,18 +17,15 @@ public class LowerArmCommand extends InstantCommand {
 	
 	public LowerArmCommand() {
 		// Use addRequirements() here to declare subsystem dependencies.
-
 		m_oi = OI.getInstance();
 	}
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    new ArmControlCommand(- m_oi.getMaxArmSpeed())
-    .withInterrupt(
-      () -> false /*this will depend with the encoder*/
-      );
-
-  }
-
+	// Called when the command is initially scheduled.
+	@Override
+	public void initialize() {
+		new ArmControlCommand(- m_oi.getMaxArmSpeed())
+		.withInterrupt(
+			() -> false /*this will depend with the encoder*/
+		);
+	}
 }
