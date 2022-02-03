@@ -12,6 +12,7 @@ import frc.robot.commands.subcommands.intakeSubcommands.IntakeControlCommand;
 import frc.robot.commands.subcommands.intakeSubcommands.PostIntakeCommand;
 import frc.robot.commands.subcommands.intakeSubcommands.RaiseIntakeCommand;
 
+
 public class IntakeCommand extends CommandBase {
 	//Holds instances of OI and Intake subsystem
 	private OI m_oi;
