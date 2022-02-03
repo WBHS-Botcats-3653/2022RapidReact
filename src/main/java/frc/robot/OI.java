@@ -32,7 +32,6 @@ public class OI {
 	private OI() {
 		m_controller = new XboxController(0);
 		m_maxDriveSpeed = 1.0;
-
 	}
 
 	public static OI getInstance() {
@@ -40,7 +39,6 @@ public class OI {
 			m_singleton = new OI();
 		}
 		if(m_maxArmSpeed == 0) m_maxArmSpeed = 1.0;
-
 		if(m_maxIntakeSpeed == 0) m_maxArmSpeed = 1.0;
 		return m_singleton;
 	}
@@ -75,6 +73,7 @@ public class OI {
 	public double getMaxIntakeSpeed(){
 		return m_maxIntakeSpeed;
 	}
+
 	/**this one will return what is commonly as the forward and back
 	 * 
 	 * @return double Throttle
@@ -84,7 +83,7 @@ public class OI {
 	}
 
 	public double getSteering() {
-		return -m_controller.getRightX() * m_maxDriveSpeed;// correct stearing (-)
+		return -m_controller.getRightX() * m_maxDriveSpeed;  // correct stearing (-)
 	}
 
 	/**
@@ -94,13 +93,11 @@ public class OI {
 	 */
 	public double getIntakeCtrl() {
 		double ret_value = 0.0;
-
 		if (m_controller.getLeftBumper()) {
 			ret_value = -1;
 		} else if (m_controller.getLeftTriggerAxis() > 0) {
 			ret_value = 1;
 		}
-
 		return ret_value * m_maxIntakeSpeed;
 	}
 
@@ -111,7 +108,12 @@ public class OI {
 	public boolean getIntakeUp() {
 		return m_controller.getLeftTriggerAxis() == 0 && isIntakeDown;
 	}
-	/**Returns the value for the shoota
+
+	public boolean getSpinIndexer() {
+		return m_controller.getXButton();
+	}
+	
+	/**Returns the value for the shooter
 	 * 
 	 * @return m_maxShootSpeed; or 0
 	 * 

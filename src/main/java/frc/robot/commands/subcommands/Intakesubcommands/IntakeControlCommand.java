@@ -21,35 +21,32 @@ import frc.robot.subsystems.Storage;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class IntakeControlCommand extends ParallelCommandGroup {
-	/** Creates a new IntakeControlCommand. */
+	//Creates a new IntakeControlCommand
 	private Intake m_intake;
 	private Storage m_storage;
-  private OI m_oi;
+	private OI m_oi;
 
-  private double intakeSpeed;
-	/**this command will execute the first part of the intake.
-	 * 
+	/*this command will execute the first part of the intake.
 	 * this command was created to divide the work of the intake into 2 separate subcommands, 
 	 * thus making it easier to find any errors.
 	 */
 	public IntakeControlCommand() {
-
 		//Initializes instance variables with Intake and Storage subsystems
 		m_intake=Intake.getIntake();
 		m_storage=Storage.getStorage();
-    m_oi = OI.getInstance();
-		intakeSpeed = m_oi.getIntakeCtrl();
+		m_oi=OI.getInstance();
+		double intakeSpeed=m_oi.getIntakeCtrl();
 		// Add your commands in the addCommands() call, e.g.
 		// addCommands(new FooCommand(), new BarCommand());
 		addCommands(
 			new DropIntakeCommand(), 
 			new StartEndCommand(
 				() -> m_intake.spinRollers(intakeSpeed),
-				() -> m_intake.spinRollers(0),
+				() -> m_intake.spinRollers(intakeSpeed),
 				m_intake
 			),
 			new InstantCommand(
-				() -> m_storage.raiseCargo(1.0),
+				() -> m_storage.raiseCargo(intakeSpeed),
 				m_storage
 			)
 		);

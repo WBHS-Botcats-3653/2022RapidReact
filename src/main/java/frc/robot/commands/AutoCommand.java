@@ -11,7 +11,6 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Shooter;
 
 /*This command will run and will do 
- * 
  */
 public class AutoCommand extends CommandBase {
 	private DriveTrain driveTrain = DriveTrain.getDriveTrain();

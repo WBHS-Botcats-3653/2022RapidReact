@@ -17,7 +17,7 @@ public class IntakeCommand extends CommandBase {
 	//Holds instances of OI and Intake subsystem
 	private OI m_oi;
 
-	/*Creates a new IntakeCommand.
+	/**Creates a new IntakeCommand.
 	 * @param subsystem The subsystem used by this command.
 	 */
 	public IntakeCommand() {
@@ -44,12 +44,6 @@ public class IntakeCommand extends CommandBase {
 			new PostIntakeCommand()
 			);
 		}
-		/* the commented code is an old version, but if the command based fails, we could use the if else
-		//Spins the rollers
-		m_intake.spinRollers(m_oi.getIntakeCtrl());
-		//Rolls the belt
-		m_intake.raiseCargo(m_oi.getIntakeCtrl());
-		*/
 	}
 
 	// Called once the command ends or is interrupted.

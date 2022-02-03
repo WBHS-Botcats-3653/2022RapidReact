@@ -7,8 +7,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 //Imports controller
 import edu.wpi.first.wpilibj.XboxController;
-//Imports Command
-import edu.wpi.first.wpilibj2.command.Command;
 //Imports commands
 import frc.robot.commands.ArcadeDriveCommand;
 import frc.robot.commands.AutoCommand;
@@ -64,10 +62,10 @@ public class RobotContainer {
 	 *
 	 * @return the command to run in autonomous
 	 */
-	public Command getAutonomousCommand() {
+	public AutoCommand getAutonomousCommand() {
 		// An ExampleCommand will run in autonomous
 		//DONE
 		//TODO: make the commands work, if they work -> be happy
-		return new AutoCommand();
+		return m_autoCommand;
 	}
 }

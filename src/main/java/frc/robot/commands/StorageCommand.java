@@ -4,43 +4,44 @@
 
 package frc.robot.commands;
 
-//Imports SmartDashboard
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
 //Imports OI
 import frc.robot.OI;
-//Imports Dashboard subsystem
-import frc.robot.subsystems.Dashboard;
+//Imports Storage subsystem
+import frc.robot.subsystems.Storage;
 
-public class DashboardCommand extends CommandBase {
-	//Holds instances of OI and Intake subsystem
+public class StorageCommand extends CommandBase {
+	private Storage m_storage;
 	private OI m_oi;
-	private Dashboard m_dashboard;
 
-	/**Creates a new DashboardCommand.
-	 * @param subsystem The subsystem used by this command.
-	 */
-	public DashboardCommand() {
-		//Initializes instance variables with OI and Intake subsystem
-		m_oi=OI.getInstance();
-		m_dashboard=Dashboard.getDashboard();
+	/** Creates a new StorageCommand. */
+	public StorageCommand() {
+		m_storage = Storage.getStorage();
+		m_oi = OI.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
-		//addRequirements();
 	}
 
 	// Called when the command is initially scheduled.
+	@Override
 	public void initialize() {}
 
 	// Called every time the scheduler runs while the command is scheduled.
+	@Override
 	public void execute() {
-		SmartDashboard.putNumber("Joystick X value", m_oi.getThrottle());
+		if (m_oi.getSpinIndexer()) {
+			m_storage.raiseCargo(1.0);
+		} else {
+			m_storage.raiseCargo(0);
+		}
 	}
 
 	// Called once the command ends or is interrupted.
+	@Override
 	public void end(boolean interrupted) {}
 
 	// Returns true when the command should end.
+	@Override
 	public boolean isFinished() {
 		return false;
 	}
