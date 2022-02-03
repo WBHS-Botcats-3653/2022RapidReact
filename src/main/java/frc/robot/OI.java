@@ -19,10 +19,10 @@ import edu.wpi.first.wpilibj.XboxController;
 public class OI {
 	private static OI m_singleton = null;
 	private XboxController m_controller = null;
-	private double m_maxDriveSpeed;
-	private double m_maxArmSpeed;
-	private double m_maxIntakeSpeed;
-	private double m_maxShootSpeed;
+	private static double m_maxDriveSpeed;
+	private static double m_maxArmSpeed;
+	private static double m_maxIntakeSpeed;
+	private static double m_maxShootSpeed;
 	public boolean isIntakeDown = false;
 
 	/**it is the constructor
@@ -39,6 +39,7 @@ public class OI {
 		if (m_singleton == null) {
 			m_singleton = new OI();
 		}
+		if(m_maxArmSpeed )
 		return m_singleton;
 	}
 
@@ -49,10 +50,18 @@ public class OI {
 		}
 	}
 
+	public double getMaxDriveSpeed(){
+		return m_maxDriveSpeed;
+	}
+
 	public void setMaxArmSpeed(double maxspd) {
 		if (0.0 < maxspd && maxspd <= 1.0) {
 			m_maxArmSpeed = maxspd;
 		}
+	}
+
+	public double getMaxArmSpeed(){
+		return m_maxArmSpeed;
 	}
 
 	public void setMaxIntakeSpeed(double maxspd) {
@@ -61,6 +70,9 @@ public class OI {
 		}
 	}
 	
+	public double getMaxIntakeSpeed(){
+		return m_maxIntakeSpeed;
+	}
 	/**this one will return what is commonly as the forward and back
 	 * 
 	 * @return double Throttle
@@ -86,7 +98,11 @@ public class OI {
 		
 		return ret_value * m_maxArmSpeed;
 	}
-
+	/**
+	 * this one is for the rollers 
+	 * 
+	 * @return ret_value * m_maxIntakeSpeed
+	 */
 	public double getIntakeCtrl() {
 		double ret_value = 0.0;
 
