@@ -28,7 +28,9 @@ public class Storage extends SubsystemBase {
 		return storage;
 	}
 
-	//Raises the cargo up the storage system
+	/**Raises the cargo up the storage system
+	 * --This is the indexer--
+	 */
 	public void raiseCargo(double speed) {
 		indexer.set(speed);
 	}
