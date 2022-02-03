@@ -13,9 +13,7 @@ public class ArcadeDriveCommand extends CommandBase {
 	//Holds instances of OI and DriveTrain subsystem
 	private DriveTrain m_drivetrain;
 
-	/**
-	 * Creates a new ArcadeDriveCommand.
-	 *
+	/**Creates a new ArcadeDriveCommand.
 	 * @param subsystem The subsystem used by this command.
 	 */
 	public ArcadeDriveCommand() {

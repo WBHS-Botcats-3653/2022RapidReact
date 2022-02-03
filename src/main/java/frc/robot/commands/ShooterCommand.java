@@ -6,13 +6,10 @@ package frc.robot.commands;
 
 //Imports ParallelCommandGroup
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-
 import edu.wpi.first.wpilibj2.command.PrintCommand;
-
 //Imports RunCommand
 import edu.wpi.first.wpilibj2.command.RunCommand;
 //Imports OI
-
 import frc.robot.OI;
 //Imports IndexerCommand subcommand
 import frc.robot.commands.subcommands.Indexersubcommands.IndexerCommand;
@@ -27,7 +24,7 @@ public class ShooterCommand extends ParallelCommandGroup {
 
 	public ShooterCommand() {
 		//Initializes instance variables with OI and Shooter subsystem
-		m_oi=OI.getInstance();
+		m_oi = OI.getInstance();
 		m_shooter = Shooter.getShooter();
 		// Use addRequirements() here to declare subsystem dependencies.
 		//addRequirements();

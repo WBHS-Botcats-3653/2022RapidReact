@@ -16,7 +16,7 @@ public class ClimberCommand extends CommandBase {
 	private OI m_oi;
 	private Climber m_climber;
 
-	/*Creates a new ClimberCommand.
+	/**Creates a new ClimberCommand.
 	 * @param subsystem The subsystem used by this command.
 	 */
 	public ClimberCommand() {
