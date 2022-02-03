@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 //Import OI
 import frc.robot.OI;
+import frc.robot.commands.subcommands.Intakesubcommands.IntakeControlCommand;
+import frc.robot.commands.subcommands.Intakesubcommands.PosIntakeCommand;
 //Import Intake subsystem
 import frc.robot.subsystems.Intake;
 
@@ -38,43 +40,27 @@ public class IntakeCommand extends CommandBase {
 
 	// Called every time the scheduler runs while the command is scheduled.
 	public void execute() {
-//TODO: FIX IT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		new WaitUntilCommand(() -> !(m_oi.getIntakeDown()))
-		.deadlineWith(
-			new StartEndCommand(
-				new InstantCommand(
-					()-> m_intake.dropIntake(),
-					m_intake
-					)/*
-						.alongWith(
-							new RunCommand(() -> m_intake.spinRollers(1.0), m_intake), 
-							new RunCommand(() -> m_intake.raiseCargo(1.0), m_intake)
-						)
-				)*/,
-				new WaitUntilCommand(3)
-					.deadlineWith(
-						new StartEndCommand(
-							() -> m_intake.raiseCargo(1.0), 
-							() -> m_intake.raiseCargo(0),
-							m_intake
-						)
-					), 
-					m_intake
-			);
+
+
+
 
 		if (m_oi.getIntakeDown()) {
 			//Drops the Intake
-			m_intake.dropIntake();
+			//m_intake.dropIntake();
+			new IntakeControlCommand();
 			;
 		} else if (m_oi.getIntakeUp()) {
 			//Raises the intake
 			
-			m_intake.raiseIntake();
+			//m_intake.raiseIntake();
+			new PosIntakeCommand();
 		}
+		/* the commented code is an old version, but if the command based fails, we could use the if else
 		//Spins the rollers
 		m_intake.spinRollers(m_oi.getIntakeCtrl());
 		//Rolls the belt
 		m_intake.raiseCargo(m_oi.getIntakeCtrl());
+		*/
 	}
 
 	// Called once the command ends or is interrupted.
