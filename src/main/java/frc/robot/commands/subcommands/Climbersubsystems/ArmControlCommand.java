@@ -7,52 +7,13 @@ package frc.robot.commands.subcommands.Climbersubsystems;
 
 //Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
-
 //Imports Climber
 import frc.robot.subsystems.Climber;
 
 public class ArmControlCommand extends CommandBase {
-<<<<<<< Updated upstream
-
-  private Climber m_climber;
-
-  private double speed;
-  /** Creates a new ArmControlCommand. */
-  public ArmControlCommand(double speed) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    m_climber = Climber.getClimber();
-    this.speed = speed;
-  }
-
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    
-  }
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-
-    m_climber.setArmSpeed(speed);
-
-  }
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-
-    m_climber.setArmSpeed(0);
-  }
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
-=======
 	private Climber m_climber;
-
 	private double speed;
+
 	/** Creates a new ArmControlCommand. */
 	public ArmControlCommand(double speed) {
 		// Use addRequirements() here to declare subsystem dependencies.
@@ -67,23 +28,20 @@ public class ArmControlCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		new StartEndCommand(
-			() -> m_climber.setArmSpeed(speed),
-			() -> m_climber.setArmSpeed(0),
-			m_climber
-		)
-		.withInterrupt(() -> speed == 0);
-	}
 
+		m_climber.setArmSpeed(speed);
+
+	}
 	// Called once the command ends or is interrupted.
 	@Override
-	public void end(boolean interrupted) {}
+	public void end(boolean interrupted) {
+
+		m_climber.setArmSpeed(0);
+	}
 
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() {
 		return false;
 	}
->>>>>>> Stashed changes
-
 }
