@@ -6,11 +6,13 @@ package frc.robot;
 
 //Imports TimedRobot
 import edu.wpi.first.wpilibj.TimedRobot;
+//Imports Scheduler
 import edu.wpi.first.wpilibj.command.Scheduler;
 //Imports Command
 import edu.wpi.first.wpilibj2.command.Command;
 //Imports CommandScheduler
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+//Imports DriveTrain subsystem
 import frc.robot.subsystems.DriveTrain;
 
 /**

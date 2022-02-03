@@ -4,9 +4,9 @@
 
 package frc.robot.commands;
 
-//Import CommandBase
+//Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
-//Import DriveTrain subsystem
+//Imports DriveTrain subsystem
 import frc.robot.subsystems.DriveTrain;
 
 public class ArcadeDriveCommand extends CommandBase {
