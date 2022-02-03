@@ -7,11 +7,10 @@ package frc.robot.commands;
 
 //Import CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
-
 //Import OI
 import frc.robot.OI;
 import frc.robot.commands.subcommands.Intakesubcommands.IntakeControlCommand;
-import frc.robot.commands.subcommands.Intakesubcommands.PosIntakeCommand;
+import frc.robot.commands.subcommands.Intakesubcommands.PostIntakeCommand;
 import frc.robot.commands.subcommands.Intakesubcommands.RaiseIntakeCommand;
 //Import Intake subsystem
 import frc.robot.subsystems.Intake;
@@ -49,7 +48,7 @@ public class IntakeCommand extends CommandBase {
 			new RaiseIntakeCommand()
 			.andThen(
 			//m_intake.raiseIntake();
-			new PosIntakeCommand()
+			new PostIntakeCommand()
 			
 			);
 		}
