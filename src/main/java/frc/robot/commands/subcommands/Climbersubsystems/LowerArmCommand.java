@@ -21,6 +21,7 @@ public class LowerArmCommand extends InstantCommand {
 		m_oi = OI.getInstance();
 	}
 
+<<<<<<< Updated upstream
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
@@ -30,5 +31,16 @@ public class LowerArmCommand extends InstantCommand {
       );
 
   }
+=======
+	// Called when the command is initially scheduled.
+	@Override
+	public void initialize() {
+		new ArmControlCommand(- m_oi.getMaxArmSpeed())
+		.withInterrupt(
+			() -> false /*this will depend with the encoder*/
+			)
+			.andThen(new ArmControlCommand(0));
+	}
+>>>>>>> Stashed changes
 
 }
