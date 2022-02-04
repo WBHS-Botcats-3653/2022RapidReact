@@ -67,6 +67,7 @@ public class Robot extends TimedRobot {
 		// and running subsystem periodic() methods.  This must be called from the robot's periodic
 		// block in order for anything in the Command-based framework to work.
 		CommandScheduler.getInstance().run();
+		
 	}
 
 	/** This function is called once each time the robot enters Disabled mode. */
@@ -137,7 +138,7 @@ public class Robot extends TimedRobot {
 */		
 		new ShooterCommand().schedule();
 		
-		Scheduler.getInstance().run();
+		
 		train.ArcadeDrived();
 		
 		m_shooterSubsystem.spinSpinner(m_oi.getShoot());
