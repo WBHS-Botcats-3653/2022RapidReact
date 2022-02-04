@@ -11,13 +11,12 @@ import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 import frc.robot.OI;
 import frc.robot.commands.subcommands.climberSubcommands.LowerArmCommand;
 import frc.robot.commands.subcommands.intakeSubcommands.RaiseIntakeCommand;
-
-
-
+import frc.robot.subsystems.Climber;
 
 public class ClimberCommand extends CommandBase {
 	//Holds instances of OI and Climber subsystem
 	private OI m_oi;
+	private Climber m_climber;
 
 	/**Creates a new ClimberCommand.
 	 * @param subsystem The subsystem used by this command.
@@ -25,6 +24,7 @@ public class ClimberCommand extends CommandBase {
 	public ClimberCommand() {
 		//Initializes instance variables with instances of OI and Climber subsystem
 		m_oi = OI.getInstance();
+		m_climber = Climber.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
 		//addRequirements();
 	}
@@ -51,5 +51,18 @@ public class ClimberCommand extends CommandBase {
 			//Lowers the arm
 			m_climber.lowerArm(m_oi.getMaxArmSpeed());
 		}*/
+
+
+		if (m_oi.POVIsUp()) {
+
+		} else if (m_oi.POVIsDown()) {
+
+		} else if (m_oi.POVIsRight()) {
+
+		} else if (m_oi.POVIsLeft()) {
+
+		} else {
+			m_climber.stopClimb();
+		}
 	}
 }
