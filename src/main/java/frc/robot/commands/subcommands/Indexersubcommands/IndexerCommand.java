@@ -22,7 +22,6 @@ public class IndexerCommand extends CommandBase {
 	@Override
 	public void initialize() {
 		m_indexer.raiseCargo(1.0);
-		
 	}
 
 	// Called once the command ends or is interrupted.

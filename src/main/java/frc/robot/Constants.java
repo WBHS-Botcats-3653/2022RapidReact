@@ -4,7 +4,7 @@
 
 package frc.robot;
 
-//Imports Java utilities
+//Imports Hashtable utility
 import java.util.Hashtable;
 
 /**
@@ -19,7 +19,7 @@ public final class Constants {
 	/*Holds all the Motor Controller IDs
 	 *<String motorControllerName, Integer ID>
 	 */
-	public static final Hashtable<String, Integer> MCID=new Hashtable<>() {{
+	public static final Hashtable<String, Integer> MCID = new Hashtable<>() {{
 		put("Wheel Front Left", 0);
 		put("Wheel Front Right", 1);
 		put("Wheel Back Left", 2);
@@ -34,7 +34,7 @@ public final class Constants {
 	/*Holds all the Encoder IDs
 	 *<String encoderName, Integer ID>
 	 */
-	public static final Hashtable<String, Integer> EID=new Hashtable<>() {{
+	public static final Hashtable<String, Integer> EID = new Hashtable<>() {{
 		put("Left Wheels", 0);
 		put("Right Wheels", 1);
 		put("Pivot", 2);

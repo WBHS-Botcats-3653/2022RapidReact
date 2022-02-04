@@ -40,15 +40,8 @@ public class IntakeControlCommand extends ParallelCommandGroup {
 		// addCommands(new FooCommand(), new BarCommand());
 		addCommands(
 			new DropIntakeCommand(), 
-			new StartEndCommand(
-				() -> m_intake.spinRollers(intakeSpeed),
-				() -> m_intake.spinRollers(intakeSpeed),
-				m_intake
-			),
-			new InstantCommand(
-				() -> m_storage.raiseCargo(intakeSpeed),
-				m_storage
-			)
+			new StartEndCommand(() -> m_intake.spinRollers(intakeSpeed), () -> m_intake.spinRollers(intakeSpeed), m_intake),
+			new InstantCommand(() -> m_storage.raiseCargo(intakeSpeed), m_storage)
 		);
 	}
 }

@@ -43,7 +43,6 @@ public class ClimberCommand extends CommandBase {
 			new ScheduleCommand(new RaiseIntakeCommand()).initialize();
 		} else if (m_oi.POVIsDown()) {
 			//Lowers the arm completely
-			
 			new ScheduleCommand(new LowerArmCommand()).initialize();
 		} /*else if (m_oi.POVIsRight()) {
 			//Raises the arm

@@ -27,11 +27,7 @@ public class PostIntakeCommand extends InstantCommand {
 	@Override
 	public void initialize() {
 		new ScheduleCommand(
-			new StartEndCommand(
-				() -> m_storage.raiseCargo(1.0), 
-				() -> m_storage.raiseCargo(0),
-				m_storage
-			).withTimeout(3)
+			new StartEndCommand(() -> m_storage.raiseCargo(1.0), () -> m_storage.raiseCargo(0), m_storage).withTimeout(3)
 		).initialize();
 	}
 }
