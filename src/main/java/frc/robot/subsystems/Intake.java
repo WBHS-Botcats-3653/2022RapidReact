@@ -87,7 +87,7 @@ public class Intake extends SubsystemBase {
 		if (!interruptor) {
 			dropIntake(speed);
 		} else { 
-			raiseIntake(speed);
+			raiseIntake(0);
 		}
 	}
 
