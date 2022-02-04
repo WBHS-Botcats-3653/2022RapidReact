@@ -4,8 +4,11 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
 //Imports TimedRobot
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.InstantCommand;
 import edu.wpi.first.wpilibj.command.PrintCommand;
 //Imports Scheduler
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -14,8 +17,12 @@ import edu.wpi.first.wpilibj2.command.Command;
 //Imports CommandScheduler
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.ShooterCommand;
+import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.Dashboard;
 //Imports DriveTrain subsystem
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Shooter;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -28,6 +35,12 @@ public class Robot extends TimedRobot {
 	private RobotContainer m_robotContainer;
 
 	private DriveTrain train = DriveTrain.getDriveTrain();
+	private final Climber m_climberSubsystem = Climber.getClimber();
+	private final Intake m_intakeSubsystem = Intake.getIntake();
+	private final Dashboard m_dashboardSubsystem = Dashboard.getDashboard();
+	private final Shooter m_shooterSubsystem = Shooter.getShooter();
+	private final OI m_oi = OI.getInstance();
+	private WPI_VictorSPX spinner= Shooter.spinner;
 	/**
 	 * This function is run when the robot is first started up and should be used for any
 	 * initialization code.
@@ -99,19 +112,32 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+		
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
+
+		m_oi.setMaxShootSpeed(1.0);
+		m_oi.setMaxIntakeSpeed(1.0);
 	}
 
 	/** This function is called periodically during operator control. */
 	@Override
 	public void teleopPeriodic() {
+		
+		Scheduler.getInstance()
+			.add(new InstantCommand(() -> m_shooterSubsystem.Shoot(m_oi.getShoot())));
+			/* it works!!!!!!
+		Scheduler.getInstance()
+			.add(new InstantCommand(() -> m_intakeSubsystem.ControlIntake(m_oi.getIntakeCtrl(), false)));
+*/
 		Scheduler.getInstance().run();
 		train.ArcadeDrived();
+		
+		m_shooterSubsystem.Shoot(m_oi.getShoot());
+		m_intakeSubsystem.ControlIntake(m_oi.getIntakeCtrl(), false);
 		//this might not work
-		new PrintCommand("this is the speed: ");
-		new ShooterCommand();
+		
 	}
 
 	@Override
@@ -122,5 +148,7 @@ public class Robot extends TimedRobot {
 
 	/** This function is called periodically during test mode. */
 	@Override
-	public void testPeriodic() {}
+	public void testPeriodic() {
+
+	}
 }

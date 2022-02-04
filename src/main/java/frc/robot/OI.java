@@ -69,11 +69,19 @@ public class OI {
 			m_maxIntakeSpeed = maxspd;
 		}
 	}
-	
+
 	public double getMaxIntakeSpeed(){
 		return m_maxIntakeSpeed;
 	}
 
+	public void setMaxShootSpeed(double maxspd) {
+		if (0.0 < maxspd && maxspd <= 1.0) {
+			m_maxShootSpeed = maxspd;
+		}
+	}
+	public double getMaxShootSpeed(){
+		return m_maxShootSpeed;
+	}
 	/**this one will return what is commonly as the forward and back
 	 * 
 	 * @return double Throttle
@@ -108,7 +116,13 @@ public class OI {
 	public boolean getIntakeUp() {
 		return m_controller.getLeftTriggerAxis() == 0 && isIntakeDown;
 	}
-
+	/*
+	public double getIntake(){
+		if(getIntakeDown()) return 1.0 *m_maxIntakeSpeed;
+		else if(getIntakeUp()) return -1.0 *m_maxIntakeSpeed;
+		else return 0;
+	}
+	*/
 	public boolean getSpinIndexer() {
 		return m_controller.getXButton();
 	}
@@ -121,7 +135,18 @@ public class OI {
 	 */
 	public double getShoot() {
 		if (m_controller.getRightTriggerAxis() > 0) {
+			if(m_maxShootSpeed != 0)
 			return m_maxShootSpeed;
+			else return 1;
+		}
+		return 0;
+	}
+
+	public double getAltShoot() {
+		if (m_controller.getAButtonPressed()) {
+			if(m_maxShootSpeed != 0)
+			return m_maxShootSpeed;
+			else return 1;
 		}
 		return 0;
 	}

@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 //Imports OI
 import frc.robot.OI;
+import frc.robot.commands.ShooterCommand;
 
 
 public class DriveTrain extends SubsystemBase {
@@ -72,6 +73,11 @@ public class DriveTrain extends SubsystemBase {
 	 */
 	public void ArcadeDrived(double speed, double rotation){
 		getDriveTrain().diffDrive.arcadeDrive(speed, rotation);
+	}
+
+
+	public static void tryThis(){
+		new ShooterCommand();
 	}
 	@Override
 	public void periodic() {

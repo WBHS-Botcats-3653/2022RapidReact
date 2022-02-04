@@ -14,7 +14,7 @@ import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase {
 	private static Shooter shooter=null;
-	private WPI_VictorSPX spinner;
+	public static WPI_VictorSPX spinner;
 
 	public Shooter() {
 		//Creates WPI_VictorSPX motor controller for the spinner
@@ -35,5 +35,10 @@ public class Shooter extends SubsystemBase {
 	//Spins the spinner to shoot the cargo
 	public void spinSpinner(double speed) {
 		spinner.set(speed);
+	}
+	//Usable methods:
+	//this methods will be used to drive the robot
+	public void Shoot(double speed){
+		spinSpinner(speed);
 	}
 }

@@ -68,4 +68,17 @@ public class Intake extends SubsystemBase {
 	public void ejectCargo(double speed) {
 		rollers.set(-speed);
 	}
+	//Usable methods:
+	//this methods will be used to drive the robot
+
+	public void ControlIntake(double speed,boolean interruptor){
+		if(speed > 0)
+		spinRollers(1.0);
+		if(!interruptor){
+			dropIntake(speed);
+		} else{ 
+			raiseIntake(speed);
+
+		}
+	}
 }
