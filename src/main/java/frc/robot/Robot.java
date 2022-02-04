@@ -72,6 +72,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledInit() {
 		//difDrive.reset();
+		// Cancels all running commands when disabled.
+		CommandScheduler.getInstance().cancelAll();
 	}
 
 	@Override
@@ -94,7 +96,7 @@ public class Robot extends TimedRobot {
 		 *		break;
 		 *}
 		 */
-		// schedule the autonomous command (example)
+		// Schedules the autonomous command
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.schedule();
 		}

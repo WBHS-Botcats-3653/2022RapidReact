@@ -17,20 +17,19 @@ import frc.robot.subsystems.Intake;
 public class RaiseIntakeCommand extends InstantCommand {
 	private Intake m_intake;
 
-  public RaiseIntakeCommand() {
-    // Use addRequirements() here to declare subsystem dependencies.
+	public RaiseIntakeCommand() {
+	// Use addRequirements() here to declare subsystem dependencies.
 		m_intake=Intake.getIntake();
-  }
+	}
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    new StartEndCommand(
-      ()-> m_intake.dropIntake(1.0), 
-      ()-> m_intake.stopIntake(), 
-      m_intake
-    )
-    .withInterrupt(() -> false /*HERE goes the conditional of the encoder to raise */);
-
-  }
+	// Called when the command is initially scheduled.
+	@Override
+	public void initialize() {
+		new StartEndCommand(
+			()-> m_intake.dropIntake(1.0), 
+			()-> m_intake.stopIntake(), 
+			m_intake
+		)
+		.withInterrupt(() -> false /*HERE goes the conditional of the encoder to raise */);
+	}
 }
