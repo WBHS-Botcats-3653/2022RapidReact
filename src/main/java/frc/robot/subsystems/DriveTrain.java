@@ -21,8 +21,8 @@ import frc.robot.commands.ShooterCommand;
 
 
 public class DriveTrain extends SubsystemBase {
-	private static DriveTrain driveTrain=null;
-	public OI input=OI.getInstance();
+	private static DriveTrain driveTrain = null;
+	public OI input = OI.getInstance();
 	private DifferentialDrive diffDrive;
 
 	//documentation for WPI_VictorSPX: 
@@ -31,22 +31,22 @@ public class DriveTrain extends SubsystemBase {
 	//Constructor
 	private DriveTrain() {
 		//Left side wheel motors
-		WPI_VictorSPX driveFrontLeft=new WPI_VictorSPX(Constants.MCID.get("Wheel Front Left"));
-		WPI_VictorSPX driveBackLeft=new WPI_VictorSPX(Constants.MCID.get("Wheel Back Left"));
-		MotorControllerGroup driveLeft=new MotorControllerGroup(driveFrontLeft, driveBackLeft);
+		WPI_VictorSPX driveFrontLeft = new WPI_VictorSPX(Constants.MCID.get("Wheel Front Left"));
+		WPI_VictorSPX driveBackLeft = new WPI_VictorSPX(Constants.MCID.get("Wheel Back Left"));
+		MotorControllerGroup driveLeft = new MotorControllerGroup(driveFrontLeft, driveBackLeft);
 		//Right side wheel motors
-		WPI_VictorSPX driveFrontRight=new WPI_VictorSPX(Constants.MCID.get("Wheel Front Right"));
-		WPI_VictorSPX driveBackRight=new WPI_VictorSPX(Constants.MCID.get("Wheel Back Right"));
-		MotorControllerGroup driveRight=new MotorControllerGroup(driveFrontRight, driveBackRight);
+		WPI_VictorSPX driveFrontRight = new WPI_VictorSPX(Constants.MCID.get("Wheel Front Right"));
+		WPI_VictorSPX driveBackRight = new WPI_VictorSPX(Constants.MCID.get("Wheel Back Right"));
+		MotorControllerGroup driveRight = new MotorControllerGroup(driveFrontRight, driveBackRight);
 		//Creates differential drive
-		diffDrive=new DifferentialDrive(driveLeft, driveRight);
+		diffDrive = new DifferentialDrive(driveLeft, driveRight);
 		//Reverses right motor direction
 		driveLeft.setInverted(true);
 	}
 	//Returns an instance of the climber, creating an instance only when one does not already exist
 	public static DriveTrain getInstance() {
-		if (driveTrain==null) {
-			driveTrain=new DriveTrain();
+		if (driveTrain == null) {
+			driveTrain = new DriveTrain();
 		}
 		return driveTrain;
 	}
@@ -75,10 +75,10 @@ public class DriveTrain extends SubsystemBase {
 		getInstance().diffDrive.arcadeDrive(speed, rotation);
 	}
 
-
 	public static void tryThis(){
 		new ShooterCommand();
 	}
+
 	@Override
 	public void periodic() {
 	// This method will be called once per scheduler run

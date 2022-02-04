@@ -13,19 +13,19 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Climber extends SubsystemBase {
-	private static Climber m_singleton=null;
+	private static Climber m_singleton = null;
 	private WPI_VictorSPX arm;
 
 	//Constructor
 	private Climber() {
 		//Creates VictorSPX motor controller for the arm
-		arm=new WPI_VictorSPX(Constants.MCID.get("Arm"));
+		arm = new WPI_VictorSPX(Constants.MCID.get("Arm"));
 	}
 
 	//Returns an instance of the climber, creating an instance only when one does not already exist (singleton)
 	public static Climber getInstance() {
-		if (m_singleton==null) {
-			m_singleton=new Climber();
+		if (m_singleton == null) {
+			m_singleton = new Climber();
 		}
 		return m_singleton;
 	}
@@ -45,10 +45,10 @@ public class Climber extends SubsystemBase {
 	 * @param interruptor when this is true, the arm will stop
 	 */
 	public void MoveArmUntil(double speed, boolean interruptor){
-
-		if(!interruptor)
-		setArmSpeed(speed);
-		else setArmSpeed(0);
-
+		if (!interruptor) {
+			setArmSpeed(speed);
+		} else {
+			setArmSpeed(0);
+		}
 	}
 }

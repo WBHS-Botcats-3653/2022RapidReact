@@ -13,12 +13,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Storage extends SubsystemBase {
-	private static Storage storage=null;
+	private static Storage storage = null;
 	private WPI_VictorSPX indexer;
 
 	/** Creates a new Indexer. */
 	public Storage() {
-		indexer=new WPI_VictorSPX(Constants.MCID.get("Indexer"));
+		indexer = new WPI_VictorSPX(Constants.MCID.get("Indexer"));
 	}
 
 	public static Storage getInstance() {

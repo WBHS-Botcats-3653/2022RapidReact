@@ -32,10 +32,10 @@ public class IntakeControlCommand extends ParallelCommandGroup {
 	 */
 	public IntakeControlCommand() {
 		//Initializes instance variables with Intake and Storage subsystems
-		m_intake=Intake.getInstance();
-		m_storage=Storage.getInstance();
-		m_oi=OI.getInstance();
-		double intakeSpeed=m_oi.getIntakeCtrl();
+		m_intake = Intake.getInstance();
+		m_storage = Storage.getInstance();
+		m_oi = OI.getInstance();
+		double intakeSpeed = m_oi.getIntakeCtrl();
 		// Add your commands in the addCommands() call, e.g.
 		// addCommands(new FooCommand(), new BarCommand());
 		addCommands(

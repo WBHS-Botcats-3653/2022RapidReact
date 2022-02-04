@@ -13,12 +13,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase {
-	private static Shooter shooter=null;
+	private static Shooter shooter = null;
 	public static WPI_VictorSPX spinner;
 
 	public Shooter() {
 		//Creates WPI_VictorSPX motor controller for the spinner
-		spinner=new WPI_VictorSPX(Constants.MCID.get("Spinner"));
+		spinner = new WPI_VictorSPX(Constants.MCID.get("Spinner"));
 	}
 
 	/**Returns an instance of the Intake
@@ -39,7 +39,4 @@ public class Shooter extends SubsystemBase {
 	public void spinSpinner(double speed) {
 		spinner.set(speed);
 	}
-	//Usable methods:
-	//this methods will be used to drive the robot
-
 }

@@ -23,7 +23,7 @@ public class IntakeCommand extends CommandBase {
 	 */
 	public IntakeCommand() {
 		//Initializes instance variable with OI subsystem
-		m_oi=OI.getInstance();
+		m_oi = OI.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
 		//addRequirements();
 	}

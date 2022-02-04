@@ -20,7 +20,7 @@ public class PostIntakeCommand extends InstantCommand {
 
 	public PostIntakeCommand() {
 		// Use addRequirements() here to declare subsystem dependencies.
-		m_storage=Storage.getInstance();
+		m_storage = Storage.getInstance();
 	}
 
 	// Called when the command is initially scheduled.
