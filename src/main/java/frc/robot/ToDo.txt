@@ -1,11 +1,8 @@
 To Do:
-1. OI (button binding)
-	a. Intake (Left Trigger)
-	b. Intske Reverse (Left Bumper)
-	c. Shoot (Right Trigger)
-	d. Climb (up down Dpad)
-	e. Traverse (left right Dpad)
-2. Auto
-3. Color Sensor
-4. Intake
-5. Climber
+1. Put encoders on robot
+2. Put photo-electric sensors on robot
+3. Code encoders
+4. Code indexer to stop spinning when the photo-electric sensor is triggered
+5. Code the shooter to spin the indexer until the photo-electric sensor inside the indexer is triggered or a timeout
+6. Move code out of the subcommands and into new files using methods and delete all the subcommands
+7. Auto
