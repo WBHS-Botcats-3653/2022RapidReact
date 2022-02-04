@@ -6,6 +6,7 @@ package frc.robot.commands.subcommands.intakeSubcommands;
 
 //Imports InstantCommand
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 //Imports StartEndCommand
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
 //Imports Storage subsystem
@@ -25,10 +26,12 @@ public class PostIntakeCommand extends InstantCommand {
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
-		new StartEndCommand(
-			() -> m_storage.raiseCargo(1.0), 
-			() -> m_storage.raiseCargo(0),
-			m_storage
-		).withTimeout(3);
+		new ScheduleCommand(
+			new StartEndCommand(
+				() -> m_storage.raiseCargo(1.0), 
+				() -> m_storage.raiseCargo(0),
+				m_storage
+			).withTimeout(3)
+		).initialize();
 	}
 }

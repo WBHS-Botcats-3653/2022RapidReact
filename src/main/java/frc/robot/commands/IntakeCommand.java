@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 //Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 //Imports OI
 import frc.robot.OI;
 import frc.robot.commands.subcommands.intakeSubcommands.IntakeControlCommand;
@@ -37,14 +38,16 @@ public class IntakeCommand extends CommandBase {
 		if (m_oi.getIntakeDown()) {
 			//Drops the Intake
 			//m_intake.dropIntake();
-			new IntakeControlCommand();
+			new ScheduleCommand(new IntakeControlCommand()).initialize();
 		} else if (m_oi.getIntakeUp()) {
 			//Raises the intake
-			new RaiseIntakeCommand()
-			.andThen(
-			//m_intake.raiseIntake();
-			new PostIntakeCommand()
-			);
+			
+			new ScheduleCommand(
+				new RaiseIntakeCommand()
+				.andThen(
+				//m_intake.raiseIntake();
+				new PostIntakeCommand()))
+			.initialize();
 		}
 	}
 }

@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 //Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 //Imports OI
 import frc.robot.OI;
 import frc.robot.commands.subcommands.climberSubcommands.LowerArmCommand;
@@ -39,10 +40,11 @@ public class ClimberCommand extends CommandBase {
 
 		if (m_oi.POVIsUp()) {
 			//Fully extends the arm
-			new RaiseIntakeCommand();
+			new ScheduleCommand(new RaiseIntakeCommand()).initialize();
 		} else if (m_oi.POVIsDown()) {
 			//Lowers the arm completely
-			new LowerArmCommand();
+			
+			new ScheduleCommand(new LowerArmCommand()).initialize();
 		} /*else if (m_oi.POVIsRight()) {
 			//Raises the arm
 			m_climber.raiseArm(m_oi.getMaxArmSpeed());

@@ -6,6 +6,7 @@ package frc.robot.commands.subcommands.intakeSubcommands;
 
 //Imports InstantCommand
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 //Imports StartEndCommand
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
 //Imports Intake subsystem
@@ -25,12 +26,13 @@ public class DropIntakeCommand extends InstantCommand {
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
+		new ScheduleCommand(
 		new StartEndCommand(
-			()-> m_intake.dropIntake(1.0), 
+			()-> m_intake.dropIntake(0.3), 
 			()-> m_intake.stopIntake(), 
 			m_intake
 		)
-		.withInterrupt(() -> false /*HERE goes the conditional of the encoder to drop */);
-
+		.withInterrupt(() -> false /*HERE goes the conditional of the encoder to drop */)
+		).initialize();
 	}
 }

@@ -32,13 +32,14 @@ public class Shooter extends SubsystemBase {
 		return shooter;
 	}
 
-	//Spins the spinner to shoot the cargo
+	/**SHOOTER, but with another name
+	 * Spins the spinner to shoot the cargo
+	 * 
+	 */
 	public void spinSpinner(double speed) {
 		spinner.set(speed);
 	}
 	//Usable methods:
 	//this methods will be used to drive the robot
-	public void Shoot(double speed){
-		spinSpinner(speed);
-	}
+
 }

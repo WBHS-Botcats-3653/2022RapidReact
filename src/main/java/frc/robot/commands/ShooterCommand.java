@@ -24,11 +24,16 @@ public class ShooterCommand extends ParallelCommandGroup {
 	public ShooterCommand() {
 		//Initializes instance variables with OI and Shooter subsystem
 		m_oi = OI.getInstance();
-		m_shooter = Shooter.getShooter();
+		m_shooter = Shooter.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
 		//addRequirements();
 	}
 
+	@Override
+	public void initialize() {
+		// TODO Auto-generated method stub
+		super.initialize();
+	}
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {

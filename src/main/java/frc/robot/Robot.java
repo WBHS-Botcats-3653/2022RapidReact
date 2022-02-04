@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj2.command.Command;
 //Imports CommandScheduler
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Dashboard;
@@ -126,17 +127,20 @@ public class Robot extends TimedRobot {
 	/** This function is called periodically during operator control. */
 	@Override
 	public void teleopPeriodic() {
-		
+		/*
 		Scheduler.getInstance()
-			.add(new InstantCommand(() -> m_shooterSubsystem.Shoot(m_oi.getShoot())));
+			.add(new InstantCommand(() -> m_shooterSubsystem.spinSpinner(m_oi.getShoot())));
+		*/
 			/* it works!!!!!!
 		Scheduler.getInstance()
 			.add(new InstantCommand(() -> m_intakeSubsystem.ControlIntake(m_oi.getIntakeCtrl(), false)));
-*/
+*/		
+		new ShooterCommand().schedule();
+		
 		Scheduler.getInstance().run();
 		train.ArcadeDrived();
 		
-		m_shooterSubsystem.Shoot(m_oi.getShoot());
+		m_shooterSubsystem.spinSpinner(m_oi.getShoot());
 		m_intakeSubsystem.ControlIntake(m_oi.getIntakeCtrl(), false);
 		//this might not work
 		
