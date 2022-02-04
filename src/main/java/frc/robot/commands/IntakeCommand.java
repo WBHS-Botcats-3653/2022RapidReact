@@ -23,7 +23,7 @@ public class IntakeCommand extends CommandBase {
 	 */
 	public IntakeCommand() {
 		//Initializes instance variable with OI subsystem
-		m_oi=OI.getInstance();
+		m_oi = OI.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
 		//addRequirements();
 	}
@@ -37,17 +37,10 @@ public class IntakeCommand extends CommandBase {
 	public void execute() {
 		if (m_oi.getIntakeDown()) {
 			//Drops the Intake
-			//m_intake.dropIntake();
 			new ScheduleCommand(new IntakeControlCommand()).initialize();
 		} else if (m_oi.getIntakeUp()) {
 			//Raises the intake
-			
-			new ScheduleCommand(
-				new RaiseIntakeCommand()
-				.andThen(
-				//m_intake.raiseIntake();
-				new PostIntakeCommand()))
-			.initialize();
+			new ScheduleCommand(new RaiseIntakeCommand().andThen(new PostIntakeCommand())).initialize();
 		}
 	}
 }

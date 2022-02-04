@@ -29,7 +29,6 @@ public class Intake extends SubsystemBase {
 		pivot=new WPI_VictorSPX(Constants.MCID.get("Pivot"));
 		rollers=new WPI_VictorSPX(Constants.MCID.get("Rollers"));
 		pivotEncoder = new AnalogInput(/*Constants*/ 1);
-
 	}
 
 	public int getRawEncoder() {
@@ -51,9 +50,7 @@ public class Intake extends SubsystemBase {
 				speed = 0.0;
 			}
 		}
-
 		pivot.set(speed);
-		
 	}
 
 	/**Pivots the intake down
@@ -85,14 +82,12 @@ public class Intake extends SubsystemBase {
 	//Usable methods:
 	//this methods will be used to drive the robot
 
-	public void ControlIntake(double speed,boolean interruptor){
-		if(speed > 0)
-		spinRollers(1.0);
-		if(!interruptor){
+	public void ControlIntake(double speed, boolean interruptor) {
+		if(speed > 0) spinRollers(1.0);
+		if (!interruptor) {
 			dropIntake(speed);
-		} else{ 
+		} else { 
 			raiseIntake(speed);
-
 		}
 	}
 

@@ -4,7 +4,7 @@
 
 package frc.robot;
 
-//Imports Java utilities
+//Imports Hashtable utility
 import java.util.Hashtable;
 
 /**
@@ -16,15 +16,10 @@ import java.util.Hashtable;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-	/*Holds ALL the Motor Controller IDs
-	 *<String motorControllerName, int ID>
-	 *Feel free to change I thought a dictionary would be better than multiple variables but idk either way works (Remove if all good)
-	 *URGENT!!! ID NAMES HAVE NOT BEEN CONFIRMED. MUST UPDATE IDS. DO NOT RUN CODE ON ROBOT WITHOUT UPDATING WITH CORRECT IDS!
-	 *URGENT!!! ID NAMES HAVE NOT BEEN CONFIRMED. MUST UPDATE IDS. DO NOT RUN CODE ON ROBOT WITHOUT UPDATING WITH CORRECT IDS!
-	 *URGENT!!! ID NAMES HAVE NOT BEEN CONFIRMED. MUST UPDATE IDS. DO NOT RUN CODE ON ROBOT WITHOUT UPDATING WITH CORRECT IDS!
-	 *Remove the above 3 comments (and this one) when the IDs have been updated completely
+	/*Holds all the Motor Controller IDs
+	 *<String motorControllerName, Integer ID>
 	 */
-	public static final Hashtable<String, Integer> MCID=new Hashtable<>() {{
+	public static final Hashtable<String, Integer> MCID = new Hashtable<>() {{
 		put("Wheel Front Left", 0);
 		put("Wheel Front Right", 1);
 		put("Wheel Back Left", 2);
@@ -34,5 +29,15 @@ public final class Constants {
 		put("Rollers", 21);
 		put("Indexer", 22);
 		put("Spinner", 30);
+	}};
+
+	/*Holds all the Encoder IDs
+	 *<String encoderName, Integer ID>
+	 */
+	public static final Hashtable<String, Integer> EID = new Hashtable<>() {{
+		put("Left Wheels", 0);
+		put("Right Wheels", 1);
+		put("Pivot", 2);
+		put("Arm", 3);
 	}};
 }

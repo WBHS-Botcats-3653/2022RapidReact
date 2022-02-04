@@ -24,7 +24,7 @@ public class ClimberCommand extends CommandBase {
 	 */
 	public ClimberCommand() {
 		//Initializes instance variables with instances of OI and Climber subsystem
-		m_oi=OI.getInstance();
+		m_oi = OI.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
 		//addRequirements();
 	}
@@ -43,7 +43,6 @@ public class ClimberCommand extends CommandBase {
 			new ScheduleCommand(new RaiseIntakeCommand()).initialize();
 		} else if (m_oi.POVIsDown()) {
 			//Lowers the arm completely
-			
 			new ScheduleCommand(new LowerArmCommand()).initialize();
 		} /*else if (m_oi.POVIsRight()) {
 			//Raises the arm

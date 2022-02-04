@@ -23,7 +23,7 @@ public class DashboardCommand extends CommandBase {
 	 */
 	public DashboardCommand() {
 		//Initializes instance variables with OI and Intake subsystem
-		m_oi=OI.getInstance();
+		m_oi = OI.getInstance();
 		//m_dashboard=Dashboard.getDashboard();
 		// Use addRequirements() here to declare subsystem dependencies.
 		//addRequirements();
