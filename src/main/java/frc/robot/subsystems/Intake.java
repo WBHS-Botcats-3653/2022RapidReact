@@ -53,27 +53,6 @@ public class Intake extends SubsystemBase {
 		pivot.set(speed);
 	}
 
-	/**Pivots the intake down
-	 * NOTE: it doesn't stop the intake
-	 * to stop the intake (the pivot), use stopIntake()
-	 * @param speed
-	 */
-	public void dropIntake(double speed) {
-		moveIntake(speed);
-	}
-	/**this method will set the speed of the pivot to 0
-	 * 
-	 */
-	public void stopIntake(){
-		pivot.set(0);
-	}
-	/**Pivots the intake up
-	 * @param speed
-	 * NOTE: the parameter speed is inverted, so don't input negative values
-	 */
-	public void raiseIntake(double speed) {
-		pivot.set(- speed);
-	}
 
 	//Ejects cargo from intake
 	public void ejectCargo(double speed) {
