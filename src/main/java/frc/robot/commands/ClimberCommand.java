@@ -30,8 +30,10 @@ public class ClimberCommand extends CommandBase {
 
 	/*Called when the command is initially scheduled.
 	 */
+	@Override
 	public void initialize() {}
 
+	@Override
 	// Called every time the scheduler runs while the command is scheduled.
 	public void execute() {
 
@@ -48,13 +50,5 @@ public class ClimberCommand extends CommandBase {
 			//Lowers the arm
 			m_climber.lowerArm(m_oi.getMaxArmSpeed());
 		}*/
-	}
-
-	// Called once the command ends or is interrupted.
-	public void end(boolean interrupted) {}
-
-	// Returns true when the command should end.
-	public boolean isFinished() {
-		return false;
 	}
 }
