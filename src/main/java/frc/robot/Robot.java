@@ -34,11 +34,11 @@ public class Robot extends TimedRobot {
 	private Command m_autonomousCommand;
 	private RobotContainer m_robotContainer;
 
-	private DriveTrain train = DriveTrain.getDriveTrain();
-	private final Climber m_climberSubsystem = Climber.getClimber();
-	private final Intake m_intakeSubsystem = Intake.getIntake();
-	private final Dashboard m_dashboardSubsystem = Dashboard.getDashboard();
-	private final Shooter m_shooterSubsystem = Shooter.getShooter();
+	private DriveTrain train = DriveTrain.getInstance();
+	private final Climber m_climberSubsystem = Climber.getInstance();
+	private final Intake m_intakeSubsystem = Intake.getInstance();
+	private final Dashboard m_dashboardSubsystem = Dashboard.getInstance();
+	private final Shooter m_shooterSubsystem = Shooter.getInstance();
 	private final OI m_oi = OI.getInstance();
 	private WPI_VictorSPX spinner= Shooter.spinner;
 	/**

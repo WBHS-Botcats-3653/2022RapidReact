@@ -26,7 +26,7 @@ public class Shooter extends SubsystemBase {
 	 * 
 	 * @return
 	 */
-	public static Shooter getShooter() {
+	public static Shooter getInstance() {
 		if (shooter == null)
 			shooter = new Shooter();
 		return shooter;

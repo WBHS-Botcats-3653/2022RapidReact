@@ -21,7 +21,7 @@ public class Storage extends SubsystemBase {
 		indexer=new WPI_VictorSPX(Constants.MCID.get("Indexer"));
 	}
 
-	public static Storage getStorage() {
+	public static Storage getInstance() {
 		if (storage == null) {
 			storage = new Storage();
 		}

@@ -23,7 +23,7 @@ public class Climber extends SubsystemBase {
 	}
 
 	//Returns an instance of the climber, creating an instance only when one does not already exist (singleton)
-	public static Climber getClimber() {
+	public static Climber getInstance() {
 		if (m_singleton==null) {
 			m_singleton=new Climber();
 		}

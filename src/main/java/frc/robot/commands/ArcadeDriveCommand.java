@@ -18,7 +18,7 @@ public class ArcadeDriveCommand extends CommandBase {
 	 */
 	public ArcadeDriveCommand() {
 		//Initializes instance variables with an instance of OI and DriveTrain
-		m_drivetrain = DriveTrain.getDriveTrain();
+		m_drivetrain = DriveTrain.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
 		//addRequirements();
 	}

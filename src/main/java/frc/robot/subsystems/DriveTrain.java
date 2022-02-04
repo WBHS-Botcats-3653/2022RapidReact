@@ -44,7 +44,7 @@ public class DriveTrain extends SubsystemBase {
 		driveLeft.setInverted(true);
 	}
 	//Returns an instance of the climber, creating an instance only when one does not already exist
-	public static DriveTrain getDriveTrain() {
+	public static DriveTrain getInstance() {
 		if (driveTrain==null) {
 			driveTrain=new DriveTrain();
 		}
@@ -55,7 +55,7 @@ public class DriveTrain extends SubsystemBase {
 	 *OVERLOADED FUNCTION
 	 */
 	public void ArcadeDrived() {
-		getDriveTrain().diffDrive.arcadeDrive(input.getThrottle(), input.getSteering());
+		getInstance().diffDrive.arcadeDrive(input.getThrottle(), input.getSteering());
 	}
 
 	/**Instantiates the arcade drive
@@ -72,7 +72,7 @@ public class DriveTrain extends SubsystemBase {
 	 * @param rotation
 	 */
 	public void ArcadeDrived(double speed, double rotation){
-		getDriveTrain().diffDrive.arcadeDrive(speed, rotation);
+		getInstance().diffDrive.arcadeDrive(speed, rotation);
 	}
 
 

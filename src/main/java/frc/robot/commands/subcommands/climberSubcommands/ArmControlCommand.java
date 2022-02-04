@@ -17,7 +17,7 @@ public class ArmControlCommand extends CommandBase {
 	/** Creates a new ArmControlCommand. */
 	public ArmControlCommand(double speed) {
 		// Use addRequirements() here to declare subsystem dependencies.
-		m_climber = Climber.getClimber();
+		m_climber = Climber.getInstance();
 		this.speed = speed;
 	}
 

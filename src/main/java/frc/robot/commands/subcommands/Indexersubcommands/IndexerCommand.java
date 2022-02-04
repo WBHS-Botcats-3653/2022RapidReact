@@ -15,7 +15,7 @@ public class IndexerCommand extends CommandBase {
 	
 	public IndexerCommand() {
 		// Use addRequirements() here to declare subsystem dependencies.
-		m_indexer = Storage.getStorage();
+		m_indexer = Storage.getInstance();
 	}
 
 	// Called when the command is initially scheduled.

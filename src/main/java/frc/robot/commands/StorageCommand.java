@@ -17,7 +17,7 @@ public class StorageCommand extends CommandBase {
 
 	/** Creates a new StorageCommand. */
 	public StorageCommand() {
-		m_storage = Storage.getStorage();
+		m_storage = Storage.getInstance();
 		m_oi = OI.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
 	}

@@ -29,11 +29,11 @@ import frc.robot.subsystems.Shooter;
  */
 public class RobotContainer {
 	// The robot's subsystems and commands are defined here...
-	private final DriveTrain m_driveSubsystem = DriveTrain.getDriveTrain();
-	private final Climber m_climberSubsystem = Climber.getClimber();
-	private final Intake m_intakeSubsystem = Intake.getIntake();
-	private final Dashboard m_dashboardSubsystem = Dashboard.getDashboard();
-	private final Shooter m_shooterSubsystem = Shooter.getShooter();
+	private final DriveTrain m_driveSubsystem = DriveTrain.getInstance();
+	private final Climber m_climberSubsystem = Climber.getInstance();
+	private final Intake m_intakeSubsystem = Intake.getInstance();
+	private final Dashboard m_dashboardSubsystem = Dashboard.getInstance();
+	private final Shooter m_shooterSubsystem = Shooter.getInstance();
 	
 	private final ArcadeDriveCommand m_arcadeDriveCommand = new ArcadeDriveCommand();
 	private final ClimberCommand m_climberCommand = new ClimberCommand();
