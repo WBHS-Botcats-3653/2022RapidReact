@@ -34,21 +34,4 @@ public class Climber extends SubsystemBase {
 	public void setArmSpeed(double speed) {
 		arm.set(speed);
 	}
-
-
-	//Usable methods:
-	//this methods will be used to drive the robot
-	//if the comand based robot fails
-	/**with one will controll the arm
-	 * 
-	 * @param speed
-	 * @param interruptor when this is true, the arm will stop
-	 */
-	public void MoveArmUntil(double speed, boolean interruptor){
-		if (!interruptor) {
-			setArmSpeed(speed);
-		} else {
-			setArmSpeed(0);
-		}
-	}
 }
