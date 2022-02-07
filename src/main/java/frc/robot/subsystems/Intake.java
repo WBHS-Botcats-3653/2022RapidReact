@@ -52,7 +52,38 @@ public class Intake extends SubsystemBase {
 		}
 		pivot.set(speed);
 	}
+	public boolean getLowerLimitSwitch() {
+		return lowerLimitSwitch.get();
+	}
 
+	public boolean getUpperLimitSwitch() {
+		return upperLimitSwitch.get();
+	}
+
+	public void setArmVertical(boolean up) {
+		if (up) {
+			double deltaAng = 86 - getAngle();
+			if (Math.abs(deltaAng) < 5.0) {
+				move(0);
+			} else if (deltaAng > 0.0) {
+				move(0.3);
+			} else if (deltaAng < 0.0) {
+				move(-0.3);
+			}
+		}
+	}
+
+	public void setArmStow(boolean stow) {
+		if (stow) {
+			move(0.3);
+		}
+	}
+
+	public void setArmDown(boolean down) {
+		if (down) {
+			move(-0.3);
+		}
+	}
 
 	//Ejects cargo from intake
 	public void ejectCargo(double speed) {
@@ -60,7 +91,7 @@ public class Intake extends SubsystemBase {
 	}
 	//Usable methods:
 	//this methods will be used to drive the robot
-
+	/*
 	public void ControlIntake(double speed, boolean interruptor) {
 		if(speed > 0) spinRollers(1.0);
 		if (!interruptor) {
@@ -69,7 +100,7 @@ public class Intake extends SubsystemBase {
 			raiseIntake(0);
 		}
 	}
-
+	*/
 	public static void setArmEncoderFloor(int floor) {
 		if (0 <= floor && floor < m_maxEncoder) {
 			m_encFloor = floor;

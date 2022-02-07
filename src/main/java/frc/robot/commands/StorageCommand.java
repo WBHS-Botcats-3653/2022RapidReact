@@ -26,7 +26,7 @@ public class StorageCommand extends CommandBase {
 	@Override
 	public void execute() {
 		if (m_oi.getSpinIndexer()) {
-			m_storage.raiseCargo(1.0);
+			m_storage.raiseCargo(0.80);
 		} else {
 			m_storage.raiseCargo(0);
 		}

@@ -12,11 +12,13 @@ import frc.robot.OI;
 import frc.robot.commands.subcommands.intakeSubcommands.IntakeControlCommand;
 import frc.robot.commands.subcommands.intakeSubcommands.PostIntakeCommand;
 import frc.robot.commands.subcommands.intakeSubcommands.RaiseIntakeCommand;
+import frc.robot.subsystems.Intake;
 
 
 public class IntakeCommand extends CommandBase {
 	//Holds instances of OI and Intake subsystem
 	private OI m_oi;
+	private Intake m_intake;
 
 	/**Creates a new IntakeCommand.
 	 * @param subsystem The subsystem used by this command.
@@ -24,6 +26,7 @@ public class IntakeCommand extends CommandBase {
 	public IntakeCommand() {
 		//Initializes instance variable with OI subsystem
 		m_oi = OI.getInstance();
+		m_intake = Intake.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
 		//addRequirements();
 	}
@@ -37,7 +40,7 @@ public class IntakeCommand extends CommandBase {
 	public void execute() {
 		if (m_oi.getIntakeDown()) {
 			//Drops the Intake
-			new ScheduleCommand(new IntakeControlCommand()).initialize();
+			m_intake.m
 		} else if (m_oi.getIntakeUp()) {
 			//Raises the intake
 			new ScheduleCommand(new RaiseIntakeCommand().andThen(new PostIntakeCommand())).initialize();
