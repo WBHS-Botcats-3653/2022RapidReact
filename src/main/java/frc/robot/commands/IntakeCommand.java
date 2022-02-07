@@ -8,13 +8,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 //Imports OI
 import frc.robot.OI;
-<<<<<<< HEAD
-import frc.robot.commands.subcommands.intakeSubcommands.IntakeControlCommand;
-import frc.robot.commands.subcommands.intakeSubcommands.PostIntakeCommand;
-import frc.robot.commands.subcommands.intakeSubcommands.RaiseIntakeCommand;
-=======
-//Imports Intake Subsystem
->>>>>>> 8d86d77b91f8e5683140ec0905362f84934732f1
+
 import frc.robot.subsystems.Intake;
 
 
@@ -50,12 +44,8 @@ public class IntakeCommand extends CommandBase {
 		}
 
 		if (m_oi.getIntakeDown()) {
-<<<<<<< HEAD
-			//Drops the Intake
-			m_intake.m
-=======
+
 			m_intake.setPivotSpeed(m_oi.getMaxIntakePivotSpeed());
->>>>>>> 8d86d77b91f8e5683140ec0905362f84934732f1
 		} else if (m_oi.getIntakeUp()) {
 			m_intake.setPivotSpeed(-m_oi.getMaxIntakePivotSpeed());
 		}
