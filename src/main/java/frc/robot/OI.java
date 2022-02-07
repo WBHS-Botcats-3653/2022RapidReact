@@ -25,7 +25,7 @@ public class OI {
 	private static double m_maxIntakeRollerSpeed;
 	private static double m_maxShootSpeed;
 	private static double m_maxIndexerSpeed;
-	public boolean isIntakeDown = false;
+	private static boolean isIntakeDown = false;
 
 	/**it is the constructor
 	 * 
@@ -33,7 +33,6 @@ public class OI {
 	 */
 	private OI() {
 		m_controller = new XboxController(0);
-		m_maxDriveSpeed = 1.0;
 	}
 
 	public static OI getInstance() {
@@ -185,6 +184,10 @@ public class OI {
 
 	public boolean POVIsLeft() {
 		return m_controller.getPOV()>225||m_controller.getPOV()<315;
+	}
+
+	public boolean getEMStop() {
+		return m_controller.getBButton();
 	}
 	
 	/*

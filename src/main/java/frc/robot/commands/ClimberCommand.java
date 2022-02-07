@@ -35,6 +35,10 @@ public class ClimberCommand extends CommandBase {
 	@Override
 	// Called every time the scheduler runs while the command is scheduled.
 	public void execute() {
+		if (m_oi.getEMStop()) {
+			m_climber.setArmSpeed(0);
+			return;
+		}
 		if (m_oi.POVIsUp()) {
 			m_climber.setArmSpeed(m_oi.getMaxArmSpeed());
 			autoClimbing = true;

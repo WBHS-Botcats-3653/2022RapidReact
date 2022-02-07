@@ -31,13 +31,22 @@ public final class Constants {
 		put("Spinner", 30);
 	}};
 
-	/*Holds all the Encoder IDs
-	 *<String encoderName, Integer ID>
+	/*Holds all the Digital Input Output(DIO) IDs
+	 *<String inputName, Integer ID>
 	 */
-	public static final Hashtable<String, Integer> EID = new Hashtable<>() {{
-		put("Left Wheels", 0);
-		put("Right Wheels", 1);
-		put("Pivot", 2);
-		put("Arm", 3);
+	public static final Hashtable<String, Integer> DIOID = new Hashtable<>() {{
+		put("Lower Storage PE Sensor", 0);
+		put("Upper Storage PE Sensor", 1);
+		put("Shooter PE Sensor", 2);
+	}};
+
+	/*Holds all the Analong Input IDs
+	 *<String inputName, Integer ID>
+	 */
+	public static final Hashtable<String, Integer> AIID = new Hashtable<>() {{
+		put("Left Motor Group Encoder", 0);
+		put("Right Motor Group Encoder", 1);
+		put("Pivot Encoder", 2);
+		put("Arm Encoder", 3);
 	}};
 }

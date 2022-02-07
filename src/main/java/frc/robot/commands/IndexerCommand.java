@@ -8,27 +8,41 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 //Imports OI
 import frc.robot.OI;
+//Imports SI
+import frc.robot.SI;
 //Imports Storage subsystem
 import frc.robot.subsystems.Indexer;
 
 public class IndexerCommand extends CommandBase {
-	private Indexer m_storage;
+	private Indexer m_indexer;
 	private OI m_oi;
+	private SI m_si;
 
 	/** Creates a new StorageCommand. */
 	public IndexerCommand() {
-		m_storage = Indexer.getInstance();
+		m_indexer = Indexer.getInstance();
 		m_oi = OI.getInstance();
+		m_si = SI.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
 	}
 
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
+		if (m_oi.getEMStop()) {
+			m_indexer.setIndexerSpeed(0);
+			return;
+		}
 		if (m_oi.getSpinIndexer()) {
-			m_storage.raiseCargo(1.0);
+			m_indexer.setIndexerSpeed(1.0);
+		} else if (m_si.getLowerStorageTriggered()) {
+			if (!m_si.getUpperStorageTriggered()) {
+				m_indexer.setIndexerSpeed(1.0);
+			} else {
+				m_indexer.setIndexerSpeed(0);
+			}
 		} else {
-			m_storage.raiseCargo(0);
+			m_indexer.setIndexerSpeed(0);
 		}
 	}
 }

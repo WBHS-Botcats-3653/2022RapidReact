@@ -39,7 +39,7 @@ public class Shooter extends SubsystemBase {
 	 * Spins the spinner to shoot the cargo
 	 * 
 	 */
-	public void spinSpinner(double speed) {
+	public void setSpinSpeed(double speed) {
 		//Caps the spinner speed from exceeding the set maxShootSpeed
 		if (speed > m_oi.getMaxShootSpeed()) speed = m_oi.getMaxShootSpeed();
 		//Sets the spinner speed

@@ -9,14 +9,17 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 //Imports OI
 import frc.robot.OI;
-import frc.robot.commands.subcommands.intakeSubcommands.IntakeControlCommand;
-import frc.robot.commands.subcommands.intakeSubcommands.PostIntakeCommand;
-import frc.robot.commands.subcommands.intakeSubcommands.RaiseIntakeCommand;
+//Imports Intake Subsystem
+import frc.robot.subsystems.Intake;
+import frc.robot.commands.subcommands.Intakesubcommands.IntakeControlCommand;
+import frc.robot.commands.subcommands.Intakesubcommands.PostIntakeCommand;
+import frc.robot.commands.subcommands.Intakesubcommands.RaiseIntakeCommand;
 
 
 public class IntakeCommand extends CommandBase {
 	//Holds instances of OI and Intake subsystem
 	private OI m_oi;
+	private Intake m_intake;
 
 	/**Creates a new IntakeCommand.
 	 * @param subsystem The subsystem used by this command.
@@ -24,6 +27,7 @@ public class IntakeCommand extends CommandBase {
 	public IntakeCommand() {
 		//Initializes instance variable with OI subsystem
 		m_oi = OI.getInstance();
+		m_intake = Intake.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
 		//addRequirements();
 	}
@@ -35,12 +39,18 @@ public class IntakeCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		if (m_oi.getIntakeDown()) {
+		if (m_oi.getEMStop()) {
+			m_intake.setRollerSpeed(0);
+			m_intake.setPivotSpeed(0);
+			return;
+		}
+
+		/*if (m_oi.getIntakeDown()) {
 			//Drops the Intake
 			new ScheduleCommand(new IntakeControlCommand()).initialize();
 		} else if (m_oi.getIntakeUp()) {
 			//Raises the intake
 			new ScheduleCommand(new RaiseIntakeCommand().andThen(new PostIntakeCommand())).initialize();
-		}
+		}*/
 	}
 }

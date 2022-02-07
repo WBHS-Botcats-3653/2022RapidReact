@@ -38,6 +38,7 @@ public class Robot extends TimedRobot {
 	private final Dashboard m_dashboardSubsystem = Dashboard.getInstance();
 	private final Shooter m_shooterSubsystem = Shooter.getInstance();
 	private final OI m_oi = OI.getInstance();
+	private final SI m_si = SI.getInstance();
 	private final WPI_VictorSPX spinner = Shooter.spinner;
 	/**
 	 * This function is run when the robot is first started up and should be used for any

@@ -55,6 +55,10 @@ public class DriveTrain extends SubsystemBase {
 	 *OVERLOADED FUNCTION
 	 */
 	public void ArcadeDrived() {
+		if (m_oi.getEMStop()) {
+			diffDrive.arcadeDrive(0, 0);
+			return;
+		}
 		//Caps the throttle speed from exceeding the set maxDriveSpeed
 		double speed = m_oi.getThrottle() <= m_oi.getMaxDriveSpeed() ? m_oi.getThrottle() : m_oi.getMaxDriveSpeed();
 		//Sets the differential drive speed and rotation
@@ -67,6 +71,10 @@ public class DriveTrain extends SubsystemBase {
 	 * @param rotation
 	 */
 	public void ArcadeDrived(double speed, double rotation) {
+		if (m_oi.getEMStop()) {
+			diffDrive.arcadeDrive(0, 0);
+			return;
+		}
 		//Caps the speed from exceeding the set maxDriveSpeed
 		if (speed > m_oi.getMaxDriveSpeed()) speed = m_oi.getMaxDriveSpeed();
 		//Sets the differential drive speed and rotation

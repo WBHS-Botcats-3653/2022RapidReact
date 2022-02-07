@@ -37,11 +37,16 @@ public class ShooterCommand extends ParallelCommandGroup {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		shoot = m_oi.getShoot();
+		if (m_oi.getEMStop()) {
+			m_shooter.setSpinSpeed(0);
+			return;
+		}
+
+		/*shoot = m_oi.getShoot();
 		addCommands(
 			new PrintCommand("this is the speed: " + shoot),
 			new RunCommand(() -> m_shooter.spinSpinner(shoot), m_shooter).withInterrupt(() -> m_oi.getShoot() == 0),
 			new IndexerCommand().withInterrupt(() -> m_oi.getShoot() == 0)
-		);
+		);*/
 	}
 }

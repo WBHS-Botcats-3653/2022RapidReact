@@ -15,7 +15,7 @@ import frc.robot.Constants;
 import frc.robot.OI;
 
 public class Indexer extends SubsystemBase {
-	private static Indexer storage = null;
+	private static Indexer m_singleton = null;
 	private WPI_VictorSPX indexer;
 	private OI m_oi = OI.getInstance();
 
@@ -25,16 +25,16 @@ public class Indexer extends SubsystemBase {
 	}
 
 	public static Indexer getInstance() {
-		if (storage == null) {
-			storage = new Indexer();
+		if (m_singleton == null) {
+			m_singleton = new Indexer();
 		}
-		return storage;
+		return m_singleton;
 	}
 
 	/**Raises the cargo up the storage system
 	 * --This is the indexer--
 	 */
-	public void raiseCargo(double speed) {
+	public void setIndexerSpeed(double speed) {
 		//Caps the spinner speed from exceeding the set maxIndexerSpeed
 		if (speed > m_oi.getMaxIndexerSpeed()) speed = m_oi.getMaxIndexerSpeed();
 		//Sets the indexer speed
