@@ -154,7 +154,7 @@ public class OI {
 	 */
 	public double getShoot() {
 		if (m_controller.getRightTriggerAxis() > 0) {
-			return m_maxShootSpeed;
+			return -m_maxShootSpeed;
 		}
 		return 0;
 	}
