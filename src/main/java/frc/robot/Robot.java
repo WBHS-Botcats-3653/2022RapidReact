@@ -135,7 +135,7 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand.cancel();
 		}
 		m_oi.setMaxShootSpeed(1.0);
-		m_oi.setMaxIntakePivotSpeed(1.0);
+		m_oi.setMaxIntakePivotSpeed(0.4);
 		m_oi.setMaxIntakeRollerSpeed(1.0);
 		m_oi.setMaxArmSpeed(1.0);
 		m_oi.setMaxDriveSpeed(1.0);
