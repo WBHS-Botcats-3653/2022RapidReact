@@ -5,7 +5,7 @@
 package frc.robot.commands;
 
 //Imports ParallelCommandGroup
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 //Imports OI
 import frc.robot.OI;
@@ -14,7 +14,7 @@ import frc.robot.subsystems.Indexer;
 //Imports Shooter subsystem
 import frc.robot.subsystems.Shooter;
 
-public class ShooterCommand extends ParallelCommandGroup {
+public class ShooterCommand extends CommandBase {
 	//Holds instances of OI and Shooter subsystem
 	private OI m_oi;
 	private Shooter m_shooter;
@@ -30,10 +30,8 @@ public class ShooterCommand extends ParallelCommandGroup {
 	}
 
 	@Override
-	public void initialize() {
-		// TODO Auto-generated method stub
-		super.initialize();
-	}
+	public void initialize() {}
+
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
