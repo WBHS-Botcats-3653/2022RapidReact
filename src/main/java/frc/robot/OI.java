@@ -90,12 +90,12 @@ public class OI {
 	}
 
 	public double getMaxIndexerSpeed(){
-		return m_maxIndexerSpeed;
+		return -m_maxIndexerSpeed;
 	}
 
 	public void setMaxShootSpeed(double maxspd) {
 		if (0.0 < maxspd && maxspd <= 1.0) {
-			m_maxShootSpeed = maxspd;
+			m_maxShootSpeed = -maxspd;
 		}
 	}
 	public double getMaxShootSpeed(){
@@ -154,7 +154,7 @@ public class OI {
 	 */
 	public double getShoot() {
 		if (m_controller.getRightTriggerAxis() > 0) {
-			return -m_maxShootSpeed;
+			return m_maxShootSpeed;
 		}
 		return 0;
 	}
