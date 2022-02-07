@@ -178,8 +178,8 @@ public class Robot extends TimedRobot {
 		//SI.getInstance().getButton().
 		new PrintCommand("Button: " + SI.getInstance().getPivotDownTriggered()).initialize();
 
-		new ScheduleCommand(new PrintCommand("Button: " + SI.getInstance().getPivotDownTriggered())).initialize();
+		
 
-		new PrintCommand("Button: " + SI.getInstance().getPivotDownTriggered()).schedule();
+		
 	}
 }

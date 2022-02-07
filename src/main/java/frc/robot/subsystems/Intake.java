@@ -69,6 +69,7 @@ public class Intake extends SubsystemBase {
 		}
 		pivot.set(speed);
 	}
+	/*
 	public boolean getLowerLimitSwitch() {
 		return lowerLimitSwitch.get();
 	}
@@ -76,30 +77,30 @@ public class Intake extends SubsystemBase {
 	public boolean getUpperLimitSwitch() {
 		return upperLimitSwitch.get();
 	}
-
+*/
 	public void setArmVertical(boolean up) {
 		if (up) {
 			double deltaAng = 86 - getAngle();
 			if (Math.abs(deltaAng) < 5.0) {
-				move(0);
+				moveIntake(0);
 			} else if (deltaAng > 0.0) {
-				move(0.3);
+				moveIntake(0.3);
 			} else if (deltaAng < 0.0) {
-				move(-0.3);
+				moveIntake(-0.3);
 			}
 		}
 	}
 
-<<<<<<< HEAD
+
 	public void setArmStow(boolean stow) {
 		if (stow) {
-			move(0.3);
+			moveIntake(0.3);
 		}
 	}
 
 	public void setArmDown(boolean down) {
 		if (down) {
-			move(-0.3);
+			moveIntake(-0.3);
 		}
 	}
 
@@ -109,27 +110,18 @@ public class Intake extends SubsystemBase {
 	}
 	//Usable methods:
 	//this methods will be used to drive the robot
-	/*
-	public void ControlIntake(double speed, boolean interruptor) {
-		if(speed > 0) spinRollers(1.0);
-=======
+
 	/*public void ControlIntake(double speed, boolean interruptor) {
 		//Caps the speed from exceeding the set maxIntakePivotSpeed
 		if (speed > m_oi.getMaxIntakeRollerSpeed()) speed = m_oi.getMaxIntakePivotSpeed();
 		if (speed > 0) spinRollers(1.0);
->>>>>>> 8d86d77b91f8e5683140ec0905362f84934732f1
+
 		if (!interruptor) {
 			dropIntake(speed);
 		} else { 
 			raiseIntake(0);
 		}
-<<<<<<< HEAD
-	}
-	*/
-=======
-	}*/
-
->>>>>>> 8d86d77b91f8e5683140ec0905362f84934732f1
+*/
 	public static void setArmEncoderFloor(int floor) {
 		if (0 <= floor && floor < m_maxEncoder) {
 			m_encFloor = floor;
