@@ -21,8 +21,10 @@ public class OI {
 	private XboxController m_controller = null;
 	private static double m_maxDriveSpeed;
 	private static double m_maxArmSpeed;
-	private static double m_maxIntakeSpeed;
+	private static double m_maxIntakePivotSpeed;
+	private static double m_maxIntakeRollerSpeed;
 	private static double m_maxShootSpeed;
+	private static double m_maxIndexerSpeed;
 	public boolean isIntakeDown = false;
 
 	/**it is the constructor
@@ -38,8 +40,6 @@ public class OI {
 		if (m_singleton == null) {
 			m_singleton = new OI();
 		}
-		if(m_maxArmSpeed == 0) m_maxArmSpeed = 1.0;
-		if(m_maxIntakeSpeed == 0) m_maxArmSpeed = 1.0;
 		return m_singleton;
 	}
 
@@ -64,14 +64,34 @@ public class OI {
 		return m_maxArmSpeed;
 	}
 
-	public void setMaxIntakeSpeed(double maxspd) {
+	public void setMaxIntakePivotSpeed(double maxspd) {
 		if (0.0 < maxspd && maxspd <= 1.0) {
-			m_maxIntakeSpeed = maxspd;
+			m_maxIntakePivotSpeed = maxspd;
 		}
 	}
 
-	public double getMaxIntakeSpeed(){
-		return m_maxIntakeSpeed;
+	public double getMaxIntakePivotSpeed(){
+		return m_maxIntakePivotSpeed;
+	}
+
+	public void setMaxIntakeRollerSpeed(double maxspd) {
+		if (0.0 < maxspd && maxspd <= 1.0) {
+			m_maxIntakeRollerSpeed = maxspd;
+		}
+	}
+
+	public double getMaxIntakeRollerSpeed(){
+		return m_maxIntakeRollerSpeed;
+	}
+
+	public void setMaxIndexerSpeed(double maxspd) {
+		if (0.0 < maxspd && maxspd <= 1.0) {
+			m_maxIndexerSpeed = maxspd;
+		}
+	}
+
+	public double getMaxIndexerSpeed(){
+		return m_maxIndexerSpeed;
 	}
 
 	public void setMaxShootSpeed(double maxspd) {
@@ -97,7 +117,7 @@ public class OI {
 	/**
 	 * this one is for the rollers 
 	 * 
-	 * @return ret_value * m_maxIntakeSpeed
+	 * @return ret_value * m_maxIntakePivotSpeed
 	 */
 	public double getIntakeCtrl() {
 		double ret_value = 0.0;
@@ -106,7 +126,7 @@ public class OI {
 		} else if (m_controller.getLeftTriggerAxis() > 0) {
 			ret_value = 1;
 		}
-		return ret_value * m_maxIntakeSpeed;
+		return ret_value * m_maxIntakePivotSpeed;
 	}
 
 	public boolean getIntakeDown() {
@@ -118,8 +138,8 @@ public class OI {
 	}
 	/*
 	public double getIntake(){
-		if(getIntakeDown()) return 1.0 *m_maxIntakeSpeed;
-		else if(getIntakeUp()) return -1.0 *m_maxIntakeSpeed;
+		if(getIntakeDown()) return 1.0 *m_maxIntakePivotSpeed;
+		else if(getIntakeUp()) return -1.0 *m_maxIntakePivotSpeed;
 		else return 0;
 	}
 	*/
