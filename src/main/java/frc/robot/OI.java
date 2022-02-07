@@ -152,22 +152,24 @@ public class OI {
 	 * 
 	 * life can feel meaningless, but you should always remember that this day will pass. 
 	 */
-	public double getShoot() {
+	public double getMainShoot() {
 		if (m_controller.getRightTriggerAxis() > 0) {
-			if(m_maxShootSpeed != 0)
-			return m_maxShootSpeed;
-			else return 1;
+			return 1.0;
 		}
 		return 0;
 	}
 
 	public double getAltShoot() {
 		if (m_controller.getAButtonPressed()) {
-			if(m_maxShootSpeed != 0)
-			return m_maxShootSpeed;
-			else return 1;
+			return 1.0;
 		}
 		return 0;
+	}
+
+	public double getShoot() {
+		double main = getMainShoot();
+		double alt = getAltShoot();
+		return main > alt ? main : alt;
 	}
 	//Easter egg \o/
 	public boolean POVIsUp() {
@@ -186,7 +188,7 @@ public class OI {
 		return m_controller.getPOV()>225||m_controller.getPOV()<315;
 	}
 
-	public boolean getEMStop() {
+	public boolean getAllStop() {
 		return m_controller.getBButton();
 	}
 	
