@@ -49,12 +49,6 @@ public class Robot extends TimedRobot {
 		// Instantiate our RobotContainer.  This will perform all our button bindings, and put our
 		// autonomous chooser on the dashboard.
 		m_robotContainer = new RobotContainer();
-		m_oi.setMaxShootSpeed(1.0);
-		m_oi.setMaxIntakePivotSpeed(1.0);
-		m_oi.setMaxIntakeRollerSpeed(1.0);
-		m_oi.setMaxArmSpeed(1.0);
-		m_oi.setMaxDriveSpeed(1.0);
-		m_oi.setMaxIndexerSpeed(1.0);
 	}
 
 	/**
@@ -80,6 +74,12 @@ public class Robot extends TimedRobot {
 		//difDrive.reset();
 		// Cancels all running commands when disabled.
 		CommandScheduler.getInstance().cancelAll();
+		m_oi.setMaxShootSpeed(0);
+		m_oi.setMaxIntakePivotSpeed(0);
+		m_oi.setMaxIntakeRollerSpeed(0);
+		m_oi.setMaxArmSpeed(0);
+		m_oi.setMaxDriveSpeed(0);
+		m_oi.setMaxIndexerSpeed(0);
 	}
 
 	@Override
@@ -106,6 +106,12 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.schedule();
 		}
+		m_oi.setMaxShootSpeed(1.0);
+		m_oi.setMaxIntakePivotSpeed(1.0);
+		m_oi.setMaxIntakeRollerSpeed(1.0);
+		m_oi.setMaxArmSpeed(1.0);
+		m_oi.setMaxDriveSpeed(1.0);
+		m_oi.setMaxIndexerSpeed(1.0);
 	}
 
 	/** This function is called periodically during autonomous. */
@@ -123,6 +129,12 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
+		m_oi.setMaxShootSpeed(1.0);
+		m_oi.setMaxIntakePivotSpeed(1.0);
+		m_oi.setMaxIntakeRollerSpeed(1.0);
+		m_oi.setMaxArmSpeed(1.0);
+		m_oi.setMaxDriveSpeed(1.0);
+		m_oi.setMaxIndexerSpeed(1.0);
 	}
 
 	/** This function is called periodically during operator control. */
@@ -151,6 +163,12 @@ public class Robot extends TimedRobot {
 	public void testInit() {
 		// Cancels all running commands at the start of test mode.
 		CommandScheduler.getInstance().cancelAll();
+		m_oi.setMaxShootSpeed(1.0);
+		m_oi.setMaxIntakePivotSpeed(0.3);
+		m_oi.setMaxIntakeRollerSpeed(0.5);
+		m_oi.setMaxArmSpeed(0.3);
+		m_oi.setMaxDriveSpeed(0.75);
+		m_oi.setMaxIndexerSpeed(0.5);
 	}
 
 	/** This function is called periodically during test mode. */
