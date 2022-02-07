@@ -47,7 +47,7 @@ public class Intake extends SubsystemBase {
 		rollers.set(speed);
 	}
 
-	private void moveIntake(double speed) {
+	public void moveIntake(double speed) {
 		//Caps the speed from exceeding the set maxIntakePivotSpeed
 		if (speed > m_oi.getMaxIntakePivotSpeed()) speed = m_oi.getMaxIntakePivotSpeed();
 		if (speed > 0.0) {
