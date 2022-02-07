@@ -15,7 +15,7 @@ import frc.robot.OI;
 //Imports Intake subsystem
 import frc.robot.subsystems.Intake;
 //Imports Storage subsystem
-import frc.robot.subsystems.Storage;
+import frc.robot.subsystems.Indexer;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -23,7 +23,7 @@ import frc.robot.subsystems.Storage;
 public class IntakeControlCommand extends ParallelCommandGroup {
 	//Creates a new IntakeControlCommand
 	private Intake m_intake;
-	private Storage m_storage;
+	private Indexer m_storage;
 	private OI m_oi;
 
 	/*this command will execute the first part of the intake.
@@ -33,7 +33,7 @@ public class IntakeControlCommand extends ParallelCommandGroup {
 	public IntakeControlCommand() {
 		//Initializes instance variables with Intake and Storage subsystems
 		m_intake = Intake.getInstance();
-		m_storage = Storage.getInstance();
+		m_storage = Indexer.getInstance();
 		m_oi = OI.getInstance();
 		double intakeSpeed = m_oi.getIntakeCtrl();
 		// Add your commands in the addCommands() call, e.g.
