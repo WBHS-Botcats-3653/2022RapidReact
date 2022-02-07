@@ -19,13 +19,13 @@ import edu.wpi.first.wpilibj.XboxController;
 public class OI {
 	private static OI m_singleton = null;
 	private XboxController m_controller = null;
-	private static double m_maxDriveSpeed;
-	private static double m_maxArmSpeed;
-	private static double m_maxIntakePivotSpeed;
-	private static double m_maxIntakeRollerSpeed;
-	private static double m_maxShootSpeed;
-	private static double m_maxIndexerSpeed;
-	private static boolean isIntakeDown = false;
+	private double m_maxDriveSpeed;
+	private double m_maxArmSpeed;
+	private double m_maxIntakePivotSpeed;
+	private double m_maxIntakeRollerSpeed;
+	private double m_maxShootSpeed;
+	private double m_maxIndexerSpeed;
+	public boolean isIntakeDown = false;
 
 	/**it is the constructor
 	 * 
