@@ -28,4 +28,14 @@ public class ArcadeDriveCommand extends CommandBase {
 	public void execute() {
 		m_drivetrain.ArcadeDrived();
 	}
+
+	// Called once the command ends or is interrupted.
+	@Override
+	public void end(boolean interrupted) {}
+
+	// Returns true when the command should end.
+	@Override
+	public boolean isFinished() {
+		return false;
+	}
 }

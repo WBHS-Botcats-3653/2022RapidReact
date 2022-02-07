@@ -16,6 +16,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.ScheduleCommand;
+import frc.robot.commands.ClimberCommand;
+import frc.robot.commands.IndexerCommand;
+import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.ShooterCommand;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Dashboard;
 //Imports DriveTrain subsystem
@@ -141,6 +145,12 @@ public class Robot extends TimedRobot {
 	/** This function is called periodically during operator control. */
 	@Override
 	public void teleopPeriodic() {
+		new PrintCommand("is all stop true? " + m_oi.getAllStop()).initialize();;
+		train.ArcadeDrived();
+		new ShooterCommand().execute();
+		new IntakeCommand().execute();
+		new IndexerCommand().execute();
+		new ClimberCommand().execute();
 		/*
 		Scheduler.getInstance()
 			.add(new InstantCommand(() -> m_shooterSubsystem.spinSpinner(m_oi.getShoot())));
@@ -177,5 +187,11 @@ public class Robot extends TimedRobot {
 	public void testPeriodic() {
 
 		//new PrintCommand("testing the button:" + m_si.getPivotUpTriggered()).initialize();
+		//new ShooterCommand().schedule();
+		train.ArcadeDrived();
+		new ShooterCommand().execute();
+		new IntakeCommand().execute();
+		new IndexerCommand().execute();
+		new ClimberCommand().execute();
 	}
 }

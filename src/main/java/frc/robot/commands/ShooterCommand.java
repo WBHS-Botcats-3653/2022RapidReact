@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 //Imports ParallelCommandGroup
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
 //Imports OI
 import frc.robot.OI;
 //Imports Indexer subsystem
@@ -43,6 +44,8 @@ public class ShooterCommand extends ParallelCommandGroup {
 			return;
 		}
 		m_shooter.setSpinSpeed(m_oi.getShoot());
+
+		new PrintCommand("the speed is" + m_oi.getShoot()).initialize();
 		/*if (Shooter Encoder reads at set shoot speed) {  //Will need to change
 			m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed());
 		}*/
@@ -55,5 +58,15 @@ public class ShooterCommand extends ParallelCommandGroup {
 			new RunCommand(() -> m_shooter.spinSpinner(shoot), m_shooter).withInterrupt(() -> m_oi.getShoot() == 0),
 			new IndexerCommand().withInterrupt(() -> m_oi.getShoot() == 0)
 		);*/
+	}
+
+	// Called once the command ends or is interrupted.
+	@Override
+	public void end(boolean interrupted) {}
+
+	// Returns true when the command should end.
+	@Override
+	public boolean isFinished() {
+		return false;
 	}
 }
