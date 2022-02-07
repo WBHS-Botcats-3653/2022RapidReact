@@ -121,9 +121,9 @@ public class OI {
 	public double getIntakeCtrl() {
 		double ret_value = 0.0;
 		if (m_controller.getLeftBumper()) {
-			ret_value = -1;
+			ret_value = -m_maxIntakeRollerSpeed;
 		} else if (m_controller.getLeftTriggerAxis() > 0) {
-			ret_value = 1;
+			ret_value = m_maxIntakeRollerSpeed;
 		}
 		return ret_value * m_maxIntakePivotSpeed;
 	}
@@ -152,24 +152,11 @@ public class OI {
 	 * 
 	 * life can feel meaningless, but you should always remember that this day will pass. 
 	 */
-	public double getMainShoot() {
-		if (m_controller.getRightTriggerAxis() > 0) {
-			return 1.0;
-		}
-		return 0;
-	}
-
-	public double getAltShoot() {
-		if (m_controller.getAButtonPressed()) {
-			return 1.0;
-		}
-		return 0;
-	}
-
 	public double getShoot() {
-		double main = getMainShoot();
-		double alt = getAltShoot();
-		return main > alt ? main : alt;
+		if (m_controller.getRightTriggerAxis() > 0) {
+			return m_maxShootSpeed;
+		}
+		return 0;
 	}
 	//Easter egg \o/
 	public boolean POVIsUp() {
