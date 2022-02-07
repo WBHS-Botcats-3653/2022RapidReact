@@ -55,7 +55,9 @@ public class DriveTrain extends SubsystemBase {
 	 *OVERLOADED FUNCTION
 	 */
 	public void ArcadeDrived() {
-		if (m_oi.getEMStop()) {
+		//All stop called (used for testing)
+		if (m_oi.getAllStop()) {
+			//Stops motor(s)
 			diffDrive.arcadeDrive(0, 0);
 			return;
 		}

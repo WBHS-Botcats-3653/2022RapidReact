@@ -6,14 +6,10 @@ package frc.robot.commands;
 
 //Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 //Imports OI
 import frc.robot.OI;
 //Imports Intake Subsystem
 import frc.robot.subsystems.Intake;
-import frc.robot.commands.subcommands.Intakesubcommands.IntakeControlCommand;
-import frc.robot.commands.subcommands.Intakesubcommands.PostIntakeCommand;
-import frc.robot.commands.subcommands.Intakesubcommands.RaiseIntakeCommand;
 
 
 public class IntakeCommand extends CommandBase {
@@ -39,12 +35,17 @@ public class IntakeCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		if (m_oi.getEMStop()) {
+		//All stop called (used for testing)
+		if (m_oi.getAllStop()) {
+			//Stops motor(s)
 			m_intake.setRollerSpeed(0);
 			m_intake.setPivotSpeed(0);
 			return;
 		}
 
+
+
+		//OLD
 		/*if (m_oi.getIntakeDown()) {
 			//Drops the Intake
 			new ScheduleCommand(new IntakeControlCommand()).initialize();

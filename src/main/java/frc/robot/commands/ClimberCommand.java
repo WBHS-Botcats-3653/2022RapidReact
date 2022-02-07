@@ -35,7 +35,9 @@ public class ClimberCommand extends CommandBase {
 	@Override
 	// Called every time the scheduler runs while the command is scheduled.
 	public void execute() {
-		if (m_oi.getEMStop()) {
+		//All stop called (used for testing)
+		if (m_oi.getAllStop()) {
+			//Stops motor(s)
 			m_climber.setArmSpeed(0);
 			return;
 		}
