@@ -43,15 +43,15 @@ public class ClimberCommand extends CommandBase {
 			return;
 		}
 		if (m_oi.POVIsUp()) {
-			m_climber.setArmSpeed(m_oi.getMaxArmSpeed());
+			m_climber.setArmSpeed(-m_oi.getMaxArmSpeed());
 			autoClimbing = true;
 		} else if (m_oi.POVIsDown()) {
-			m_climber.setArmSpeed(-m_oi.getMaxArmSpeed());
+			m_climber.setArmSpeed(m_oi.getMaxArmSpeed());
 			autoClimbing = true;
 		} else if (m_oi.POVIsRight()) {
-			m_climber.setArmSpeed(m_oi.getMaxArmSpeed());
-		} else if (m_oi.POVIsLeft()) {
 			m_climber.setArmSpeed(-m_oi.getMaxArmSpeed());
+		} else if (m_oi.POVIsLeft()) {
+			m_climber.setArmSpeed(m_oi.getMaxArmSpeed());
 		} else if (!autoClimbing/*||Check if arm has reached highest point with encoder*/) {
 			m_climber.setArmSpeed(0);
 			if (autoClimbing) autoClimbing = false;

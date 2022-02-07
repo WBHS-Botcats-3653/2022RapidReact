@@ -151,6 +151,8 @@ public class Robot extends TimedRobot {
 		new IntakeCommand().execute();
 		new IndexerCommand().execute();
 		new ClimberCommand().execute();
+
+		
 		/*
 		Scheduler.getInstance()
 			.add(new InstantCommand(() -> m_shooterSubsystem.spinSpinner(m_oi.getShoot())));
