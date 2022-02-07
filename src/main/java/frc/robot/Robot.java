@@ -176,6 +176,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void testPeriodic() {
 
-		new PrintCommand("testing the button:" + m_si.getPivotUpTriggered()).initialize();
+		//new PrintCommand("testing the button:" + m_si.getPivotUpTriggered()).initialize();
 	}
 }
