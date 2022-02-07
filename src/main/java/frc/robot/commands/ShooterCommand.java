@@ -45,7 +45,7 @@ public class ShooterCommand extends ParallelCommandGroup {
 		}
 		m_shooter.setSpinSpeed(m_oi.getShoot());
 
-		new PrintCommand("the speed is" + m_oi.getShoot()).initialize();
+		//new PrintCommand("the speed is" + m_oi.getShoot()).initialize();
 		/*if (Shooter Encoder reads at set shoot speed) {  //Will need to change
 			m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed());
 		}*/
