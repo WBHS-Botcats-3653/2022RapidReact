@@ -43,15 +43,15 @@ public class IntakeCommand extends CommandBase {
 			return;
 		}
 
-
-
-		//OLD
-		/*if (m_oi.getIntakeDown()) {
-			//Drops the Intake
-			new ScheduleCommand(new IntakeControlCommand()).initialize();
+		if (m_oi.getIntakeDown()) {
+			m_intake.setPivotSpeed(m_oi.getMaxIntakePivotSpeed());
 		} else if (m_oi.getIntakeUp()) {
-			//Raises the intake
-			new ScheduleCommand(new RaiseIntakeCommand().andThen(new PostIntakeCommand())).initialize();
-		}*/
+			m_intake.setPivotSpeed(-m_oi.getMaxIntakePivotSpeed());
+		}
+		m_intake.setRollerSpeed(m_oi.getIntakeCtrl());
+		if (/*Encoder detects intake pivot is fully up or down*/) {
+			m_oi.isIntakeDown = false/*Encoder detects whether the intake is down*/;
+			m_intake.setPivotSpeed(0);
+		}
 	}
 }
