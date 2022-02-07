@@ -8,15 +8,12 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 //Imports TimedRobot
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.InstantCommand;
-import edu.wpi.first.wpilibj.command.PrintCommand;
 //Imports Scheduler
 import edu.wpi.first.wpilibj.command.Scheduler;
 //Imports Command
 import edu.wpi.first.wpilibj2.command.Command;
 //Imports CommandScheduler
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Dashboard;
@@ -35,13 +32,13 @@ public class Robot extends TimedRobot {
 	private Command m_autonomousCommand;
 	private RobotContainer m_robotContainer;
 
-	private DriveTrain train = DriveTrain.getInstance();
+	private final DriveTrain train = DriveTrain.getInstance();
 	private final Climber m_climberSubsystem = Climber.getInstance();
 	private final Intake m_intakeSubsystem = Intake.getInstance();
 	private final Dashboard m_dashboardSubsystem = Dashboard.getInstance();
 	private final Shooter m_shooterSubsystem = Shooter.getInstance();
 	private final OI m_oi = OI.getInstance();
-	private WPI_VictorSPX spinner= Shooter.spinner;
+	private final WPI_VictorSPX spinner = Shooter.spinner;
 	/**
 	 * This function is run when the robot is first started up and should be used for any
 	 * initialization code.
@@ -51,6 +48,12 @@ public class Robot extends TimedRobot {
 		// Instantiate our RobotContainer.  This will perform all our button bindings, and put our
 		// autonomous chooser on the dashboard.
 		m_robotContainer = new RobotContainer();
+		m_oi.setMaxShootSpeed(1.0);
+		m_oi.setMaxIntakePivotSpeed(1.0);
+		m_oi.setMaxIntakeRollerSpeed(1.0);
+		m_oi.setMaxArmSpeed(1.0);
+		m_oi.setMaxDriveSpeed(1.0);
+		m_oi.setMaxIndexerSpeed(1.0);
 	}
 
 	/**
@@ -116,13 +119,9 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
-
-		m_oi.setMaxShootSpeed(1.0);
-		m_oi.setMaxIntakeSpeed(1.0);
 	}
 
 	/** This function is called periodically during operator control. */
