@@ -10,17 +10,17 @@ import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 //Imports StartEndCommand
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
 //Imports Storage subsystem
-import frc.robot.subsystems.Storage;
+import frc.robot.subsystems.Indexer;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class PostIntakeCommand extends InstantCommand {
-	private Storage m_storage;
+	private Indexer m_storage;
 
 	public PostIntakeCommand() {
 		// Use addRequirements() here to declare subsystem dependencies.
-		m_storage = Storage.getInstance();
+		m_storage = Indexer.getInstance();
 	}
 
 	// Called when the command is initially scheduled.
