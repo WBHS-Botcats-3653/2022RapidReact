@@ -42,7 +42,11 @@ public class Intake extends SubsystemBase {
 	//Spins the rollers on the intake
 	public void setRollerSpeed(double speed) {
 		//Caps the speed from exceeding the set maxIntakeRollerSpeed
-		if (speed > m_oi.getMaxIntakeRollerSpeed()) speed = m_oi.getMaxIntakeRollerSpeed();
+		if (speed > m_oi.getMaxIntakeRollerSpeed()) {
+			speed = m_oi.getMaxIntakeRollerSpeed();
+		} else if (speed < -m_oi.getMaxIntakeRollerSpeed()) {
+			speed = -m_oi.getMaxIntakeRollerSpeed();
+		}
 		//Sets the roller speed
 		rollers.set(speed);
 	}
@@ -66,16 +70,7 @@ public class Intake extends SubsystemBase {
 		pivot.set(speed);
 	}
 
-
-	//Ejects cargo from intake
-	public void ejectCargo(double speed) {
-		//Caps the speed from exceeding the set maxIntakeRollerSpeed
-		if (speed > m_oi.getMaxIntakeRollerSpeed()) speed = m_oi.getMaxIntakeRollerSpeed();
-		//Sets the roller speed
-		rollers.set(-speed);
-	}
-
-	public void ControlIntake(double speed, boolean interruptor) {
+	/*public void ControlIntake(double speed, boolean interruptor) {
 		//Caps the speed from exceeding the set maxIntakePivotSpeed
 		if (speed > m_oi.getMaxIntakeRollerSpeed()) speed = m_oi.getMaxIntakePivotSpeed();
 		if (speed > 0) spinRollers(1.0);
@@ -84,9 +79,9 @@ public class Intake extends SubsystemBase {
 		} else { 
 			raiseIntake(0);
 		}
-	}
+	}*/
 
-	public void setArmEncoderFloor(int floor) {
+	public static void setArmEncoderFloor(int floor) {
 		if (0 <= floor && floor < m_maxEncoder) {
 			m_encFloor = floor;
 		}
