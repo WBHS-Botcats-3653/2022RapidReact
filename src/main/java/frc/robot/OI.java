@@ -173,19 +173,19 @@ public class OI {
 	}
 	//Easter egg \o/
 	public boolean POVIsUp() {
-		return m_controller.getPOV()>=315||m_controller.getPOV()<=45;
+		return m_controller.getPOV()>=315&&m_controller.getPOV()<=45&&m_controller.getPOV()!=-1;
 	}
 
 	public boolean POVIsDown() {
-		return m_controller.getPOV()>=135||m_controller.getPOV()<=225;
+		return m_controller.getPOV()>=135&&m_controller.getPOV()<=225;
 	}
 
 	public boolean POVIsRight() {
-		return m_controller.getPOV()>45||m_controller.getPOV()<135;
+		return m_controller.getPOV()>45&&m_controller.getPOV()<135;
 	}
 
 	public boolean POVIsLeft() {
-		return m_controller.getPOV()>225||m_controller.getPOV()<315;
+		return m_controller.getPOV()>225&&m_controller.getPOV()<315;
 	}
 
 	public boolean getAllStop() {
