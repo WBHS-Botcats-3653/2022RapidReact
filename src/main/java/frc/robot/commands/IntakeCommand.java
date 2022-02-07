@@ -8,14 +8,16 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 //Imports OI
 import frc.robot.OI;
-
+//Imports SI
+import frc.robot.SI;
+//Imports Intake
 import frc.robot.subsystems.Intake;
-
 
 public class IntakeCommand extends CommandBase {
 	//Holds instances of OI and Intake subsystem
 	private OI m_oi;
 	private Intake m_intake;
+	private SI m_si;
 
 	/**Creates a new IntakeCommand.
 	 * @param subsystem The subsystem used by this command.
@@ -24,6 +26,7 @@ public class IntakeCommand extends CommandBase {
 		//Initializes instance variable with OI subsystem
 		m_oi = OI.getInstance();
 		m_intake = Intake.getInstance();
+		m_si = SI.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
 		//addRequirements();
 	}
@@ -42,14 +45,15 @@ public class IntakeCommand extends CommandBase {
 			m_intake.setPivotSpeed(0);
 			return;
 		}
-
 		if (m_oi.getIntakeDown()) {
-
 			m_intake.setPivotSpeed(m_oi.getMaxIntakePivotSpeed());
 		} else if (m_oi.getIntakeUp()) {
 			m_intake.setPivotSpeed(-m_oi.getMaxIntakePivotSpeed());
 		}
 		m_intake.setRollerSpeed(m_oi.getIntakeCtrl());
+		if (m_si.getPivotStop()) {
+			m_intake.setPivotSpeed(0);
+		}
 		/*if (Encoder detects intake pivot is fully up or down) {
 			m_oi.isIntakeDown = Encoder detects whether the intake is down;
 			m_intake.setPivotSpeed(0);

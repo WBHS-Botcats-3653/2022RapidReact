@@ -47,14 +47,14 @@ public class SI {
 	}
 
 	public boolean getPivotUpTriggered() {
-		return pivotUpButton.get();
+		return !pivotUpButton.get();
 	}
 
 	public boolean getPivotDownTriggered() {
-		return pivotDownButton.get();
+		return !pivotDownButton.get();
 	}
 
-	public DigitalInput getButton(){
-		return pivotDownButton;
+	public boolean getPivotStop() {
+		return getPivotDownTriggered()||getPivotUpTriggered();
 	}
 }
