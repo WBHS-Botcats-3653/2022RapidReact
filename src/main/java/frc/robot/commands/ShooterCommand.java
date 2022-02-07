@@ -43,9 +43,9 @@ public class ShooterCommand extends ParallelCommandGroup {
 			return;
 		}
 		m_shooter.setSpinSpeed(m_oi.getShoot());
-		if (/*Shooter Encoder reads at set shoot speed*/) {  //Will need to change
+		/*if (Shooter Encoder reads at set shoot speed) {  //Will need to change
 			m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed());
-		}
+		}*/
 
 
 		//OLD

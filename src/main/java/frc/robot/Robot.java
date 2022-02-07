@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj2.command.Command;
 //Imports CommandScheduler
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.ShooterCommand;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Dashboard;
 //Imports DriveTrain subsystem
@@ -148,13 +147,13 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance()
 			.add(new InstantCommand(() -> m_intakeSubsystem.ControlIntake(m_oi.getIntakeCtrl(), false)));
 */		
-		new ShooterCommand().schedule();
+		/*new ShooterCommand().schedule();
 		
 		
 		train.ArcadeDrived();
 		
 		m_shooterSubsystem.spinSpinner(m_oi.getShoot());
-		m_intakeSubsystem.ControlIntake(m_oi.getIntakeCtrl(), false);
+		m_intakeSubsystem.ControlIntake(m_oi.getIntakeCtrl(), false);*/
 		//this might not work
 		
 	}

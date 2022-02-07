@@ -49,9 +49,9 @@ public class IntakeCommand extends CommandBase {
 			m_intake.setPivotSpeed(-m_oi.getMaxIntakePivotSpeed());
 		}
 		m_intake.setRollerSpeed(m_oi.getIntakeCtrl());
-		if (/*Encoder detects intake pivot is fully up or down*/) {
-			m_oi.isIntakeDown = false/*Encoder detects whether the intake is down*/;
+		/*if (Encoder detects intake pivot is fully up or down) {
+			m_oi.isIntakeDown = Encoder detects whether the intake is down;
 			m_intake.setPivotSpeed(0);
-		}
+		}*/
 	}
 }

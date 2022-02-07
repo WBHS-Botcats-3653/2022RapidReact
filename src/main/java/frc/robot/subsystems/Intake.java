@@ -21,8 +21,8 @@ public class Intake extends SubsystemBase {
 	private WPI_VictorSPX pivot;
 	private WPI_VictorSPX rollers;
 	private AnalogInput pivotEncoder;
-	private int m_maxEncoder;
-	private int m_encFloor;
+	private static int m_maxEncoder;
+	private static int m_encFloor;
 	private OI m_oi = OI.getInstance();
 
 	/**Constructor
