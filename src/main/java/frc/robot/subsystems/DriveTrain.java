@@ -22,7 +22,7 @@ import frc.robot.commands.ShooterCommand;
 
 public class DriveTrain extends SubsystemBase {
 	private static DriveTrain driveTrain = null;
-	public OI input = OI.getInstance();
+	public OI m_oi = OI.getInstance();
 	private DifferentialDrive diffDrive;
 
 	//documentation for WPI_VictorSPX: 
@@ -51,31 +51,41 @@ public class DriveTrain extends SubsystemBase {
 		return driveTrain;
 	}
 
-	/**Instantiates the arcade drive
+	/**Sets the arcade drive speed and rotation
 	 *OVERLOADED FUNCTION
 	 */
 	public void ArcadeDrived() {
-		getInstance().diffDrive.arcadeDrive(input.getThrottle(), input.getSteering());
+		//All stop called (used for testing)
+		if (m_oi.getAllStop()) {
+			//Stops motor(s)
+			diffDrive.arcadeDrive(0, 0);
+			return;
+		}
+		//Caps the throttle speed from exceeding the set maxDriveSpeed
+		double speed = m_oi.getThrottle() <= m_oi.getMaxDriveSpeed() ? m_oi.getThrottle() : m_oi.getMaxDriveSpeed();
+		//Sets the differential drive speed and rotation
+		diffDrive.arcadeDrive(speed, m_oi.getSteering());
 	}
 
-	/**Instantiates the arcade drive
-	 *OVERLOADED FUNCTION
-	 * @param train
-	 */
-	public void ArcadeDrived(DriveTrain train) {
-		train.diffDrive.arcadeDrive(input.getThrottle(), input.getSteering());
-	}
-
-	/**Instantiates the arcade drive
+	/**Sets the arcade drive speed and rotation
 	 * OVERLOADED FUNCTION
 	 * @param speed
 	 * @param rotation
 	 */
-	public void ArcadeDrived(double speed, double rotation){
-		getInstance().diffDrive.arcadeDrive(speed, rotation);
+	public void ArcadeDrived(double speed, double rotation) {
+		//All stop called (used for testing)
+		if (m_oi.getAllStop()) {
+			//Stops motor(s)
+			diffDrive.arcadeDrive(0, 0);
+			return;
+		}
+		//Caps the speed from exceeding the set maxDriveSpeed
+		if (speed > m_oi.getMaxDriveSpeed()) speed = m_oi.getMaxDriveSpeed();
+		//Sets the differential drive speed and rotation
+		diffDrive.arcadeDrive(speed, rotation);
 	}
 
-	public static void tryThis(){
+	public static void tryThis() {
 		new ShooterCommand();
 	}
 

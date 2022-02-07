@@ -14,12 +14,14 @@ import frc.robot.commands.ClimberCommand;
 import frc.robot.commands.DashboardCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.ShooterCommand;
+import frc.robot.commands.IndexerCommand;
 //Imports subsystems
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Dashboard;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Indexer;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -34,6 +36,7 @@ public class RobotContainer {
 	private final Intake m_intakeSubsystem = Intake.getInstance();
 	private final Dashboard m_dashboardSubsystem = Dashboard.getInstance();
 	private final Shooter m_shooterSubsystem = Shooter.getInstance();
+	private final Indexer m_indexerSubsystem = Indexer.getInstance();
 	
 	private final ArcadeDriveCommand m_arcadeDriveCommand = new ArcadeDriveCommand();
 	private final ClimberCommand m_climberCommand = new ClimberCommand();
@@ -41,6 +44,7 @@ public class RobotContainer {
 	private final DashboardCommand m_dashboardCommand = new DashboardCommand();
 	private final ShooterCommand m_shooterCommand = new ShooterCommand();
 	private final AutoCommand m_autoCommand = new AutoCommand();
+	private final IndexerCommand m_indexerCommand = new IndexerCommand();
 
 	/** The container for the robot. Contains subsystems, OI devices, and commands. */
 	

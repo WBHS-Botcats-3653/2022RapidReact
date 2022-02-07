@@ -7,19 +7,23 @@ package frc.robot.subsystems;
 //Imports WPI_VictorSPX (Motor Controller)
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+//Imports AnalogInput
 import edu.wpi.first.wpilibj.AnalogInput;
 //Imports SubsystemBase
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 //Imports Constants
 import frc.robot.Constants;
+//Imports OI
+import frc.robot.OI;
 
 public class Intake extends SubsystemBase {
 	private static Intake intake=null;
-	private static WPI_VictorSPX pivot;
-	private static WPI_VictorSPX rollers;
-	private static AnalogInput pivotEncoder;
+	private WPI_VictorSPX pivot;
+	private WPI_VictorSPX rollers;
+	private AnalogInput pivotEncoder;
 	private static int m_maxEncoder;
 	private static int m_encFloor;
+	private OI m_oi = OI.getInstance();
 
 	/**Constructor
 	 * it is a singleton
@@ -36,11 +40,24 @@ public class Intake extends SubsystemBase {
 	}
 
 	//Spins the rollers on the intake
-	public void spinRollers(double speed) {
+	public void setRollerSpeed(double speed) {
+		//Caps the speed from exceeding the set maxIntakeRollerSpeed
+		if (speed > m_oi.getMaxIntakeRollerSpeed()) {
+			speed = m_oi.getMaxIntakeRollerSpeed();
+		} else if (speed < -m_oi.getMaxIntakeRollerSpeed()) {
+			speed = -m_oi.getMaxIntakeRollerSpeed();
+		}
+		//Sets the roller speed
 		rollers.set(speed);
 	}
 
-	private void moveIntake(double speed) {
+	public void setPivotSpeed(double speed) {
+		pivot.set(speed);
+	}
+
+	public void moveIntake(double speed) {
+		//Caps the speed from exceeding the set maxIntakePivotSpeed
+		if (speed > m_oi.getMaxIntakePivotSpeed()) speed = m_oi.getMaxIntakePivotSpeed();
 		if (speed > 0.0) {
 			if (false/*!upperLimitSwitch.get()  || getRawEncoder() > 2050 */) {
 				speed = 0.0;
@@ -73,6 +90,7 @@ public class Intake extends SubsystemBase {
 		}
 	}
 
+<<<<<<< HEAD
 	public void setArmStow(boolean stow) {
 		if (stow) {
 			move(0.3);
@@ -94,13 +112,24 @@ public class Intake extends SubsystemBase {
 	/*
 	public void ControlIntake(double speed, boolean interruptor) {
 		if(speed > 0) spinRollers(1.0);
+=======
+	/*public void ControlIntake(double speed, boolean interruptor) {
+		//Caps the speed from exceeding the set maxIntakePivotSpeed
+		if (speed > m_oi.getMaxIntakeRollerSpeed()) speed = m_oi.getMaxIntakePivotSpeed();
+		if (speed > 0) spinRollers(1.0);
+>>>>>>> 8d86d77b91f8e5683140ec0905362f84934732f1
 		if (!interruptor) {
 			dropIntake(speed);
 		} else { 
 			raiseIntake(0);
 		}
+<<<<<<< HEAD
 	}
 	*/
+=======
+	}*/
+
+>>>>>>> 8d86d77b91f8e5683140ec0905362f84934732f1
 	public static void setArmEncoderFloor(int floor) {
 		if (0 <= floor && floor < m_maxEncoder) {
 			m_encFloor = floor;

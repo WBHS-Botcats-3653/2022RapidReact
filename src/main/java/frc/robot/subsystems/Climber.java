@@ -11,10 +11,13 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 //Imports Constants
 import frc.robot.Constants;
+//Imports OI
+import frc.robot.OI;
 
 public class Climber extends SubsystemBase {
 	private static Climber m_singleton = null;
 	private WPI_VictorSPX arm;
+	private OI m_oi = OI.getInstance();
 
 	//Constructor
 	private Climber() {
@@ -30,25 +33,11 @@ public class Climber extends SubsystemBase {
 		return m_singleton;
 	}
 
-	//Raises the arm to it's fully extended position
+	//Sets the arms speed
 	public void setArmSpeed(double speed) {
+		//Caps the speed from exceeding the set maxArmSpeed
+		if (speed > m_oi.getMaxArmSpeed()) speed = m_oi.getMaxArmSpeed();
+		//Sets the arm speed
 		arm.set(speed);
-	}
-
-
-	//Usable methods:
-	//this methods will be used to drive the robot
-	//if the comand based robot fails
-	/**with one will controll the arm
-	 * 
-	 * @param speed
-	 * @param interruptor when this is true, the arm will stop
-	 */
-	public void MoveArmUntil(double speed, boolean interruptor){
-		if (!interruptor) {
-			setArmSpeed(speed);
-		} else {
-			setArmSpeed(0);
-		}
 	}
 }

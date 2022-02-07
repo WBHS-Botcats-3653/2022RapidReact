@@ -11,27 +11,33 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 //Imports Constants
 import frc.robot.Constants;
+//Imports OI
+import frc.robot.OI;
 
-public class Storage extends SubsystemBase {
-	private static Storage storage = null;
+public class Indexer extends SubsystemBase {
+	private static Indexer m_singleton = null;
 	private WPI_VictorSPX indexer;
+	private OI m_oi = OI.getInstance();
 
 	/** Creates a new Indexer. */
-	public Storage() {
+	public Indexer() {
 		indexer = new WPI_VictorSPX(Constants.MCID.get("Indexer"));
 	}
 
-	public static Storage getInstance() {
-		if (storage == null) {
-			storage = new Storage();
+	public static Indexer getInstance() {
+		if (m_singleton == null) {
+			m_singleton = new Indexer();
 		}
-		return storage;
+		return m_singleton;
 	}
 
 	/**Raises the cargo up the storage system
 	 * --This is the indexer--
 	 */
-	public void raiseCargo(double speed) {
+	public void setIndexerSpeed(double speed) {
+		//Caps the spinner speed from exceeding the set maxIndexerSpeed
+		if (speed > m_oi.getMaxIndexerSpeed()) speed = m_oi.getMaxIndexerSpeed();
+		//Sets the indexer speed
 		indexer.set(speed);
 	}
 }

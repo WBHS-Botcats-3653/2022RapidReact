@@ -6,12 +6,15 @@ package frc.robot.commands;
 
 //Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 //Imports OI
 import frc.robot.OI;
+<<<<<<< HEAD
 import frc.robot.commands.subcommands.intakeSubcommands.IntakeControlCommand;
 import frc.robot.commands.subcommands.intakeSubcommands.PostIntakeCommand;
 import frc.robot.commands.subcommands.intakeSubcommands.RaiseIntakeCommand;
+=======
+//Imports Intake Subsystem
+>>>>>>> 8d86d77b91f8e5683140ec0905362f84934732f1
 import frc.robot.subsystems.Intake;
 
 
@@ -38,12 +41,28 @@ public class IntakeCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
+		//All stop called (used for testing)
+		if (m_oi.getAllStop()) {
+			//Stops motor(s)
+			m_intake.setRollerSpeed(0);
+			m_intake.setPivotSpeed(0);
+			return;
+		}
+
 		if (m_oi.getIntakeDown()) {
+<<<<<<< HEAD
 			//Drops the Intake
 			m_intake.m
+=======
+			m_intake.setPivotSpeed(m_oi.getMaxIntakePivotSpeed());
+>>>>>>> 8d86d77b91f8e5683140ec0905362f84934732f1
 		} else if (m_oi.getIntakeUp()) {
-			//Raises the intake
-			new ScheduleCommand(new RaiseIntakeCommand().andThen(new PostIntakeCommand())).initialize();
+			m_intake.setPivotSpeed(-m_oi.getMaxIntakePivotSpeed());
 		}
+		m_intake.setRollerSpeed(m_oi.getIntakeCtrl());
+		/*if (Encoder detects intake pivot is fully up or down) {
+			m_oi.isIntakeDown = Encoder detects whether the intake is down;
+			m_intake.setPivotSpeed(0);
+		}*/
 	}
 }

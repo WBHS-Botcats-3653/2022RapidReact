@@ -6,17 +6,15 @@ package frc.robot.commands;
 
 //Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 //Imports OI
 import frc.robot.OI;
-import frc.robot.commands.subcommands.climberSubcommands.LowerArmCommand;
-import frc.robot.commands.subcommands.intakeSubcommands.RaiseIntakeCommand;
 import frc.robot.subsystems.Climber;
 
 public class ClimberCommand extends CommandBase {
 	//Holds instances of OI and Climber subsystem
 	private OI m_oi;
 	private Climber m_climber;
+	private boolean autoClimbing = false;
 
 	/**Creates a new ClimberCommand.
 	 * @param subsystem The subsystem used by this command.
@@ -37,32 +35,25 @@ public class ClimberCommand extends CommandBase {
 	@Override
 	// Called every time the scheduler runs while the command is scheduled.
 	public void execute() {
-
+		//All stop called (used for testing)
+		if (m_oi.getAllStop()) {
+			//Stops motor(s)
+			m_climber.setArmSpeed(0);
+			return;
+		}
 		if (m_oi.POVIsUp()) {
-			//Fully extends the arm
-			new ScheduleCommand(new RaiseIntakeCommand()).initialize();
+			m_climber.setArmSpeed(m_oi.getMaxArmSpeed());
+			autoClimbing = true;
 		} else if (m_oi.POVIsDown()) {
-			//Lowers the arm completely
-			new ScheduleCommand(new LowerArmCommand()).initialize();
-		} /*else if (m_oi.POVIsRight()) {
-			//Raises the arm
-			m_climber.raiseArm(m_oi.getMaxArmSpeed());
-		} else if (m_oi.POVIsLeft()) {
-			//Lowers the arm
-			m_climber.lowerArm(m_oi.getMaxArmSpeed());
-		}*/
-
-
-		if (m_oi.POVIsUp()) {
-
-		} else if (m_oi.POVIsDown()) {
-
+			m_climber.setArmSpeed(-m_oi.getMaxArmSpeed());
+			autoClimbing = true;
 		} else if (m_oi.POVIsRight()) {
-
+			m_climber.setArmSpeed(m_oi.getMaxArmSpeed());
 		} else if (m_oi.POVIsLeft()) {
-
-		} else {
-			m_climber.stopClimb();
+			m_climber.setArmSpeed(-m_oi.getMaxArmSpeed());
+		} else if (!autoClimbing/*||Check if arm has reached highest point with encoder*/) {
+			m_climber.setArmSpeed(0);
+			if (autoClimbing) autoClimbing = false;
 		}
 	}
 }

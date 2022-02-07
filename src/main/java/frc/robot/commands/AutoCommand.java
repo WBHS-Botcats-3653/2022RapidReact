@@ -2,10 +2,6 @@ package frc.robot.commands;
 
 //Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.ScheduleCommand;
-//Imports StartEndCommand
-import edu.wpi.first.wpilibj2.command.StartEndCommand;
-
 //Imports DriveTrain and Shooter subsystems
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Shooter;
@@ -23,8 +19,8 @@ public class AutoCommand extends CommandBase {
 
 	@Override
 	public void initialize() {
-		new ScheduleCommand(
-			/*this one will execute the shooter for 3 seconds and then stop */
+		/*new ScheduleCommand(
+			//this one will execute the shooter for 3 seconds and then stop
 			new StartEndCommand(
 				//run when it starts
 				() -> shooter.spinSpinner(1.0), 
@@ -39,7 +35,7 @@ public class AutoCommand extends CommandBase {
 			 * (in this case) WaitUntilCommand stops).
 			 * so it will basically go and .5 speed, straight, and it will last for 3 seconds, 
 			 * thus making the cut for the taxi drive part.
-			 */
+			 *
 				new StartEndCommand(
 					//run when it starts
 					() -> driveTrain.ArcadeDrived(0.5, 0), 
@@ -49,6 +45,6 @@ public class AutoCommand extends CommandBase {
 				).withTimeout(3)
 			)
 		).initialize();
-		//super.initialize();
+		//super.initialize();*/
 	}
 }

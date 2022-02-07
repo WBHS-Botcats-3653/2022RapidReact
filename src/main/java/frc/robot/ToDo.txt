@@ -6,3 +6,4 @@ To Do:
 5. Code the shooter to spin the indexer until the photo-electric sensor inside the indexer is triggered or a timeout
 6. Move code out of the subcommands and into new files using methods and delete all the subcommands
 7. Auto
+8. Add on/off switch on dashboard for automated indexing (Incase one of the photoelectric sensors malfunctions)
