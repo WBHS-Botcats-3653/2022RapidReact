@@ -7,15 +7,15 @@ package frc.robot.commands.subcommands.indexerSubcommands;
 //Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
 //Imports Storage subsystem
-import frc.robot.subsystems.Storage;
+import frc.robot.subsystems.Indexer;
 
 public class IndexerCommand extends CommandBase {
 	/** Creates a new IndexerCommand. */
-	private Storage m_indexer;
+	private Indexer m_indexer;
 	
 	public IndexerCommand() {
 		// Use addRequirements() here to declare subsystem dependencies.
-		m_indexer = Storage.getInstance();
+		m_indexer = Indexer.getInstance();
 	}
 
 	// Called when the command is initially scheduled.
