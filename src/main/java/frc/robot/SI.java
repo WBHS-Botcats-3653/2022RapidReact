@@ -47,7 +47,7 @@ public class SI {
 	}
 
 	public boolean getPivotUpTriggered() {
-		return !pivotUpButton.get();
+		return !pivotUpButton.get();  //Invert (Nick wired it wrong lol)
 	}
 
 	public boolean getPivotDownTriggered() {

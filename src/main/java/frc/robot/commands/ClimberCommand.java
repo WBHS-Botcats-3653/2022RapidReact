@@ -39,6 +39,7 @@ public class ClimberCommand extends CommandBase {
 		if (m_oi.getAllStop()) {
 			//Stops motor(s)
 			m_climber.setArmSpeed(0);
+			autoClimbing = false;
 			return;
 		}
 		if (m_oi.POVIsUp()) {
