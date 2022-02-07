@@ -1,0 +1,43 @@
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
+package frc.robot.subsystems;
+
+//Imports WPI_VictorSPX (Motor Controller)
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
+//Imports SubsystemBase
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+//Imports Constants
+import frc.robot.Constants;
+//Imports OI
+import frc.robot.OI;
+
+public class Indexer extends SubsystemBase {
+	private static Indexer storage = null;
+	private WPI_VictorSPX indexer;
+	private OI m_oi = OI.getInstance();
+
+	/** Creates a new Indexer. */
+	public Indexer() {
+		indexer = new WPI_VictorSPX(Constants.MCID.get("Indexer"));
+	}
+
+	public static Indexer getInstance() {
+		if (storage == null) {
+			storage = new Indexer();
+		}
+		return storage;
+	}
+
+	/**Raises the cargo up the storage system
+	 * --This is the indexer--
+	 */
+	public void raiseCargo(double speed) {
+		//Caps the spinner speed from exceeding the set maxIndexerSpeed
+		if (speed > m_oi.getMaxIndexerSpeed()) speed = m_oi.getMaxIndexerSpeed();
+		//Sets the indexer speed
+		indexer.set(speed);
+	}
+}

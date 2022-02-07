@@ -11,10 +11,13 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 //Imports Constants
 import frc.robot.Constants;
+//Imports OI
+import frc.robot.OI;
 
 public class Shooter extends SubsystemBase {
 	private static Shooter shooter = null;
 	public static WPI_VictorSPX spinner;
+	private OI m_oi = OI.getInstance();
 
 	public Shooter() {
 		//Creates WPI_VictorSPX motor controller for the spinner
@@ -37,6 +40,9 @@ public class Shooter extends SubsystemBase {
 	 * 
 	 */
 	public void spinSpinner(double speed) {
+		//Caps the spinner speed from exceeding the set maxShootSpeed
+		if (speed > m_oi.getMaxShootSpeed()) speed = m_oi.getMaxShootSpeed();
+		//Sets the spinner speed
 		spinner.set(speed);
 	}
 }
