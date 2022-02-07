@@ -12,8 +12,6 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-//Imports SubsystemBase
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.OI;
 
 public class Dashboard {
@@ -76,7 +74,8 @@ public class Dashboard {
 
 		ctrl.setMaxDriveSpeed(m_nteMaxSpd.getDouble(1.0));
 		ctrl.setMaxArmSpeed(m_nteMaxArmSpd.getDouble(1.0));
-		ctrl.setMaxIntakeSpeed(m_nteMaxIntake.getDouble(1.0));
+		ctrl.setMaxIntakePivotSpeed(m_nteMaxIntake.getDouble(1.0));
+		ctrl.setMaxIntakeRollerSpeed(m_nteMaxIntake.getDouble(1.0));
 
 		Intake.setArmEncoderFloor((int) m_nteArmDownEnc.getDouble(1024));
 	}
