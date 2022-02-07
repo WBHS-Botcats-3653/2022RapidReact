@@ -73,7 +73,9 @@ public class DriveTrain extends SubsystemBase {
 	 * @param rotation
 	 */
 	public void ArcadeDrived(double speed, double rotation) {
-		if (m_oi.getEMStop()) {
+		//All stop called (used for testing)
+		if (m_oi.getAllStop()) {
+			//Stops motor(s)
 			diffDrive.arcadeDrive(0, 0);
 			return;
 		}
