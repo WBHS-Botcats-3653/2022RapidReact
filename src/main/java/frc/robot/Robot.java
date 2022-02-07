@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj2.command.Command;
 //Imports CommandScheduler
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Dashboard;
 //Imports DriveTrain subsystem
@@ -173,6 +174,7 @@ public class Robot extends TimedRobot {
 	/** This function is called periodically during test mode. */
 	@Override
 	public void testPeriodic() {
-
+		//SI.getInstance().getButton().
+		new PrintCommand("Button: " + SI.getInstance().getPivotDownTriggered()).initialize();
 	}
 }

@@ -35,9 +35,11 @@ public final class Constants {
 	 *<String inputName, Integer ID>
 	 */
 	public static final Hashtable<String, Integer> DIOID = new Hashtable<>() {{
-		put("Lower Storage PE Sensor", 0);
-		put("Upper Storage PE Sensor", 1);
-		put("Shooter PE Sensor", 2);
+		put("Lower Storage PE Sensor", 2);
+		put("Upper Storage PE Sensor", 3);
+		put("Shooter PE Sensor", 4);
+		put("Pivot Up Button", 0);
+		put("Pivot Down Button", 1);
 	}};
 
 	/*Holds all the Analong Input IDs
