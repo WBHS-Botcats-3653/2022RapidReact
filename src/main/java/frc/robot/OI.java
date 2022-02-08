@@ -135,13 +135,7 @@ public class OI {
 	public boolean getIntakeUp() {
 		return m_controller.getLeftTriggerAxis() == 0 && isIntakeDown;
 	}
-	/*
-	public double getIntake(){
-		if(getIntakeDown()) return 1.0 *m_maxIntakePivotSpeed;
-		else if(getIntakeUp()) return -1.0 *m_maxIntakePivotSpeed;
-		else return 0;
-	}
-	*/
+	
 	public boolean getSpinIndexer() {
 		return m_controller.getXButton();
 	}

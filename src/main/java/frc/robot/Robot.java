@@ -147,35 +147,10 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		new PrintCommand("is all stop true? " + m_oi.getAllStop()).initialize();;
 		train.ArcadeDrived();
-		/*
-		new ShooterCommand().execute();
-		new IntakeCommand().execute();
-		new IndexerCommand().execute();
-		new ClimberCommand().execute();
-		*/
 		new ShooterCommand().initialize();;
 		new IntakeCommand().initialize();
 		new IndexerCommand().initialize();
 		new ClimberCommand().initialize();
-
-		
-		/*
-		Scheduler.getInstance()
-			.add(new InstantCommand(() -> m_shooterSubsystem.spinSpinner(m_oi.getShoot())));
-		*/
-			/* it works!!!!!!
-		Scheduler.getInstance()
-			.add(new InstantCommand(() -> m_intakeSubsystem.ControlIntake(m_oi.getIntakeCtrl(), false)));
-*/		
-		/*new ShooterCommand().schedule();
-		
-		
-		train.ArcadeDrived();
-		
-		m_shooterSubsystem.spinSpinner(m_oi.getShoot());
-		m_intakeSubsystem.ControlIntake(m_oi.getIntakeCtrl(), false);*/
-		//this might not work
-		
 	}
 
 	@Override
@@ -198,8 +173,8 @@ public class Robot extends TimedRobot {
 		//new ShooterCommand().schedule();
 		train.ArcadeDrived();
 		//new ShooterCommand().execute();
-		new IntakeCommand().execute();
-		new IndexerCommand().execute();
-		new ClimberCommand().execute();
+		new IntakeCommand().initialize();
+		new IndexerCommand().initialize();
+		new ClimberCommand().initialize();
 	}
 }

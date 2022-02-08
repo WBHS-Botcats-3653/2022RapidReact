@@ -31,15 +31,7 @@ public class ShooterCommand extends CommandBase {
 	}
 
 	@Override
-	public void initialize() {
-
-		if (m_oi.getAllStop()) {
-			//Stops motor(s)
-			m_shooter.setSpinSpeed(0);
-			return;
-		}
-		m_shooter.setSpinSpeed(m_oi.getShoot());
-	}
+	public void initialize() {}
 
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
