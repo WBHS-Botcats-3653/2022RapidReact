@@ -25,10 +25,32 @@ public class IndexerCommand extends CommandBase {
 		m_si = SI.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
 	}
+@Override
+	public void initialize(){
+		
+		if (m_oi.getAllStop()) {
+			//Stops motor(s)
+			m_indexer.setIndexerSpeed(0);
+			return;
+		}
+		if (m_oi.getSpinIndexer()) {
+			m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed());
+		} else if (m_si.getLowerStorageTriggered()) {
+			if (!m_si.getUpperStorageTriggered()) {
+				m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed());
+			} else {
+				m_indexer.setIndexerSpeed(0);
+			}
+		} else {
+			m_indexer.setIndexerSpeed(0);
+		}
+		
+	}
 
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
+		
 		//All stop called (used for testing)
 		if (m_oi.getAllStop()) {
 			//Stops motor(s)
@@ -46,6 +68,7 @@ public class IndexerCommand extends CommandBase {
 		} else {
 			m_indexer.setIndexerSpeed(0);
 		}
+		
 	}
 	// Called once the command ends or is interrupted.
 	@Override

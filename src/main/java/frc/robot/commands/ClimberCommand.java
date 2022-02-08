@@ -30,12 +30,8 @@ public class ClimberCommand extends CommandBase {
 	/*Called when the command is initially scheduled.
 	 */
 	@Override
-	public void initialize() {}
+	public void initialize() {
 
-	@Override
-	// Called every time the scheduler runs while the command is scheduled.
-	public void execute() {
-		//All stop called (used for testing)
 		if (m_oi.getAllStop()) {
 			//Stops motor(s)
 			m_climber.setArmSpeed(0);
@@ -56,6 +52,35 @@ public class ClimberCommand extends CommandBase {
 			m_climber.setArmSpeed(0);
 			if (autoClimbing) autoClimbing = false;
 		}
+		
+	}
+
+	@Override
+	// Called every time the scheduler runs while the command is scheduled.
+	public void execute() {
+		/*
+		//All stop called (used for testing)
+		if (m_oi.getAllStop()) {
+			//Stops motor(s)
+			m_climber.setArmSpeed(0);
+			autoClimbing = false;
+			return;
+		}
+		if (m_oi.POVIsUp()) {
+			m_climber.setArmSpeed(-m_oi.getMaxArmSpeed());
+			autoClimbing = true;
+		} else if (m_oi.POVIsDown()) {
+			m_climber.setArmSpeed(m_oi.getMaxArmSpeed());
+			autoClimbing = true;
+		} else if (m_oi.POVIsRight()) {
+			m_climber.setArmSpeed(-m_oi.getMaxArmSpeed());
+		} else if (m_oi.POVIsLeft()) {
+			m_climber.setArmSpeed(m_oi.getMaxArmSpeed());
+		} else if (!autoClimbing/*||Check if arm has reached highest point with encoder) {
+			m_climber.setArmSpeed(0);
+			if (autoClimbing) autoClimbing = false;
+		}
+		*/
 	}
 
 	// Called once the command ends or is interrupted.

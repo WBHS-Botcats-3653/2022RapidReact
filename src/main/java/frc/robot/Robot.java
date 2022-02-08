@@ -134,12 +134,12 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
-		m_oi.setMaxShootSpeed(1.0);
+		m_oi.setMaxShootSpeed(0); //set
 		m_oi.setMaxIntakePivotSpeed(1.0);
 		m_oi.setMaxIntakeRollerSpeed(1.0);
 		m_oi.setMaxArmSpeed(1.0);
 		m_oi.setMaxDriveSpeed(1.0);
-		m_oi.setMaxIndexerSpeed(1.0);
+		m_oi.setMaxIndexerSpeed(0); //set
 	}
 
 	/** This function is called periodically during operator control. */
@@ -147,10 +147,16 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		new PrintCommand("is all stop true? " + m_oi.getAllStop()).initialize();;
 		train.ArcadeDrived();
+		/*
 		new ShooterCommand().execute();
 		new IntakeCommand().execute();
 		new IndexerCommand().execute();
 		new ClimberCommand().execute();
+		*/
+		new ShooterCommand().initialize();;
+		new IntakeCommand().initialize();
+		new IndexerCommand().initialize();
+		new ClimberCommand().initialize();
 
 		
 		/*

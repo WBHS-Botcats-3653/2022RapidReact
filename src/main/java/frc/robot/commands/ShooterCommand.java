@@ -30,19 +30,28 @@ public class ShooterCommand extends CommandBase {
 	}
 
 	@Override
-	public void initialize() {}
+	public void initialize() {
 
-	// Called every time the scheduler runs while the command is scheduled.
-	@Override
-	public void execute() {
-		//All stop called (used for testing)
 		if (m_oi.getAllStop()) {
 			//Stops motor(s)
 			m_shooter.setSpinSpeed(0);
 			return;
 		}
-		m_shooter.setSpinSpeed(m_oi.getShoot() * m_oi.getMaxShootSpeed());
+		m_shooter.setSpinSpeed(m_oi.getShoot());
+	}
 
+	// Called every time the scheduler runs while the command is scheduled.
+	@Override
+	public void execute() {
+		//All stop called (used for testing)
+		/*
+		if (m_oi.getAllStop()) {
+			//Stops motor(s)
+			m_shooter.setSpinSpeed(0);
+			return;
+		}
+		m_shooter.setSpinSpeed(m_oi.getShoot());
+		*/
 		//new PrintCommand("the speed is" + m_oi.getShoot()).initialize();
 		/*if (Shooter Encoder reads at set shoot speed) {  //Will need to change
 			m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed());
