@@ -124,7 +124,7 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand.schedule();
 		}
 		m_oi.setMaxShootSpeed(1.0);
-		m_oi.setMaxIntakePivotSpeed(1.0);
+		m_oi.setMaxIntakePivotSpeed(0.50);
 		m_oi.setMaxIntakeRollerSpeed(1.0);
 		m_oi.setMaxArmSpeed(1.0);
 		m_oi.setMaxDriveSpeed(1.0);
@@ -147,7 +147,7 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand.cancel();
 		}
 		m_oi.setMaxShootSpeed(1.0); //set
-		m_oi.setMaxIntakePivotSpeed(1.0);
+		m_oi.setMaxIntakePivotSpeed(0.5);
 		m_oi.setMaxIntakeRollerSpeed(1.0);
 		m_oi.setMaxArmSpeed(1.0);
 		m_oi.setMaxDriveSpeed(1.0);
@@ -170,7 +170,9 @@ public class Robot extends TimedRobot {
 	public void testInit() {
 		// Cancels all running commands at the start of test mode.
 		CommandScheduler.getInstance().cancelAll();
+		
 		m_oi.setMaxShootSpeed(1.0);
+		
 		m_oi.setMaxIntakePivotSpeed(0.3);
 		m_oi.setMaxIntakeRollerSpeed(0.5);
 		m_oi.setMaxArmSpeed(0.3);
