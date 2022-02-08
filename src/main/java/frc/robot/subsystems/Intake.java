@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 //Imports OI
 import frc.robot.OI;
+import frc.robot.SI;
 
 public class Intake extends SubsystemBase {
 	private static Intake intake=null;
@@ -24,6 +25,7 @@ public class Intake extends SubsystemBase {
 	private static int m_maxEncoder;
 	private static int m_encFloor;
 	private OI m_oi = OI.getInstance();
+	private SI m_si = SI.getInstance();
 
 	/**Constructor
 	 * it is a singleton
@@ -63,7 +65,7 @@ public class Intake extends SubsystemBase {
 				speed = 0.0;
 			}
 		} else if (speed < 0.0) {
-			if ( false/*!lowerLimitSwitch.get() || getRawEncoder() < m_encFloor*/) {
+			if ( !m_si.getPivotDownTriggered() /*|| getRawEncoder() < m_encFloor*/) {
 				speed = 0.0;
 			}
 		}
@@ -102,6 +104,7 @@ public class Intake extends SubsystemBase {
 		if (down) {
 			moveIntake(-0.3);
 		}
+
 	}
 
 	//Ejects cargo from intake

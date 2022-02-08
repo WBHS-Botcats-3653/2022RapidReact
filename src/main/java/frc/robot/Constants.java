@@ -38,8 +38,8 @@ public final class Constants {
 		put("Lower Storage PE Sensor", 2);
 		put("Upper Storage PE Sensor", 3);
 		put("Shooter PE Sensor", 4);
-		put("Pivot Up Button", 0);
-		put("Pivot Down Button", 1);
+		put("Pivot Up Button", 1);
+		put("Pivot Down Button", 0);
 	}};
 
 	/*Holds all the Analong Input IDs
