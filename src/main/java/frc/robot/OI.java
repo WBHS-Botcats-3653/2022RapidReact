@@ -154,7 +154,7 @@ public class OI {
 	}
 	//Easter egg \o/
 	public boolean POVIsUp() {
-		return m_controller.getPOV()>=315&&m_controller.getPOV()<=45&&m_controller.getPOV()!=-1;
+		return m_controller.getPOV()!=-1&&(m_controller.getPOV()>=315||m_controller.getPOV()<=45);
 	}
 
 	public boolean POVIsDown() {

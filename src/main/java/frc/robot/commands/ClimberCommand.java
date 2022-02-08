@@ -14,7 +14,6 @@ public class ClimberCommand extends CommandBase {
 	//Holds instances of OI and Climber subsystem
 	private OI m_oi;
 	private Climber m_climber;
-	private boolean autoClimbing = false;
 
 	/**Creates a new ClimberCommand.
 	 * @param subsystem The subsystem used by this command.
@@ -39,22 +38,14 @@ public class ClimberCommand extends CommandBase {
 		if (m_oi.getAllStop()) {
 			//Stops motor(s)
 			m_climber.setArmSpeed(0);
-			autoClimbing = false;
 			return;
 		}
 		if (m_oi.POVIsUp()) {
 			m_climber.setArmSpeed(-m_oi.getMaxArmSpeed());
-			autoClimbing = true;
 		} else if (m_oi.POVIsDown()) {
 			m_climber.setArmSpeed(m_oi.getMaxArmSpeed());
-			autoClimbing = true;
-		} else if (m_oi.POVIsRight()) {
-			m_climber.setArmSpeed(-m_oi.getMaxArmSpeed());
-		} else if (m_oi.POVIsLeft()) {
-			m_climber.setArmSpeed(m_oi.getMaxArmSpeed());
-		} else if (!autoClimbing/*||Check if arm has reached highest point with encoder*/) {
+		} else {
 			m_climber.setArmSpeed(0);
-			if (autoClimbing) autoClimbing = false;
 		}
 	}
 
