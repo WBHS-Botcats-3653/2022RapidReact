@@ -44,7 +44,6 @@ public class Robot extends TimedRobot {
 	private final Shooter m_shooterSubsystem = Shooter.getInstance();
 	private final OI m_oi = OI.getInstance();
 	private final SI m_si = SI.getInstance();
-	private final WPI_VictorSPX spinner = Shooter.spinner;
 	/**
 	 * This function is run when the robot is first started up and should be used for any
 	 * initialization code.
@@ -134,12 +133,12 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
-		m_oi.setMaxShootSpeed(0); //set
+		m_oi.setMaxShootSpeed(1.0); //set
 		m_oi.setMaxIntakePivotSpeed(1.0);
 		m_oi.setMaxIntakeRollerSpeed(1.0);
 		m_oi.setMaxArmSpeed(1.0);
 		m_oi.setMaxDriveSpeed(1.0);
-		m_oi.setMaxIndexerSpeed(0); //set
+		m_oi.setMaxIndexerSpeed(1.0); //set
 	}
 
 	/** This function is called periodically during operator control. */

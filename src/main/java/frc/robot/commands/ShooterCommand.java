@@ -47,11 +47,18 @@ public class ShooterCommand extends CommandBase {
 
 	// Called once the command ends or is interrupted.
 	@Override
-	public void end(boolean interrupted) {}
+	public void end(boolean interrupted) {
+		m_shooter.setSpinSpeed(0);
+	}
 
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() {
+		if (m_oi.getAllStop()) {
+			//Stops motor(s)
+			m_shooter.setSpinSpeed(0);
+			return true;
+		}
 		return false;
 	}
 }
