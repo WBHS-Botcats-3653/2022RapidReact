@@ -33,19 +33,7 @@ public class IntakeCommand extends CommandBase {
 
 	// Called when the command is initially scheduled.
 	@Override
-	public void initialize() {}
-
-	// Called every time the scheduler runs while the command is scheduled.
-	@Override
-	public void execute() {
-		
-		//All stop called (used for testing)
-		if (m_oi.getAllStop()) {
-			//Stops motor(s)
-			m_intake.setRollerSpeed(0);
-			m_intake.setPivotSpeed(0);
-			return;
-		}
+	public void initialize() {
 		if (m_oi.getIntakeDown()) {
 			m_intake.setPivotSpeed(m_oi.getMaxIntakePivotSpeed());
 		} else if (m_oi.getIntakeUp()) {
@@ -61,6 +49,10 @@ public class IntakeCommand extends CommandBase {
 		}*/
 	}
 
+	// Called every time the scheduler runs while the command is scheduled.
+	@Override
+	public void execute() {}
+
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {}
@@ -68,6 +60,13 @@ public class IntakeCommand extends CommandBase {
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() {
+		//All stop called (used for testing)
+		if (m_oi.getAllStop()) {
+			//Stops motor(s)
+			m_intake.setRollerSpeed(0);
+			m_intake.setPivotSpeed(0);
+			return true;
+		}
 		return false;
 	}
 }

@@ -6,8 +6,6 @@ package frc.robot.commands;
 
 //Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
-//Imports ParallelCommandGroup
-import edu.wpi.first.wpilibj2.command.PrintCommand;
 //Imports OI
 import frc.robot.OI;
 //Imports Indexer subsystem
@@ -31,25 +29,17 @@ public class ShooterCommand extends CommandBase {
 	}
 
 	@Override
-	public void initialize() {}
-
-	// Called every time the scheduler runs while the command is scheduled.
-	@Override
-	public void execute() {
-		//All stop called (used for testing)
-		if (m_oi.getAllStop()) {
-			//Stops motor(s)
-			m_shooter.setSpinSpeed(0);
-			return;
-		}
+	public void initialize() {
 		m_shooter.setSpinSpeed(m_oi.getShoot());
 	}
 
+	// Called every time the scheduler runs while the command is scheduled.
+	@Override
+	public void execute() {}
+
 	// Called once the command ends or is interrupted.
 	@Override
-	public void end(boolean interrupted) {
-		m_shooter.setSpinSpeed(0);
-	}
+	public void end(boolean interrupted) {}
 
 	// Returns true when the command should end.
 	@Override
