@@ -26,10 +26,13 @@ public class ClimberCommand extends CommandBase {
 		//addRequirements();
 	}
 
-	/*Called when the command is initially scheduled.
-	 */
-	@Override
-	public void initialize() {
+	public void run() {
+		//All stop called (used for testing)
+		if (m_oi.getAllStop()) {
+			//Stops motor(s)
+			m_climber.setArmSpeed(0);
+			return;
+		}
 		if (m_oi.POVIsUp()) {
 			m_climber.setArmSpeed(-m_oi.getMaxArmSpeed());
 		} else if (m_oi.POVIsDown()) {
@@ -38,6 +41,11 @@ public class ClimberCommand extends CommandBase {
 			m_climber.setArmSpeed(0);
 		}
 	}
+
+	/*Called when the command is initially scheduled.
+	 */
+	@Override
+	public void initialize() {}
 
 	@Override
 	// Called every time the scheduler runs while the command is scheduled.
@@ -50,12 +58,6 @@ public class ClimberCommand extends CommandBase {
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() {
-		//All stop called (used for testing)
-		if (m_oi.getAllStop()) {
-			//Stops motor(s)
-			m_climber.setArmSpeed(0);
-			return true;
-		}
 		return false;
 	}
 }
