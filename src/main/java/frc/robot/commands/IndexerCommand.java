@@ -27,17 +27,7 @@ public class IndexerCommand extends CommandBase {
 	}
 	
 	@Override
-	public void initialize() {}
-
-	// Called every time the scheduler runs while the command is scheduled.
-	@Override
-	public void execute() {
-		//All stop called (used for testing)
-		if (m_oi.getAllStop()) {
-			//Stops motor(s)
-			m_indexer.setIndexerSpeed(0);
-			return;
-		}
+	public void initialize() {
 		if (m_oi.getSpinIndexer()) {
 			m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed());
 		} else if (m_si.getLowerStorageTriggered()) {
@@ -51,6 +41,11 @@ public class IndexerCommand extends CommandBase {
 		}
 		
 	}
+
+	// Called every time the scheduler runs while the command is scheduled.
+	@Override
+	public void execute() {}
+
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {}
@@ -58,6 +53,12 @@ public class IndexerCommand extends CommandBase {
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() {
+		//All stop called (used for testing)
+		if (m_oi.getAllStop()) {
+			//Stops motor(s)
+			m_indexer.setIndexerSpeed(0);
+			return true;
+		}
 		return false;
 	}
 }
