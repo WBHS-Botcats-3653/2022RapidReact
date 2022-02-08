@@ -16,7 +16,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.ScheduleCommand;
+import frc.robot.commands.ArcadeDriveCommand;
+import frc.robot.commands.AutoCommand;
 import frc.robot.commands.ClimberCommand;
+import frc.robot.commands.DashboardCommand;
 import frc.robot.commands.IndexerCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.ShooterCommand;
@@ -44,6 +47,15 @@ public class Robot extends TimedRobot {
 	private final Shooter m_shooterSubsystem = Shooter.getInstance();
 	private final OI m_oi = OI.getInstance();
 	private final SI m_si = SI.getInstance();
+
+	private final ArcadeDriveCommand m_arcadeDriveCommand = new ArcadeDriveCommand();
+	private final ClimberCommand m_climberCommand = new ClimberCommand();
+	private final IntakeCommand m_intakeCommand = new IntakeCommand();
+	private final DashboardCommand m_dashboardCommand = new DashboardCommand();
+	private final ShooterCommand m_shooterCommand = new ShooterCommand();
+	private final AutoCommand m_autoCommand = new AutoCommand();
+	private final IndexerCommand m_indexerCommand = new IndexerCommand();
+	
 	/**
 	 * This function is run when the robot is first started up and should be used for any
 	 * initialization code.
@@ -53,6 +65,7 @@ public class Robot extends TimedRobot {
 		// Instantiate our RobotContainer.  This will perform all our button bindings, and put our
 		// autonomous chooser on the dashboard.
 		m_robotContainer = new RobotContainer();
+
 	}
 
 	/**
@@ -144,12 +157,13 @@ public class Robot extends TimedRobot {
 	/** This function is called periodically during operator control. */
 	@Override
 	public void teleopPeriodic() {
-		//new PrintCommand("is all stop true? " + m_oi.getAllStop()).initialize();;
+		//new PrintCommand("is all stop true? " + m_oi.getAllStop()).initialize();
+		
 		train.ArcadeDrived();
-		new ShooterCommand().initialize();;
-		new IntakeCommand().initialize();
-		new IndexerCommand().initialize();
-		new ClimberCommand().initialize();
+		m_shooterCommand.initialize();
+		m_intakeCommand.initialize();
+		m_indexerCommand.initialize();
+		m_climberCommand.initialize();
 	}
 
 	@Override
@@ -171,9 +185,11 @@ public class Robot extends TimedRobot {
 		//new PrintCommand("testing the button:" + m_si.getPivotUpTriggered()).initialize();
 		//new ShooterCommand().schedule();
 		train.ArcadeDrived();
-		//new ShooterCommand().execute();
-		new IntakeCommand().initialize();
-		new IndexerCommand().initialize();
-		new ClimberCommand().initialize();
+		/*
+		m_shooterCommand.initialize();
+		m_intakeCommand.initialize();
+		m_indexerCommand.initialize();
+		m_climberCommand.initialize();
+		*/
 	}
 }
