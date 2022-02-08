@@ -36,7 +36,7 @@ public class Climber extends SubsystemBase {
 	//Sets the arms speed
 	public void setArmSpeed(double speed) {
 		//Caps the speed from exceeding the set maxArmSpeed
-		if (speed > m_oi.getMaxArmSpeed()) speed = m_oi.getMaxArmSpeed();
+		//if (speed > m_oi.getMaxArmSpeed()) speed = m_oi.getMaxArmSpeed();
 		//Sets the arm speed
 		arm.set(speed);
 	}
