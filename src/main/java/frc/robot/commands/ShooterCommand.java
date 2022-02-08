@@ -4,8 +4,9 @@
 
 package frc.robot.commands;
 
-//Imports ParallelCommandGroup
+//Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
+//Imports ParallelCommandGroup
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 //Imports OI
 import frc.robot.OI;
@@ -44,27 +45,12 @@ public class ShooterCommand extends CommandBase {
 	@Override
 	public void execute() {
 		//All stop called (used for testing)
-		/*
 		if (m_oi.getAllStop()) {
 			//Stops motor(s)
 			m_shooter.setSpinSpeed(0);
 			return;
 		}
 		m_shooter.setSpinSpeed(m_oi.getShoot());
-		*/
-		//new PrintCommand("the speed is" + m_oi.getShoot()).initialize();
-		/*if (Shooter Encoder reads at set shoot speed) {  //Will need to change
-			m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed());
-		}*/
-
-
-		//OLD
-		/*double shoot = m_oi.getShoot();
-		addCommands(
-			new PrintCommand("this is the speed: " + shoot),
-			new RunCommand(() -> m_shooter.spinSpinner(shoot), m_shooter).withInterrupt(() -> m_oi.getShoot() == 0),
-			new IndexerCommand().withInterrupt(() -> m_oi.getShoot() == 0)
-		);*/
 	}
 
 	// Called once the command ends or is interrupted.
