@@ -144,7 +144,7 @@ public class Robot extends TimedRobot {
 	/** This function is called periodically during operator control. */
 	@Override
 	public void teleopPeriodic() {
-		new PrintCommand("is all stop true? " + m_oi.getAllStop()).initialize();;
+		//new PrintCommand("is all stop true? " + m_oi.getAllStop()).initialize();;
 		train.ArcadeDrived();
 		new ShooterCommand().initialize();;
 		new IntakeCommand().initialize();
