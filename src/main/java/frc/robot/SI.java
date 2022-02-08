@@ -53,8 +53,4 @@ public class SI {
 	public boolean getPivotDownTriggered() {
 		return pivotDownButton.get();
 	}
-
-	public boolean getPivotStop() {
-		return getPivotDownTriggered()||getPivotUpTriggered();
-	}
 }
