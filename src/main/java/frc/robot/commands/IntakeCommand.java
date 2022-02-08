@@ -33,29 +33,12 @@ public class IntakeCommand extends CommandBase {
 
 	// Called when the command is initially scheduled.
 	@Override
-	public void initialize() {
-
-		if (m_oi.getAllStop()) {
-			//Stops motor(s)
-			m_intake.setRollerSpeed(0);
-			m_intake.setPivotSpeed(0);
-			return;
-		}
-		if (m_oi.getIntakeDown()) {
-			m_intake.setPivotSpeed(m_oi.getMaxIntakePivotSpeed());
-		} else if (m_oi.getIntakeUp()) {
-			m_intake.setPivotSpeed(-m_oi.getMaxIntakePivotSpeed());
-		}
-		m_intake.setRollerSpeed(m_oi.getIntakeCtrl());
-		if (m_si.getPivotStop()) {
-			m_intake.setPivotSpeed(0);
-		}
-	}
+	public void initialize() {}
 
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		/*
+		
 		//All stop called (used for testing)
 		if (m_oi.getAllStop()) {
 			//Stops motor(s)
@@ -71,13 +54,11 @@ public class IntakeCommand extends CommandBase {
 		m_intake.setRollerSpeed(m_oi.getIntakeCtrl());
 		if (m_si.getPivotStop()) {
 			m_intake.setPivotSpeed(0);
-		}*/
+		}
 		/*if (Encoder detects intake pivot is fully up or down) {
 			m_oi.isIntakeDown = Encoder detects whether the intake is down;
 			m_intake.setPivotSpeed(0);
 		}*/
-		
-		
 	}
 
 	// Called once the command ends or is interrupted.
