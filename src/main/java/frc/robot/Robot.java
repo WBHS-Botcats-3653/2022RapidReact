@@ -160,10 +160,10 @@ public class Robot extends TimedRobot {
 		//new PrintCommand("is all stop true? " + m_oi.getAllStop()).initialize();
 		
 		train.ArcadeDrived();
-		m_shooterCommand.initialize();
-		m_intakeCommand.initialize();
-		m_indexerCommand.initialize();
-		m_climberCommand.initialize();
+		m_shooterCommand.run();
+		m_intakeCommand.run();
+		m_indexerCommand.run();
+		m_climberCommand.run();
 	}
 
 	@Override
@@ -185,6 +185,8 @@ public class Robot extends TimedRobot {
 		//new PrintCommand("testing the button:" + m_si.getPivotUpTriggered()).initialize();
 		//new ShooterCommand().schedule();
 		train.ArcadeDrived();
+		
+		new PrintCommand("is all stop true? " + m_si.getPivotDownTriggered()).initialize();
 		/*
 		m_shooterCommand.initialize();
 		m_intakeCommand.initialize();

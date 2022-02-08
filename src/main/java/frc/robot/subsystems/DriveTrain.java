@@ -80,7 +80,7 @@ public class DriveTrain extends SubsystemBase {
 			return;
 		}
 		//Caps the speed from exceeding the set maxDriveSpeed
-		if (speed > m_oi.getMaxDriveSpeed()) speed = m_oi.getMaxDriveSpeed();
+		//if (speed > m_oi.getMaxDriveSpeed()) speed = m_oi.getMaxDriveSpeed();
 		//Sets the differential drive speed and rotation
 		diffDrive.arcadeDrive(speed, rotation);
 	}
