@@ -25,8 +25,9 @@ public class IndexerCommand extends CommandBase {
 		m_si = SI.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
 	}
-@Override
-	public void initialize(){}
+	
+	@Override
+	public void initialize() {}
 
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
