@@ -17,6 +17,8 @@ public class AutoCommand extends CommandBase {
 		
 	}
 
+	public void run() {}
+
 	@Override
 	public void initialize() {
 		/*new ScheduleCommand(
