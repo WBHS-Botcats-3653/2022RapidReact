@@ -122,7 +122,7 @@ public class OI {
 		double ret_value = 0.0;
 		if (m_controller.getLeftBumper()) {
 			ret_value = -m_maxIntakeRollerSpeed;
-		} else if (m_controller.getLeftTriggerAxis() > 0) {
+		} else if (m_controller.getLeftTriggerAxis() > 0 || m_controller.getRightBumper()) {
 			ret_value = m_maxIntakeRollerSpeed;
 		}
 		return ret_value * m_maxIntakePivotSpeed;
@@ -134,6 +134,14 @@ public class OI {
 
 	public boolean getIntakeUp() {
 		return m_controller.getLeftTriggerAxis() == 0 && isIntakeDown;
+	}
+
+	public boolean getManualIntakeUp() {
+		return m_controller.getYButton();
+	}
+
+	public boolean getManualIntakeDown() {
+		return m_controller.getAButton();
 	}
 	
 	public boolean getSpinIndexer() {

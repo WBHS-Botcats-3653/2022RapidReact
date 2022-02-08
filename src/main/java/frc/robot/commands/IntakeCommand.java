@@ -39,7 +39,11 @@ public class IntakeCommand extends CommandBase {
 			m_intake.setPivotSpeed(0);
 			return;
 		}
-		if (m_si.getPivotUpTriggered()) {
+		if (m_oi.getManualIntakeDown()) {
+			m_intake.setPivotSpeed(m_oi.getMaxIntakePivotSpeed());
+		} else if (m_oi.getManualIntakeUp()) {
+			m_intake.setPivotSpeed(m_oi.getMaxIntakePivotSpeed());
+		} else if (m_si.getPivotUpTriggered()) {
 			m_intake.setPivotSpeed(0);
 			m_oi.isIntakeDown = true;
 		} else if (m_si.getPivotDownTriggered()) {
