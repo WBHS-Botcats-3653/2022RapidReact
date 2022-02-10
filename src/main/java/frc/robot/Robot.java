@@ -18,12 +18,6 @@ import frc.robot.commands.DashboardCommand;
 import frc.robot.commands.IndexerCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.ShooterCommand;
-import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.Dashboard;
-//Imports DriveTrain subsystem
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Shooter;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -35,11 +29,11 @@ public class Robot extends TimedRobot {
 	//private Command m_autonomousCommand;
 	private RobotContainer m_robotContainer;
 
-	private final DriveTrain train = DriveTrain.getInstance();
+	/*private final DriveTrain train = DriveTrain.getInstance();
 	private final Climber m_climberSubsystem = Climber.getInstance();
 	private final Intake m_intakeSubsystem = Intake.getInstance();
 	private final Dashboard m_dashboardSubsystem = Dashboard.getInstance();
-	private final Shooter m_shooterSubsystem = Shooter.getInstance();
+	private final Shooter m_shooterSubsystem = Shooter.getInstance();*/
 	private final OI m_oi = OI.getInstance();
 	private final SI m_si = SI.getInstance();
 

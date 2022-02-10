@@ -41,7 +41,7 @@ public class Shooter extends SubsystemBase {
 	 */
 	public void setSpinSpeed(double speed) {
 		//Caps the spinner speed from exceeding the set maxShootSpeed
-		//if (speed < -m_oi.getMaxShootSpeed()) speed = -m_oi.getMaxShootSpeed();
+		if (speed < -m_oi.getMaxShootSpeed()) speed = -m_oi.getMaxShootSpeed();
 		//Sets the spinner speed
 		spinner.set(speed);
 	}
