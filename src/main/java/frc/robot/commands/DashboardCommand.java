@@ -12,18 +12,21 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.OI;
 //Imports Dashboard subsystem
 //import frc.robot.subsystems.Dashboard;
+import frc.robot.subsystems.Dashboard;
 
 public class DashboardCommand extends CommandBase {
 	//Holds instances of OI and Intake subsystem
 	private OI m_oi;
+	private Dashboard m_dashboard;
 	//private Dashboard m_dashboard;
 
 	/**Creates a new DashboardCommand.
 	 * @param subsystem The subsystem used by this command.
 	 */
-	public DashboardCommand() {
+	public DashboardCommand(Dashboard m_dashboard) {
 		//Initializes instance variables with OI and Intake subsystem
 		m_oi = OI.getInstance();
+		this.m_dashboard = m_dashboard;
 		//m_dashboard=Dashboard.getDashboard();
 		// Use addRequirements() here to declare subsystem dependencies.
 		//addRequirements();

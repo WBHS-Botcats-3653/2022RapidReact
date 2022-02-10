@@ -16,14 +16,14 @@ public class ArcadeDriveCommand extends CommandBase {
 	/**Creates a new ArcadeDriveCommand.
 	 * @param subsystem The subsystem used by this command.
 	 */
-	public ArcadeDriveCommand() {
+	public ArcadeDriveCommand(DriveTrain m_drivetrain) {
 		//Initializes instance variables with an instance of OI and DriveTrain
-		m_drivetrain = DriveTrain.getInstance();
+		this.m_drivetrain = m_drivetrain;
 		// Use addRequirements() here to declare subsystem dependencies.
 		//addRequirements();
 	}
 
-	public void run() {}
+	//public void run() {}
 	
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override

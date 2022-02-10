@@ -22,16 +22,48 @@ public class IntakeCommand extends CommandBase {
 	/**Creates a new IntakeCommand.
 	 * @param subsystem The subsystem used by this command.
 	 */
-	public IntakeCommand() {
+	public IntakeCommand(Intake m_intake) {
 		//Initializes instance variable with OI subsystem
 		m_oi = OI.getInstance();
-		m_intake = Intake.getInstance();
+		this.m_intake = m_intake;
 		m_si = SI.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
 		//addRequirements();
 	}
 
-	public void run() {
+	/*public void run() {
+		//All stop called (used for testing)
+		if (m_oi.getAllStop()) {
+			//Stops motor(s)
+			m_intake.setRollerSpeed(0);
+			m_intake.setPivotSpeed(0);
+			return;
+		}
+		if (m_oi.getManualIntakeDown()) {
+			m_intake.setPivotSpeed(m_oi.getMaxIntakePivotSpeed());
+		} else if (m_oi.getManualIntakeUp()) {
+			m_intake.setPivotSpeed(-m_oi.getMaxIntakePivotSpeed());
+		} else if (m_si.getPivotUpTriggered()) {
+			m_intake.setPivotSpeed(0);
+			m_oi.isIntakeDown = false;
+		} else if (m_si.getPivotDownTriggered()) {
+			m_intake.setPivotSpeed(0);
+			m_oi.isIntakeDown = true;
+		} else if (m_oi.getIntakeDown()) {
+			m_intake.setPivotSpeed(m_oi.getMaxIntakePivotSpeed());
+		} else if (m_oi.getIntakeUp()) {
+			m_intake.setPivotSpeed(-m_oi.getMaxIntakePivotSpeed());
+		}
+		m_intake.setRollerSpeed(m_oi.getIntakeCtrl());
+	}*/
+
+	// Called when the command is initially scheduled.
+	@Override
+	public void initialize() {}
+
+	// Called every time the scheduler runs while the command is scheduled.
+	@Override
+	public void execute() {
 		//All stop called (used for testing)
 		if (m_oi.getAllStop()) {
 			//Stops motor(s)
@@ -56,14 +88,6 @@ public class IntakeCommand extends CommandBase {
 		}
 		m_intake.setRollerSpeed(m_oi.getIntakeCtrl());
 	}
-
-	// Called when the command is initially scheduled.
-	@Override
-	public void initialize() {}
-
-	// Called every time the scheduler runs while the command is scheduled.
-	@Override
-	public void execute() {}
 
 	// Called once the command ends or is interrupted.
 	@Override

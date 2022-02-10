@@ -19,16 +19,31 @@ public class ShooterCommand extends CommandBase {
 	private Shooter m_shooter;
 	private Indexer m_indexer;
 
-	public ShooterCommand() {
+	public ShooterCommand(Shooter m_shooter) {
 		//Initializes instance variables with OI and Shooter subsystem
 		m_oi = OI.getInstance();
-		m_shooter = Shooter.getInstance();
+		this.m_shooter = m_shooter;
 		m_indexer = Indexer.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
 		//addRequirements();
 	}
 
-	public void run() {
+	/*public void run() {
+		//All stop called (used for testing)
+		if (m_oi.getAllStop()) {
+			//Stops motor(s)
+			m_shooter.setSpinSpeed(0);
+			return;
+		}
+		m_shooter.setSpinSpeed(m_oi.getShoot());
+	}*/
+
+	@Override
+	public void initialize() {}
+
+	// Called every time the scheduler runs while the command is scheduled.
+	@Override
+	public void execute() {
 		//All stop called (used for testing)
 		if (m_oi.getAllStop()) {
 			//Stops motor(s)
@@ -37,13 +52,6 @@ public class ShooterCommand extends CommandBase {
 		}
 		m_shooter.setSpinSpeed(m_oi.getShoot());
 	}
-
-	@Override
-	public void initialize() {}
-
-	// Called every time the scheduler runs while the command is scheduled.
-	@Override
-	public void execute() {}
 
 	// Called once the command ends or is interrupted.
 	@Override

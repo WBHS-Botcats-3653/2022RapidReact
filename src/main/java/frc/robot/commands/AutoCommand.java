@@ -11,16 +11,24 @@ import frc.robot.subsystems.Shooter;
 public class AutoCommand extends CommandBase {
 	private DriveTrain driveTrain = DriveTrain.getInstance();
 	private Shooter shooter = Shooter.getInstance();
+	private boolean hasFinished = false;
 
 	//Constructor
 	public AutoCommand() {
 		
 	}
 
-	public void run() {}
+	//public void run() {}
 
 	@Override
 	public void initialize() {
+		
+
+
+
+
+
+
 		/*new ScheduleCommand(
 			//this one will execute the shooter for 3 seconds and then stop
 			new StartEndCommand(
@@ -50,6 +58,9 @@ public class AutoCommand extends CommandBase {
 		//super.initialize();*/
 	}
 
+	@Override
+	public void execute() {}
+
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {}
@@ -57,6 +68,6 @@ public class AutoCommand extends CommandBase {
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() {
-		return false;
+		return hasFinished;
 	}
 }

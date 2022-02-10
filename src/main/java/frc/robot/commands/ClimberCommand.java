@@ -18,15 +18,38 @@ public class ClimberCommand extends CommandBase {
 	/**Creates a new ClimberCommand.
 	 * @param subsystem The subsystem used by this command.
 	 */
-	public ClimberCommand() {
+	public ClimberCommand(Climber m_climber) {
 		//Initializes instance variables with instances of OI and Climber subsystem
 		m_oi = OI.getInstance();
-		m_climber = Climber.getInstance();
+		this.m_climber = m_climber;
 		// Use addRequirements() here to declare subsystem dependencies.
 		//addRequirements();
 	}
 
-	public void run() {
+	/*public void run() {
+		//All stop called (used for testing)
+		if (m_oi.getAllStop()) {
+			//Stops motor(s)
+			m_climber.setArmSpeed(0);
+			return;
+		}
+		if (m_oi.POVIsUp()) {
+			m_climber.setArmSpeed(-m_oi.getMaxArmSpeed());
+		} else if (m_oi.POVIsDown()) {
+			m_climber.setArmSpeed(m_oi.getMaxArmSpeed());
+		} else {
+			m_climber.setArmSpeed(0);
+		}
+	}*/
+
+	/*Called when the command is initially scheduled.
+	 */
+	@Override
+	public void initialize() {}
+
+	@Override
+	// Called every time the scheduler runs while the command is scheduled.
+	public void execute() {
 		//All stop called (used for testing)
 		if (m_oi.getAllStop()) {
 			//Stops motor(s)
@@ -41,15 +64,6 @@ public class ClimberCommand extends CommandBase {
 			m_climber.setArmSpeed(0);
 		}
 	}
-
-	/*Called when the command is initially scheduled.
-	 */
-	@Override
-	public void initialize() {}
-
-	@Override
-	// Called every time the scheduler runs while the command is scheduled.
-	public void execute() {}
 
 	// Called once the command ends or is interrupted.
 	@Override

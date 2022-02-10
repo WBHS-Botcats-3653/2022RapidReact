@@ -12,16 +12,16 @@ import frc.robot.commands.ArcadeDriveCommand;
 import frc.robot.commands.AutoCommand;
 import frc.robot.commands.ClimberCommand;
 import frc.robot.commands.DashboardCommand;
+import frc.robot.commands.IndexerCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.ShooterCommand;
-import frc.robot.commands.IndexerCommand;
 //Imports subsystems
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Dashboard;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Indexer;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -38,13 +38,13 @@ public class RobotContainer {
 	private final Shooter m_shooterSubsystem = Shooter.getInstance();
 	private final Indexer m_indexerSubsystem = Indexer.getInstance();
 	
-	private final ArcadeDriveCommand m_arcadeDriveCommand = new ArcadeDriveCommand();
-	private final ClimberCommand m_climberCommand = new ClimberCommand();
-	private final IntakeCommand m_intakeCommand = new IntakeCommand();
-	private final DashboardCommand m_dashboardCommand = new DashboardCommand();
-	private final ShooterCommand m_shooterCommand = new ShooterCommand();
+	private final ArcadeDriveCommand m_arcadeDriveCommand = new ArcadeDriveCommand(m_driveSubsystem);
+	private final ClimberCommand m_climberCommand = new ClimberCommand(m_climberSubsystem);
+	private final IntakeCommand m_intakeCommand = new IntakeCommand(m_intakeSubsystem);
+	private final DashboardCommand m_dashboardCommand = new DashboardCommand(m_dashboardSubsystem);
+	private final ShooterCommand m_shooterCommand = new ShooterCommand(m_shooterSubsystem);
 	private final AutoCommand m_autoCommand = new AutoCommand();
-	private final IndexerCommand m_indexerCommand = new IndexerCommand();
+	private final IndexerCommand m_indexerCommand = new IndexerCommand(m_indexerSubsystem);
 
 	/** The container for the robot. Contains subsystems, OI devices, and commands. */
 	
@@ -67,9 +67,60 @@ public class RobotContainer {
 	 * @return the command to run in autonomous
 	 */
 	public AutoCommand getAutonomousCommand() {
-		// An ExampleCommand will run in autonomous
-		//DONE
-		//TODO: make the commands work, if they work -> be happy
 		return m_autoCommand;
+	}
+
+	/**
+	 * Use this to pass the arcade drive command to the main {@link Robot} class.
+	 *
+	 * @return the command to run in teleop
+	 */
+	public ArcadeDriveCommand getArcadeDriveCommand() {
+		return m_arcadeDriveCommand;
+	}
+
+	/**
+	 * Use this to pass the climber command to the main {@link Robot} class.
+	 *
+	 * @return the command to run in teleop
+	 */
+	public ClimberCommand getClimberCommand() {
+		return m_climberCommand;
+	}
+
+	/**
+	 * Use this to pass the arcade intake to the main {@link Robot} class.
+	 *
+	 * @return the command to run in teleop
+	 */
+	public IntakeCommand getIntakeCommand() {
+		return m_intakeCommand;
+	}
+
+	/**
+	 * Use this to pass the arcade dashboard to the main {@link Robot} class.
+	 *
+	 * @return the command to run in teleop
+	 */
+	public DashboardCommand getDashboardCommand() {
+		return m_dashboardCommand;
+	}
+
+	/**
+	 * Use this to pass the shooter command to the main {@link Robot} class.
+	 *
+	 * @return the command to run in teleop
+	 */
+	public ShooterCommand getShooterCommand() {
+		return m_shooterCommand;
+	}
+
+	/**
+	 * Use this to pass the indexer command to the main {@link Robot} class.
+	 *
+	 * @return the command to run in teleop
+	 */
+	public IndexerCommand getIndexerCommand() {
+		return m_indexerCommand;
 	}
 }

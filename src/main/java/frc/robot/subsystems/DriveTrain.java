@@ -86,7 +86,7 @@ public class DriveTrain extends SubsystemBase {
 	}
 
 	public static void tryThis() {
-		new ShooterCommand();
+		new ShooterCommand(Shooter.getInstance());
 	}
 
 	@Override
