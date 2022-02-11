@@ -11,12 +11,12 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.AnalogInput;
 //Imports SubsystemBase
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-//Imports DriveConstants
-import frc.robot.DriveConstants;
-import frc.robot.DriveConstants;
 //Imports OI
 import frc.robot.OI;
+//Imports SI
 import frc.robot.SI;
+//Imports IntakeConstants
+import frc.robot.Constants.IntakeConstants;
 
 public class Intake extends SubsystemBase {
 	private static Intake intake=null;
@@ -33,8 +33,8 @@ public class Intake extends SubsystemBase {
 	 */
 	private Intake() {
 		//Creates WPI_VictorSPX motor controllers for the Pivot and Rollers in the Intake
-		pivot=new WPI_VictorSPX(DriveConstants.MCID.get("Pivot"));
-		rollers=new WPI_VictorSPX(DriveConstants.MCID.get("Rollers"));
+		pivot = new WPI_VictorSPX(IntakeConstants.pivotMotorID);
+		rollers = new WPI_VictorSPX(IntakeConstants.rollersMotorID);
 		pivotEncoder = new AnalogInput(/*DriveConstants*/ 1);
 	}
 

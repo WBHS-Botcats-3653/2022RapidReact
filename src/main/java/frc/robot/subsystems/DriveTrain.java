@@ -13,10 +13,10 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 //Imports Subsystem Base
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-//Imports DriveConstants
-import frc.robot.DriveConstants;
 //Imports OI
 import frc.robot.OI;
+//Imports DriveConstants
+import frc.robot.Constants.DriveConstants;
 
 
 public class DriveTrain extends SubsystemBase {
@@ -30,12 +30,12 @@ public class DriveTrain extends SubsystemBase {
 	//Constructor
 	private DriveTrain() {
 		//Left side wheel motors
-		WPI_VictorSPX driveFrontLeft = new WPI_VictorSPX(DriveConstants.MCID.get("Wheel Front Left"));
-		WPI_VictorSPX driveBackLeft = new WPI_VictorSPX(DriveConstants.MCID.get("Wheel Back Left"));
+		WPI_VictorSPX driveFrontLeft = new WPI_VictorSPX(DriveConstants.frontLeftMotorID);
+		WPI_VictorSPX driveBackLeft = new WPI_VictorSPX(DriveConstants.backLeftMotorID);
 		MotorControllerGroup driveLeft = new MotorControllerGroup(driveFrontLeft, driveBackLeft);
 		//Right side wheel motors
-		WPI_VictorSPX driveFrontRight = new WPI_VictorSPX(DriveConstants.MCID.get("Wheel Front Right"));
-		WPI_VictorSPX driveBackRight = new WPI_VictorSPX(DriveConstants.MCID.get("Wheel Back Right"));
+		WPI_VictorSPX driveFrontRight = new WPI_VictorSPX(DriveConstants.frontRightMotorID);
+		WPI_VictorSPX driveBackRight = new WPI_VictorSPX(DriveConstants.backRightMotorID);
 		MotorControllerGroup driveRight = new MotorControllerGroup(driveFrontRight, driveBackRight);
 		//Creates differential drive
 		diffDrive = new DifferentialDrive(driveLeft, driveRight);

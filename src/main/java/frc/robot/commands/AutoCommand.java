@@ -3,9 +3,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.Encoder;
 //Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.AutoConstants;
+//Imports OI
 import frc.robot.OI;
-import frc.robot.SIConstants;
+//Imports Constants
+import frc.robot.Constants.AutoConstants;
+import frc.robot.Constants.DriveConstants;
 //Imports subsystems
 import frc.robot.subsystems.Direction;
 import frc.robot.subsystems.DriveTrain;
@@ -30,7 +32,7 @@ public class AutoCommand extends CommandBase {
 		shooter = Shooter.getInstance();
 		gyro = Direction.getInstance();
 		kP = 1;
-		encoder = new Encoder(SIConstants.AIID.get("Left Motor Group Encoder"), SIConstants.AIID.get("Right Motor Group Encoder"));
+		encoder = new Encoder(DriveConstants.leftMotorGroupEncoder, DriveConstants.rightMotorGroupEncoder);
 		hasFinished = false;
 		// Configures the encoders' distance-per-pulse
 		// The robot moves forward 1 foot per encoder rotation

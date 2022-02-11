@@ -9,10 +9,10 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 //Imports SubsystemBase
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-//Imports DriveConstants
-import frc.robot.DriveConstants;
 //Imports OI
 import frc.robot.OI;
+//Imports IntakeConstants
+import frc.robot.Constants.IntakeConstants;
 
 public class Indexer extends SubsystemBase {
 	private static Indexer m_singleton = null;
@@ -21,7 +21,7 @@ public class Indexer extends SubsystemBase {
 
 	/** Creates a new Indexer. */
 	public Indexer() {
-		indexer = new WPI_VictorSPX(DriveConstants.MCID.get("Indexer"));
+		indexer = new WPI_VictorSPX(IntakeConstants.indexerMotorID);
 	}
 
 	public static Indexer getInstance() {
