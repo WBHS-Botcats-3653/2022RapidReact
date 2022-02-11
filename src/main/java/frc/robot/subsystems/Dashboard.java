@@ -42,13 +42,13 @@ public class Dashboard {
 		ShuffleboardTab tabTest = Shuffleboard.getTab("Test");
 
 		// Config Tab
-		m_nteMaxSpd = tabConfig.addPersistent("Max Speed", 1.0).withSize(1, 1).withPosition(0, 0).getEntry();
+		//m_nteMaxSpd = tabConfig.addPersistent("Max Speed", 1.0).withSize(1, 1).withPosition(0, 0).getEntry();
 		m_nteMaxIntake = tabConfig.addPersistent("Max Intake", 1.0).withSize(1, 1).withPosition(1, 0).getEntry();
 		m_nteMaxArmSpd = tabConfig.addPersistent("Max Arm Spd", 1.0).withSize(1, 1).withPosition(2, 0).getEntry();
 		m_nteArmDownEnc = tabConfig.addPersistent("Arm Down", 1024.0).withSize(1, 1).withPosition(3, 0).getEntry();
 
 		// Drive Tab
-		cam0 = CameraServer.getInstance().startAutomaticCapture(0);
+		cam0 = CameraServer.startAutomaticCapture(0);
 		cam0.setResolution(142, 90);
 		cam0.setFPS(20);
 		tabDrive.add("Field View", cam0).withSize(3, 2).withPosition(0, 0);
@@ -58,8 +58,8 @@ public class Dashboard {
 		m_nteArmAngle = tabDrive.add("Arm", 0.0).withWidget(BuiltInWidgets.kDial)
 				.withProperties(Map.of("min", 0, "max", 180)).withSize(1, 1).withPosition(5, 0).getEntry();
 
-		m_nteDriveSpeed = tabDrive.add("Speed", 0.0).withWidget(BuiltInWidgets.kNumberBar)
-				.withProperties(Map.of("min", 0, "max", 10)).withSize(1, 1).withPosition(6, 0).getEntry();
+		m_nteDriveSpeed = tabDrive.addPersistent("Speed", 1.0).withWidget(BuiltInWidgets.kNumberSlider)
+				.withProperties(Map.of("min", 0, "max", 1.0)).withSize(1, 1).withPosition(6, 0).getEntry();
 
 		// Test Tab
 		m_nteArmDnLimit = tabTest.add("Arm Down", false).withSize(1, 1).withPosition(0, 0).getEntry();
@@ -72,7 +72,7 @@ public class Dashboard {
 	public void refresh() {
 		OI ctrl = OI.getInstance();
 
-		ctrl.setMaxDriveSpeed(m_nteMaxSpd.getDouble(1.0));
+		ctrl.setMaxDriveSpeed(m_nteDriveSpeed.getDouble(1.0));
 		ctrl.setMaxArmSpeed(m_nteMaxArmSpd.getDouble(1.0));
 		ctrl.setMaxIntakePivotSpeed(m_nteMaxIntake.getDouble(1.0));
 		ctrl.setMaxIntakeRollerSpeed(m_nteMaxIntake.getDouble(1.0));
@@ -81,11 +81,13 @@ public class Dashboard {
 	}
 
 	public void telopPeriodic() {
+		OI ctrl = OI.getInstance();
 		Intake arm = Intake.getInstance();
 		DriveTrain drive = DriveTrain.getInstance();
 		OI oi = OI.getInstance();
 		m_nteArmAngle.setDouble(arm.getAngle());
 		m_nteDriveSpeed.setDouble(Math.abs(oi.getMaxDriveSpeed()));
+		ctrl.setMaxDriveSpeed(m_nteDriveSpeed.getDouble(1.0));
 	}
 
 	public void testPeriodic() {

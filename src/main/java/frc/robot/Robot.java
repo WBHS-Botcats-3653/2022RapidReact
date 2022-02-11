@@ -19,6 +19,7 @@ import frc.robot.commands.DashboardCommand;
 import frc.robot.commands.IndexerCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.ShooterCommand;
+import frc.robot.subsystems.Dashboard;
 import frc.robot.subsystems.DriveTrain;
 
 /**
@@ -32,6 +33,7 @@ public class Robot extends TimedRobot {
 	private RobotContainer m_robotContainer;
 
 	private final DriveTrain m_driveTrainSubsystem = DriveTrain.getInstance();
+	private Dashboard m_dashboard = Dashboard.getInstance();
 	//private final Climber m_climberSubsystem = Climber.getInstance();
 	//private final Intake m_intakeSubsystem = Intake.getInstance();
 	//private final Dashboard m_dashboardSubsystem = Dashboard.getInstance();
@@ -167,6 +169,7 @@ public class Robot extends TimedRobot {
 	/** This function is called periodically during operator control. */
 	@Override
 	public void teleopPeriodic() {
+		m_dashboard.telopPeriodic();
 		//new PrintCommand("is all stop true? " + m_oi.getAllStop()).initialize();
 		/*train.ArcadeDrived();
 		m_shooterCommand.run();
