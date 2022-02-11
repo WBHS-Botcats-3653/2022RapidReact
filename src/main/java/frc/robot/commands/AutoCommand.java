@@ -31,6 +31,7 @@ public class AutoCommand extends CommandBase {
 		driveTrain = DriveTrain.getInstance();
 		shooter = Shooter.getInstance();
 		gyro = Direction.getInstance();
+		/* commented until encoders are installed
 		kP = 1;
 		encoder = new Encoder(DriveConstants.leftMotorGroupEncoder, DriveConstants.rightMotorGroupEncoder);
 		hasFinished = false;
@@ -38,6 +39,7 @@ public class AutoCommand extends CommandBase {
 		// The robot moves forward 1 foot per encoder rotation
 		// There are 256 pulses per encoder rotation
 		encoder.setDistancePerPulse(1./256.);
+		*/
 	}
 
 	//public void run() {}
@@ -77,6 +79,7 @@ public class AutoCommand extends CommandBase {
 
 	@Override
 	public void execute() {
+		/* autonomous commented until fixed
 		switch (stage) {
 			case ("Shoot Preload"):
 				//Shoot preload HERE
@@ -97,7 +100,9 @@ public class AutoCommand extends CommandBase {
 			case ("Collect Cargo"):
 				//Collect cargo HERE
 				break;
+				
 		}
+		*/
 	}
 
 	// Called once the command ends or is interrupted.

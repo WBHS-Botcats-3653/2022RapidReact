@@ -162,6 +162,7 @@ public class Robot extends TimedRobot {
 		m_oi.setMaxIntakePivotSpeed(0.5);
 		m_oi.setMaxIntakeRollerSpeed(1.0);
 		m_oi.setMaxArmSpeed(1.0);
+		
 		m_oi.setMaxDriveSpeed(1.0);
 		m_oi.setMaxIndexerSpeed(1.0);
 	}
@@ -169,6 +170,8 @@ public class Robot extends TimedRobot {
 	/** This function is called periodically during operator control. */
 	@Override
 	public void teleopPeriodic() {
+		//Runs the scheduler
+		Scheduler.getInstance().run();
 		m_dashboard.telopPeriodic();
 		//new PrintCommand("is all stop true? " + m_oi.getAllStop()).initialize();
 		/*train.ArcadeDrived();
