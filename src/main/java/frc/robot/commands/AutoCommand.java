@@ -3,9 +3,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.Encoder;
 //Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.AutoConstants;
 import frc.robot.OI;
-import frc.robot.SIConstants;
+import frc.robot.Constants.AutoConstants;
+import frc.robot.Constants.SIConstants;
 //Imports subsystems
 import frc.robot.subsystems.Direction;
 import frc.robot.subsystems.DriveTrain;

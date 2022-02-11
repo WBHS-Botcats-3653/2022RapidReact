@@ -9,10 +9,10 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 //Imports SubsystemBase
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-//Imports DriveConstants
-import frc.robot.DriveConstants;
 //Imports OI
 import frc.robot.OI;
+//Imports ClimberConstants
+import frc.robot.Constants.ClimberConstants;
 
 public class Climber extends SubsystemBase {
 	private static Climber m_singleton = null;
@@ -22,7 +22,7 @@ public class Climber extends SubsystemBase {
 	//Constructor
 	private Climber() {
 		//Creates VictorSPX motor controller for the arm
-		arm = new WPI_VictorSPX(DriveConstants.MCID.get("Arm"));
+		arm = new WPI_VictorSPX(ClimberConstants.armMotorID);
 	}
 
 	//Returns an instance of the climber, creating an instance only when one does not already exist (singleton)
