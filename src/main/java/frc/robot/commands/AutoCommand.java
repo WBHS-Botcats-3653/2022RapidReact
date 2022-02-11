@@ -3,6 +3,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.Encoder;
 //Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.AutoConstants;
 import frc.robot.Constants;
 //Imports subsystems
 import frc.robot.subsystems.Direction;
@@ -78,10 +79,11 @@ public class AutoCommand extends CommandBase {
 				break;
 			case ("Taxi"):
 				//Gets the error rate
-				double error = -gyro.getRate();
+				double error = kP * -gyro.getRate();
 				//Taxis out of the Tarmax (10 feet back at high speed) then stops
-				if (encoder.getDistance() > -10) {
-					driveTrain.tankDrived(-0.95 + kP * error, -0.95 - kP * error);  //Speed not 1 so that course corrections can be made
+				if (encoder.getDistance() > AutoConstants.taxiDistanceInFeet) {
+					double speed = -0.95;  //Speed not 1 so that course corrections can be made
+					driveTrain.tankDrived(speed + error, speed - error);
 				} else {
 					driveTrain.tankDrived(0, 0);  //Eventually have robot turn instead of stopping
 					stage = "Collect Cargo";
