@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.Encoder;
 //Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.AutoConstants;
-import frc.robot.Constants;
+import frc.robot.OI;
 //Imports subsystems
 import frc.robot.subsystems.Direction;
 import frc.robot.subsystems.DriveTrain;
@@ -13,6 +13,7 @@ import frc.robot.subsystems.Shooter;
 /*This command will run and will do 
  */
 public class AutoCommand extends CommandBase {
+	private OI m_oi;
 	private DriveTrain driveTrain;
 	private Shooter shooter;
 	private Direction gyro;
@@ -23,11 +24,12 @@ public class AutoCommand extends CommandBase {
 
 	//Constructor
 	public AutoCommand() {
+		m_oi = OI.getInstance();
 		driveTrain = DriveTrain.getInstance();
 		shooter = Shooter.getInstance();
 		gyro = Direction.getInstance();
 		kP = 1;
-		encoder = new Encoder(Constants.AIID.get("Left Motor Group Encoder"), Constants.AIID.get("Right Motor Group Encoder"));
+		encoder = new Encoder(SIConstants.AIID.get("Left Motor Group Encoder"), Constants.AIID.get("Right Motor Group Encoder"));
 		hasFinished = false;
 		// Configures the encoders' distance-per-pulse
 		// The robot moves forward 1 foot per encoder rotation
@@ -74,7 +76,7 @@ public class AutoCommand extends CommandBase {
 	public void execute() {
 		switch (stage) {
 			case ("Shoot Preload"):
-				//Shoot preload here
+				//Shoot preload HERE
 				stage = "Taxi"; //Add condition
 				break;
 			case ("Taxi"):
@@ -82,7 +84,7 @@ public class AutoCommand extends CommandBase {
 				double error = kP * -gyro.getRate();
 				//Taxis out of the Tarmax (10 feet back at high speed) then stops
 				if (encoder.getDistance() > AutoConstants.taxiDistanceInFeet) {
-					double speed = -0.95;  //Speed not 1 so that course corrections can be made
+					double speed = -0.95;  //Speed not -1 so that course corrections can be made
 					driveTrain.tankDrived(speed + error, speed - error);
 				} else {
 					driveTrain.tankDrived(0, 0);  //Eventually have robot turn instead of stopping
@@ -90,7 +92,7 @@ public class AutoCommand extends CommandBase {
 				}
 				break;
 			case ("Collect Cargo"):
-				//Collect cargo here
+				//Collect cargo HERE
 				break;
 		}
 	}
