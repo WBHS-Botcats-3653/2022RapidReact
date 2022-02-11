@@ -16,6 +16,7 @@ import java.util.Hashtable;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+
 	/*Holds all the Motor Controller IDs
 	 *<String motorControllerName, Integer ID>
 	 */

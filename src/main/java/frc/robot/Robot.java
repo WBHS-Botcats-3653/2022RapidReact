@@ -4,23 +4,6 @@
 
 package frc.robot;
 
-import java.util.ArrayList;
-import java.util.List;
-
-//Imports Pose2d
-import edu.wpi.first.math.geometry.Pose2d;
-//Imports Rotation2d
-import edu.wpi.first.math.geometry.Rotation2d;
-//Imports Translation2d
-import edu.wpi.first.math.geometry.Translation2d;
-//Imports Trajectory
-import edu.wpi.first.math.trajectory.Trajectory;
-//Imports TrajectoryConfig
-import edu.wpi.first.math.trajectory.TrajectoryConfig;
-//Imports TrajectoryGenerator
-import edu.wpi.first.math.trajectory.TrajectoryGenerator;
-//Imports Units
-import edu.wpi.first.math.util.Units;
 //Imports TimedRobot
 import edu.wpi.first.wpilibj.TimedRobot;
 //Imports Scheduler
@@ -36,6 +19,7 @@ import frc.robot.commands.DashboardCommand;
 import frc.robot.commands.IndexerCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.ShooterCommand;
+import frc.robot.subsystems.DriveTrain;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -47,11 +31,11 @@ public class Robot extends TimedRobot {
 	//private Command m_autonomousCommand;
 	private RobotContainer m_robotContainer;
 
-	/*private final DriveTrain train = DriveTrain.getInstance();
-	private final Climber m_climberSubsystem = Climber.getInstance();
-	private final Intake m_intakeSubsystem = Intake.getInstance();
-	private final Dashboard m_dashboardSubsystem = Dashboard.getInstance();
-	private final Shooter m_shooterSubsystem = Shooter.getInstance();*/
+	private final DriveTrain m_driveTrainSubsystem = DriveTrain.getInstance();
+	//private final Climber m_climberSubsystem = Climber.getInstance();
+	//private final Intake m_intakeSubsystem = Intake.getInstance();
+	//private final Dashboard m_dashboardSubsystem = Dashboard.getInstance();
+	//private final Shooter m_shooterSubsystem = Shooter.getInstance();
 
 	//Inputs
 	private final OI m_oi = OI.getInstance();
@@ -65,9 +49,6 @@ public class Robot extends TimedRobot {
 	private DashboardCommand m_dashboardCommand;
 	private ShooterCommand m_shooterCommand;
 	private IndexerCommand m_indexerCommand;
-
-	//Trajectories
-	public ArrayList<Trajectory> trajectories = new ArrayList<Trajectory>();
 	
 	/**
 	 * This function is run when the robot is first started up and should be used for any
@@ -78,15 +59,6 @@ public class Robot extends TimedRobot {
 		// Instantiate our RobotContainer.  This will perform all our button bindings, and put our
 		// autonomous chooser on the dashboard.
 		m_robotContainer = new RobotContainer();
-
-		//Autonomous trajectories initialization
-		//Test trajectory
-		trajectories.add(TrajectoryGenerator.generateTrajectory(
-			new Pose2d(0, 0, Rotation2d.fromDegrees(0)),
-			List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
-			new Pose2d(3, 0, Rotation2d.fromDegrees(0)),
-			new TrajectoryConfig(Units.feetToMeters(3.0), Units.feetToMeters(3.0))
-		));
 	}
 
 	/**
@@ -130,7 +102,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-		m_autonomousCommand.setTrajectories(trajectories);
 		/*
 		 *String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		 *switch(autoSelected) {
@@ -158,6 +129,7 @@ public class Robot extends TimedRobot {
 	/** This function is called periodically during autonomous. */
 	@Override
 	public void autonomousPeriodic() {
+		//Runs the scheduler
 		Scheduler.getInstance().run();
 	}
 

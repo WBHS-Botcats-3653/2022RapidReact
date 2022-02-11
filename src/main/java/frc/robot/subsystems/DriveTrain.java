@@ -53,15 +53,16 @@ public class DriveTrain extends SubsystemBase {
 	/**Sets the arcade drive speed and rotation
 	 *OVERLOADED FUNCTION
 	 */
-	public void ArcadeDrived() {
+	public void arcadeDrived() {
 		//All stop called (used for testing)
 		if (m_oi.getAllStop()) {
 			//Stops motor(s)
-			diffDrive.arcadeDrive(0, 0);
+			diffDrive.tankDrive(0, 0);
 			return;
 		}
+		double speed = m_oi.getThrottle();
 		//Caps the throttle speed from exceeding the set maxDriveSpeed
-		double speed = m_oi.getThrottle() <= m_oi.getMaxDriveSpeed() ? m_oi.getThrottle() : m_oi.getMaxDriveSpeed();
+		if (Math.abs(speed) > m_oi.getMaxDriveSpeed()) speed = (speed < 0 ? -1 : 1) * m_oi.getMaxDriveSpeed();
 		//Sets the differential drive speed and rotation
 		diffDrive.arcadeDrive(speed, m_oi.getSteering());
 	}
@@ -71,24 +72,7 @@ public class DriveTrain extends SubsystemBase {
 	 * @param speed
 	 * @param rotation
 	 */
-	public void ArcadeDrived(double speed, double rotation) {
-		//All stop called (used for testing)
-		if (m_oi.getAllStop()) {
-			//Stops motor(s)
-			diffDrive.arcadeDrive(0, 0);
-			return;
-		}
-		//Caps the speed from exceeding the set maxDriveSpeed
-		if (speed > m_oi.getMaxDriveSpeed()) speed = m_oi.getMaxDriveSpeed();
-		//Sets the differential drive speed and rotation
-		diffDrive.arcadeDrive(speed, rotation);
-	}
-
-	/**Sets the tank drive left wheel speed and right wheel speed
-	 * @param leftSpeed
-	 * @param rightSpeed
-	 */
-	public void TankDrived(double leftSpeed, double rightSpeed) {
+	public void arcadeDrived(double speed, double rotation) {
 		//All stop called (used for testing)
 		if (m_oi.getAllStop()) {
 			//Stops motor(s)
@@ -96,8 +80,26 @@ public class DriveTrain extends SubsystemBase {
 			return;
 		}
 		//Caps the speed from exceeding the set maxDriveSpeed
-		if (leftSpeed > m_oi.getMaxDriveSpeed()) leftSpeed = m_oi.getMaxDriveSpeed();
-		if (rightSpeed > m_oi.getMaxDriveSpeed()) rightSpeed = m_oi.getMaxDriveSpeed();
+		if (Math.abs(speed) > m_oi.getMaxDriveSpeed()) speed = (speed < 0 ? -1 : 1) * m_oi.getMaxDriveSpeed();
+		//Sets the differential drive speed and rotation
+		diffDrive.arcadeDrive(speed, rotation);
+	}
+
+	/**Sets the tank drive left wheel speed and right wheel speed
+	 * Used for autonomous
+	 * @param leftSpeed
+	 * @param rightSpeed
+	 */
+	public void tankDrived(double leftSpeed, double rightSpeed) {
+		//All stop called (used for testing)
+		if (m_oi.getAllStop()) {
+			//Stops motor(s)
+			diffDrive.tankDrive(0, 0);
+			return;
+		}
+		//Caps the speed from exceeding the set maxDriveSpeed
+		if (Math.abs(leftSpeed) > m_oi.getMaxDriveSpeed()) leftSpeed = (leftSpeed < 0 ? -1 : 1) * m_oi.getMaxDriveSpeed();
+		if (Math.abs(rightSpeed) > m_oi.getMaxDriveSpeed()) rightSpeed = (rightSpeed < 0 ? -1 : 1) * m_oi.getMaxDriveSpeed();
 		//Sets the differential drive left wheel speed and right wheel speed
 		diffDrive.tankDrive(leftSpeed, rightSpeed);
 	}

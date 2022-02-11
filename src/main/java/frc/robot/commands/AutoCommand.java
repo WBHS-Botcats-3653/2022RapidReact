@@ -1,38 +1,45 @@
 package frc.robot.commands;
 
-import java.util.ArrayList;
-
-import edu.wpi.first.math.controller.RamseteController;
-import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
-import edu.wpi.first.math.trajectory.Trajectory;
+import edu.wpi.first.wpilibj.Encoder;
 //Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
-//Imports DriveTrain and Shooter subsystems
+import frc.robot.Constants;
+//Imports subsystems
+import frc.robot.subsystems.Direction;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Shooter;
 
 /*This command will run and will do 
  */
 public class AutoCommand extends CommandBase {
-	private DriveTrain driveTrain = DriveTrain.getInstance();
-	private Shooter shooter = Shooter.getInstance();
-	private boolean hasFinished = false;
-	private ArrayList<Trajectory> trajectories;
+	private DriveTrain driveTrain;
+	private Shooter shooter;
+	private Direction gyro;
+	private double kP;
+	private Encoder encoder;
+	private boolean hasFinished;
+	private String stage;
 
 	//Constructor
 	public AutoCommand() {
-		
-	}
-
-	public void setTrajectories(ArrayList<Trajectory> trajectories) {
-		this.trajectories = trajectories;
+		driveTrain = DriveTrain.getInstance();
+		shooter = Shooter.getInstance();
+		gyro = Direction.getInstance();
+		kP = 1;
+		encoder = new Encoder(Constants.AIID.get("Left Motor Group Encoder"), Constants.AIID.get("Right Motor Group Encoder"));
+		hasFinished = false;
+		// Configures the encoders' distance-per-pulse
+		// The robot moves forward 1 foot per encoder rotation
+		// There are 256 pulses per encoder rotation
+		encoder.setDistancePerPulse(1./256.);
 	}
 
 	//public void run() {}
 
 	@Override
 	public void initialize() {
+		stage = "Shoot Preload";
+
 		/*new ScheduleCommand(
 			//this one will execute the shooter for 3 seconds and then stop
 			new StartEndCommand(
@@ -64,12 +71,26 @@ public class AutoCommand extends CommandBase {
 
 	@Override
 	public void execute() {
-		RamseteController controller = new RamseteController();
-		ChassisSpeeds adjustedSpeeds = controller.calculate(currentRobotPose, goal);
-		DifferentialDriveWheelSpeeds wheelSpeeds = kinematics.toWheelSpeeds(adjustedSpeeds);
-		double left = wheelSpeeds.leftMetersPerSecond;
-		double right = wheelSpeeds.rightMetersPerSecond;
-		driveTrain.TankDrived(left, right);
+		switch (stage) {
+			case ("Shoot Preload"):
+				//Shoot preload here
+				stage = "Taxi"; //Add condition
+				break;
+			case ("Taxi"):
+				//Gets the error rate
+				double error = -gyro.getRate();
+				//Taxis out of the Tarmax (10 feet back at high speed) then stops
+				if (encoder.getDistance() > -10) {
+					driveTrain.tankDrived(-0.95 + kP * error, -0.95 - kP * error);  //Speed not 1 so that course corrections can be made
+				} else {
+					driveTrain.tankDrived(0, 0);  //Eventually have robot turn instead of stopping
+					stage = "Collect Cargo";
+				}
+				break;
+			case ("Collect Cargo"):
+				//Collect cargo here
+				break;
+		}
 	}
 
 	// Called once the command ends or is interrupted.

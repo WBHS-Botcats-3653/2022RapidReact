@@ -18,9 +18,16 @@ public class Direction extends SubsystemBase {
 	private static Direction m_singleton;
 	private ADIS16470_IMU m_gyro;
 	
-	private Direction() {
+	public Direction() {
 		m_gyro = new ADIS16470_IMU();
 		m_gyro.calibrate();
+	}
+
+	public static Direction getInstance() {
+		if (m_singleton == null) {
+			m_singleton = new Direction();
+		}
+		return m_singleton;
 	}
 
 	public Sendable getGyro() {
@@ -31,10 +38,7 @@ public class Direction extends SubsystemBase {
 		return m_gyro.getAngle();
 	}
 
-	public static Direction getInstance() {
-		if (m_singleton == null) {
-			m_singleton = new Direction();
-		}
-		return m_singleton;
+	public double getRate() {
+		return m_gyro.getRate();
 	}
 }
