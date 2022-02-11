@@ -18,6 +18,7 @@ public class SI {
 	private static DigitalInput shooterPE;
 	private static DigitalInput pivotUpButton;
 	private static DigitalInput pivotDownButton;
+	private static DigitalInput climberDownButton;
 
 	public SI() {
 		lowerStoragePE = new DigitalInput(Constants.DIOID.get("Lower Storage PE Sensor"));
@@ -25,6 +26,7 @@ public class SI {
 		shooterPE = new DigitalInput(Constants.DIOID.get("Shooter PE Sensor"));
 		pivotUpButton = new DigitalInput(Constants.DIOID.get("Pivot Up Button"));
 		pivotDownButton = new DigitalInput(Constants.DIOID.get("Pivot Down Button"));
+		climberDownButton = new DigitalInput(Constants.DIOID.get("Climber Down Button"));
 	}
 
 	public static SI getInstance() {
@@ -52,5 +54,9 @@ public class SI {
 
 	public boolean getPivotDownTriggered() {
 		return pivotDownButton.get();
+	}
+
+	public boolean getClimberDownTriggered() {
+		return climberDownButton.get();
 	}
 }

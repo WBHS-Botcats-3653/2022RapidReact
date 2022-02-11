@@ -8,11 +8,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 //Imports OI
 import frc.robot.OI;
+//Imports SI
+import frc.robot.SI;
+//Imports Climber subsystem
 import frc.robot.subsystems.Climber;
 
 public class ClimberCommand extends CommandBase {
 	//Holds instances of OI and Climber subsystem
 	private OI m_oi;
+	private SI m_si;
 	private Climber m_climber;
 
 	/**Creates a new ClimberCommand.
@@ -21,6 +25,7 @@ public class ClimberCommand extends CommandBase {
 	public ClimberCommand(Climber m_climber) {
 		//Initializes instance variables with instances of OI and Climber subsystem
 		m_oi = OI.getInstance();
+		m_si = SI.getInstance();
 		this.m_climber = m_climber;
 		// Use addRequirements() here to declare subsystem dependencies.
 		//addRequirements();
@@ -58,6 +63,8 @@ public class ClimberCommand extends CommandBase {
 		}
 		if (m_oi.POVIsUp()) {
 			m_climber.setArmSpeed(-m_oi.getMaxArmSpeed());
+		} else if (m_si.getClimberDownTriggered()) {
+			m_climber.setArmSpeed(0);
 		} else if (m_oi.POVIsDown()) {
 			m_climber.setArmSpeed(m_oi.getMaxArmSpeed());
 		} else {
