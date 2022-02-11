@@ -17,7 +17,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 //Imports OI
 import frc.robot.OI;
-import frc.robot.commands.ShooterCommand;
 
 
 public class DriveTrain extends SubsystemBase {
@@ -85,9 +84,27 @@ public class DriveTrain extends SubsystemBase {
 		diffDrive.arcadeDrive(speed, rotation);
 	}
 
-	public static void tryThis() {
-		new ShooterCommand(Shooter.getInstance());
+	/**Sets the tank drive left wheel speed and right wheel speed
+	 * @param leftSpeed
+	 * @param rightSpeed
+	 */
+	public void TankDrived(double leftSpeed, double rightSpeed) {
+		//All stop called (used for testing)
+		if (m_oi.getAllStop()) {
+			//Stops motor(s)
+			diffDrive.tankDrive(0, 0);
+			return;
+		}
+		//Caps the speed from exceeding the set maxDriveSpeed
+		if (leftSpeed > m_oi.getMaxDriveSpeed()) leftSpeed = m_oi.getMaxDriveSpeed();
+		if (rightSpeed > m_oi.getMaxDriveSpeed()) rightSpeed = m_oi.getMaxDriveSpeed();
+		//Sets the differential drive left wheel speed and right wheel speed
+		diffDrive.tankDrive(leftSpeed, rightSpeed);
 	}
+
+	/*public static void tryThis() {
+		new ShooterCommand(Shooter.getInstance());
+	}*/
 
 	@Override
 	public void periodic() {

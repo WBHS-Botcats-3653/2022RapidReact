@@ -1,5 +1,11 @@
 package frc.robot.commands;
 
+import java.util.ArrayList;
+
+import edu.wpi.first.math.controller.RamseteController;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
+import edu.wpi.first.math.trajectory.Trajectory;
 //Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
 //Imports DriveTrain and Shooter subsystems
@@ -12,23 +18,21 @@ public class AutoCommand extends CommandBase {
 	private DriveTrain driveTrain = DriveTrain.getInstance();
 	private Shooter shooter = Shooter.getInstance();
 	private boolean hasFinished = false;
+	private ArrayList<Trajectory> trajectories;
 
 	//Constructor
 	public AutoCommand() {
 		
 	}
 
+	public void setTrajectories(ArrayList<Trajectory> trajectories) {
+		this.trajectories = trajectories;
+	}
+
 	//public void run() {}
 
 	@Override
 	public void initialize() {
-		
-
-
-
-
-
-
 		/*new ScheduleCommand(
 			//this one will execute the shooter for 3 seconds and then stop
 			new StartEndCommand(
@@ -59,7 +63,14 @@ public class AutoCommand extends CommandBase {
 	}
 
 	@Override
-	public void execute() {}
+	public void execute() {
+		RamseteController controller = new RamseteController();
+		ChassisSpeeds adjustedSpeeds = controller.calculate(currentRobotPose, goal);
+		DifferentialDriveWheelSpeeds wheelSpeeds = kinematics.toWheelSpeeds(adjustedSpeeds);
+		double left = wheelSpeeds.leftMetersPerSecond;
+		double right = wheelSpeeds.rightMetersPerSecond;
+		driveTrain.TankDrived(left, right);
+	}
 
 	// Called once the command ends or is interrupted.
 	@Override
