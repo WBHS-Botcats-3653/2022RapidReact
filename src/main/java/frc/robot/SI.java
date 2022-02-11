@@ -9,7 +9,9 @@ package frc.robot;
 
 //Imports DigitalInput
 import edu.wpi.first.wpilibj.DigitalInput;
-import frc.robot.Constants.SIConstants;
+import frc.robot.Constants.ClimberConstants;
+import frc.robot.Constants.IntakeConstants;
+import frc.robot.Constants.ShooterConstants;
 
 //Sensor Inputs
 public class SI {
@@ -22,12 +24,12 @@ public class SI {
 	private static DigitalInput climberDownButton;
 
 	public SI() {
-		lowerStoragePE = new DigitalInput(SIConstants.DIOID.get("Lower Storage PE Sensor"));
-		upperStoragePE = new DigitalInput(SIConstants.DIOID.get("Upper Storage PE Sensor"));
-		shooterPE = new DigitalInput(SIConstants.DIOID.get("Shooter PE Sensor"));
-		pivotUpButton = new DigitalInput(SIConstants.DIOID.get("Pivot Up Button"));
-		pivotDownButton = new DigitalInput(SIConstants.DIOID.get("Pivot Down Button"));
-		climberDownButton = new DigitalInput(SIConstants.DIOID.get("Climber Down Button"));
+		lowerStoragePE = new DigitalInput(IntakeConstants.lowerStoragePESensorID);
+		upperStoragePE = new DigitalInput(IntakeConstants.upperStoragePESensorID);
+		shooterPE = new DigitalInput(ShooterConstants.shooterPESensorID);
+		pivotUpButton = new DigitalInput(IntakeConstants.pivotUpButtonID);
+		pivotDownButton = new DigitalInput(IntakeConstants.pivotDownButtonID);
+		climberDownButton = new DigitalInput(ClimberConstants.climberDownButtonID);
 	}
 
 	public static SI getInstance() {
