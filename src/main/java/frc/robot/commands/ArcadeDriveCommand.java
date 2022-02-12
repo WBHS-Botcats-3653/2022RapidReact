@@ -22,8 +22,6 @@ public class ArcadeDriveCommand extends CommandBase {
 		// Use addRequirements() here to declare subsystem dependencies.
 		//addRequirements();
 	}
-
-	//public void run() {}
 	
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override

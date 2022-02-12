@@ -75,7 +75,7 @@ public class AutoCommand extends CommandBase {
 				double error = kP * -gyro.getRate();
 				//Taxis out of the Tarmax (10 feet forward at high speed) then stops
 				if (gyro.getRightDistance() < AutoConstants.taxiDistanceInFeet) {
-					double speed = 0.95;  //Speed not 1 so that course corrections can be made
+					double speed = -0.95;  //Speed not -1 so that course corrections can be made
 					driveTrain.tankDrived(speed + error, speed - error);
 				} else {
 					driveTrain.tankDrived(0, 0);  //Eventually have robot turn instead of stopping

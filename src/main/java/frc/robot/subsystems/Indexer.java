@@ -24,6 +24,7 @@ public class Indexer extends SubsystemBase {
 		indexer = new WPI_VictorSPX(IntakeConstants.indexerMotorID);
 	}
 
+	//Returns an instance of the indexer, creating an instance only when one does not already exist (singleton)
 	public static Indexer getInstance() {
 		if (m_singleton == null) {
 			m_singleton = new Indexer();

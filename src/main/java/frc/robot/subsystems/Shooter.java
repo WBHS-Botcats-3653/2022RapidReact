@@ -24,11 +24,7 @@ public class Shooter extends SubsystemBase {
 		spinner = new WPI_VictorSPX(ShooterConstants.spinnerMotorID);
 	}
 
-	/**Returns an instance of the Intake
-	 * this helps with the singleton
-	 * 
-	 * @return
-	 */
+	//Returns an instance of the climber, creating an instance only when one does not already exist (singleton)
 	public static Shooter getInstance() {
 		if (shooter == null)
 			shooter = new Shooter();

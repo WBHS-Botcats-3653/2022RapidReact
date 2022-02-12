@@ -31,22 +31,6 @@ public class ClimberCommand extends CommandBase {
 		//addRequirements();
 	}
 
-	/*public void run() {
-		//All stop called (used for testing)
-		if (m_oi.getAllStop()) {
-			//Stops motor(s)
-			m_climber.setArmSpeed(0);
-			return;
-		}
-		if (m_oi.POVIsUp()) {
-			m_climber.setArmSpeed(-m_oi.getMaxArmSpeed());
-		} else if (m_oi.POVIsDown()) {
-			m_climber.setArmSpeed(m_oi.getMaxArmSpeed());
-		} else {
-			m_climber.setArmSpeed(0);
-		}
-	}*/
-
 	/*Called when the command is initially scheduled.
 	 */
 	@Override
@@ -56,18 +40,23 @@ public class ClimberCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	public void execute() {
 		//All stop called (used for testing)
-		if (m_oi.getAllStop()) {
-			//Stops motor(s)
+		if (m_oi.getAllStop()) {  //If the B button is being pressed
+			//Stop motor
 			m_climber.setArmSpeed(0);
 			return;
 		}
-		if (m_oi.POVIsUp()) {
-			m_climber.setArmSpeed(-m_oi.getMaxArmSpeed());
-		} else if (m_si.getClimberDownTriggered()) {
+		//Checks whether there is input coming in to move the arm
+		if (m_oi.POVIsUp()) {  //If up Dpad up is pressed
+			//Move arm up
+			m_climber.setArmSpeed(-m_oi.getMaxArmSpeed());  //Climber motor is inverted
+		} else if (m_si.getClimberDownTriggered()) {  //If the button on the bottom if the climber is pressed
+			//Stop arm
 			m_climber.setArmSpeed(0);
-		} else if (m_oi.POVIsDown()) {
-			m_climber.setArmSpeed(m_oi.getMaxArmSpeed());
+		} else if (m_oi.POVIsDown()) {  //If Dpad down is pressed
+			//Move arm down
+			m_climber.setArmSpeed(m_oi.getMaxArmSpeed());  //Climber motor is inverted
 		} else {
+			//Stop arm
 			m_climber.setArmSpeed(0);
 		}
 	}

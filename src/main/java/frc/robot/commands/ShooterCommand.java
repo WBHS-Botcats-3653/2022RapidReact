@@ -28,16 +28,7 @@ public class ShooterCommand extends CommandBase {
 		//addRequirements();
 	}
 
-	/*public void run() {
-		//All stop called (used for testing)
-		if (m_oi.getAllStop()) {
-			//Stops motor(s)
-			m_shooter.setSpinSpeed(0);
-			return;
-		}
-		m_shooter.setSpinSpeed(m_oi.getShoot());
-	}*/
-
+	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {}
 
@@ -45,11 +36,12 @@ public class ShooterCommand extends CommandBase {
 	@Override
 	public void execute() {
 		//All stop called (used for testing)
-		if (m_oi.getAllStop()) {
-			//Stops motor(s)
+		if (m_oi.getAllStop()) {  //If the B button is being pressed
+			//Stop motor
 			m_shooter.setSpinSpeed(0);
 			return;
 		}
+		//Spins the shooter based on controller input
 		m_shooter.setSpinSpeed(m_oi.getShoot());
 	}
 

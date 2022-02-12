@@ -42,6 +42,7 @@ public class DriveTrain extends SubsystemBase {
 		//Reverses right motor direction
 		driveLeft.setInverted(true);
 	}
+	
 	//Returns an instance of the climber, creating an instance only when one does not already exist
 	public static DriveTrain getInstance() {
 		if (driveTrain == null) {
@@ -103,10 +104,6 @@ public class DriveTrain extends SubsystemBase {
 		//Sets the differential drive left wheel speed and right wheel speed
 		diffDrive.tankDrive(leftSpeed, rightSpeed);
 	}
-
-	/*public static void tryThis() {
-		new ShooterCommand(Shooter.getInstance());
-	}*/
 
 	@Override
 	public void periodic() {

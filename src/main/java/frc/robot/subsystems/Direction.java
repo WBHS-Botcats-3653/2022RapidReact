@@ -30,7 +30,6 @@ public class Direction extends SubsystemBase {
 
 	
 	public Direction() {
-		//
 		//m_gyro.calibrate();
 		m_oi = OI.getInstance();
 		driveTrain = DriveTrain.getInstance();
@@ -67,7 +66,6 @@ public class Direction extends SubsystemBase {
 	/**
 	 * @return encoder's right distance
 	 */
-	
 	public double getRightDistance(){
 		return rightEncoder.getDistance();
 	}

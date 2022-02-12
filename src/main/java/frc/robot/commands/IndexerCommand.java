@@ -25,26 +25,6 @@ public class IndexerCommand extends CommandBase {
 		m_si = SI.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
 	}
-
-	/*public void run() {
-		//All stop called (used for testing)
-		if (m_oi.getAllStop()) {
-			//Stops motor(s)
-			m_indexer.setIndexerSpeed(0);
-			return;
-		}
-		if (m_oi.getSpinIndexer()) {
-			m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed());
-		} else if (m_si.getLowerStorageTriggered()) {
-			if (!m_si.getUpperStorageTriggered()) {
-				m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed());
-			} else {
-				m_indexer.setIndexerSpeed(0);
-			}
-		} else {
-			m_indexer.setIndexerSpeed(0);
-		}
-	}*/
 	
 	@Override
 	public void initialize() {}
@@ -53,20 +33,25 @@ public class IndexerCommand extends CommandBase {
 	@Override
 	public void execute() {
 		//All stop called (used for testing)
-		if (m_oi.getAllStop()) {
-			//Stops motor(s)
+		if (m_oi.getAllStop()) {  //If the B button is being pressed
+			//Stop motor
 			m_indexer.setIndexerSpeed(0);
 			return;
 		}
-		if (m_oi.getSpinIndexer()) {
+		//Checks whether there is input coming in to spin the indexer
+		if (m_oi.getSpinIndexer()) {  //If the X button is being pressed
+			//Spin the indexer at max speed
 			m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed());
-		} else if (m_si.getLowerStorageTriggered()) {
-			if (!m_si.getUpperStorageTriggered()) {
+		} else if (m_si.getLowerStorageTriggered()) {  //If the lower storage photoelectric sensor is triggered
+			if (!m_si.getUpperStorageTriggered()) {  //If the lower storage photoelectric sensor is not triggered
+				//Spin the indexer at max speed
 				m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed());
 			} else {
+				//Stop spinning the indexer
 				m_indexer.setIndexerSpeed(0);
 			}
 		} else {
+			//Stop spinning the indexer
 			m_indexer.setIndexerSpeed(0);
 		}
 	}
