@@ -24,7 +24,6 @@ public class Direction extends SubsystemBase {
 	private DriveTrain driveTrain;
 	private Shooter shooter;
 	private Direction gyro;
-	private double kP;
 	private Encoder encoder;
 	private boolean hasFinished;
 	private String stage;
@@ -37,8 +36,6 @@ public class Direction extends SubsystemBase {
 		driveTrain = DriveTrain.getInstance();
 		shooter = Shooter.getInstance();
 		gyro = Direction.getInstance();
-		
-		kP = 1;
 		encoder = new Encoder(DriveConstants.leftMotorGroupEncoder, DriveConstants.rightMotorGroupEncoder);
 		hasFinished = false;
 		// Configures the encoders' distance-per-pulse

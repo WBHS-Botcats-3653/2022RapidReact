@@ -19,6 +19,7 @@ public class AutoCommand extends CommandBase {
 	private Direction gyro;
 	private boolean hasFinished;
 	private String stage;
+	private double kP;
 
 	//Constructor
 	public AutoCommand() {
@@ -26,11 +27,8 @@ public class AutoCommand extends CommandBase {
 		driveTrain = DriveTrain.getInstance();
 		shooter = Shooter.getInstance();
 		gyro = Direction.getInstance();
-		
-		
-		
+		kP = 1;
 		hasFinished = false;
-		
 	}
 
 	//public void run() {}
@@ -80,7 +78,7 @@ public class AutoCommand extends CommandBase {
 				//Gets the error rate
 				double error = kP * -gyro.getRate();
 				//Taxis out of the Tarmax (10 feet forward at high speed) then stops
-				if (encoder.getDistance() < AutoConstants.taxiDistanceInFeet) {
+				if (gyro.getDrivedDistance() < AutoConstants.taxiDistanceInFeet) {
 					double speed = 0.95;  //Speed not 1 so that course corrections can be made
 					driveTrain.tankDrived(speed + error, speed - error);
 				} else {
