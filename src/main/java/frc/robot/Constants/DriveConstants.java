@@ -7,6 +7,9 @@ public class DriveConstants {
 	public static final int backLeftMotorID = 2;
 	public static final int backRightMotorID = 3;
 	//Encoders
-	public static final int leftMotorGroupEncoder = 0;
-	public static final int rightMotorGroupEncoder = 1;
+	public static final int leftMotorGroupEncoder1 = 0;
+	public static final int leftMotorGroupEncoder2 = 0;
+
+	public static final int rightMotorGroupEncoder1 = 1;
+	public static final int rightMotorGroupEncoder2 = 1;
 }

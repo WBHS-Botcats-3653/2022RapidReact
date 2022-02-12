@@ -23,7 +23,8 @@ public class Direction extends SubsystemBase {
 	private OI m_oi;
 	private DriveTrain driveTrain;
 	private Shooter shooter;
-	private Encoder encoder;
+	private Encoder leftEncoder;
+	private Encoder rightEncoder;
 	private boolean hasFinished;
 	private String stage;
 
@@ -34,12 +35,14 @@ public class Direction extends SubsystemBase {
 		m_oi = OI.getInstance();
 		driveTrain = DriveTrain.getInstance();
 		shooter = Shooter.getInstance();
-		encoder = new Encoder(DriveConstants.leftMotorGroupEncoder, DriveConstants.rightMotorGroupEncoder);
+		leftEncoder = new Encoder(DriveConstants.leftMotorGroupEncoder1, DriveConstants.leftMotorGroupEncoder2);
+		rightEncoder = new Encoder(DriveConstants.rightMotorGroupEncoder1, DriveConstants.rightMotorGroupEncoder2);
 		hasFinished = false;
 		// Configures the encoders' distance-per-pulse
 		// The robot moves forward 1 foot per encoder rotation
 		// There are 256 pulses per encoder rotation
-		encoder.setDistancePerPulse(1./256.);
+		leftEncoder.setDistancePerPulse(1./256.);
+		rightEncoder.setDistancePerPulse(1./256.);
 	}
 
 	public static Direction getInstance() {
