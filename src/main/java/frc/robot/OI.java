@@ -90,7 +90,7 @@ public class OI {
 	}
 
 	public double getMaxIndexerSpeed(){
-		return -m_maxIndexerSpeed;
+		return m_maxIndexerSpeed;
 	}
 
 	public void setMaxShootSpeed(double maxspd) {
@@ -120,7 +120,7 @@ public class OI {
 	/**
 	 * this one is for the rollers 
 	 * 
-	 * @return ret_value * m_maxIntakePivotSpeed
+	 * @return ret_value
 	 */
 	public double getIntakeCtrl() {
 		double ret_value = 0.0;
@@ -129,7 +129,7 @@ public class OI {
 		} else if (m_controller.getLeftTriggerAxis() > 0 || m_controller.getRightBumper()) {
 			ret_value = m_maxIntakeRollerSpeed;
 		}
-		return ret_value * m_maxIntakePivotSpeed;
+		return ret_value;
 	}
 
 	public boolean getIntakeDown() {

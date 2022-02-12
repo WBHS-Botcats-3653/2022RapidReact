@@ -19,11 +19,10 @@ import frc.robot.Constants.DriveConstants;
  */
 public class Direction extends SubsystemBase {
 	private static Direction m_singleton;
-	private ADIS16470_IMU m_gyro;
+	private ADIS16470_IMU m_gyro = new ADIS16470_IMU();
 	private OI m_oi;
 	private DriveTrain driveTrain;
 	private Shooter shooter;
-	private Direction gyro;
 	private double kP;
 	private Encoder encoder;
 	private boolean hasFinished;
@@ -31,12 +30,12 @@ public class Direction extends SubsystemBase {
 
 	
 	public Direction() {
-		m_gyro = new ADIS16470_IMU();
-		m_gyro.calibrate();
+		//
+		//m_gyro.calibrate();
 		m_oi = OI.getInstance();
 		driveTrain = DriveTrain.getInstance();
 		shooter = Shooter.getInstance();
-		gyro = Direction.getInstance();
+
 		
 		kP = 1;
 		encoder = new Encoder(DriveConstants.leftMotorGroupEncoder, DriveConstants.rightMotorGroupEncoder);
@@ -53,7 +52,7 @@ public class Direction extends SubsystemBase {
 		}
 		return m_singleton;
 	}
-
+	
 	public Sendable getGyro() {
 		return m_gyro;
 	}
@@ -63,8 +62,9 @@ public class Direction extends SubsystemBase {
 	}
 
 	public double getRate() {
-		return m_gyro.getRate();
+		return  m_gyro.getRate();
 	}
+	
 	/**
 	 * @return encoder's distance since last reset
 	 */
