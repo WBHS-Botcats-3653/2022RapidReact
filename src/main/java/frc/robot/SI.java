@@ -9,6 +9,7 @@ package frc.robot;
 
 //Imports DigitalInput
 import edu.wpi.first.wpilibj.DigitalInput;
+//Imports Constants
 import frc.robot.Constants.ClimberConstants;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.Constants.ShooterConstants;
@@ -16,22 +17,27 @@ import frc.robot.Constants.ShooterConstants;
 //Sensor Inputs
 public class SI {
 	private static SI m_singleton;
+	//Photoelectric sensors
 	private static DigitalInput lowerStoragePE;
 	private static DigitalInput upperStoragePE;
 	private static DigitalInput shooterPE;
-	private static DigitalInput pivotUpButton;
-	private static DigitalInput pivotDownButton;
+	//Limit switches
+	private static DigitalInput topPivotLimitSwitch;
+	private static DigitalInput bottomPivotLimitSwitch;
 	private static DigitalInput climberDownButton;
 
 	public SI() {
+		//Photoelectric sensors
 		lowerStoragePE = new DigitalInput(IntakeConstants.lowerStoragePESensorID);
 		upperStoragePE = new DigitalInput(IntakeConstants.upperStoragePESensorID);
 		shooterPE = new DigitalInput(ShooterConstants.shooterPESensorID);
-		pivotUpButton = new DigitalInput(IntakeConstants.pivotUpButtonID);
-		pivotDownButton = new DigitalInput(IntakeConstants.pivotDownButtonID);
-		climberDownButton = new DigitalInput(ClimberConstants.climberDownButtonID);
+		//Limit switches
+		topPivotLimitSwitch = new DigitalInput(IntakeConstants.topPivotLimitSwitchID);
+		bottomPivotLimitSwitch = new DigitalInput(IntakeConstants.bottomPivotLimitSwitchID);
+		climberDownButton = new DigitalInput(ClimberConstants.bottomClimberLimitSwitchID);
 	}
 
+	//Returns an instance of SI, creating an instance only when one does not already exist (singleton)
 	public static SI getInstance() {
 		if (m_singleton == null) {
 			m_singleton = new SI();
@@ -39,27 +45,33 @@ public class SI {
 		return m_singleton;
 	}
 
+	//Returns input from the lower storage photoelectric sensor
 	public boolean getLowerStorageTriggered() {
 		return lowerStoragePE.get();
 	}
 
+	//Returns input from the upper storage photoelectric sensor
 	public boolean getUpperStorageTriggered() {
 		return upperStoragePE.get();
 	}
 
+	//Returns input from the shooter photoelectric sensor
 	public boolean getShooterTriggered() {
 		return shooterPE.get();
 	}
 
+	//Returns input from the lower storage photoelectric sensor
 	public boolean getPivotUpTriggered() {
-		return !pivotUpButton.get();  //Invert (Nick wired it wrong lol)
+		return !topPivotLimitSwitch.get();  //Invert (electrical issue)
 	}
 
+	//Returns input from the bottom pivot switch
 	public boolean getPivotDownTriggered() {
-		return pivotDownButton.get();
+		return bottomPivotLimitSwitch.get();
 	}
 
+	//Returns input from the top pivot switch
 	public boolean getClimberDownTriggered() {
-		return !climberDownButton.get();  //Invert (Nick wired it wrong (again) lol)
+		return !climberDownButton.get();  //Invert (electrical issue)
 	}
 }

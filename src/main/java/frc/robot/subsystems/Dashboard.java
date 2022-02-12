@@ -103,7 +103,7 @@ public class Dashboard {
 		*/
 	}
 
-	//Returns an instance of the dashboard, creating an instance only when one does not already exist (singleton)
+	//Returns an instance of Dashboard, creating an instance only when one does not already exist (singleton)
 	public static Dashboard getInstance() {
 		if (m_singleton == null) {
 			m_singleton = new Dashboard();

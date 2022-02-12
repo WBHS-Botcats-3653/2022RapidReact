@@ -5,6 +5,6 @@ public class ClimberConstants {
 	public static final int armMotorID = 10;
 	//Arm encoder ID
 	public static final int armEncoderID = 3;
-	//Climber
-	public static final int climberDownButtonID = 6;
+	//Climber limit switch
+	public static final int bottomClimberLimitSwitchID = 6;
 }

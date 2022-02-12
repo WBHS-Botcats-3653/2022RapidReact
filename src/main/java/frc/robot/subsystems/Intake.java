@@ -24,9 +24,6 @@ public class Intake extends SubsystemBase {
 	private OI m_oi = OI.getInstance();
 	private SI m_si = SI.getInstance();
 
-	/**Constructor
-	 * it is a singleton
-	 */
 	private Intake() {
 		//Creates WPI_VictorSPX motor controllers for the Pivot and Rollers in the Intake
 		pivot = new WPI_VictorSPX(IntakeConstants.pivotMotorID);
@@ -34,7 +31,7 @@ public class Intake extends SubsystemBase {
 		//pivotEncoder = new AnalogInput(/*DriveConstants*/ 1);
 	}
 	
-	//Returns an instance of the climber, creating an instance only when one does not already exist (singleton)
+	//Returns an instance of Intake, creating an instance only when one does not already exist (singleton)
 	public static Intake getInstance() {
 		if (intake == null)
 			intake = new Intake();

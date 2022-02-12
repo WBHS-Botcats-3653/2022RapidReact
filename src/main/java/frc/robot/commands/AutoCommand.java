@@ -31,8 +31,6 @@ public class AutoCommand extends CommandBase {
 		hasFinished = false;
 	}
 
-	//public void run() {}
-
 
 	@Override
 	public void initialize() {

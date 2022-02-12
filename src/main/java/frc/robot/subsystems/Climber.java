@@ -25,7 +25,7 @@ public class Climber extends SubsystemBase {
 		arm = new WPI_VictorSPX(ClimberConstants.armMotorID);
 	}
 
-	//Returns an instance of the climber, creating an instance only when one does not already exist (singleton)
+	//Returns an instance of Climber, creating an instance only when one does not already exist (singleton)
 	public static Climber getInstance() {
 		if (m_singleton == null) {
 			m_singleton = new Climber();

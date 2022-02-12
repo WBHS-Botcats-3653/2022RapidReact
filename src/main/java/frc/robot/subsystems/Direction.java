@@ -44,6 +44,7 @@ public class Direction extends SubsystemBase {
 		rightEncoder.setDistancePerPulse(1./256.);
 	}
 
+	//Returns an instance of Direction, creating an instance only when one does not already exist
 	public static Direction getInstance() {
 		if (m_singleton == null) {
 			m_singleton = new Direction();

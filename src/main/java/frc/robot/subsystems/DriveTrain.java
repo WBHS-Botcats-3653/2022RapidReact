@@ -43,7 +43,7 @@ public class DriveTrain extends SubsystemBase {
 		driveLeft.setInverted(true);
 	}
 	
-	//Returns an instance of the climber, creating an instance only when one does not already exist
+	//Returns an instance of DrainTrain, creating an instance only when one does not already exist
 	public static DriveTrain getInstance() {
 		if (driveTrain == null) {
 			driveTrain = new DriveTrain();
