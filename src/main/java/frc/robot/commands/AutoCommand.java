@@ -1,9 +1,5 @@
 package frc.robot.commands;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> d1c3ecae4ee07b882d69ec51f318fec110b2bad4
 //Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
 //Imports OI
@@ -40,11 +36,7 @@ public class AutoCommand extends CommandBase {
 
 	@Override
 	public void initialize() {
-		stage = "Shoot Preload";
-<<<<<<< HEAD
-=======
-
-		/*new ScheduleCommand(
+		stage = "Shoot Preload";/*new ScheduleCommand(
 			//this one will execute the shooter for 3 seconds and then stop
 			new StartEndCommand(
 				//run when it starts
@@ -69,7 +61,6 @@ public class AutoCommand extends CommandBase {
 				)
 			).initialize();
 		//super.initialize();*/
->>>>>>> d1c3ecae4ee07b882d69ec51f318fec110b2bad4
 	}
 
 	@Override
