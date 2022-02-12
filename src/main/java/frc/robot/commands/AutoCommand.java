@@ -59,11 +59,9 @@ public class AutoCommand extends CommandBase {
 					//run when it starts
 					() -> driveTrain.ArcadeDrived(0.5, 0), 
 					//run when it ends
-					() -> driveTrain.ArcadeDrived(0, 0),
-					driveTrain
-				).withTimeout(3)
-			)
-		).initialize();
+					() -> driveTrain.ArcadeDrived(0, 0), driveTrain).withTimeout(3)
+				)
+			).initialize();
 		//super.initialize();*/
 	}
 
