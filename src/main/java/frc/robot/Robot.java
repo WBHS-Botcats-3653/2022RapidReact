@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj2.command.PrintCommand;
 import frc.robot.commands.ArcadeDriveCommand;
 import frc.robot.commands.AutoCommand;
 import frc.robot.commands.ClimberCommand;
-import frc.robot.commands.DashboardCommand;
 import frc.robot.commands.IndexerCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.ShooterCommand;
@@ -51,7 +50,6 @@ public class Robot extends TimedRobot {
 	private ArcadeDriveCommand m_arcadeDriveCommand;
 	private ClimberCommand m_climberCommand;
 	private IntakeCommand m_intakeCommand;
-	private DashboardCommand m_dashboardCommand;
 	private ShooterCommand m_shooterCommand;
 	private IndexerCommand m_indexerCommand;
 	
@@ -143,7 +141,6 @@ public class Robot extends TimedRobot {
 		m_arcadeDriveCommand = m_robotContainer.getArcadeDriveCommand();
 		m_climberCommand = m_robotContainer.getClimberCommand();
 		m_intakeCommand = m_robotContainer.getIntakeCommand();
-		m_dashboardCommand = m_robotContainer.getDashboardCommand();
 		m_shooterCommand = m_robotContainer.getShooterCommand();
 		m_indexerCommand = m_robotContainer.getIndexerCommand();
 		// This makes sure that the autonomous stops running when
@@ -158,7 +155,6 @@ public class Robot extends TimedRobot {
 		m_climberCommand.schedule();
 		m_indexerCommand.schedule();
 		m_intakeCommand.schedule();
-		m_dashboardCommand.schedule();
 		m_shooterCommand.schedule();
 		//Sets max motor speeds
 		m_oi.setMaxShootSpeed(1.0);
@@ -193,7 +189,6 @@ public class Robot extends TimedRobot {
 		m_climberCommand.schedule();
 		m_indexerCommand.schedule();
 		m_intakeCommand.schedule();
-		m_dashboardCommand.schedule();
 		m_shooterCommand.schedule();
 		//Sets max motor speeds
 		m_oi.setMaxShootSpeed(1.0);

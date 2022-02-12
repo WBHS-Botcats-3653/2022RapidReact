@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ArcadeDriveCommand;
 import frc.robot.commands.AutoCommand;
 import frc.robot.commands.ClimberCommand;
-import frc.robot.commands.DashboardCommand;
 import frc.robot.commands.IndexerCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.ShooterCommand;
@@ -41,7 +40,6 @@ public class RobotContainer {
 	private final ArcadeDriveCommand m_arcadeDriveCommand = new ArcadeDriveCommand(m_driveSubsystem);
 	private final ClimberCommand m_climberCommand = new ClimberCommand(m_climberSubsystem);
 	private final IntakeCommand m_intakeCommand = new IntakeCommand(m_intakeSubsystem);
-	private final DashboardCommand m_dashboardCommand = new DashboardCommand(m_dashboardSubsystem);
 	private final ShooterCommand m_shooterCommand = new ShooterCommand(m_shooterSubsystem);
 	private final AutoCommand m_autoCommand = new AutoCommand();
 	private final IndexerCommand m_indexerCommand = new IndexerCommand(m_indexerSubsystem);
@@ -95,15 +93,6 @@ public class RobotContainer {
 	 */
 	public IntakeCommand getIntakeCommand() {
 		return m_intakeCommand;
-	}
-
-	/**
-	 * Use this to pass the arcade dashboard to the main {@link Robot} class.
-	 *
-	 * @return the command to run in teleop
-	 */
-	public DashboardCommand getDashboardCommand() {
-		return m_dashboardCommand;
 	}
 
 	/**
