@@ -1,13 +1,10 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Encoder;
 //Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
 //Imports OI
 import frc.robot.OI;
-//Imports Constants
 import frc.robot.Constants.AutoConstants;
-import frc.robot.Constants.DriveConstants;
 //Imports subsystems
 import frc.robot.subsystems.Direction;
 import frc.robot.subsystems.DriveTrain;
@@ -74,7 +71,6 @@ public class AutoCommand extends CommandBase {
 
 	@Override
 	public void execute() {
-		/* autonomous commented until fixed
 		switch (stage) {
 			case ("Shoot Preload"):
 				//Shoot preload HERE
@@ -97,7 +93,6 @@ public class AutoCommand extends CommandBase {
 				break;
 				
 		}
-		*/
 	}
 
 	// Called once the command ends or is interrupted.
