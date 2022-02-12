@@ -8,8 +8,11 @@ package frc.robot.subsystems;
 import edu.wpi.first.util.sendable.Sendable;
 //Imports ADIS16470_IMU (Gyroscope)
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
+import edu.wpi.first.wpilibj.Encoder;
 //Imports SubsystemBase
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.OI;
+import frc.robot.Constants.DriveConstants;
 
 /**
  * Wrapper class to gyro on Roborio.
@@ -17,10 +20,31 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Direction extends SubsystemBase {
 	private static Direction m_singleton;
 	private ADIS16470_IMU m_gyro;
+	private OI m_oi;
+	private DriveTrain driveTrain;
+	private Shooter shooter;
+	private Direction gyro;
+	private double kP;
+	private Encoder encoder;
+	private boolean hasFinished;
+	private String stage;
+
 	
 	public Direction() {
 		m_gyro = new ADIS16470_IMU();
 		m_gyro.calibrate();
+		m_oi = OI.getInstance();
+		driveTrain = DriveTrain.getInstance();
+		shooter = Shooter.getInstance();
+		gyro = Direction.getInstance();
+		
+		kP = 1;
+		encoder = new Encoder(DriveConstants.leftMotorGroupEncoder, DriveConstants.rightMotorGroupEncoder);
+		hasFinished = false;
+		// Configures the encoders' distance-per-pulse
+		// The robot moves forward 1 foot per encoder rotation
+		// There are 256 pulses per encoder rotation
+		encoder.setDistancePerPulse(1./256.);
 	}
 
 	public static Direction getInstance() {
@@ -41,4 +65,12 @@ public class Direction extends SubsystemBase {
 	public double getRate() {
 		return m_gyro.getRate();
 	}
+	/**
+	 * @return encoder's distance since last reset
+	 */
+	
+	public double getDrivedDistance(){
+		return encoder.getDistance();
+	}
+	
 }

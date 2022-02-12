@@ -95,9 +95,13 @@ public class OI {
 
 	public void setMaxShootSpeed(double maxspd) {
 		if (0.0 < maxspd && maxspd <= 1.0) {
-			m_maxShootSpeed = -maxspd;
+			m_maxShootSpeed = maxspd;
 		}
 	}
+	/**
+	 * 
+	 * @return m_maxShootSpeed, but it needs to be inverted
+	 */
 	public double getMaxShootSpeed(){
 		return m_maxShootSpeed;
 	}

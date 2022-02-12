@@ -20,6 +20,7 @@ import frc.robot.commands.IndexerCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.subsystems.Dashboard;
+import frc.robot.subsystems.Direction;
 import frc.robot.subsystems.DriveTrain;
 
 /**
@@ -38,6 +39,7 @@ public class Robot extends TimedRobot {
 	//private final Intake m_intakeSubsystem = Intake.getInstance();
 	//private final Dashboard m_dashboardSubsystem = Dashboard.getInstance();
 	//private final Shooter m_shooterSubsystem = Shooter.getInstance();
+	private final Direction m_directionSubsystem = Direction.getInstance();
 
 	//Inputs
 	private final OI m_oi = OI.getInstance();
@@ -210,6 +212,7 @@ public class Robot extends TimedRobot {
 		//train.ArcadeDrived();
 		
 		new PrintCommand("is all stop true? " + m_si.getPivotDownTriggered()).initialize();
+		new PrintCommand("how much had it moved " + m_directionSubsystem.getDrivedDistance()).initialize();
 		/*
 		m_shooterCommand.initialize();
 		m_intakeCommand.initialize();

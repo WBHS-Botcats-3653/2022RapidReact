@@ -20,8 +20,6 @@ public class AutoCommand extends CommandBase {
 	private DriveTrain driveTrain;
 	private Shooter shooter;
 	private Direction gyro;
-	private double kP;
-	private Encoder encoder;
 	private boolean hasFinished;
 	private String stage;
 
@@ -31,18 +29,15 @@ public class AutoCommand extends CommandBase {
 		driveTrain = DriveTrain.getInstance();
 		shooter = Shooter.getInstance();
 		gyro = Direction.getInstance();
-		/* commented until encoders are installed
-		kP = 1;
-		encoder = new Encoder(DriveConstants.leftMotorGroupEncoder, DriveConstants.rightMotorGroupEncoder);
+		
+		
+		
 		hasFinished = false;
-		// Configures the encoders' distance-per-pulse
-		// The robot moves forward 1 foot per encoder rotation
-		// There are 256 pulses per encoder rotation
-		encoder.setDistancePerPulse(1./256.);
-		*/
+		
 	}
 
 	//public void run() {}
+
 
 	@Override
 	public void initialize() {
