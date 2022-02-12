@@ -60,6 +60,6 @@ public class SI {
 	}
 
 	public boolean getClimberDownTriggered() {
-		return climberDownButton.get();
+		return !climberDownButton.get();  //Invert (Nick wired it wrong (again) lol)
 	}
 }
