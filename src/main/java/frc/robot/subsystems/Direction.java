@@ -23,7 +23,11 @@ public class Direction extends SubsystemBase {
 	private OI m_oi;
 	private DriveTrain driveTrain;
 	private Shooter shooter;
+<<<<<<< HEAD
 	private double kP;
+=======
+	private Direction gyro;
+>>>>>>> d1c3ecae4ee07b882d69ec51f318fec110b2bad4
 	private Encoder encoder;
 	private boolean hasFinished;
 	private String stage;
@@ -35,9 +39,13 @@ public class Direction extends SubsystemBase {
 		m_oi = OI.getInstance();
 		driveTrain = DriveTrain.getInstance();
 		shooter = Shooter.getInstance();
+<<<<<<< HEAD
 
 		
 		kP = 1;
+=======
+		gyro = Direction.getInstance();
+>>>>>>> d1c3ecae4ee07b882d69ec51f318fec110b2bad4
 		encoder = new Encoder(DriveConstants.leftMotorGroupEncoder, DriveConstants.rightMotorGroupEncoder);
 		hasFinished = false;
 		// Configures the encoders' distance-per-pulse
