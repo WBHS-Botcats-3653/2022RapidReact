@@ -208,7 +208,8 @@ public class Robot extends TimedRobot {
 		//train.ArcadeDrived();
 		
 		new PrintCommand("is all stop true? " + m_si.getPivotDownTriggered()).initialize();
-		new PrintCommand("how much had it moved " + m_directionSubsystem.getDrivedDistance()).initialize();
+		new PrintCommand("how much had it moved " + m_directionSubsystem.getLeftDistance()).initialize();
+		new PrintCommand("how much had it moved " + m_directionSubsystem.getRightDistance()).initialize();
 		/*
 		m_shooterCommand.initialize();
 		m_intakeCommand.initialize();
