@@ -97,8 +97,8 @@ public class OI {
 		}
 	}
 
-	//Returns the max indexer speed (invert after return)
-	public double getMaxIndexerSpeed(){
+	//Returns the max indexer speed
+	public double getMaxIndexerSpeed() {
 		return m_maxIndexerSpeed;
 	}
 
