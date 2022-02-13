@@ -2,10 +2,12 @@ package frc.robot.commands;
 
 //Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import frc.robot.OI;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.subsystems.Direction;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Shooter;
 
 /*This command will run and will do 
@@ -13,7 +15,8 @@ import frc.robot.subsystems.Shooter;
 public class AutoCommand extends CommandBase {
 	private OI m_oi;
 	private DriveTrain driveTrain;
-	private Shooter shooter;
+	private Shooter m_shooter;
+	private Indexer m_indexer;
 	private Direction gyro;
 	private boolean hasFinished;
 	private String stage;
@@ -23,7 +26,8 @@ public class AutoCommand extends CommandBase {
 	public AutoCommand() {
 		m_oi = OI.getInstance();
 		driveTrain = DriveTrain.getInstance();
-		shooter = Shooter.getInstance();
+		m_shooter = Shooter.getInstance();
+		m_indexer = Indexer.getInstance();
 		gyro = Direction.getInstance();
 		kP = 1;
 		hasFinished = false;
@@ -42,7 +46,6 @@ public class AutoCommand extends CommandBase {
 		hasFinished = true;*/
 
 		stage = "Shoot Preload";
-		
 		/*new ScheduleCommand(
 			//this one will execute the shooter for 3 seconds and then stop
 			new StartEndCommand(
@@ -75,6 +78,15 @@ public class AutoCommand extends CommandBase {
 		switch (stage) {
 			case ("Shoot Preload"):
 				//Shoot preload HERE
+				new StartEndCommand(
+					() -> m_shooter.setSpinSpeed(m_oi.getMaxShootSpeed()),
+					() -> new StartEndCommand(
+						() -> m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed()),
+						() -> m_indexer.setIndexerSpeed(0)
+					).withTimeout(2)
+				).withTimeout(2).andThen(
+					() -> m_shooter.setSpinSpeed(m_oi.getMaxShootSpeed())
+				);
 				//End shoot preload stage and switch to taxi stage
 				stage = "Taxi"; //Add condition
 				break;
