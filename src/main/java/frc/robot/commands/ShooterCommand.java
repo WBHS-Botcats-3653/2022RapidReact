@@ -35,14 +35,21 @@ public class ShooterCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		//All stop called (used for testing)
+		if (m_oi.getShoot()) {  //If the right trigger is being pressed
+			//Spins the shooter at max speed
+			m_shooter.setSpinSpeed(m_oi.getMaxShootSpeed());
+		} else {  //Nothing is being pressed (shooter wise)
+			//Stops the spinner
+			m_shooter.setSpinSpeed(0);
+		}
+		/*//All stop called (used for testing)
 		if (m_oi.getAllStop()) {  //If the B button is being pressed
 			//Stop motor
 			m_shooter.setSpinSpeed(0);
 			return;
 		}
 		//Spins the shooter based on controller input
-		m_shooter.setSpinSpeed(m_oi.getShoot());
+		m_shooter.setSpinSpeed(m_oi.getShoot());*/
 	}
 
 	// Called once the command ends or is interrupted.

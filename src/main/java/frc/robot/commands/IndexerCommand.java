@@ -35,7 +35,19 @@ public class IndexerCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		//All stop called (used for testing)
+		if (m_oi.getIndexerIn()) {  //If the A button is being pressed
+			m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed());
+			m_intake.setRollerSpeed(m_oi.getMaxIntakeRollerSpeed());
+		} else if (m_oi.getIndexerOut()) {  //If the Y button is being pressed
+			m_indexer.setIndexerSpeed(-m_oi.getMaxIndexerSpeed());
+			m_intake.setRollerSpeed(-m_oi.getMaxIntakeRollerSpeed());
+		} else {  //Nothing being pressed (indexer wise)
+			//Stops the indexer
+			m_indexer.setIndexerSpeed(0);
+			//Stops the rollers
+			m_intake.setRollerSpeed(0);
+		}
+		/*//All stop called (used for testing)
 		if (m_oi.getAllStop()) {  //If the B button is being pressed
 			//Stop motor
 			m_indexer.setIndexerSpeed(0);
@@ -47,7 +59,7 @@ public class IndexerCommand extends CommandBase {
 			//Spin the indexer at max speed
 			m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed());
 			m_intake.setRollerSpeed(-m_oi.getMaxIntakeRollerSpeed());
-		}/* else if (m_si.getLowerStorageTriggered()) {  //If the lower storage photoelectric sensor is triggered
+		} else if (m_si.getLowerStorageTriggered()) {  //If the lower storage photoelectric sensor is triggered
 			if (!m_si.getUpperStorageTriggered()) {  //If the lower storage photoelectric sensor is not triggered
 				//Spin the indexer at max speed
 				m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed());
@@ -55,11 +67,11 @@ public class IndexerCommand extends CommandBase {
 				//Stop spinning the indexer
 				m_indexer.setIndexerSpeed(0);
 			}
-		}*/ else {
+		} else {
 			//Stop spinning the indexer
 			m_indexer.setIndexerSpeed(0);
 			m_intake.setRollerSpeed(0);
-		}
+		}*/
 	}
 
 	// Called once the command ends or is interrupted.

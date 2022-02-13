@@ -1,10 +1,22 @@
+/*----------------------------------------------------------------------------*/
+/* Copyright (c) 2021-2022 FIRST. All Rights Reserved.                        */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
+/*----------------------------------------------------------------------------*/
+
 package frc.robot;
 
-//Imports XboxController
+//Imports XBoxController
 import edu.wpi.first.wpilibj.XboxController;
 
-public class OI {
-	private static OI m_singleton = null;
+/**
+ * Operator input
+ * This class is the glue that binds the controls on the physical operator
+ * interface to the commands and command groups that allow control of the robot.
+ */
+public class OldOI {
+	private static OldOI m_singleton = null;
 	//Controller
 	private XboxController m_controller = null;
 	//Max speeds
@@ -17,14 +29,14 @@ public class OI {
 	//Holds whether the intake is down
 	public boolean isIntakeDown = false;
 
-	public OI() {
+	private OldOI() {
 		m_controller = new XboxController(0);
 	}
-	
+
 	//Returns an instance of OI, creating an instance only when one does not already exist (singleton)
-	public static OI getInstance() {
+	public static OldOI getInstance() {
 		if (m_singleton == null) {
-			m_singleton = new OI();
+			m_singleton = new OldOI();
 		}
 		return m_singleton;
 	}
@@ -111,38 +123,48 @@ public class OI {
 		return -m_controller.getRightX() * m_maxDriveSpeed;  // correct stearing (-)
 	}
 
-	//Returns whether the left trigger is being pressed
-	public boolean getIntakeUp() {
-		return m_controller.getLeftBumper();
+	//Returns the speed to move the intake rollers
+	public double getIntakeCtrl() {
+		double ret_value = 0.0;
+		if (m_controller.getLeftBumper()) {
+			ret_value = -m_maxIntakeRollerSpeed;
+		} else if (m_controller.getLeftTriggerAxis() > 0 || m_controller.getRightBumper()) {
+			ret_value = m_maxIntakeRollerSpeed;
+		}
+		return ret_value;
 	}
 
-	//Returns whether the left bumper is being pressed
+	//Returns whether the operator is trying to move the intake down and the intake is not already down
 	public boolean getIntakeDown() {
-		return m_controller.getLeftTriggerAxis() > 0;
+		return m_controller.getLeftTriggerAxis() > 0 && !isIntakeDown;
 	}
 
-	//Returns whether the B button is being pressed
-	public boolean getIndexerIn() {
-		return m_controller.getBButton();
+	//Returns whether the operator is trying to move the intake up and the intake is down
+	public boolean getIntakeUp() {
+		return m_controller.getLeftTriggerAxis() == 0 && isIntakeDown;
 	}
 
-	//Returns whether the Y button is being pressed
-	public boolean getIndexerOut() {
+	//Returns whether the manual intake up is being pressed
+	public boolean getManualIntakeUp() {
 		return m_controller.getYButton();
 	}
 
-	//Returns whether the A button is being pressed
-	public boolean getIntakeIn() {
+	//Returns whether the manual intake down is being pressed
+	public boolean getManualIntakeDown() {
 		return m_controller.getAButton();
 	}
-
-	//Returns whether the A button is being pressed
-	public boolean getIntakeOut() {
+	
+	//Returns whether the manual indexer is being being pressed
+	public boolean getSpinIndexer() {
 		return m_controller.getXButton();
 	}
-
-	public boolean getShoot() {
-		return m_controller.getRightTriggerAxis() > 0;
+	
+	//Returns the speed to spin the 
+	public double getShoot() {
+		if (m_controller.getRightTriggerAxis() > 0) {
+			return m_maxShootSpeed;
+		}
+		return 0;
 	}
 
 	//Returns whether the up bottom on the DPad is being pressed
@@ -163,5 +185,10 @@ public class OI {
 	//Returns whether the left button on the DPad is being pressed
 	public boolean POVIsLeft() {
 		return m_controller.getPOV()>225&&m_controller.getPOV()<315;
+	}
+
+	//Returns whether the all motor stop button is being pressed (used for testing purposes, no smoke from the motors is nice)
+	public boolean getAllStop() {
+		return m_controller.getBButton();
 	}
 }

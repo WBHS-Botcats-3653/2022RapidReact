@@ -39,12 +39,12 @@ public class ClimberCommand extends CommandBase {
 	@Override
 	// Called every time the scheduler runs while the command is scheduled.
 	public void execute() {
-		//All stop called (used for testing)
+		/*//All stop called (used for testing)
 		if (m_oi.getAllStop()) {  //If the B button is being pressed
 			//Stop motor
 			m_climber.setArmSpeed(0);
 			return;
-		}
+		}*/
 		//Checks whether there is input coming in to move the arm
 		if (m_oi.POVIsUp()) {  //If up Dpad up is pressed
 			//Move arm up
@@ -55,7 +55,7 @@ public class ClimberCommand extends CommandBase {
 		} else if (m_oi.POVIsDown()) {  //If Dpad down is pressed
 			//Move arm down
 			m_climber.setArmSpeed(m_oi.getMaxArmSpeed());  //Climber motor is inverted
-		} else {
+		} else {  //Nothing being pressed (climber wise)
 			//Stop arm
 			m_climber.setArmSpeed(0);
 		}

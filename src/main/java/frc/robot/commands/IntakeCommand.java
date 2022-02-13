@@ -38,7 +38,27 @@ public class IntakeCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		//All stop called (used for testing)
+		if (m_oi.getIntakeDown()) {  //If the left trigger is being pressed
+			//Pivot the intake down
+			m_intake.setPivotSpeed(m_oi.getMaxIntakePivotSpeed());
+		} else if (m_oi.getIntakeUp()) {  //If the left bumper is being pressed
+			//Pivot the intake up
+			m_intake.setPivotSpeed(-m_oi.getMaxIntakePivotSpeed());
+		} else {
+			//Stops the intake pivot
+			m_intake.setPivotSpeed(0);
+		}
+		if (m_oi.getIntakeIn()) {  //If the A button is being pressed
+			//Spin the rollers at max speed
+			m_intake.setRollerSpeed(m_oi.getMaxIntakeRollerSpeed());
+		} else if (m_oi.getIntakeOut()) {  //If the X button is being pressed
+			//Reverse the rollers and spin at max speed
+			m_intake.setRollerSpeed(-m_oi.getMaxIntakeRollerSpeed());
+		} else {  //Nothing being pressed (intake roller wise)
+			//Stops the rollers
+			m_intake.setRollerSpeed(0);
+		}
+		/*//All stop called (used for testing)
 		if (m_oi.getAllStop()) {  //If the B button is being pressed
 			//Stop motors
 			m_intake.setRollerSpeed(0);
@@ -70,7 +90,7 @@ public class IntakeCommand extends CommandBase {
 			m_intake.setPivotSpeed(-m_oi.getMaxIntakePivotSpeed());
 		}
 		//Spins the rollers based off a combination of possible inputs (handled in OI)
-		m_intake.setRollerSpeed(m_oi.getIntakeCtrl());
+		m_intake.setRollerSpeed(m_oi.getIntakeCtrl());*/
 	}
 
 	// Called once the command ends or is interrupted.
