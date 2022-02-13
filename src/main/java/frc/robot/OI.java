@@ -145,6 +145,10 @@ public class OI {
 		return m_controller.getRightTriggerAxis() > 0;
 	}
 
+	public boolean getShootReverse() {
+		return m_controller.getRightBumper();
+	}
+
 	//Returns whether the up bottom on the DPad is being pressed
 	public boolean POVIsUp() {
 		return m_controller.getPOV()!=-1&&(m_controller.getPOV()>=315||m_controller.getPOV()<=45);
