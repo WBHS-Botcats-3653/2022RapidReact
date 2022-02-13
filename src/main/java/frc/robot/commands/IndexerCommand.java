@@ -42,7 +42,7 @@ public class IndexerCommand extends CommandBase {
 		if (m_oi.getSpinIndexer()) {  //If the X button is being pressed
 			//Spin the indexer at max speed
 			m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed());
-		} else if (m_si.getLowerStorageTriggered()) {  //If the lower storage photoelectric sensor is triggered
+		}/* else if (m_si.getLowerStorageTriggered()) {  //If the lower storage photoelectric sensor is triggered
 			if (!m_si.getUpperStorageTriggered()) {  //If the lower storage photoelectric sensor is not triggered
 				//Spin the indexer at max speed
 				m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed());
@@ -50,7 +50,7 @@ public class IndexerCommand extends CommandBase {
 				//Stop spinning the indexer
 				m_indexer.setIndexerSpeed(0);
 			}
-		} else {
+		}*/ else {
 			//Stop spinning the indexer
 			m_indexer.setIndexerSpeed(0);
 		}
