@@ -23,6 +23,7 @@ public class Climber extends SubsystemBase {
 	private Climber() {
 		//Creates VictorSPX motor controller for the arm
 		arm = new WPI_VictorSPX(ClimberConstants.armMotorID);
+		arm.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);  //Fix feedback device
 	}
 
 	//Returns an instance of Climber, creating an instance only when one does not already exist (singleton)
@@ -39,5 +40,14 @@ public class Climber extends SubsystemBase {
 		if (speed > m_oi.getMaxArmSpeed()) speed = m_oi.getMaxArmSpeed();
 		//Sets the arm speed
 		arm.set(speed);
+	}
+
+	public void resetPosition() {
+		arm.setSelectedSensorPosition(0, 0, 0);
+	}
+
+	public double getPosition() {
+		final double distPerCount = ( 1.756 * Math.PI ) / (2.083 * 4096 );
+		return arm.getSelectedSensorPosition(0) * distPerCount;
 	}
 }

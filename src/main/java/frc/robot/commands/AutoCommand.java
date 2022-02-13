@@ -2,39 +2,48 @@ package frc.robot.commands;
 
 //Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
-//Imports OI
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.OI;
 import frc.robot.Constants.AutoConstants;
-//Imports subsystems
-import frc.robot.subsystems.Direction;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Shooter;
+import frc.robot.commands.AutoCommands.DriveCommand;
+import frc.robot.commands.AutoCommands.ShootCargoCommand;
 
 /*This command will run and will do 
  */
 public class AutoCommand extends CommandBase {
 	private OI m_oi;
-	private DriveTrain driveTrain;
+	/*private DriveTrain driveTrain;
 	private Shooter shooter;
-	private Direction gyro;
+	private Direction gyro;*/
 	private boolean hasFinished;
-	private String stage;
-	private double kP;
+	/*private String stage;
+	private double kP;*/
 
 	//Constructor
 	public AutoCommand() {
 		m_oi = OI.getInstance();
-		driveTrain = DriveTrain.getInstance();
+		/*driveTrain = DriveTrain.getInstance();
 		shooter = Shooter.getInstance();
 		gyro = Direction.getInstance();
-		kP = 1;
+		kP = 1;*/
 		hasFinished = false;
 	}
 
 
 	@Override
 	public void initialize() {
-		stage = "Shoot Preload";/*new ScheduleCommand(
+		//Runs auto commands sequentially
+		new SequentialCommandGroup(
+			//Shoots 1 preloaded cargo
+			new ShootCargoCommand(),
+			//Taxiing, move back 10 feet at max speed
+			new DriveCommand(-m_oi.getMaxDriveSpeed(), AutoConstants.taxiDistanceInFeet, true)
+		);
+		hasFinished = true;
+
+		//stage = "Shoot Preload";
+		
+		/*new ScheduleCommand(
 			//this one will execute the shooter for 3 seconds and then stop
 			new StartEndCommand(
 				//run when it starts
@@ -63,20 +72,24 @@ public class AutoCommand extends CommandBase {
 
 	@Override
 	public void execute() {
-		switch (stage) {
+		/*switch (stage) {
 			case ("Shoot Preload"):
 				//Shoot preload HERE
+				//End shoot preload stage and switch to taxi stage
 				stage = "Taxi"; //Add condition
 				break;
 			case ("Taxi"):
 				//Gets the error rate
 				double error = kP * -gyro.getRate();
 				//Taxis out of the Tarmax (10 feet forward at high speed) then stops
-				if (gyro.getRightDistance() < AutoConstants.taxiDistanceInFeet) {
-					double speed = -0.95;  //Speed not -1 so that course corrections can be made
+				if (gyro.getDistance() < AutoConstants.taxiDistanceInFeet) {
+					double speed = -m_oi.getMaxDriveSpeed()-0.05;  //Speed not max so that course corrections can be made
+					//Moves the robot at the set speed and making course corrections based off the gyro
 					driveTrain.tankDrived(speed + error, speed - error);
 				} else {
+					//Stop the robot
 					driveTrain.tankDrived(0, 0);  //Eventually have robot turn instead of stopping
+					//End taxi stage and switch to collect cargo stage
 					stage = "Collect Cargo";
 				}
 				break;
@@ -84,7 +97,7 @@ public class AutoCommand extends CommandBase {
 				//Collect cargo HERE
 				break;
 				
-		}
+		}*/
 	}
 
 	// Called once the command ends or is interrupted.
