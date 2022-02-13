@@ -86,7 +86,7 @@ public class AutoCommand extends CommandBase {
 					).withTimeout(2)
 				).withTimeout(2).andThen(
 					() -> m_shooter.setSpinSpeed(0)
-				);
+				).initialize();
 				//End shoot preload stage and switch to taxi stage
 				stage = "Taxi"; //Add condition
 				break;
