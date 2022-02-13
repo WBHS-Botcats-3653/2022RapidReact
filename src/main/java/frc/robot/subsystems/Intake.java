@@ -44,13 +44,20 @@ public class Intake extends SubsystemBase {
 		if (speed > m_oi.getMaxIntakeRollerSpeed()) {
 			speed = m_oi.getMaxIntakeRollerSpeed();
 		} else if (speed < -m_oi.getMaxIntakeRollerSpeed()) {
-			speed = m_oi.getMaxIntakeRollerSpeed();
+			speed = -m_oi.getMaxIntakeRollerSpeed();
 		}
 		//Sets the roller speed
 		rollers.set(-speed);
 	}
 
 	public void setPivotSpeed(double speed) {
+		//Caps the speed from exceeding the set maxIntakePivotSpeed
+		if (speed > m_oi.getMaxIntakePivotSpeed()) {
+			speed = m_oi.getMaxIntakePivotSpeed();
+		} else if (speed < -m_oi.getMaxIntakePivotSpeed()) {
+			speed = -m_oi.getMaxIntakePivotSpeed();
+		}
+		//Sets the pivot speed
 		pivot.set(speed);
 	}
 }

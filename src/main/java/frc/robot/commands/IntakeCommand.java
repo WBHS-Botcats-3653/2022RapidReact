@@ -45,7 +45,7 @@ public class IntakeCommand extends CommandBase {
 			m_intake.setPivotSpeed(0);
 			return;
 		}
-		//Checks whether there is input coming in for the pivot to move down
+		//Checks whether there is input coming in for the pivot to move up or down
 		if (m_oi.getManualIntakeDown()) {  //If the A button is being pressed (intake pivot manual down)
 			//Pivots the intake down at max speed
 			m_intake.setPivotSpeed(m_oi.getMaxIntakePivotSpeed());

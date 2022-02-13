@@ -157,7 +157,7 @@ public class Robot extends TimedRobot {
 		m_intakeCommand.schedule();
 		m_shooterCommand.schedule();
 		//Sets max motor speeds
-		m_oi.setMaxShootSpeed(1.0);
+		m_oi.setMaxShootSpeed(0.8);
 		m_oi.setMaxIntakePivotSpeed(0.5);
 		m_oi.setMaxIntakeRollerSpeed(1.0);
 		m_oi.setMaxArmSpeed(1.0);
