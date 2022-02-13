@@ -10,11 +10,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.OI;
 //Imports SI
 import frc.robot.SI;
-//Imports Storage subsystem
+//Imports subsystems
 import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.Intake;
 
 public class IndexerCommand extends CommandBase {
 	private Indexer m_indexer;
+	private Intake m_intake;
 	private OI m_oi;
 	private SI m_si;
 
@@ -36,12 +38,14 @@ public class IndexerCommand extends CommandBase {
 		if (m_oi.getAllStop()) {  //If the B button is being pressed
 			//Stop motor
 			m_indexer.setIndexerSpeed(0);
+			m_intake.setRollerSpeed(0);
 			return;
 		}
 		//Checks whether there is input coming in to spin the indexer
 		if (m_oi.getSpinIndexer()) {  //If the X button is being pressed
 			//Spin the indexer at max speed
 			m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed());
+			m_intake.setRollerSpeed(-m_oi.getMaxIntakeRollerSpeed());
 		}/* else if (m_si.getLowerStorageTriggered()) {  //If the lower storage photoelectric sensor is triggered
 			if (!m_si.getUpperStorageTriggered()) {  //If the lower storage photoelectric sensor is not triggered
 				//Spin the indexer at max speed
@@ -53,6 +57,7 @@ public class IndexerCommand extends CommandBase {
 		}*/ else {
 			//Stop spinning the indexer
 			m_indexer.setIndexerSpeed(0);
+			m_intake.setRollerSpeed(0);
 		}
 	}
 
