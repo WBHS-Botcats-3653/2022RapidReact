@@ -85,7 +85,7 @@ public class AutoCommand extends CommandBase {
 						() -> m_indexer.setIndexerSpeed(0)
 					).withTimeout(2)
 				).withTimeout(2).andThen(
-					() -> m_shooter.setSpinSpeed(m_oi.getMaxShootSpeed())
+					() -> m_shooter.setSpinSpeed(0)
 				);
 				//End shoot preload stage and switch to taxi stage
 				stage = "Taxi"; //Add condition
