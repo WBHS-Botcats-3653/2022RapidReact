@@ -2,46 +2,46 @@ package frc.robot.commands;
 
 //Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.OI;
 import frc.robot.Constants.AutoConstants;
-import frc.robot.commands.AutoCommands.DriveCommand;
-import frc.robot.commands.AutoCommands.ShootCargoCommand;
+import frc.robot.subsystems.Direction;
+import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Shooter;
 
 /*This command will run and will do 
  */
 public class AutoCommand extends CommandBase {
 	private OI m_oi;
-	/*private DriveTrain driveTrain;
+	private DriveTrain driveTrain;
 	private Shooter shooter;
-	private Direction gyro;*/
+	private Direction gyro;
 	private boolean hasFinished;
-	/*private String stage;
-	private double kP;*/
+	private String stage;
+	private double kP;
 
 	//Constructor
 	public AutoCommand() {
 		m_oi = OI.getInstance();
-		/*driveTrain = DriveTrain.getInstance();
+		driveTrain = DriveTrain.getInstance();
 		shooter = Shooter.getInstance();
 		gyro = Direction.getInstance();
-		kP = 1;*/
+		kP = 1;
 		hasFinished = false;
 	}
 
 
 	@Override
 	public void initialize() {
-		//Runs auto commands sequentially
+		/*//Runs auto commands sequentially
 		new SequentialCommandGroup(
 			//Shoots 1 preloaded cargo
 			new ShootCargoCommand(),
 			//Taxiing, move back 10 feet at max speed
 			new DriveCommand(-m_oi.getMaxDriveSpeed(), AutoConstants.taxiDistanceInFeet, true)
 		);
-		hasFinished = true;
+		hasFinished = true;*/
 
-		//stage = "Shoot Preload";
+		stage = "Shoot Preload";
 		
 		/*new ScheduleCommand(
 			//this one will execute the shooter for 3 seconds and then stop
@@ -72,7 +72,7 @@ public class AutoCommand extends CommandBase {
 
 	@Override
 	public void execute() {
-		/*switch (stage) {
+		switch (stage) {
 			case ("Shoot Preload"):
 				//Shoot preload HERE
 				//End shoot preload stage and switch to taxi stage
@@ -97,7 +97,7 @@ public class AutoCommand extends CommandBase {
 				//Collect cargo HERE
 				break;
 				
-		}*/
+		}
 	}
 
 	// Called once the command ends or is interrupted.
