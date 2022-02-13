@@ -46,6 +46,18 @@ public class AutoCommand extends CommandBase {
 		hasFinished = true;*/
 
 		stage = "Shoot Preload";
+
+		new StartEndCommand(
+			() -> m_shooter.setSpinSpeed(m_oi.getMaxShootSpeed()),
+			() -> new StartEndCommand(
+				() -> m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed()),
+				() -> m_indexer.setIndexerSpeed(0)
+			).withTimeout(2)
+		).withTimeout(2).andThen(
+			() -> m_shooter.setSpinSpeed(0)
+		).andThen(
+			() -> stage = "Taxi"
+		).initialize();
 		/*new ScheduleCommand(
 			//this one will execute the shooter for 3 seconds and then stop
 			new StartEndCommand(
@@ -78,22 +90,13 @@ public class AutoCommand extends CommandBase {
 		switch (stage) {
 			case ("Shoot Preload"):
 				//Shoot preload HERE
-				new StartEndCommand(
-					() -> m_shooter.setSpinSpeed(m_oi.getMaxShootSpeed()),
-					() -> new StartEndCommand(
-						() -> m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed()),
-						() -> m_indexer.setIndexerSpeed(0)
-					).withTimeout(2)
-				).withTimeout(2).andThen(
-					() -> m_shooter.setSpinSpeed(0)
-				).initialize();
 				//End shoot preload stage and switch to taxi stage
-				stage = "Taxi"; //Add condition
+				//stage = "Taxi"; //Add condition
 				break;
 			case ("Taxi"):
 				//Gets the error rate
 				double error = kP * -gyro.getRate();
-				//Taxis out of the Tarmax (10 feet forward at high speed) then stops
+				//Taxis out of the Tarmax (10 feet backward at high speed) then stops
 				if (gyro.getDistance() > AutoConstants.taxiDistanceInFeet) {
 					double speed = -m_oi.getMaxDriveSpeed() - 0.05;  //Speed not max so that course corrections can be made
 					//Moves the robot at the set speed and making course corrections based off the gyro
