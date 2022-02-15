@@ -14,8 +14,6 @@ public class OI {
 	private double m_maxIntakeRollerSpeed;
 	private double m_maxShootSpeed;
 	private double m_maxIndexerSpeed;
-	//Holds whether the intake is down
-	public boolean isIntakeDown = false;
 
 	public OI() {
 		m_controller = new XboxController(0);
@@ -97,7 +95,7 @@ public class OI {
 	}
 	
 	//Returns the max shoot speed (invert after return)
-	public double getMaxShootSpeed(){
+	public double getMaxShootSpeed() {
 		return m_maxShootSpeed;
 	}
 	
@@ -139,6 +137,16 @@ public class OI {
 	//Returns whether the A button is being pressed
 	public boolean getIntakeOut() {
 		return m_controller.getXButton();
+	}
+
+	//
+	public boolean getSmartIntakeDown() {
+		return false;
+	}
+
+	//
+	public boolean getSmartIntakeUp() {
+		return false;
 	}
 
 	public boolean getShoot() {

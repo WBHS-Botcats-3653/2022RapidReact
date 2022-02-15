@@ -15,9 +15,10 @@ import frc.robot.subsystems.Intake;
 
 public class IntakeCommand extends CommandBase {
 	//Holds instances of OI and Intake subsystem
-	private OI m_oi;
 	private Intake m_intake;
+	private OI m_oi;
 	private SI m_si;
+	private boolean smartControl;
 
 	/**Creates a new IntakeCommand.
 	 * @param subsystem The subsystem used by this command.
@@ -27,6 +28,7 @@ public class IntakeCommand extends CommandBase {
 		m_oi = OI.getInstance();
 		this.m_intake = m_intake;
 		m_si = SI.getInstance();
+		smartControl = false;
 		// Use addRequirements() here to declare subsystem dependencies.
 		//addRequirements();
 	}
@@ -38,11 +40,18 @@ public class IntakeCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		//pivot
-		pivotLogic();
-		//rollers
-		rollerLogics();
-		/*All stop called (used for testing)
+		//Smart intake control
+		smartLogic();
+		//Manual controls
+		if (!smartControl) {  //If smart controls are not currently being used
+			//Intake pivot controls
+			pivotLogic();
+			//Intake roller controls
+			rollerLogic();
+		}
+
+		/*Delete later
+		All stop called (used for testing)
 		if (m_oi.getAllStop()) {  //If the B button is being pressed
 			//Stop motors
 			m_intake.setRollerSpeed(0);
@@ -50,11 +59,24 @@ public class IntakeCommand extends CommandBase {
 			return;
 		}
 		*/
-		/**/
 	}
 
+	//Pivot OI logic
+	public void pivotLogic() {
+		if (m_oi.getIntakeDown()) {  //If the left trigger is being pressed
+			//Pivot the intake down
+			m_intake.setPivotSpeed(m_oi.getMaxIntakePivotSpeed());
+		} else if (m_oi.getIntakeUp()) {  //If the left bumper is being pressed
+			//Pivot the intake up
+			m_intake.setPivotSpeed(-m_oi.getMaxIntakePivotSpeed());
+		} else {  //Nothing being pressed (intake pivot wise)
+			//Stops the intake pivot
+			m_intake.setPivotSpeed(0);
+		}
+	}
 
-	public void rollerLogics(){
+	//Roller OI logic
+	public void rollerLogic() {
 		if (m_oi.getIntakeIn()) {  //If the A button is being pressed
 			//Spin the rollers at max speed
 			m_intake.setRollerSpeed(m_oi.getMaxIntakeRollerSpeed());
@@ -67,52 +89,25 @@ public class IntakeCommand extends CommandBase {
 		}
 	}
 
-	public void pivotLogic(){
-		if (m_oi.getIntakeDown()) {  //If the left trigger is being pressed
-			//Pivot the intake down
-			m_intake.setPivotSpeed(m_oi.getMaxIntakePivotSpeed());
-		} else if (m_oi.getIntakeUp()) {  //If the left bumper is being pressed
-			//Pivot the intake up
+	//Smart control logic (button down-pivot down, button pressed-spin rollers, button released-pivot up)
+	public void smartLogic() {
+		if (m_oi.getSmartIntakeUp() && !m_si.getPivotUpLimitTriggered()) {  //If the smart intake is being called to go up
+			//Pivots the intake up at the set max speed
 			m_intake.setPivotSpeed(-m_oi.getMaxIntakePivotSpeed());
-		} else {
+			//Stops the intake rollers
+			m_intake.setRollerSpeed(0);
+			smartControl = true;
+		} else if (m_oi.getSmartIntakeDown() && !m_si.getPivotDownLimitTriggered()) {  //If the smart intake is being called to go down
+			//Pivots the intake down at the set max speed
+			m_intake.setPivotSpeed(m_oi.getMaxIntakePivotSpeed());
+			//Spins the intake rollers at the set max speed
+			m_intake.setRollerSpeed(m_oi.getMaxIntakeRollerSpeed());
+			smartControl = true;
+		} else if (m_si.getPivotDownLimitTriggered() || m_si.getPivotUpLimitTriggered()) {  //If either of the pivot limit switches are triggered
 			//Stops the intake pivot
 			m_intake.setPivotSpeed(0);
+			smartControl = false;
 		}
-	}
-
-	public void smartPivotLogic(){
-		/*
-		if (m_si.getPivotUpTriggered()) {  //If the bottom pivot limit switch is being depressed
-			//Stops the pivot
-			m_intake.setPivotSpeed(0);
-			//Intake is down
-			m_oi.isIntakeDown = false;
-		} else if (m_si.getPivotDownTriggered()) {  //If the bottom pivot limit switch is being depressed
-			//Stops the pivot
-			m_intake.setPivotSpeed(0);
-			//Intake is up
-			m_oi.isIntakeDown = true;
-		} else if (m_oi.getIntakeDown()) {  //If the intake is currently down
-			//Pivots the intake down at max speed
-			m_intake.setPivotSpeed(0);
-		} else if (m_oi.getIntakeUp()) {  //If the intake is currently up
-			//Pivots the intake up at max speed
-			m_intake.setPivotSpeed(0);
-		}
-		*/
-		//this will execute while the button (and the intake is down)
-		if(true /*the button for the smart thingi*/){
-			//in here
-			if(m_oi.getIntakeDown()){
-				m_intake.setPivotSpeed(0);
-			}
-		} else if (false /*this will be when the button is getting releaced*/){
-			//here the intake will go up until it presses the button.
-		} 
-
-		
-		//Spins the rollers based off a combination of possible inputs (handled in OI)
-		m_intake.setRollerSpeed((true /*the button for the smart thingi*/) ? 1.0 : 0);
 	}
 	// Called once the command ends or is interrupted.
 	@Override
