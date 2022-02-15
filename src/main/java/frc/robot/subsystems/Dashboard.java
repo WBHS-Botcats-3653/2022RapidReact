@@ -35,7 +35,7 @@ public class Dashboard {
 	// Drive Tab
 	private NetworkTableEntry m_nteArmAngle = null;
 	private NetworkTableEntry m_nteDriveSpeed = null;
-	
+
 	public static NetworkTableEntry m_isAutoShootOn = null;
 	public static NetworkTableEntry m_isAutoTaxiOn = null;
 	public static NetworkTableEntry m_isAutoCollectOn = null;
@@ -65,14 +65,23 @@ public class Dashboard {
 		m_nteDriveSpeed = tabDrive.addPersistent("Speed", ctrl.getMaxDriveSpeed()).withWidget(BuiltInWidgets.kNumberSlider)
 				.withProperties(Map.of("min", 0, "max", 1.0)).withSize(1, 1).withPosition(6, 0).getEntry();
 
+		//Auto Shoot
 		m_isAutoShootOn = tabDrive.addPersistent("Auto Shoot", true).withWidget(BuiltInWidgets.kToggleButton)
-		.withSize(1, 1).withPosition(3, 1).getEntry();
+		.withSize(1, 1).withPosition(5, 2).getEntry();
+		//this one goes
+		tabDrive.addPersistent("is Auto Shoot", m_isAutoShootOn.getBoolean(true)).withSize(1, 1).withPosition(5, 1);
 
+		//auto Taxi
 		m_isAutoTaxiOn = tabDrive.addPersistent("Auto Taxi", true).withWidget(BuiltInWidgets.kToggleButton)
-		.withSize(1, 1).withPosition(4, 1).getEntry();
+		.withSize(1, 1).withPosition(6, 2).getEntry();
+		//this
+		tabDrive.addPersistent("is Auto Taxi", m_isAutoTaxiOn.getBoolean(true)).withSize(1, 1).withPosition(6, 1);
 
+		//Auto collect
 		m_isAutoCollectOn = tabDrive.addPersistent("Auto Collect", true).withWidget(BuiltInWidgets.kToggleButton)
-		.withSize(1, 1).withPosition(5, 1).getEntry();
+		.withSize(1, 1).withPosition(7, 2).getEntry();
+		//this one goes
+		tabDrive.addPersistent("is Auto Collect", m_isAutoCollectOn.getBoolean(true)).withSize(1, 1).withPosition(7, 1);
 
 		// Test Tab
 		m_nteArmDnLimit = tabTest.add("Arm Down", false).withSize(1, 1).withPosition(0, 0).getEntry();

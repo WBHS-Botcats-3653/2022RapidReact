@@ -86,14 +86,16 @@ public class AutoCommand extends CommandBase {
 		switch (stage) {
 			case ("Shoot Preload"):
 				//shootPreload(true);
-				if (shootPreload(isAutoShootOn)) stage = "Taxi";
+				if (shootPreload(isAutoShootOn) || !isAutoShootOn) stage = "Taxi";
 				break;
 			case ("Taxi"):
 			//runs the taxi
-				//taxiDrive(isAutoTaxiOn);
+				taxiDrive(isAutoTaxiOn);
+				if (taxiDrive(isAutoTaxiOn) || !isAutoTaxiOn) stage = "Collect Cargo";
 				break;
 			case ("Collect Cargo"):
 				//Collect cargo HERE
+				hasFinished = true;
 				break;
 				
 		}
@@ -166,7 +168,11 @@ public class AutoCommand extends CommandBase {
 
 	// Called once the command ends or is interrupted.
 	@Override
-	public void end(boolean interrupted) {}
+	public void end(boolean interrupted) {
+		m_shooter.setSpinSpeed(0);
+		m_indexer.setIndexerSpeed(0);
+		driveTrain.tankDrived(0, 0); 
+	}
 
 	// Returns true when the command should end.
 	@Override
