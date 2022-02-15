@@ -46,13 +46,13 @@ public class ClimberCommand extends CommandBase {
 			return;
 		}*/
 		//Checks whether there is input coming in to move the arm
-		if (m_oi.POVIsUp()) {  //If up Dpad up is pressed
+		if (m_oi.getClimbUp()) {  //If up Dpad up is pressed
 			//Move arm up
 			m_climber.setArmSpeed(-m_oi.getMaxArmSpeed());  //Climber motor is inverted
 		} else if (m_si.getClimberDownLimitTriggered()) {  //If the button on the bottom if the climber is pressed
 			//Stop arm
 			m_climber.setArmSpeed(0);
-		} else if (m_oi.POVIsDown()) {  //If Dpad down is pressed
+		} else if (m_oi.getClimbDown()) {  //If Dpad down is pressed
 			//Move arm down
 			m_climber.setArmSpeed(m_oi.getMaxArmSpeed());  //Climber motor is inverted
 		} else {  //Nothing being pressed (climber wise)
