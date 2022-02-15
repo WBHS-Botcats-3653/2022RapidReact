@@ -49,6 +49,7 @@ public class AutoCommand extends CommandBase {
 		hasFinished = true;*/
 
 		stage = "Shoot Preload";
+
 		/*new ScheduleCommand(
 			//this one will execute the shooter for 3 seconds and then stop
 			new StartEndCommand(
@@ -85,7 +86,7 @@ public class AutoCommand extends CommandBase {
 				break;
 			case ("Taxi"):
 			//runs the taxi
-				taxiDrive(true);
+				//taxiDrive(true);
 				break;
 			case ("Collect Cargo"):
 				//Collect cargo HERE
