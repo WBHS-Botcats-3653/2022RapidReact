@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.OI;
+import frc.robot.commands.AutoCommand;
 
 public class Dashboard {
 	private static Dashboard m_singleton = null;
@@ -67,21 +68,24 @@ public class Dashboard {
 
 		//Auto Shoot
 		m_isAutoShootOn = tabDrive.addPersistent("Auto Shoot", true).withWidget(BuiltInWidgets.kToggleButton)
-		.withSize(1, 1).withPosition(5, 2).getEntry();
+		.withSize(1, 1).withPosition(1, 2).getEntry();
 		//this one goes
-		tabDrive.addPersistent("is Auto Shoot", m_isAutoShootOn.getBoolean(true)).withSize(1, 1).withPosition(5, 1);
+		tabDrive.addPersistent("is Auto Shoot", AutoCommand.isAutoShootOn)
+		.withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(1, 1);
 
-		//auto Taxi
+		//Auto Taxi
 		m_isAutoTaxiOn = tabDrive.addPersistent("Auto Taxi", true).withWidget(BuiltInWidgets.kToggleButton)
-		.withSize(1, 1).withPosition(6, 2).getEntry();
+		.withSize(1, 1).withPosition(2, 2).getEntry();
 		//this
-		tabDrive.addPersistent("is Auto Taxi", m_isAutoTaxiOn.getBoolean(true)).withSize(1, 1).withPosition(6, 1);
+		tabDrive.addPersistent("is Auto Taxi", AutoCommand.isAutoTaxiOn)
+		.withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(2, 1);
 
 		//Auto collect
 		m_isAutoCollectOn = tabDrive.addPersistent("Auto Collect", true).withWidget(BuiltInWidgets.kToggleButton)
-		.withSize(1, 1).withPosition(7, 2).getEntry();
+		.withSize(1, 1).withPosition(3, 2).getEntry();
 		//this one goes
-		tabDrive.addPersistent("is Auto Collect", m_isAutoCollectOn.getBoolean(true)).withSize(1, 1).withPosition(7, 1);
+		tabDrive.addPersistent("is Auto Collect", AutoCommand.isAutoCollectOn)
+		.withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(3, 1);
 
 		// Test Tab
 		m_nteArmDnLimit = tabTest.add("Arm Down", false).withSize(1, 1).withPosition(0, 0).getEntry();
