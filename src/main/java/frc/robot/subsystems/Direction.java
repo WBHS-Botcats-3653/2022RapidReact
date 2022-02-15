@@ -4,10 +4,9 @@
 
 package frc.robot.subsystems;
 
-//Imports Sendable (Who even knows)
+//Imports Sendable
 import edu.wpi.first.util.sendable.Sendable;
-//Imports ADIS16470_IMU (Gyroscope)
-import edu.wpi.first.wpilibj.ADIS16470_IMU;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
 //Imports SubsystemBase
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -19,7 +18,8 @@ import frc.robot.Constants.DriveConstants;
  */
 public class Direction extends SubsystemBase {
 	private static Direction m_singleton;
-	private ADIS16470_IMU m_gyro = new ADIS16470_IMU();
+	//private ADIS16470_IMU m_gyro = new ADIS16470_IMU();
+	private ADXRS450_Gyro m_gyro = new ADXRS450_Gyro();
 	private OI m_oi;
 	private DriveTrain driveTrain;
 	private Shooter shooter;
@@ -30,7 +30,7 @@ public class Direction extends SubsystemBase {
 
 	
 	public Direction() {
-		//m_gyro.calibrate();
+		m_gyro.calibrate();
 		m_oi = OI.getInstance();
 		driveTrain = DriveTrain.getInstance();
 		shooter = Shooter.getInstance();
