@@ -2,7 +2,6 @@ package frc.robot.commands;
 
 //Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import frc.robot.OI;
 import frc.robot.SI;
 import frc.robot.Constants.AutoConstants;
@@ -174,5 +173,5 @@ public class AutoCommand extends CommandBase {
 	public boolean isFinished() {
 		return hasFinished;
 	}
-	//esteban is driving us nuts
+	//esteban is driving us nuts :):)
 }
