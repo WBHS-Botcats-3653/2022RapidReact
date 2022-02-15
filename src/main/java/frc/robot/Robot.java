@@ -104,6 +104,7 @@ public class Robot extends TimedRobot {
 	/** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
 	@Override
 	public void autonomousInit() {
+		m_directionSubsystem.resetEncoders();
 		m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 		/*
 		 *String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
@@ -138,6 +139,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
+		m_directionSubsystem.resetEncoders();
 		m_arcadeDriveCommand = m_robotContainer.getArcadeDriveCommand();
 		m_climberCommand = m_robotContainer.getClimberCommand();
 		m_intakeCommand = m_robotContainer.getIntakeCommand();
