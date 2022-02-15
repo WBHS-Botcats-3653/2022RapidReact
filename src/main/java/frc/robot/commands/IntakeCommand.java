@@ -45,9 +45,9 @@ public class IntakeCommand extends CommandBase {
 		//Manual controls
 		if (!smartControl) {  //If smart controls are not currently being used
 			//Intake pivot controls
-			pivotLogic();
+			manualPivotLogic();
 			//Intake roller controls
-			rollerLogic();
+			manualRollerLogic();
 		}
 
 		/*Delete later
@@ -62,7 +62,7 @@ public class IntakeCommand extends CommandBase {
 	}
 
 	//Pivot OI logic
-	public void pivotLogic() {
+	public void manualPivotLogic() {
 		if (m_oi.getIntakeDown()) {  //If the left trigger is being pressed
 			//Pivot the intake down
 			m_intake.setPivotSpeed(m_oi.getMaxIntakePivotSpeed());
@@ -76,7 +76,7 @@ public class IntakeCommand extends CommandBase {
 	}
 
 	//Roller OI logic
-	public void rollerLogic() {
+	public void manualRollerLogic() {
 		if (m_oi.getIntakeIn()) {  //If the A button is being pressed
 			//Spin the rollers at max speed
 			m_intake.setRollerSpeed(m_oi.getMaxIntakeRollerSpeed());
