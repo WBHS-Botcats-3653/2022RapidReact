@@ -169,22 +169,22 @@ public class OldOI {
 
 	//Returns whether the up bottom on the DPad is being pressed
 	public boolean POVIsUp() {
-		return m_controller.getPOV()!=-1&&(m_controller.getPOV()>=315||m_controller.getPOV()<=45);
+		return m_controller.getPOV() != -1 && (m_controller.getPOV() >= 315 || m_controller.getPOV() <= 45);
 	}
 
 	//Returns whether the down button on the DPad is being pressed
 	public boolean POVIsDown() {
-		return m_controller.getPOV()>=135&&m_controller.getPOV()<=225;
+		return m_controller.getPOV() >= 135 && m_controller.getPOV() <= 225;
 	}
 
 	//Returns whether the right button on the DPad is being pressed
 	public boolean POVIsRight() {
-		return m_controller.getPOV()>45&&m_controller.getPOV()<135;
+		return m_controller.getPOV() > 45 && m_controller.getPOV() < 135;
 	}
 
 	//Returns whether the left button on the DPad is being pressed
 	public boolean POVIsLeft() {
-		return m_controller.getPOV()>225&&m_controller.getPOV()<315;
+		return m_controller.getPOV() > 225 && m_controller.getPOV() < 315;
 	}
 
 	//Returns whether the all motor stop button is being pressed (used for testing purposes, no smoke from the motors is nice)
