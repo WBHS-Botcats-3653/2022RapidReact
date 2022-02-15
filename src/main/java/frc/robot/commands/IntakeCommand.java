@@ -49,12 +49,12 @@ public class IntakeCommand extends CommandBase {
 		}
 	}
 
-	//Pivot OI logic
+	//Manual pivot OI logic
 	public void manualPivotLogic() {
-		if (m_oi.getIntakeDown()) {  //If the left trigger is being pressed
+		if (m_oi.getManualIntakeDown()) {  //If the left trigger is being pressed
 			//Pivot the intake down
 			m_intake.setPivotSpeed(m_oi.getMaxIntakePivotSpeed());
-		} else if (m_oi.getIntakeUp()) {  //If the left bumper is being pressed
+		} else if (m_oi.getManualIntakeUp()) {  //If the left bumper is being pressed
 			//Pivot the intake up
 			m_intake.setPivotSpeed(-m_oi.getMaxIntakePivotSpeed());
 		} else {  //Nothing being pressed (intake pivot wise)
@@ -63,12 +63,12 @@ public class IntakeCommand extends CommandBase {
 		}
 	}
 
-	//Roller OI logic
+	//Manual roller OI logic
 	public void manualRollerLogic() {
-		if (m_oi.getIntakeIn()) {  //If the A button is being pressed
+		if (m_oi.getManualIntakeIn()) {  //If the A button is being pressed
 			//Spin the rollers at max speed
 			m_intake.setRollerSpeed(m_oi.getMaxIntakeRollerSpeed());
-		} else if (m_oi.getIntakeOut()) {  //If the X button is being pressed
+		} else if (m_oi.getManualIntakeOut()) {  //If the X button is being pressed
 			//Reverse the rollers and spin at max speed
 			m_intake.setRollerSpeed(-m_oi.getMaxIntakeRollerSpeed());
 		} else {  //Nothing being pressed (intake roller wise)
@@ -77,7 +77,7 @@ public class IntakeCommand extends CommandBase {
 		}
 	}
 
-	//Smart control logic (button down-pivot down, button pressed-spin rollers, button released-pivot up)
+	//Smart control pivot/roller logic (button down-pivot down, button pressed-spin rollers, button released-pivot up)
 	public void smartLogic() {
 		if (m_oi.getSmartIntakeUp() && !m_si.getPivotUpLimitTriggered()) {  //If the smart intake is being called to go up
 			//Pivots the intake up at the set max speed
@@ -97,7 +97,7 @@ public class IntakeCommand extends CommandBase {
 			smartControl = false;
 		}
 	}
-	
+
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {}

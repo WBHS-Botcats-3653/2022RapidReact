@@ -28,9 +28,9 @@ public class OI {
 	}
 
 	//Sets the max drive speed
-	public void setMaxDriveSpeed(double maxspd) {
-		if (0.0 < maxspd && maxspd <= 1.0) {
-			m_maxDriveSpeed = maxspd;
+	public void setMaxDriveSpeed(double speed) {
+		if (0.0 < speed && speed <= 1.0) {
+			m_maxDriveSpeed = speed;
 		}
 	}
 
@@ -40,9 +40,9 @@ public class OI {
 	}
 
 	//Sets the max arm speed
-	public void setMaxArmSpeed(double maxspd) {
-		if (0.0 < maxspd && maxspd <= 1.0) {
-			m_maxArmSpeed = maxspd;
+	public void setMaxArmSpeed(double speed) {
+		if (0.0 < speed && speed <= 1.0) {
+			m_maxArmSpeed = speed;
 		}
 	}
 
@@ -52,9 +52,9 @@ public class OI {
 	}
 
 	//Sets the max intake pivot speed
-	public void setMaxIntakePivotSpeed(double maxspd) {
-		if (0.0 < maxspd && maxspd <= 1.0) {
-			m_maxIntakePivotSpeed = maxspd;
+	public void setMaxIntakePivotSpeed(double speed) {
+		if (0.0 < speed && speed <= 1.0) {
+			m_maxIntakePivotSpeed = speed;
 		}
 	}
 
@@ -64,9 +64,9 @@ public class OI {
 	}
 
 	//Sets the max intake roller speed
-	public void setMaxIntakeRollerSpeed(double maxspd) {
-		if (0.0 < maxspd && maxspd <= 1.0) {
-			m_maxIntakeRollerSpeed = maxspd;
+	public void setMaxIntakeRollerSpeed(double speed) {
+		if (0.0 < speed && speed <= 1.0) {
+			m_maxIntakeRollerSpeed = speed;
 		}
 	}
 
@@ -76,9 +76,9 @@ public class OI {
 	}
 
 	//Sets the max indexer speed
-	public void setMaxIndexerSpeed(double maxspd) {
-		if (0.0 < maxspd && maxspd <= 1.0) {
-			m_maxIndexerSpeed = maxspd;
+	public void setMaxIndexerSpeed(double speed) {
+		if (0.0 < speed && speed <= 1.0) {
+			m_maxIndexerSpeed = speed;
 		}
 	}
 
@@ -88,9 +88,9 @@ public class OI {
 	}
 
 	//Sets the max shoot speed
-	public void setMaxShootSpeed(double maxspd) {
-		if (0.0 < maxspd && maxspd <= 1.0) {
-			m_maxShootSpeed = maxspd;
+	public void setMaxShootSpeed(double speed) {
+		if (0.0 < speed && speed <= 1.0) {
+			m_maxShootSpeed = speed;
 		}
 	}
 	
@@ -109,7 +109,7 @@ public class OI {
 		return -m_controller.getRightX() * m_maxDriveSpeed;  // correct stearing (-)
 	}
 
-	//Returns whether the left trigger is being pressed
+	/*//Returns whether the left trigger is being pressed
 	public boolean getIntakeUp() {
 		return m_controller.getLeftBumper();
 	}
@@ -117,6 +117,16 @@ public class OI {
 	//Returns whether the left bumper is being pressed
 	public boolean getIntakeDown() {
 		return m_controller.getLeftTriggerAxis() > 0;
+	}*/
+
+	//Returns whether the right DPad is being pressed
+	public boolean getManualIntakeUp() {
+		return POVIsRight();
+	}
+
+	//Returns whether the left DPad is being pressed
+	public boolean getManualIntakeDown() {
+		return POVIsLeft();
 	}
 
 	//Returns whether the B button is being pressed
@@ -130,50 +140,62 @@ public class OI {
 	}
 
 	//Returns whether the A button is being pressed
-	public boolean getIntakeIn() {
+	public boolean getManualIntakeIn() {
 		return m_controller.getAButton();
 	}
 
 	//Returns whether the A button is being pressed
-	public boolean getIntakeOut() {
+	public boolean getManualIntakeOut() {
 		return m_controller.getXButton();
 	}
 
-	//
+	//Returns whether the left trigger is being pressed
 	public boolean getSmartIntakeDown() {
-		return false;
+		return m_controller.getLeftTriggerAxis() > 0;
 	}
 
-	//
+	//Returns whether the left trigger is not being pressed
 	public boolean getSmartIntakeUp() {
-		return false;
+		return m_controller.getLeftTriggerAxis() == 0;
 	}
 
+	//Whether the right trigger is being pressed
 	public boolean getShoot() {
 		return m_controller.getRightTriggerAxis() > 0;
 	}
 
+	//Whether the right bumper is being pressed
 	public boolean getShootReverse() {
 		return m_controller.getRightBumper();
 	}
 
-	//Returns whether the up bottom on the DPad is being pressed
+	//Whether the up botton on the DPad is being pressed
+	public boolean getClimbUp() {
+		return POVIsUp();
+	}
+
+	//Whether the down button on the DPas is being pressed
+	public boolean getClimbDown() {
+		return POVIsDown();
+	}
+
+	//Returns whether the up botton on the DPad is being pressed
 	public boolean POVIsUp() {
-		return m_controller.getPOV()!=-1&&(m_controller.getPOV()>=315||m_controller.getPOV()<=45);
+		return m_controller.getPOV() != -1 && (m_controller.getPOV() >= 315 || m_controller.getPOV() <= 45);
 	}
 
 	//Returns whether the down button on the DPad is being pressed
 	public boolean POVIsDown() {
-		return m_controller.getPOV()>=135&&m_controller.getPOV()<=225;
+		return m_controller.getPOV() >= 135 && m_controller.getPOV() <= 225;
 	}
 
 	//Returns whether the right button on the DPad is being pressed
 	public boolean POVIsRight() {
-		return m_controller.getPOV()>45&&m_controller.getPOV()<135;
+		return m_controller.getPOV() > 45 && m_controller.getPOV() < 135;
 	}
 
 	//Returns whether the left button on the DPad is being pressed
 	public boolean POVIsLeft() {
-		return m_controller.getPOV()>225&&m_controller.getPOV()<315;
+		return m_controller.getPOV() > 225 && m_controller.getPOV() < 315;
 	}
 }
