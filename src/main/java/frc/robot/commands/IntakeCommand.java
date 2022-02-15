@@ -38,16 +38,23 @@ public class IntakeCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		if (m_oi.getIntakeDown()) {  //If the left trigger is being pressed
-			//Pivot the intake down
-			m_intake.setPivotSpeed(m_oi.getMaxIntakePivotSpeed());
-		} else if (m_oi.getIntakeUp()) {  //If the left bumper is being pressed
-			//Pivot the intake up
-			m_intake.setPivotSpeed(-m_oi.getMaxIntakePivotSpeed());
-		} else {
-			//Stops the intake pivot
+		//pivot
+		pivotLogic();
+		//rollers
+		rollerLogics();
+		/*All stop called (used for testing)
+		if (m_oi.getAllStop()) {  //If the B button is being pressed
+			//Stop motors
+			m_intake.setRollerSpeed(0);
 			m_intake.setPivotSpeed(0);
+			return;
 		}
+		*/
+		/**/
+	}
+
+
+	public void rollerLogics(){
 		if (m_oi.getIntakeIn()) {  //If the A button is being pressed
 			//Spin the rollers at max speed
 			m_intake.setRollerSpeed(m_oi.getMaxIntakeRollerSpeed());
@@ -58,41 +65,55 @@ public class IntakeCommand extends CommandBase {
 			//Stops the rollers
 			m_intake.setRollerSpeed(0);
 		}
-		/*//All stop called (used for testing)
-		if (m_oi.getAllStop()) {  //If the B button is being pressed
-			//Stop motors
-			m_intake.setRollerSpeed(0);
-			m_intake.setPivotSpeed(0);
-			return;
-		}
-		//Checks whether there is input coming in for the pivot to move up or down
-		if (m_oi.getManualIntakeDown()) {  //If the A button is being pressed (intake pivot manual down)
-			//Pivots the intake down at max speed
+	}
+
+	public void pivotLogic(){
+		if (m_oi.getIntakeDown()) {  //If the left trigger is being pressed
+			//Pivot the intake down
 			m_intake.setPivotSpeed(m_oi.getMaxIntakePivotSpeed());
-		} else if (m_oi.getManualIntakeUp()) {  //If the Y button is being pressed (intake pivot manual up)
-			//Pivots the intake up at max speed
+		} else if (m_oi.getIntakeUp()) {  //If the left bumper is being pressed
+			//Pivot the intake up
 			m_intake.setPivotSpeed(-m_oi.getMaxIntakePivotSpeed());
-		} else if (m_si.getPivotUpTriggered()) {  //If the bottom pivot limit switch is being depressed
+		} else {
+			//Stops the intake pivot
+			m_intake.setPivotSpeed(0);
+		}
+	}
+
+	public void smartPivotLogic(){
+		/*
+		if (m_si.getPivotUpTriggered()) {  //If the bottom pivot limit switch is being depressed
 			//Stops the pivot
 			m_intake.setPivotSpeed(0);
 			//Intake is down
 			m_oi.isIntakeDown = false;
-		} else if (m_si.getPivotDownTriggered()) {  //If the top pivot limit switch is being depressed
+		} else if (m_si.getPivotDownTriggered()) {  //If the bottom pivot limit switch is being depressed
 			//Stops the pivot
 			m_intake.setPivotSpeed(0);
 			//Intake is up
 			m_oi.isIntakeDown = true;
 		} else if (m_oi.getIntakeDown()) {  //If the intake is currently down
 			//Pivots the intake down at max speed
-			m_intake.setPivotSpeed(m_oi.getMaxIntakePivotSpeed());
+			m_intake.setPivotSpeed(0);
 		} else if (m_oi.getIntakeUp()) {  //If the intake is currently up
 			//Pivots the intake up at max speed
-			m_intake.setPivotSpeed(-m_oi.getMaxIntakePivotSpeed());
+			m_intake.setPivotSpeed(0);
 		}
-		//Spins the rollers based off a combination of possible inputs (handled in OI)
-		m_intake.setRollerSpeed(m_oi.getIntakeCtrl());*/
-	}
+		*/
+		//this will execute while the button (and the intake is down)
+		if(true /*the button for the smart thingi*/){
+			//in here
+			if(m_oi.getIntakeDown()){
+				m_intake.setPivotSpeed(0);
+			}
+		} else if (false /*this will be when the button is getting releaced*/){
+			//here the intake will go up until it presses the button.
+		} 
 
+		
+		//Spins the rollers based off a combination of possible inputs (handled in OI)
+		m_intake.setRollerSpeed((true /*the button for the smart thingi*/) ? 1.0 : 0);
+	}
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {}
