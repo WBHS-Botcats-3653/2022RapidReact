@@ -37,11 +37,7 @@ public class Direction extends SubsystemBase {
 		leftEncoder = new Encoder(DriveConstants.leftMotorGroupEncoder1, DriveConstants.leftMotorGroupEncoder2);
 		rightEncoder = new Encoder(DriveConstants.rightMotorGroupEncoder1, DriveConstants.rightMotorGroupEncoder2);
 		hasFinished = false;
-		// Configures the encoders' distance-per-pulse
-		// The robot moves forward 1 foot per encoder rotation
-		// There are 256 pulses per encoder rotation
-		leftEncoder.setDistancePerPulse(1./256.);
-		rightEncoder.setDistancePerPulse(1./256.);
+		
 	}
 
 	//Returns an instance of Direction, creating an instance only when one does not already exist
@@ -83,5 +79,15 @@ public class Direction extends SubsystemBase {
 	 */
 	public double getDistance(){
 		return (this.getRightDistance() + this.getLeftDistance()) / 2;
+	}
+
+	public void resetEncoders(){
+		rightEncoder.reset();
+		leftEncoder.reset();
+		// Configures the encoders' distance-per-pulse
+		// The robot moves forward 1 foot per encoder rotation
+		// There are 256 pulses per encoder rotation
+		leftEncoder.setDistancePerPulse(1./256.);
+		rightEncoder.setDistancePerPulse(1./256.);
 	}
 }
