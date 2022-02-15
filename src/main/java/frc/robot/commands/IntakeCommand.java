@@ -29,8 +29,6 @@ public class IntakeCommand extends CommandBase {
 		this.m_intake = m_intake;
 		m_si = SI.getInstance();
 		smartControl = false;
-		// Use addRequirements() here to declare subsystem dependencies.
-		//addRequirements();
 	}
 
 	// Called when the command is initially scheduled.
@@ -49,16 +47,6 @@ public class IntakeCommand extends CommandBase {
 			//Intake roller controls
 			manualRollerLogic();
 		}
-
-		/*Delete later
-		All stop called (used for testing)
-		if (m_oi.getAllStop()) {  //If the B button is being pressed
-			//Stop motors
-			m_intake.setRollerSpeed(0);
-			m_intake.setPivotSpeed(0);
-			return;
-		}
-		*/
 	}
 
 	//Pivot OI logic
@@ -109,6 +97,7 @@ public class IntakeCommand extends CommandBase {
 			smartControl = false;
 		}
 	}
+	
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {}
