@@ -24,6 +24,11 @@ public class AutoCommand extends CommandBase {
 	private String stage;
 	private double kP;
 
+	public static boolean isAutoShootOn;
+	public static boolean isAutoTaxiOn;
+	public static boolean isAutoCollectOn;
+
+
 	//Constructor
 	public AutoCommand() {
 		m_oi = OI.getInstance();
@@ -82,11 +87,11 @@ public class AutoCommand extends CommandBase {
 		switch (stage) {
 			case ("Shoot Preload"):
 				//shootPreload(true);
-				if (shootPreload(true)) stage = "Taxi";
+				if (shootPreload(isAutoShootOn)) stage = "Taxi";
 				break;
 			case ("Taxi"):
 			//runs the taxi
-				//taxiDrive(true);
+				//taxiDrive(isAutoTaxiOn);
 				break;
 			case ("Collect Cargo"):
 				//Collect cargo HERE
@@ -159,6 +164,7 @@ public class AutoCommand extends CommandBase {
 		}
 		return false;
 	}
+
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {}

@@ -16,7 +16,7 @@ import frc.robot.OI;
 
 public class Dashboard {
 	private static Dashboard m_singleton = null;
-
+	private static OI ctrl = OI.getInstance();
 	private UsbCamera cam0 = null;
 
 	// Config Tab
@@ -35,6 +35,10 @@ public class Dashboard {
 	// Drive Tab
 	private NetworkTableEntry m_nteArmAngle = null;
 	private NetworkTableEntry m_nteDriveSpeed = null;
+	
+	public static NetworkTableEntry m_isAutoShootOn = null;
+	public static NetworkTableEntry m_isAutoTaxiOn = null;
+	public static NetworkTableEntry m_isAutoCollectOn = null;
 
 	private Dashboard() {
 		ShuffleboardTab tabConfig = Shuffleboard.getTab("Config");
@@ -58,8 +62,17 @@ public class Dashboard {
 		m_nteArmAngle = tabDrive.add("Arm", 0.0).withWidget(BuiltInWidgets.kDial)
 				.withProperties(Map.of("min", 0, "max", 180)).withSize(1, 1).withPosition(5, 0).getEntry();
 		*/
-		m_nteDriveSpeed = tabDrive.addPersistent("Speed", 1.0).withWidget(BuiltInWidgets.kNumberSlider)
+		m_nteDriveSpeed = tabDrive.addPersistent("Speed", ctrl.getMaxDriveSpeed()).withWidget(BuiltInWidgets.kNumberSlider)
 				.withProperties(Map.of("min", 0, "max", 1.0)).withSize(1, 1).withPosition(6, 0).getEntry();
+
+		m_isAutoShootOn = tabDrive.addPersistent("Auto Shoot", true).withWidget(BuiltInWidgets.kToggleButton)
+		.withSize(1, 1).withPosition(3, 1).getEntry();
+
+		m_isAutoTaxiOn = tabDrive.addPersistent("Auto Taxi", true).withWidget(BuiltInWidgets.kToggleButton)
+		.withSize(1, 1).withPosition(4, 1).getEntry();
+
+		m_isAutoCollectOn = tabDrive.addPersistent("Auto Collect", true).withWidget(BuiltInWidgets.kToggleButton)
+		.withSize(1, 1).withPosition(5, 1).getEntry();
 
 		// Test Tab
 		m_nteArmDnLimit = tabTest.add("Arm Down", false).withSize(1, 1).withPosition(0, 0).getEntry();
@@ -69,8 +82,9 @@ public class Dashboard {
 		//m_nteDriveEncRight = tabTest.add("Drive Right", 0).withSize(1, 1).withPosition(1, 1).getEntry();
 	}
 
+	
 	public void refresh() {
-		OI ctrl = OI.getInstance();
+		
 
 		ctrl.setMaxDriveSpeed(m_nteDriveSpeed.getDouble(1.0));
 		ctrl.setMaxArmSpeed(m_nteMaxArmSpd.getDouble(1.0));

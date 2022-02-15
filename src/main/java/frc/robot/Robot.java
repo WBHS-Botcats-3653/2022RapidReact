@@ -99,6 +99,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 		//Scheduler.getInstance().run();
+		AutoCommand.isAutoShootOn = Dashboard.m_isAutoShootOn.getBoolean(true);
+		AutoCommand.isAutoTaxiOn = Dashboard.m_isAutoTaxiOn.getBoolean(true);
+		AutoCommand.isAutoCollectOn = Dashboard.m_isAutoCollectOn.getBoolean(true);
 	}
 
 	/** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
