@@ -67,7 +67,7 @@ public class SI {
 
 	//Returns input from the bottom pivot switch
 	public boolean getPivotDownLimitTriggered() {
-		return bottomPivotLimitSwitch.get();
+		return !bottomPivotLimitSwitch.get();
 	}
 
 	//Returns input from the top pivot switch
