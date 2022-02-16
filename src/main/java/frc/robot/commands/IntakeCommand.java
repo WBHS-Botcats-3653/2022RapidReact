@@ -81,12 +81,12 @@ public class IntakeCommand extends CommandBase {
 	public void smartLogic() {
 		if (m_oi.getSmartIntakeUp() && !m_si.getPivotUpLimitTriggered()) {  //If the smart intake is being called to go up and the top pivot limit switch is not being triggered
 			//Pivots the intake up at the set max speed
-			m_intake.setPivotSpeed(-m_oi.getMaxIntakePivotSpeed());
+			m_intake.setPivotSpeed(-m_oi.getMaxSmartIntakePivotSpeed());
 			//Allows manual control to take over from smart control
 			smartControl = false;
 		} else if (m_oi.getSmartIntakeDown() && !m_si.getPivotDownLimitTriggered()) {  //If the smart intake is being called to go down and the bottom pivot limit switch is not being triggered
 			//Pivots the intake down at the set max speed
-			m_intake.setPivotSpeed(m_oi.getMaxIntakePivotSpeed());
+			m_intake.setPivotSpeed(m_oi.getMaxSmartIntakePivotSpeed());
 			//Prevents manual control from interferring with smart control
 			smartControl = true;
 			//Don't set roller speed until the downward pivot has already started. This is to avoid damage to the robot from the rollers

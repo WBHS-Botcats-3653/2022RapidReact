@@ -8,12 +8,13 @@ public class OI {
 	//Controller
 	private XboxController m_controller = null;
 	//Max speeds
-	private double m_maxDriveSpeed;
-	private double m_maxArmSpeed;
-	private double m_maxIntakePivotSpeed;
-	private double m_maxIntakeRollerSpeed;
-	private double m_maxShootSpeed;
-	private double m_maxIndexerSpeed;
+	private double m_maxDriveSpeed = 0;
+	private double m_maxArmSpeed = 0;
+	private double m_maxIntakePivotSpeed = 0;
+	private double m_maxSmartIntakePivotSpeed = 0;
+	private double m_maxIntakeRollerSpeed = 0;
+	private double m_maxShootSpeed = 0;
+	private double m_maxIndexerSpeed = 0;
 
 	public OI() {
 		m_controller = new XboxController(0);
@@ -61,6 +62,18 @@ public class OI {
 	//Returns the max intake pivot speed
 	public double getMaxIntakePivotSpeed(){
 		return m_maxIntakePivotSpeed;
+	}
+
+	//Sets the max smart intake pivot speed
+	public void setMaxSmartIntakePivotSpeed(double speed) {
+		if (0.0 < speed && speed <= 1.0) {
+			m_maxSmartIntakePivotSpeed = speed;
+		}
+	}
+
+	//Returns the max smart intake pivot speed
+	public double getMaxSmartIntakePivotSpeed(){
+		return m_maxSmartIntakePivotSpeed;
 	}
 
 	//Sets the max intake roller speed
