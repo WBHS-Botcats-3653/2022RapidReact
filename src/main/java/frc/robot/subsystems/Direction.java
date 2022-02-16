@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
 //Imports SubsystemBase
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.OI;
 import frc.robot.Constants.DriveConstants;
 
 /**
@@ -20,23 +19,14 @@ public class Direction extends SubsystemBase {
 	private static Direction m_singleton;
 	//private ADIS16470_IMU m_gyro = new ADIS16470_IMU();
 	private ADXRS450_Gyro m_gyro = new ADXRS450_Gyro();
-	private OI m_oi;
-	private DriveTrain driveTrain;
-	private Shooter shooter;
 	private Encoder leftEncoder;
 	private Encoder rightEncoder;
-	private boolean hasFinished;
-	private String stage;
 
 	
 	public Direction() {
 		m_gyro.calibrate();
-		m_oi = OI.getInstance();
-		driveTrain = DriveTrain.getInstance();
-		shooter = Shooter.getInstance();
 		leftEncoder = new Encoder(DriveConstants.leftMotorGroupEncoder1, DriveConstants.leftMotorGroupEncoder2);
 		rightEncoder = new Encoder(DriveConstants.rightMotorGroupEncoder1, DriveConstants.rightMotorGroupEncoder2);
-		hasFinished = false;
 		
 	}
 
