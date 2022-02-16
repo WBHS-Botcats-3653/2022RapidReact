@@ -60,17 +60,17 @@ public class SI {
 		return !shooterPE.get();  //Inverted (electrical issue)
 	}
 
-	//Returns input from the lower storage photoelectric sensor
+	//Returns input from the top pivot limit switch
 	public boolean getPivotUpLimitTriggered() {
 		return !topPivotLimitSwitch.get();  //Inverted (electrical issue)
 	}
 
-	//Returns input from the bottom pivot switch
+	//Returns input from the bottom pivot limit switch
 	public boolean getPivotDownLimitTriggered() {
 		return !bottomPivotLimitSwitch.get();
 	}
 
-	//Returns input from the top pivot switch
+	//Returns input from the top pivot limit switch
 	public boolean getClimberDownLimitTriggered() {
 		return !climberDownButton.get();  //Inverted (electrical issue)
 	}
