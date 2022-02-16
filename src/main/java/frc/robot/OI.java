@@ -14,6 +14,7 @@ public class OI {
 	private double m_maxIntakeRollerSpeed;
 	private double m_maxShootSpeed;
 	private double m_maxIndexerSpeed;
+	private boolean isIntakeDown = false;
 
 	public OI() {
 		m_controller = new XboxController(0);
@@ -156,7 +157,7 @@ public class OI {
 
 	//Returns whether the left trigger is not being pressed
 	public boolean getSmartIntakeUp() {
-		return m_controller.getLeftTriggerAxis() == 0;
+		return m_controller.getLeftTriggerAxis() == 0 && isIntakeDown;
 	}
 
 	//Whether the right trigger is being pressed
