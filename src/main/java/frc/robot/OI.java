@@ -14,7 +14,6 @@ public class OI {
 	private double m_maxIntakeRollerSpeed;
 	private double m_maxShootSpeed;
 	private double m_maxIndexerSpeed;
-	private boolean isIntakeDown = false;
 
 	public OI() {
 		m_controller = new XboxController(0);
@@ -152,12 +151,17 @@ public class OI {
 
 	//Returns whether the left trigger is being pressed
 	public boolean getSmartIntakeDown() {
-		return m_controller.getLeftTriggerAxis() > 0;
+		return m_controller.getLeftBumperPressed();
 	}
 
 	//Returns whether the left trigger is not being pressed
 	public boolean getSmartIntakeUp() {
-		return m_controller.getLeftTriggerAxis() == 0 && isIntakeDown;
+		return m_controller.getLeftBumperReleased();
+	}
+
+	//Returns whether the left bumper is being pressed
+	public double getSmartRollers() {
+		return m_controller.getLeftBumper() ? 1.0 : 0;
 	}
 
 	//Whether the right trigger is being pressed
@@ -198,15 +202,5 @@ public class OI {
 	//Returns whether the left button on the DPad is being pressed
 	public boolean POVIsLeft() {
 		return m_controller.getPOV() > 225 && m_controller.getPOV() < 315;
-	}
-
-	//Sets whether the intake is down
-	public void setIsIntakeDown(boolean isDown) {
-		isIntakeDown = isDown;
-	}
-
-	//Returns whether the intake is down
-	public boolean getIsIntakeDown() {
-		return isIntakeDown;
 	}
 }
