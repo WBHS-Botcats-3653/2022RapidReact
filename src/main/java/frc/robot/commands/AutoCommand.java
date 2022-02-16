@@ -13,12 +13,13 @@ import frc.robot.subsystems.Shooter;
 /*This command will run and will do 
  */
 public class AutoCommand extends CommandBase {
-	private OI m_oi;
-	private SI m_si;
 	private DriveTrain driveTrain;
 	private Shooter m_shooter;
 	private Indexer m_indexer;
 	private Direction gyro;
+	private OI m_oi;
+	private SI m_si;
+
 	private boolean hasFinished;
 	private String stage;
 	private double kP;
@@ -30,12 +31,12 @@ public class AutoCommand extends CommandBase {
 
 	//Constructor
 	public AutoCommand() {
-		m_oi = OI.getInstance();
-		m_si = SI.getInstance();
 		driveTrain = DriveTrain.getInstance();
 		m_shooter = Shooter.getInstance();
 		m_indexer = Indexer.getInstance();
 		gyro = Direction.getInstance();
+		m_oi = OI.getInstance();
+		m_si = SI.getInstance();
 		kP = 1;
 		hasFinished = false;
 	}
@@ -43,15 +44,6 @@ public class AutoCommand extends CommandBase {
 
 	@Override
 	public void initialize() {
-		/*//Runs auto commands sequentially
-		new SequentialCommandGroup(
-			//Shoots 1 preloaded cargo
-			new ShootCargoCommand(),
-			//Taxiing, move back 10 feet at max speed
-			new DriveCommand(-m_oi.getMaxDriveSpeed(), AutoConstants.taxiDistanceInFeet, true)
-		);
-		hasFinished = true;*/
-
 		stage = "Shoot Preload";
 
 		/*new ScheduleCommand(
@@ -141,11 +133,11 @@ public class AutoCommand extends CommandBase {
 		//stage = "Taxi"; //Add condition
 */
 		/**
-		 * steps:
-		 * 1. runs the indexer until the high pe is off
-		 * 2. stops the indexer
-		 * 3. runs the spinner until the shooter pe is on
-		 * 4. stops and passes to next
+		 * Steps:
+		 * 1. Runs the indexer until the high pe is off
+		 * 2. Stops the indexer
+		 * 3. Runs the spinner until the shooter pe is on
+		 * 4. Stops and passes to next
 		 */
 		if (isActive){
 			/*in reality, what the bellow if statement checks is if the robot have drived above the line*/

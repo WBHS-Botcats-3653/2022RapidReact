@@ -14,15 +14,13 @@ import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Shooter;
 
 public class ShooterCommand extends CommandBase {
-	//Holds instances of OI and Shooter subsystem
-	private OI m_oi;
 	private Shooter m_shooter;
 	private Indexer m_indexer;
+	private OI m_oi;
 
 	public ShooterCommand(Shooter m_shooter) {
-		//Initializes instance variables with OI and Shooter subsystem
-		m_oi = OI.getInstance();
 		this.m_shooter = m_shooter;
+		m_oi = OI.getInstance();
 		m_indexer = Indexer.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
 		//addRequirements();
@@ -45,14 +43,6 @@ public class ShooterCommand extends CommandBase {
 			//Stops the spinner
 			m_shooter.setSpinSpeed(0);
 		}
-		/*//All stop called (used for testing)
-		if (m_oi.getAllStop()) {  //If the B button is being pressed
-			//Stop motor
-			m_shooter.setSpinSpeed(0);
-			return;
-		}
-		//Spins the shooter based on controller input
-		m_shooter.setSpinSpeed(m_oi.getShoot());*/
 	}
 
 	// Called once the command ends or is interrupted.

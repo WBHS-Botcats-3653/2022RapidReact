@@ -24,9 +24,8 @@ public class IntakeCommand extends CommandBase {
 	 * @param subsystem The subsystem used by this command.
 	 */
 	public IntakeCommand(Intake m_intake) {
-		//Initializes instance variable with OI subsystem
-		m_oi = OI.getInstance();
 		this.m_intake = m_intake;
+		m_oi = OI.getInstance();
 		m_si = SI.getInstance();
 		smartControl = false;
 	}
@@ -39,7 +38,7 @@ public class IntakeCommand extends CommandBase {
 	@Override
 	public void execute() {
 		//Smart intake control
-		smartLogic();
+		smartIntakeLogic();
 		//Manual controls
 		if (!smartControl) {  //If smart controls are not currently being used
 			//Intake pivot controls
@@ -78,7 +77,7 @@ public class IntakeCommand extends CommandBase {
 	}
 
 	//Smart control pivot/roller logic (button down-pivot down, button pressed-spin rollers, button released-pivot up)
-	public void smartLogic() {
+	public void smartIntakeLogic() {
 		if (m_oi.getSmartIntakeUp() && !m_si.getPivotUpLimitTriggered()) {  //If the smart intake is being called to go up and the top pivot limit switch is not being triggered
 			//Pivots the intake up at the set max speed
 			m_intake.setPivotSpeed(-m_oi.getMaxSmartIntakePivotSpeed());

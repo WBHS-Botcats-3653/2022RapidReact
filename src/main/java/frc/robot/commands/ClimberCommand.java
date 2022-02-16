@@ -14,19 +14,17 @@ import frc.robot.SI;
 import frc.robot.subsystems.Climber;
 
 public class ClimberCommand extends CommandBase {
-	//Holds instances of OI and Climber subsystem
+	private Climber m_climber;
 	private OI m_oi;
 	private SI m_si;
-	private Climber m_climber;
 
 	/**Creates a new ClimberCommand.
 	 * @param subsystem The subsystem used by this command.
 	 */
 	public ClimberCommand(Climber m_climber) {
-		//Initializes instance variables with instances of OI and Climber subsystem
+		this.m_climber = m_climber;
 		m_oi = OI.getInstance();
 		m_si = SI.getInstance();
-		this.m_climber = m_climber;
 		// Use addRequirements() here to declare subsystem dependencies.
 		//addRequirements();
 	}
@@ -39,12 +37,6 @@ public class ClimberCommand extends CommandBase {
 	@Override
 	// Called every time the scheduler runs while the command is scheduled.
 	public void execute() {
-		/*//All stop called (used for testing)
-		if (m_oi.getAllStop()) {  //If the B button is being pressed
-			//Stop motor
-			m_climber.setArmSpeed(0);
-			return;
-		}*/
 		//Checks whether there is input coming in to move the arm
 		if (m_oi.getClimbUp()) {  //If up Dpad up is pressed
 			//Move arm up

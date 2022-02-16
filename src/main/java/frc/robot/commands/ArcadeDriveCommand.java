@@ -10,14 +10,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
 public class ArcadeDriveCommand extends CommandBase {
-	//Holds instances of OI and DriveTrain subsystem
 	private DriveTrain m_drivetrain;
 
 	/**Creates a new ArcadeDriveCommand.
 	 * @param subsystem The subsystem used by this command.
 	 */
 	public ArcadeDriveCommand(DriveTrain m_drivetrain) {
-		//Initializes instance variables with an instance of OI and DriveTrain
 		this.m_drivetrain = m_drivetrain;
 		// Use addRequirements() here to declare subsystem dependencies.
 		//addRequirements();
