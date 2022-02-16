@@ -164,17 +164,12 @@ public class OI {
 
 	//Returns whether the left trigger is being pressed
 	public boolean getSmartIntakeDown() {
-		return m_controller.getLeftBumperPressed();
+		return m_controller.getLeftBumper();
 	}
 
 	//Returns whether the left trigger is not being pressed
 	public boolean getSmartIntakeUp() {
 		return m_controller.getLeftBumperReleased();
-	}
-
-	//Returns whether the left bumper is being pressed
-	public double getSmartRollers() {
-		return m_controller.getLeftBumper() ? 1.0 : 0;
 	}
 
 	//Whether the right trigger is being pressed
