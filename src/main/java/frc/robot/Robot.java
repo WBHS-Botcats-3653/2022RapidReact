@@ -178,15 +178,13 @@ public class Robot extends TimedRobot {
 		//Runs the scheduler
 		Scheduler.getInstance().run();
 		m_dashboard.telopPeriodic();
-		new PrintCommand("Top Pivot Limit Switch " + m_si.getPivotUpLimitTriggered()).initialize();
-		new PrintCommand("Bottom Pivot Limit Switch " + m_si.getPivotDownLimitTriggered()).initialize();
 	}
 
 	@Override
 	public void testInit() {
 		// Cancels all running commands at the start of test mode.
 		CommandScheduler.getInstance().cancelAll();
-		//Schedule teleop commands
+		//Schedule test commands
 		m_arcadeDriveCommand.schedule();
 		m_climberCommand.schedule();
 		m_indexerCommand.schedule();
@@ -205,8 +203,7 @@ public class Robot extends TimedRobot {
 	/** This function is called periodically during test mode. */
 	@Override
 	public void testPeriodic() {
-		new PrintCommand("is all stop true? " + m_si.getPivotDownLimitTriggered()).initialize();
-		new PrintCommand("how much had it moved l " + m_directionSubsystem.getLeftDistance()).initialize();
-		new PrintCommand("how much had it moved r " + m_directionSubsystem.getRightDistance()).initialize();
+		new PrintCommand("Top Pivot Limit Switch " + m_si.getPivotUpLimitTriggered()).initialize();
+		new PrintCommand("Bottom Pivot Limit Switch " + m_si.getPivotDownLimitTriggered()).initialize();
 	}
 }
