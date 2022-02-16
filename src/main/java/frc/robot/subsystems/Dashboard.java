@@ -60,7 +60,7 @@ public class Dashboard {
 		cam0 = CameraServer.startAutomaticCapture(0);
 		cam0.setResolution(142, 90);
 		cam0.setFPS(20);
-		tabDrive.add("Field View", cam0).withSize(3, 2).withPosition(0, 0);
+		tabDrive.add("Field View", cam0).withSize(3, 2).withPosition(6, 0);
 
 		tabDrive.add("Gyro", Direction.getInstance().getGyro()).withSize(2, 2).withPosition(3, 0);
 		/*
@@ -68,7 +68,7 @@ public class Dashboard {
 				.withProperties(Map.of("min", 0, "max", 180)).withSize(1, 1).withPosition(5, 0).getEntry();
 		*/
 		m_nteDriveSpeed = tabDrive.addPersistent("Speed", ctrl.getMaxDriveSpeed()).withWidget(BuiltInWidgets.kNumberSlider)
-				.withProperties(Map.of("min", 0, "max", 1.0)).withSize(1, 1).withPosition(6, 0).getEntry();
+				.withProperties(Map.of("min", 0, "max", 1.0)).withSize(1, 1).withPosition(5, 0).getEntry();
 
 		//Auto Shoot
 		m_isAutoShootOn = tabDrive.addPersistent("Auto Shoot", true).withWidget(BuiltInWidgets.kToggleButton)
