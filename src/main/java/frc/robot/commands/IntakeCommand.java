@@ -79,19 +79,28 @@ public class IntakeCommand extends CommandBase {
 
 	//Smart control pivot/roller logic (button down-pivot down, button pressed-spin rollers, button released-pivot up)
 	public void smartLogic() {
-		if (m_oi.getSmartIntakeUp() && !m_si.getPivotUpLimitTriggered()) {  //If the smart intake is being called to go up
+		if (m_oi.getSmartIntakeUp() && !m_si.getPivotUpLimitTriggered()) {  //If the smart intake is being called to go up and the top pivot limit switch is not being triggered
 			//Pivots the intake up at the set max speed
 			m_intake.setPivotSpeed(-m_oi.getMaxIntakePivotSpeed());
 			//Allows manual control to take over from smart control
 			smartControl = false;
-		} else if (m_oi.getSmartIntakeDown() && !m_si.getPivotDownLimitTriggered()) {  //If the smart intake is being called to go down
+		} else if (m_oi.getSmartIntakeDown() && !m_si.getPivotDownLimitTriggered()) {  //If the smart intake is being called to go down and the bottom pivot limit switch is not being triggered
 			//Pivots the intake down at the set max speed
 			m_intake.setPivotSpeed(m_oi.getMaxIntakePivotSpeed());
 			//Prevents manual control from interferring with smart control
 			smartControl = true;
 			//Don't set roller speed until the downward pivot has already started. This is to avoid damage to the robot from the rollers
 			return;
-		} else if (m_si.getPivotDownLimitTriggered()) {  //If either of the pivot limit switches are triggered
+		} else if (m_si.getPivotDownLimitTriggered() || m_si.getPivotUpLimitTriggered()) {  //If either of the pivot limit switches are triggered
+			//Checks if the smart intake is being pressed incase the intake had already been manually moved down
+			if (m_oi.getSmartIntakeDown()) {  //If the smart intake is being called to go down
+				//Prevents manual control from interferring with smart control
+				smartControl = true;
+			}
+			if (m_si.getPivotUpLimitTriggered()) {  //If the top pivot limit switch is being triggered
+				//Allows manual control to take over from smart control
+				smartControl = false;
+			}
 			//Stops the intake pivot
 			m_intake.setPivotSpeed(0);
 		}
