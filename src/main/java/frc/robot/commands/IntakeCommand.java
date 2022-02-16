@@ -90,6 +90,7 @@ public class IntakeCommand extends CommandBase {
 			m_intake.setPivotSpeed(m_oi.getMaxIntakePivotSpeed());
 			//Spins the intake rollers at the set max speed
 			m_intake.setRollerSpeed(m_oi.getMaxIntakeRollerSpeed());
+			m_oi.setIsIntakeDown(true);
 			smartControl = true;
 		} else if (m_si.getPivotDownLimitTriggered() || m_si.getPivotUpLimitTriggered()) {  //If either of the pivot limit switches are triggered
 			//Stops the intake pivot
