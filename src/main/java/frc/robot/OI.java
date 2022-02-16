@@ -199,4 +199,14 @@ public class OI {
 	public boolean POVIsLeft() {
 		return m_controller.getPOV() > 225 && m_controller.getPOV() < 315;
 	}
+
+	//Sets whether the intake is down
+	public void setIsIntakeDown(boolean isDown) {
+		isIntakeDown = isDown;
+	}
+
+	//Returns whether the intake is down
+	public boolean getIsIntakeDown() {
+		return isIntakeDown;
+	}
 }
