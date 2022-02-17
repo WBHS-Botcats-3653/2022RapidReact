@@ -17,7 +17,7 @@ import frc.robot.SI;
 import frc.robot.Constants.IntakeConstants;
 
 public class Intake extends SubsystemBase {
-	private static Intake intake=null;
+	private static Intake m_singleton = null;
 	private WPI_VictorSPX pivot;
 	private WPI_VictorSPX rollers;
 	//private AnalogInput pivotEncoder;  Should be DIO
@@ -33,9 +33,9 @@ public class Intake extends SubsystemBase {
 	
 	//Returns an instance of Intake, creating an instance only when one does not already exist (singleton)
 	public static Intake getInstance() {
-		if (intake == null)
-			intake = new Intake();
-		return intake;
+		if (m_singleton == null)
+			m_singleton = new Intake();
+		return m_singleton;
 	}
 
 	//Spins the rollers on the intake
