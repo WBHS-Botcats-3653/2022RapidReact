@@ -81,6 +81,8 @@ public class IntakeCommand extends CommandBase {
 		if (m_oi.getSmartIntakeUp() && !m_si.getPivotUpLimitTriggered()) {  //If the smart intake is being called to go up and the top pivot limit switch is not being triggered
 			//Pivots the intake up at the set max speed
 			m_intake.setPivotSpeed(-m_oi.getMaxSmartIntakePivotSpeed());
+			//Stops the intake rollers
+			m_intake.setRollerSpeed(0);
 			//Allows manual control to take over from smart control
 			smartControl = false;
 		} else if (m_oi.getSmartIntakeDown() && !m_si.getPivotDownLimitTriggered()) {  //If the smart intake is being called to go down and the bottom pivot limit switch is not being triggered
@@ -97,14 +99,18 @@ public class IntakeCommand extends CommandBase {
 				smartControl = true;
 			}
 			if (m_si.getPivotUpLimitTriggered()) {  //If the top pivot limit switch is being triggered
+				//Stops the intake rollers
+				m_intake.setRollerSpeed(0);
 				//Allows manual control to take over from smart control
 				smartControl = false;
 			}
 			//Stops the intake pivot
 			m_intake.setPivotSpeed(0);
 		}
-		//Sets the speed of the intake rollers based off whether the left bumper is being pressed
-		m_intake.setRollerSpeed(m_oi.getSmartIntakeDown() ? 1.0 : 0);
+		if (smartControl) {
+			//Sets the speed of the intake rollers based off whether the left bumper is being pressed
+			m_intake.setRollerSpeed(m_oi.getMaxIntakeRollerSpeed());
+		}
 	}
 
 	// Called once the command ends or is interrupted.

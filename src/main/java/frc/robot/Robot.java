@@ -21,7 +21,6 @@ import frc.robot.commands.ShooterCommand;
 //Imports subsystems
 import frc.robot.subsystems.Dashboard;
 import frc.robot.subsystems.Direction;
-import frc.robot.subsystems.DriveTrain;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -33,7 +32,7 @@ public class Robot extends TimedRobot {
 	//private Command m_autonomousCommand;
 	private RobotContainer m_robotContainer;
 
-	private final DriveTrain m_driveTrainSubsystem = DriveTrain.getInstance();
+	//private final DriveTrain m_driveTrainSubsystem = DriveTrain.getInstance();
 	private Dashboard m_dashboard = Dashboard.getInstance();
 	//private final Climber m_climberSubsystem = Climber.getInstance();
 	//private final Intake m_intakeSubsystem = Intake.getInstance();
@@ -203,6 +202,8 @@ public class Robot extends TimedRobot {
 	/** This function is called periodically during test mode. */
 	@Override
 	public void testPeriodic() {
+		//Runs the scheduler
+		Scheduler.getInstance().run();
 		new PrintCommand("Top Pivot Limit Switch " + m_si.getPivotUpLimitTriggered()).initialize();
 		new PrintCommand("Bottom Pivot Limit Switch " + m_si.getPivotDownLimitTriggered()).initialize();
 	}
