@@ -140,6 +140,8 @@ public class Robot extends TimedRobot {
 		Dashboard.UpdateEncoderForTest(m_directionSubsystem.getLeftDistance());
 		//Runs the scheduler
 		Scheduler.getInstance().run();
+		new PrintCommand("disntance left " + m_directionSubsystem.getLeftDistance()).initialize();
+		new PrintCommand("disntance right " + m_directionSubsystem.getRightDistance()).initialize();
 	}
 
 	@Override
