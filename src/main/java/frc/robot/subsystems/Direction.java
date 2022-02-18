@@ -46,27 +46,27 @@ public class Direction extends SubsystemBase {
 
 	//Returns the rate
 	public double getRate() {
-		return  gyro.getRate();
+		return gyro.getRate();
 	}*/
 	
 	/**
 	 * @return encoder's right distance
 	 */
-	public double getRightDistance(){
+	public double getRightDistance() {
 		return rightEncoder.getDistance();
 	}
 
 	/**
 	 * @return encoder's left distance
 	 */
-	public double getLeftDistance(){
+	public double getLeftDistance() {
 		return leftEncoder.getDistance();
 	}
 
 	/**
 	 * @return encoder's distance
 	 */
-	public double getDistance(){
+	public double getDistance() {
 		return (this.getRightDistance() + this.getLeftDistance()) / 2;
 	}
 

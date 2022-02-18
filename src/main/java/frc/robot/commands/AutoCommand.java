@@ -61,31 +61,8 @@ public class AutoCommand extends CommandBase {
 				
 		}
 	}
-	/**it is inchagre of doing the taxi part of the auto
-	 * 
-	 * @param isActive is dependant on whether we choose to use it (if true, it will do it)
-	 */
-	public boolean taxiDrive(boolean isActive) {
-		//Taxis out of the Tarmax (10 feet backward at high speed) then stops
-		if (isActive) {
-			//Checks if the robot has moved the specified taxi distance (aka, has left the Tarmac)
-			if (m_direction.getDistance() > AutoConstants.taxiDistanceInFeet) {
-				double speed = m_oi.getMaxDriveSpeed() + 0.05;  //Speed not max so that course corrections can be made
-				//Gets the error rate
-				double error = kP * -m_direction.getError();
-				//Moves the robot at the set speed and makes course corrections based off the encoders
-				driveTrain.tankDrived(speed + error, speed - error);
-			} else {
-				//Stops the robot
-				driveTrain.tankDrived(0, 0);  //Eventually have robot turn instead of stopping
-				//End taxi stage and switch to collect cargo stage
-				return true;
-				//stage = "Collect Cargo";
-			}
-		}
-		return false;	
-	}
 
+	//Shoots the preloaded cargo
 	public boolean shootPreload(boolean isActive) {
 		/**
 		 * Steps:
@@ -112,6 +89,31 @@ public class AutoCommand extends CommandBase {
 		}
 		//Continues shoot preload stage
 		return false;
+	}
+
+	/**it is inchagre of doing the taxi part of the auto
+	 * 
+	 * @param isActive is dependant on whether we choose to use it (if true, it will do it)
+	 */
+	public boolean taxiDrive(boolean isActive) {
+		//Taxis out of the Tarmax (10 feet backward at high speed) then stops
+		if (isActive) {
+			//Checks if the robot has moved the specified taxi distance (aka, has left the Tarmac)
+			if (m_direction.getDistance() > AutoConstants.taxiDistanceInFeet) {
+				double speed = m_oi.getMaxDriveSpeed() + 0.05;  //Speed not max so that course corrections can be made
+				//Gets the error rate
+				double error = kP * -m_direction.getError();
+				//Moves the robot at the set speed and makes course corrections based off the encoders
+				driveTrain.tankDrived(speed + error, speed - error);
+			} else {
+				//Stops the robot
+				driveTrain.tankDrived(0, 0);  //Eventually have robot turn instead of stopping
+				//End taxi stage and switch to collect cargo stage
+				return true;
+				//stage = "Collect Cargo";
+			}
+		}
+		return false;	
 	}
 
 	// Called once the command ends or is interrupted.
