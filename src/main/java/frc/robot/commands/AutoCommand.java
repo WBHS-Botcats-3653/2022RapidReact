@@ -82,7 +82,7 @@ public class AutoCommand extends CommandBase {
 				break;
 			case ("Taxi"):
 			//runs the taxi
-				taxiDrive(isAutoTaxiOn);
+				//taxiDrive(isAutoTaxiOn);
 				if (taxiDrive(isAutoTaxiOn) || !isAutoTaxiOn) stage = "Collect Cargo";
 				break;
 			case ("Collect Cargo"):

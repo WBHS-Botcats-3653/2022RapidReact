@@ -33,6 +33,9 @@ public class Dashboard {
 	private NetworkTableEntry m_nteArmUpLimit = null;
 	private NetworkTableEntry m_nteArmDnLimit = null;
 
+
+	public static NetworkTableEntry testingEncoderLeft = null;
+
 	// Drive Tab
 	private NetworkTableEntry m_nteArmAngle = null;
 	private NetworkTableEntry m_nteDriveSpeed = null;
@@ -41,9 +44,9 @@ public class Dashboard {
 	public static NetworkTableEntry m_isAutoTaxiOn = null;
 	public static NetworkTableEntry m_isAutoCollectOn = null;
 
-	private static NetworkTableEntry m_isAutoShootOnBox = null;
-	private static NetworkTableEntry m_isAutoTaxiOnBox = null;
-	private static NetworkTableEntry m_isAutoCollectOnBox = null;
+	public static NetworkTableEntry m_isAutoShootOnBox = null;
+	public static NetworkTableEntry m_isAutoTaxiOnBox = null;
+	public static NetworkTableEntry m_isAutoCollectOnBox = null;
 
 	private Dashboard() {
 		ShuffleboardTab tabConfig = Shuffleboard.getTab("Config");
