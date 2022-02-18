@@ -17,7 +17,6 @@ import frc.robot.Constants.DriveConstants;
  */
 public class Direction extends SubsystemBase {
 	private static Direction m_singleton;
-	//private ADIS16470_IMU m_gyro = new ADIS16470_IMU();
 	private ADXRS450_Gyro m_gyro = new ADXRS450_Gyro();
 	private Encoder leftEncoder;
 	private Encoder rightEncoder;
@@ -38,14 +37,17 @@ public class Direction extends SubsystemBase {
 		return m_singleton;
 	}
 	
+	//Returns the gyro
 	public Sendable getGyro() {
 		return m_gyro;
 	}
 
+	//Returns the angle
 	public double getAngle() {
 		return m_gyro.getAngle();
 	}
 
+	//Returns the rate
 	public double getRate() {
 		return  m_gyro.getRate();
 	}
@@ -71,6 +73,7 @@ public class Direction extends SubsystemBase {
 		return (this.getRightDistance() + this.getLeftDistance()) / 2;
 	}
 
+	//Resets the encoders
 	public void resetEncoders(){
 		rightEncoder.reset();
 		leftEncoder.reset();
