@@ -69,7 +69,11 @@ public class Dashboard {
 		cam0.setResolution(142, 90);
 		cam0.setFPS(20);
 		tabDrive.add("Field View", cam0).withSize(3, 2).withPosition(6, 0);
+<<<<<<< HEAD
 		*/
+=======
+
+>>>>>>> 647d8aaf5d246e51c4bbe7fac632c0ac8ef5cbd3
 		//tabDrive.add("Gyro", Direction.getInstance().getGyro()).withSize(2, 2).withPosition(3, 0);
 		/*
 		m_nteArmAngle = tabDrive.add("Arm", 0.0).withWidget(BuiltInWidgets.kDial)

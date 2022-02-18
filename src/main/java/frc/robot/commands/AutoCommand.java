@@ -10,13 +10,11 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Shooter;
 
-/*This command will run and will do 
- */
 public class AutoCommand extends CommandBase {
 	private DriveTrain driveTrain;
 	private Shooter m_shooter;
 	private Indexer m_indexer;
-	private Direction gyro;
+	private Direction m_direction;
 	private OI m_oi;
 	private SI m_si;
 
@@ -34,7 +32,7 @@ public class AutoCommand extends CommandBase {
 		driveTrain = DriveTrain.getInstance();
 		m_shooter = Shooter.getInstance();
 		m_indexer = Indexer.getInstance();
-		gyro = Direction.getInstance();
+		m_direction = Direction.getInstance();
 		m_oi = OI.getInstance();
 		m_si = SI.getInstance();
 		kP = 1;
@@ -45,44 +43,15 @@ public class AutoCommand extends CommandBase {
 	@Override
 	public void initialize() {
 		stage = "Shoot Preload";
-
-		/*new ScheduleCommand(
-			//this one will execute the shooter for 3 seconds and then stop
-			new StartEndCommand(
-				//run when it starts
-				() -> shooter.spinSpinner(1.0), 
-				//run when it ends
-				() -> shooter.spinSpinner(0),
-				driveTrain)
-			.withTimeout(3)
-			.andThen(
-			/**what this will do is:
-			 * it will run the WaitUntilCommand (which will run for the time (in this case 3 seconds) and then stop)
-			 * because it is used the deadlineWith (which will make the parameter stop when the 
-			 * (in this case) WaitUntilCommand stops).
-			 * so it will basically go and .5 speed, straight, and it will last for 3 seconds, 
-			 * thus making the cut for the taxi drive part.
-			 *
-				new StartEndCommand(
-					//run when it starts
-					() -> driveTrain.ArcadeDrived(0.5, 0), 
-					//run when it ends
-					() -> driveTrain.ArcadeDrived(0, 0), driveTrain).withTimeout(3)
-				)
-			).initialize();
-		//super.initialize();*/
 	}
 
 	@Override
 	public void execute() {
 		switch (stage) {
-			case ("Shoot Preload"):
-				//shootPreload(true);
+			case ("Shoot Preload"):  //Shoots the preload if enabled
 				if (shootPreload(isAutoShootOn) || !isAutoShootOn) stage = "Taxi";
 				break;
-			case ("Taxi"):
-			//runs the taxi
-				//taxiDrive(isAutoTaxiOn);
+			case ("Taxi"):  //Moves (Taxis) the robot out of the Tarmac (starting area)
 				if (taxiDrive(isAutoTaxiOn) || !isAutoTaxiOn) stage = "Collect Cargo";
 				break;
 			case ("Collect Cargo"):
@@ -96,18 +65,18 @@ public class AutoCommand extends CommandBase {
 	 * 
 	 * @param isActive is dependant on whether we choose to use it (if true, it will do it)
 	 */
-	public boolean taxiDrive(boolean isActive){
-		//Gets the error rate
-		double error = kP * -gyro.getRate();
+	public boolean taxiDrive(boolean isActive) {
 		//Taxis out of the Tarmax (10 feet backward at high speed) then stops
-		if (isActive){
-			/*in reality, what the bellow if statement checks is if the robot have drived above the line*/
-			if (gyro.getDistance() > AutoConstants.taxiDistanceInFeet) {
+		if (isActive) {
+			//Checks if the robot has moved the specified taxi distance (aka, has left the Tarmac)
+			if (m_direction.getDistance() > AutoConstants.taxiDistanceInFeet) {
 				double speed = m_oi.getMaxDriveSpeed() + 0.05;  //Speed not max so that course corrections can be made
-				//Moves the robot at the set speed and making course corrections based off the gyro
+				//Gets the error rate
+				double error = kP * -m_direction.getError();
+				//Moves the robot at the set speed and makes course corrections based off the encoders
 				driveTrain.tankDrived(speed + error, speed - error);
 			} else {
-				//Stop the robot
+				//Stops the robot
 				driveTrain.tankDrived(0, 0);  //Eventually have robot turn instead of stopping
 				//End taxi stage and switch to collect cargo stage
 				return true;
@@ -117,21 +86,7 @@ public class AutoCommand extends CommandBase {
 		return false;	
 	}
 
-	public boolean shootPreload(boolean isActive){
-		//Shoot preload HERE
-		/*
-		new StartEndCommand(
-			() -> true,
-			() -> new StartEndCommand(
-				() -> m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed()),
-				() -> m_indexer.setIndexerSpeed(0)
-			).withTimeout(2)
-		).withTimeout(2).andThen(
-			() -> m_shooter.setSpinSpeed(0)
-		).initialize();
-		//End shoot preload stage and switch to taxi stage
-		//stage = "Taxi"; //Add condition
-*/
+	public boolean shootPreload(boolean isActive) {
 		/**
 		 * Steps:
 		 * 1. Runs the indexer until the high pe is off
@@ -139,30 +94,34 @@ public class AutoCommand extends CommandBase {
 		 * 3. Runs the spinner until the shooter pe is on
 		 * 4. Stops and passes to next
 		 */
-		if (isActive){
-			/*in reality, what the bellow if statement checks is if the robot have drived above the line*/
+		if (isActive) {
+			//Checks if the robot has moved the specified taxi distance (aka, has left the Tarmac)
 			m_shooter.setSpinSpeed(m_oi.getMaxShootSpeed());
-			if(m_si.getUpperStorageTriggered() /*when there is something in the high pe*/){
+			if (m_si.getUpperStorageTriggered()) {  //If the upper storage photoelectric sensor is triggered
+				//Stops the indexer
 				m_indexer.setIndexerSpeed(0);
-			} else if (m_si.getLowerStorageTriggered()/*when there is something in the lower pe*/) {
+			} else if (m_si.getLowerStorageTriggered()) {  //If the lower storage photoelectric sensor is triggered
+				//Spins the indexer at max speed
 				m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed());
-			} 
-			/* while there is detection in the shooter*/
-			 else if(m_si.getShooterTriggered()){
+			} else if (m_si.getShooterTriggered()) {  //If the shooter photoelectric sensor is triggered aka cargo has been ejected
+				//Stops the shooter
 				m_shooter.setSpinSpeed(0);
-				//end shooter part
-				//stage = "Collect Cargo";
+				//Ends shoot preload stage
 				return true;
 			}
 		}
+		//Continues shoot preload stage
 		return false;
 	}
 
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
+		//Stops the shooter
 		m_shooter.setSpinSpeed(0);
+		//Stops the Indexer
 		m_indexer.setIndexerSpeed(0);
+		//Stops the DriveTrain
 		driveTrain.tankDrived(0, 0); 
 	}
 
