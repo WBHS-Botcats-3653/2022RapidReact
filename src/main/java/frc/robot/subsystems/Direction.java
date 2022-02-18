@@ -67,14 +67,16 @@ public class Direction extends SubsystemBase {
 	 * @return encoder's distance
 	 */
 	public double getDistance() {
-		return (this.getRightDistance() + this.getLeftDistance()) / 2;
+		//return (this.getRightDistance() + this.getLeftDistance()) / 2;
+		return this.getRightDistance();
 	}
 
 	/**
 	 * @return the error between the left and right distance
 	 */
 	public double getError() {
-		return this.getLeftDistance() - this.getRightDistance();
+		//return this.getLeftDistance() - this.getRightDistance();
+		return 0;
 	}
 
 	//Resets the encoders
