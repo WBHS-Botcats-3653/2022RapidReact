@@ -70,6 +70,13 @@ public class Direction extends SubsystemBase {
 		return (this.getRightDistance() + this.getLeftDistance()) / 2;
 	}
 
+	/**
+	 * @return the error between the left and right distance
+	 */
+	public double getError() {
+		return this.getLeftDistance() - this.getRightDistance();
+	}
+
 	//Resets the encoders
 	public void resetEncoders(){
 		rightEncoder.reset();
