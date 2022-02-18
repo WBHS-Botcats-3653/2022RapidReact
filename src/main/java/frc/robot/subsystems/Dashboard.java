@@ -79,24 +79,24 @@ public class Dashboard {
 
 		//Auto Shoot
 		m_isAutoShootOn = tabDrive.addPersistent("Auto Shoot", true).withWidget(BuiltInWidgets.kToggleButton)
-		.withSize(1, 1).withPosition(1, 2).getEntry();
+		.withSize(1, 1).withPosition(0, 1).getEntry();
 		//this one is the boolean box
 		m_isAutoShootOnBox = tabDrive.addPersistent("is Auto Shoot", AutoCommand.isAutoShootOn)
-		.withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(1, 1).getEntry();
+		.withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(0, 0).getEntry();
 
 		//Auto Taxi
 		m_isAutoTaxiOn = tabDrive.addPersistent("Auto Taxi", true).withWidget(BuiltInWidgets.kToggleButton)
-		.withSize(1, 1).withPosition(2, 2).getEntry();
+		.withSize(1, 1).withPosition(1, 1).getEntry();
 		//this one is the boolean box
 		m_isAutoTaxiOnBox = tabDrive.addPersistent("is Auto Taxi", AutoCommand.isAutoTaxiOn)
-		.withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(2, 1).getEntry();
+		.withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(1, 0).getEntry();
 
 		//Auto collect
 		m_isAutoCollectOn = tabDrive.addPersistent("Auto Collect", true).withWidget(BuiltInWidgets.kToggleButton)
-		.withSize(1, 1).withPosition(3, 2).getEntry();
+		.withSize(1, 1).withPosition(2, 1).getEntry();
 		//this one is the boolean box
 		m_isAutoCollectOnBox = tabDrive.addPersistent("is Auto Collect", AutoCommand.isAutoCollectOn)
-		.withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(3, 1).getEntry();
+		.withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(2, 0).getEntry();
 
 		// Test Tab
 		m_nteArmDnLimit = tabTest.add("Arm Down", false).withSize(1, 1).withPosition(0, 0).getEntry();
