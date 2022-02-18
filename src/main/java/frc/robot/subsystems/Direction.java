@@ -23,7 +23,7 @@ public class Direction extends SubsystemBase {
 		//gyro.calibrate();
 		leftEncoder = new Encoder(DriveConstants.leftMotorGroupEncoder1, DriveConstants.leftMotorGroupEncoder2);
 		rightEncoder = new Encoder(DriveConstants.rightMotorGroupEncoder1, DriveConstants.rightMotorGroupEncoder2);
-		
+		this.resetEncoders();
 	}
 
 	//Returns an instance of Direction, creating an instance only when one does not already exist
