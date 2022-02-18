@@ -48,10 +48,14 @@ public class Dashboard {
 	public static NetworkTableEntry m_isAutoTaxiOnBox = null;
 	public static NetworkTableEntry m_isAutoCollectOnBox = null;
 
+	public static ShuffleboardTab tabConfig;
+	public static ShuffleboardTab tabDrive;
+	public static ShuffleboardTab tabTest;
+
 	private Dashboard() {
-		ShuffleboardTab tabConfig = Shuffleboard.getTab("Config");
-		ShuffleboardTab tabDrive = Shuffleboard.getTab("Drive");
-		ShuffleboardTab tabTest = Shuffleboard.getTab("Test");
+		tabConfig = Shuffleboard.getTab("Config");
+		tabDrive = Shuffleboard.getTab("Drive");
+		tabTest = Shuffleboard.getTab("Test");
 
 		// Config Tab
 		//m_nteMaxSpd = tabConfig.addPersistent("Max Speed", 1.0).withSize(1, 1).withPosition(0, 0).getEntry();
@@ -97,6 +101,8 @@ public class Dashboard {
 		// Test Tab
 		m_nteArmDnLimit = tabTest.add("Arm Down", false).withSize(1, 1).withPosition(0, 0).getEntry();
 		m_nteArmUpLimit = tabTest.add("Arm Up", false).withSize(1, 1).withPosition(1, 0).getEntry();
+		//this is for testing the encoders if they are working
+		testingEncoderLeft = tabTest.add("Left encoder testing it", 0).withSize(1, 1).withPosition(1, 0).getEntry();
 		//m_nteArmEncoderRaw = tabTest.add("Arm Encoder", 1024).withSize(1, 1).withPosition(2, 0).getEntry();
 		//m_nteDriveEncLeft = tabTest.add("Drive Left", 0).withSize(1, 1).withPosition(0, 1).getEntry();
 		//m_nteDriveEncRight = tabTest.add("Drive Right", 0).withSize(1, 1).withPosition(1, 1).getEntry();
@@ -113,7 +119,11 @@ public class Dashboard {
 
 		//Intake.setArmEncoderFloor((int) m_nteArmDownEnc.getDouble(1024));
 	}
-
+	/**this is for testing the encoders if they are working
+	*/
+	public static void UpdateEncoderForTest(double v){
+		testingEncoderLeft.forceSetDouble(v);
+	}
 	public void telopPeriodic() {
 		OI ctrl = OI.getInstance();
 		Intake arm = Intake.getInstance();

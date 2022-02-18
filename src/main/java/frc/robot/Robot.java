@@ -136,6 +136,8 @@ public class Robot extends TimedRobot {
 	/** This function is called periodically during autonomous. */
 	@Override
 	public void autonomousPeriodic() {
+		//this is for testing the encoders if they are working
+		Dashboard.UpdateEncoderForTest(m_directionSubsystem.getLeftDistance());
 		//Runs the scheduler
 		Scheduler.getInstance().run();
 	}
