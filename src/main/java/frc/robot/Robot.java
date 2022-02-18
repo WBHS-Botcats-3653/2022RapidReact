@@ -179,12 +179,16 @@ public class Robot extends TimedRobot {
 		//Runs the scheduler
 		Scheduler.getInstance().run();
 		m_dashboard.telopPeriodic();
+		new PrintCommand("disntance left " + m_directionSubsystem.getLeftDistance()).initialize();
+		new PrintCommand("disntance right " + m_directionSubsystem.getRightDistance()).initialize();
 	}
 
 	@Override
 	public void testInit() {
 		// Cancels all running commands at the start of test mode.
 		CommandScheduler.getInstance().cancelAll();
+		
+		
 		//Schedule test commands
 		m_arcadeDriveCommand.schedule();
 		m_climberCommand.schedule();
