@@ -14,7 +14,7 @@ public class AutoCommand extends CommandBase {
 	private DriveTrain driveTrain;
 	private Shooter m_shooter;
 	private Indexer m_indexer;
-	private Direction gyro;
+	private Direction m_direction;
 	private OI m_oi;
 	private SI m_si;
 
@@ -32,7 +32,7 @@ public class AutoCommand extends CommandBase {
 		driveTrain = DriveTrain.getInstance();
 		m_shooter = Shooter.getInstance();
 		m_indexer = Indexer.getInstance();
-		gyro = Direction.getInstance();
+		m_direction = Direction.getInstance();
 		m_oi = OI.getInstance();
 		m_si = SI.getInstance();
 		kP = 1;
@@ -66,15 +66,17 @@ public class AutoCommand extends CommandBase {
 	 * @param isActive is dependant on whether we choose to use it (if true, it will do it)
 	 */
 	public boolean taxiDrive(boolean isActive) {
-		//Gets the error rate
-		double error = kP * -gyro.getRate();
+		/*//Gets the error rate
+		double error = kP * -m_direction.getRate();*/
 		//Taxis out of the Tarmax (10 feet backward at high speed) then stops
 		if (isActive) {
 			//Checks if the robot has moved the specified taxi distance (aka, has left the Tarmac)
-			if (gyro.getDistance() > AutoConstants.taxiDistanceInFeet) {
-				double speed = m_oi.getMaxDriveSpeed() + 0.05;  //Speed not max so that course corrections can be made
+			if (m_direction.getDistance() > AutoConstants.taxiDistanceInFeet) {
+				/*double speed = m_oi.getMaxDriveSpeed() + 0.05;  //Speed not max so that course corrections can be made
 				//Moves the robot at the set speed and makes course corrections based off the gyro
-				driveTrain.tankDrived(speed + error, speed - error);
+				driveTrain.tankDrived(speed + error, speed - error);*/
+				double speed = m_oi.getMaxDriveSpeed();
+				driveTrain.tankDrived(speed, speed);
 			} else {
 				//Stops the robot
 				driveTrain.tankDrived(0, 0);  //Eventually have robot turn instead of stopping
