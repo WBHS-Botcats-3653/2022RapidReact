@@ -64,12 +64,13 @@ public class Dashboard {
 		m_nteArmDownEnc = tabConfig.addPersistent("Arm Down", 1024.0).withSize(1, 1).withPosition(3, 0).getEntry();
 
 		// Drive Tab
+		/*
 		cam0 = CameraServer.startAutomaticCapture(0);
 		cam0.setResolution(142, 90);
 		cam0.setFPS(20);
 		tabDrive.add("Field View", cam0).withSize(3, 2).withPosition(6, 0);
-
-		tabDrive.add("Gyro", Direction.getInstance().getGyro()).withSize(2, 2).withPosition(3, 0);
+		*/
+		//tabDrive.add("Gyro", Direction.getInstance().getGyro()).withSize(2, 2).withPosition(3, 0);
 		/*
 		m_nteArmAngle = tabDrive.add("Arm", 0.0).withWidget(BuiltInWidgets.kDial)
 				.withProperties(Map.of("min", 0, "max", 180)).withSize(1, 1).withPosition(5, 0).getEntry();
