@@ -20,6 +20,7 @@ public class IntakeCommand extends CommandBase {
 	private SI m_si;
 	private boolean smartControl;
 	private boolean smartPivotGoingUp;
+	private boolean smartPivotGoingDown;
 
 	/**Creates a new IntakeCommand.
 	 * @param subsystem The subsystem used by this command.
@@ -30,6 +31,7 @@ public class IntakeCommand extends CommandBase {
 		m_si = SI.getInstance();
 		smartControl = false;
 		smartPivotGoingUp = false;
+		smartPivotGoingDown = false;
 	}
 
 	// Called when the command is initially scheduled.
@@ -92,6 +94,8 @@ public class IntakeCommand extends CommandBase {
 			m_intake.setPivotSpeed(m_oi.getMaxSmartIntakePivotDownSpeed());
 			//Prevents manual control from interferring with smart control
 			smartControl = true;
+			//Initial pivot down started
+			smartPivotGoingDown = true;
 		} else if (m_si.getPivotDownLimitTriggered() || m_si.getPivotUpLimitTriggered()) {  //If either of the pivot limit switches are triggered
 			//Checks if the smart intake is being pressed incase the intake has already been manually moved down
 			if (!smartControl && m_oi.getSmartIntakeDown()) {  //If the smart intake is being pressed
@@ -106,12 +110,19 @@ public class IntakeCommand extends CommandBase {
 			}
 			//If the intake has lifted off the bottom pivot limit switch
 			if (smartPivotGoingUp && !m_si.getPivotDownLimitTriggered()) {
+				//Stops the intake rollers
+				m_intake.setRollerSpeed(0);
 				//Allows manual control to take over from smart control
 				smartControl = false;
 				//Smart pivot has made initial upward pivot
 				smartPivotGoingUp = false;
-				//Stops the intake rollers
-				m_intake.setRollerSpeed(0);
+			}
+			//If the intake has lifted off the top pivot limit switch
+			if (smartPivotGoingDown && !m_si.getPivotUpLimitTriggered()) {
+				//Smart pivot has made initial upward pivot
+				smartPivotGoingDown = false;
+				//Spins the intake rollers at max speed
+				m_intake.setRollerSpeed(m_oi.getMaxIntakeRollerSpeed());
 			}
 			//If the intake isn't going up
 			if (!smartPivotGoingUp || m_si.getPivotUpLimitTriggered()) {
