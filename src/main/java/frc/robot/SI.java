@@ -47,17 +47,17 @@ public class SI {
 
 	//Returns input from the lower storage photoelectric sensor
 	public boolean getLowerStorageTriggered() {
-		return !lowerStoragePE.get();  //Inverted (electrical issue)
+		return lowerStoragePE.get();
 	}
 
 	//Returns input from the upper storage photoelectric sensor
 	public boolean getUpperStorageTriggered() {
-		return !upperStoragePE.get();  //Inverted (electrical issue)
+		return upperStoragePE.get();
 	}
 
 	//Returns input from the shooter photoelectric sensor
 	public boolean getShooterTriggered() {
-		return !shooterPE.get();  //Inverted (electrical issue)
+		return shooterPE.get();
 	}
 
 	//Returns input from the top pivot limit switch
