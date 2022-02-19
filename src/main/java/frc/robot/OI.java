@@ -65,14 +65,26 @@ public class OI {
 	}
 
 	//Sets the max smart intake pivot speed
-	public void setMaxSmartIntakePivotSpeed(double speed) {
+	public void setMaxSmartIntakePivotDownSpeed(double speed) {
 		if (0.0 < speed && speed <= 1.0) {
 			m_maxSmartIntakePivotSpeed = speed;
 		}
 	}
 
 	//Returns the max smart intake pivot speed
-	public double getMaxSmartIntakePivotSpeed(){
+	public double getMaxSmartIntakePivotDownSpeed(){
+		return m_maxSmartIntakePivotSpeed;
+	}
+
+	//Sets the max smart intake pivot speed
+	public void setMaxSmartIntakePivotUpSpeed(double speed) {
+		if (0.0 < speed && speed <= 1.0) {
+			m_maxSmartIntakePivotSpeed = speed;
+		}
+	}
+
+	//Returns the max smart intake pivot speed
+	public double getMaxSmartIntakePivotUpSpeed(){
 		return m_maxSmartIntakePivotSpeed;
 	}
 
