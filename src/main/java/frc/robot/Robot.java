@@ -172,7 +172,7 @@ public class Robot extends TimedRobot {
 		//Sets max motor speeds
 		m_oi.setMaxShootSpeed(0.6);
 		m_oi.setMaxIntakePivotSpeed(0.5);
-		m_oi.setMaxSmartIntakePivotDownSpeed(0.2);
+		m_oi.setMaxSmartIntakePivotDownSpeed(0.15);
 		m_oi.setMaxSmartIntakePivotUpSpeed(0.35);
 		m_oi.setMaxIntakeRollerSpeed(1.0);
 		m_oi.setMaxArmSpeed(1.0);
@@ -188,6 +188,9 @@ public class Robot extends TimedRobot {
 		m_dashboard.telopPeriodic();
 		new PrintCommand("Distance left " + m_directionSubsystem.getLeftDistance()).initialize();
 		new PrintCommand("Distance right " + m_directionSubsystem.getRightDistance()).initialize();
+		new PrintCommand("Shooter PE: "+m_si.getShooterTriggered()).initialize();
+		new PrintCommand("Upper Storage PE: "+m_si.getUpperStorageTriggered()).initialize();
+		new PrintCommand("Lower Storage PE: "+m_si.getLowerStorageTriggered()).initialize();
 	}
 
 	@Override
