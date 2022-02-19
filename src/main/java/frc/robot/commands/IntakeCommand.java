@@ -19,6 +19,7 @@ public class IntakeCommand extends CommandBase {
 	private OI m_oi;
 	private SI m_si;
 	private boolean smartControl;
+	private boolean smartPivotGoingUp;
 
 	/**Creates a new IntakeCommand.
 	 * @param subsystem The subsystem used by this command.
@@ -28,6 +29,7 @@ public class IntakeCommand extends CommandBase {
 		m_oi = OI.getInstance();
 		m_si = SI.getInstance();
 		smartControl = false;
+		smartPivotGoingUp = false;
 	}
 
 	// Called when the command is initially scheduled.
@@ -85,6 +87,7 @@ public class IntakeCommand extends CommandBase {
 			m_intake.setRollerSpeed(0);
 			//Allows manual control to take over from smart control
 			smartControl = false;
+			smartPivotGoingUp = true;
 		} else if (m_oi.getSmartIntakeDown() && !m_si.getPivotDownLimitTriggered()) {  //If the smart intake is being called to go down and the bottom pivot limit switch is not being triggered
 			//Pivots the intake down at the set max speed
 			m_intake.setPivotSpeed(m_oi.getMaxSmartIntakePivotSpeed());
@@ -104,8 +107,16 @@ public class IntakeCommand extends CommandBase {
 				//Allows manual control to take over from smart control
 				smartControl = false;
 			}
-			//Stops the intake pivot
-			m_intake.setPivotSpeed(0);
+			//If the intake has lifted off the bottom pivot limit switch
+			if (smartPivotGoingUp && !m_si.getPivotDownLimitTriggered()) {
+				//Smart pivot has made initial upward pivot
+				smartPivotGoingUp = false;
+			}
+			//If the intake isn't going up
+			if (!smartPivotGoingUp) {
+				//Stops the intake pivot
+				m_intake.setPivotSpeed(0);
+			}
 		}
 		if (smartControl) {
 			//Sets the speed of the intake rollers based off whether the left bumper is being pressed
