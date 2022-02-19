@@ -92,8 +92,6 @@ public class IntakeCommand extends CommandBase {
 			m_intake.setPivotSpeed(m_oi.getMaxSmartIntakePivotSpeed());
 			//Prevents manual control from interferring with smart control
 			smartControl = true;
-			//Don't set roller speed until the downward pivot has already started. This is to avoid damage to the robot from the rollers
-			return;
 		} else if (m_si.getPivotDownLimitTriggered() || m_si.getPivotUpLimitTriggered()) {  //If either of the pivot limit switches are triggered
 			//Checks if the smart intake is being pressed incase the intake has already been manually moved down
 			if (!smartControl && m_oi.getSmartIntakeDown()) {  //If the smart intake is being pressed
@@ -121,6 +119,7 @@ public class IntakeCommand extends CommandBase {
 				m_intake.setPivotSpeed(0);
 			}
 		}
+		//Rollers
 		if (smartControl) {  //If smart control has priority over manual controls
 			//Sets the speed of the intake rollers based off whether the left bumper is being pressed
 			m_intake.setRollerSpeed(m_oi.getMaxIntakeRollerSpeed());
