@@ -49,7 +49,7 @@ public class AutoCommand extends CommandBase {
 	public void execute() {
 		switch (stage) {
 			case ("Shoot Preload"):  //Shoots the preload if enabled
-				if (shootPreload(isAutoShootOn) || !isAutoShootOn) stage = "Taxi";
+				if (shootPreload(/*isAutoShootOn*/true)/* || !isAutoShootOn*/) stage = "Taxi";
 				break;
 			case ("Taxi"):  //Moves (Taxis) the robot out of the Tarmac (starting area)
 				if (taxiDrive(isAutoTaxiOn) || !isAutoTaxiOn) stage = "Collect Cargo";
