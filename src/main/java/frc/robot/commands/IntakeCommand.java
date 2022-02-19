@@ -112,6 +112,8 @@ public class IntakeCommand extends CommandBase {
 				smartControl = false;
 				//Smart pivot has made initial upward pivot
 				smartPivotGoingUp = false;
+				//Stops the intake rollers
+				m_intake.setRollerSpeed(0);
 			}
 			//If the intake isn't going up
 			if (!smartPivotGoingUp || m_si.getPivotUpLimitTriggered()) {
