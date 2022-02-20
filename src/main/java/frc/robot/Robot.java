@@ -141,8 +141,8 @@ public class Robot extends TimedRobot {
 		Dashboard.UpdateEncoderForTest(m_directionSubsystem.getLeftDistance());
 		//Runs the scheduler
 		Scheduler.getInstance().run();
-		//new PrintCommand("Distance left " + m_directionSubsystem.getLeftDistance()).initialize();
-		//new PrintCommand("Distance right " + m_directionSubsystem.getRightDistance()).initialize();
+		new PrintCommand("Distance left " + m_directionSubsystem.getLeftDistance()).initialize();
+		new PrintCommand("Distance right " + m_directionSubsystem.getRightDistance()).initialize();
 		new PrintCommand("Shooter PE: "+m_si.getShooterTriggered()).initialize();
 		new PrintCommand("Upper Storage PE: "+m_si.getUpperStorageTriggered()).initialize();
 		new PrintCommand("Lower Storage PE: "+m_si.getLowerStorageTriggered()).initialize();
