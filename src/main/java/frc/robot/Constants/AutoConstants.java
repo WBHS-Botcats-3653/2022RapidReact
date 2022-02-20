@@ -1,9 +1,6 @@
 package frc.robot.constants;
 
 public class AutoConstants {
-	//Our teams alliance color (defaults to blue)
-	public static String alliance = "Blue";
-
 	/*Which Tarmac the robot is starting in (defaults to left tarmac)
 	 *"L"=Left, "R"=Right
 	 */

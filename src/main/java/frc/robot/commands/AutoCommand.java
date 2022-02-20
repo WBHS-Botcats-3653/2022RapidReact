@@ -84,22 +84,10 @@ public class AutoCommand extends CommandBase {
 					case("MR"):
 
 						break;
-					case("RL"):
-
-						break;
-					case("RR"):
-
-						break;
 				}
 				break;
 			case("R"):
 				switch(AutoConstants.cargoToTarget[cargoTargetIndex]) {
-					case("LL"):
-
-						break;
-					case("LR"):
-
-						break;
 					case("ML"):
 
 						break;
