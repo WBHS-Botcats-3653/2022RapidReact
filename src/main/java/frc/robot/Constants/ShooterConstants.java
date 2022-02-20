@@ -3,6 +3,6 @@ package frc.robot.Constants;
 public class ShooterConstants {
 	//Spinner motor ID
 	public static final int spinnerMotorID = 30;
-	//Shooter photo electric sensor ID
+	//Shooter photoelectric sensor ID
 	public static final int shooterPESensorID = 9;
 }
