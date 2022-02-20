@@ -14,8 +14,10 @@ import frc.robot.subsystems.DriveTrain;
 public class DriveCommand extends CommandBase {
 	private DriveTrain m_driveTrain;
 	private Direction m_direction;
+
 	private double distance;
 	private double speed;
+
 	private double currentDistance;
 	private int direction;
 	private final int kP = 1;
@@ -32,7 +34,9 @@ public class DriveCommand extends CommandBase {
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
+		//Resets the encoders
 		m_direction.resetEncoders();
+		//Sets distance traveled to 0
 		currentDistance = 0;
 	}
 
@@ -50,12 +54,14 @@ public class DriveCommand extends CommandBase {
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
+		//Stops the robot
 		m_driveTrain.tankDrived(0, 0);
 	}
 
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() {
+		//Stops driving when the robot has traversed the specified distance
 		return Math.abs(distance) - Math.abs(currentDistance) <= 0;
 	}
 }

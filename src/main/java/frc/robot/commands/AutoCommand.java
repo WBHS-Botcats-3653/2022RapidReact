@@ -2,63 +2,125 @@ package frc.robot.commands;
 
 //Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
+//Imports InstantCommand
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+//Imports SequentialCommandGroup
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+//Imports OI
 import frc.robot.OI;
+//Imports SI
 import frc.robot.SI;
+//Imports auto commands
 import frc.robot.commands.autoCommands.DriveCommand;
+import frc.robot.commands.autoCommands.ShootCommand;
+//Imports constants
 import frc.robot.constants.AutoConstants;
+//Imports subsystems
 import frc.robot.subsystems.Direction;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Shooter;
 
 public class AutoCommand extends CommandBase {
-	private DriveTrain driveTrain;
-	private Shooter m_shooter;
-	private Indexer m_indexer;
-	private Direction m_direction;
+	//private DriveTrain driveTrain;
+	//private Shooter m_shooter;
+	//private Indexer m_indexer;
+	//private Direction m_direction;
 	private OI m_oi;
-	private SI m_si;
+	//private SI m_si;
 
 	private boolean hasFinished;
-	private String stage;
-	private double kP;
+	private boolean initialCommandsDone;
+	private int cargoTargetIndex;
+	//private String stage;
+	//private double kP;
 
 	public static boolean isAutoShootOn;
 	public static boolean isAutoTaxiOn;
 	public static boolean isAutoCollectOn;
 
-
 	//Constructor
 	public AutoCommand() {
-		driveTrain = DriveTrain.getInstance();
-		m_shooter = Shooter.getInstance();
-		m_indexer = Indexer.getInstance();
-		m_direction = Direction.getInstance();
+		//driveTrain = DriveTrain.getInstance();
+		//m_shooter = Shooter.getInstance();
+		//m_indexer = Indexer.getInstance();
+		//m_direction = Direction.getInstance();
 		m_oi = OI.getInstance();
-		m_si = SI.getInstance();
-		kP = 1;
+		//m_si = SI.getInstance();
+		//kP = 1;
 		hasFinished = false;
+		initialCommandsDone = false;
 
-
-		//New code
 		new SequentialCommandGroup(
-			//Shoot command,
-			new DriveCommand(AutoConstants.taxiDistanceInFeet, m_oi.getMaxDriveSpeed())  //Taxi
+			new ShootCommand(),  //Shoots Preload
+			new DriveCommand(AutoConstants.taxiDistanceInFeet, m_oi.getMaxDriveSpeed()),  //Taxi (remove if isAutoCollectOn is true and just go for cargo)
+			new InstantCommand(() -> {initialCommandsDone = true;})
 		);
 	}
 
 
 	@Override
 	public void initialize() {
-		stage = "Shoot Preload";
+		cargoTargetIndex = 0;
+		//stage = "Shoot Preload";
 	}
 
 	@Override
 	public void execute() {
-		switch (stage) {
+		if (!initialCommandsDone) return;
+		//"L"=Left, "M"=Middle, "R"=Right
+		switch(AutoConstants.startingPosition) {
+			case("L"):
+				switch(AutoConstants.cargoToTarget[cargoTargetIndex]) {
+					case("LL"):
+
+						break;
+					case("LR"):
+
+						break;
+					case("ML"):
+
+						break;
+					case("MR"):
+
+						break;
+					case("RL"):
+
+						break;
+					case("RR"):
+
+						break;
+				}
+				break;
+			case("R"):
+				switch(AutoConstants.cargoToTarget[cargoTargetIndex]) {
+					case("LL"):
+
+						break;
+					case("LR"):
+
+						break;
+					case("ML"):
+
+						break;
+					case("MR"):
+
+						break;
+					case("RL"):
+
+						break;
+					case("RR"):
+
+						break;
+				}
+				break;
+		}
+		if (++cargoTargetIndex == AutoConstants.cargoToTarget.length) hasFinished = true;
+
+
+		/*switch (stage) {
 			case ("Shoot Preload"):  //Shoots the preload if enabled
-				if (shootPreload(/*isAutoShootOn*/true)/* || !isAutoShootOn*/) stage = "Taxi";
+				if (shootPreload(isAutoShootOn) || !isAutoShootOn) stage = "Taxi";
 				break;
 			case ("Taxi"):  //Moves (Taxis) the robot out of the Tarmac (starting area)
 				if (taxiDrive(isAutoTaxiOn) || !isAutoTaxiOn) stage = "Collect Cargo";
@@ -68,13 +130,13 @@ public class AutoCommand extends CommandBase {
 				if (collectCargo(isAutoCollectOn) || !isAutoCollectOn) hasFinished = true;
 				break;
 				
-		}
+		}*/
 	}
 
-	/**Is in chagre of doing the preload shooting portion of auto
+	/*/**Is in chagre of doing the preload shooting portion of auto
 	 * 
 	 * @param isActive is dependant on whether we choose to use it (if true, it will do it)
-	 */
+	 *
 	public boolean shootPreload(boolean isActive) {
 		/**
 		 * Steps:
@@ -82,7 +144,7 @@ public class AutoCommand extends CommandBase {
 		 * 2. Stops the indexer
 		 * 3. Runs the spinner until the shooter pe is on
 		 * 4. Stops and passes to next
-		 */
+		 *
 		if (isActive) {
 			//Checks if the robot has moved the specified taxi distance (aka, has left the Tarmac)
 			m_shooter.setSpinSpeed(m_oi.getMaxShootSpeed());
@@ -106,7 +168,7 @@ public class AutoCommand extends CommandBase {
 	/**Is in chagre of doing the taxi portion of auto
 	 * 
 	 * @param isActive is dependant on whether we choose to use it (if true, it will do it)
-	 */
+	 *
 	public boolean taxiDrive(boolean isActive) {
 		//Taxis out of the Tarmax (10 feet backward at high speed) then stops
 		if (isActive) {
@@ -132,7 +194,7 @@ public class AutoCommand extends CommandBase {
 	/**Is in chagre of doing the cargo collection portion of auto
 	 * 
 	 * @param isActive is dependant on whether we choose to use it (if true, it will do it)
-	 */
+	 *
 	public boolean collectCargo(boolean isActive) {
 		if (isActive) {
 			for (int i = 0; i < AutoConstants.cargoToTarget.length; i++) {
@@ -141,17 +203,17 @@ public class AutoCommand extends CommandBase {
 		}
 		//Continue collect cargo stage
 		return false;
-	}
+	}*/
 
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
-		//Stops the shooter
+		/*//Stops the shooter
 		m_shooter.setSpinSpeed(0);
 		//Stops the Indexer
 		m_indexer.setIndexerSpeed(0);
 		//Stops the DriveTrain
-		driveTrain.tankDrived(0, 0); 
+		driveTrain.tankDrived(0, 0);*/
 	}
 
 	// Returns true when the command should end.

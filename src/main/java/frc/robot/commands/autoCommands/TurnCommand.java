@@ -29,24 +29,27 @@ public class TurnCommand extends CommandBase {
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
+		//Gets the angle of the robot when the turn command is first called
 		startAngle = m_direction.getAngle();
+		//Turns the robot 
+		m_driveTrain.arcadeDrived(0, turnSpeed);
 	}
 
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
-	public void execute() {
-		m_driveTrain.arcadeDrived(0, turnSpeed);
-	}
+	public void execute() {}
 
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
+		//Stops the robot
 		m_driveTrain.arcadeDrived(0, 0);
 	}
 
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() {
+		//If the robot has turned to the specified angle
 		return Math.abs(m_direction.getAngle() - startAngle) >= Math.abs(angle);
 	}
 }
