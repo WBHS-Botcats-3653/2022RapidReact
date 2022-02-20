@@ -4,23 +4,25 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.util.sendable.Sendable;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
 //Imports SubsystemBase
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.DriveConstants;
+import frc.robot.constants.DriveConstants;
 
 /**
  * Wrapper class to gyro on Roborio.
  */
 public class Direction extends SubsystemBase {
 	private static Direction m_singleton;
-	//private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+	private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 	private Encoder leftEncoder;
 	private Encoder rightEncoder;
 
 	
 	public Direction() {
-		//gyro.calibrate();
+		gyro.calibrate();
 		leftEncoder = new Encoder(DriveConstants.leftMotorGroupEncoder1, DriveConstants.leftMotorGroupEncoder2);
 		rightEncoder = new Encoder(DriveConstants.rightMotorGroupEncoder1, DriveConstants.rightMotorGroupEncoder2);
 		this.resetEncoders();
@@ -34,7 +36,7 @@ public class Direction extends SubsystemBase {
 		return m_singleton;
 	}
 	
-	/*//Returns the gyro
+	//Returns the gyro
 	public Sendable getGyro() {
 		return gyro;
 	}
@@ -47,7 +49,7 @@ public class Direction extends SubsystemBase {
 	//Returns the rate
 	public double getRate() {
 		return gyro.getRate();
-	}*/
+	}
 	
 	/**
 	 * @return encoder's right distance

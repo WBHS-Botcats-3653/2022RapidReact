@@ -11,8 +11,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 //Imports OI
 import frc.robot.OI;
-//Imports IntakeConstants
-import frc.robot.Constants.IntakeConstants;
+import frc.robot.constants.IntakeConstants;
 
 public class Indexer extends SubsystemBase {
 	private static Indexer m_singleton = null;

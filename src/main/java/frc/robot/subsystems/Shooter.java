@@ -11,8 +11,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 //Imports OI
 import frc.robot.OI;
-//Imports ShooterConstants
-import frc.robot.Constants.ShooterConstants;
+import frc.robot.constants.ShooterConstants;
 
 public class Shooter extends SubsystemBase {
 	private static Shooter shooter = null;

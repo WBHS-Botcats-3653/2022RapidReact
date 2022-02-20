@@ -9,10 +9,9 @@ package frc.robot;
 
 //Imports DigitalInput
 import edu.wpi.first.wpilibj.DigitalInput;
-//Imports Constants
-import frc.robot.Constants.ClimberConstants;
-import frc.robot.Constants.IntakeConstants;
-import frc.robot.Constants.ShooterConstants;
+import frc.robot.constants.ClimberConstants;
+import frc.robot.constants.IntakeConstants;
+import frc.robot.constants.ShooterConstants;
 
 //Sensor Inputs
 public class SI {

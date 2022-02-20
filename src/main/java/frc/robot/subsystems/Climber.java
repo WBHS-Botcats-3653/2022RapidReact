@@ -11,8 +11,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 //Imports OI
 import frc.robot.OI;
-//Imports ClimberConstants
-import frc.robot.Constants.ClimberConstants;
+import frc.robot.constants.ClimberConstants;
 
 public class Climber extends SubsystemBase {
 	private static Climber m_singleton = null;

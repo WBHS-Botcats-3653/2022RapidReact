@@ -15,8 +15,8 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 //Imports OI
 import frc.robot.OI;
-//Imports DriveConstants
-import frc.robot.Constants.DriveConstants;
+//Imports Constants
+import frc.robot.constants.DriveConstants;
 
 
 public class DriveTrain extends SubsystemBase {
@@ -103,6 +103,11 @@ public class DriveTrain extends SubsystemBase {
 		if (Math.abs(rightSpeed) > m_oi.getMaxDriveSpeed()) rightSpeed = (rightSpeed < 0 ? -1 : 1) * m_oi.getMaxDriveSpeed();
 		//Sets the differential drive left wheel speed and right wheel speed
 		diffDrive.tankDrive(leftSpeed, rightSpeed);
+	}
+
+	//Resets the drive encoders
+	public void resetEncoders() {
+
 	}
 
 	@Override

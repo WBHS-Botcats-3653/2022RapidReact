@@ -2,9 +2,11 @@ package frc.robot.commands;
 
 //Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.OI;
 import frc.robot.SI;
-import frc.robot.Constants.AutoConstants;
+import frc.robot.commands.autoCommands.DriveCommand;
+import frc.robot.constants.AutoConstants;
 import frc.robot.subsystems.Direction;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Indexer;
@@ -37,6 +39,13 @@ public class AutoCommand extends CommandBase {
 		m_si = SI.getInstance();
 		kP = 1;
 		hasFinished = false;
+
+
+		//New code
+		new SequentialCommandGroup(
+			//Shoot command,
+			new DriveCommand(AutoConstants.taxiDistanceInFeet, m_oi.getMaxDriveSpeed())  //Taxi
+		);
 	}
 
 
@@ -56,13 +65,16 @@ public class AutoCommand extends CommandBase {
 				break;
 			case ("Collect Cargo"):
 				//Collect cargo HERE
-				hasFinished = true;
+				if (collectCargo(isAutoCollectOn) || !isAutoCollectOn) hasFinished = true;
 				break;
 				
 		}
 	}
 
-	//Shoots the preloaded cargo
+	/**Is in chagre of doing the preload shooting portion of auto
+	 * 
+	 * @param isActive is dependant on whether we choose to use it (if true, it will do it)
+	 */
 	public boolean shootPreload(boolean isActive) {
 		/**
 		 * Steps:
@@ -87,11 +99,11 @@ public class AutoCommand extends CommandBase {
 				return true;
 			}
 		}
-		//Continues shoot preload stage
+		//Continue shoot preload stage
 		return false;
 	}
 
-	/**it is inchagre of doing the taxi part of the auto
+	/**Is in chagre of doing the taxi portion of auto
 	 * 
 	 * @param isActive is dependant on whether we choose to use it (if true, it will do it)
 	 */
@@ -113,7 +125,22 @@ public class AutoCommand extends CommandBase {
 				//stage = "Collect Cargo";
 			}
 		}
+		//Continue taxi stage
 		return false;	
+	}
+
+	/**Is in chagre of doing the cargo collection portion of auto
+	 * 
+	 * @param isActive is dependant on whether we choose to use it (if true, it will do it)
+	 */
+	public boolean collectCargo(boolean isActive) {
+		if (isActive) {
+			for (int i = 0; i < AutoConstants.cargoToTarget.length; i++) {
+				
+			}
+		}
+		//Continue collect cargo stage
+		return false;
 	}
 
 	// Called once the command ends or is interrupted.

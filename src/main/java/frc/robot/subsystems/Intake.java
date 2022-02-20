@@ -13,8 +13,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.OI;
 //Imports SI
 import frc.robot.SI;
-//Imports IntakeConstants
-import frc.robot.Constants.IntakeConstants;
+import frc.robot.constants.IntakeConstants;
 
 public class Intake extends SubsystemBase {
 	private static Intake m_singleton = null;
