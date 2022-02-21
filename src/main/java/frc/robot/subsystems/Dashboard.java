@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 //Imports java utilities
 import java.util.*;
 
+//Imports UsbCamera
 //import edu.wpi.first.cscore.UsbCamera;
 //Imports networkTableEntry
 import edu.wpi.first.networktables.NetworkTableEntry;
