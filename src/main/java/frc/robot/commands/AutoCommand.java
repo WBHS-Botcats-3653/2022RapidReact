@@ -6,13 +6,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 //Imports SequentialCommandGroup
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-//Imports OI
-import frc.robot.OI;
 //Imports autoCommands
 import frc.robot.commands.autoCommands.DriveCommand;
 import frc.robot.commands.autoCommands.ShootCommand;
 //Imports constants
 import frc.robot.constants.AutoConstants;
+import frc.robot.inputs.OI;
 
 public class AutoCommand extends CommandBase {
 	//private DriveTrain driveTrain;
@@ -44,6 +43,7 @@ public class AutoCommand extends CommandBase {
 		hasFinished = false;
 		initialCommandsDone = false;
 
+		//Still taxi when collecting cargo? Can prob skip since we'll leave the Tarmac anyways
 		new SequentialCommandGroup(
 			new ShootCommand(),  //Shoots Preload
 			new DriveCommand(AutoConstants.taxiDistanceInFeet, m_oi.getMaxDriveSpeed()),  //Taxi (remove if isAutoCollectOn is true and just go for cargo)

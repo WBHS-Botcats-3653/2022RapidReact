@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot;
+package frc.robot.inputs;
 
 //Imports DigitalInput
 import edu.wpi.first.wpilibj.DigitalInput;

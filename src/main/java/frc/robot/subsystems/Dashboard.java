@@ -11,8 +11,8 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-import frc.robot.OI;
 import frc.robot.commands.AutoCommand;
+import frc.robot.inputs.OI;
 
 public class Dashboard {
 	private static Dashboard m_singleton = null;

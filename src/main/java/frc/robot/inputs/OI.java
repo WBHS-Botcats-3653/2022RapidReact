@@ -1,8 +1,9 @@
-package frc.robot;
+package frc.robot.inputs;
 
 //Imports XboxController
 import edu.wpi.first.wpilibj.XboxController;
 
+//Operator Inputs
 public class OI {
 	private static OI m_singleton = null;
 	//Controller

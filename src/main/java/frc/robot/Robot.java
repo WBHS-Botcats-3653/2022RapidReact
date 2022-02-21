@@ -18,6 +18,8 @@ import frc.robot.commands.ClimberCommand;
 import frc.robot.commands.IndexerCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.ShooterCommand;
+import frc.robot.inputs.OI;
+import frc.robot.inputs.SI;
 //Imports subsystems
 import frc.robot.subsystems.Dashboard;
 import frc.robot.subsystems.Direction;
@@ -89,6 +91,8 @@ public class Robot extends TimedRobot {
 		//Sets max motor speeds
 		m_oi.setMaxShootSpeed(0);
 		m_oi.setMaxIntakePivotSpeed(0);
+		m_oi.setMaxSmartIntakePivotDownSpeed(0);
+		m_oi.setMaxSmartIntakePivotUpSpeed(0);
 		m_oi.setMaxIntakeRollerSpeed(0);
 		m_oi.setMaxArmSpeed(0);
 		m_oi.setMaxDriveSpeed(0);
@@ -143,9 +147,9 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 		new PrintCommand("Distance left " + m_directionSubsystem.getLeftDistance()).initialize();
 		new PrintCommand("Distance right " + m_directionSubsystem.getRightDistance()).initialize();
-		new PrintCommand("Shooter PE: "+m_si.getShooterTriggered()).initialize();
-		new PrintCommand("Upper Storage PE: "+m_si.getUpperStorageTriggered()).initialize();
-		new PrintCommand("Lower Storage PE: "+m_si.getLowerStorageTriggered()).initialize();
+		new PrintCommand("Shooter PE: " + m_si.getShooterTriggered()).initialize();
+		new PrintCommand("Upper Storage PE: " + m_si.getUpperStorageTriggered()).initialize();
+		new PrintCommand("Lower Storage PE: " + m_si.getLowerStorageTriggered()).initialize();
 	} 
 
 	@Override
@@ -188,16 +192,15 @@ public class Robot extends TimedRobot {
 		m_dashboard.telopPeriodic();
 		new PrintCommand("Distance left " + m_directionSubsystem.getLeftDistance()).initialize();
 		new PrintCommand("Distance right " + m_directionSubsystem.getRightDistance()).initialize();
-		new PrintCommand("Shooter PE: "+m_si.getShooterTriggered()).initialize();
-		new PrintCommand("Upper Storage PE: "+m_si.getUpperStorageTriggered()).initialize();
-		new PrintCommand("Lower Storage PE: "+m_si.getLowerStorageTriggered()).initialize();
+		new PrintCommand("Shooter PE: " + m_si.getShooterTriggered()).initialize();
+		new PrintCommand("Upper Storage PE: " + m_si.getUpperStorageTriggered()).initialize();
+		new PrintCommand("Lower Storage PE: " + m_si.getLowerStorageTriggered()).initialize();
 	}
 
 	@Override
 	public void testInit() {
 		// Cancels all running commands at the start of test mode.
 		CommandScheduler.getInstance().cancelAll();
-		
 		
 		//Schedule test commands
 		m_arcadeDriveCommand.schedule();

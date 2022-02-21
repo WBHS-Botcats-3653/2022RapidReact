@@ -9,10 +9,9 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 //Imports SubsystemBase
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-//Imports OI
-import frc.robot.OI;
 //Imports constants
 import frc.robot.constants.IntakeConstants;
+import frc.robot.inputs.OI;
 
 public class Intake extends SubsystemBase {
 	private static Intake m_singleton = null;

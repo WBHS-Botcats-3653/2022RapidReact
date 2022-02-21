@@ -6,10 +6,8 @@ package frc.robot.commands;
 
 //Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
-//Imports OI
-import frc.robot.OI;
-//Imports SI
-import frc.robot.SI;
+import frc.robot.inputs.OI;
+import frc.robot.inputs.SI;
 //Imports subsystems
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;

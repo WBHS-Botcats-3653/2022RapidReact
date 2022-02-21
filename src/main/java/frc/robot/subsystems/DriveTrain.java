@@ -13,10 +13,9 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 //Imports Subsystem Base
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-//Imports OI
-import frc.robot.OI;
 //Imports Constants
 import frc.robot.constants.DriveConstants;
+import frc.robot.inputs.OI;
 
 
 public class DriveTrain extends SubsystemBase {
