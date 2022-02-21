@@ -10,12 +10,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.OI;
 //Imports SI
 import frc.robot.SI;
-//Imports Intake
+//Imports subsystems
+import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
 
 public class IntakeCommand extends CommandBase {
 	//Holds instances of OI and Intake subsystem
 	private Intake m_intake;
+	private Indexer m_indexer;
 	private OI m_oi;
 	private SI m_si;
 	private boolean smartControl;
@@ -27,6 +29,7 @@ public class IntakeCommand extends CommandBase {
 	 */
 	public IntakeCommand(Intake m_intake) {
 		this.m_intake = m_intake;
+		m_indexer = Indexer.getInstance();
 		m_oi = OI.getInstance();
 		m_si = SI.getInstance();
 		smartControl = false;
@@ -49,6 +52,9 @@ public class IntakeCommand extends CommandBase {
 			manualPivotLogic();
 			//Intake roller controls
 			manualRollerLogic();
+		} else {  //Smart indexer
+			//Smart indexer control
+			smartIndexerLogic();
 		}
 	}
 
@@ -134,6 +140,17 @@ public class IntakeCommand extends CommandBase {
 		if (smartControl) {  //If smart control has priority over manual controls
 			//Sets the speed of the intake rollers based off whether the left bumper is being pressed
 			m_intake.setRollerSpeed(m_oi.getMaxIntakeRollerSpeed());
+		}
+	}
+
+	//Smart control indexer logic
+	public void smartIndexerLogic() {
+		if (m_si.getUpperStorageTriggered()) {  //If there is cargo in the lower storage
+			//Stops the indexer
+			m_indexer.setIndexerSpeed(0);
+		} else if (m_si.getLowerStorageTriggered()) {  //If there is cargo in the upper storage
+			//Sets the indexer to max speed
+			m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed());
 		}
 	}
 

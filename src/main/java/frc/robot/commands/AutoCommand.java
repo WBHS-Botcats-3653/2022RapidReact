@@ -8,18 +8,11 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 //Imports OI
 import frc.robot.OI;
-//Imports SI
-import frc.robot.SI;
 //Imports auto commands
 import frc.robot.commands.autoCommands.DriveCommand;
 import frc.robot.commands.autoCommands.ShootCommand;
 //Imports constants
 import frc.robot.constants.AutoConstants;
-//Imports subsystems
-import frc.robot.subsystems.Direction;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Indexer;
-import frc.robot.subsystems.Shooter;
 
 public class AutoCommand extends CommandBase {
 	//private DriveTrain driveTrain;
