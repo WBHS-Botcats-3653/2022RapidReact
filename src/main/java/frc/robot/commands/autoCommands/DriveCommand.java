@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Direction;
 //Imports DriveTrain subsystem
 import frc.robot.subsystems.DriveTrain;
+//Imports constants
+import static frc.robot.Constants.DriveConstants.*;
 
 public class DriveCommand extends CommandBase {
 	private DriveTrain m_driveTrain;
@@ -20,7 +22,6 @@ public class DriveCommand extends CommandBase {
 
 	private double currentDistance;
 	private int direction;
-	private final int kP = 1;
 
 	public DriveCommand(double distance, double speed) {
 		m_driveTrain = DriveTrain.getInstance();

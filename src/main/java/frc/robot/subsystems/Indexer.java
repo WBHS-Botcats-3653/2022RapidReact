@@ -9,8 +9,10 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 //Imports SubsystemBase
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.constants.IntakeConstants;
+//Imports OI
 import frc.robot.inputs.OI;
+//Imports constants
+import static frc.robot.Constants.IntakeConstants.*;
 
 public class Indexer extends SubsystemBase {
 	private static Indexer m_singleton = null;
@@ -19,7 +21,7 @@ public class Indexer extends SubsystemBase {
 
 	/** Creates a new Indexer. */
 	public Indexer() {
-		indexer = new WPI_VictorSPX(IntakeConstants.indexerMotorID);
+		indexer = new WPI_VictorSPX(kIndexerMotorID);
 	}
 
 	//Returns an instance of Indexer, creating an instance only when one does not already exist (singleton)

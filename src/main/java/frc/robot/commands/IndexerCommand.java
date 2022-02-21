@@ -17,8 +17,8 @@ public class IndexerCommand extends CommandBase {
 	private OI m_oi;
 
 	/** Creates a new StorageCommand. */
-	public IndexerCommand(Indexer m_indexer) {
-		this.m_indexer = m_indexer;
+	public IndexerCommand(Indexer p_indexer) {
+		m_indexer = p_indexer;
 		m_intake = Intake.getInstance();
 		m_oi = OI.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.

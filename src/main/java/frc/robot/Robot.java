@@ -6,11 +6,12 @@ package frc.robot;
 
 //Imports TimedRobot
 import edu.wpi.first.wpilibj.TimedRobot;
-//Imports Scheduler
-import edu.wpi.first.wpilibj.command.Scheduler;
 //Imports CommandScheduler
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+//Imports PrintCommand
 import edu.wpi.first.wpilibj2.command.PrintCommand;
+//Imports SequentialCommandGroup
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 //Imports Commands
 import frc.robot.commands.ArcadeDriveCommand;
 import frc.robot.commands.AutoCommand;
@@ -63,6 +64,10 @@ public class Robot extends TimedRobot {
 		// Instantiate our RobotContainer.  This will perform all our button bindings, and put our
 		// autonomous chooser on the dashboard.
 		m_robotContainer = new RobotContainer();
+		//Calibrates the gyro
+		m_directionSubsystem.calibrateGyro();
+		//Resets the encoders
+		m_directionSubsystem.resetEncoders();
 	}
 
 	/**
@@ -88,6 +93,7 @@ public class Robot extends TimedRobot {
 		//difDrive.reset();
 		// Cancels all running commands when disabled.
 		CommandScheduler.getInstance().cancelAll();
+		CommandScheduler.getInstance().disable();
 		//Sets max motor speeds
 		m_oi.setMaxShootSpeed(0);
 		m_oi.setMaxIntakePivotSpeed(0);
@@ -101,7 +107,6 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void disabledPeriodic() {
-		//Scheduler.getInstance().run();
 		AutoCommand.isAutoShootOn = Dashboard.m_isAutoShootOn.getBoolean(true);
 		AutoCommand.isAutoTaxiOn = Dashboard.m_isAutoTaxiOn.getBoolean(true);
 		AutoCommand.isAutoCollectOn = Dashboard.m_isAutoCollectOn.getBoolean(true);
@@ -110,6 +115,7 @@ public class Robot extends TimedRobot {
 	/** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
 	@Override
 	public void autonomousInit() {
+		CommandScheduler.getInstance().enable();
 		m_directionSubsystem.resetEncoders();
 		m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 		/*
@@ -141,10 +147,16 @@ public class Robot extends TimedRobot {
 	/** This function is called periodically during autonomous. */
 	@Override
 	public void autonomousPeriodic() {
-		//this is for testing the encoders if they are working
+		//This is for testing the encoders if they are working
 		Dashboard.UpdateEncoderForTest(m_directionSubsystem.getLeftDistance());
+		//Schedules SquentialCommandGroups fed from the AutoCommand
+		SequentialCommandGroup command = m_autonomousCommand.getCommand();
+		if (command != null) {
+			command.schedule();
+		}
 		//Runs the scheduler
-		Scheduler.getInstance().run();
+		CommandScheduler.getInstance().run();
+		//Print stuff
 		new PrintCommand("Distance left " + m_directionSubsystem.getLeftDistance()).initialize();
 		new PrintCommand("Distance right " + m_directionSubsystem.getRightDistance()).initialize();
 		new PrintCommand("Shooter PE: " + m_si.getShooterTriggered()).initialize();
@@ -154,6 +166,8 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
+		CommandScheduler.getInstance().enable();
+		//Resets the encoders
 		m_directionSubsystem.resetEncoders();
 		m_arcadeDriveCommand = m_robotContainer.getArcadeDriveCommand();
 		m_climberCommand = m_robotContainer.getClimberCommand();
@@ -188,8 +202,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		//Runs the scheduler
-		Scheduler.getInstance().run();
+		CommandScheduler.getInstance().run();
 		m_dashboard.telopPeriodic();
+		//Print stuff
 		new PrintCommand("Distance left " + m_directionSubsystem.getLeftDistance()).initialize();
 		new PrintCommand("Distance right " + m_directionSubsystem.getRightDistance()).initialize();
 		new PrintCommand("Shooter PE: " + m_si.getShooterTriggered()).initialize();
@@ -199,9 +214,9 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void testInit() {
+		CommandScheduler.getInstance().enable();
 		// Cancels all running commands at the start of test mode.
 		CommandScheduler.getInstance().cancelAll();
-		
 		//Schedule test commands
 		m_arcadeDriveCommand.schedule();
 		m_climberCommand.schedule();
@@ -223,7 +238,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void testPeriodic() {
 		//Runs the scheduler
-		Scheduler.getInstance().run();
+		CommandScheduler.getInstance().run();
+		//Print stuff
 		new PrintCommand("Top Pivot Limit Switch " + m_si.getPivotUpLimitTriggered()).initialize();
 		new PrintCommand("Bottom Pivot Limit Switch " + m_si.getPivotDownLimitTriggered()).initialize();
 	}

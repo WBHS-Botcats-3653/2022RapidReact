@@ -9,8 +9,10 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 //Imports SubsystemBase
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.constants.ShooterConstants;
+//Imports OI
 import frc.robot.inputs.OI;
+//Imports constants
+import static frc.robot.Constants.ShooterConstants.*;
 
 public class Shooter extends SubsystemBase {
 	private static Shooter shooter = null;
@@ -19,7 +21,7 @@ public class Shooter extends SubsystemBase {
 
 	public Shooter() {
 		//Creates WPI_VictorSPX motor controller for the spinner
-		spinner = new WPI_VictorSPX(ShooterConstants.spinnerMotorID);
+		spinner = new WPI_VictorSPX(kSpinnerMotorID);
 	}
 
 	//Returns an instance of Shooter, creating an instance only when one does not already exist (singleton)

@@ -12,13 +12,15 @@ import frc.robot.inputs.SI;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Shooter;
 
-public class ShootCommand extends CommandBase {
+public class ShootCargoCommand extends CommandBase {
 	private Shooter m_shooter;
 	private Indexer m_indexer;
 	private OI m_oi;
 	private SI m_si;
 
-	public ShootCommand() {
+	private final double indexSpeed = 0.5;
+
+	public ShootCargoCommand() {
 		m_shooter = Shooter.getInstance();
 		m_indexer = Indexer.getInstance();
 		m_oi = OI.getInstance();
@@ -36,12 +38,16 @@ public class ShootCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		if (m_si.getUpperStorageTriggered()) {  //If there is cargo in the upper storage area
+		/*if (m_si.getUpperStorageTriggered()) {  //If there is cargo in the upper storage area
 			//Stops the indexer
 			m_indexer.setIndexerSpeed(0);
 		} else if (m_si.getLowerStorageTriggered()) {  //If there is cargo in the lower storage area
 			//Sets the indexer to max speed
 			m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed());
+		}*/
+		if (m_si.getLowerStorageTriggered() || m_si.getUpperStorageTriggered()) {  //If there is cargo in the storage area
+			//Sets the indexer to max speed
+			m_indexer.setIndexerSpeed(indexSpeed);
 		}
 	}
 

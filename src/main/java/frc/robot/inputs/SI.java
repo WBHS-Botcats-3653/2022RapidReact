@@ -9,9 +9,10 @@ package frc.robot.inputs;
 
 //Imports DigitalInput
 import edu.wpi.first.wpilibj.DigitalInput;
-import frc.robot.constants.ClimberConstants;
-import frc.robot.constants.IntakeConstants;
-import frc.robot.constants.ShooterConstants;
+//Imports constants
+import static frc.robot.Constants.IntakeConstants.*;
+import static frc.robot.Constants.ShooterConstants.*;
+import static frc.robot.Constants.ClimberConstants.*;
 
 //Sensor Inputs
 public class SI {
@@ -27,13 +28,13 @@ public class SI {
 
 	public SI() {
 		//Photoelectric sensors
-		lowerStoragePE = new DigitalInput(IntakeConstants.lowerStoragePESensorID);
-		upperStoragePE = new DigitalInput(IntakeConstants.upperStoragePESensorID);
-		shooterPE = new DigitalInput(ShooterConstants.shooterPESensorID);
+		lowerStoragePE = new DigitalInput(kLowerStoragePESensorID);
+		upperStoragePE = new DigitalInput(kUpperStoragePESensorID);
+		shooterPE = new DigitalInput(kShooterPESensorID);
 		//Limit switches
-		topPivotLimitSwitch = new DigitalInput(IntakeConstants.topPivotLimitSwitchID);
-		bottomPivotLimitSwitch = new DigitalInput(IntakeConstants.bottomPivotLimitSwitchID);
-		climberDownButton = new DigitalInput(ClimberConstants.bottomClimberLimitSwitchID);
+		topPivotLimitSwitch = new DigitalInput(kTopPivotLimitSwitchID);
+		bottomPivotLimitSwitch = new DigitalInput(kBottomPivotLimitSwitchID);
+		climberDownButton = new DigitalInput(kBottomClimberLimitSwitchID);
 	}
 
 	//Returns an instance of SI, creating an instance only when one does not already exist (singleton)

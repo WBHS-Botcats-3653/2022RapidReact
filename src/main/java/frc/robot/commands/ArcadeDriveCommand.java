@@ -15,8 +15,8 @@ public class ArcadeDriveCommand extends CommandBase {
 	/**Creates a new ArcadeDriveCommand.
 	 * @param subsystem The subsystem used by this command.
 	 */
-	public ArcadeDriveCommand(DriveTrain m_drivetrain) {
-		this.m_drivetrain = m_drivetrain;
+	public ArcadeDriveCommand(DriveTrain p_drivetrain) {
+		m_drivetrain = p_drivetrain;
 		// Use addRequirements() here to declare subsystem dependencies.
 		//addRequirements();
 	}

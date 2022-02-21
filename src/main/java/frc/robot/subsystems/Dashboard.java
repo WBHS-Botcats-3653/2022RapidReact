@@ -4,39 +4,46 @@
 
 package frc.robot.subsystems;
 
-import java.util.Map;
+//Imports java utilities
+import java.util.*;
 
-import edu.wpi.first.cscore.UsbCamera;
+//import edu.wpi.first.cscore.UsbCamera;
+//Imports networkTableEntry
 import edu.wpi.first.networktables.NetworkTableEntry;
+//Imports BuiltInWidgets
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+//Imports Shuffleboard
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+//Imports ShuffleboardTab
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+//Imports commands
 import frc.robot.commands.AutoCommand;
+//Imports OI
 import frc.robot.inputs.OI;
 
 public class Dashboard {
 	private static Dashboard m_singleton = null;
 	private static OI ctrl = OI.getInstance();
-	private UsbCamera cam0 = null;
+	//private UsbCamera cam0 = null;
 
 	// Config Tab
 	private NetworkTableEntry m_nteMaxSpd = null;
 	private NetworkTableEntry m_nteMaxArmSpd = null;
 	private NetworkTableEntry m_nteMaxIntake = null;
-	private NetworkTableEntry m_nteArmDownEnc = null;
+	//private NetworkTableEntry m_nteArmDownEnc = null;
 
 	// Test Tab
-	private NetworkTableEntry m_nteArmEncoderRaw = null;
+	//private NetworkTableEntry m_nteArmEncoderRaw = null;
 	private NetworkTableEntry m_nteDriveEncLeft = null;
 	private NetworkTableEntry m_nteDriveEncRight = null;
-	private NetworkTableEntry m_nteArmUpLimit = null;
+	//private NetworkTableEntry m_nteArmUpLimit = null;
 	private NetworkTableEntry m_nteArmDnLimit = null;
 
 
 	public static NetworkTableEntry testingEncoderLeft = null;
 
 	// Drive Tab
-	private NetworkTableEntry m_nteArmAngle = null;
+	//private NetworkTableEntry m_nteArmAngle = null;
 	private NetworkTableEntry m_nteDriveSpeed = null;
 
 	public static NetworkTableEntry m_isAutoShootOn = null;
@@ -60,7 +67,7 @@ public class Dashboard {
 		//m_nteMaxSpd = tabConfig.addPersistent("Max Speed", 1.0).withSize(1, 1).withPosition(0, 0).getEntry();
 		m_nteMaxIntake = tabConfig.addPersistent("Max Intake", 1.0).withSize(1, 1).withPosition(1, 0).getEntry();
 		m_nteMaxArmSpd = tabConfig.addPersistent("Max Arm Spd", 1.0).withSize(1, 1).withPosition(2, 0).getEntry();
-		m_nteArmDownEnc = tabConfig.addPersistent("Arm Down", 1024.0).withSize(1, 1).withPosition(3, 0).getEntry();
+		//m_nteArmDownEnc = tabConfig.addPersistent("Arm Down", 1024.0).withSize(1, 1).withPosition(3, 0).getEntry();
 
 		// Drive Tab
 		/*
@@ -99,7 +106,7 @@ public class Dashboard {
 
 		// Test Tab
 		m_nteArmDnLimit = tabTest.add("Arm Down", false).withSize(1, 1).withPosition(0, 0).getEntry();
-		m_nteArmUpLimit = tabTest.add("Arm Up", false).withSize(1, 1).withPosition(1, 0).getEntry();
+		//m_nteArmUpLimit = tabTest.add("Arm Up", false).withSize(1, 1).withPosition(1, 0).getEntry();
 		//this is for testing the encoders if they are working
 		testingEncoderLeft = tabTest.add("Left encoder testing it", 0).withSize(1, 1).withPosition(1, 0).getEntry();
 		//m_nteArmEncoderRaw = tabTest.add("Arm Encoder", 1024).withSize(1, 1).withPosition(2, 0).getEntry();
@@ -125,8 +132,8 @@ public class Dashboard {
 	}
 	public void telopPeriodic() {
 		OI ctrl = OI.getInstance();
-		Intake arm = Intake.getInstance();
-		DriveTrain drive = DriveTrain.getInstance();
+		//Intake arm = Intake.getInstance();
+		//DriveTrain drive = DriveTrain.getInstance();
 		OI oi = OI.getInstance();
 		//m_nteArmAngle.setDouble(arm.getAngle());
 		m_nteDriveSpeed.setDouble(Math.abs(oi.getMaxDriveSpeed()));
@@ -134,8 +141,8 @@ public class Dashboard {
 	}
 
 	public void testPeriodic() {
-		Intake arm = Intake.getInstance();
-		DriveTrain drive = DriveTrain.getInstance();
+		//Intake arm = Intake.getInstance();
+		//DriveTrain drive = DriveTrain.getInstance();
 
 		//m_nteArmEncoderRaw.setNumber(arm.getRawEncoder());
 		/*

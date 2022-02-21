@@ -12,18 +12,15 @@ import frc.robot.inputs.SI;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
 
-public class IntakeCommand extends CommandBase {
+public class CollectCargoCommand extends CommandBase {
 	private Intake m_intake;
 	private Indexer m_indexer;
 	private OI m_oi;
 	private SI m_si;
-	
-	private boolean cargoInUpperAtStart;
-	private boolean cargoInLowerAtStart;
 
 	private boolean goingUp;
 
-	public IntakeCommand() {
+	public CollectCargoCommand() {
 		m_intake = Intake.getInstance();
 		m_indexer =  Indexer.getInstance();
 		m_oi = OI.getInstance();
@@ -34,9 +31,6 @@ public class IntakeCommand extends CommandBase {
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
-		//Finds whether there is cargo in the upper or lower storage area at the start of the command
-		cargoInUpperAtStart = m_si.getUpperStorageTriggered();
-		cargoInLowerAtStart = m_si.getLowerStorageTriggered();
 		//Intake is not pivoting up
 		goingUp = false;
 		//Sets the pivot to max speed down

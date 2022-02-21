@@ -19,8 +19,8 @@ public class ClimberCommand extends CommandBase {
 	/**Creates a new ClimberCommand.
 	 * @param subsystem The subsystem used by this command.
 	 */
-	public ClimberCommand(Climber m_climber) {
-		this.m_climber = m_climber;
+	public ClimberCommand(Climber p_climber) {
+		m_climber = p_climber;
 		m_oi = OI.getInstance();
 		m_si = SI.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.

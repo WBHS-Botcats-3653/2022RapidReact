@@ -25,13 +25,16 @@ public class IntakeCommand extends CommandBase {
 	/**Creates a new IntakeCommand.
 	 * @param subsystem The subsystem used by this command.
 	 */
-	public IntakeCommand(Intake m_intake) {
-		this.m_intake = m_intake;
+	public IntakeCommand(Intake p_intake) {
+		m_intake = p_intake;
 		m_indexer = Indexer.getInstance();
 		m_oi = OI.getInstance();
 		m_si = SI.getInstance();
+		//Not in smart control
 		smartControl = false;
+		//Not pivoting up while under smart control
 		smartPivotGoingUp = false;
+		//Not pivoting down while under smart control
 		smartPivotGoingDown = false;
 	}
 

@@ -4,12 +4,16 @@
 
 package frc.robot.subsystems;
 
+//Imports Sendable
 import edu.wpi.first.util.sendable.Sendable;
+//Imports ADXRS450_Gyro
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+//Imports Encoder
 import edu.wpi.first.wpilibj.Encoder;
 //Imports SubsystemBase
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.constants.DriveConstants;
+//Imports constants
+import static frc.robot.Constants.DriveConstants.*;
 
 /**
  * Wrapper class to gyro on Roborio.
@@ -23,10 +27,8 @@ public class Direction extends SubsystemBase {
 	
 	public Direction() {
 		gyro = new ADXRS450_Gyro();
-		leftEncoder = new Encoder(DriveConstants.leftMotorGroupEncoder1, DriveConstants.leftMotorGroupEncoder2);
-		rightEncoder = new Encoder(DriveConstants.rightMotorGroupEncoder1, DriveConstants.rightMotorGroupEncoder2);
-		this.resetEncoders();
-		gyro.calibrate();
+		leftEncoder = new Encoder(kLeftMotorGroupEncoder1, kLeftMotorGroupEncoder2);
+		rightEncoder = new Encoder(kRightMotorGroupEncoder1, kRightMotorGroupEncoder2);
 	}
 
 	//Returns an instance of Direction, creating an instance only when one does not already exist
@@ -35,6 +37,11 @@ public class Direction extends SubsystemBase {
 			m_singleton = new Direction();
 		}
 		return m_singleton;
+	}
+
+	//Calibrates the gyro
+	public void calibrateGyro() {
+		gyro.calibrate();
 	}
 	
 	//Returns the gyro
@@ -70,16 +77,14 @@ public class Direction extends SubsystemBase {
 	 * @return encoder's distance
 	 */
 	public double getDistance() {
-		//return (this.getRightDistance() + this.getLeftDistance()) / 2;
-		return this.getRightDistance();
+		return (this.getRightDistance() + this.getLeftDistance()) / 2;
 	}
 
 	/**
 	 * @return the error between the left and right distance
 	 */
 	public double getError() {
-		//return this.getLeftDistance() - this.getRightDistance();
-		return 0;
+		return this.getLeftDistance() - this.getRightDistance();
 	}
 
 	//Resets the encoders
@@ -89,7 +94,7 @@ public class Direction extends SubsystemBase {
 		// Configures the encoders' distance-per-pulse
 		// The robot moves forward 1 foot per encoder rotation
 		// There are 256 pulses per encoder rotation
-		leftEncoder.setDistancePerPulse(1./256.);
-		rightEncoder.setDistancePerPulse(1./256.);
+		leftEncoder.setDistancePerPulse(kDistancePerPulse);
+		rightEncoder.setDistancePerPulse(kDistancePerPulse);
 	}
 }

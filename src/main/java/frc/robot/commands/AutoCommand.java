@@ -8,10 +8,11 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 //Imports autoCommands
 import frc.robot.commands.autoCommands.DriveCommand;
-import frc.robot.commands.autoCommands.ShootCommand;
-//Imports constants
-import frc.robot.constants.AutoConstants;
+import frc.robot.commands.autoCommands.ShootCargoCommand;
+//Imports OI
 import frc.robot.inputs.OI;
+//Imports constants
+import static frc.robot.Constants.AutoConstants.*;
 
 public class AutoCommand extends CommandBase {
 	//private DriveTrain driveTrain;
@@ -22,7 +23,7 @@ public class AutoCommand extends CommandBase {
 	//private SI m_si;
 
 	private boolean hasFinished;
-	private boolean initialCommandsDone;
+	private static boolean executingCommand;
 	private int cargoTargetIndex;
 	//private String stage;
 	//private double kP;
@@ -30,6 +31,8 @@ public class AutoCommand extends CommandBase {
 	public static boolean isAutoShootOn;
 	public static boolean isAutoTaxiOn;
 	public static boolean isAutoCollectOn;
+
+	private SequentialCommandGroup command;
 
 	//Constructor
 	public AutoCommand() {
@@ -41,16 +44,23 @@ public class AutoCommand extends CommandBase {
 		//m_si = SI.getInstance();
 		//kP = 1;
 		hasFinished = false;
-		initialCommandsDone = false;
+		executingCommand = false;
 
 		//Still taxi when collecting cargo? Can prob skip since we'll leave the Tarmac anyways
-		new SequentialCommandGroup(
-			new ShootCommand(),  //Shoots Preload
-			new DriveCommand(AutoConstants.taxiDistanceInFeet, m_oi.getMaxDriveSpeed()),  //Taxi (remove if isAutoCollectOn is true and just go for cargo)
-			new InstantCommand(() -> {initialCommandsDone = true;})
+		command = new SequentialCommandGroup(
+			new InstantCommand(() -> {AutoCommand.executingCommand = true;}),
+			new ShootCargoCommand(),  //Shoots Preload
+			new DriveCommand(kTaxiDistanceInFeet, m_oi.getMaxDriveSpeed()),
+			new InstantCommand(() -> {AutoCommand.executingCommand = true;})
 		);
 	}
 
+	//Returns the next SequentialCommandGroup to be scheduled
+	public SequentialCommandGroup getCommand() {
+		SequentialCommandGroup cmd = command;
+		command = null;
+		return cmd;
+	}
 
 	@Override
 	public void initialize() {
@@ -60,11 +70,11 @@ public class AutoCommand extends CommandBase {
 
 	@Override
 	public void execute() {
-		if (!initialCommandsDone) return;
+		if (executingCommand) return;
 		//"L"=Left, "M"=Middle, "R"=Right
-		switch(AutoConstants.startingPosition) {
+		switch(kStartingPosition) {
 			case("L"):
-				switch(AutoConstants.cargoToTarget[cargoTargetIndex]) {
+				switch(kCargoToTarget[cargoTargetIndex]) {
 					case("LL"):
 
 						break;
@@ -80,7 +90,7 @@ public class AutoCommand extends CommandBase {
 				}
 				break;
 			case("R"):
-				switch(AutoConstants.cargoToTarget[cargoTargetIndex]) {
+				switch(kCargoToTarget[cargoTargetIndex]) {
 					case("ML"):
 
 						break;
@@ -96,7 +106,7 @@ public class AutoCommand extends CommandBase {
 				}
 				break;
 		}
-		if (++cargoTargetIndex == AutoConstants.cargoToTarget.length) hasFinished = true;
+		if (++cargoTargetIndex == kCargoToTarget.length) hasFinished = true;
 
 
 		/*switch (stage) {
