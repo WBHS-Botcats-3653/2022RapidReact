@@ -8,19 +8,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 //Imports OI
 import frc.robot.OI;
-//Imports Indexer subsystem
-import frc.robot.subsystems.Indexer;
 //Imports Shooter subsystem
 import frc.robot.subsystems.Shooter;
 
 public class ShooterCommand extends CommandBase {
 	private Shooter m_shooter;
-	private Indexer m_indexer;
 	private OI m_oi;
 
 	public ShooterCommand(Shooter m_shooter) {
 		this.m_shooter = m_shooter;
-		m_indexer = Indexer.getInstance();
 		m_oi = OI.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
 		//addRequirements();

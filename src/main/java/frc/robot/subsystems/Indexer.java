@@ -15,8 +15,8 @@ import frc.robot.constants.IntakeConstants;
 
 public class Indexer extends SubsystemBase {
 	private static Indexer m_singleton = null;
-	private WPI_VictorSPX indexer;
 	private OI m_oi = OI.getInstance();
+	private WPI_VictorSPX indexer;
 
 	/** Creates a new Indexer. */
 	public Indexer() {

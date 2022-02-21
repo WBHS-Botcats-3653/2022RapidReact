@@ -1,9 +1,3 @@
 To Do:
-1. Put encoders on robot
-2. Put photo-electric sensors on robot
-3. Code encoders
-4. Code indexer to stop spinning when the photo-electric sensor is triggered
-5. Code the shooter to spin the indexer until the photo-electric sensor inside the indexer is triggered or a timeout
-6. Move code out of the subcommands and into new files using methods and delete all the subcommands
-7. Auto
-8. Add on/off switch on dashboard for automated indexing (Incase one of the photoelectric sensors malfunctions)
+1. Auto
+2. Dashboard

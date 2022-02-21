@@ -16,16 +16,17 @@ import frc.robot.constants.DriveConstants;
  */
 public class Direction extends SubsystemBase {
 	private static Direction m_singleton;
-	private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+	private ADXRS450_Gyro gyro;
 	private Encoder leftEncoder;
 	private Encoder rightEncoder;
 
 	
 	public Direction() {
-		gyro.calibrate();
+		gyro = new ADXRS450_Gyro();
 		leftEncoder = new Encoder(DriveConstants.leftMotorGroupEncoder1, DriveConstants.leftMotorGroupEncoder2);
 		rightEncoder = new Encoder(DriveConstants.rightMotorGroupEncoder1, DriveConstants.rightMotorGroupEncoder2);
 		this.resetEncoders();
+		gyro.calibrate();
 	}
 
 	//Returns an instance of Direction, creating an instance only when one does not already exist

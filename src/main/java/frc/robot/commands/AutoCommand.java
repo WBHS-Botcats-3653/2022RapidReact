@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 //Imports OI
 import frc.robot.OI;
-//Imports auto commands
+//Imports autoCommands
 import frc.robot.commands.autoCommands.DriveCommand;
 import frc.robot.commands.autoCommands.ShootCommand;
 //Imports constants

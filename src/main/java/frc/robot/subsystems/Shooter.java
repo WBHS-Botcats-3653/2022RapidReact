@@ -15,8 +15,8 @@ import frc.robot.constants.ShooterConstants;
 
 public class Shooter extends SubsystemBase {
 	private static Shooter shooter = null;
-	public static WPI_VictorSPX spinner;
 	private OI m_oi = OI.getInstance();
+	public static WPI_VictorSPX spinner;
 
 	public Shooter() {
 		//Creates WPI_VictorSPX motor controller for the spinner
