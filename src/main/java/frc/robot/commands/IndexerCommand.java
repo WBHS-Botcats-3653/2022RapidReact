@@ -8,8 +8,6 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 //Imports OI
 import frc.robot.OI;
-//Imports SI
-import frc.robot.SI;
 //Imports subsystems
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
@@ -18,14 +16,12 @@ public class IndexerCommand extends CommandBase {
 	private Indexer m_indexer;
 	private Intake m_intake;
 	private OI m_oi;
-	private SI m_si;
 
 	/** Creates a new StorageCommand. */
 	public IndexerCommand(Indexer m_indexer) {
 		this.m_indexer = m_indexer;
 		m_intake = Intake.getInstance();
 		m_oi = OI.getInstance();
-		m_si = SI.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
 	}
 	
