@@ -18,7 +18,6 @@ import frc.robot.subsystems.*;
  * project.
  */
 public class Robot extends TimedRobot {
-	//private Command m_autonomousCommand;
 	private RobotContainer m_robotContainer;
 
 	//Subsystems
@@ -72,7 +71,10 @@ public class Robot extends TimedRobot {
 		// block in order for anything in the Command-based framework to work.
 		CommandScheduler.getInstance().run();
 
+		m_dashboardSubsystem.periodic();
+
 		//Print stuff
+		System.out.println("TEST PRINTLN");
 		new PrintCommand("-----------------------------------------------").initialize();
 
 		//Encoders
@@ -139,7 +141,8 @@ public class Robot extends TimedRobot {
 
 		// Schedules the autonomous command
 		if (m_autonomousCommand != null) {
-			m_autonomousCommand.schedule();
+			//m_autonomousCommand.schedule();
+			CommandScheduler.getInstance().schedule(m_autonomousCommand);
 		}
 
 		//Sets max motor speeds
@@ -162,7 +165,8 @@ public class Robot extends TimedRobot {
 		//Schedules SquentialCommandGroups fed from the AutoCommand
 		SequentialCommandGroup command = m_autonomousCommand.getCommand();
 		if (command != null) {
-			command.schedule();
+			//command.schedule();
+			CommandScheduler.getInstance().schedule(command);
 		}
 	} 
 
@@ -183,11 +187,16 @@ public class Robot extends TimedRobot {
 		}
 
 		//Schedule teleop commands
-		m_arcadeDriveCommand.schedule();
+		/*m_arcadeDriveCommand.schedule();
 		m_climberCommand.schedule();
 		m_indexerCommand.schedule();
 		m_intakeCommand.schedule();
-		m_shooterCommand.schedule();
+		m_shooterCommand.schedule();*/
+		CommandScheduler.getInstance().schedule(m_arcadeDriveCommand);
+		CommandScheduler.getInstance().schedule(m_climberCommand);
+		CommandScheduler.getInstance().schedule(m_indexerCommand);
+		CommandScheduler.getInstance().schedule(m_intakeCommand);
+		CommandScheduler.getInstance().schedule(m_shooterCommand);
 
 		//Sets max motor speeds
 		m_oi.setMaxShootSpeed(0.6);
@@ -202,9 +211,7 @@ public class Robot extends TimedRobot {
 
 	/** This function is called periodically during operator control. */
 	@Override
-	public void teleopPeriodic() {
-		m_dashboardSubsystem.telopPeriodic();
-	}
+	public void teleopPeriodic() {}
 
 	@Override
 	public void testInit() {
@@ -212,11 +219,16 @@ public class Robot extends TimedRobot {
 		CommandScheduler.getInstance().cancelAll();
 
 		//Schedule test commands
-		m_arcadeDriveCommand.schedule();
+		/*m_arcadeDriveCommand.schedule();
 		m_climberCommand.schedule();
 		m_indexerCommand.schedule();
 		m_intakeCommand.schedule();
-		m_shooterCommand.schedule();
+		m_shooterCommand.schedule();*/
+		CommandScheduler.getInstance().schedule(m_arcadeDriveCommand);
+		CommandScheduler.getInstance().schedule(m_climberCommand);
+		CommandScheduler.getInstance().schedule(m_indexerCommand);
+		CommandScheduler.getInstance().schedule(m_intakeCommand);
+		CommandScheduler.getInstance().schedule(m_shooterCommand);
 
 		//Sets max motor speeds
 		m_oi.setMaxShootSpeed(0.1);

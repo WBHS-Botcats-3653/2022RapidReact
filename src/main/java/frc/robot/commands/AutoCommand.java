@@ -71,14 +71,17 @@ public class AutoCommand extends CommandBase {
 		if (cargoTargetIndex == kCargoToTarget.length) hasFinished = true;
 		//Refence to get angles and distance to specific cargo positions from auto constants
 		String reference = kStartingPosition + kCargoToTarget[cargoTargetIndex];
-		//Creates new sequential command to 
-		command = new SequentialCommandGroup(
-			new InstantCommand(() -> {AutoCommand.executingCommand = true;}),
-			new TurnCommand(kTurnAngles.get(reference)),
-			new DriveCommand(kDriveDistances.get(reference), m_oi.getMaxDriveSpeed()),
-			new CollectCargoCommand(),
-			new InstantCommand(() -> {AutoCommand.executingCommand = false;})
-		);
+		//If there is no distance or angle to move skip this cargo
+		if (kTurnAngles.get(reference) != 0.0 && kDriveDistances.get(reference) != 0.0) {
+			//Creates new sequential command to 
+			command = new SequentialCommandGroup(
+				new InstantCommand(() -> {AutoCommand.executingCommand = true;}),
+				new TurnCommand(kTurnAngles.get(reference)),
+				new DriveCommand(kDriveDistances.get(reference), m_oi.getMaxDriveSpeed()),
+				new CollectCargoCommand(),
+				new InstantCommand(() -> {AutoCommand.executingCommand = false;})
+			);
+		}
 		cargoTargetIndex++;
 
 

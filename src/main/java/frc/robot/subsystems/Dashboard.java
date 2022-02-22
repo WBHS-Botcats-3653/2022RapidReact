@@ -120,7 +120,7 @@ public class Dashboard {
 	public static void UpdateEncoderForTest(double v){
 		testingEncoderLeft.forceSetDouble(v);
 	}
-	public void telopPeriodic() {
+	public void periodic() {
 		OI ctrl = OI.getInstance();
 		//Intake arm = Intake.getInstance();
 		//DriveTrain drive = DriveTrain.getInstance();
@@ -128,12 +128,8 @@ public class Dashboard {
 		//m_nteArmAngle.setDouble(arm.getAngle());
 		m_nteDriveSpeed.setDouble(Math.abs(oi.getMaxDriveSpeed()));
 		ctrl.setMaxDriveSpeed(m_nteDriveSpeed.getDouble(1.0));
-	}
 
-	public void testPeriodic() {
-		//Intake arm = Intake.getInstance();
-		//DriveTrain drive = DriveTrain.getInstance();
-
+		//FIX
 		//m_nteArmEncoderRaw.setNumber(arm.getRawEncoder());
 		/*
 		m_nteArmDnLimit.setBoolean(arm.getLowerLimitSwitch());

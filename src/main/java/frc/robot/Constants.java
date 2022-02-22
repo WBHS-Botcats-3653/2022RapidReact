@@ -30,6 +30,10 @@ public final class Constants {
 			put("LLR", 0.0);
 			put("LML", 0.0);
 			put("LMR", 0.0);
+			put("LRL", 0.0);  //DO NOT PUT VALUE
+			put("LRR", 0.0);  //DO NOT PUT VALUE
+			put("RLL", 0.0);  //DO NOT PUT VALUE
+			put("RLR", 0.0);  //DO NOT PUT VALUE
 			put("RML", 0.0);
 			put("RMR", 0.0);
 			put("RRL", 0.0);
@@ -42,6 +46,10 @@ public final class Constants {
 			put("LLR", 0.0);
 			put("LML", 0.0);
 			put("LMR", 0.0);
+			put("LRL", 0.0);  //DO NOT PUT VALUE
+			put("LRR", 0.0);  //DO NOT PUT VALUE
+			put("RLL", 0.0);  //DO NOT PUT VALUE
+			put("RLR", 0.0);  //DO NOT PUT VALUE
 			put("RML", 0.0);
 			put("RMR", 0.0);
 			put("RRL", 0.0);
