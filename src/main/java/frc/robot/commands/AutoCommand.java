@@ -41,6 +41,14 @@ public class AutoCommand extends CommandBase {
 		hasFinished = false;
 		executingCommand = false;
 
+		if(isAutoCollectOn){
+			command = new SequentialCommandGroup(
+				new InstantCommand(() -> {AutoCommand.executingCommand = true;}),
+				new CollectCargoCommand();
+				new DriveCommand(kTaxiDistanceInFeet, m_oi.getMaxDriveSpeed()),
+				new InstantCommand(() -> {AutoCommand.executingCommand = false;})
+			);	
+		}
 		//When collecting cargo robot will still taxi in order to get to a better position to collect cargo from
 		command = new SequentialCommandGroup(
 			new InstantCommand(() -> {AutoCommand.executingCommand = true;}),
