@@ -44,7 +44,7 @@ public class AutoCommand extends CommandBase {
 		if(isAutoCollectOn){
 			command = new SequentialCommandGroup(
 				new InstantCommand(() -> {AutoCommand.executingCommand = true;}),
-				new CollectCargoCommand();
+				//new CollectCargoCommand();
 				new DriveCommand(kTaxiDistanceInFeet, m_oi.getMaxDriveSpeed()),
 				new InstantCommand(() -> {AutoCommand.executingCommand = false;})
 			);	
