@@ -1,3 +1,9 @@
 To Do:
 1. Auto
 2. Dashboard
+	Items to put on Dashboard:
+	1. All max speed values, has default values but is able to be changed.
+	2. Current sensor readings (button, photoelectric, encoders)
+	3. Auto settings (taxi, shoot preload, collect cargo, which cargo to target, tarmac robot is starting in)
+	4. Allow to enable/disable certain functionalities (smart intake, auto index during smart intake, etc.)
+	5. All settings and info should be clear, concise, and easy to find

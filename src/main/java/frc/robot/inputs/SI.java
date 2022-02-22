@@ -7,12 +7,11 @@
 
 package frc.robot.inputs;
 
-//Imports DigitalInput
-import edu.wpi.first.wpilibj.DigitalInput;
-//Imports constants
+import static frc.robot.Constants.ClimberConstants.kBottomClimberLimitSwitchID;
 import static frc.robot.Constants.IntakeConstants.*;
-import static frc.robot.Constants.ShooterConstants.*;
-import static frc.robot.Constants.ClimberConstants.*;
+import static frc.robot.Constants.ShooterConstants.kShooterPESensorID;
+
+import edu.wpi.first.wpilibj.DigitalInput;
 
 //Sensor Inputs
 public class SI {

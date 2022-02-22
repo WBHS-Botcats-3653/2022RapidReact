@@ -4,10 +4,8 @@
 
 package frc.robot.commands;
 
-//Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.inputs.OI;
-//Imports Shooter subsystem
 import frc.robot.subsystems.Shooter;
 
 public class ShooterCommand extends CommandBase {

@@ -4,9 +4,7 @@
 
 package frc.robot.commands.autoCommands;
 
-//Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
-//Imports subsystems
 import frc.robot.subsystems.Direction;
 import frc.robot.subsystems.DriveTrain;
 

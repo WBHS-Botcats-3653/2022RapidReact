@@ -4,11 +4,9 @@
 
 package frc.robot.commands;
 
-//Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.inputs.OI;
 import frc.robot.inputs.SI;
-//Imports Climber subsystem
 import frc.robot.subsystems.Climber;
 
 public class ClimberCommand extends CommandBase {

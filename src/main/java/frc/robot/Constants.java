@@ -1,5 +1,7 @@
 package frc.robot;
 
+import java.util.HashMap;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -20,7 +22,31 @@ public final class Constants {
 		public static final String[] kCargoToTarget = new String[] {"LR", "LL"};  //MOVE OUT OF CONSTANTS SHOULD NOT BE FINAL
 
 		//The distance to travel when taxiing
-		public static final double kTaxiDistanceInFeet = -7.5;
+		public static final double kTaxiDistanceInFeet = -7.1;
+
+		//Turn angles
+		public static final HashMap<String, Double> kTurnAngles = new HashMap<>() {{
+			put("LLL", 0.0);
+			put("LLR", 0.0);
+			put("LML", 0.0);
+			put("LMR", 0.0);
+			put("RML", 0.0);
+			put("RMR", 0.0);
+			put("RRL", 0.0);
+			put("RRR", 0.0);
+		}};
+
+		//Drive distances
+		public static final HashMap<String, Double> kDriveDistances = new HashMap<>() {{
+			put("LLL", 0.0);
+			put("LLR", 0.0);
+			put("LML", 0.0);
+			put("LMR", 0.0);
+			put("RML", 0.0);
+			put("RMR", 0.0);
+			put("RRL", 0.0);
+			put("RRR", 0.0);
+		}};
 	}
 
 	//Drive Constants

@@ -5,22 +5,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
-//Imports controller
 import edu.wpi.first.wpilibj.XboxController;
-//Imports commands
-import frc.robot.commands.ArcadeDriveCommand;
-import frc.robot.commands.AutoCommand;
-import frc.robot.commands.ClimberCommand;
-import frc.robot.commands.IndexerCommand;
-import frc.robot.commands.IntakeCommand;
-import frc.robot.commands.ShooterCommand;
-//Imports subsystems
-import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.Dashboard;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Indexer;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Shooter;
+import frc.robot.commands.*;
+import frc.robot.subsystems.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a

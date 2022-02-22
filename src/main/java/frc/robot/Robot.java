@@ -4,24 +4,11 @@
 
 package frc.robot;
 
-//Imports TimedRobot
 import edu.wpi.first.wpilibj.TimedRobot;
-//Imports CommandScheduler
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
-//Imports PrintCommand
-import edu.wpi.first.wpilibj2.command.PrintCommand;
-//Imports SequentialCommandGroup
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-//Imports Commands
-import frc.robot.commands.ArcadeDriveCommand;
-import frc.robot.commands.AutoCommand;
-import frc.robot.commands.ClimberCommand;
-import frc.robot.commands.IndexerCommand;
-import frc.robot.commands.IntakeCommand;
-import frc.robot.commands.ShooterCommand;
+import edu.wpi.first.wpilibj2.command.*;
+import frc.robot.commands.*;
 import frc.robot.inputs.OI;
 import frc.robot.inputs.SI;
-//Imports subsystems
 import frc.robot.subsystems.Dashboard;
 import frc.robot.subsystems.Direction;
 

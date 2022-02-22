@@ -4,7 +4,6 @@
 
 package frc.robot;
 
-//Imports RobotBase
 import edu.wpi.first.wpilibj.RobotBase;
 
 /**

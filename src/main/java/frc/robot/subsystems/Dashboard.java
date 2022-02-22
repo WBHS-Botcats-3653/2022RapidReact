@@ -4,22 +4,11 @@
 
 package frc.robot.subsystems;
 
-//Imports java utilities
-import java.util.*;
+import java.util.Map;
 
-//Imports UsbCamera
-//import edu.wpi.first.cscore.UsbCamera;
-//Imports networkTableEntry
 import edu.wpi.first.networktables.NetworkTableEntry;
-//Imports BuiltInWidgets
-import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
-//Imports Shuffleboard
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-//Imports ShuffleboardTab
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-//Imports commands
+import edu.wpi.first.wpilibj.shuffleboard.*;
 import frc.robot.commands.AutoCommand;
-//Imports OI
 import frc.robot.inputs.OI;
 
 public class Dashboard {

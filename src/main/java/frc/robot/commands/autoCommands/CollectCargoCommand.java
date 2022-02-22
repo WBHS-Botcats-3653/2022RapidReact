@@ -4,11 +4,9 @@
 
 package frc.robot.commands.autoCommands;
 
-//Imports CommandBase
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.inputs.OI;
 import frc.robot.inputs.SI;
-//Imports subsystems
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
 

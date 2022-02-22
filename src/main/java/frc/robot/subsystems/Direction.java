@@ -4,16 +4,12 @@
 
 package frc.robot.subsystems;
 
-//Imports Sendable
-import edu.wpi.first.util.sendable.Sendable;
-//Imports ADXRS450_Gyro
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-//Imports Encoder
-import edu.wpi.first.wpilibj.Encoder;
-//Imports SubsystemBase
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-//Imports constants
 import static frc.robot.Constants.DriveConstants.*;
+
+import edu.wpi.first.util.sendable.Sendable;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 /**
  * Wrapper class to gyro on Roborio.

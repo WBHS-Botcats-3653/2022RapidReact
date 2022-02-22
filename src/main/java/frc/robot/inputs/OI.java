@@ -1,6 +1,5 @@
 package frc.robot.inputs;
 
-//Imports XboxController
 import edu.wpi.first.wpilibj.XboxController;
 
 //Operator Inputs

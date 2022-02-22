@@ -1,18 +1,13 @@
 package frc.robot.commands;
 
-//Imports CommandBase
-import edu.wpi.first.wpilibj2.command.CommandBase;
-//Imports InstantCommand
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-//Imports SequentialCommandGroup
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-//Imports autoCommands
-import frc.robot.commands.autoCommands.DriveCommand;
-import frc.robot.commands.autoCommands.ShootCargoCommand;
-//Imports OI
-import frc.robot.inputs.OI;
-//Imports constants
 import static frc.robot.Constants.AutoConstants.*;
+
+import edu.wpi.first.wpilibj2.command.*;
+import frc.robot.commands.autoCommands.*;
+import frc.robot.inputs.OI;
+
+//Field layout and marking diagram
+//https://firstfrc.blob.core.windows.net/frc2022/FieldAssets/2022LayoutMarkingDiagram.pdf
 
 public class AutoCommand extends CommandBase {
 	//private DriveTrain driveTrain;
@@ -46,12 +41,12 @@ public class AutoCommand extends CommandBase {
 		hasFinished = false;
 		executingCommand = false;
 
-		//Still taxi when collecting cargo? Can prob skip since we'll leave the Tarmac anyways
+		//When collecting cargo robot will still taxi in order to get to a better position to collect cargo from
 		command = new SequentialCommandGroup(
 			new InstantCommand(() -> {AutoCommand.executingCommand = true;}),
 			new ShootCargoCommand(),  //Shoots Preload
 			new DriveCommand(kTaxiDistanceInFeet, m_oi.getMaxDriveSpeed()),
-			new InstantCommand(() -> {AutoCommand.executingCommand = true;})
+			new InstantCommand(() -> {AutoCommand.executingCommand = false;})
 		);
 	}
 
@@ -70,43 +65,21 @@ public class AutoCommand extends CommandBase {
 
 	@Override
 	public void execute() {
+		//If currently executing an auto command break
 		if (executingCommand) return;
-		//"L"=Left, "M"=Middle, "R"=Right
-		switch(kStartingPosition) {
-			case("L"):
-				switch(kCargoToTarget[cargoTargetIndex]) {
-					case("LL"):
-
-						break;
-					case("LR"):
-
-						break;
-					case("ML"):
-
-						break;
-					case("MR"):
-
-						break;
-				}
-				break;
-			case("R"):
-				switch(kCargoToTarget[cargoTargetIndex]) {
-					case("ML"):
-
-						break;
-					case("MR"):
-
-						break;
-					case("RL"):
-
-						break;
-					case("RR"):
-
-						break;
-				}
-				break;
-		}
-		if (++cargoTargetIndex == kCargoToTarget.length) hasFinished = true;
+		//If there is no more cargo left to collect end auto command
+		if (cargoTargetIndex == kCargoToTarget.length) hasFinished = true;
+		//Refence to get angles and distance to specific cargo positions from auto constants
+		String reference = kStartingPosition + kCargoToTarget[cargoTargetIndex];
+		//Creates new sequential command to 
+		command = new SequentialCommandGroup(
+			new InstantCommand(() -> {AutoCommand.executingCommand = true;}),
+			new TurnCommand(kTurnAngles.get(reference)),
+			new DriveCommand(kDriveDistances.get(reference), m_oi.getMaxDriveSpeed()),
+			new CollectCargoCommand(),
+			new InstantCommand(() -> {AutoCommand.executingCommand = false;})
+		);
+		cargoTargetIndex++;
 
 
 		/*switch (stage) {

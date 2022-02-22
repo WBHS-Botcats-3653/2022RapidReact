@@ -4,14 +4,11 @@
 
 package frc.robot.commands.autoCommands;
 
-//Imports CommandBase
+import static frc.robot.Constants.DriveConstants.kP;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
-//Imports Direction
 import frc.robot.subsystems.Direction;
-//Imports DriveTrain subsystem
 import frc.robot.subsystems.DriveTrain;
-//Imports constants
-import static frc.robot.Constants.DriveConstants.*;
 
 public class DriveCommand extends CommandBase {
 	private DriveTrain m_driveTrain;

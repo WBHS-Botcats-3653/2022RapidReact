@@ -4,15 +4,12 @@
 
 package frc.robot.subsystems;
 
-//Imports WPI_VictorSPX (Motor Controller)
+import static frc.robot.Constants.IntakeConstants.*;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-//Imports SubsystemBase
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-//Imports OI
 import frc.robot.inputs.OI;
-//Imports constants
-import static frc.robot.Constants.IntakeConstants.*;
 
 public class Intake extends SubsystemBase {
 	private static Intake m_singleton = null;

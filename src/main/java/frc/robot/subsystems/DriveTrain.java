@@ -4,19 +4,14 @@
 
 package frc.robot.subsystems;
 
-//Imports WPI_VictorSPX (Motor Controller)
+import static frc.robot.Constants.DriveConstants.*;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-//Imports DifferentialDrive
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-//Imports MotorControllerGroup
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
-//Imports Subsystem Base
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-//Imports OI
 import frc.robot.inputs.OI;
-//Imports constants
-import static frc.robot.Constants.DriveConstants.*;
 
 
 public class DriveTrain extends SubsystemBase {
