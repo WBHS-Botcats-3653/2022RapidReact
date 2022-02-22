@@ -9,8 +9,7 @@ import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.commands.*;
 import frc.robot.inputs.OI;
 import frc.robot.inputs.SI;
-import frc.robot.subsystems.Dashboard;
-import frc.robot.subsystems.Direction;
+import frc.robot.subsystems.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -22,13 +21,14 @@ public class Robot extends TimedRobot {
 	//private Command m_autonomousCommand;
 	private RobotContainer m_robotContainer;
 
-	//private final DriveTrain m_driveTrainSubsystem = DriveTrain.getInstance();
-	private Dashboard m_dashboard = Dashboard.getInstance();
-	//private final Climber m_climberSubsystem = Climber.getInstance();
-	//private final Intake m_intakeSubsystem = Intake.getInstance();
-	//private final Dashboard m_dashboardSubsystem = Dashboard.getInstance();
-	//private final Shooter m_shooterSubsystem = Shooter.getInstance();
+	//Subsystems
+	private final DriveTrain m_driveTrainSubsystem = DriveTrain.getInstance();
+	private final Climber m_climberSubsystem = Climber.getInstance();
+	private final Intake m_intakeSubsystem = Intake.getInstance();
+	private final Dashboard m_dashboardSubsystem = Dashboard.getInstance();
+	private final Shooter m_shooterSubsystem = Shooter.getInstance();
 	private final Direction m_directionSubsystem = Direction.getInstance();
+	private final Indexer m_indexerSubsystem = Indexer.getInstance();
 
 	//Inputs
 	private final OI m_oi = OI.getInstance();
@@ -36,11 +36,11 @@ public class Robot extends TimedRobot {
 
 	//Commands
 	private AutoCommand m_autonomousCommand;
-	private ArcadeDriveCommand m_arcadeDriveCommand;
-	private ClimberCommand m_climberCommand;
-	private IntakeCommand m_intakeCommand;
-	private ShooterCommand m_shooterCommand;
-	private IndexerCommand m_indexerCommand;
+	private final ArcadeDriveCommand m_arcadeDriveCommand = new ArcadeDriveCommand(m_driveTrainSubsystem);
+	private final ClimberCommand m_climberCommand = new ClimberCommand(m_climberSubsystem);
+	private final IntakeCommand m_intakeCommand = new IntakeCommand(m_intakeSubsystem);
+	private final ShooterCommand m_shooterCommand = new ShooterCommand(m_shooterSubsystem);
+	private final IndexerCommand m_indexerCommand = new IndexerCommand(m_indexerSubsystem);
 	
 	/**
 	 * This function is run when the robot is first started up and should be used for any
@@ -71,16 +71,33 @@ public class Robot extends TimedRobot {
 		// and running subsystem periodic() methods.  This must be called from the robot's periodic
 		// block in order for anything in the Command-based framework to work.
 		CommandScheduler.getInstance().run();
-		
+
+		//Print stuff
+		new PrintCommand("-----------------------------------------------").initialize();
+
+		//Encoders
+		new PrintCommand("Left Drive Distance: " + m_directionSubsystem.getLeftDistance()).initialize();
+		new PrintCommand("Right Drive Distance: " + m_directionSubsystem.getRightDistance()).initialize();
+
+		//Photoelectric sensors
+		new PrintCommand("Shooter PE: " + m_si.getShooterTriggered()).initialize();
+		new PrintCommand("Upper Storage PE: " + m_si.getUpperStorageTriggered()).initialize();
+		new PrintCommand("Lower Storage PE: " + m_si.getLowerStorageTriggered()).initialize();
+
+		//Limit switches
+		new PrintCommand("Top Pivot Limit Switch: " + m_si.getPivotUpLimitTriggered()).initialize();
+		new PrintCommand("Bottom Pivot Limit Switch: " + m_si.getPivotDownLimitTriggered()).initialize();
+		new PrintCommand("Bottom Climber Limit Switch: " + m_si.getClimberDownLimitTriggered()).initialize();
 	}
 
 	/** This function is called once each time the robot enters Disabled mode. */
 	@Override
 	public void disabledInit() {
 		//difDrive.reset();
+
 		// Cancels all running commands when disabled.
 		CommandScheduler.getInstance().cancelAll();
-		CommandScheduler.getInstance().disable();
+
 		//Sets max motor speeds
 		m_oi.setMaxShootSpeed(0);
 		m_oi.setMaxIntakePivotSpeed(0);
@@ -102,9 +119,12 @@ public class Robot extends TimedRobot {
 	/** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
 	@Override
 	public void autonomousInit() {
-		CommandScheduler.getInstance().enable();
+		//Resets the encoders
 		m_directionSubsystem.resetEncoders();
+
+		//Gets the autonomous command from robotContainer
 		m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+
 		/*
 		 *String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		 *switch(autoSelected) {
@@ -116,10 +136,12 @@ public class Robot extends TimedRobot {
 		 *		break;
 		 *}
 		 */
+
 		// Schedules the autonomous command
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.schedule();
 		}
+
 		//Sets max motor speeds
 		m_oi.setMaxShootSpeed(0.6);
 		m_oi.setMaxIntakePivotSpeed(0.5);
@@ -136,31 +158,22 @@ public class Robot extends TimedRobot {
 	public void autonomousPeriodic() {
 		//This is for testing the encoders if they are working
 		Dashboard.UpdateEncoderForTest(m_directionSubsystem.getLeftDistance());
+
 		//Schedules SquentialCommandGroups fed from the AutoCommand
 		SequentialCommandGroup command = m_autonomousCommand.getCommand();
 		if (command != null) {
 			command.schedule();
 		}
-		//Runs the scheduler
-		CommandScheduler.getInstance().run();
-		//Print stuff
-		new PrintCommand("Distance left " + m_directionSubsystem.getLeftDistance()).initialize();
-		new PrintCommand("Distance right " + m_directionSubsystem.getRightDistance()).initialize();
-		new PrintCommand("Shooter PE: " + m_si.getShooterTriggered()).initialize();
-		new PrintCommand("Upper Storage PE: " + m_si.getUpperStorageTriggered()).initialize();
-		new PrintCommand("Lower Storage PE: " + m_si.getLowerStorageTriggered()).initialize();
 	} 
 
 	@Override
 	public void teleopInit() {
-		CommandScheduler.getInstance().enable();
+		// Cancels all running commands at the start of teleoperated mode.
+		CommandScheduler.getInstance().cancelAll();
+
 		//Resets the encoders
 		m_directionSubsystem.resetEncoders();
-		m_arcadeDriveCommand = m_robotContainer.getArcadeDriveCommand();
-		m_climberCommand = m_robotContainer.getClimberCommand();
-		m_intakeCommand = m_robotContainer.getIntakeCommand();
-		m_shooterCommand = m_robotContainer.getShooterCommand();
-		m_indexerCommand = m_robotContainer.getIndexerCommand();
+
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
@@ -168,12 +181,14 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
+
 		//Schedule teleop commands
 		m_arcadeDriveCommand.schedule();
 		m_climberCommand.schedule();
 		m_indexerCommand.schedule();
 		m_intakeCommand.schedule();
 		m_shooterCommand.schedule();
+
 		//Sets max motor speeds
 		m_oi.setMaxShootSpeed(0.6);
 		m_oi.setMaxIntakePivotSpeed(0.5);
@@ -188,28 +203,21 @@ public class Robot extends TimedRobot {
 	/** This function is called periodically during operator control. */
 	@Override
 	public void teleopPeriodic() {
-		//Runs the scheduler
-		CommandScheduler.getInstance().run();
-		m_dashboard.telopPeriodic();
-		//Print stuff
-		new PrintCommand("Distance left " + m_directionSubsystem.getLeftDistance()).initialize();
-		new PrintCommand("Distance right " + m_directionSubsystem.getRightDistance()).initialize();
-		new PrintCommand("Shooter PE: " + m_si.getShooterTriggered()).initialize();
-		new PrintCommand("Upper Storage PE: " + m_si.getUpperStorageTriggered()).initialize();
-		new PrintCommand("Lower Storage PE: " + m_si.getLowerStorageTriggered()).initialize();
+		m_dashboardSubsystem.telopPeriodic();
 	}
 
 	@Override
 	public void testInit() {
-		CommandScheduler.getInstance().enable();
 		// Cancels all running commands at the start of test mode.
 		CommandScheduler.getInstance().cancelAll();
+
 		//Schedule test commands
 		m_arcadeDriveCommand.schedule();
 		m_climberCommand.schedule();
 		m_indexerCommand.schedule();
 		m_intakeCommand.schedule();
 		m_shooterCommand.schedule();
+
 		//Sets max motor speeds
 		m_oi.setMaxShootSpeed(0.6);
 		m_oi.setMaxIntakePivotSpeed(0.5);
@@ -223,11 +231,5 @@ public class Robot extends TimedRobot {
 
 	/** This function is called periodically during test mode. */
 	@Override
-	public void testPeriodic() {
-		//Runs the scheduler
-		CommandScheduler.getInstance().run();
-		//Print stuff
-		new PrintCommand("Top Pivot Limit Switch " + m_si.getPivotUpLimitTriggered()).initialize();
-		new PrintCommand("Bottom Pivot Limit Switch " + m_si.getPivotDownLimitTriggered()).initialize();
-	}
+	public void testPeriodic() {}
 }
