@@ -86,7 +86,7 @@ public class AutoCommand extends CommandBase {
 	public void execute() {
 		//If currently executing an auto command break out of the method
 		if (executingCommand) return;
-		if (isAutoCollectOn) {  //If not collecting cargo
+		if (!isAutoCollectOn) {  //If not collecting cargo
 			//End auto command
 			hasFinished = true;
 			//Break out of the method
