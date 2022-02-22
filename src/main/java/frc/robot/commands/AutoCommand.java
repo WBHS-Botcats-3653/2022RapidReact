@@ -40,22 +40,6 @@ public class AutoCommand extends CommandBase {
 		//kP = 1;
 		hasFinished = false;
 		executingCommand = false;
-
-		if(isAutoCollectOn){
-			command = new SequentialCommandGroup(
-				new InstantCommand(() -> {AutoCommand.executingCommand = true;}),
-				//new CollectCargoCommand();
-				new DriveCommand(kTaxiDistanceInFeet, m_oi.getMaxDriveSpeed()),
-				new InstantCommand(() -> {AutoCommand.executingCommand = false;})
-			);	
-		}
-		//When collecting cargo robot will still taxi in order to get to a better position to collect cargo from
-		command = new SequentialCommandGroup(
-			new InstantCommand(() -> {AutoCommand.executingCommand = true;}),
-			new ShootCargoCommand(),  //Shoots Preload
-			new DriveCommand(kTaxiDistanceInFeet, m_oi.getMaxDriveSpeed()),
-			new InstantCommand(() -> {AutoCommand.executingCommand = false;})
-		);
 	}
 
 	//Returns the next SequentialCommandGroup to be scheduled
@@ -68,13 +52,46 @@ public class AutoCommand extends CommandBase {
 	@Override
 	public void initialize() {
 		cargoTargetIndex = 0;
+		if (isAutoShootOn) {  //If shooting preload
+			if (isAutoTaxiOn || isAutoCollectOn) {  //If taxiing or collecting cargo
+				command = new SequentialCommandGroup(
+					new InstantCommand(() -> {AutoCommand.executingCommand = true;}),
+					new ShootCargoCommand(),  //Shoots Preload
+					new DriveCommand(kTaxiDistanceInFeet, m_oi.getMaxDriveSpeed()),  //Taxi
+					new InstantCommand(() -> {AutoCommand.executingCommand = false;})
+				);
+			} else {  //If not taxiing or collecting cargo
+				command = new SequentialCommandGroup(
+					new InstantCommand(() -> {AutoCommand.executingCommand = true;}),
+					new ShootCargoCommand(),  //Shoots Preload
+					new InstantCommand(() -> {AutoCommand.executingCommand = false;})
+				);
+			}
+		} else if (isAutoTaxiOn || isAutoCollectOn) {  //If taxiing or collecting cargo and not shooting preload
+			command = new SequentialCommandGroup(
+				new InstantCommand(() -> {AutoCommand.executingCommand = true;}),
+				new DriveCommand(kTaxiDistanceInFeet, m_oi.getMaxDriveSpeed()),  //Taxi
+				new InstantCommand(() -> {AutoCommand.executingCommand = false;})
+			);
+		} else {  //If not executing any auto functions
+			//End auto command
+			hasFinished = true;
+		}
+
+
 		//stage = "Shoot Preload";
 	}
 
 	@Override
 	public void execute() {
-		//If currently executing an auto command break
+		//If currently executing an auto command break out of the method
 		if (executingCommand) return;
+		if (isAutoCollectOn) {  //If not collecting cargo
+			//End auto command
+			hasFinished = true;
+			//Break out of the method
+			return;
+		}
 		//If there is no more cargo left to collect end auto command
 		if (cargoTargetIndex == kCargoToTarget.length) hasFinished = true;
 		//Refence to get angles and distance to specific cargo positions from auto constants
