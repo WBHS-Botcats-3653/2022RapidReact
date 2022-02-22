@@ -83,13 +83,19 @@ public class AutoCommand extends CommandBase {
 		if (kTurnAngles.get(reference) != 0.0 && kDriveDistances.get(reference) != 0.0) {
 			//Creates new sequential command to 
 			command = new SequentialCommandGroup(
+				//Start command
 				new InstantCommand(() -> {AutoCommand.executingCommand = true;}),
+				//Turn specified distance
 				new TurnCommand(kTurnAngles.get(reference)),
+				//Drive specified distance
 				new DriveCommand(kDriveDistances.get(reference), m_oi.getMaxDriveSpeed()),
+				//Intake the cargo
 				new CollectCargoCommand(),
+				//End command
 				new InstantCommand(() -> {AutoCommand.executingCommand = false;})
 			);
 		}
+		//Target next cargo
 		cargoTargetIndex++;
 
 
