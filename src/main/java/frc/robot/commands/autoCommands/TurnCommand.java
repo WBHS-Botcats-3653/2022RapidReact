@@ -22,6 +22,7 @@ public class TurnCommand extends CommandBase {
 		this.angle = angle;
 		if (angle < 0) turnSpeed *= -1;
 		// Use addRequirements() here to declare subsystem dependencies.
+		addRequirements(m_driveTrain, m_direction);
 	}
 
 	// Called when the command is initially scheduled.

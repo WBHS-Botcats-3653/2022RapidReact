@@ -27,6 +27,7 @@ public class DriveCommand extends CommandBase {
 		direction = distance < 0 ? -1 : 1;
 		this.speed = speed * direction;
 		// Use addRequirements() here to declare subsystem dependencies.
+		addRequirements(m_driveTrain, m_direction);
 	}
 
 	// Called when the command is initially scheduled.

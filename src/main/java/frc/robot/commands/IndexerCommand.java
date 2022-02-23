@@ -7,19 +7,17 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.inputs.OI;
 import frc.robot.subsystems.Indexer;
-import frc.robot.subsystems.Intake;
 
 public class IndexerCommand extends CommandBase {
 	private Indexer m_indexer;
-	private Intake m_intake;
 	private OI m_oi;
 
 	/** Creates a new StorageCommand. */
 	public IndexerCommand(Indexer p_indexer) {
 		m_indexer = p_indexer;
-		m_intake = Intake.getInstance();
 		m_oi = OI.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
+		addRequirements(p_indexer);
 	}
 	
 	@Override
@@ -29,16 +27,14 @@ public class IndexerCommand extends CommandBase {
 	@Override
 	public void execute() {
 		if (m_oi.getIndexerIn()) {  //If the A button is being pressed
+			//Sets the indexer speed to the set max
 			m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed());
-			m_intake.setRollerSpeed(m_oi.getMaxIntakeRollerSpeed());
 		} else if (m_oi.getIndexerOut()) {  //If the Y button is being pressed
-			m_indexer.setIndexerSpeed(-m_oi.getMaxIndexerSpeed());
-			m_intake.setRollerSpeed(-m_oi.getMaxIntakeRollerSpeed());
+			//Sets the indexer speed to the negative set max
+			m_indexer.setIndexerSpeed(-m_oi.getMaxIndexerSpeed());  //Reverse indexer
 		} else {  //Nothing being pressed (indexer wise)
 			//Stops the indexer
 			m_indexer.setIndexerSpeed(0);
-			//Stops the rollers
-			m_intake.setRollerSpeed(0);
 		}
 	}
 

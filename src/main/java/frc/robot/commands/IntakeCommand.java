@@ -33,6 +33,7 @@ public class IntakeCommand extends CommandBase {
 		smartPivotGoingUp = false;
 		//Not pivoting down while under smart control
 		smartPivotGoingDown = false;
+		addRequirements(p_intake);
 	}
 
 	// Called when the command is initially scheduled.
