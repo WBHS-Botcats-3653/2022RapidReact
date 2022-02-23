@@ -24,6 +24,7 @@ public class CollectCargoCommand extends CommandBase {
 		m_oi = OI.getInstance();
 		m_si = SI.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
+		addRequirements(m_intake, m_indexer);
 	}
 
 	// Called when the command is initially scheduled.

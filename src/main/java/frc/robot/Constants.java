@@ -27,16 +27,16 @@ public final class Constants {
 		//Turn angles
 		public static final HashMap<String, Double> kTurnAngles = new HashMap<>() {{
 			put("LLL", 0.0);
-			put("LLR", 0.0);
-			put("LML", 0.0);
+			put("LLR", 77.43);
+			put("LML", -100.78);
 			put("LMR", 0.0);
 			put("LRL", 0.0);  //DO NOT PUT VALUE
 			put("LRR", 0.0);  //DO NOT PUT VALUE
 			put("RLL", 0.0);  //DO NOT PUT VALUE
 			put("RLR", 0.0);  //DO NOT PUT VALUE
 			put("RML", 0.0);
-			put("RMR", 0.0);
-			put("RRL", 0.0);
+			put("RMR", 100.78);
+			put("RRL", -77.43);
 			put("RRR", 0.0);
 		}};
 

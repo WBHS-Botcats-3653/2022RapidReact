@@ -16,7 +16,7 @@ public class ShooterCommand extends CommandBase {
 		m_shooter = p_shooter;
 		m_oi = OI.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
-		//addRequirements();
+		addRequirements(p_shooter);
 	}
 
 	// Called when the command is initially scheduled.
