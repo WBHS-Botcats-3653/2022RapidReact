@@ -16,19 +16,19 @@ public class NetworkEntries {
     	// Config Tab
 
 	// Test Tab
-	public static NetworkTableEntry m_nteDriveEncLeft = null; //double
-	public static NetworkTableEntry m_nteDriveEncRight = null; //double
-	public static NetworkTableEntry m_nteArmDnLimit = null;
-
+	public static NetworkTableEntry m_nteDriveEncLeft; //double
+	public static NetworkTableEntry m_nteDriveEncRight; //double
+	public static NetworkTableEntry m_nteIntakeUpLimit;
+    public static NetworkTableEntry m_nteIntakeDownLimit;
 
 	// Drive Tab
 	//private NetworkTableEntry m_nteArmAngle = null;
-	public static NetworkTableEntry m_nteDriveSpeed = null; //double
+	public static NetworkTableEntry m_nteDriveSpeed; //double
 
     //Auto Phases
-	public static NetworkTableEntry m_isAutoShootOn = null; //boolean
-	public static NetworkTableEntry m_isAutoTaxiOn = null; //boolean
-	public static NetworkTableEntry m_isAutoCollectOn = null; //boolean
+	public static NetworkTableEntry m_isAutoShootOn; //boolean
+	public static NetworkTableEntry m_isAutoTaxiOn; //boolean
+	public static NetworkTableEntry m_isAutoCollectOn; //boolean
 /*
 	public static NetworkTableEntry m_isAutoShootOnBox = null;
 	public static NetworkTableEntry m_isAutoTaxiOnBox = null;
@@ -37,8 +37,8 @@ public class NetworkEntries {
 
 	//TODO: Implement
     //TODO: I know you don't like 'em, but I DO...
-	public static boolean isPivotAssistEnabled = true;
-	public static boolean isSmartIntakeEnabled = true;
+	public static NetworkTableEntry isPivotAssistEnabled;
+	public static NetworkTableEntry isSmartIntakeEnabled;
 
     private NetworkEntries(){}
 

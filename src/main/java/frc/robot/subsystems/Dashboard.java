@@ -11,10 +11,12 @@ import edu.wpi.first.wpilibj.shuffleboard.*;
 import frc.robot.NetworkEntries;
 import frc.robot.commands.AutoCommand;
 import frc.robot.inputs.OI;
+import frc.robot.inputs.SI;
 
 public class Dashboard {
 	private static Dashboard m_singleton = null;
 	private static OI ctrl = OI.getInstance();
+	private static SI m_si =  SI.getInstance();
 	private static NetworkEntries network = NetworkEntries.getInstance();
 	//private UsbCamera cam0 = null;
 
@@ -30,7 +32,10 @@ public class Dashboard {
 		tabTest = Shuffleboard.getTab("Test");
 
 		// Config Tab
-		
+		network.isPivotAssistEnabled = tabConfig.addPersistent("is Pivot Assist Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
+		.withSize(1, 1).withPosition(0, 1).getEntry();
+		network.isSmartIntakeEnabled = tabConfig.addPersistent("is Smart Intake Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
+		.withSize(1, 1).withPosition(0, 1).getEntry();
 		// Drive Tab
 		/*
 		cam0 = CameraServer.startAutomaticCapture(0);
@@ -64,7 +69,8 @@ public class Dashboard {
 		//--m_isAutoCollectOnBox = tabDrive.addPersistent("is Auto Collect", AutoCommand.isAutoCollectOn).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(2, 0).getEntry();
 
 		// Test Tab
-		network.m_nteArmDnLimit = tabTest.add("Arm Down", false).withSize(1, 1).withPosition(0, 0).getEntry();
+		network.m_nteIntakeUpLimit = tabTest.add("Intake up limit", false).withSize(1, 1).withPosition(0, 0).getEntry();
+		network.m_nteIntakeDownLimit = tabTest.add("Intake Down limit", false).withSize(1, 1).withPosition(0, 0).getEntry();
 		//m_nteArmUpLimit = tabTest.add("Arm Up", false).withSize(1, 1).withPosition(1, 0).getEntry();
 		//this is for testing the encoders if they are working
 		//--network.testingEncoderLeft = tabTest.add("Left encoder testing it", 0).withSize(1, 1).withPosition(1, 0).getEntry();
@@ -90,6 +96,8 @@ public class Dashboard {
 		OI oi = OI.getInstance();
 		//m_nteArmAngle.setDouble(arm.getAngle());
 		network.m_nteDriveSpeed.setDouble(Math.abs(oi.getMaxDriveSpeed()));
+		network.m_nteIntakeUpLimit.setBoolean(m_si.getPivotUpLimitTriggered());
+		network.m_nteIntakeDownLimit.setBoolean(m_si.getPivotDownLimitTriggered());
 		ctrl.setMaxDriveSpeed(network.m_nteDriveSpeed.getDouble(1.0));
 
 		//FIX

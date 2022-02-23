@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.NetworkEntries;
 import frc.robot.inputs.OI;
 import frc.robot.inputs.SI;
 import frc.robot.subsystems.*;
@@ -15,6 +16,7 @@ public class IntakeCommand extends CommandBase {
 	private Indexer m_indexer;
 	private OI m_oi;
 	private SI m_si;
+	private static NetworkEntries m_network;
 	private boolean smartControl;
 	private boolean smartPivotGoingUp;
 	private boolean smartPivotGoingDown;
@@ -27,6 +29,7 @@ public class IntakeCommand extends CommandBase {
 		m_indexer = Indexer.getInstance();
 		m_oi = OI.getInstance();
 		m_si = SI.getInstance();
+		m_network = NetworkEntries.getInstance();
 		//Not in smart control
 		smartControl = false;
 		//Not pivoting up while under smart control
@@ -43,7 +46,7 @@ public class IntakeCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		if (Dashboard.isSmartIntakeEnabled) {
+		if (m_network.isSmartIntakeEnabled.getBoolean(false)) {
 			//Smart intake control
 			smartIntakeLogic();
 		}
@@ -79,7 +82,7 @@ public class IntakeCommand extends CommandBase {
 			//Spin the rollers at max speed
 			m_intake.setRollerSpeed(m_oi.getMaxIntakeRollerSpeed());
 			//Pivot assist (pivots the intake down at a low speed when spinning the rollers)
-			if (Dashboard.isPivotAssistEnabled) {  //If pivot assist is enabled in the Dashboard
+			if (m_network.isPivotAssistEnabled.getBoolean(false)) {  //If pivot assist is enabled in the Dashboard
 				//Sets the pivot speed to max assist speed
 				m_intake.setPivotSpeed(m_oi.getMaxPivotAssistSpeed());
 			}
