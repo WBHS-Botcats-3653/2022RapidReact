@@ -48,6 +48,10 @@ public class Dashboard {
 	public static ShuffleboardTab tabDrive;
 	public static ShuffleboardTab tabTest;
 
+	//To Do: Implement
+	public static boolean isPivotAssistEnabled = true;
+	public static boolean isSmartIntakeEnabled = true;
+
 	private Dashboard() {
 		tabConfig = Shuffleboard.getTab("Config");
 		tabDrive = Shuffleboard.getTab("Drive");

@@ -7,8 +7,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.inputs.OI;
 import frc.robot.inputs.SI;
-import frc.robot.subsystems.Indexer;
-import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.*;
 
 public class IntakeCommand extends CommandBase {
 	//Holds instances of OI and Intake subsystem
@@ -43,8 +42,10 @@ public class IntakeCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		//Smart intake control
-		smartIntakeLogic();
+		if (Dashboard.isSmartIntakeEnabled) {
+			//Smart intake control
+			smartIntakeLogic();
+		}
 		//Manual controls
 		if (!smartControl) {  //If smart controls are not currently being used
 			//Intake pivot controls
@@ -76,6 +77,11 @@ public class IntakeCommand extends CommandBase {
 		if (m_oi.getManualIntakeIn()) {  //If the A button is being pressed
 			//Spin the rollers at max speed
 			m_intake.setRollerSpeed(m_oi.getMaxIntakeRollerSpeed());
+			//Pivot assist (pivots the intake down at a low speed when spinning the rollers)
+			if (Dashboard.isPivotAssistEnabled) {  //If pivot assist is enabled in the Dashboard
+				//Sets the pivot speed to max assist speed
+				m_intake.setPivotSpeed(m_oi.getMaxPivotAssistSpeed());
+			}
 		} else if (m_oi.getManualIntakeOut()) {  //If the X button is being pressed
 			//Reverse the rollers and spin at max speed
 			m_intake.setRollerSpeed(-m_oi.getMaxIntakeRollerSpeed());

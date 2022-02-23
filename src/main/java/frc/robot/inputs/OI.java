@@ -8,13 +8,14 @@ public class OI {
 	//Controller
 	private XboxController m_controller = null;
 	//Max speeds
-	private double m_maxDriveSpeed = 0;
-	private double m_maxArmSpeed = 0;
-	private double m_maxIntakePivotSpeed = 0;
-	private double m_maxSmartIntakePivotSpeed = 0;
-	private double m_maxIntakeRollerSpeed = 0;
-	private double m_maxShootSpeed = 0;
-	private double m_maxIndexerSpeed = 0;
+	private double maxDriveSpeed = 0;
+	private double maxArmSpeed = 0;
+	private double maxIntakePivotSpeed = 0;
+	private double maxSmartIntakePivotSpeed = 0;
+	private double maxIntakeRollerSpeed = 0;
+	private double maxShootSpeed = 0;
+	private double maxIndexerSpeed = 0;
+	private double maxPivotAssistSpeed = 0;
 
 	public OI() {
 		m_controller = new XboxController(0);
@@ -31,107 +32,119 @@ public class OI {
 	//Sets the max drive speed
 	public void setMaxDriveSpeed(double speed) {
 		if (0.0 < speed && speed <= 1.0) {
-			m_maxDriveSpeed = speed;
+			maxDriveSpeed = speed;
 		}
 	}
 
 	//Returns the max drive speed
 	public double getMaxDriveSpeed(){
-		return m_maxDriveSpeed;
+		return maxDriveSpeed;
 	}
 
 	//Sets the max arm speed
 	public void setMaxArmSpeed(double speed) {
 		if (0.0 < speed && speed <= 1.0) {
-			m_maxArmSpeed = speed;
+			maxArmSpeed = speed;
 		}
 	}
 
 	//Returns the max arm speed
 	public double getMaxArmSpeed(){
-		return m_maxArmSpeed;
+		return maxArmSpeed;
 	}
 
 	//Sets the max intake pivot speed
 	public void setMaxIntakePivotSpeed(double speed) {
 		if (0.0 < speed && speed <= 1.0) {
-			m_maxIntakePivotSpeed = speed;
+			maxIntakePivotSpeed = speed;
 		}
 	}
 
 	//Returns the max intake pivot speed
 	public double getMaxIntakePivotSpeed(){
-		return m_maxIntakePivotSpeed;
+		return maxIntakePivotSpeed;
 	}
 
 	//Sets the max smart intake pivot speed
 	public void setMaxSmartIntakePivotDownSpeed(double speed) {
 		if (0.0 < speed && speed <= 1.0) {
-			m_maxSmartIntakePivotSpeed = speed;
+			maxSmartIntakePivotSpeed = speed;
 		}
 	}
 
 	//Returns the max smart intake pivot speed
 	public double getMaxSmartIntakePivotDownSpeed(){
-		return m_maxSmartIntakePivotSpeed;
+		return maxSmartIntakePivotSpeed;
 	}
 
 	//Sets the max smart intake pivot speed
 	public void setMaxSmartIntakePivotUpSpeed(double speed) {
 		if (0.0 < speed && speed <= 1.0) {
-			m_maxSmartIntakePivotSpeed = speed;
+			maxSmartIntakePivotSpeed = speed;
 		}
 	}
 
 	//Returns the max smart intake pivot speed
 	public double getMaxSmartIntakePivotUpSpeed(){
-		return m_maxSmartIntakePivotSpeed;
+		return maxSmartIntakePivotSpeed;
 	}
 
 	//Sets the max intake roller speed
 	public void setMaxIntakeRollerSpeed(double speed) {
 		if (0.0 < speed && speed <= 1.0) {
-			m_maxIntakeRollerSpeed = speed;
+			maxIntakeRollerSpeed = speed;
 		}
 	}
 
 	//Returns the max intake roller speed
 	public double getMaxIntakeRollerSpeed(){
-		return m_maxIntakeRollerSpeed;
+		return maxIntakeRollerSpeed;
 	}
 
 	//Sets the max indexer speed
 	public void setMaxIndexerSpeed(double speed) {
 		if (0.0 < speed && speed <= 1.0) {
-			m_maxIndexerSpeed = speed;
+			maxIndexerSpeed = speed;
 		}
 	}
 
 	//Returns the max indexer speed
 	public double getMaxIndexerSpeed() {
-		return m_maxIndexerSpeed;
+		return maxIndexerSpeed;
 	}
 
 	//Sets the max shoot speed
 	public void setMaxShootSpeed(double speed) {
 		if (0.0 < speed && speed <= 1.0) {
-			m_maxShootSpeed = speed;
+			maxShootSpeed = speed;
 		}
 	}
 	
 	//Returns the max shoot speed (invert after return)
 	public double getMaxShootSpeed() {
-		return m_maxShootSpeed;
+		return maxShootSpeed;
+	}
+
+	//Sets the max pivot assist speed
+	public void setMaxPivotAssistSpeed(double speed) {
+		if (0.0 < speed && speed <= 1.0) {
+			maxPivotAssistSpeed = speed;
+		}
+	}
+	
+	//Returns the max pivot assist speed
+	public double getMaxPivotAssistSpeed() {
+		return maxPivotAssistSpeed;
 	}
 	
 	//Returns the speed to move forward/backward
 	public double getThrottle() {
-		return m_controller.getLeftY() * m_maxDriveSpeed;
+		return m_controller.getLeftY() * maxDriveSpeed;
 	}
 
 	//Returns the speed to move left/right
 	public double getSteering() {
-		return -m_controller.getRightX() * m_maxDriveSpeed;  // correct stearing (-)
+		return -m_controller.getRightX() * maxDriveSpeed;  // correct stearing (-)
 	}
 
 	/*//Returns whether the left trigger is being pressed
