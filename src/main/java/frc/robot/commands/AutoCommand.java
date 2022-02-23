@@ -36,6 +36,13 @@ public class AutoCommand extends CommandBase {
 		//kP = 1;
 		hasFinished = false;
 		executingCommand = false;
+		command = new SequentialCommandGroup(
+			new InstantCommand(() -> {AutoCommand.executingCommand = true;}),  //Executing a sequential command
+			isAutoShootOn ? new ShootCargoCommand() : new InstantCommand(() -> {System.out.println("Auto shoot preload disabled");}),   //Shoots Preload
+			isAutoTaxiOn||isAutoCollectOn ? new DriveCommand(kTaxiDistanceInFeet, m_oi.getMaxDriveSpeed()) : new InstantCommand(() -> {System.out.println("Taxi is disabled");}),
+			new InstantCommand(() -> {AutoCommand.executingCommand = false;}),  //Completed executing a sequential command
+			new InstantCommand(() -> {AutoCommand.stage = "Taxi";})  //Switches to Taxi stage
+		);
 	}
 
 	//Returns the next SequentialCommandGroup to be scheduled
@@ -47,7 +54,7 @@ public class AutoCommand extends CommandBase {
 
 	@Override
 	public void initialize() {
-		stage = "Shoot Preload";
+		//stage = "Shoot Preload";
 		cargoTargetIndex = 0;
 		/*if (isAutoShootOn) {  //If shooting preload is enabled in the Dashboard
 			if (isAutoTaxiOn || isAutoCollectOn) {  //If taxiing or collecting cargo is enabled in the Dashboard
@@ -80,64 +87,32 @@ public class AutoCommand extends CommandBase {
 	public void execute() {
 		//If currently executing an auto command break out of the method
 		if (executingCommand) return;
-		switch (stage) {
-			case ("Shoot Preload"):  //Shoot Preload stage
-				if (!isAutoShootOn) {  //If auto shoot preload is disabled in the Dashboard
-					//Switches to Taxi stage
-					stage = "Taxi";
-					//Breaks out of the switch
-					break;
-				}
-				command = new SequentialCommandGroup(
-					new InstantCommand(() -> {AutoCommand.executingCommand = true;}),  //Executing a sequential command
-					new ShootCargoCommand(),  //Shoots Preload
-					new InstantCommand(() -> {AutoCommand.executingCommand = false;}),  //Completed executing a sequential command
-					new InstantCommand(() -> {AutoCommand.stage = "Taxi";})  //Switches to Taxi stage
-				);
-				break;
-			case ("Taxi"):  //Taxi stage
-				if (!isAutoTaxiOn) {  //If auto taxi is disabled in the Dashboard
-					//Switcjes to Collect Cargo stage
-					stage = "Collect Cargo";
-					//Breaks out of the switch
-					break;
-				}
-				command = new SequentialCommandGroup(
-					new InstantCommand(() -> {AutoCommand.executingCommand = true;}),  //Executing a sequential command
-					new DriveCommand(kTaxiDistanceInFeet, m_oi.getMaxDriveSpeed()),  //Taxi
-					new InstantCommand(() -> {AutoCommand.executingCommand = false;}),  //Completed executing a sequential command
-					new InstantCommand(() -> {AutoCommand.stage = "Collect Cargo";})  //Switches to Collect Cargo stage
-				);
-				break;
-			case ("Collect Cargo"):  //Collect Cargo stage
-				if (!isAutoCollectOn || cargoTargetIndex == kCargoToTarget.length) {  //If collect cargo is disabled in the Dashboard or there is no more cargo left to collect
-					//Ends auto command
-					hasFinished = true;
-					//Breaks out of the switch
-					break;
-				}
-				//Refence to get angles and distance to specific cargo positions from auto constants
-				String reference = kStartingPosition + kCargoToTarget[cargoTargetIndex];
-				//If there is no distance or angle to move skip this cargo
-				if (kTurnAngles.get(reference) != 0 && kDriveDistances.get(reference) != 0) {
-					//Creates new sequential command to 
-					command = new SequentialCommandGroup(
-						//Start command
-						new InstantCommand(() -> {AutoCommand.executingCommand = true;}),
-						//Turn specified distance
-						new TurnCommand(kTurnAngles.get(reference)),
-						//Drive specified distance
-						new DriveCommand(kDriveDistances.get(reference), m_oi.getMaxDriveSpeed()),
-						//Intake the cargo
-						new CollectCargoCommand(),
-						//End command
-						new InstantCommand(() -> {AutoCommand.executingCommand = false;})
-					);
-				}
-				//Target next cargo
-				cargoTargetIndex++;
-				break;
+		if (!isAutoCollectOn || cargoTargetIndex == kCargoToTarget.length) {  //If collect cargo is disabled in the Dashboard or there is no more cargo left to collect
+			//Ends auto command
+			hasFinished = true;
+			//Breaks out of the switch
+			return;
 		}
+		//Refence to get angles and distance to specific cargo positions from auto constants
+		String reference = kStartingPosition + kCargoToTarget[cargoTargetIndex];
+		//If there is no distance or angle to move skip this cargo
+		if (kTurnAngles.get(reference) != 0 && kDriveDistances.get(reference) != 0) {
+			//Creates new sequential command to 
+			command = new SequentialCommandGroup(
+				//Start command
+				new InstantCommand(() -> {AutoCommand.executingCommand = true;}),
+				//Turn specified distance
+				new TurnCommand(kTurnAngles.get(reference)),
+				//Drive specified distance
+				new DriveCommand(kDriveDistances.get(reference), m_oi.getMaxDriveSpeed()),
+				//Intake the cargo
+				new CollectCargoCommand(),
+				//End command
+				new InstantCommand(() -> {AutoCommand.executingCommand = false;})
+			);
+		}
+		//Target next cargo
+		cargoTargetIndex++;
 
 
 		/*switch (stage) {
@@ -241,6 +216,7 @@ public class AutoCommand extends CommandBase {
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() {
+		//If has finished
 		return hasFinished;
 	}
 	//esteban is driving us nuts :):)
