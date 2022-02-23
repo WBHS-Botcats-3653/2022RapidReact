@@ -29,6 +29,8 @@ public class Robot extends TimedRobot {
 	private final Direction m_directionSubsystem = Direction.getInstance();
 	private final Indexer m_indexerSubsystem = Indexer.getInstance();
 
+	private static NetworkEntries network = NetworkEntries.getInstance();
+
 	//Inputs
 	private final OI m_oi = OI.getInstance();
 	private final SI m_si = SI.getInstance();
@@ -114,9 +116,9 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void disabledPeriodic() {
-		AutoCommand.isAutoShootOn = Dashboard.m_isAutoShootOn.getBoolean(true);
-		AutoCommand.isAutoTaxiOn = Dashboard.m_isAutoTaxiOn.getBoolean(true);
-		AutoCommand.isAutoCollectOn = Dashboard.m_isAutoCollectOn.getBoolean(true);
+		AutoCommand.isAutoShootOn = network.m_isAutoShootOn.getBoolean(true);
+		AutoCommand.isAutoTaxiOn = network.m_isAutoTaxiOn.getBoolean(true);
+		AutoCommand.isAutoCollectOn = network.m_isAutoCollectOn.getBoolean(true);
 	}
 
 	/** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
@@ -162,7 +164,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		//This is for testing the encoders if they are working
-		Dashboard.UpdateEncoderForTest(m_directionSubsystem.getLeftDistance());
 
 		//Schedules SquentialCommandGroups fed from the AutoCommand
 		SequentialCommandGroup command = m_autonomousCommand.getCommand();
