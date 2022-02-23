@@ -5,7 +5,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj2.command.*;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.*;
 import frc.robot.inputs.OI;
 import frc.robot.inputs.SI;
@@ -77,21 +78,21 @@ public class Robot extends TimedRobot {
 
 		//Print stuff
 		System.out.println("TEST PRINTLN");
-		new PrintCommand("-----------------------------------------------").initialize();
+		System.out.println("-----------------------------------------------");
 
 		//Encoders
-		new PrintCommand("Left Drive Distance: " + m_directionSubsystem.getLeftDistance()).initialize();
-		new PrintCommand("Right Drive Distance: " + m_directionSubsystem.getRightDistance()).initialize();
+		System.out.println("Left Drive Distance: " + m_directionSubsystem.getLeftDistance());
+		System.out.println("Right Drive Distance: " + m_directionSubsystem.getRightDistance());
 
 		//Photoelectric sensors
-		new PrintCommand("Shooter PE: " + m_si.getShooterTriggered()).initialize();
-		new PrintCommand("Upper Storage PE: " + m_si.getUpperStorageTriggered()).initialize();
-		new PrintCommand("Lower Storage PE: " + m_si.getLowerStorageTriggered()).initialize();
+		System.out.println("Shooter PE: " + m_si.getShooterTriggered());
+		System.out.println("Upper Storage PE: " + m_si.getUpperStorageTriggered());
+		System.out.println("Lower Storage PE: " + m_si.getLowerStorageTriggered());
 
 		//Limit switches
-		new PrintCommand("Top Pivot Limit Switch: " + m_si.getPivotUpLimitTriggered()).initialize();
-		new PrintCommand("Bottom Pivot Limit Switch: " + m_si.getPivotDownLimitTriggered()).initialize();
-		new PrintCommand("Bottom Climber Limit Switch: " + m_si.getClimberDownLimitTriggered()).initialize();
+		System.out.println("Top Pivot Limit Switch: " + m_si.getPivotUpLimitTriggered());
+		System.out.println("Bottom Pivot Limit Switch: " + m_si.getPivotDownLimitTriggered());
+		System.out.println("Bottom Climber Limit Switch: " + m_si.getClimberDownLimitTriggered());
 	}
 
 	/** This function is called once each time the robot enters Disabled mode. */

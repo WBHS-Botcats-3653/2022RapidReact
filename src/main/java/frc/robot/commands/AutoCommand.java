@@ -38,8 +38,8 @@ public class AutoCommand extends CommandBase {
 		executingCommand = false;
 		command = new SequentialCommandGroup(
 			new InstantCommand(() -> {AutoCommand.executingCommand = true;}),  //Executing a sequential command
-			isAutoShootOn ? new ShootCargoCommand() : new InstantCommand(() -> {System.out.println("Auto shoot preload disabled");}),   //Shoots Preload
-			isAutoTaxiOn||isAutoCollectOn ? new DriveCommand(kTaxiDistanceInFeet, m_oi.getMaxDriveSpeed()) : new InstantCommand(() -> {System.out.println("Taxi is disabled");}),
+			isAutoShootOn ? new ShootCargoCommand() : new PrintCommand("Auto shoot preload disabled"),   //Shoots Preload
+			isAutoTaxiOn||isAutoCollectOn ? new DriveCommand(kTaxiDistanceInFeet, m_oi.getMaxDriveSpeed()) : new PrintCommand ("Taxi is disabled"),
 			new InstantCommand(() -> {AutoCommand.executingCommand = false;}),  //Completed executing a sequential command
 			new InstantCommand(() -> {AutoCommand.stage = "Taxi";})  //Switches to Taxi stage
 		);
