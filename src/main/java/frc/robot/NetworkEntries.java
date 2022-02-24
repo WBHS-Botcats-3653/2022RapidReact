@@ -62,6 +62,14 @@ public class NetworkEntries {
 	public static NetworkTableEntry m_nteRLCargo; //boolean
 	public static NetworkTableEntry m_nteRRCargo; //boolean
 
+	public static HashMap<String, Boolean> getTarmacs(){
+
+		return new HashMap<>() {{
+			put("L", m_nteLTarmac.getBoolean(false));
+			put("R", m_nteRTarmac.getBoolean(false));
+
+		}};
+	}
 
 	public static HashMap<String, Boolean> getCargos(){
 
