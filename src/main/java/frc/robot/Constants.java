@@ -13,13 +13,6 @@ import java.util.HashMap;
 public final class Constants {
 	//Auto Constants
 	public static final class AutoConstants {
-		/*Which Tarmac the robot is starting in (defaults to left tarmac)
-		*"L"=Left, "R"=Right
-		*/
-		public static final String kStartingPosition = "L";  //MOVE OUT OF CONSTANTS SHOULD NOT BE FINAL
-
-		//Which cargo the robot should target during autonomous (defaults to cargo on left side of field)
-		public static final String[] kCargoToTarget = new String[] {"LR", "LL"};  //MOVE OUT OF CONSTANTS SHOULD NOT BE FINAL
 
 		//The distance to travel when taxiing
 		public static final double kTaxiDistanceInFeet = -7.1;
@@ -41,38 +34,6 @@ public final class Constants {
 			put("RRL", new double[] {-77.43, -30.58});
 			put("RRR", new double[] {-100.78, -86.53});
 		}};
-
-		/*//Turn angles
-		public static final HashMap<String, Double> kTurnAngles = new HashMap<>() {{
-			put("LLL", 100.78);
-			put("LLR", 77.43);
-			put("LML", -100.78);
-			put("LMR", -114.66);
-			put("LRL", 0.0);  //DO NOT PUT VALUE
-			put("LRR", 0.0);  //DO NOT PUT VALUE
-			put("RLL", 0.0);  //DO NOT PUT VALUE
-			put("RLR", 0.0);  //DO NOT PUT VALUE
-			put("RML", 114.66);
-			put("RMR", 100.78);
-			put("RRL", -77.43);
-			put("RRR", -100.78);
-		}};
-
-		//Drive distances
-		public static final HashMap<String, Double> kDriveDistances = new HashMap<>() {{
-			put("LLL", -86.53);
-			put("LLR", -30.58);
-			put("LML", -86.53);
-			put("LMR", -139.98);
-			put("LRL", 0.0);  //DO NOT PUT VALUE
-			put("LRR", 0.0);  //DO NOT PUT VALUE
-			put("RLL", 0.0);  //DO NOT PUT VALUE
-			put("RLR", 0.0);  //DO NOT PUT VALUE
-			put("RML", -139.98);
-			put("RMR", -86.53);
-			put("RRL", -30.58);
-			put("RRR", -86.53);
-		}};*/
 	}
 
 	//Drive Constants

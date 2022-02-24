@@ -52,8 +52,8 @@ public class NetworkEntries {
 
 	//Ball Pos
 	//public static NetworkTableEntry m_nteMaxDriveSpeed; //double
-	public static NetworkTableEntry m_nteRTarmac; //boolean
-	public static NetworkTableEntry m_nteLTarmac; //boolean
+	public static NetworkTableEntry m_nteTarmac; //boolean
+	//public static NetworkTableEntry m_nteLTarmac; //boolean
 
 	public static NetworkTableEntry m_nteLLCargo; //boolean
 	public static NetworkTableEntry m_nteLRCargo; //boolean
@@ -62,13 +62,8 @@ public class NetworkEntries {
 	public static NetworkTableEntry m_nteRLCargo; //boolean
 	public static NetworkTableEntry m_nteRRCargo; //boolean
 
-	public static HashMap<String, Boolean> getTarmacs(){
-
-		return new HashMap<>() {{
-			put("L", m_nteLTarmac.getBoolean(false));
-			put("R", m_nteRTarmac.getBoolean(false));
-
-		}};
+	public static char getTarmac(){
+		return m_nteTarmac.getBoolean(false) ? 'R' : 'L';
 	}
 
 	public static HashMap<String, Boolean> getCargos(){

@@ -99,8 +99,8 @@ public class Dashboard {
 		
 
 		//AutoConfig Tab
-		NetworkEntries.m_nteRTarmac = tabAutoConfig.add("Right Tarmac", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(0, 0).getEntry(); //boolean
-		NetworkEntries.m_nteLTarmac = tabAutoConfig.add("Left Tarmac", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(0, 0).getEntry(); //boolean
+		NetworkEntries.m_nteTarmac = tabAutoConfig.add("Right Tarmac", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(0, 0).getEntry(); //boolean
+		//NetworkEntries.m_nteLTarmac = tabAutoConfig.add("Left Tarmac", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(0, 0).getEntry(); //boolean
 		ShuffleboardLayout Cargos = Shuffleboard.getTab("AutoConfig")
   			.getLayout("Cargo options", BuiltInLayouts.kList)
   			.withSize(2, 2)

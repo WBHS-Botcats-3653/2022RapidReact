@@ -128,17 +128,8 @@ public class Robot extends TimedRobot {
 		//Gets the autonomous command from robotContainer
 		m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
-		/*
-		 *String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-		 *switch(autoSelected) {
-		 *	case "My Auto": autonomousCommand=new MyAutoCommand();
-		 *		break;
-		 *	case "Default Auto":
-		 *	default:
-		 *		autonomousCommand=new ExampleCommand();
-		 *		break;
-		 *}
-		 */
+		m_autonomousCommand.setTarmac(NetworkEntries.getTarmac());
+		m_autonomousCommand.setCargoToTarget(NetworkEntries.getCargos());
 
 		// Schedules the autonomous command
 		if (m_autonomousCommand != null) {

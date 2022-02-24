@@ -2,6 +2,8 @@ package frc.robot.commands;
 
 import static frc.robot.Constants.AutoConstants.*;
 
+import java.util.*;
+
 import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.commands.autoCommands.*;
 import frc.robot.inputs.OI;
@@ -14,6 +16,15 @@ public class AutoCommand extends CommandBase {
 	private Direction m_direction;
 	private OI m_oi;
 	//private SI m_si;
+
+
+	/*Which Tarmac the robot is starting in (defaults to left tarmac)
+	*"L"=Left, "R"=Right
+	*/
+	private char startingTarmac;
+
+	//Which cargo the robot should target during autonomous
+	private ArrayList<String> cargoToTarget = new ArrayList<>();
 
 	public static boolean executingCommand;
 	public static String stage;
@@ -63,6 +74,21 @@ public class AutoCommand extends CommandBase {
 		return cmd;
 	}
 
+	//Sets the tarmax the robot is starting in
+	public void setTarmac(char tarmac) {
+		startingTarmac = tarmac;
+	}
+
+	//Sets the cargo the robot should target during auto
+	public void setCargoToTarget(HashMap<String, Boolean> cargos) {
+		for (Map.Entry<String, Boolean> cargo : cargos.entrySet()) {
+			if (cargo.getValue()) {
+				cargoToTarget.add(cargo.getKey());
+			}
+			if (cargoToTarget.size() == 2) return;
+		}
+	}
+
 	@Override
 	public void initialize() {
 		//Target first selected cargo
@@ -73,7 +99,7 @@ public class AutoCommand extends CommandBase {
 	public void execute() {
 		//If currently executing an auto command break out of the method
 		if (executingCommand) return;
-		if (!isAutoCollectOn || cargoTargetIndex == kCargoToTarget.length) {  //If collect cargo is disabled in the Dashboard or there is no more cargo left to collect
+		if (!isAutoCollectOn || cargoTargetIndex == cargoToTarget.size()) {  //If collect cargo is disabled in the Dashboard or there is no more cargo left to collect
 			//Ends auto command
 			hasFinished = true;
 			//Breaks out of the switch
@@ -82,7 +108,7 @@ public class AutoCommand extends CommandBase {
 		/*The distance and angle the robot needs to move to get to the desired cargo
 		 *double[angle, distance]
 		 */
-		double[] distanceAndAngle = kDistancesAndAngles.get(kStartingPosition + kCargoToTarget[cargoTargetIndex]);
+		double[] distanceAndAngle = kDistancesAndAngles.get(startingTarmac + cargoToTarget.get(cargoTargetIndex));
 		//If there is no distance or angle to move skip this cargo
 		if (distanceAndAngle[0] != 0 && distanceAndAngle[1] != 0) {
 			commandToScheduleNext = "Sequential";
