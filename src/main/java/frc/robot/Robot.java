@@ -5,8 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.commands.*;
 import frc.robot.inputs.OI;
 import frc.robot.inputs.SI;
@@ -162,13 +161,16 @@ public class Robot extends TimedRobot {
 	/** This function is called periodically during autonomous. */
 	@Override
 	public void autonomousPeriodic() {
-		//This is for testing the encoders if they are working
-
-		//Schedules SquentialCommandGroups fed from the AutoCommand
-		SequentialCommandGroup command = m_autonomousCommand.getCommand();
-		if (command != null) {
-			//command.schedule();
-			CommandScheduler.getInstance().schedule(command);
+		if (AutoCommand.executingCommand) return;
+		//Schedules command groups fed from the AutoCommand
+		SequentialCommandGroup sequentialCommand = m_autonomousCommand.getSequentialCommand();
+		ParallelCommandGroup parallelCommand = m_autonomousCommand.getParallelCommand();
+		if (AutoCommand.commandToScheduleNext.equals("Sequential") && sequentialCommand != null) {
+			AutoCommand.executingCommand = true;
+			CommandScheduler.getInstance().schedule(sequentialCommand);
+		} else if (AutoCommand.commandToScheduleNext.equals("Parallel") && parallelCommand != null) {
+			AutoCommand.executingCommand = true;
+			CommandScheduler.getInstance().schedule(parallelCommand);
 		}
 	} 
 

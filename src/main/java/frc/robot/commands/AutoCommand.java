@@ -5,82 +5,68 @@ import static frc.robot.Constants.AutoConstants.*;
 import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.commands.autoCommands.*;
 import frc.robot.inputs.OI;
+import frc.robot.subsystems.Direction;
 
 public class AutoCommand extends CommandBase {
 	//private DriveTrain driveTrain;
 	//private Shooter m_shooter;
 	//private Indexer m_indexer;
-	//private Direction m_direction;
+	private Direction m_direction;
 	private OI m_oi;
 	//private SI m_si;
 
-	private boolean hasFinished;
-	private static boolean executingCommand;
-	private int cargoTargetIndex;
+	public static boolean executingCommand;
 	public static String stage;
+
+	private boolean hasFinished;
+	private int cargoTargetIndex;
 
 	public static boolean isAutoShootOn;
 	public static boolean isAutoTaxiOn;
 	public static boolean isAutoCollectOn;
 
-	private SequentialCommandGroup command;
+	public static String commandToScheduleNext;
+	private SequentialCommandGroup sequentialCommandToSchedule;
+	private ParallelCommandGroup parallelCommandToSchedule;
 
 	//Constructor
 	public AutoCommand() {
 		//driveTrain = DriveTrain.getInstance();
 		//m_shooter = Shooter.getInstance();
 		//m_indexer = Indexer.getInstance();
-		//m_direction = Direction.getInstance();
+		m_direction = Direction.getInstance();
 		m_oi = OI.getInstance();
 		//m_si = SI.getInstance();
 		//kP = 1;
 		hasFinished = false;
 		executingCommand = false;
-		command = new SequentialCommandGroup(
-			new InstantCommand(() -> {AutoCommand.executingCommand = true;}),  //Executing a sequential command
+		commandToScheduleNext = "Sequential";
+		sequentialCommandToSchedule = new SequentialCommandGroup(
 			isAutoShootOn ? new ShootCargoCommand() : new PrintCommand("Auto shoot preload disabled"),   //Shoots Preload
-			isAutoTaxiOn||isAutoCollectOn ? new DriveCommand(kTaxiDistanceInFeet, m_oi.getMaxDriveSpeed()) : new PrintCommand ("Taxi is disabled"),
-			new InstantCommand(() -> {AutoCommand.executingCommand = false;}),  //Completed executing a sequential command
-			new InstantCommand(() -> {AutoCommand.stage = "Taxi";})  //Switches to Taxi stage
+			isAutoTaxiOn||isAutoCollectOn ? new DriveCommand(kTaxiDistanceInFeet, m_oi.getMaxDriveSpeed(), false) : new PrintCommand ("Taxi is disabled"),
+			new InstantCommand(() -> {AutoCommand.stage = "Taxi";}),  //Switches to Taxi stage
+			new InstantCommand(() -> {AutoCommand.executingCommand = false;})  //Completed executing a sequential command
 		);
 	}
 
 	//Returns the next SequentialCommandGroup to be scheduled
-	public SequentialCommandGroup getCommand() {
-		SequentialCommandGroup cmd = command;
-		command = null;
+	public SequentialCommandGroup getSequentialCommand() {
+		SequentialCommandGroup cmd = sequentialCommandToSchedule;
+		sequentialCommandToSchedule = null;
+		return cmd;
+	}
+
+	//Returns the next ParallelCommandGroup to be scheduled
+	public ParallelCommandGroup getParallelCommand() {
+		ParallelCommandGroup cmd = parallelCommandToSchedule;
+		parallelCommandToSchedule = null;
 		return cmd;
 	}
 
 	@Override
 	public void initialize() {
-		//stage = "Shoot Preload";
+		//Target first selected cargo
 		cargoTargetIndex = 0;
-		/*if (isAutoShootOn) {  //If shooting preload is enabled in the Dashboard
-			if (isAutoTaxiOn || isAutoCollectOn) {  //If taxiing or collecting cargo is enabled in the Dashboard
-				command = new SequentialCommandGroup(
-					new InstantCommand(() -> {AutoCommand.executingCommand = true;}),
-					new ShootCargoCommand(),  //Shoots Preload
-					new DriveCommand(kTaxiDistanceInFeet, m_oi.getMaxDriveSpeed()),  //Taxi
-					new InstantCommand(() -> {AutoCommand.executingCommand = false;})
-				);
-			} else {  //If taxiing and collecting cargo are disabled in the Dashboard
-				command = new SequentialCommandGroup(
-					new InstantCommand(() -> {AutoCommand.executingCommand = true;}),
-					new ShootCargoCommand(),  //Shoots Preload
-					new InstantCommand(() -> {AutoCommand.executingCommand = false;})
-				);
-			}
-		} else if (isAutoTaxiOn || isAutoCollectOn) {  //If taxiing or collecting cargo are enabled and shooting preload is disabled in the Dashboard
-			command = new SequentialCommandGroup(
-				new InstantCommand(() -> {AutoCommand.executingCommand = true;}),
-				new DriveCommand(kTaxiDistanceInFeet, m_oi.getMaxDriveSpeed()),  //Taxi
-				new InstantCommand(() -> {AutoCommand.executingCommand = false;})
-			);
-		} else {  //If not executing any auto functions
-			//End auto command
-			hasFinished = true;
-		}*/
 	}
 
 	@Override
@@ -99,18 +85,24 @@ public class AutoCommand extends CommandBase {
 		double[] distanceAndAngle = kDistancesAndAngles.get(kStartingPosition + kCargoToTarget[cargoTargetIndex]);
 		//If there is no distance or angle to move skip this cargo
 		if (distanceAndAngle[0] != 0 && distanceAndAngle[1] != 0) {
-			//Creates new sequential command to 
-			command = new SequentialCommandGroup(
-				//Start command
-				new InstantCommand(() -> {AutoCommand.executingCommand = true;}),
+			commandToScheduleNext = "Sequential";
+			//Creates a new sequential command to be scheduled
+			sequentialCommandToSchedule = new SequentialCommandGroup(
 				//Turn specified distance
 				new TurnCommand(distanceAndAngle[0]),
-				//Drive specified distance
-				new DriveCommand(distanceAndAngle[1], m_oi.getMaxDriveSpeed()),
-				//Intake the cargo
-				new CollectCargoCommand(),
+				//Execute parallel command next
+				new InstantCommand(() -> {AutoCommand.commandToScheduleNext = "Parallel";}),
 				//End command
 				new InstantCommand(() -> {AutoCommand.executingCommand = false;})
+			);
+			//Creates a new parallel command to be scheduled
+			parallelCommandToSchedule = new ParallelCommandGroup(
+				//Drive specified distance
+				new DriveCommand(distanceAndAngle[1], m_oi.getMaxDriveSpeed(), true),
+				//Intake the cargo
+				new CollectCargoCommand(),
+				//Execute parallel command next
+				new InstantCommand(() -> {AutoCommand.commandToScheduleNext = "Sequential";})
 			);
 		}
 		//Target next cargo
@@ -207,6 +199,9 @@ public class AutoCommand extends CommandBase {
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
+		m_direction.resetEncoders();
+
+
 		/*//Stops the shooter
 		m_shooter.setSpinSpeed(0);
 		//Stops the Indexer
@@ -218,7 +213,7 @@ public class AutoCommand extends CommandBase {
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() {
-		//If has finished
+		//If auto has finished
 		return hasFinished;
 	}
 	//esteban is driving us nuts :):)
