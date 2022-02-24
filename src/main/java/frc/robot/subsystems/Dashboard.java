@@ -15,6 +15,7 @@ public class Dashboard {
 	private static Dashboard m_singleton = null;
 	private static OI ctrl = OI.getInstance();
 	private static SI m_si =  SI.getInstance();
+	private static Direction m_direction = Direction.getInstance();
 	//private UsbCamera cam0 = null;
 
 	public static ShuffleboardTab tabConfig;
@@ -92,10 +93,16 @@ public class Dashboard {
 		//DriveTrain drive = DriveTrain.getInstance();
 		OI oi = OI.getInstance();
 		//m_nteArmAngle.setDouble(arm.getAngle());
-		NetworkEntries.m_nteDriveSpeed.setDouble(Math.abs(oi.getMaxDriveSpeed()));
+		//updates the speed in the dashboard
+		ctrl.setMaxDriveSpeed(NetworkEntries.m_nteDriveSpeed.getDouble(1.0));
+		//NetworkEntries.m_nteDriveSpeed.setDouble(Math.abs(oi.getMaxDriveSpeed()));
+
+		NetworkEntries.m_nteDriveEncLeft.setDouble(m_direction.getLeftDistance());
+		NetworkEntries.m_nteDriveEncRight.setDouble(m_direction.getRightDistance());
+
 		NetworkEntries.m_nteIntakeUpLimit.setBoolean(m_si.getPivotUpLimitTriggered());
 		NetworkEntries.m_nteIntakeDownLimit.setBoolean(m_si.getPivotDownLimitTriggered());
-		ctrl.setMaxDriveSpeed(NetworkEntries.m_nteDriveSpeed.getDouble(1.0));
+		
 
 		//FIX
 		//m_nteArmEncoderRaw.setNumber(arm.getRawEncoder());
