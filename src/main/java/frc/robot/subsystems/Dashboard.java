@@ -6,10 +6,8 @@ package frc.robot.subsystems;
 
 import java.util.Map;
 
-import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.shuffleboard.*;
 import frc.robot.NetworkEntries;
-import frc.robot.commands.AutoCommand;
 import frc.robot.inputs.OI;
 import frc.robot.inputs.SI;
 
@@ -17,7 +15,6 @@ public class Dashboard {
 	private static Dashboard m_singleton = null;
 	private static OI ctrl = OI.getInstance();
 	private static SI m_si =  SI.getInstance();
-	private static NetworkEntries network = NetworkEntries.getInstance();
 	//private UsbCamera cam0 = null;
 
 	public static ShuffleboardTab tabConfig;
@@ -32,9 +29,9 @@ public class Dashboard {
 		tabTest = Shuffleboard.getTab("Test");
 
 		// Config Tab
-		network.isPivotAssistEnabled = tabConfig.addPersistent("is Pivot Assist Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
+		NetworkEntries.isPivotAssistEnabled = tabConfig.addPersistent("is Pivot Assist Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
 		.withSize(1, 1).withPosition(0, 1).getEntry();
-		network.isSmartIntakeEnabled = tabConfig.addPersistent("is Smart Intake Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
+		NetworkEntries.isSmartIntakeEnabled = tabConfig.addPersistent("is Smart Intake Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
 		.withSize(1, 1).withPosition(0, 1).getEntry();
 		// Drive Tab
 		/*
@@ -47,33 +44,33 @@ public class Dashboard {
 		m_nteArmAngle = tabDrive.add("Arm", 0.0).withWidget(BuiltInWidgets.kDial)
 				.withProperties(Map.of("min", 0, "max", 180)).withSize(1, 1).withPosition(5, 0).getEntry();
 		*/
-		network.m_nteDriveSpeed = tabDrive.addPersistent("Speed", ctrl.getMaxDriveSpeed()).withWidget(BuiltInWidgets.kNumberSlider)
+		NetworkEntries.m_nteDriveSpeed = tabDrive.addPersistent("Speed", ctrl.getMaxDriveSpeed()).withWidget(BuiltInWidgets.kNumberSlider)
 				.withProperties(Map.of("min", 0, "max", 1.0)).withSize(1, 1).withPosition(5, 0).getEntry();
 
 		//Auto Shoot
-		network.m_isAutoShootOn = tabDrive.addPersistent("Auto Shoot", true).withWidget(BuiltInWidgets.kToggleButton)
+		NetworkEntries.m_isAutoShootOn = tabDrive.addPersistent("Auto Shoot", true).withWidget(BuiltInWidgets.kToggleButton)
 		.withSize(1, 1).withPosition(0, 1).getEntry();
 		//this one is the boolean box
 		//--m_isAutoShootOnBox = tabDrive.addPersistent("is Auto Shoot", AutoCommand.isAutoShootOn).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(0, 0).getEntry();
 
 		//Auto Taxi
-		network.m_isAutoTaxiOn = tabDrive.addPersistent("Auto Taxi", true).withWidget(BuiltInWidgets.kToggleButton)
+		NetworkEntries.m_isAutoTaxiOn = tabDrive.addPersistent("Auto Taxi", true).withWidget(BuiltInWidgets.kToggleButton)
 		.withSize(1, 1).withPosition(1, 1).getEntry();
 		//this one is the boolean box
 		//--m_isAutoTaxiOnBox = tabDrive.addPersistent("is Auto Taxi", AutoCommand.isAutoTaxiOn).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(1, 0).getEntry();
 
 		//Auto collect
-		network.m_isAutoCollectOn = tabDrive.addPersistent("Auto Collect", true).withWidget(BuiltInWidgets.kToggleButton)
+		NetworkEntries.m_isAutoCollectOn = tabDrive.addPersistent("Auto Collect", true).withWidget(BuiltInWidgets.kToggleButton)
 		.withSize(1, 1).withPosition(2, 1).getEntry();
 		//this one is the boolean box
 		//--m_isAutoCollectOnBox = tabDrive.addPersistent("is Auto Collect", AutoCommand.isAutoCollectOn).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(2, 0).getEntry();
 
 		// Test Tab
-		network.m_nteIntakeUpLimit = tabTest.add("Intake up limit", false).withSize(1, 1).withPosition(0, 0).getEntry();
-		network.m_nteIntakeDownLimit = tabTest.add("Intake Down limit", false).withSize(1, 1).withPosition(0, 0).getEntry();
+		NetworkEntries.m_nteIntakeUpLimit = tabTest.add("Intake up limit", false).withSize(1, 1).withPosition(0, 0).getEntry();
+		NetworkEntries.m_nteIntakeDownLimit = tabTest.add("Intake Down limit", false).withSize(1, 1).withPosition(0, 0).getEntry();
 		//m_nteArmUpLimit = tabTest.add("Arm Up", false).withSize(1, 1).withPosition(1, 0).getEntry();
 		//this is for testing the encoders if they are working
-		//--network.testingEncoderLeft = tabTest.add("Left encoder testing it", 0).withSize(1, 1).withPosition(1, 0).getEntry();
+		//--NetworkEntries.testingEncoderLeft = tabTest.add("Left encoder testing it", 0).withSize(1, 1).withPosition(1, 0).getEntry();
 		//m_nteArmEncoderRaw = tabTest.add("Arm Encoder", 1024).withSize(1, 1).withPosition(2, 0).getEntry();
 		//m_nteDriveEncLeft = tabTest.add("Drive Left", 0).withSize(1, 1).withPosition(0, 1).getEntry();
 		//m_nteDriveEncRight = tabTest.add("Drive Right", 0).withSize(1, 1).withPosition(1, 1).getEntry();
@@ -83,7 +80,7 @@ public class Dashboard {
 	public void refresh() {
 		
 
-		ctrl.setMaxDriveSpeed(network.m_nteDriveSpeed.getDouble(1.0));
+		ctrl.setMaxDriveSpeed(NetworkEntries.m_nteDriveSpeed.getDouble(1.0));
 
 
 		//Intake.setArmEncoderFloor((int) m_nteArmDownEnc.getDouble(1024));
@@ -95,10 +92,10 @@ public class Dashboard {
 		//DriveTrain drive = DriveTrain.getInstance();
 		OI oi = OI.getInstance();
 		//m_nteArmAngle.setDouble(arm.getAngle());
-		network.m_nteDriveSpeed.setDouble(Math.abs(oi.getMaxDriveSpeed()));
-		network.m_nteIntakeUpLimit.setBoolean(m_si.getPivotUpLimitTriggered());
-		network.m_nteIntakeDownLimit.setBoolean(m_si.getPivotDownLimitTriggered());
-		ctrl.setMaxDriveSpeed(network.m_nteDriveSpeed.getDouble(1.0));
+		NetworkEntries.m_nteDriveSpeed.setDouble(Math.abs(oi.getMaxDriveSpeed()));
+		NetworkEntries.m_nteIntakeUpLimit.setBoolean(m_si.getPivotUpLimitTriggered());
+		NetworkEntries.m_nteIntakeDownLimit.setBoolean(m_si.getPivotDownLimitTriggered());
+		ctrl.setMaxDriveSpeed(NetworkEntries.m_nteDriveSpeed.getDouble(1.0));
 
 		//FIX
 		//m_nteArmEncoderRaw.setNumber(arm.getRawEncoder());

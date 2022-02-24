@@ -11,9 +11,7 @@ import edu.wpi.first.networktables.NetworkTableEntry;
  * 
 */
 public class NetworkEntries {
-
-    private static NetworkEntries m_singleton = null;
-    	// Config Tab
+    // Config Tab
 
 	// Test Tab
 	public static NetworkTableEntry m_nteDriveEncLeft; //double
@@ -29,24 +27,12 @@ public class NetworkEntries {
 	public static NetworkTableEntry m_isAutoShootOn; //boolean
 	public static NetworkTableEntry m_isAutoTaxiOn; //boolean
 	public static NetworkTableEntry m_isAutoCollectOn; //boolean
-/*
-	public static NetworkTableEntry m_isAutoShootOnBox = null;
+
+	/*public static NetworkTableEntry m_isAutoShootOnBox = null;
 	public static NetworkTableEntry m_isAutoTaxiOnBox = null;
-	public static NetworkTableEntry m_isAutoCollectOnBox = null;
-*/
+	public static NetworkTableEntry m_isAutoCollectOnBox = null;*/
 
 	//TODO: Implement
-    //TODO: I know you don't like 'em, but I DO...
 	public static NetworkTableEntry isPivotAssistEnabled;
 	public static NetworkTableEntry isSmartIntakeEnabled;
-
-    private NetworkEntries(){}
-
-    public static NetworkEntries getInstance(){
-        if(m_singleton == null) m_singleton = new NetworkEntries();
-        return m_singleton;
-    }
-
-
-
 }

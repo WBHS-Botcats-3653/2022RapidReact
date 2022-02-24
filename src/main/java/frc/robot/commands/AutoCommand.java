@@ -93,18 +93,20 @@ public class AutoCommand extends CommandBase {
 			//Breaks out of the switch
 			return;
 		}
-		//Refence to get angles and distance to specific cargo positions from auto constants
-		String reference = kStartingPosition + kCargoToTarget[cargoTargetIndex];
+		/*The distance and angle the robot needs to move to get to the desired cargo
+		 *double[angle, distance]
+		 */
+		double[] distanceAndAngle = kDistancesAndAngles.get(kStartingPosition + kCargoToTarget[cargoTargetIndex]);
 		//If there is no distance or angle to move skip this cargo
-		if (kTurnAngles.get(reference) != 0 && kDriveDistances.get(reference) != 0) {
+		if (distanceAndAngle[0] != 0 && distanceAndAngle[1] != 0) {
 			//Creates new sequential command to 
 			command = new SequentialCommandGroup(
 				//Start command
 				new InstantCommand(() -> {AutoCommand.executingCommand = true;}),
 				//Turn specified distance
-				new TurnCommand(kTurnAngles.get(reference)),
+				new TurnCommand(distanceAndAngle[0]),
 				//Drive specified distance
-				new DriveCommand(kDriveDistances.get(reference), m_oi.getMaxDriveSpeed()),
+				new DriveCommand(distanceAndAngle[1], m_oi.getMaxDriveSpeed()),
 				//Intake the cargo
 				new CollectCargoCommand(),
 				//End command

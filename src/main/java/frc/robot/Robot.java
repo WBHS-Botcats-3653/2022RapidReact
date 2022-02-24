@@ -30,8 +30,6 @@ public class Robot extends TimedRobot {
 	private final Direction m_directionSubsystem = Direction.getInstance();
 	private final Indexer m_indexerSubsystem = Indexer.getInstance();
 
-	private static NetworkEntries network = NetworkEntries.getInstance();
-
 	//Inputs
 	private final OI m_oi = OI.getInstance();
 	private final SI m_si = SI.getInstance();
@@ -117,9 +115,9 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void disabledPeriodic() {
-		AutoCommand.isAutoShootOn = network.m_isAutoShootOn.getBoolean(true);
-		AutoCommand.isAutoTaxiOn = network.m_isAutoTaxiOn.getBoolean(true);
-		AutoCommand.isAutoCollectOn = network.m_isAutoCollectOn.getBoolean(true);
+		AutoCommand.isAutoShootOn = NetworkEntries.m_isAutoShootOn.getBoolean(true);
+		AutoCommand.isAutoTaxiOn = NetworkEntries.m_isAutoTaxiOn.getBoolean(true);
+		AutoCommand.isAutoCollectOn = NetworkEntries.m_isAutoCollectOn.getBoolean(true);
 	}
 
 	/** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */

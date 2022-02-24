@@ -24,37 +24,55 @@ public final class Constants {
 		//The distance to travel when taxiing
 		public static final double kTaxiDistanceInFeet = -7.1;
 
-		//Turn angles
+		/*Distances and angles to cargo after taxi during auto
+		 *<String cargoID, double[angle, distance]>
+		 */
+		public static final HashMap<String, double[]> kDistancesAndAngles = new HashMap<>() {{
+			put("LLL", new double[] {100.78, -86.53});
+			put("LLR", new double[] {77.43, -30.58});
+			put("LML", new double[] {-100.78, -86.53});
+			put("LMR", new double[] {-114.66, -139.98});
+			put("LRL", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
+			put("LRR", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
+			put("RLL", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
+			put("RLR", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
+			put("RML", new double[] {114.66, -139.98});
+			put("RMR", new double[] {100.78, -86.53});
+			put("RRL", new double[] {-77.43, -30.58});
+			put("RRR", new double[] {-100.78, -86.53});
+		}};
+
+		/*//Turn angles
 		public static final HashMap<String, Double> kTurnAngles = new HashMap<>() {{
-			put("LLL", 0.0);
+			put("LLL", 100.78);
 			put("LLR", 77.43);
 			put("LML", -100.78);
-			put("LMR", 0.0);
+			put("LMR", -114.66);
 			put("LRL", 0.0);  //DO NOT PUT VALUE
 			put("LRR", 0.0);  //DO NOT PUT VALUE
 			put("RLL", 0.0);  //DO NOT PUT VALUE
 			put("RLR", 0.0);  //DO NOT PUT VALUE
-			put("RML", 0.0);
+			put("RML", 114.66);
 			put("RMR", 100.78);
 			put("RRL", -77.43);
-			put("RRR", 0.0);
+			put("RRR", -100.78);
 		}};
 
 		//Drive distances
 		public static final HashMap<String, Double> kDriveDistances = new HashMap<>() {{
-			put("LLL", 0.0);
-			put("LLR", 0.0);
-			put("LML", 0.0);
-			put("LMR", 0.0);
+			put("LLL", -86.53);
+			put("LLR", -30.58);
+			put("LML", -86.53);
+			put("LMR", -139.98);
 			put("LRL", 0.0);  //DO NOT PUT VALUE
 			put("LRR", 0.0);  //DO NOT PUT VALUE
 			put("RLL", 0.0);  //DO NOT PUT VALUE
 			put("RLR", 0.0);  //DO NOT PUT VALUE
-			put("RML", 0.0);
-			put("RMR", 0.0);
-			put("RRL", 0.0);
-			put("RRR", 0.0);
-		}};
+			put("RML", -139.98);
+			put("RMR", -86.53);
+			put("RRL", -30.58);
+			put("RRR", -86.53);
+		}};*/
 	}
 
 	//Drive Constants
