@@ -16,16 +16,18 @@ public class DriveCommand extends CommandBase {
 
 	private double distance;
 	private double speed;
+	private boolean isCollectingCargo;
 
 	private double currentDistance;
 	private int direction;
 
-	public DriveCommand(double distance, double speed) {
+	public DriveCommand(double distance, double speed, boolean isCollectingCargo) {
 		m_driveTrain = DriveTrain.getInstance();
 		m_direction = Direction.getInstance();
 		this.distance = distance;
 		direction = distance < 0 ? -1 : 1;
 		this.speed = speed * direction;
+		this.isCollectingCargo = isCollectingCargo;
 		// Use addRequirements() here to declare subsystem dependencies.
 		addRequirements(m_driveTrain, m_direction);
 	}
@@ -53,6 +55,11 @@ public class DriveCommand extends CommandBase {
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
+		//If the DriveCommand is running sequentially with the CollectCargoCommand
+		if (isCollectingCargo) {
+			//End the cargo collection command
+			CollectCargoCommand.endCommand = true;
+		}
 		//Stops the robot
 		m_driveTrain.tankDrived(0, 0);
 	}

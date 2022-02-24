@@ -5,6 +5,7 @@
 package frc.robot.commands.autoCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.commands.AutoCommand;
 import frc.robot.inputs.OI;
 import frc.robot.inputs.SI;
 import frc.robot.subsystems.Indexer;
@@ -16,7 +17,7 @@ public class CollectCargoCommand extends CommandBase {
 	private OI m_oi;
 	private SI m_si;
 
-	private boolean goingUp;
+	public static boolean endCommand;
 
 	public CollectCargoCommand() {
 		m_intake = Intake.getInstance();
@@ -30,8 +31,8 @@ public class CollectCargoCommand extends CommandBase {
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
-		//Intake is not pivoting up
-		goingUp = false;
+		//Do not end the command
+		endCommand = false;
 		//Sets the pivot to max speed down
 		m_intake.setPivotSpeed(m_oi.getMaxSmartIntakePivotDownSpeed());
 	}
@@ -39,17 +40,12 @@ public class CollectCargoCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		//If there are two pieces of cargo stored in the robot
-		if (m_si.getUpperStorageTriggered() && m_si.getLowerStorageTriggered()) {
-			//Intake pivot is moving up
-			goingUp = true;
-		}
-		if (m_si.getPivotDownLimitTriggered() && !goingUp) {  //If the intake has finished it's downward pivot
+		if (m_si.getPivotDownLimitTriggered() && !endCommand) {  //If the intake has finished it's downward pivot
 			//Stops the intake pivot
 			m_intake.setPivotSpeed(0);
 			//Sets the intake roller speed to max
 			m_intake.setRollerSpeed(m_oi.getMaxIntakeRollerSpeed());
-		} else if (goingUp) {  //If the intake is going up
+		} else if (endCommand) {  //If the command has been told to end
 			//Sets the intake pivot speed to max up
 			m_intake.setPivotSpeed(-m_oi.getMaxSmartIntakePivotUpSpeed());
 			//Stops the intake rollers
@@ -66,12 +62,14 @@ public class CollectCargoCommand extends CommandBase {
 		m_intake.setRollerSpeed(0);
 		//Stops the indexer
 		m_indexer.setIndexerSpeed(0);
+		//No longer executing a command
+		AutoCommand.executingCommand = false;
 	}
 
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() {
 		//If the intake has finished it's upward pivot
-		return m_si.getPivotUpLimitTriggered() && goingUp;
+		return m_si.getPivotUpLimitTriggered() && endCommand;
 	}
 }
