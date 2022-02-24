@@ -15,6 +15,7 @@ public class Dashboard {
 	private static Dashboard m_singleton = null;
 	private static OI ctrl = OI.getInstance();
 	private static SI m_si =  SI.getInstance();
+	private static Direction m_direction = Direction.getInstance();
 	//private UsbCamera cam0 = null;
 
 	public static ShuffleboardTab tabConfig;
@@ -72,8 +73,8 @@ public class Dashboard {
 		//this is for testing the encoders if they are working
 		//--NetworkEntries.testingEncoderLeft = tabTest.add("Left encoder testing it", 0).withSize(1, 1).withPosition(1, 0).getEntry();
 		//m_nteArmEncoderRaw = tabTest.add("Arm Encoder", 1024).withSize(1, 1).withPosition(2, 0).getEntry();
-		//m_nteDriveEncLeft = tabTest.add("Drive Left", 0).withSize(1, 1).withPosition(0, 1).getEntry();
-		//m_nteDriveEncRight = tabTest.add("Drive Right", 0).withSize(1, 1).withPosition(1, 1).getEntry();
+		NetworkEntries.m_nteDriveEncLeft = tabTest.add("Drive Left", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(0, 1).getEntry();
+		NetworkEntries.m_nteDriveEncRight = tabTest.add("Drive Right", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(1, 1).getEntry();
 	}
 
 	
@@ -92,10 +93,16 @@ public class Dashboard {
 		//DriveTrain drive = DriveTrain.getInstance();
 		OI oi = OI.getInstance();
 		//m_nteArmAngle.setDouble(arm.getAngle());
-		NetworkEntries.m_nteDriveSpeed.setDouble(Math.abs(oi.getMaxDriveSpeed()));
+		//updates the speed in the dashboard
+		ctrl.setMaxDriveSpeed(NetworkEntries.m_nteDriveSpeed.getDouble(1.0));
+		//NetworkEntries.m_nteDriveSpeed.setDouble(Math.abs(oi.getMaxDriveSpeed()));
+
+		NetworkEntries.m_nteDriveEncLeft.setDouble(m_direction.getLeftDistance());
+		NetworkEntries.m_nteDriveEncRight.setDouble(m_direction.getRightDistance());
+
 		NetworkEntries.m_nteIntakeUpLimit.setBoolean(m_si.getPivotUpLimitTriggered());
 		NetworkEntries.m_nteIntakeDownLimit.setBoolean(m_si.getPivotDownLimitTriggered());
-		ctrl.setMaxDriveSpeed(NetworkEntries.m_nteDriveSpeed.getDouble(1.0));
+		
 
 		//FIX
 		//m_nteArmEncoderRaw.setNumber(arm.getRawEncoder());
