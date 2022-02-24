@@ -45,8 +45,8 @@ public final class Constants {
 		public static final int kBackRightMotorID = 3;  //CAN
 		
 		//Encoders
-		public static final int kLeftMotorGroupEncoder1 = 5;  //DIO 1 pin
-		public static final int kLeftMotorGroupEncoder2 = 4; //DIO 3 pin
+		public static final int kLeftMotorGroupEncoder1 = 1;  //DIO 1 pin  HAS BEEN UPDATED TO NEW ID
+		public static final int kLeftMotorGroupEncoder2 = 0; //DIO 3 pin  HAS BEEN UPDATED TO NEW ID
 		public static final int kRightMotorGroupEncoder1 = 3;  //DIO 1 pin
 		public static final int kRightMotorGroupEncoder2 = 2;  //DIO 3 pin
 
