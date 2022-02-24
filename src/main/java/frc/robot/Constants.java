@@ -78,8 +78,8 @@ public final class Constants {
 		public static final int kUpperStoragePESensorID = 8;  //DIO
 		
 		//Pivot limit switch IDs
-		public static final int kBottomPivotLimitSwitchID = 0;  //DIO
-		public static final int kTopPivotLimitSwitchID = 1;  //DIO
+		//public static final int kBottomPivotLimitSwitchID = 0;  //DIO
+		//public static final int kTopPivotLimitSwitchID = 1;  //DIO
 	}
 
 	//Shooter Constants

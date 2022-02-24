@@ -31,8 +31,8 @@ public class SI {
 		upperStoragePE = new DigitalInput(kUpperStoragePESensorID);
 		shooterPE = new DigitalInput(kShooterPESensorID);
 		//Limit switches
-		topPivotLimitSwitch = new DigitalInput(kTopPivotLimitSwitchID);
-		bottomPivotLimitSwitch = new DigitalInput(kBottomPivotLimitSwitchID);
+		//topPivotLimitSwitch = new DigitalInput(kTopPivotLimitSwitchID);
+		//bottomPivotLimitSwitch = new DigitalInput(kBottomPivotLimitSwitchID);
 		climberDownButton = new DigitalInput(kBottomClimberLimitSwitchID);
 	}
 
