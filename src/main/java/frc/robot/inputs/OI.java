@@ -11,7 +11,8 @@ public class OI {
 	private double maxDriveSpeed = 0;
 	private double maxArmSpeed = 0;
 	private double maxIntakePivotSpeed = 0;
-	private double maxSmartIntakePivotSpeed = 0;
+	private double maxSmartIntakePivotDownSpeed = 0;
+	private double maxSmartIntakePivotUpSpeed = 0;
 	private double maxIntakeRollerSpeed = 0;
 	private double maxShootSpeed = 0;
 	private double maxIndexerSpeed = 0;
@@ -68,25 +69,25 @@ public class OI {
 	//Sets the max smart intake pivot speed
 	public void setMaxSmartIntakePivotDownSpeed(double speed) {
 		if (0.0 < speed && speed <= 1.0) {
-			maxSmartIntakePivotSpeed = speed;
+			maxSmartIntakePivotDownSpeed = speed;
 		}
 	}
 
 	//Returns the max smart intake pivot speed
 	public double getMaxSmartIntakePivotDownSpeed(){
-		return maxSmartIntakePivotSpeed;
+		return maxSmartIntakePivotDownSpeed;
 	}
 
 	//Sets the max smart intake pivot speed
 	public void setMaxSmartIntakePivotUpSpeed(double speed) {
 		if (0.0 < speed && speed <= 1.0) {
-			maxSmartIntakePivotSpeed = speed;
+			maxSmartIntakePivotUpSpeed = speed;
 		}
 	}
 
 	//Returns the max smart intake pivot speed
 	public double getMaxSmartIntakePivotUpSpeed(){
-		return maxSmartIntakePivotSpeed;
+		return maxSmartIntakePivotUpSpeed;
 	}
 
 	//Sets the max intake roller speed
