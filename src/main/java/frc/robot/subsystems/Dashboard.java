@@ -91,8 +91,8 @@ public class Dashboard {
 		NetworkEntries.m_nteMaxDriveSpeed = Speeds.addPersistent("Max Drive speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(1, 1).withPosition(1, 1).getEntry();//double
 		NetworkEntries.m_nteMaxArmSpeed = Speeds.addPersistent("Max Arm speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(1, 1).withPosition(1, 1).getEntry();//double
 		NetworkEntries.m_nteMaxIntakePivotSpeed = Speeds.addPersistent("Max Intake Pivot speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(1, 1).withPosition(1, 1).getEntry();//double
-		NetworkEntries.m_nteMaxSmartIntakePivotDownSpeed = Speeds.addPersistent("Max Smart Intake Pivot speed", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(1, 1).getEntry();//double
-		NetworkEntries.m_nteMaxSmartIntakePivotUpSpeed = Speeds.addPersistent("Max Smart Intake Pivot speed", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(1, 1).getEntry();//double
+		NetworkEntries.m_nteMaxSmartIntakePivotDownSpeed = Speeds.addPersistent("Max Smart Down Intake Pivot speed", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(1, 1).getEntry();//double
+		NetworkEntries.m_nteMaxSmartIntakePivotUpSpeed = Speeds.addPersistent("Max Smart Up Intake Pivot speed", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(1, 1).getEntry();//double
 		NetworkEntries.m_nteMaxShootSpeed = Speeds.addPersistent("Max Shoot speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(1, 1).withPosition(1, 1).getEntry();//double
 		NetworkEntries.m_nteMaxIndexerSpeed = Speeds.addPersistent("Max Indexer speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(1, 1).withPosition(1, 1).getEntry();//double
 		NetworkEntries.m_nteMaxPivotAssistSpeed = Speeds.addPersistent("Max Pivot Assist speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(1, 1).withPosition(1, 1).getEntry(); //double
@@ -109,7 +109,7 @@ public class Dashboard {
 			  NetworkEntries.m_nteLLCargo = Cargos.add("LL Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(0, 0).getEntry(); //boolean
 			  NetworkEntries.m_nteLRCargo = Cargos.add("LR Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(0, 0).getEntry(); //boolean
 			  NetworkEntries.m_nteMLCargo = Cargos.add("ML Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(0, 0).getEntry(); //boolean
-			  NetworkEntries.m_nteMRCargo = Cargos.add("ML Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(0, 0).getEntry(); //boolean
+			  NetworkEntries.m_nteMRCargo = Cargos.add("MR Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(0, 0).getEntry(); //boolean
 			  NetworkEntries.m_nteRLCargo = Cargos.add("RL Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(0, 0).getEntry(); //boolean
 			  NetworkEntries.m_nteRRCargo = Cargos.add("RR Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(0, 0).getEntry(); //boolean
 	}
@@ -149,7 +149,7 @@ public class Dashboard {
 		NetworkEntries.m_nteMaxSmartIntakePivotDownSpeed.setDouble(1.0);
 		NetworkEntries.m_nteMaxSmartIntakePivotUpSpeed.setDouble(1.0);
 
-		ctrl.setMaxIntakeRollerSpeed(NetworkEntries.m_nteMaxIntakeRollerSpeed.getDouble(1.0));
+		//ctrl.setMaxIntakeRollerSpeed(NetworkEntries.m_nteMaxIntakeRollerSpeed.getDouble(1.0));
 		ctrl.setMaxShootSpeed(NetworkEntries.m_nteMaxShootSpeed.getDouble(1.0));
 		
 		
