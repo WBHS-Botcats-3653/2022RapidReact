@@ -95,6 +95,7 @@ public class NetworkEntries {
 
 	//Returns whether the smart intake is enabled
 	public static boolean isSmartIntakeEnabled() {
-		return m_nteIsSmartIntakeEnabled.getBoolean(false);
+		return false;
+		//return m_nteIsSmartIntakeEnabled.getBoolean(false);
 	}
 }

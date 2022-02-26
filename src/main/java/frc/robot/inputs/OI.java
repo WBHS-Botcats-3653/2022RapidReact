@@ -1,6 +1,7 @@
 package frc.robot.inputs;
 
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.NetworkEntries;
 
 //Operator Inputs
 public class OI {
@@ -160,12 +161,20 @@ public class OI {
 
 	//Returns whether the right DPad is being pressed
 	public boolean getManualIntakeUp() {
-		return POVIsRight();
+		if (NetworkEntries.isSmartIntakeEnabled()) {
+			return POVIsRight();
+		} else {
+			return m_controller.getLeftBumper();
+		}
 	}
 
 	//Returns whether the left DPad is being pressed
 	public boolean getManualIntakeDown() {
-		return POVIsLeft();
+		if (NetworkEntries.isSmartIntakeEnabled()) {
+			return POVIsLeft();
+		} else {
+			return m_controller.getLeftTriggerAxis() > 0;
+		}
 	}
 
 	//Returns whether the B button is being pressed
@@ -190,12 +199,20 @@ public class OI {
 
 	//Returns whether the left trigger is being pressed
 	public boolean getSmartIntakeDown() {
-		return m_controller.getLeftBumper();
+		if (NetworkEntries.isSmartIntakeEnabled()) {
+			return m_controller.getLeftBumper();
+		} else {
+			return false;
+		}
 	}
 
 	//Returns whether the left trigger is not being pressed
 	public boolean getSmartIntakeUp() {
-		return m_controller.getLeftBumperReleased();
+		if (NetworkEntries.isSmartIntakeEnabled()) {
+			return m_controller.getLeftBumperReleased();
+		} else {
+			return false;
+		}
 	}
 
 	//Whether the right trigger is being pressed
