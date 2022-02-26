@@ -63,7 +63,7 @@ public final class Constants {
 		public static final int kArmMotorID = 10;  //CAN
 		
 		//Climber limit switch
-		public static final int kBottomClimberLimitSwitchID = 6;  //DIO
+		//public static final int kBottomClimberLimitSwitchID = 9;  //DIO
 	}
 
 	//Intake Constants
@@ -74,8 +74,8 @@ public final class Constants {
 		public static final int kIndexerMotorID = 22;  //CAN
 
 		//Storage photoelectric sensor IDs
-		public static final int kLowerStoragePESensorID = 7;  //DIO
-		public static final int kUpperStoragePESensorID = 8;  //DIO
+		public static final int kLowerStoragePESensorID = 6;  //DIO
+		public static final int kUpperStoragePESensorID = 7;  //DIO
 		
 		//Pivot limit switch IDs
 		public static final int kBottomPivotLimitSwitchID = 0;  //DIO
@@ -88,6 +88,6 @@ public final class Constants {
 		public static final int kSpinnerMotorID = 30;  //CAN
 
 		//Shooter photoelectric sensor ID
-		public static final int kShooterPESensorID = 9;  //DIO
+		public static final int kShooterPESensorID = 8;  //DIO
 	}
 }

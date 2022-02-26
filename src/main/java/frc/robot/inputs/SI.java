@@ -7,7 +7,6 @@
 
 package frc.robot.inputs;
 
-import static frc.robot.Constants.ClimberConstants.kBottomClimberLimitSwitchID;
 import static frc.robot.Constants.IntakeConstants.*;
 import static frc.robot.Constants.ShooterConstants.kShooterPESensorID;
 
@@ -23,7 +22,7 @@ public class SI {
 	//Limit switches
 	private static DigitalInput topPivotLimitSwitch;
 	private static DigitalInput bottomPivotLimitSwitch;
-	private static DigitalInput climberDownButton;
+	//private static DigitalInput climberDownButton;
 
 	public SI() {
 		//Photoelectric sensors
@@ -33,7 +32,7 @@ public class SI {
 		//Limit switches
 		topPivotLimitSwitch = new DigitalInput(kTopPivotLimitSwitchID);
 		bottomPivotLimitSwitch = new DigitalInput(kBottomPivotLimitSwitchID);
-		climberDownButton = new DigitalInput(kBottomClimberLimitSwitchID);
+		//climberDownButton = new DigitalInput(kBottomClimberLimitSwitchID);
 	}
 
 	//Returns an instance of SI, creating an instance only when one does not already exist (singleton)
@@ -70,7 +69,7 @@ public class SI {
 	}
 
 	//Returns input from the top pivot limit switch
-	public boolean getClimberDownLimitTriggered() {
+	/*public boolean getClimberDownLimitTriggered() {
 		return !climberDownButton.get();  //Inverted (electrical issue)
-	}
+	}*/
 }
