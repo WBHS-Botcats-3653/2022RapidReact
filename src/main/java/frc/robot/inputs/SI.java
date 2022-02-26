@@ -55,7 +55,7 @@ public class SI {
 
 	//Returns input from the shooter photoelectric sensor
 	public boolean getShooterTriggered() {
-		return shooterPE.get();
+		return !shooterPE.get();
 	}
 
 	//Returns input from the top pivot limit switch
