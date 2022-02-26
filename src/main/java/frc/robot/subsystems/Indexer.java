@@ -36,6 +36,6 @@ public class Indexer extends SubsystemBase {
 		//Caps the spinner speed from exceeding the set maxIndexerSpeed
 		if (speed > m_oi.getMaxIndexerSpeed()) speed = m_oi.getMaxIndexerSpeed();
 		//Sets the indexer speed
-		indexer.set(speed);
+		indexer.set(-speed);  //Inverted
 	}
 }

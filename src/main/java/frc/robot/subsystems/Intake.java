@@ -40,7 +40,7 @@ public class Intake extends SubsystemBase {
 			speed = -m_oi.getMaxIntakeRollerSpeed();
 		}
 		//Sets the roller speed
-		rollers.set(-speed);
+		rollers.set(speed);
 	}
 
 	public void setPivotSpeed(double speed) {
