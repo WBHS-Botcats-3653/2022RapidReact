@@ -2,7 +2,7 @@ package frc.robot.commands;
 
 import static frc.robot.Constants.AutoConstants.*;
 
-import java.util.*;
+import java.util.ArrayList;
 
 import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.commands.autoCommands.*;
@@ -24,7 +24,7 @@ public class AutoCommand extends CommandBase {
 	private char startingTarmac;
 
 	//Which cargo the robot should target during autonomous
-	private ArrayList<String> cargoToTarget = new ArrayList<>();
+	private ArrayList<String> cargoToTarget;
 
 	public static boolean executingCommand;
 	public static String stage;
@@ -80,13 +80,8 @@ public class AutoCommand extends CommandBase {
 	}
 
 	//Sets the cargo the robot should target during auto
-	public void setCargoToTarget(HashMap<String, Boolean> cargos) {
-		for (Map.Entry<String, Boolean> cargo : cargos.entrySet()) {
-			if (cargo.getValue()) {
-				cargoToTarget.add(cargo.getKey());
-			}
-			if (cargoToTarget.size() == 2) return;
-		}
+	public void setCargoToTarget(ArrayList<String> cargo) {
+		cargoToTarget = cargo;
 	}
 
 	@Override

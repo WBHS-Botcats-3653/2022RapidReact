@@ -8,16 +8,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.NetworkEntries;
 import frc.robot.inputs.OI;
 import frc.robot.inputs.SI;
-import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
 
 public class IntakeCommand extends CommandBase {
-	//Holds instances of OI and Intake subsystem
 	private Intake m_intake;
-	private Indexer m_indexer;
 	private OI m_oi;
 	private SI m_si;
-	private boolean smartControl;
+	private static boolean smartControl = false;
 	private boolean smartPivotGoingUp;
 	private boolean smartPivotGoingDown;
 
@@ -26,15 +23,11 @@ public class IntakeCommand extends CommandBase {
 	 */
 	public IntakeCommand(Intake p_intake) {
 		m_intake = p_intake;
-		m_indexer = Indexer.getInstance();
 		m_oi = OI.getInstance();
 		m_si = SI.getInstance();
-		//Not in smart control
-		smartControl = false;
 		//Not pivoting up while under smart control
 		smartPivotGoingUp = false;
-		//Not pivoting down while under smart control
-		smartPivotGoingDown = false;
+		// Use addRequirements() here to declare subsystem dependencies.
 		addRequirements(p_intake);
 	}
 
@@ -45,7 +38,7 @@ public class IntakeCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		if (NetworkEntries.isSmartIntakeEnabled.getBoolean(false)) {
+		if (NetworkEntries.isSmartIntakeEnabled()) {
 			//Smart intake control
 			smartIntakeLogic();
 		}
@@ -55,10 +48,17 @@ public class IntakeCommand extends CommandBase {
 			manualPivotLogic();
 			//Intake roller controls
 			manualRollerLogic();
-		} else {  //Smart indexer
-			//Smart indexer control
-			smartIndexerLogic();
 		}
+	}
+
+	// Called once the command ends or is interrupted.
+	@Override
+	public void end(boolean interrupted) {}
+
+	// Returns true when the command should end.
+	@Override
+	public boolean isFinished() {
+		return false;
 	}
 
 	//Manual pivot OI logic
@@ -81,7 +81,7 @@ public class IntakeCommand extends CommandBase {
 			//Spin the rollers at max speed
 			m_intake.setRollerSpeed(m_oi.getMaxIntakeRollerSpeed());
 			//Pivot assist (pivots the intake down at a low speed when spinning the rollers)
-			if (NetworkEntries.isPivotAssistEnabled.getBoolean(false)) {  //If pivot assist is enabled in the Dashboard
+			if (NetworkEntries.isPivotAssistEnabled()) {  //If pivot assist is enabled in the Dashboard
 				//Sets the pivot speed to max assist speed
 				m_intake.setPivotSpeed(m_oi.getMaxPivotAssistSpeed());
 			}
@@ -151,24 +151,8 @@ public class IntakeCommand extends CommandBase {
 		}
 	}
 
-	//Smart control indexer logic
-	public void smartIndexerLogic() {
-		if (m_si.getUpperStorageTriggered()) {  //If there is cargo in the lower storage
-			//Stops the indexer
-			m_indexer.setIndexerSpeed(0);
-		} else if (m_si.getLowerStorageTriggered()) {  //If there is cargo in the upper storage
-			//Sets the indexer to max speed
-			m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed());
-		}
-	}
-
-	// Called once the command ends or is interrupted.
-	@Override
-	public void end(boolean interrupted) {}
-
-	// Returns true when the command should end.
-	@Override
-	public boolean isFinished() {
-		return false;
+	//Returns whether the intake in under smart control
+	public static boolean isUnderSmartControl() {
+		return smartControl;
 	}
 }

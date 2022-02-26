@@ -74,7 +74,6 @@ public class Robot extends TimedRobot {
 		m_dashboardSubsystem.periodic();
 
 		//Print stuff
-		System.out.println("TEST PRINTLN");
 		System.out.println("-----------------------------------------------");
 
 		//Encoders
@@ -152,8 +151,8 @@ public class Robot extends TimedRobot {
 	/** This function is called periodically during autonomous. */
 	@Override
 	public void autonomousPeriodic() {
+		//Schedules sequential and parallel command groups fed from the AutoCommand
 		if (AutoCommand.executingCommand) return;
-		//Schedules command groups fed from the AutoCommand
 		SequentialCommandGroup sequentialCommand = m_autonomousCommand.getSequentialCommand();
 		ParallelCommandGroup parallelCommand = m_autonomousCommand.getParallelCommand();
 		if (AutoCommand.commandToScheduleNext.equals("Sequential") && sequentialCommand != null) {

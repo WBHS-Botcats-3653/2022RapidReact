@@ -4,7 +4,7 @@
 
 package frc.robot;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
 
@@ -14,6 +14,8 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 */
 public class NetworkEntries {
     // Config Tab
+	public static NetworkTableEntry m_nteIsPivotAssistEnabled;
+	public static NetworkTableEntry m_nteIsSmartIntakeEnabled;
 
 	// Test Tab
 	public static NetworkTableEntry m_nteDriveEncLeft; //double
@@ -45,11 +47,6 @@ public class NetworkEntries {
 	public static NetworkTableEntry m_nteMaxIndexerSpeed; //double
 	public static NetworkTableEntry m_nteMaxPivotAssistSpeed; //double
 
-	//TODO: Implement
-	public static NetworkTableEntry isPivotAssistEnabled;
-	public static NetworkTableEntry isSmartIntakeEnabled;
-
-
 	//Ball Pos
 	//public static NetworkTableEntry m_nteMaxDriveSpeed; //double
 	public static NetworkTableEntry m_nteTarmac; //boolean
@@ -62,19 +59,42 @@ public class NetworkEntries {
 	public static NetworkTableEntry m_nteRLCargo; //boolean
 	public static NetworkTableEntry m_nteRRCargo; //boolean
 
+	//Returns the selected Tarmac
 	public static char getTarmac(){
 		return m_nteTarmac.getBoolean(false) ? 'R' : 'L';
 	}
 
-	public static HashMap<String, Boolean> getCargos(){
+	//Returns the selected cargo to target
+	public static ArrayList<String> getCargos() {
+		ArrayList<String> cargo = new ArrayList<>();
+		if (m_nteLLCargo.getBoolean(false)) {
+			cargo.add("LL");
+		}
+		if (m_nteLRCargo.getBoolean(false)) {
+			cargo.add("LR");
+		}
+		if (m_nteMLCargo.getBoolean(false)) {
+			cargo.add("ML");
+		}
+		if (m_nteMRCargo.getBoolean(false)) {
+			cargo.add("MR");
+		}
+		if (m_nteRLCargo.getBoolean(false)) {
+			cargo.add("RL");
+		}
+		if (m_nteRRCargo.getBoolean(false)) {
+			cargo.add("RR");
+		}
+		return cargo;
+	}
 
-		return new HashMap<>() {{
-			put("LL", m_nteLLCargo.getBoolean(false));
-			put("LR", m_nteLRCargo.getBoolean(false));
-			put("ML", m_nteMLCargo.getBoolean(false));
-			put("MR", m_nteMRCargo.getBoolean(false));
-			put("RL", m_nteRLCargo.getBoolean(false));  
-			put("RR", m_nteRRCargo.getBoolean(false));  
-		}};
+	//Returns whether the pivot assist is enabled
+	public static boolean isPivotAssistEnabled() {
+		return m_nteIsPivotAssistEnabled.getBoolean(false);
+	}
+
+	//Returns whether the smart intake is enabled
+	public static boolean isSmartIntakeEnabled() {
+		return m_nteIsSmartIntakeEnabled.getBoolean(false);
 	}
 }

@@ -13,7 +13,7 @@ import frc.robot.inputs.SI;
 
 public class Dashboard {
 	private static Dashboard m_singleton = null;
-	private static OI ctrl = OI.getInstance();
+	private static OI m_oi = OI.getInstance();
 	private static SI m_si =  SI.getInstance();
 	private static Direction m_direction = Direction.getInstance();
 	//private UsbCamera cam0 = null;
@@ -33,9 +33,9 @@ public class Dashboard {
 		tabAutoConfig = Shuffleboard.getTab("AutoConfig");
 
 		// Config Tab
-		NetworkEntries.isPivotAssistEnabled = tabConfig.addPersistent("is Pivot Assist Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
+		NetworkEntries.m_nteIsPivotAssistEnabled = tabConfig.addPersistent("is Pivot Assist Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
 		.withSize(1, 1).withPosition(0, 1).getEntry();
-		NetworkEntries.isSmartIntakeEnabled = tabConfig.addPersistent("is Smart Intake Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
+		NetworkEntries.m_nteIsSmartIntakeEnabled = tabConfig.addPersistent("is Smart Intake Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
 		.withSize(1, 1).withPosition(0, 1).getEntry();
 		// Drive Tab
 		/*
@@ -48,7 +48,7 @@ public class Dashboard {
 		m_nteArmAngle = tabDrive.add("Arm", 0.0).withWidget(BuiltInWidgets.kDial)
 				.withProperties(Map.of("min", 0, "max", 180)).withSize(1, 1).withPosition(5, 0).getEntry();
 		*/
-		NetworkEntries.m_nteDriveSpeed = tabDrive.addPersistent("Speed", ctrl.getMaxDriveSpeed()).withWidget(BuiltInWidgets.kNumberSlider)
+		NetworkEntries.m_nteDriveSpeed = tabDrive.addPersistent("Speed", m_oi.getMaxDriveSpeed()).withWidget(BuiltInWidgets.kNumberSlider)
 				.withProperties(Map.of("min", 0, "max", 1.0)).withSize(1, 1).withPosition(5, 0).getEntry();
 
 		//Auto Shoot
@@ -86,7 +86,6 @@ public class Dashboard {
   			.withSize(2, 2)
   			.withProperties(Map.of("Label position", "HIDDEN")); // hide labels for commands
 
-			  
 		
 		NetworkEntries.m_nteMaxDriveSpeed = Speeds.addPersistent("Max Drive speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(1, 1).withPosition(1, 1).getEntry();//double
 		NetworkEntries.m_nteMaxArmSpeed = Speeds.addPersistent("Max Arm speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(1, 1).withPosition(1, 1).getEntry();//double
@@ -106,33 +105,29 @@ public class Dashboard {
   			.withSize(2, 2)
   			.withProperties(Map.of("Label position", "HIDDEN")); // hide labels for commands
 
-			  NetworkEntries.m_nteLLCargo = Cargos.add("LL Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(0, 0).getEntry(); //boolean
-			  NetworkEntries.m_nteLRCargo = Cargos.add("LR Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(0, 0).getEntry(); //boolean
-			  NetworkEntries.m_nteMLCargo = Cargos.add("ML Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(0, 0).getEntry(); //boolean
-			  NetworkEntries.m_nteMRCargo = Cargos.add("MR Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(0, 0).getEntry(); //boolean
-			  NetworkEntries.m_nteRLCargo = Cargos.add("RL Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(0, 0).getEntry(); //boolean
-			  NetworkEntries.m_nteRRCargo = Cargos.add("RR Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(0, 0).getEntry(); //boolean
+		NetworkEntries.m_nteLLCargo = Cargos.add("LL Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(0, 0).getEntry(); //boolean
+		NetworkEntries.m_nteLRCargo = Cargos.add("LR Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(0, 0).getEntry(); //boolean
+		NetworkEntries.m_nteMLCargo = Cargos.add("ML Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(0, 0).getEntry(); //boolean
+		NetworkEntries.m_nteMRCargo = Cargos.add("MR Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(0, 0).getEntry(); //boolean
+		NetworkEntries.m_nteRLCargo = Cargos.add("RL Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(0, 0).getEntry(); //boolean
+		NetworkEntries.m_nteRRCargo = Cargos.add("RR Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(0, 0).getEntry(); //boolean
 	}
 
 	
 	public void refresh() {
-		
-
-		ctrl.setMaxDriveSpeed(NetworkEntries.m_nteDriveSpeed.getDouble(1.0));
-
+		m_oi.setMaxDriveSpeed(NetworkEntries.m_nteDriveSpeed.getDouble(1.0));
 
 		//Intake.setArmEncoderFloor((int) m_nteArmDownEnc.getDouble(1024));
 	}
 	
 	public void periodic() {
-		OI ctrl = OI.getInstance();
+		OI m_oi = OI.getInstance();
 		//Intake arm = Intake.getInstance();
 		//DriveTrain drive = DriveTrain.getInstance();
-		OI oi = OI.getInstance();
 		//m_nteArmAngle.setDouble(arm.getAngle());
 
 		//updates the speeds in the dashboard:
-		ctrl.setMaxDriveSpeed(NetworkEntries.m_nteDriveSpeed.getDouble(1.0));
+		m_oi.setMaxDriveSpeed(NetworkEntries.m_nteDriveSpeed.getDouble(1.0));
 
 		NetworkEntries.m_nteDriveEncLeft.setDouble(m_direction.getLeftDistance());
 		NetworkEntries.m_nteDriveEncRight.setDouble(m_direction.getRightDistance());
@@ -140,18 +135,17 @@ public class Dashboard {
 		NetworkEntries.m_nteIntakeUpLimit.setBoolean(m_si.getPivotUpLimitTriggered());
 		NetworkEntries.m_nteIntakeDownLimit.setBoolean(m_si.getPivotDownLimitTriggered());
 		//updates the following speeds
-		ctrl.setMaxDriveSpeed(NetworkEntries.m_nteMaxDriveSpeed.getDouble(1.0));
-		ctrl.setMaxIndexerSpeed(NetworkEntries.m_nteMaxIndexerSpeed.getDouble(1.0));
-		ctrl.setMaxIntakePivotSpeed(NetworkEntries.m_nteMaxIntakePivotSpeed.getDouble(1.0));
-		ctrl.setMaxArmSpeed(NetworkEntries.m_nteMaxArmSpeed.getDouble(1.0));
+		m_oi.setMaxDriveSpeed(NetworkEntries.m_nteMaxDriveSpeed.getDouble(1.0));
+		m_oi.setMaxIndexerSpeed(NetworkEntries.m_nteMaxIndexerSpeed.getDouble(1.0));
+		m_oi.setMaxIntakePivotSpeed(NetworkEntries.m_nteMaxIntakePivotSpeed.getDouble(1.0));
+		m_oi.setMaxArmSpeed(NetworkEntries.m_nteMaxArmSpeed.getDouble(1.0));
 
 		//updates the values on the dashboard so they wont change but they will show up
 		NetworkEntries.m_nteMaxSmartIntakePivotDownSpeed.setDouble(1.0);
 		NetworkEntries.m_nteMaxSmartIntakePivotUpSpeed.setDouble(1.0);
 
-		//ctrl.setMaxIntakeRollerSpeed(NetworkEntries.m_nteMaxIntakeRollerSpeed.getDouble(1.0));
-		ctrl.setMaxShootSpeed(NetworkEntries.m_nteMaxShootSpeed.getDouble(1.0));
-		
+		//m_oi.setMaxIntakeRollerSpeed(NetworkEntries.m_nteMaxIntakeRollerSpeed.getDouble(1.0));
+		m_oi.setMaxShootSpeed(NetworkEntries.m_nteMaxShootSpeed.getDouble(1.0));
 		
 		NetworkEntries.m_nteMaxPivotAssistSpeed.getDouble(1.0);
 		//FIX

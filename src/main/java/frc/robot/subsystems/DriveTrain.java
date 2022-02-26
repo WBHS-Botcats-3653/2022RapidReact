@@ -49,34 +49,11 @@ public class DriveTrain extends SubsystemBase {
 	}
 
 	/**Sets the arcade drive speed and rotation
-	 *OVERLOADED FUNCTION
-	 */
-	public void arcadeDrived() {
-		/*//All stop called (used for testing)
-		if (m_oi.getAllStop()) {
-			//Stops motor(s)
-			diffDrive.tankDrive(0, 0);
-			return;
-		}*/
-		double speed = m_oi.getThrottle();
-		//Caps the throttle speed from exceeding the set maxDriveSpeed
-		if (Math.abs(speed) > m_oi.getMaxDriveSpeed()) speed = (speed < 0 ? -1 : 1) * m_oi.getMaxDriveSpeed();
-		//Sets the differential drive speed and rotation
-		diffDrive.arcadeDrive(speed, m_oi.getSteering());
-	}
-
-	/**Sets the arcade drive speed and rotation
 	 * OVERLOADED FUNCTION
 	 * @param speed
 	 * @param rotation
 	 */
 	public void arcadeDrived(double speed, double rotation) {
-		/*//All stop called (used for testing)
-		if (m_oi.getAllStop()) {
-			//Stops motor(s)
-			diffDrive.tankDrive(0, 0);
-			return;
-		}*/
 		//Caps the speed from exceeding the set maxDriveSpeed
 		if (Math.abs(speed) > m_oi.getMaxDriveSpeed()) speed = (speed < 0 ? -1 : 1) * m_oi.getMaxDriveSpeed();
 		//Sets the differential drive speed and rotation
@@ -89,12 +66,6 @@ public class DriveTrain extends SubsystemBase {
 	 * @param rightSpeed
 	 */
 	public void tankDrived(double leftSpeed, double rightSpeed) {
-		/*//All stop called (used for testing)
-		if (m_oi.getAllStop()) {
-			//Stops motor(s)
-			diffDrive.tankDrive(0, 0);
-			return;
-		}*/
 		//Caps the speed from exceeding the set maxDriveSpeed
 		if (Math.abs(leftSpeed) > m_oi.getMaxDriveSpeed()) leftSpeed = (leftSpeed < 0 ? -1 : 1) * m_oi.getMaxDriveSpeed();
 		if (Math.abs(rightSpeed) > m_oi.getMaxDriveSpeed()) rightSpeed = (rightSpeed < 0 ? -1 : 1) * m_oi.getMaxDriveSpeed();
