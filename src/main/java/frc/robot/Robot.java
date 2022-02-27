@@ -137,7 +137,7 @@ public class Robot extends TimedRobot {
 		}
 
 		//Sets max motor speeds
-		m_oi.setMaxShootSpeed(0.6);
+		m_oi.setMaxShootSpeed(0.85);
 		m_oi.setMaxIntakePivotSpeed(0.5);
 		m_oi.setMaxSmartIntakePivotDownSpeed(0);
 		m_oi.setMaxSmartIntakePivotUpSpeed(0);
@@ -193,7 +193,7 @@ public class Robot extends TimedRobot {
 		CommandScheduler.getInstance().schedule(m_shooterCommand);
 
 		//Sets max motor speeds
-		m_oi.setMaxShootSpeed(0.9);
+		m_oi.setMaxShootSpeed(0.85);
 		m_oi.setMaxIntakePivotSpeed(0.5);
 		m_oi.setMaxSmartIntakePivotDownSpeed(0.15);
 		m_oi.setMaxSmartIntakePivotUpSpeed(0.35);
@@ -226,7 +226,7 @@ public class Robot extends TimedRobot {
 		CommandScheduler.getInstance().schedule(m_shooterCommand);
 
 		//Sets max motor speeds
-		m_oi.setMaxShootSpeed(0.1);
+		m_oi.setMaxShootSpeed(0.3);
 		m_oi.setMaxIntakePivotSpeed(0.5);
 		m_oi.setMaxSmartIntakePivotDownSpeed(0.3);
 		m_oi.setMaxSmartIntakePivotUpSpeed(0.4);
