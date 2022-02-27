@@ -90,7 +90,8 @@ public class NetworkEntries {
 
 	//Returns whether the pivot assist is enabled
 	public static boolean isPivotAssistEnabled() {
-		return m_nteIsPivotAssistEnabled.getBoolean(false);
+		return true;
+		//return m_nteIsPivotAssistEnabled.getBoolean(false);
 	}
 
 	//Returns whether the smart intake is enabled

@@ -42,7 +42,7 @@ public class CollectCargoCommand extends CommandBase {
 	public void execute() {
 		if (m_si.getPivotDownLimitTriggered() && !endCommand) {  //If the intake has finished it's downward pivot
 			//Stops the intake pivot
-			m_intake.setPivotSpeed(0);
+			m_intake.setPivotSpeed(m_oi.getMaxPivotAssistSpeed());
 			//Sets the intake roller speed to max
 			m_intake.setRollerSpeed(m_oi.getMaxIntakeRollerSpeed());
 		} else if (endCommand) {  //If the command has been told to end

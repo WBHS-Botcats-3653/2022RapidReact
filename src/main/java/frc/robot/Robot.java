@@ -145,7 +145,7 @@ public class Robot extends TimedRobot {
 		m_oi.setMaxArmSpeed(1.0);
 		m_oi.setMaxDriveSpeed(0.5);
 		m_oi.setMaxIndexerSpeed(1.0);
-		m_oi.setMaxPivotAssistSpeed(0.05);
+		m_oi.setMaxPivotAssistSpeed(0.1);
 	}
 
 	/** This function is called periodically during autonomous. */
@@ -201,7 +201,7 @@ public class Robot extends TimedRobot {
 		m_oi.setMaxArmSpeed(1.0);
 		m_oi.setMaxDriveSpeed(1.0);
 		m_oi.setMaxIndexerSpeed(1.0);
-		m_oi.setMaxPivotAssistSpeed(0.05);
+		m_oi.setMaxPivotAssistSpeed(0.1);
 	}
 
 	/** This function is called periodically during operator control. */
@@ -234,7 +234,7 @@ public class Robot extends TimedRobot {
 		m_oi.setMaxArmSpeed(1.0);
 		m_oi.setMaxDriveSpeed(0.5);
 		m_oi.setMaxIndexerSpeed(0.5);
-		m_oi.setMaxPivotAssistSpeed(0.05);
+		m_oi.setMaxPivotAssistSpeed(0.1);
 	}
 
 	/** This function is called periodically during test mode. */
