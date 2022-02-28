@@ -73,18 +73,18 @@ public class Dashboard {
 		//--m_isAutoCollectOnBox = tabDrive.addPersistent("is Auto Collect", AutoCommand.isAutoCollectOn).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(2, 0).getEntry();
 
 		// Test Tab
-		NetworkEntries.m_nteIntakeUpLimit = tabTest.add("Intake up limit", false).withSize(1, 1).withPosition(0, 0).getEntry();
-		NetworkEntries.m_nteIntakeDownLimit = tabTest.add("Intake Down limit", false).withSize(1, 1).withPosition(0, 0).getEntry();
+		NetworkEntries.m_nteIntakeUpLimit = tabTest.add("Intake up limit", false).withSize(1, 1).withPosition(3, 0).getEntry();
+		NetworkEntries.m_nteIntakeDownLimit = tabTest.add("Intake Down limit", false).withSize(1, 1).withPosition(4, 0).getEntry();
 
-		NetworkEntries.m_nteLowerStoragePE = tabTest.add("lower pe", false).withSize(1, 1).withPosition(0, 0).getEntry();
-		NetworkEntries.m_nteUpperStoragePE = tabTest.add("upper pe", false).withSize(1, 1).withPosition(0, 0).getEntry();
-		NetworkEntries.m_nteShooterPE = tabTest.add("shooter", false).withSize(1, 1).withPosition(0, 0).getEntry();
+		NetworkEntries.m_nteLowerStoragePE = tabTest.add("lower pe", false).withSize(1, 1).withPosition(1, 0).getEntry();
+		NetworkEntries.m_nteUpperStoragePE = tabTest.add("upper pe", false).withSize(1, 1).withPosition(2, 0).getEntry();
+		NetworkEntries.m_nteShooterPE = tabTest.add("shooter", false).withSize(1, 1).withPosition(2, 1).getEntry();
 		//m_nteArmUpLimit = tabTest.add("Arm Up", false).withSize(1, 1).withPosition(1, 0).getEntry();
 		//this is for testing the encoders if they are working
 		//--NetworkEntries.testingEncoderLeft = tabTest.add("Left encoder testing it", 0).withSize(1, 1).withPosition(1, 0).getEntry();
 		//m_nteArmEncoderRaw = tabTest.add("Arm Encoder", 1024).withSize(1, 1).withPosition(2, 0).getEntry();
-		NetworkEntries.m_nteDriveEncLeft = tabTest.add("Drive Left", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(0, 1).getEntry();
-		NetworkEntries.m_nteDriveEncRight = tabTest.add("Drive Right", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(1, 1).getEntry();
+		NetworkEntries.m_nteDriveEncLeft = tabTest.add("Drive Left", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(0, 2).getEntry();
+		NetworkEntries.m_nteDriveEncRight = tabTest.add("Drive Right", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(1, 2).getEntry();
 		
 
 		//Speeds Tab
@@ -104,6 +104,7 @@ public class Dashboard {
 		NetworkEntries.m_nteMaxSmartIntakePivotDownSpeed = tabSpeeds.addPersistent("Max Smart Down Intake Pivot speed", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(2, 1).getEntry();//double
 		NetworkEntries.m_nteMaxSmartIntakePivotUpSpeed = tabSpeeds.addPersistent("Max Smart Up Intake Pivot speed", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(5, 1).getEntry();//double
 		NetworkEntries.m_nteMaxCargoCollectDriveSpeed = tabSpeeds.addPersistent("Max Cargo Collect Drive speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(3, 1).getEntry(); //double
+		NetworkEntries.m_nteMaxIntakeRollerSpeed = tabSpeeds.addPersistent("Max Intake Roller Speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(3, 2).getEntry(); //double
 
 		//AutoConfig Tab
 		NetworkEntries.m_nteTarmac = tabAutoConfig.add("Is Right Tarmac?", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(0, 0).getEntry(); //boolean
@@ -159,6 +160,7 @@ public class Dashboard {
 		m_oi.setMaxIndexerSpeed(NetworkEntries.m_nteMaxIndexerSpeed.getDouble(1.0));
 		m_oi.setMaxIntakePivotSpeed(NetworkEntries.m_nteMaxIntakePivotSpeed.getDouble(1.0));
 		m_oi.setMaxArmSpeed(NetworkEntries.m_nteMaxArmSpeed.getDouble(1.0));
+		m_oi.setMaxIntakeRollerSpeed(NetworkEntries.m_nteMaxIntakeRollerSpeed.getDouble(1.0));
 
 		//updates the values on the dashboard so they wont change but they will show up
 		NetworkEntries.m_nteMaxSmartIntakePivotDownSpeed.setDouble(1.0);
@@ -182,7 +184,12 @@ public class Dashboard {
 		m_nteDriveEncRight.setNumber(drive.getRightEncoder());
 		*/
 	}
-
+	public static void robotInit(){
+		//pe 's'
+		NetworkEntries.m_nteLowerStoragePE.setBoolean(m_si.getLowerStorageTriggered());
+		NetworkEntries.m_nteUpperStoragePE.setBoolean(m_si.getUpperStorageTriggered());
+		NetworkEntries.m_nteShooterPE.setBoolean(m_si.getShooterTriggered());
+	}
 	//Returns an instance of Dashboard, creating an instance only when one does not already exist (singleton)
 	public static Dashboard getInstance() {
 		if (m_singleton == null) {
