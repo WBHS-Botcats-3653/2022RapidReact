@@ -23,6 +23,12 @@ public class NetworkEntries {
 	public static NetworkTableEntry m_nteIntakeUpLimit;
     public static NetworkTableEntry m_nteIntakeDownLimit;
 
+	// pe 's'
+	public static NetworkTableEntry m_nteLowerStoragePE;
+    public static NetworkTableEntry m_nteUpperStoragePE;
+	public static NetworkTableEntry m_nteShooterPE;
+	
+
 	// Drive Tab
 	//private NetworkTableEntry m_nteArmAngle = null;
 	public static NetworkTableEntry m_nteDriveSpeed; //double
@@ -46,6 +52,7 @@ public class NetworkEntries {
 	public static NetworkTableEntry m_nteMaxShootSpeed; //double
 	public static NetworkTableEntry m_nteMaxIndexerSpeed; //double
 	public static NetworkTableEntry m_nteMaxPivotAssistSpeed; //double
+	public static NetworkTableEntry m_nteMaxCargoCollectDriveSpeed; //double
 
 	//Ball Pos
 	//public static NetworkTableEntry m_nteMaxDriveSpeed; //double
