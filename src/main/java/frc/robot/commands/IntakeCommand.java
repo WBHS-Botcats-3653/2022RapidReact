@@ -83,7 +83,7 @@ public class IntakeCommand extends CommandBase {
 			//Pivot assist (pivots the intake down at a low speed when spinning the rollers)
 			if (NetworkEntries.isPivotAssistEnabled()) {  //If pivot assist is enabled in the Dashboard
 				//Sets the pivot speed to max assist speed
-				m_intake.setPivotSpeed(m_oi.getMaxPivotAssistSpeed());
+				m_intake.setPivotSpeed(-m_oi.getMaxPivotAssistSpeed());
 			}
 		} else if (m_oi.getManualIntakeOut()) {  //If the X button is being pressed
 			//Reverse the rollers and spin at max speed
