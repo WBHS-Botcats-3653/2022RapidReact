@@ -227,7 +227,7 @@ public class Robot extends TimedRobot {
 		NetworkEntries.m_nteMaxArmSpeed.setDouble(1.0);
 		NetworkEntries.m_nteMaxDriveSpeed.setDouble(1.0);
 		NetworkEntries.m_nteMaxIndexerSpeed.setDouble(1.0);
-		NetworkEntries.m_nteMaxPivotAssistSpeed.setDouble(0.1);
+		NetworkEntries.m_nteMaxPivotAssistSpeed.setDouble(0.2);
 		NetworkEntries.m_nteMaxCargoCollectDriveSpeed.setDouble(0);
 		/*m_oi.setMaxShootSpeed(0.85);
 		m_oi.setMaxIntakePivotSpeed(0.5);
