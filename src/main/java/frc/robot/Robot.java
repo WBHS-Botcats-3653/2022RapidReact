@@ -72,7 +72,8 @@ public class Robot extends TimedRobot {
 		CommandScheduler.getInstance().run();
 
 		m_dashboardSubsystem.periodic();
-
+		Dashboard.selectorLogic();
+		/*
 		//Print stuff
 		System.out.println("-----------------------------------------------");
 
@@ -89,6 +90,7 @@ public class Robot extends TimedRobot {
 		System.out.println("Top Pivot Limit Switch: " + m_si.getPivotUpLimitTriggered());
 		System.out.println("Bottom Pivot Limit Switch: " + m_si.getPivotDownLimitTriggered());
 		//System.out.println("Bottom Climber Limit Switch: " + m_si.getClimberDownLimitTriggered());
+		*/
 	}
 
 	/** This function is called once each time the robot enters Disabled mode. */
