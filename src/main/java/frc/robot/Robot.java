@@ -74,6 +74,11 @@ public class Robot extends TimedRobot {
 		m_dashboardSubsystem.periodic();
 		Dashboard.selectorLogic();
 		/*
+		System.out.println("shooter: " + m_si.getShooterTriggered());
+		System.out.println("upper: " + m_si.getUpperStorageTriggered());
+		System.out.println("lower: " + m_si.getLowerStorageTriggered());
+		*/
+		/*
 		//Print stuff
 		System.out.println("-----------------------------------------------");
 
@@ -104,7 +109,7 @@ public class Robot extends TimedRobot {
 		//Sets max motor speeds
 		//TODO:
 		NetworkEntries.m_nteMaxShootSpeed.setDouble(0);
-		NetworkEntries.m_nteMaxIntakePivotSpeed.setDouble(0);
+		//NetworkEntries.m_nteMaxIntakePivotSpeed.setDouble(0);
 		NetworkEntries.m_nteMaxSmartIntakePivotDownSpeed.setDouble(0);
 		NetworkEntries.m_nteMaxSmartIntakePivotUpSpeed.setDouble(0);
 		NetworkEntries.m_nteMaxIntakeRollerSpeed.setDouble(0);
