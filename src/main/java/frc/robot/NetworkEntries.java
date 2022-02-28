@@ -94,10 +94,11 @@ public class NetworkEntries {
 		}
 		return cargo;
 	}
-
+	
 	//Returns whether the pivot assist is enabled
 	public static boolean isPivotAssistEnabled() {
 		return m_nteIsPivotAssistEnabled.getBoolean(false);
+	
 	}
 
 	//Returns whether the smart intake is enabled
