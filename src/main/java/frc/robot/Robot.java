@@ -102,7 +102,18 @@ public class Robot extends TimedRobot {
 		CommandScheduler.getInstance().cancelAll();
 
 		//Sets max motor speeds
-		m_oi.setMaxShootSpeed(0);
+		//TODO:
+		NetworkEntries.m_nteMaxShootSpeed.setDouble(0);
+		NetworkEntries.m_nteMaxIntakePivotSpeed.setDouble(0);
+		NetworkEntries.m_nteMaxSmartIntakePivotDownSpeed.setDouble(0);
+		NetworkEntries.m_nteMaxSmartIntakePivotUpSpeed.setDouble(0);
+		NetworkEntries.m_nteMaxIntakeRollerSpeed.setDouble(0);
+		NetworkEntries.m_nteMaxArmSpeed.setDouble(0);
+		NetworkEntries.m_nteMaxDriveSpeed.setDouble(0);
+		NetworkEntries.m_nteMaxIndexerSpeed.setDouble(0);
+		NetworkEntries.m_nteMaxPivotAssistSpeed.setDouble(0);
+		NetworkEntries.m_nteMaxCargoCollectDriveSpeed.setDouble(0);
+		/*m_oi.setMaxShootSpeed(0);
 		m_oi.setMaxIntakePivotSpeed(0);
 		m_oi.setMaxSmartIntakePivotDownSpeed(0);
 		m_oi.setMaxSmartIntakePivotUpSpeed(0);
@@ -110,7 +121,7 @@ public class Robot extends TimedRobot {
 		m_oi.setMaxArmSpeed(0);
 		m_oi.setMaxDriveSpeed(0);
 		m_oi.setMaxIndexerSpeed(0);
-		m_oi.setMaxPivotAssistSpeed(0);
+		m_oi.setMaxPivotAssistSpeed(0);*/
 	}
 
 	@Override
@@ -139,7 +150,18 @@ public class Robot extends TimedRobot {
 		}
 
 		//Sets max motor speeds
-		m_oi.setMaxShootSpeed(0.85);
+		//TODO:
+		NetworkEntries.m_nteMaxShootSpeed.setDouble(0.85);
+		NetworkEntries.m_nteMaxIntakePivotSpeed.setDouble(0.5);
+		NetworkEntries.m_nteMaxSmartIntakePivotDownSpeed.setDouble(0);
+		NetworkEntries.m_nteMaxSmartIntakePivotUpSpeed.setDouble(0);
+		NetworkEntries.m_nteMaxIntakeRollerSpeed.setDouble(1.0);
+		NetworkEntries.m_nteMaxArmSpeed.setDouble(1.0);
+		NetworkEntries.m_nteMaxDriveSpeed.setDouble(0.5);
+		NetworkEntries.m_nteMaxIndexerSpeed.setDouble(1.0);
+		NetworkEntries.m_nteMaxPivotAssistSpeed.setDouble(0.1);
+		NetworkEntries.m_nteMaxCargoCollectDriveSpeed.setDouble(0.5);
+		/*m_oi.setMaxShootSpeed(0.85);
 		m_oi.setMaxIntakePivotSpeed(0.5);
 		m_oi.setMaxSmartIntakePivotDownSpeed(0);
 		m_oi.setMaxSmartIntakePivotUpSpeed(0);
@@ -148,7 +170,7 @@ public class Robot extends TimedRobot {
 		m_oi.setMaxDriveSpeed(0.5);
 		m_oi.setMaxIndexerSpeed(1.0);
 		m_oi.setMaxPivotAssistSpeed(0.1);
-		m_oi.setMaxCargoCollectDriveSpeed(0.5);
+		m_oi.setMaxCargoCollectDriveSpeed(0.5);*/
 	}
 
 	/** This function is called periodically during autonomous. */
@@ -196,7 +218,18 @@ public class Robot extends TimedRobot {
 		CommandScheduler.getInstance().schedule(m_shooterCommand);
 
 		//Sets max motor speeds
-		m_oi.setMaxShootSpeed(0.85);
+		//TODO:
+		NetworkEntries.m_nteMaxShootSpeed.setDouble(0.85);
+		NetworkEntries.m_nteMaxIntakePivotSpeed.setDouble(0.5);
+		NetworkEntries.m_nteMaxSmartIntakePivotDownSpeed.setDouble(0.15);
+		NetworkEntries.m_nteMaxSmartIntakePivotUpSpeed.setDouble(0.35);
+		NetworkEntries.m_nteMaxIntakeRollerSpeed.setDouble(1.0);
+		NetworkEntries.m_nteMaxArmSpeed.setDouble(1.0);
+		NetworkEntries.m_nteMaxDriveSpeed.setDouble(1.0);
+		NetworkEntries.m_nteMaxIndexerSpeed.setDouble(1.0);
+		NetworkEntries.m_nteMaxPivotAssistSpeed.setDouble(0.1);
+		NetworkEntries.m_nteMaxCargoCollectDriveSpeed.setDouble(0);
+		/*m_oi.setMaxShootSpeed(0.85);
 		m_oi.setMaxIntakePivotSpeed(0.5);
 		m_oi.setMaxSmartIntakePivotDownSpeed(0.15);
 		m_oi.setMaxSmartIntakePivotUpSpeed(0.35);
@@ -205,7 +238,7 @@ public class Robot extends TimedRobot {
 		m_oi.setMaxDriveSpeed(1.0);
 		m_oi.setMaxIndexerSpeed(1.0);
 		m_oi.setMaxPivotAssistSpeed(0.1);
-		m_oi.setMaxCargoCollectDriveSpeed(0);
+		m_oi.setMaxCargoCollectDriveSpeed(0);*/
 	}
 
 	/** This function is called periodically during operator control. */
@@ -230,7 +263,18 @@ public class Robot extends TimedRobot {
 		CommandScheduler.getInstance().schedule(m_shooterCommand);
 
 		//Sets max motor speeds
-		m_oi.setMaxShootSpeed(0.3);
+		//TODO:
+		NetworkEntries.m_nteMaxShootSpeed.setDouble(0.3);
+		NetworkEntries.m_nteMaxIntakePivotSpeed.setDouble(0.5);
+		NetworkEntries.m_nteMaxSmartIntakePivotDownSpeed.setDouble(0.3);
+		NetworkEntries.m_nteMaxSmartIntakePivotUpSpeed.setDouble(0.4);
+		NetworkEntries.m_nteMaxIntakeRollerSpeed.setDouble(0.5);
+		NetworkEntries.m_nteMaxArmSpeed.setDouble(1.0);
+		NetworkEntries.m_nteMaxDriveSpeed.setDouble(0.5);
+		NetworkEntries.m_nteMaxIndexerSpeed.setDouble(0.5);
+		NetworkEntries.m_nteMaxPivotAssistSpeed.setDouble(0.1);
+		NetworkEntries.m_nteMaxCargoCollectDriveSpeed.setDouble(0);
+		/*m_oi.setMaxShootSpeed(0.3);
 		m_oi.setMaxIntakePivotSpeed(0.5);
 		m_oi.setMaxSmartIntakePivotDownSpeed(0.3);
 		m_oi.setMaxSmartIntakePivotUpSpeed(0.4);
@@ -239,7 +283,7 @@ public class Robot extends TimedRobot {
 		m_oi.setMaxDriveSpeed(0.5);
 		m_oi.setMaxIndexerSpeed(0.5);
 		m_oi.setMaxPivotAssistSpeed(0.1);
-		m_oi.setMaxCargoCollectDriveSpeed(0);
+		m_oi.setMaxCargoCollectDriveSpeed(0);*/
 	}
 
 	/** This function is called periodically during test mode. */
