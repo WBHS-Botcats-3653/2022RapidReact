@@ -67,7 +67,7 @@ public class NetworkEntries {
 	public static NetworkTableEntry m_nteRRCargo; //boolean
 
 	//Returns the selected Tarmac
-	public static char getTarmac(){
+	public static char getTarmac() {
 		return m_nteTarmac.getBoolean(false) ? 'R' : 'L';
 	}
 
@@ -102,6 +102,7 @@ public class NetworkEntries {
 
 	//Returns whether the smart intake is enabled
 	public static boolean isSmartIntakeEnabled() {
-		return m_nteIsSmartIntakeEnabled.getBoolean(false);
+		return false;
+		//return m_nteIsSmartIntakeEnabled.getBoolean(false);
 	}
 }
