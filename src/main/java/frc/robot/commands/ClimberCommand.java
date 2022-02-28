@@ -6,13 +6,12 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.inputs.OI;
-import frc.robot.inputs.SI;
 import frc.robot.subsystems.Climber;
 
 public class ClimberCommand extends CommandBase {
 	private Climber m_climber;
 	private OI m_oi;
-	private SI m_si;
+	//private SI m_si;
 
 	/**Creates a new ClimberCommand.
 	 * @param subsystem The subsystem used by this command.
@@ -20,7 +19,7 @@ public class ClimberCommand extends CommandBase {
 	public ClimberCommand(Climber p_climber) {
 		m_climber = p_climber;
 		m_oi = OI.getInstance();
-		m_si = SI.getInstance();
+		//m_si = SI.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
 		addRequirements(p_climber);
 	}

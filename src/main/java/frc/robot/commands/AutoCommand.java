@@ -119,7 +119,7 @@ public class AutoCommand extends CommandBase {
 			//Creates a new parallel command to be scheduled
 			parallelCommandToSchedule = new ParallelCommandGroup(
 				//Drive specified distance
-				new DriveCommand(distanceAndAngle[1], m_oi.getMaxDriveSpeed(), true),
+				new DriveCommand(distanceAndAngle[1], m_oi.getMaxCargoCollectDriveSpeed(), true),
 				//Intake the cargo
 				new CollectCargoCommand(),
 				//Execute parallel command next

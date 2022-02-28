@@ -18,6 +18,7 @@ public class OI {
 	private double maxShootSpeed = 0;
 	private double maxIndexerSpeed = 0;
 	private double maxPivotAssistSpeed = 0;
+	private double maxCargoCollectDriveSpeed = 0;
 
 	public OI() {
 		m_controller = new XboxController(0);
@@ -137,6 +138,18 @@ public class OI {
 	//Returns the max pivot assist speed
 	public double getMaxPivotAssistSpeed() {
 		return maxPivotAssistSpeed;
+	}
+	
+	//Sets the cargo collect drive speed
+	public void setMaxCargoCollectDriveSpeed(double speed) {
+		if (0.0 < speed && speed <= 1.0) {
+			maxCargoCollectDriveSpeed = speed;
+		}
+	}
+	
+	//Returns the cargo collect drive speed
+	public double getMaxCargoCollectDriveSpeed() {
+		return maxCargoCollectDriveSpeed;
 	}
 	
 	//Returns the speed to move forward/backward

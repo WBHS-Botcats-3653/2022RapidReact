@@ -16,7 +16,8 @@ public class ShootCargoCommand extends CommandBase {
 	private OI m_oi;
 	private SI m_si;
 
-	private final double indexSpeed = 0.5;
+	private boolean hasFinished;
+	private boolean shooterTriggered;
 
 	public ShootCargoCommand() {
 		m_shooter = Shooter.getInstance();
@@ -32,21 +33,25 @@ public class ShootCargoCommand extends CommandBase {
 	public void initialize() {
 		//Spins the shooter at max speed
 		m_shooter.setSpinSpeed(m_oi.getMaxShootSpeed());
+		//The command has not finished
+		hasFinished = false;
+		//The shooter photoelectric sensor has not been triggered
+		shooterTriggered = false;
 	}
 
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		/*if (m_si.getUpperStorageTriggered()) {  //If there is cargo in the upper storage area
-			//Stops the indexer
-			m_indexer.setIndexerSpeed(0);
-		} else if (m_si.getLowerStorageTriggered()) {  //If there is cargo in the lower storage area
+		if (m_si.getLowerStorageTriggered()) {  //If there is cargo in the lower storage area
 			//Sets the indexer to max speed
 			m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed());
-		}*/
-		if (m_si.getLowerStorageTriggered() || m_si.getUpperStorageTriggered()) {  //If there is cargo in the storage area
-			//Sets the indexer to max speed
-			m_indexer.setIndexerSpeed(indexSpeed);
+		}
+		if (m_si.getShooterTriggered()) {  //If cargo has moved into the shooter
+			//The shooter photoelectric sensor has been triggered
+			shooterTriggered = true;
+		} else {  //If cargo is not in the shooter
+			//If the shooter has been previously triggered the command should finish
+			if (shooterTriggered) hasFinished = true;
 		}
 	}
 
@@ -63,6 +68,6 @@ public class ShootCargoCommand extends CommandBase {
 	@Override
 	public boolean isFinished() {
 		//Stops the command when the cargo has left the shooter
-		return m_si.getShooterTriggered();
+		return hasFinished;
 	}
 }
