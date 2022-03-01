@@ -33,6 +33,7 @@ public class NetworkEntries {
 	//private NetworkTableEntry m_nteArmAngle = null;
 	public static NetworkTableEntry m_nteDriveSpeed; //double
 	public static NetworkTableEntry m_nteDriveDistance; //double
+	public static NetworkTableEntry m_nteEndSmartIntake;
 
     //Auto Phases
 	public static NetworkTableEntry m_isAutoShootOn; //boolean
@@ -94,6 +95,10 @@ public class NetworkEntries {
 		return cargo;
 	}
 	
+
+	public static boolean endSmartIntake(){
+		return m_nteEndSmartIntake.getBoolean(false);
+	}
 	//Returns whether the pivot assist is enabled
 	public static boolean isPivotAssistEnabled() {
 		return true;
