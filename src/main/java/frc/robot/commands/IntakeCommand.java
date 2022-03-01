@@ -38,6 +38,11 @@ public class IntakeCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
+		if(NetworkEntries.endSmartIntake()) {
+			smartControl = false;
+			smartPivotGoingUp = false;
+			smartPivotGoingDown = false;
+		}
 		if (NetworkEntries.isSmartIntakeEnabled()) {
 			//Smart intake control
 			smartIntakeLogic();
