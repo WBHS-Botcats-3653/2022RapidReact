@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.commands.*;
 import frc.robot.inputs.OI;
-import frc.robot.inputs.SI;
 import frc.robot.subsystems.*;
 
 /**
@@ -31,7 +30,6 @@ public class Robot extends TimedRobot {
 
 	//Inputs
 	private final OI m_oi = OI.getInstance();
-	private final SI m_si = SI.getInstance();
 
 	//Commands
 	private AutoCommand m_autonomousCommand;
@@ -73,29 +71,6 @@ public class Robot extends TimedRobot {
 
 		m_dashboardSubsystem.periodic();
 		Dashboard.selectorLogic();
-		/*
-		System.out.println("shooter: " + m_si.getShooterTriggered());
-		System.out.println("upper: " + m_si.getUpperStorageTriggered());
-		System.out.println("lower: " + m_si.getLowerStorageTriggered());
-		*/
-		/*
-		//Print stuff
-		System.out.println("-----------------------------------------------");
-
-		//Encoders
-		System.out.println("Left Drive Distance: " + m_directionSubsystem.getLeftDistance());
-		System.out.println("Right Drive Distance: " + m_directionSubsystem.getRightDistance());
-
-		//Photoelectric sensors
-		System.out.println("Shooter PE: " + m_si.getShooterTriggered());
-		System.out.println("Upper Storage PE: " + m_si.getUpperStorageTriggered());
-		System.out.println("Lower Storage PE: " + m_si.getLowerStorageTriggered());
-
-		//Limit switches
-		System.out.println("Top Pivot Limit Switch: " + m_si.getPivotUpLimitTriggered());
-		System.out.println("Bottom Pivot Limit Switch: " + m_si.getPivotDownLimitTriggered());
-		//System.out.println("Bottom Climber Limit Switch: " + m_si.getClimberDownLimitTriggered());
-		*/
 	}
 
 	/** This function is called once each time the robot enters Disabled mode. */
