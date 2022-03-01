@@ -40,7 +40,6 @@ public class IntakeCommand extends CommandBase {
 	public void execute() {
 		if (NetworkEntries.isSmartIntakeEnabled()) {
 			//Smart intake control
-			//TODO: the problem is in the smart intake
 			smartIntakeLogic();
 		}
 		//Manual controls
