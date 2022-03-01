@@ -181,7 +181,7 @@ public class OI {
 		}
 	}
 
-	//Returns whether the left DPad is being pressed
+	/**Returns whether the left DPad is being pressed */
 	public boolean getManualIntakeDown() {
 		if (NetworkEntries.isSmartIntakeEnabled()) {
 			return POVIsLeft();
@@ -190,27 +190,31 @@ public class OI {
 		}
 	}
 
-	//Returns whether the B button is being pressed
+	/**Returns whether the B button is being pressed */
 	public boolean getIndexerIn() {
 		return m_controller.getBButton();
 	}
 
-	//Returns whether the Y button is being pressed
+	/**Returns whether the Y button is being pressed
+	*/
 	public boolean getIndexerOut() {
 		return m_controller.getYButton();
 	}
 
-	//Returns whether the A button is being pressed
+	/**Returns whether the A button is being pressed
+	 */
 	public boolean getManualIntakeIn() {
 		return m_controller.getAButton();
 	}
 
-	//Returns whether the A button is being pressed
+	/**Returns whether the X button is being pressed
+	 */
 	public boolean getManualIntakeOut() {
 		return m_controller.getXButton();
 	}
 
-	//Returns whether the left trigger is being pressed
+	/**Returns whether the left trigger (bumper) is being pressed
+	 */
 	public boolean getSmartIntakeDown() {
 		if (NetworkEntries.isSmartIntakeEnabled()) {
 			return m_controller.getLeftBumper();
@@ -219,7 +223,8 @@ public class OI {
 		}
 	}
 
-	//Returns whether the left trigger is not being pressed
+	/**Returns whether the left trigger (bumper) is not being pressed
+	 */
 	public boolean getSmartIntakeUp() {
 		if (NetworkEntries.isSmartIntakeEnabled()) {
 			return m_controller.getLeftBumperReleased();
