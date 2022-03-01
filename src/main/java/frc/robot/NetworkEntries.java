@@ -32,6 +32,7 @@ public class NetworkEntries {
 	// Drive Tab
 	//private NetworkTableEntry m_nteArmAngle = null;
 	public static NetworkTableEntry m_nteDriveSpeed; //double
+	public static NetworkTableEntry m_nteDriveDistance; //double
 
     //Auto Phases
 	public static NetworkTableEntry m_isAutoShootOn; //boolean
