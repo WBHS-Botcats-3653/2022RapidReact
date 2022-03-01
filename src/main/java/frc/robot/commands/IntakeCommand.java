@@ -108,6 +108,8 @@ public class IntakeCommand extends CommandBase {
 			m_intake.setRollerSpeed(0);
 			//Initial pivot up started
 			smartPivotGoingUp = true;
+			//Stop downward pivot
+			smartPivotGoingDown = false;
 		} else if (m_oi.getSmartIntakeDown() && !m_si.getPivotDownLimitTriggered()) {  //If the smart intake is being called to go down and the bottom pivot limit switch is not being triggered
 			//Pivots the intake down at the set max speed
 			m_intake.setPivotSpeed(m_oi.getMaxSmartIntakePivotDownSpeed());
@@ -120,6 +122,22 @@ public class IntakeCommand extends CommandBase {
 			if (!smartControl && m_oi.getSmartIntakeDown()) {  //If the smart intake is being pressed
 				//Prevents manual control from interferring with smart control
 				smartControl = true;
+			}
+			//If the intake has lifted off the top pivot limit switch
+			if (smartPivotGoingDown && !m_si.getPivotUpLimitTriggered()) {
+				//Smart pivot has made initial upward pivot
+				smartPivotGoingDown = false;
+				//Spins the intake rollers at max speed
+				m_intake.setRollerSpeed(m_oi.getMaxIntakeRollerSpeed());
+			}
+			//If the intake has lifted off the bottom pivot limit switch
+			if (smartPivotGoingUp && !m_si.getPivotDownLimitTriggered()) {
+				//Stops the intake rollers
+				m_intake.setRollerSpeed(0);
+				//Allows manual control to take over from smart control
+				smartControl = false;
+				//Smart pivot has made initial upward pivot
+				smartPivotGoingUp = false;
 			}
 			if (m_si.getPivotUpLimitTriggered()) {  //If the top pivot limit switch is being triggered
 				//Stops the intake rollers
@@ -135,13 +153,6 @@ public class IntakeCommand extends CommandBase {
 				smartControl = false;
 				//Smart pivot has made initial upward pivot
 				smartPivotGoingUp = false;
-			}
-			//If the intake has lifted off the top pivot limit switch
-			if (smartPivotGoingDown && !m_si.getPivotUpLimitTriggered()) {
-				//Smart pivot has made initial upward pivot
-				smartPivotGoingDown = false;
-				//Spins the intake rollers at max speed
-				m_intake.setRollerSpeed(m_oi.getMaxIntakeRollerSpeed());
 			}
 			//If the intake isn't going up
 			if (!smartPivotGoingUp || m_si.getPivotUpLimitTriggered()) {
