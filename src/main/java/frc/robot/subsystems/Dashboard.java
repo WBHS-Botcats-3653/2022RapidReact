@@ -32,95 +32,72 @@ public class Dashboard {
 		tabSpeeds = Shuffleboard.getTab("Speeds");
 		tabTest = Shuffleboard.getTab("Test");
 
-		
+		//AutoConfig Tab
+			//Auto Shoot
+			NetworkEntries.m_isAutoShootOn = tabAutoConfig.addPersistent("Auto Shoot", true).withWidget(BuiltInWidgets.kToggleButton)
+			.withSize(1, 1).withPosition(0, 0).getEntry();
+			//Auto Taxi
+			NetworkEntries.m_isAutoTaxiOn = tabAutoConfig.addPersistent("Auto Taxi", true).withWidget(BuiltInWidgets.kToggleButton)
+			.withSize(1, 1).withPosition(1, 0).getEntry();
+			//Auto collect
+			NetworkEntries.m_isAutoCollectOn = tabAutoConfig.addPersistent("Auto Collect", true).withWidget(BuiltInWidgets.kToggleButton)
+			.withSize(1, 1).withPosition(2, 0).getEntry();
+			//AutoConfig Tab
+			NetworkEntries.m_nteTarmac = tabAutoConfig.add("Is Right Tarmac?", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(1, 1).getEntry(); //boolean
+			
+			/*
+			ShuffleboardLayout Cargos = Shuffleboard.getTab("AutoConfig")
+				.getLayout("Cargo options", BuiltInLayouts.kList)
+				.withSize(2, 2).withPosition(1, 0)
+				.withProperties(Map.of("Label position", "HIDDEN")); // hide labels for commands
+			*/
+			NetworkEntries.m_nteLLCargo = tabAutoConfig.add("LL Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(5, 0).getEntry(); //boolean
+			NetworkEntries.m_nteLRCargo = tabAutoConfig.add("LR Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(5, 1).getEntry(); //boolean
+			NetworkEntries.m_nteMLCargo = tabAutoConfig.add("ML Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(6, 0).getEntry(); //boolean
+			NetworkEntries.m_nteMRCargo = tabAutoConfig.add("MR Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(7, 0).getEntry(); //boolean
+			NetworkEntries.m_nteRLCargo = tabAutoConfig.add("RL Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(8, 0).getEntry(); //boolean
+			NetworkEntries.m_nteRRCargo = tabAutoConfig.add("RR Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(8, 1).getEntry(); //boolean
 
-		// Config Tab
-		NetworkEntries.m_nteIsPivotAssistEnabled = tabConfig.addPersistent("is Pivot Assist Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
-		.withSize(1, 1).withPosition(0, 1).getEntry();
-		
+
 		// Drive Tab
-		/*
-		cam0 = CameraServer.startAutomaticCapture(0);
-		cam0.setResolution(142, 90);
-		cam0.setFPS(20);
-		tabDrive.add("Field View", cam0).withSize(3, 2).withPosition(6, 0);
-		tabDrive.add("Gyro", Direction.getInstance().getGyro()).withSize(2, 2).withPosition(3, 0);
-		/*
-		m_nteArmAngle = tabDrive.add("Arm", 0.0).withWidget(BuiltInWidgets.kDial)
-				.withProperties(Map.of("min", 0, "max", 180)).withSize(1, 1).withPosition(5, 0).getEntry();
-		*/
-		NetworkEntries.m_nteIsSmartIntakeEnabled = tabDrive.addPersistent("is Smart Intake Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
+			/*
+			cam0 = CameraServer.startAutomaticCapture(0);
+			cam0.setResolution(142, 90);
+			cam0.setFPS(20);
+			tabDrive.add("Field View", cam0).withSize(3, 2).withPosition(6, 0);
+			tabDrive.add("Gyro", Direction.getInstance().getGyro()).withSize(2, 2).withPosition(3, 0);
+			*/
+			NetworkEntries.m_nteIsSmartIntakeEnabled = tabDrive.addPersistent("is Smart Intake Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
 			.withSize(1, 1).withPosition(5, 1).getEntry();
-		NetworkEntries.m_nteDriveSpeed = tabDrive.addPersistent("Speed", m_oi.getMaxDriveSpeed()).withWidget(BuiltInWidgets.kNumberSlider)
+			NetworkEntries.m_nteDriveSpeed = tabDrive.addPersistent("Speed", m_oi.getMaxDriveSpeed()).withWidget(BuiltInWidgets.kNumberSlider)
 				.withProperties(Map.of("min", 0, "max", 1.0)).withSize(1, 1).withPosition(5, 0).getEntry();
-
-		//Auto Shoot
-		NetworkEntries.m_isAutoShootOn = tabDrive.addPersistent("Auto Shoot", true).withWidget(BuiltInWidgets.kToggleButton)
-		.withSize(1, 1).withPosition(0, 1).getEntry();
-		//this one is the boolean box
-		//--m_isAutoShootOnBox = tabDrive.addPersistent("is Auto Shoot", AutoCommand.isAutoShootOn).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(0, 0).getEntry();
-
-		//Auto Taxi
-		NetworkEntries.m_isAutoTaxiOn = tabDrive.addPersistent("Auto Taxi", true).withWidget(BuiltInWidgets.kToggleButton)
-		.withSize(1, 1).withPosition(1, 1).getEntry();
-		//this one is the boolean box
-		//--m_isAutoTaxiOnBox = tabDrive.addPersistent("is Auto Taxi", AutoCommand.isAutoTaxiOn).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(1, 0).getEntry();
-
-		//Auto collect
-		NetworkEntries.m_isAutoCollectOn = tabDrive.addPersistent("Auto Collect", true).withWidget(BuiltInWidgets.kToggleButton)
-		.withSize(1, 1).withPosition(2, 1).getEntry();
-		//this one is the boolean box
-		//--m_isAutoCollectOnBox = tabDrive.addPersistent("is Auto Collect", AutoCommand.isAutoCollectOn).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(2, 0).getEntry();
+		// Config Tab
+			NetworkEntries.m_nteIsPivotAssistEnabled = tabConfig.addPersistent("is Pivot Assist Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
+			.withSize(1, 1).withPosition(0, 1).getEntry();
+		//Speeds Tab			
+			NetworkEntries.m_nteMaxDriveSpeed = tabSpeeds.addPersistent("Max Drive speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(0, 0).getEntry();//double
+			NetworkEntries.m_nteMaxArmSpeed = tabSpeeds.addPersistent("Max Arm speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(2, 0).getEntry();//double
+			NetworkEntries.m_nteMaxIntakePivotSpeed = tabSpeeds.addPersistent("Max Intake Pivot speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(4, 0).getEntry();//double
+			NetworkEntries.m_nteMaxShootSpeed = tabSpeeds.addPersistent("Max Shoot speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(6, 0).getEntry();//double
+			NetworkEntries.m_nteMaxIndexerSpeed = tabSpeeds.addPersistent("Max Indexer speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(0, 1).getEntry();//double
+			NetworkEntries.m_nteMaxPivotAssistSpeed = tabSpeeds.addPersistent("Max Pivot Assist speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(6, 1).getEntry(); //double
+			NetworkEntries.m_nteMaxSmartIntakePivotDownSpeed = tabSpeeds.addPersistent("Max Smart Down Intake Pivot speed", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(2, 1).getEntry();//double
+			NetworkEntries.m_nteMaxSmartIntakePivotUpSpeed = tabSpeeds.addPersistent("Max Smart Up Intake Pivot speed", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(5, 1).getEntry();//double
+			NetworkEntries.m_nteMaxCargoCollectDriveSpeed = tabSpeeds.addPersistent("Max Cargo Collect Drive speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(3, 1).getEntry(); //double
+			NetworkEntries.m_nteMaxIntakeRollerSpeed = tabSpeeds.addPersistent("Max Intake Roller Speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(3, 2).getEntry(); //double
 
 		// Test Tab
-		NetworkEntries.m_nteIntakeUpLimit = tabTest.add("Intake up limit", false).withSize(1, 1).withPosition(3, 0).getEntry();
-		NetworkEntries.m_nteIntakeDownLimit = tabTest.add("Intake Down limit", false).withSize(1, 1).withPosition(4, 0).getEntry();
-
-		NetworkEntries.m_nteLowerStoragePE = tabTest.add("lower pe", false).withSize(1, 1).withPosition(1, 0).getEntry();
-		NetworkEntries.m_nteUpperStoragePE = tabTest.add("upper pe", false).withSize(1, 1).withPosition(2, 0).getEntry();
-		NetworkEntries.m_nteShooterPE = tabTest.add("shooter", false).withSize(1, 1).withPosition(2, 1).getEntry();
-		//m_nteArmUpLimit = tabTest.add("Arm Up", false).withSize(1, 1).withPosition(1, 0).getEntry();
-		//this is for testing the encoders if they are working
-		//--NetworkEntries.testingEncoderLeft = tabTest.add("Left encoder testing it", 0).withSize(1, 1).withPosition(1, 0).getEntry();
-		//m_nteArmEncoderRaw = tabTest.add("Arm Encoder", 1024).withSize(1, 1).withPosition(2, 0).getEntry();
-		NetworkEntries.m_nteDriveEncLeft = tabTest.add("Drive Left", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(0, 2).getEntry();
-		NetworkEntries.m_nteDriveEncRight = tabTest.add("Drive Right", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(1, 2).getEntry();
-		
-
-		//Speeds Tab
-		/*
-		ShuffleboardLayout Speeds = Shuffleboard.getTab("Speeds")
-  			.getLayout("Speeds", BuiltInLayouts.kList)
-  			.withSize(2, 2)
-  			.withProperties(Map.of("Label position", "HIDDEN")); // hide labels for commands
-		*/
-		
-		NetworkEntries.m_nteMaxDriveSpeed = tabSpeeds.addPersistent("Max Drive speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(0, 0).getEntry();//double
-		NetworkEntries.m_nteMaxArmSpeed = tabSpeeds.addPersistent("Max Arm speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(2, 0).getEntry();//double
-		NetworkEntries.m_nteMaxIntakePivotSpeed = tabSpeeds.addPersistent("Max Intake Pivot speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(4, 0).getEntry();//double
-		NetworkEntries.m_nteMaxShootSpeed = tabSpeeds.addPersistent("Max Shoot speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(6, 0).getEntry();//double
-		NetworkEntries.m_nteMaxIndexerSpeed = tabSpeeds.addPersistent("Max Indexer speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(0, 1).getEntry();//double
-		NetworkEntries.m_nteMaxPivotAssistSpeed = tabSpeeds.addPersistent("Max Pivot Assist speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(6, 1).getEntry(); //double
-		NetworkEntries.m_nteMaxSmartIntakePivotDownSpeed = tabSpeeds.addPersistent("Max Smart Down Intake Pivot speed", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(2, 1).getEntry();//double
-		NetworkEntries.m_nteMaxSmartIntakePivotUpSpeed = tabSpeeds.addPersistent("Max Smart Up Intake Pivot speed", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(5, 1).getEntry();//double
-		NetworkEntries.m_nteMaxCargoCollectDriveSpeed = tabSpeeds.addPersistent("Max Cargo Collect Drive speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(3, 1).getEntry(); //double
-		NetworkEntries.m_nteMaxIntakeRollerSpeed = tabSpeeds.addPersistent("Max Intake Roller Speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(3, 2).getEntry(); //double
-
-		//AutoConfig Tab
-		NetworkEntries.m_nteTarmac = tabAutoConfig.add("Is Right Tarmac?", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(0, 0).getEntry(); //boolean
-		//NetworkEntries.m_nteLTarmac = tabAutoConfig.add("Left Tarmac", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(0, 0).getEntry(); //boolean
-		/*
-		ShuffleboardLayout Cargos = Shuffleboard.getTab("AutoConfig")
-  			.getLayout("Cargo options", BuiltInLayouts.kList)
-  			.withSize(2, 2).withPosition(1, 0)
-  			.withProperties(Map.of("Label position", "HIDDEN")); // hide labels for commands
-*/
-		NetworkEntries.m_nteLLCargo = tabAutoConfig.add("LL Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(2, 0).getEntry(); //boolean
-		NetworkEntries.m_nteLRCargo = tabAutoConfig.add("LR Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(2, 1).getEntry(); //boolean
-		NetworkEntries.m_nteMLCargo = tabAutoConfig.add("ML Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(3, 0).getEntry(); //boolean
-		NetworkEntries.m_nteMRCargo = tabAutoConfig.add("MR Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(4, 0).getEntry(); //boolean
-		NetworkEntries.m_nteRLCargo = tabAutoConfig.add("RL Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(5, 0).getEntry(); //boolean
-		NetworkEntries.m_nteRRCargo = tabAutoConfig.add("RR Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(5, 1).getEntry(); //boolean
+			NetworkEntries.m_nteIntakeUpLimit = tabTest.add("Intake up limit", false).withSize(1, 1).withPosition(3, 0).getEntry();
+			NetworkEntries.m_nteIntakeDownLimit = tabTest.add("Intake Down limit", false).withSize(1, 1).withPosition(4, 0).getEntry();
+			NetworkEntries.m_nteLowerStoragePE = tabTest.add("lower pe", false).withSize(1, 1).withPosition(1, 0).getEntry();
+			NetworkEntries.m_nteUpperStoragePE = tabTest.add("upper pe", false).withSize(1, 1).withPosition(2, 0).getEntry();
+			NetworkEntries.m_nteShooterPE = tabTest.add("shooter", false).withSize(1, 1).withPosition(2, 1).getEntry();
+			//m_nteArmUpLimit = tabTest.add("Arm Up", false).withSize(1, 1).withPosition(1, 0).getEntry();
+			//this is for testing the encoders if they are working
+			//--NetworkEntries.testingEncoderLeft = tabTest.add("Left encoder testing it", 0).withSize(1, 1).withPosition(1, 0).getEntry();
+			//m_nteArmEncoderRaw = tabTest.add("Arm Encoder", 1024).withSize(1, 1).withPosition(2, 0).getEntry();
+			NetworkEntries.m_nteDriveEncLeft = tabTest.add("Drive Left", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(0, 2).getEntry();
+			NetworkEntries.m_nteDriveEncRight = tabTest.add("Drive Right", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(1, 2).getEntry();	
 	}
 
 	
@@ -129,9 +106,7 @@ public class Dashboard {
 
 		//Intake.setArmEncoderFloor((int) m_nteArmDownEnc.getDouble(1024));
 	}
-	/**This is in charge of making sure the user won't be able to select the cargo that are too far.
-	 * 
-	 */
+	/**This is in charge of making sure the user won't be able to select the cargo that are too far.*/
 	public static void selectorLogic(){
 		if(NetworkEntries.m_nteTarmac.getBoolean(false)){
 			NetworkEntries.m_nteLLCargo.setBoolean(false);
@@ -141,6 +116,12 @@ public class Dashboard {
 			NetworkEntries.m_nteRRCargo.setBoolean(false);
 		}
 	}
+	/**@Important This Method method should be executed in RobotPeriodic().
+	 * It is an alternative to the refresh() method.
+	 * 
+	 * @description This Method will update the values in the dashboard and in the networkTable
+	 * in order to change the aprepiate values accordingly
+	 */
 	public void periodic() {
 		OI m_oi = OI.getInstance();
 		//Intake arm = Intake.getInstance();
@@ -171,7 +152,7 @@ public class Dashboard {
 		m_oi.setMaxCargoCollectDriveSpeed(NetworkEntries.m_nteMaxCargoCollectDriveSpeed.getDouble(1.0));
 		NetworkEntries.m_nteMaxPivotAssistSpeed.getDouble(1.0);
 
-		//pe 's'
+		//Updates the PhotoElectric sensors in the dashboard
 		NetworkEntries.m_nteLowerStoragePE.setBoolean(m_si.getLowerStorageTriggered());
 		NetworkEntries.m_nteUpperStoragePE.setBoolean(m_si.getUpperStorageTriggered());
 		NetworkEntries.m_nteShooterPE.setBoolean(m_si.getShooterTriggered());
@@ -184,13 +165,14 @@ public class Dashboard {
 		m_nteDriveEncRight.setNumber(drive.getRightEncoder());
 		*/
 	}
+	/**This Method Starts the robot with updating some values */
 	public static void robotInit(){
-		//pe 's'
+		//Updates the PhotoElectric sensors in the dashboard
 		NetworkEntries.m_nteLowerStoragePE.setBoolean(m_si.getLowerStorageTriggered());
 		NetworkEntries.m_nteUpperStoragePE.setBoolean(m_si.getUpperStorageTriggered());
 		NetworkEntries.m_nteShooterPE.setBoolean(m_si.getShooterTriggered());
 	}
-	//Returns an instance of Dashboard, creating an instance only when one does not already exist (singleton)
+	/**Returns an instance of Dashboard, creating an instance only when one does not already exist (singleton)*/
 	public static Dashboard getInstance() {
 		if (m_singleton == null) {
 			m_singleton = new Dashboard();
