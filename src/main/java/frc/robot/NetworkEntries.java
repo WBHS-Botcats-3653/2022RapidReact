@@ -55,9 +55,7 @@ public class NetworkEntries {
 	public static NetworkTableEntry m_nteMaxCargoCollectDriveSpeed; //double
 
 	//Ball Pos
-	//public static NetworkTableEntry m_nteMaxDriveSpeed; //double
 	public static NetworkTableEntry m_nteTarmac; //boolean
-	//public static NetworkTableEntry m_nteLTarmac; //boolean
 
 	public static NetworkTableEntry m_nteLLCargo; //boolean
 	public static NetworkTableEntry m_nteLRCargo; //boolean
