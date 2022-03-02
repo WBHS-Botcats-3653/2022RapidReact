@@ -32,7 +32,7 @@ public class ShootCargoCommand extends CommandBase {
 	@Override
 	public void initialize() {
 		//Spins the shooter at max speed
-		m_shooter.setSpinSpeed(m_oi.getMaxShootSpeed());
+		m_shooter.setSpinSpeed(/*m_oi.getMaxShootSpeed()*/0.85);
 		//The command has not finished
 		hasFinished = false;
 		//The shooter photoelectric sensor has not been triggered
