@@ -68,7 +68,10 @@ public class Robot extends TimedRobot {
 		// and running subsystem periodic() methods.  This must be called from the robot's periodic
 		// block in order for anything in the Command-based framework to work.
 		CommandScheduler.getInstance().run();
-
+		//Prints
+		System.out.println("Left Encoder" + m_directionSubsystem.getLeftDistance());
+		System.out.println("Right Encoder" + m_directionSubsystem.getRightDistance());
+		
 		m_dashboardSubsystem.periodic();
 		Dashboard.selectorLogic();
 	}
