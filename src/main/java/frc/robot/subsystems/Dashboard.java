@@ -148,7 +148,7 @@ public class Dashboard {
 		m_oi.setMaxSmartIntakePivotUpSpeed(NetworkEntries.m_nteMaxSmartIntakePivotUpSpeed.getDouble(0.35));
 		m_oi.setMaxSmartIntakePivotDownSpeed(NetworkEntries.m_nteMaxSmartIntakePivotDownSpeed.getDouble(0.15));
 		//m_oi.setMaxIntakeRollerSpeed(NetworkEntries.m_nteMaxIntakeRollerSpeed.getDouble(1.0));
-		m_oi.setMaxShootSpeed(NetworkEntries.m_nteMaxShootSpeed.getDouble(0.85));
+		m_oi.setMaxShootSpeed(/*NetworkEntries.m_nteMaxShootSpeed.getDouble(0.85)*/0.85);
 		m_oi.setMaxCargoCollectDriveSpeed(NetworkEntries.m_nteMaxCargoCollectDriveSpeed.getDouble(1.0));
 		NetworkEntries.m_nteMaxPivotAssistSpeed.getDouble(1.0);
 
