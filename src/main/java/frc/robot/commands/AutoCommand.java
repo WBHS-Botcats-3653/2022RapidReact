@@ -51,13 +51,6 @@ public class AutoCommand extends CommandBase {
 		//kP = 1;
 		hasFinished = false;
 		executingCommand = false;
-		commandToScheduleNext = "Sequential";
-		sequentialCommandToSchedule = new SequentialCommandGroup(
-			isAutoShootOn ? new ShootCargoCommand() : new PrintCommand("Auto shoot preload disabled"),   //Shoots Preload
-			isAutoTaxiOn||isAutoCollectOn ? new DriveCommand(kTaxiDistanceInFeet, m_oi.getMaxDriveSpeed(), false) : new PrintCommand ("Taxi is disabled"),
-			new InstantCommand(() -> {AutoCommand.stage = "Taxi";}),  //Switches to Taxi stage
-			new InstantCommand(() -> {AutoCommand.executingCommand = false;})  //Completed executing a sequential command
-		);
 	}
 
 	//Returns the next SequentialCommandGroup to be scheduled
@@ -86,8 +79,17 @@ public class AutoCommand extends CommandBase {
 
 	@Override
 	public void initialize() {
+		System.out.println("Auto scheduled");
 		//Target first selected cargo
 		cargoTargetIndex = 0;
+		//Schedules preload shoot and taxi if applicable
+		commandToScheduleNext = "Sequential";
+		sequentialCommandToSchedule = new SequentialCommandGroup(
+			isAutoShootOn ? new ShootCargoCommand() : new PrintCommand("Auto shoot preload disabled"),   //Shoots Preload
+			isAutoTaxiOn||isAutoCollectOn ? new DriveCommand(kTaxiDistanceInFeet, m_oi.getMaxDriveSpeed(), false) : new PrintCommand ("Taxi is disabled"),
+			new InstantCommand(() -> {AutoCommand.stage = "Taxi";}),  //Switches to Taxi stage
+			new InstantCommand(() -> {AutoCommand.executingCommand = false;})  //Completed executing a sequential command
+		);
 	}
 
 	@Override
