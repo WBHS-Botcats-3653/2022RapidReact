@@ -95,7 +95,7 @@ public class Dashboard {
 			NetworkEntries.m_nteLowerStoragePE = tabTest.add("lower pe", false).withSize(1, 1).withPosition(1, 0).getEntry();
 			NetworkEntries.m_nteUpperStoragePE = tabTest.add("upper pe", false).withSize(1, 1).withPosition(2, 0).getEntry();
 			NetworkEntries.m_nteShooterPE = tabTest.add("shooter", false).withSize(1, 1).withPosition(2, 1).getEntry();
-			
+			NetworkEntries.m_nteResetEncoders = tabTest.add("Reset Encoders", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1,1).withPosition(4,1).getEntry();
 
 			NetworkEntries.m_nteDriveEncLeft = tabTest.add("Drive Left", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(0, 1).getEntry();
 			NetworkEntries.m_nteDriveEncRight = tabTest.add("Drive Right", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(1, 1).getEntry();	
@@ -168,8 +168,11 @@ public class Dashboard {
 		m_nteDriveEncLeft.setNumber(drive.getLeftEncoder());
 		m_nteDriveEncRight.setNumber(drive.getRightEncoder());
 		*/
-
-
+		//In charge of reseting encoders
+		if(NetworkEntries.m_nteResetEncoders.getBoolean(false)){
+			m_direction.resetEncoders();
+			NetworkEntries.m_nteResetEncoders.setBoolean(false);
+		}
 	}
 	/**This Method Starts the robot with updating some values */
 	public static void robotInit() {
