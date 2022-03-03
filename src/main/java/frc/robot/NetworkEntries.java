@@ -22,6 +22,8 @@ public class NetworkEntries {
 	public static NetworkTableEntry m_nteDriveEncRight; //double
 	public static NetworkTableEntry m_nteIntakeUpLimit;
     public static NetworkTableEntry m_nteIntakeDownLimit;
+	public static NetworkTableEntry m_nteResetEncoders;
+		
 
 	// pe 's'
 	public static NetworkTableEntry m_nteLowerStoragePE;
