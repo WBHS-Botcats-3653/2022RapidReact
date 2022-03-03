@@ -86,7 +86,7 @@ public class AutoCommand extends CommandBase {
 		commandToScheduleNext = "Sequential";
 		sequentialCommandToSchedule = new SequentialCommandGroup(
 			isAutoShootOn ? new ShootCargoCommand() : new PrintCommand("Auto shoot preload disabled"),   //Shoots Preload
-			isAutoTaxiOn||isAutoCollectOn ? new DriveCommand(kTaxiDistanceInFeet, m_oi.getMaxDriveSpeed(), false) : new PrintCommand ("Taxi is disabled"),
+			isAutoTaxiOn||isAutoCollectOn ? new DriveCommand(kTaxiDistanceInInches, m_oi.getMaxDriveSpeed(), false) : new PrintCommand ("Taxi is disabled"),
 			new InstantCommand(() -> {AutoCommand.stage = "Taxi";}),  //Switches to Taxi stage
 			new InstantCommand(() -> {AutoCommand.executingCommand = false;})  //Completed executing a sequential command
 		);
