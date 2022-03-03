@@ -72,7 +72,7 @@ public class Dashboard {
 			NetworkEntries.m_nteDriveSpeed = tabDrive.addPersistent("Speed", m_oi.getMaxDriveSpeed()).withWidget(BuiltInWidgets.kNumberSlider)
 				.withProperties(Map.of("min", 0, "max", 1.0)).withSize(1, 1).withPosition(5, 0).getEntry();
 
-			NetworkEntries.m_nteDriveDistance = tabDrive.add("Drived Distance", 0).withWidget(BuiltInWidgets.kDial).withSize(1, 1).withPosition(3, 0).getEntry();
+			NetworkEntries.m_nteDriveDistance = tabDrive.add("Drived Distance", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(3, 0).getEntry();
 			NetworkEntries.m_nteEndSmartIntake = tabDrive.add("End Smart Intake", false).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 1).withPosition(3, 6).getEntry();
 			// Config Tab
 			NetworkEntries.m_nteIsPivotAssistEnabled = tabConfig.addPersistent("is Pivot Assist Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
@@ -135,6 +135,10 @@ public class Dashboard {
 		NetworkEntries.m_nteDriveEncLeft.setDouble(m_direction.getLeftDistance());
 		NetworkEntries.m_nteDriveEncRight.setDouble(m_direction.getRightDistance());
 
+		//drived distance:
+		NetworkEntries.m_nteDriveDistance.setDouble(m_direction.getDistance());
+
+
 		NetworkEntries.m_nteIntakeUpLimit.setBoolean(m_si.isPivotUpLimitClosed());
 		NetworkEntries.m_nteIntakeDownLimit.setBoolean(m_si.isPivotDownLimitClosed());
 		//updates the following speeds
@@ -164,6 +168,8 @@ public class Dashboard {
 		m_nteDriveEncLeft.setNumber(drive.getLeftEncoder());
 		m_nteDriveEncRight.setNumber(drive.getRightEncoder());
 		*/
+
+
 	}
 	/**This Method Starts the robot with updating some values */
 	public static void robotInit() {
