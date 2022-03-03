@@ -4,7 +4,7 @@
 
 package frc.robot.subsystems;
 
-import static frc.robot.Constants.ShooterConstants.kSpinnerMotorID;
+import static frc.robot.Constants.ShooterConstants.kFlyWheelMotorID;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
@@ -14,11 +14,19 @@ import frc.robot.inputs.OI;
 public class Shooter extends SubsystemBase {
 	private static Shooter shooter = null;
 	private OI m_oi = OI.getInstance();
-	public static WPI_VictorSPX spinner;
+
+	private static WPI_VictorSPX flyWheel;
+	private double maxFlyWheelSpeed;
 
 	public Shooter() {
-		//Creates WPI_VictorSPX motor controller for the spinner
-		spinner = new WPI_VictorSPX(kSpinnerMotorID);
+		//Creates WPI_VictorSPX motor controller for the fly wheel
+		flyWheel = new WPI_VictorSPX(kFlyWheelMotorID);
+		flyWheel.setInverted(true);
+	}
+
+	@Override
+	public void periodic() {
+		maxFlyWheelSpeed = m_oi.getMaxShootSpeed();
 	}
 
 	//Returns an instance of Shooter, creating an instance only when one does not already exist (singleton)
@@ -29,13 +37,13 @@ public class Shooter extends SubsystemBase {
 	}
 
 	/**SHOOTER, but with another name
-	 * Spins the spinner to shoot the cargo
+	 * Spins the flyWheel to shoot the cargo
 	 * 
 	 */
 	public void setSpinSpeed(double speed) {
-		//Caps the spinner speed from exceeding the set maxShootSpeed
-		if (Math.abs(speed) > m_oi.getMaxShootSpeed()) speed = (speed < 0 ? -1 : 1) * m_oi.getMaxShootSpeed();
-		//Sets the spinner speed
-		spinner.set(-speed);
+		//Caps the fly wheel speed from exceeding the set maxShootSpeed
+		if (Math.abs(speed) > maxFlyWheelSpeed) speed = (speed < 0 ? -1 : 1) * maxFlyWheelSpeed;
+		//Sets the fly wheel speed
+		flyWheel.set(speed);
 	}
 }

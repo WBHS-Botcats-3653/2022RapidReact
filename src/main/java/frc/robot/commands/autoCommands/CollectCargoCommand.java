@@ -40,7 +40,7 @@ public class CollectCargoCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		if (m_si.getPivotDownLimitTriggered() && !endCommand) {  //If the intake has finished it's downward pivot
+		if (m_si.isPivotDownLimitClosed() && !endCommand) {  //If the intake has finished it's downward pivot
 			//Stops the intake pivot
 			m_intake.setPivotSpeed(m_oi.getMaxPivotAssistSpeed());
 			//Sets the intake roller speed to max
@@ -70,6 +70,6 @@ public class CollectCargoCommand extends CommandBase {
 	@Override
 	public boolean isFinished() {
 		//If the intake has finished it's upward pivot
-		return m_si.getPivotUpLimitTriggered() && endCommand;
+		return m_si.isPivotUpLimitClosed() && endCommand;
 	}
 }

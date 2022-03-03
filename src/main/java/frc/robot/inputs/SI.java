@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 //Sensor Inputs
 public class SI {
 	private static SI m_singleton;
+
 	//Photoelectric sensors
 	private static DigitalInput lowerStoragePE;
 	private static DigitalInput upperStoragePE;
@@ -22,7 +23,6 @@ public class SI {
 	//Limit switches
 	private static DigitalInput topPivotLimitSwitch;
 	private static DigitalInput bottomPivotLimitSwitch;
-	//private static DigitalInput climberDownButton;
 
 	public SI() {
 		//Photoelectric sensors
@@ -32,7 +32,6 @@ public class SI {
 		//Limit switches
 		topPivotLimitSwitch = new DigitalInput(kTopPivotLimitSwitchID);
 		bottomPivotLimitSwitch = new DigitalInput(kBottomPivotLimitSwitchID);
-		//climberDownButton = new DigitalInput(kBottomClimberLimitSwitchID);
 	}
 
 	//Returns an instance of SI, creating an instance only when one does not already exist (singleton)
@@ -44,32 +43,27 @@ public class SI {
 	}
 
 	//Returns input from the lower storage photoelectric sensor
-	public boolean getLowerStorageTriggered() {
+	public boolean isLowerStorageClosed() {
 		return lowerStoragePE.get();
 	}
 
 	//Returns input from the upper storage photoelectric sensor
-	public boolean getUpperStorageTriggered() {
+	public boolean isUpperStorageClosed() {
 		return upperStoragePE.get();
 	}
 
 	//Returns input from the shooter photoelectric sensor
-	public boolean getShooterTriggered() {
+	public boolean isShooterClosed() {
 		return shooterPE.get();
 	}
 
 	//Returns input from the top pivot limit switch
-	public boolean getPivotUpLimitTriggered() {
+	public boolean isPivotUpLimitClosed() {
 		return !topPivotLimitSwitch.get();  //Inverted (electrical issue)
 	}
 
 	//Returns input from the bottom pivot limit switch
-	public boolean getPivotDownLimitTriggered() {
+	public boolean isPivotDownLimitClosed() {
 		return !bottomPivotLimitSwitch.get();
 	}
-
-	//Returns input from the top pivot limit switch
-	/*public boolean getClimberDownLimitTriggered() {
-		return !climberDownButton.get();  //Inverted (electrical issue)
-	}*/
 }

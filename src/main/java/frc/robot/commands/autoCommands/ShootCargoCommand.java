@@ -42,11 +42,11 @@ public class ShootCargoCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		if (m_si.getLowerStorageTriggered()) {  //If there is cargo in the lower storage area
+		if (m_si.isLowerStorageClosed()) {  //If there is cargo in the lower storage area
 			//Sets the indexer to max speed
 			m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed());
 		}
-		if (m_si.getShooterTriggered()) {  //If cargo has moved into the shooter
+		if (m_si.isShooterClosed()) {  //If cargo has moved into the shooter
 			//The shooter photoelectric sensor has been triggered
 			shooterTriggered = true;
 		} else {  //If cargo is not in the shooter

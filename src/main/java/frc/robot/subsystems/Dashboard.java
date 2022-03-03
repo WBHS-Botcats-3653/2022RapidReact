@@ -135,8 +135,8 @@ public class Dashboard {
 		NetworkEntries.m_nteDriveEncLeft.setDouble(m_direction.getLeftDistance());
 		NetworkEntries.m_nteDriveEncRight.setDouble(m_direction.getRightDistance());
 
-		NetworkEntries.m_nteIntakeUpLimit.setBoolean(m_si.getPivotUpLimitTriggered());
-		NetworkEntries.m_nteIntakeDownLimit.setBoolean(m_si.getPivotDownLimitTriggered());
+		NetworkEntries.m_nteIntakeUpLimit.setBoolean(m_si.isPivotUpLimitClosed());
+		NetworkEntries.m_nteIntakeDownLimit.setBoolean(m_si.isPivotDownLimitClosed());
 		//updates the following speeds
 		m_oi.setMaxDriveSpeed(NetworkEntries.m_nteMaxDriveSpeed.getDouble(1.0));
 		m_oi.setMaxIndexerSpeed(NetworkEntries.m_nteMaxIndexerSpeed.getDouble(1.0));
@@ -153,9 +153,9 @@ public class Dashboard {
 		NetworkEntries.m_nteMaxPivotAssistSpeed.getDouble(1.0);
 
 		//Updates the PhotoElectric sensors in the dashboard
-		NetworkEntries.m_nteLowerStoragePE.setBoolean(m_si.getLowerStorageTriggered());
-		NetworkEntries.m_nteUpperStoragePE.setBoolean(m_si.getUpperStorageTriggered());
-		NetworkEntries.m_nteShooterPE.setBoolean(m_si.getShooterTriggered());
+		NetworkEntries.m_nteLowerStoragePE.setBoolean(m_si.isLowerStorageClosed());
+		NetworkEntries.m_nteUpperStoragePE.setBoolean(m_si.isUpperStorageClosed());
+		NetworkEntries.m_nteShooterPE.setBoolean(m_si.isShooterClosed());
 		//FIX
 		//m_nteArmEncoderRaw.setNumber(arm.getRawEncoder());
 		/*
@@ -168,9 +168,9 @@ public class Dashboard {
 	/**This Method Starts the robot with updating some values */
 	public static void robotInit() {
 		//Updates the PhotoElectric sensors in the dashboard
-		NetworkEntries.m_nteLowerStoragePE.setBoolean(m_si.getLowerStorageTriggered());
-		NetworkEntries.m_nteUpperStoragePE.setBoolean(m_si.getUpperStorageTriggered());
-		NetworkEntries.m_nteShooterPE.setBoolean(m_si.getShooterTriggered());
+		NetworkEntries.m_nteLowerStoragePE.setBoolean(m_si.isLowerStorageClosed());
+		NetworkEntries.m_nteUpperStoragePE.setBoolean(m_si.isUpperStorageClosed());
+		NetworkEntries.m_nteShooterPE.setBoolean(m_si.isShooterClosed());
 	}
 	/**Returns an instance of Dashboard, creating an instance only when one does not already exist (singleton)*/
 	public static Dashboard getInstance() {

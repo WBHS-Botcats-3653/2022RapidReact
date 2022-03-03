@@ -80,6 +80,11 @@ public class Robot extends TimedRobot {
 		// Cancels all running commands when disabled.
 		CommandScheduler.getInstance().cancelAll();
 
+		//Sets motors to coast or brake
+		m_climberSubsystem.enableMotors(true);
+		m_driveTrainSubsystem.enableMotors(false);
+		m_indexerSubsystem.enableMotors(false);
+
 		//Sets max motor speeds
 		//TODO:
 		NetworkEntries.m_nteMaxShootSpeed.setDouble(0);
@@ -113,6 +118,11 @@ public class Robot extends TimedRobot {
 	/** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
 	@Override
 	public void autonomousInit() {
+		//Sets motors to brake
+		m_climberSubsystem.enableMotors(true);
+		m_driveTrainSubsystem.enableMotors(true);
+		m_indexerSubsystem.enableMotors(true);
+
 		//Resets the encoders
 		m_directionSubsystem.resetEncoders();
 
@@ -172,6 +182,11 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
+		//Sets motors to coast or brake
+		m_climberSubsystem.enableMotors(true);
+		m_driveTrainSubsystem.enableMotors(false);
+		m_indexerSubsystem.enableMotors(true);
+
 		// Cancels all running commands at the start of teleoperated mode.
 		CommandScheduler.getInstance().cancelAll();
 
@@ -230,6 +245,11 @@ public class Robot extends TimedRobot {
 	public void testInit() {
 		// Cancels all running commands at the start of test mode.
 		CommandScheduler.getInstance().cancelAll();
+
+		//Sets motors to coast
+		m_climberSubsystem.enableMotors(true);
+		m_driveTrainSubsystem.enableMotors(false);
+		m_indexerSubsystem.enableMotors(true);
 
 		//Schedule test commands
 		/*m_arcadeDriveCommand.schedule();

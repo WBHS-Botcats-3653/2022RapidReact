@@ -44,14 +44,20 @@ public final class Constants {
 		public static final int kBackLeftMotorID = 2;  //CAN
 		public static final int kBackRightMotorID = 3;  //CAN
 		
-		//Encoders
+		//Encoder IDs
 		public static final int kLeftMotorGroupEncoder1 = 5;  //DIO 1 pin
 		public static final int kLeftMotorGroupEncoder2 = 4; //DIO 3 pin
 		public static final int kRightMotorGroupEncoder1 = 3;  //DIO 1 pin
 		public static final int kRightMotorGroupEncoder2 = 2;  //DIO 3 pin
 
 		//Encoder distance per pulse
-		public static final double kDistancePerPulse = 1.0/256.0;
+		private static final double kWheelDiameter = 6.0;
+		private static final double kPulsePerRevolution = 360.0;
+		private static final double kEncoderGearRatio = 1.0;
+		private static final double kGearRatio = 10.71/1.0;
+		private static final double kFudgefactor = 12.0;  //Unit conversion
+		public static final double kDistancePerPulse = Math.PI * kWheelDiameter / kPulsePerRevolution / kEncoderGearRatio / kGearRatio * kFudgefactor;
+		//public static final double kDistancePerPulse = 1.0/256.0;
 
 		//Something
 		public static final int kP = 1;
@@ -59,11 +65,8 @@ public final class Constants {
 
 	//Climber Constants
 	public static final class ClimberConstants {
-		//Arm motor ID
+		//Motor ID
 		public static final int kArmMotorID = 10;  //CAN
-		
-		//Climber limit switch
-		//public static final int kBottomClimberLimitSwitchID = 9;  //DIO
 	}
 
 	//Intake Constants
@@ -85,7 +88,7 @@ public final class Constants {
 	//Shooter Constants
 	public static final class ShooterConstants {
 		//Spinner motor ID
-		public static final int kSpinnerMotorID = 30;  //CAN
+		public static final int kFlyWheelMotorID = 30;  //CAN
 
 		//Shooter photoelectric sensor ID
 		public static final int kShooterPESensorID = 8;  //DIO

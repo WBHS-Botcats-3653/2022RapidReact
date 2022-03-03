@@ -14,6 +14,8 @@ public class IndexerCommand extends CommandBase {
 	private OI m_oi;
 	private SI m_si;
 
+	private boolean smartControl;
+
 	/** Creates a new StorageCommand. */
 	public IndexerCommand(Indexer p_indexer) {
 		m_indexer = p_indexer;
@@ -29,9 +31,15 @@ public class IndexerCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		if (IntakeCommand.isUnderSmartControl()) {
+		if (IntakeCommand.isUnderSmartControl()) {  //If the intake is under smart control
+			//Smart indexer logic
 			smartIndexerLogic();
 		} else {
+			//Is not under smart control
+			smartControl = false;
+		}
+		if (!smartControl) {  //If the indexer is not in smart control
+			//Manual indexer logic
 			manualIndexerLogic();
 		}
 	}
@@ -62,10 +70,14 @@ public class IndexerCommand extends CommandBase {
 
 	//Smart control indexer logic
 	public void smartIndexerLogic() {
-		if (m_si.getUpperStorageTriggered()) {  //If there is cargo in the upper storage
+		if (m_si.isUpperStorageClosed()) {  //If there is cargo in the upper storage
+			//Is not under smart control
+			smartControl = false;
 			//Stops the indexer
 			m_indexer.setIndexerSpeed(0);
-		} else if (m_si.getLowerStorageTriggered()) {  //If there is cargo in the lower storage
+		} else if (m_si.isLowerStorageClosed()) {  //If there is cargo in the lower storage
+			//Is under smart control
+			smartControl = true;
 			//Sets the indexer to max speed
 			m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed());
 		}

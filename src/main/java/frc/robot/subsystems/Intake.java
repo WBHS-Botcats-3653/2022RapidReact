@@ -14,14 +14,23 @@ import frc.robot.inputs.OI;
 public class Intake extends SubsystemBase {
 	private static Intake m_singleton = null;
 	private OI m_oi = OI.getInstance();
+
 	private WPI_VictorSPX pivot;
 	private WPI_VictorSPX rollers;
+	private double maxPivotSpeed;
+	private double maxRollerSpeed;
 
 	private Intake() {
 		//Creates WPI_VictorSPX motor controllers for the Pivot and Rollers in the Intake
 		pivot = new WPI_VictorSPX(kPivotMotorID);
 		rollers = new WPI_VictorSPX(kRollersMotorID);
-		//pivotEncoder = new AnalogInput(/*DriveConstants*/ 1);
+		rollers.setInverted(true);
+	}
+
+	@Override
+	public void periodic() {
+		maxPivotSpeed = m_oi.getMaxIntakePivotSpeed();
+		maxRollerSpeed = m_oi.getMaxIntakeRollerSpeed();
 	}
 	
 	//Returns an instance of Intake, creating an instance only when one does not already exist (singleton)
@@ -31,26 +40,18 @@ public class Intake extends SubsystemBase {
 		return m_singleton;
 	}
 
+	public void setPivotSpeed(double speed) {
+		//Caps the speed from exceeding the set maxIntakePivotSpeed
+		if (Math.abs(speed) > maxPivotSpeed) speed = (speed < 0 ? -1 : 1) * maxPivotSpeed;
+		//Sets the pivot speed
+		pivot.set(speed);
+	}
+
 	//Spins the rollers on the intake
 	public void setRollerSpeed(double speed) {
 		//Caps the speed from exceeding the set maxIntakeRollerSpeed
-		if (speed > m_oi.getMaxIntakeRollerSpeed()) {
-			speed = m_oi.getMaxIntakeRollerSpeed();
-		} else if (speed < -m_oi.getMaxIntakeRollerSpeed()) {
-			speed = -m_oi.getMaxIntakeRollerSpeed();
-		}
+		if (Math.abs(speed) > maxRollerSpeed) speed = (speed < 0 ? -1 : 1) * maxRollerSpeed;
 		//Sets the roller speed
-		rollers.set(-speed);  //Inverted
-	}
-
-	public void setPivotSpeed(double speed) {
-		//Caps the speed from exceeding the set maxIntakePivotSpeed
-		if (speed > m_oi.getMaxIntakePivotSpeed()) {
-			speed = m_oi.getMaxIntakePivotSpeed();
-		} else if (speed < -m_oi.getMaxIntakePivotSpeed()) {
-			speed = -m_oi.getMaxIntakePivotSpeed();
-		}
-		//Sets the pivot speed
-		pivot.set(speed);
+		rollers.set(speed);
 	}
 }

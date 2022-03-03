@@ -14,6 +14,7 @@ public class IntakeCommand extends CommandBase {
 	private Intake m_intake;
 	private OI m_oi;
 	private SI m_si;
+
 	private static boolean smartControl = false;
 	private boolean smartPivotGoingUp;
 	private boolean smartPivotGoingDown;
@@ -38,11 +39,18 @@ public class IntakeCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		if(NetworkEntries.endSmartIntake()) {
+		//If the end smart intake button on the shuffleboard is pressed, end the smart intake
+		if (NetworkEntries.endSmartIntake()) {
+			//Switches from smart control to manual
 			smartControl = false;
 			smartPivotGoingUp = false;
 			smartPivotGoingDown = false;
+			//Stops the intake pivot
+			m_intake.setPivotSpeed(0);
+			//Stops the intake rollers
+			m_intake.setRollerSpeed(0);
 		}
+		//If the smart intake is enabled in the shuffleboard
 		if (NetworkEntries.isSmartIntakeEnabled()) {
 			//Smart intake control
 			smartIntakeLogic();
@@ -101,62 +109,53 @@ public class IntakeCommand extends CommandBase {
 
 	//Smart control pivot/roller logic (button down-pivot down, button pressed-spin rollers, button released-pivot up)
 	public void smartIntakeLogic() {
-		if (m_oi.getSmartIntakeUp() && !m_si.getPivotUpLimitTriggered()) {  //If the smart intake is being called to go up and the top pivot limit switch is not being triggered
+		if (m_oi.getSmartIntakeUp() && !m_si.isPivotUpLimitClosed()) {  //If the smart intake is being called to go up and the top pivot limit switch is open
 			//Pivots the intake up at the set max speed
 			m_intake.setPivotSpeed(-m_oi.getMaxSmartIntakePivotUpSpeed());
-			//Stops the intake rollers
-			m_intake.setRollerSpeed(0);
 			//Initial pivot up started
 			smartPivotGoingUp = true;
 			//Stop downward pivot
 			smartPivotGoingDown = false;
-		} else if (m_oi.getSmartIntakeDown() && !m_si.getPivotDownLimitTriggered()) {  //If the smart intake is being called to go down and the bottom pivot limit switch is not being triggered
+		} else if (m_oi.getSmartIntakeDown() && !m_si.isPivotDownLimitClosed()) {  //If the smart intake is being called to go down and the bottom pivot limit switch is open
 			//Pivots the intake down at the set max speed
 			m_intake.setPivotSpeed(m_oi.getMaxSmartIntakePivotDownSpeed());
 			//Prevents manual control from interferring with smart control
 			smartControl = true;
 			//Initial pivot down started
 			smartPivotGoingDown = true;
-		} else if (m_si.getPivotDownLimitTriggered() || m_si.getPivotUpLimitTriggered()) {  //If either of the pivot limit switches are triggered
-			//Checks if the smart intake is being pressed incase the intake has already been manually moved down
-			if (!smartControl && m_oi.getSmartIntakeDown()) {  //If the smart intake is being pressed
+			//Stop upward pivot
+			smartPivotGoingUp = false;
+		} else if (m_si.isPivotDownLimitClosed() || m_si.isPivotUpLimitClosed()) {  //If either of the pivot limit switches are closed
+			//If the smart intake is being pressed (incase the intake has already been manually moved down)
+			if (m_oi.getSmartIntakeDown()) {
 				//Prevents manual control from interferring with smart control
 				smartControl = true;
-			}
-			//If the intake has lifted off the bottom pivot limit switch
-			if (smartPivotGoingUp && !m_si.getPivotDownLimitTriggered()) {
-				//Stops the intake rollers
-				m_intake.setRollerSpeed(0);
-				//Allows manual control to take over from smart control
-				smartControl = false;
-				//Smart pivot has made initial upward pivot
+				//Stop upward pivot
 				smartPivotGoingUp = false;
 			}
-			if (m_si.getPivotUpLimitTriggered()) {  //If the top pivot limit switch is being triggered
-				//Stops the intake rollers
-				m_intake.setRollerSpeed(0);
-				//Allows manual control to take over from smart control
-				smartControl = false;
-			}
-			//If the pivot is moving up
-			if (smartPivotGoingUp) {
-				//Stops the intake rollers
-				m_intake.setRollerSpeed(0);
-				//Allows manual control to take over from smart control
-				smartControl = false;
-				//Smart pivot has made initial upward pivot
-				smartPivotGoingUp = false;
-			}
-			//If the intake isn't going up
-			if (!smartPivotGoingUp || m_si.getPivotUpLimitTriggered()) {
+			//If smart control has priority over manual controls
+			if (smartControl) {
 				//Stops the intake pivot
 				m_intake.setPivotSpeed(0);
+				//If the intake has lifted off the bottom pivot limit switch
+				if (smartPivotGoingUp && m_si.isPivotUpLimitClosed()) {
+					//Allows manual control to take over from smart control
+					smartControl = false;
+					//Smart pivot has made initial upward pivot
+					smartPivotGoingUp = false;
+				}
 			}
+		} else if (NetworkEntries.isPivotAssistEnabled() && smartControl && !smartPivotGoingDown && !smartPivotGoingUp) {  //If pivot assist is enabled and neither limit switch is closed and the intake is not pivoting up or down
+			//Pivots the intake down at the set pivot assist speed
+			m_intake.setPivotSpeed(m_oi.getMaxPivotAssistSpeed());
 		}
 		//Rollers
-		if (smartControl) {  //If smart control has priority over manual controls
+		if (smartControl && !smartPivotGoingUp && !m_si.isPivotUpLimitClosed()) {  //If smart control has priority over manual controls and the intake is not up and is not pivoting up
 			//Sets the speed of the intake rollers based off whether the left bumper is being pressed
 			m_intake.setRollerSpeed(m_oi.getMaxIntakeRollerSpeed());
+		} else {  //If smart control does not have priority over manual controls or the intake is up or is pivoting up
+			//Stops the intake rollers
+			m_intake.setRollerSpeed(0);
 		}
 	}
 
