@@ -53,11 +53,11 @@ public final class Constants {
 		//Encoder distance per pulse
 		private static final double kWheelDiameter = 6.0;
 		private static final double kPulsePerRevolution = 360.0;
-		private static final double kEncoderGearRatio = 1.0;
-		private static final double kGearRatio = 10.71/1.0;
+		private static final double kEncoderGearRatio = 1.0 / 1.0;
+		private static final double kGearRatio = 10.71 / 1.0;
 		private static final double kFudgefactor = 12.0;  //Unit conversion
 		//the value is divide by 10 to give the distance in feet, the values were 10 times bigger than they should be
-		public static final double kDistancePerPulse = (Math.PI * kWheelDiameter / kPulsePerRevolution / kEncoderGearRatio / kGearRatio * kFudgefactor) / 10;
+		public static final double kDistancePerPulse = Math.PI * kWheelDiameter / kPulsePerRevolution / kEncoderGearRatio / kGearRatio * kFudgefactor / 10.0;
 		//public static final double kDistancePerPulse = 1.0/256.0;
 
 		//Something
