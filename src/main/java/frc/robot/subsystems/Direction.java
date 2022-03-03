@@ -65,14 +65,14 @@ public class Direction extends SubsystemBase {
 	 * @return encoder's right distance
 	 */
 	public double getRightDistance() {
-		return (rightEncoder.getDistance() + 2.36322) / 0.577385;
+		return rightEncoder.getDistance();
 	}
 
 	/**
 	 * @return encoder's left distance
 	 */
 	public double getLeftDistance() {
-		return (-leftEncoder.getDistance() + 0.195) / 1.1155;  //Inverted
+		return -leftEncoder.getDistance();  //Inverted
 	}
 
 	/**
