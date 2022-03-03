@@ -18,8 +18,8 @@ public class NetworkEntries {
 	public static NetworkTableEntry m_nteIsSmartIntakeEnabled;
 
 	// Test Tab
-	public static NetworkTableEntry m_nteDriveEncLeft; //double
-	public static NetworkTableEntry m_nteDriveEncRight; //double
+	public static NetworkTableEntry m_nteDriveEncLeft;  //double
+	public static NetworkTableEntry m_nteDriveEncRight;  //double
 	public static NetworkTableEntry m_nteIntakeUpLimit;
     public static NetworkTableEntry m_nteIntakeDownLimit;
 	public static NetworkTableEntry m_nteResetEncoders;
@@ -33,40 +33,41 @@ public class NetworkEntries {
 
 	// Drive Tab
 	//private NetworkTableEntry m_nteArmAngle = null;
-	public static NetworkTableEntry m_nteDriveSpeed; //double
-	public static NetworkTableEntry m_nteDriveDistance; //double
-	public static NetworkTableEntry m_nteEndSmartIntake;
+	public static NetworkTableEntry m_nteDriveSpeed;  //double
+	public static NetworkTableEntry m_nteDriveDistance;  //double
+	public static NetworkTableEntry m_nteEndSmartIntake;  //boolean
 
     //Auto Phases
-	public static NetworkTableEntry m_isAutoShootOn; //boolean
-	public static NetworkTableEntry m_isAutoTaxiOn; //boolean
-	public static NetworkTableEntry m_isAutoCollectOn; //boolean
+	public static NetworkTableEntry m_isAutoShootOn;  //boolean
+	public static NetworkTableEntry m_isAutoTaxiOn;  //boolean
+	public static NetworkTableEntry m_isAutoCollectOn;  //boolean
 
 	/*public static NetworkTableEntry m_isAutoShootOnBox = null;
 	public static NetworkTableEntry m_isAutoTaxiOnBox = null;
 	public static NetworkTableEntry m_isAutoCollectOnBox = null;*/
 
 	//Speeds Tab
-	public static NetworkTableEntry m_nteMaxDriveSpeed; //double
-	public static NetworkTableEntry m_nteMaxArmSpeed; //double
-	public static NetworkTableEntry m_nteMaxIntakePivotSpeed; //double
-	public static NetworkTableEntry m_nteMaxSmartIntakePivotDownSpeed; //double
-	public static NetworkTableEntry m_nteMaxSmartIntakePivotUpSpeed; //double
-	public static NetworkTableEntry m_nteMaxIntakeRollerSpeed; //double
-	public static NetworkTableEntry m_nteMaxShootSpeed; //double
-	public static NetworkTableEntry m_nteMaxIndexerSpeed; //double
-	public static NetworkTableEntry m_nteMaxPivotAssistSpeed; //double
-	public static NetworkTableEntry m_nteMaxCargoCollectDriveSpeed; //double
+	public static NetworkTableEntry m_nteMaxDriveSpeed;  //double
+	public static NetworkTableEntry m_nteMaxArmSpeed;  //double
+	public static NetworkTableEntry m_nteMaxIntakePivotSpeed;  //double
+	public static NetworkTableEntry m_nteMaxSmartIntakePivotDownSpeed;  //double
+	public static NetworkTableEntry m_nteMaxSmartIntakePivotUpSpeed;  //double
+	public static NetworkTableEntry m_nteMaxIntakeRollerSpeed;  //double
+	public static NetworkTableEntry m_nteMaxShootSpeed;  //double
+	public static NetworkTableEntry m_nteMaxIndexerSpeed;  //double
+	public static NetworkTableEntry m_nteMaxAutoIndexerSpeed;  //double
+	public static NetworkTableEntry m_nteMaxPivotAssistSpeed;  //double
+	public static NetworkTableEntry m_nteMaxCargoCollectDriveSpeed;  //double
 
 	//Ball Pos
-	public static NetworkTableEntry m_nteTarmac; //boolean
+	public static NetworkTableEntry m_nteTarmac;  //boolean
 
-	public static NetworkTableEntry m_nteLLCargo; //boolean
-	public static NetworkTableEntry m_nteLRCargo; //boolean
-	public static NetworkTableEntry m_nteMLCargo; //boolean
-	public static NetworkTableEntry m_nteMRCargo; //boolean
-	public static NetworkTableEntry m_nteRLCargo; //boolean
-	public static NetworkTableEntry m_nteRRCargo; //boolean
+	public static NetworkTableEntry m_nteLLCargo;  //boolean
+	public static NetworkTableEntry m_nteLRCargo;  //boolean
+	public static NetworkTableEntry m_nteMLCargo;  //boolean
+	public static NetworkTableEntry m_nteMRCargo;  //boolean
+	public static NetworkTableEntry m_nteRLCargo;  //boolean
+	public static NetworkTableEntry m_nteRRCargo;  //boolean
 
 	//Returns the selected Tarmac
 	public static char getTarmac() {

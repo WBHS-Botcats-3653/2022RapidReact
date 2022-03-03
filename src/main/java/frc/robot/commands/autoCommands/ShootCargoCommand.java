@@ -44,7 +44,7 @@ public class ShootCargoCommand extends CommandBase {
 	public void execute() {
 		if (m_si.isLowerStorageClosed()) {  //If there is cargo in the lower storage area
 			//Sets the indexer to max speed
-			m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed());
+			m_indexer.setIndexerSpeed(m_oi.getMaxAutoIndexerSpeed());
 		}
 		if (m_si.isShooterClosed()) {  //If cargo has moved into the shooter
 			//The shooter photoelectric sensor has been triggered

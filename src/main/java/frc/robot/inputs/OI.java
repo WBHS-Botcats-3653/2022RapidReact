@@ -17,6 +17,7 @@ public class OI {
 	private double maxIntakeRollerSpeed = 0;
 	private double maxShootSpeed = 0;
 	private double maxIndexerSpeed = 0;
+	private double maxAutoIndexerSpeed = 0;
 	private double maxPivotAssistSpeed = 0;
 	private double maxCargoCollectDriveSpeed = 0;
 
@@ -114,6 +115,18 @@ public class OI {
 	//Returns the max indexer speed
 	public double getMaxIndexerSpeed() {
 		return maxIndexerSpeed;
+	}
+
+	//Sets the max indexer speed
+	public void setMaxAutoIndexerSpeed(double speed) {
+		if (0.0 < speed && speed <= 1.0) {
+			maxAutoIndexerSpeed = speed;
+		}
+	}
+
+	//Returns the max indexer speed
+	public double getMaxAutoIndexerSpeed() {
+		return maxAutoIndexerSpeed;
 	}
 
 	//Sets the max shoot speed
