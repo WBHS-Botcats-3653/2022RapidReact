@@ -84,6 +84,7 @@ public class Robot extends TimedRobot {
 		m_climberSubsystem.enableMotors(true);
 		m_driveTrainSubsystem.enableMotors(false);
 		m_indexerSubsystem.enableMotors(false);
+		m_intakeSubsystem.enableMotors(false);
 
 		//Sets max motor speeds
 		//TODO:
@@ -123,6 +124,7 @@ public class Robot extends TimedRobot {
 		m_climberSubsystem.enableMotors(true);
 		m_driveTrainSubsystem.enableMotors(true);
 		m_indexerSubsystem.enableMotors(true);
+		m_intakeSubsystem.enableMotors(true);
 
 		//Resets the encoders
 		m_directionSubsystem.resetEncoders();
@@ -188,6 +190,7 @@ public class Robot extends TimedRobot {
 		m_climberSubsystem.enableMotors(true);
 		m_driveTrainSubsystem.enableMotors(false);
 		m_indexerSubsystem.enableMotors(true);
+		m_intakeSubsystem.enableMotors(true);
 
 		// Cancels all running commands at the start of teleoperated mode.
 		CommandScheduler.getInstance().cancelAll();
@@ -253,6 +256,7 @@ public class Robot extends TimedRobot {
 		m_climberSubsystem.enableMotors(true);
 		m_driveTrainSubsystem.enableMotors(false);
 		m_indexerSubsystem.enableMotors(true);
+		m_intakeSubsystem.enableMotors(true);
 
 		//Schedule test commands
 		/*m_arcadeDriveCommand.schedule();

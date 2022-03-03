@@ -135,8 +135,11 @@ public class IntakeCommand extends CommandBase {
 			}
 			//If smart control has priority over manual controls
 			if (smartControl) {
-				//Stops the intake pivot
-				m_intake.setPivotSpeed(0);
+				//If the intake is not pivoting up or down
+				if (!smartPivotGoingUp && !smartPivotGoingDown) {
+					//Stops the intake pivot
+					m_intake.setPivotSpeed(0);
+				}
 				//If the intake has lifted off the bottom pivot limit switch
 				if (smartPivotGoingUp && m_si.isPivotUpLimitClosed()) {
 					//Allows manual control to take over from smart control

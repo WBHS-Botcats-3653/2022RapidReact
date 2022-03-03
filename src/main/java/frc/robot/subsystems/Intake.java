@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import static frc.robot.Constants.IntakeConstants.*;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -40,6 +41,7 @@ public class Intake extends SubsystemBase {
 		return m_singleton;
 	}
 
+	//Sets the intake pivot speed
 	public void setPivotSpeed(double speed) {
 		//Caps the speed from exceeding the set maxIntakePivotSpeed
 		if (Math.abs(speed) > maxPivotSpeed) speed = (speed < 0 ? -1 : 1) * maxPivotSpeed;
@@ -47,11 +49,16 @@ public class Intake extends SubsystemBase {
 		pivot.set(speed);
 	}
 
-	//Spins the rollers on the intake
+	//Sets the intake roller speed
 	public void setRollerSpeed(double speed) {
 		//Caps the speed from exceeding the set maxIntakeRollerSpeed
 		if (Math.abs(speed) > maxRollerSpeed) speed = (speed < 0 ? -1 : 1) * maxRollerSpeed;
 		//Sets the roller speed
 		rollers.set(speed);
+	}
+
+	//Enables or disabled the neutral brake on the motors
+	public void enableMotors(boolean enable) {
+		pivot.setNeutralMode(enable ? NeutralMode.Brake : NeutralMode.Coast);
 	}
 }
