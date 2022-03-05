@@ -153,7 +153,7 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteResetEncoders.setBoolean(false);
 		}
 
-		//In charge of resetting the smart intake
+		//In charge of ending the smart intake
 		if (NetworkEntries.m_nteEndSmartIntake.getBoolean(false)) {
 			IntakeCommand.endSmartIntake();
 			NetworkEntries.m_nteEndSmartIntake.setBoolean(false);
