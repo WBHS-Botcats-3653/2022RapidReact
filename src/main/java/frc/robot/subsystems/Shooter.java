@@ -40,7 +40,7 @@ public class Shooter extends SubsystemBase {
 	 * Spins the flyWheel to shoot the cargo
 	 * 
 	 */
-	public void setSpinSpeed(double speed) {
+	public void setShootSpeed(double speed) {
 		//Caps the fly wheel speed from exceeding the set maxShootSpeed
 		if (Math.abs(speed) > maxFlyWheelSpeed) speed = (speed < 0 ? -1 : 1) * maxFlyWheelSpeed;
 		//Sets the fly wheel speed

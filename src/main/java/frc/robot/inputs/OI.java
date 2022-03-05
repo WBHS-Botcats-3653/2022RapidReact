@@ -6,8 +6,10 @@ import frc.robot.NetworkEntries;
 //Operator Inputs
 public class OI {
 	private static OI m_singleton = null;
+
 	//Controller
 	private XboxController m_controller = null;
+	
 	//Max speeds
 	private double maxDriveSpeed = 0;
 	private double maxArmSpeed = 0;
@@ -174,16 +176,6 @@ public class OI {
 	public double getSteering() {
 		return -m_controller.getRightX() * maxDriveSpeed;  // correct stearing (-)
 	}
-
-	/*//Returns whether the left trigger is being pressed
-	public boolean getIntakeUp() {
-		return m_controller.getLeftBumper();
-	}
-
-	//Returns whether the left bumper is being pressed
-	public boolean getIntakeDown() {
-		return m_controller.getLeftTriggerAxis() > 0;
-	}*/
 
 	//Returns whether the right DPad is being pressed
 	public boolean getManualIntakeUp() {

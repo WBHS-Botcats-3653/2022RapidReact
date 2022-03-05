@@ -68,15 +68,13 @@ public class Robot extends TimedRobot {
 		// and running subsystem periodic() methods.  This must be called from the robot's periodic
 		// block in order for anything in the Command-based framework to work.
 		CommandScheduler.getInstance().run();
-		m_dashboardSubsystem.periodic();
+		//m_dashboardSubsystem.periodic();
 		Dashboard.selectorLogic();
 	}
 
 	/** This function is called once each time the robot enters Disabled mode. */
 	@Override
 	public void disabledInit() {
-		//difDrive.reset();
-
 		// Cancels all running commands when disabled.
 		CommandScheduler.getInstance().cancelAll();
 
@@ -89,7 +87,7 @@ public class Robot extends TimedRobot {
 		//Sets max motor speeds
 		//TODO:
 		NetworkEntries.m_nteMaxShootSpeed.setDouble(0);
-		//NetworkEntries.m_nteMaxIntakePivotSpeed.setDouble(0);
+		NetworkEntries.m_nteMaxIntakePivotSpeed.setDouble(0);
 		NetworkEntries.m_nteMaxSmartIntakePivotDownSpeed.setDouble(0);
 		NetworkEntries.m_nteMaxSmartIntakePivotUpSpeed.setDouble(0);
 		NetworkEntries.m_nteMaxIntakeRollerSpeed.setDouble(0);
@@ -99,17 +97,9 @@ public class Robot extends TimedRobot {
 		NetworkEntries.m_nteMaxAutoIndexerSpeed.setDouble(0);
 		NetworkEntries.m_nteMaxPivotAssistSpeed.setDouble(0);
 		NetworkEntries.m_nteMaxCargoCollectDriveSpeed.setDouble(0);
-		/*m_oi.setMaxShootSpeed(0);
-		m_oi.setMaxIntakePivotSpeed(0);
-		m_oi.setMaxSmartIntakePivotDownSpeed(0);
-		m_oi.setMaxSmartIntakePivotUpSpeed(0);
-		m_oi.setMaxIntakeRollerSpeed(0);
-		m_oi.setMaxArmSpeed(0);
-		m_oi.setMaxDriveSpeed(0);
-		m_oi.setMaxIndexerSpeed(0);
-		m_oi.setMaxPivotAssistSpeed(0);*/
 	}
 
+	/** This function is called periodically when disabled. */
 	@Override
 	public void disabledPeriodic() {
 		AutoCommand.isAutoShootOn = NetworkEntries.m_isAutoShootOn.getBoolean(true);
@@ -126,9 +116,6 @@ public class Robot extends TimedRobot {
 		m_indexerSubsystem.enableMotors(true);
 		m_intakeSubsystem.enableMotors(true);
 
-		//Resets the encoders
-		m_directionSubsystem.resetEncoders();
-
 		//Gets the autonomous command from robotContainer
 		m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
@@ -137,7 +124,6 @@ public class Robot extends TimedRobot {
 
 		// Schedules the autonomous command
 		if (m_autonomousCommand != null) {
-			//m_autonomousCommand.schedule();
 			CommandScheduler.getInstance().schedule(m_autonomousCommand);
 		}
 
@@ -154,16 +140,6 @@ public class Robot extends TimedRobot {
 		NetworkEntries.m_nteMaxAutoIndexerSpeed.setDouble(0.5);
 		NetworkEntries.m_nteMaxPivotAssistSpeed.setDouble(0.1);
 		NetworkEntries.m_nteMaxCargoCollectDriveSpeed.setDouble(0.5);
-		/*m_oi.setMaxShootSpeed(0.85);
-		m_oi.setMaxIntakePivotSpeed(0.5);
-		m_oi.setMaxSmartIntakePivotDownSpeed(0);
-		m_oi.setMaxSmartIntakePivotUpSpeed(0);
-		m_oi.setMaxIntakeRollerSpeed(1.0);
-		m_oi.setMaxArmSpeed(1.0);
-		m_oi.setMaxDriveSpeed(0.5);
-		m_oi.setMaxIndexerSpeed(1.0);
-		m_oi.setMaxPivotAssistSpeed(0.1);
-		m_oi.setMaxCargoCollectDriveSpeed(0.5);*/
 	}
 
 	/** This function is called periodically during autonomous. */
@@ -174,44 +150,32 @@ public class Robot extends TimedRobot {
 		SequentialCommandGroup sequentialCommand = m_autonomousCommand.getSequentialCommand();
 		ParallelCommandGroup parallelCommand = m_autonomousCommand.getParallelCommand();
 		if (AutoCommand.commandToScheduleNext.equals("Sequential") && sequentialCommand != null) {
-			System.out.println("Scheduling Sequential");
 			AutoCommand.executingCommand = true;
 			CommandScheduler.getInstance().schedule(sequentialCommand);
 		} else if (AutoCommand.commandToScheduleNext.equals("Parallel") && parallelCommand != null) {
-			System.out.println("Scheduling Parallel");
 			AutoCommand.executingCommand = true;
 			CommandScheduler.getInstance().schedule(parallelCommand);
 		}
 	} 
 
+	/** This function is called once each time the robot enters Teleoperated mode. */
 	@Override
 	public void teleopInit() {
+		// Cancels all running commands at the start of teleop.
+		CommandScheduler.getInstance().cancelAll();
+
 		//Sets motors to coast or brake
 		m_climberSubsystem.enableMotors(true);
 		m_driveTrainSubsystem.enableMotors(false);
 		m_indexerSubsystem.enableMotors(true);
 		m_intakeSubsystem.enableMotors(true);
 
-		// Cancels all running commands at the start of teleoperated mode.
+		// Cancels all running commands at the start of Teleoperated mode.
 		CommandScheduler.getInstance().cancelAll();
 
 		//Resets the encoders
 		m_directionSubsystem.resetEncoders();
 
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.cancel();
-		}
-
-		//Schedule teleop commands
-		/*m_arcadeDriveCommand.schedule();
-		m_climberCommand.schedule();
-		m_indexerCommand.schedule();
-		m_intakeCommand.schedule();
-		m_shooterCommand.schedule();*/
 		CommandScheduler.getInstance().schedule(m_arcadeDriveCommand);
 		CommandScheduler.getInstance().schedule(m_climberCommand);
 		CommandScheduler.getInstance().schedule(m_indexerCommand);
@@ -231,22 +195,13 @@ public class Robot extends TimedRobot {
 		NetworkEntries.m_nteMaxAutoIndexerSpeed.setDouble(0);
 		NetworkEntries.m_nteMaxPivotAssistSpeed.setDouble(0.1);
 		NetworkEntries.m_nteMaxCargoCollectDriveSpeed.setDouble(0);
-		/*m_oi.setMaxShootSpeed(0.85);
-		m_oi.setMaxIntakePivotSpeed(0.5);
-		m_oi.setMaxSmartIntakePivotDownSpeed(0.15);
-		m_oi.setMaxSmartIntakePivotUpSpeed(0.35);
-		m_oi.setMaxIntakeRollerSpeed(1.0);
-		m_oi.setMaxArmSpeed(1.0);
-		m_oi.setMaxDriveSpeed(1.0);
-		m_oi.setMaxIndexerSpeed(1.0);
-		m_oi.setMaxPivotAssistSpeed(0.1);
-		m_oi.setMaxCargoCollectDriveSpeed(0);*/
 	}
 
 	/** This function is called periodically during operator control. */
 	@Override
 	public void teleopPeriodic() {}
 
+	/** This function is called once each time the robot enters Test mode. */
 	@Override
 	public void testInit() {
 		// Cancels all running commands at the start of test mode.
@@ -258,12 +213,6 @@ public class Robot extends TimedRobot {
 		m_indexerSubsystem.enableMotors(true);
 		m_intakeSubsystem.enableMotors(true);
 
-		//Schedule test commands
-		/*m_arcadeDriveCommand.schedule();
-		m_climberCommand.schedule();
-		m_indexerCommand.schedule();
-		m_intakeCommand.schedule();
-		m_shooterCommand.schedule();*/
 		CommandScheduler.getInstance().schedule(m_arcadeDriveCommand);
 		CommandScheduler.getInstance().schedule(m_climberCommand);
 		CommandScheduler.getInstance().schedule(m_indexerCommand);
@@ -283,16 +232,6 @@ public class Robot extends TimedRobot {
 		NetworkEntries.m_nteMaxAutoIndexerSpeed.setDouble(0);
 		NetworkEntries.m_nteMaxPivotAssistSpeed.setDouble(0.1);
 		NetworkEntries.m_nteMaxCargoCollectDriveSpeed.setDouble(0);
-		/*m_oi.setMaxShootSpeed(0.3);
-		m_oi.setMaxIntakePivotSpeed(0.5);
-		m_oi.setMaxSmartIntakePivotDownSpeed(0.3);
-		m_oi.setMaxSmartIntakePivotUpSpeed(0.4);
-		m_oi.setMaxIntakeRollerSpeed(0.5);
-		m_oi.setMaxArmSpeed(1.0);
-		m_oi.setMaxDriveSpeed(0.5);
-		m_oi.setMaxIndexerSpeed(0.5);
-		m_oi.setMaxPivotAssistSpeed(0.1);
-		m_oi.setMaxCargoCollectDriveSpeed(0);*/
 	}
 
 	/** This function is called periodically during test mode. */

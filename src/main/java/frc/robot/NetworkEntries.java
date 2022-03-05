@@ -33,7 +33,6 @@ public class NetworkEntries {
 
 	// Drive Tab
 	//private NetworkTableEntry m_nteArmAngle = null;
-	public static NetworkTableEntry m_nteDriveSpeed;  //double
 	public static NetworkTableEntry m_nteDriveDistance;  //double
 	public static NetworkTableEntry m_nteEndSmartIntake;  //boolean
 
@@ -41,10 +40,6 @@ public class NetworkEntries {
 	public static NetworkTableEntry m_isAutoShootOn;  //boolean
 	public static NetworkTableEntry m_isAutoTaxiOn;  //boolean
 	public static NetworkTableEntry m_isAutoCollectOn;  //boolean
-
-	/*public static NetworkTableEntry m_isAutoShootOnBox = null;
-	public static NetworkTableEntry m_isAutoTaxiOnBox = null;
-	public static NetworkTableEntry m_isAutoCollectOnBox = null;*/
 
 	//Speeds Tab
 	public static NetworkTableEntry m_nteMaxDriveSpeed;  //double

@@ -28,19 +28,21 @@ public class ShooterCommand extends CommandBase {
 	public void execute() {
 		if (m_oi.getShoot()) {  //If the right trigger is being pressed
 			//Spins the shooter at max speed
-			m_shooter.setSpinSpeed(m_oi.getMaxShootSpeed());
+			m_shooter.setShootSpeed(m_oi.getMaxShootSpeed());
 		} else if (m_oi.getShootReverse()) {  //If the right bumper is being pressed
 			//Spins the shooter at max speed in reverse
-			m_shooter.setSpinSpeed(-m_oi.getMaxShootSpeed());
+			m_shooter.setShootSpeed(-m_oi.getMaxShootSpeed());
 		} else {  //Nothing is being pressed (shooter wise)
 			//Stops the spinner
-			m_shooter.setSpinSpeed(0);
+			m_shooter.setShootSpeed(0);
 		}
 	}
 
 	// Called once the command ends or is interrupted.
 	@Override
-	public void end(boolean interrupted) {}
+	public void end(boolean interrupted) {
+		m_shooter.setShootSpeed(0);
+	}
 
 	// Returns true when the command should end.
 	@Override
