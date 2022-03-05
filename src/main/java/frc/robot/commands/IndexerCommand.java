@@ -61,10 +61,10 @@ public class IndexerCommand extends CommandBase {
 	public void manualIndexerLogic() {
 		if (m_oi.getIndexerIn()) {  //If the A button is being pressed
 			//Sets the indexer speed to the set max
-			m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed());
+			m_indexer.setIndexerSpeed(m_oi.getMaxIndexSpeed());
 		} else if (m_oi.getIndexerOut()) {  //If the Y button is being pressed
 			//Sets the indexer speed to the negative set max
-			m_indexer.setIndexerSpeed(-m_oi.getMaxIndexerSpeed());  //Reverse indexer
+			m_indexer.setIndexerSpeed(-m_oi.getMaxIndexSpeed());  //Reverse indexer
 		} else {  //Nothing being pressed (indexer wise)
 			//Stops the indexer
 			m_indexer.setIndexerSpeed(0);
@@ -82,7 +82,7 @@ public class IndexerCommand extends CommandBase {
 			//Is under smart control
 			smartControl = true;
 			//Sets the indexer to max speed
-			m_indexer.setIndexerSpeed(m_oi.getMaxIndexerSpeed());
+			m_indexer.setIndexerSpeed(m_oi.getMaxIndexSpeed());
 		}
 	}
 }

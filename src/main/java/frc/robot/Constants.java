@@ -108,4 +108,15 @@ public final class Constants {
 		//Shooter photoelectric sensor ID
 		public static final int kShooterPESensorID = 8;  //DIO
 	}
+
+	//Default Speeds Constants
+	public static final class DefaultSpeedsConstants {
+		//Default Speeds
+		public static final double kDefaultShootSpeed = 0.85;
+		public static final double kDefaultIntakePivotSpeed = 0.5;
+		public static final double kDefaultIntakeRollerSpeed = 1.0;
+		public static final double kDefaultClimbSpeed = 1.0;
+		public static final double kDefaultDriveSpeed = 1.0;
+		public static final double kDefaultIndexSpeed = 1.0;
+	}
 }

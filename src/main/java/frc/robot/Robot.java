@@ -19,21 +19,21 @@ public class Robot extends TimedRobot {
 	private RobotContainer m_robotContainer;
 
 	//Subsystems
-	private final DriveTrain m_driveTrainSubsystem = DriveTrain.getInstance();
-	private final Climber m_climberSubsystem = Climber.getInstance();
-	private final Intake m_intakeSubsystem = Intake.getInstance();
 	private final Dashboard m_dashboardSubsystem = Dashboard.getInstance();
-	private final Shooter m_shooterSubsystem = Shooter.getInstance();
 	private final Direction m_directionSubsystem = Direction.getInstance();
+	private final DriveTrain m_driveTrainSubsystem = DriveTrain.getInstance();
+	private final Intake m_intakeSubsystem = Intake.getInstance();
 	private final Indexer m_indexerSubsystem = Indexer.getInstance();
+	private final Shooter m_shooterSubsystem = Shooter.getInstance();
+	private final Climber m_climberSubsystem = Climber.getInstance();
 
 	//Commands
 	private AutoCommand m_autonomousCommand;
 	private final ArcadeDriveCommand m_arcadeDriveCommand = new ArcadeDriveCommand(m_driveTrainSubsystem);
-	private final ClimberCommand m_climberCommand = new ClimberCommand(m_climberSubsystem);
 	private final IntakeCommand m_intakeCommand = new IntakeCommand(m_intakeSubsystem);
-	private final ShooterCommand m_shooterCommand = new ShooterCommand(m_shooterSubsystem);
 	private final IndexerCommand m_indexerCommand = new IndexerCommand(m_indexerSubsystem);
+	private final ShooterCommand m_shooterCommand = new ShooterCommand(m_shooterSubsystem);
+	private final ClimberCommand m_climberCommand = new ClimberCommand(m_climberSubsystem);
 	
 	/**
 	 * This function is run when the robot is first started up and should be used for any
@@ -64,6 +64,7 @@ public class Robot extends TimedRobot {
 		// and running subsystem periodic() methods.  This must be called from the robot's periodic
 		// block in order for anything in the Command-based framework to work.
 		CommandScheduler.getInstance().run();
+
 		//m_dashboardSubsystem.periodic();
 		Dashboard.selectorLogic();
 	}
@@ -74,20 +75,17 @@ public class Robot extends TimedRobot {
 		// Cancels all running commands when disabled.
 		CommandScheduler.getInstance().cancelAll();
 
-		//Sets motors to coast or brake
-		m_climberSubsystem.enableMotors(true);
-		m_driveTrainSubsystem.enableMotors(false);
-		m_indexerSubsystem.enableMotors(false);
-		m_intakeSubsystem.enableMotors(false);
+		//Ends the smart intake
+		IntakeCommand.endSmartIntake();
 
-		//Sets max motor speeds
-		//TODO:
-		NetworkEntries.m_nteMaxShootSpeed.setDouble(0);
-		NetworkEntries.m_nteMaxIntakePivotSpeed.setDouble(0);
-		NetworkEntries.m_nteMaxIntakeRollerSpeed.setDouble(0);
-		NetworkEntries.m_nteMaxArmSpeed.setDouble(0);
-		NetworkEntries.m_nteMaxDriveSpeed.setDouble(0);
-		NetworkEntries.m_nteMaxIndexerSpeed.setDouble(0);
+		//Sets motors to coast or brake
+		m_driveTrainSubsystem.enableMotors(false);
+		m_intakeSubsystem.enableMotors(false);
+		m_indexerSubsystem.enableMotors(false);
+		m_climberSubsystem.enableMotors(true);
+
+		//Disables the speeds
+		m_dashboardSubsystem.disableSpeeds(true);
 	}
 
 	/** This function is called periodically when disabled. */
@@ -102,10 +100,10 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		//Sets motors to brake
-		m_climberSubsystem.enableMotors(true);
 		m_driveTrainSubsystem.enableMotors(true);
-		m_indexerSubsystem.enableMotors(true);
 		m_intakeSubsystem.enableMotors(true);
+		m_indexerSubsystem.enableMotors(true);
+		m_climberSubsystem.enableMotors(true);
 
 		//Gets the autonomous command from robotContainer
 		m_autonomousCommand = m_robotContainer.getAutonomousCommand();
@@ -118,14 +116,8 @@ public class Robot extends TimedRobot {
 			CommandScheduler.getInstance().schedule(m_autonomousCommand);
 		}
 
-		//Sets max motor speeds
-		//TODO:
-		NetworkEntries.m_nteMaxShootSpeed.setDouble(0.85);
-		NetworkEntries.m_nteMaxIntakePivotSpeed.setDouble(0.5);
-		NetworkEntries.m_nteMaxIntakeRollerSpeed.setDouble(1.0);
-		NetworkEntries.m_nteMaxArmSpeed.setDouble(1.0);
-		NetworkEntries.m_nteMaxDriveSpeed.setDouble(0.5);
-		NetworkEntries.m_nteMaxIndexerSpeed.setDouble(1.0);
+		//Disables the speeds
+		m_dashboardSubsystem.disableSpeeds(true);
 	}
 
 	/** This function is called periodically during autonomous. */
@@ -150,11 +142,14 @@ public class Robot extends TimedRobot {
 		// Cancels all running commands at the start of teleop.
 		CommandScheduler.getInstance().cancelAll();
 
+		//Ends the smart intake
+		IntakeCommand.endSmartIntake();
+
 		//Sets motors to coast or brake
-		m_climberSubsystem.enableMotors(true);
 		m_driveTrainSubsystem.enableMotors(false);
-		m_indexerSubsystem.enableMotors(true);
 		m_intakeSubsystem.enableMotors(true);
+		m_indexerSubsystem.enableMotors(true);
+		m_climberSubsystem.enableMotors(true);
 
 		// Cancels all running commands at the start of Teleoperated mode.
 		CommandScheduler.getInstance().cancelAll();
@@ -163,19 +158,13 @@ public class Robot extends TimedRobot {
 		m_directionSubsystem.resetEncoders();
 
 		CommandScheduler.getInstance().schedule(m_arcadeDriveCommand);
-		CommandScheduler.getInstance().schedule(m_climberCommand);
-		CommandScheduler.getInstance().schedule(m_indexerCommand);
 		CommandScheduler.getInstance().schedule(m_intakeCommand);
+		CommandScheduler.getInstance().schedule(m_indexerCommand);
 		CommandScheduler.getInstance().schedule(m_shooterCommand);
+		CommandScheduler.getInstance().schedule(m_climberCommand);
 
-		//Sets max motor speeds
-		//TODO:
-		NetworkEntries.m_nteMaxShootSpeed.setDouble(0.85);
-		NetworkEntries.m_nteMaxIntakePivotSpeed.setDouble(0.5);
-		NetworkEntries.m_nteMaxIntakeRollerSpeed.setDouble(1.0);
-		NetworkEntries.m_nteMaxArmSpeed.setDouble(1.0);
-		NetworkEntries.m_nteMaxDriveSpeed.setDouble(1.0);
-		NetworkEntries.m_nteMaxIndexerSpeed.setDouble(1.0);
+		//Enables the speeds
+		m_dashboardSubsystem.disableSpeeds(false);
 	}
 
 	/** This function is called periodically during operator control. */
@@ -188,6 +177,9 @@ public class Robot extends TimedRobot {
 		// Cancels all running commands at the start of test mode.
 		CommandScheduler.getInstance().cancelAll();
 
+		//Ends the smart intake
+		IntakeCommand.endSmartIntake();
+
 		//Sets motors to coast
 		m_climberSubsystem.enableMotors(true);
 		m_driveTrainSubsystem.enableMotors(false);
@@ -195,19 +187,13 @@ public class Robot extends TimedRobot {
 		m_intakeSubsystem.enableMotors(true);
 
 		CommandScheduler.getInstance().schedule(m_arcadeDriveCommand);
-		CommandScheduler.getInstance().schedule(m_climberCommand);
-		CommandScheduler.getInstance().schedule(m_indexerCommand);
 		CommandScheduler.getInstance().schedule(m_intakeCommand);
+		CommandScheduler.getInstance().schedule(m_indexerCommand);
 		CommandScheduler.getInstance().schedule(m_shooterCommand);
+		CommandScheduler.getInstance().schedule(m_climberCommand);
 
-		//Sets max motor speeds
-		//TODO:
-		NetworkEntries.m_nteMaxShootSpeed.setDouble(0.3);
-		NetworkEntries.m_nteMaxIntakePivotSpeed.setDouble(0.5);
-		NetworkEntries.m_nteMaxIntakeRollerSpeed.setDouble(0.5);
-		NetworkEntries.m_nteMaxArmSpeed.setDouble(1.0);
-		NetworkEntries.m_nteMaxDriveSpeed.setDouble(0.5);
-		NetworkEntries.m_nteMaxIndexerSpeed.setDouble(0.5);
+		//Enables the speeds
+		m_dashboardSubsystem.disableSpeeds(false);
 	}
 
 	/** This function is called periodically during test mode. */

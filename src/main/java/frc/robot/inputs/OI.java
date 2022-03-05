@@ -12,11 +12,11 @@ public class OI {
 	
 	//Max speeds
 	private double maxDriveSpeed = 0;
-	private double maxArmSpeed = 0;
 	private double maxIntakePivotSpeed = 0;
 	private double maxIntakeRollerSpeed = 0;
+	private double maxIndexSpeed = 0;
 	private double maxShootSpeed = 0;
-	private double maxIndexerSpeed = 0;
+	private double maxClimbSpeed = 0;
 
 	public OI() {
 		m_controller = new XboxController(0);
@@ -43,15 +43,15 @@ public class OI {
 	}
 
 	//Sets the max arm speed
-	public void setMaxArmSpeed(double speed) {
+	public void setMaxClimbSpeed(double speed) {
 		if (0.0 < speed && speed <= 1.0) {
-			maxArmSpeed = speed;
+			maxClimbSpeed = speed;
 		}
 	}
 
 	//Returns the max arm speed
-	public double getMaxArmSpeed(){
-		return maxArmSpeed;
+	public double getMaxClimbSpeed(){
+		return maxClimbSpeed;
 	}
 
 	//Sets the max intake pivot speed
@@ -79,15 +79,15 @@ public class OI {
 	}
 
 	//Sets the max indexer speed
-	public void setMaxIndexerSpeed(double speed) {
+	public void setMaxIndexSpeed(double speed) {
 		if (0.0 < speed && speed <= 1.0) {
-			maxIndexerSpeed = speed;
+			maxIndexSpeed = speed;
 		}
 	}
 
 	//Returns the max indexer speed
-	public double getMaxIndexerSpeed() {
-		return maxIndexerSpeed;
+	public double getMaxIndexSpeed() {
+		return maxIndexSpeed;
 	}
 
 	//Sets the max shoot speed

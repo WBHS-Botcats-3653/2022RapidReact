@@ -4,11 +4,14 @@
 
 package frc.robot.subsystems;
 
+import static frc.robot.Constants.DefaultSpeedsConstants.*;
+
 import java.util.Map;
 
 import edu.wpi.first.wpilibj.shuffleboard.*;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.NetworkEntries;
+import frc.robot.commands.IntakeCommand;
 import frc.robot.inputs.OI;
 import frc.robot.inputs.SI;
 
@@ -26,6 +29,7 @@ public class Dashboard extends SubsystemBase {
 	public static ShuffleboardTab tabSpeeds;
 	public static ShuffleboardTab tabAutoConfig;
 
+	public boolean speedsDisabled = true;
 
 	private Dashboard() {
 		tabAutoConfig = Shuffleboard.getTab("AutoConfig");
@@ -72,12 +76,12 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteIsPivotAssistEnabled = tabConfig.addPersistent("is Pivot Assist Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
 			.withSize(1, 1).withPosition(0, 1).getEntry();
 		//Speeds Tab			
-			NetworkEntries.m_nteMaxDriveSpeed = tabSpeeds.addPersistent("Max Drive speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(0, 0).getEntry();  //double
-			NetworkEntries.m_nteMaxArmSpeed = tabSpeeds.addPersistent("Max Arm speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(2, 0).getEntry();  //double
-			NetworkEntries.m_nteMaxIntakePivotSpeed = tabSpeeds.addPersistent("Max Intake Pivot speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(4, 0).getEntry();  //double
-			NetworkEntries.m_nteMaxShootSpeed = tabSpeeds.addPersistent("Max Shoot speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(6, 0).getEntry();  //double
-			NetworkEntries.m_nteMaxIndexerSpeed = tabSpeeds.addPersistent("Max Indexer speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(0, 1).getEntry();  //double
-			NetworkEntries.m_nteMaxIntakeRollerSpeed = tabSpeeds.addPersistent("Max Intake Roller Speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(3, 2).getEntry();  //double
+			NetworkEntries.m_nteMaxDriveSpeed = tabSpeeds.addPersistent("Max Drive speed", kDefaultDriveSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(0, 0).getEntry();  //double
+			NetworkEntries.m_nteMaxArmSpeed = tabSpeeds.addPersistent("Max Arm speed", kDefaultClimbSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(2, 0).getEntry();  //double
+			NetworkEntries.m_nteMaxIntakePivotSpeed = tabSpeeds.addPersistent("Max Intake Pivot speed", kDefaultIntakePivotSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(4, 0).getEntry();  //double
+			NetworkEntries.m_nteMaxShootSpeed = tabSpeeds.addPersistent("Max Shoot speed", kDefaultShootSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(6, 0).getEntry();  //double
+			NetworkEntries.m_nteMaxIndexerSpeed = tabSpeeds.addPersistent("Max Indexer speed", kDefaultIndexSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(0, 1).getEntry();  //double
+			NetworkEntries.m_nteMaxIntakeRollerSpeed = tabSpeeds.addPersistent("Max Intake Roller Speed", kDefaultIntakeRollerSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(3, 2).getEntry();  //double
 
 		// Test Tab
 			NetworkEntries.m_nteIntakeUpLimit = tabTest.add("Intake up limit", false).withSize(1, 1).withPosition(3, 0).getEntry();
@@ -119,25 +123,46 @@ public class Dashboard extends SubsystemBase {
 
 		NetworkEntries.m_nteIntakeUpLimit.setBoolean(m_si.isPivotUpLimitClosed());
 		NetworkEntries.m_nteIntakeDownLimit.setBoolean(m_si.isPivotDownLimitClosed());
-		//updates the following speeds
-		m_oi.setMaxDriveSpeed(NetworkEntries.m_nteMaxDriveSpeed.getDouble(0));
-		m_oi.setMaxIndexerSpeed(NetworkEntries.m_nteMaxIndexerSpeed.getDouble(0));
-		m_oi.setMaxIntakePivotSpeed(NetworkEntries.m_nteMaxIntakePivotSpeed.getDouble(0));
-		m_oi.setMaxArmSpeed(NetworkEntries.m_nteMaxArmSpeed.getDouble(0));
-		m_oi.setMaxIntakeRollerSpeed(NetworkEntries.m_nteMaxIntakeRollerSpeed.getDouble(0));
-		m_oi.setMaxIntakeRollerSpeed(NetworkEntries.m_nteMaxIntakeRollerSpeed.getDouble(0));
-		m_oi.setMaxShootSpeed(NetworkEntries.m_nteMaxShootSpeed.getDouble(0));
+
+		if (speedsDisabled) {
+			//Sets max speeds to 0
+			m_oi.setMaxDriveSpeed(0);
+			m_oi.setMaxIntakePivotSpeed(0);
+			m_oi.setMaxIntakeRollerSpeed(0);
+			m_oi.setMaxIndexSpeed(0);
+			m_oi.setMaxShootSpeed(0);
+			m_oi.setMaxClimbSpeed(0);
+		} else {
+			//Sets max speeds from shuffleboard
+			m_oi.setMaxDriveSpeed(NetworkEntries.m_nteMaxDriveSpeed.getDouble(0));
+			m_oi.setMaxIntakePivotSpeed(NetworkEntries.m_nteMaxIntakePivotSpeed.getDouble(0));
+			m_oi.setMaxIntakeRollerSpeed(NetworkEntries.m_nteMaxIntakeRollerSpeed.getDouble(0));
+			m_oi.setMaxIndexSpeed(NetworkEntries.m_nteMaxIndexerSpeed.getDouble(0));
+			m_oi.setMaxShootSpeed(NetworkEntries.m_nteMaxShootSpeed.getDouble(0));
+			m_oi.setMaxClimbSpeed(NetworkEntries.m_nteMaxArmSpeed.getDouble(0));
+		}
 
 		//Updates the PhotoElectric sensors in the dashboard
 		NetworkEntries.m_nteLowerStoragePE.setBoolean(m_si.isLowerStorageClosed());
 		NetworkEntries.m_nteUpperStoragePE.setBoolean(m_si.isUpperStorageClosed());
 		NetworkEntries.m_nteShooterPE.setBoolean(m_si.isShooterClosed());
 
-		//In charge of reseting encoders
+		//In charge of resetting the encoders
 		if (NetworkEntries.m_nteResetEncoders.getBoolean(false)) {
 			m_direction.resetEncoders();
 			NetworkEntries.m_nteResetEncoders.setBoolean(false);
 		}
+
+		//In charge of resetting the smart intake
+		if (NetworkEntries.m_nteEndSmartIntake.getBoolean(false)) {
+			IntakeCommand.endSmartIntake();
+			NetworkEntries.m_nteEndSmartIntake.setBoolean(false);
+		}
+	}
+
+	/**Disables or enables the speeds*/
+	public void disableSpeeds(boolean disabled) {
+		speedsDisabled = disabled;
 	}
 
 	/**Returns an instance of Dashboard, creating an instance only when one does not already exist (singleton)*/

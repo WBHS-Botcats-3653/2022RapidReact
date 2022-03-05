@@ -18,7 +18,7 @@ public class IntakeCommand extends CommandBase {
 	private SI m_si;
 
 	private static boolean smartControl = false;
-	private boolean smartPivotGoingUp, smartPivotGoingDown;
+	private static boolean smartPivotGoingUp, smartPivotGoingDown;
 
 	/**Creates a new IntakeCommand.
 	 * @param subsystem The subsystem used by this command.
@@ -40,17 +40,6 @@ public class IntakeCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		//If the end smart intake button on the shuffleboard is pressed, end the smart intake
-		if (NetworkEntries.endSmartIntake()) {
-			//Switches from smart control to manual
-			smartControl = false;
-			smartPivotGoingUp = false;
-			smartPivotGoingDown = false;
-			//Stops the intake pivot
-			m_intake.setPivotSpeed(0);
-			//Stops the intake rollers
-			m_intake.setRollerSpeed(0);
-		}
 		//If the smart intake is enabled in the shuffleboard
 		if (NetworkEntries.isSmartIntakeEnabled()) {
 			//Smart intake control
@@ -166,6 +155,20 @@ public class IntakeCommand extends CommandBase {
 			//Stops the intake rollers
 			m_intake.setRollerSpeed(0);
 		}
+	}
+
+	
+	//If the end smart intake button on the shuffleboard is pressed, end the smart intake
+	public static void endSmartIntake() {
+		//Switches from smart control to manual
+		smartControl = false;
+		smartPivotGoingUp = false;
+		smartPivotGoingDown = false;
+		Intake intake = Intake.getInstance();
+		//Stops the intake pivot
+		intake.setPivotSpeed(0);
+		//Stops the intake rollers
+		intake.setRollerSpeed(0);
 	}
 
 	//Returns whether the intake in under smart control

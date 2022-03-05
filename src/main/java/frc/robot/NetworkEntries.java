@@ -25,14 +25,13 @@ public class NetworkEntries {
 	public static NetworkTableEntry m_nteResetEncoders;
 		
 
-	// pe 's'
+	// Photoelectric sensors
 	public static NetworkTableEntry m_nteLowerStoragePE;
     public static NetworkTableEntry m_nteUpperStoragePE;
 	public static NetworkTableEntry m_nteShooterPE;
 	
 
 	// Drive Tab
-	//private NetworkTableEntry m_nteArmAngle = null;
 	public static NetworkTableEntry m_nteDriveDistance;  //double
 	public static NetworkTableEntry m_nteEndSmartIntake;  //boolean
 
@@ -43,11 +42,11 @@ public class NetworkEntries {
 
 	//Speeds Tab
 	public static NetworkTableEntry m_nteMaxDriveSpeed;  //double
-	public static NetworkTableEntry m_nteMaxArmSpeed;  //double
 	public static NetworkTableEntry m_nteMaxIntakePivotSpeed;  //double
 	public static NetworkTableEntry m_nteMaxIntakeRollerSpeed;  //double
-	public static NetworkTableEntry m_nteMaxShootSpeed;  //double
 	public static NetworkTableEntry m_nteMaxIndexerSpeed;  //double
+	public static NetworkTableEntry m_nteMaxShootSpeed;  //double
+	public static NetworkTableEntry m_nteMaxArmSpeed;  //double
 
 	//Ball Pos
 	public static NetworkTableEntry m_nteTarmac;  //boolean
@@ -87,20 +86,14 @@ public class NetworkEntries {
 		}
 		return cargo;
 	}
-	
 
-	public static boolean endSmartIntake(){
-		return m_nteEndSmartIntake.getBoolean(false);
-	}
 	//Returns whether the pivot assist is enabled
 	public static boolean isPivotAssistEnabled() {
-		return true;
-		//return m_nteIsPivotAssistEnabled.getBoolean(false);
+		return m_nteIsPivotAssistEnabled.getBoolean(false);
 	}
 
 	//Returns whether the smart intake is enabled
 	public static boolean isSmartIntakeEnabled() {
 		return m_nteIsSmartIntakeEnabled.getBoolean(false);
-		//return m_nteIsSmartIntakeEnabled.getBoolean(false);
 	}
 }
