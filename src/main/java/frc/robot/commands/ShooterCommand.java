@@ -33,7 +33,7 @@ public class ShooterCommand extends CommandBase {
 			//Spins the shooter at max speed in reverse
 			m_shooter.setShootSpeed(-m_oi.getMaxShootSpeed());
 		} else {  //Nothing is being pressed (shooter wise)
-			//Stops the spinner
+			//Stops the flywheel
 			m_shooter.setShootSpeed(0);
 		}
 	}
@@ -41,6 +41,7 @@ public class ShooterCommand extends CommandBase {
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
+		//Stops the flywheel
 		m_shooter.setShootSpeed(0);
 	}
 

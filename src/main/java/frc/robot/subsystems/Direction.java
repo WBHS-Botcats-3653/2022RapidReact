@@ -16,9 +16,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
  */
 public class Direction extends SubsystemBase {
 	private static Direction m_singleton;
+	
 	private ADXRS450_Gyro gyro;
-	private Encoder leftEncoder;
-	private Encoder rightEncoder;
+	private Encoder leftEncoder, rightEncoder;
 
 	
 	public Direction() {

@@ -12,19 +12,13 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.inputs.OI;
 
 
 public class DriveTrain extends SubsystemBase {
 	private static DriveTrain driveTrain = null;
-	public OI m_oi = OI.getInstance();
 
-	private WPI_VictorSPX driveFrontLeft;
-	private WPI_VictorSPX driveBackLeft;
-	private WPI_VictorSPX driveFrontRight;
-	private WPI_VictorSPX driveBackRight;
+	private WPI_VictorSPX driveFrontLeft, driveBackLeft, driveFrontRight, driveBackRight;
 	private DifferentialDrive diffDrive;
-	private double maxDriveSpeed;
 
 	//documentation for WPI_VictorSPX: 
 	//https://robotpy.readthedocs.io/projects/ctre/en/stable/ctre/WPI_VictorSPX.html
@@ -47,11 +41,6 @@ public class DriveTrain extends SubsystemBase {
 		//Reverses left motor direction
 		driveLeft.setInverted(true);
 	}
-
-	@Override
-	public void periodic() {
-		maxDriveSpeed = m_oi.getMaxDriveSpeed();
-	}
 	
 	//Returns an instance of DrainTrain, creating an instance only when one does not already exist
 	public static DriveTrain getInstance() {
@@ -66,8 +55,6 @@ public class DriveTrain extends SubsystemBase {
 	 * @param rotation Amount to rotate
 	 */
 	public void arcadeDrived(double speed, double rotation) {
-		//Caps the speed from exceeding the set maxDriveSpeed
-		if (Math.abs(speed) > maxDriveSpeed) speed = (speed < 0 ? -1 : 1) * maxDriveSpeed;
 		//Sets the differential drive speed and rotation
 		diffDrive.arcadeDrive(speed, rotation);
 	}
@@ -78,9 +65,6 @@ public class DriveTrain extends SubsystemBase {
 	 * @param rightSpeed Speed to set to the right side of the drive train
 	 */
 	public void tankDrived(double leftSpeed, double rightSpeed) {
-		//Caps the speed from exceeding the set maxDriveSpeed
-		if (Math.abs(leftSpeed) > maxDriveSpeed) leftSpeed = (leftSpeed < 0 ? -1 : 1) * maxDriveSpeed;
-		if (Math.abs(rightSpeed) > maxDriveSpeed) rightSpeed = (rightSpeed < 0 ? -1 : 1) * maxDriveSpeed;
 		//Sets the differential drive left wheel speed and right wheel speed
 		diffDrive.tankDrive(leftSpeed, rightSpeed);
 	}

@@ -34,6 +34,16 @@ public final class Constants {
 			put("RRL", new double[] {-77.43, -30.58});
 			put("RRR", new double[] {-100.78, -86.53});
 		}};
+
+		//Speeds
+		public static final double kAutoFastDriveSpeed = 1.0;
+		public static final double kAutoSlowDriveSpeed = 1.0;
+		public static final double kAutoTurnSpeed = 0.6;
+		public static final double kAutoIntakePivotDownSpeed = 0.15;
+		public static final double kAutoIntakePivotUpSpeed = 0.35;
+		public static final double kAutoIntakeRollerSpeed = 1.0;
+		public static final double kAutoIndexSpeed = 0.5;
+		public static final double kAutoShootSpeed = 0.85;
 	}
 
 	//Drive Constants
@@ -83,12 +93,17 @@ public final class Constants {
 		//Pivot limit switch IDs
 		public static final int kBottomPivotLimitSwitchID = 0;  //DIO
 		public static final int kTopPivotLimitSwitchID = 1;  //DIO
+
+		//Speeds
+		public static final double kSmartIntakePivotDownSpeed = 0.15;
+		public static final double kSmartIntakePivotUpSpeed = 0.35;
+		public static final double kIntakePivotAssistSpeed = 0.1;
 	}
 
 	//Shooter Constants
 	public static final class ShooterConstants {
 		//Spinner motor ID
-		public static final int kFlyWheelMotorID = 30;  //CAN
+		public static final int kFlywheelMotorID = 30;  //CAN
 
 		//Shooter photoelectric sensor ID
 		public static final int kShooterPESensorID = 8;  //DIO

@@ -77,11 +77,6 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteMaxIntakePivotSpeed = tabSpeeds.addPersistent("Max Intake Pivot speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(4, 0).getEntry();  //double
 			NetworkEntries.m_nteMaxShootSpeed = tabSpeeds.addPersistent("Max Shoot speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(6, 0).getEntry();  //double
 			NetworkEntries.m_nteMaxIndexerSpeed = tabSpeeds.addPersistent("Max Indexer speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(0, 1).getEntry();  //double
-			NetworkEntries.m_nteMaxAutoIndexerSpeed = tabSpeeds.addPersistent("Max Auto Indexer speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(0, 1).getEntry();  //double
-			NetworkEntries.m_nteMaxPivotAssistSpeed = tabSpeeds.addPersistent("Max Pivot Assist speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(6, 1).getEntry();  //double
-			NetworkEntries.m_nteMaxSmartIntakePivotDownSpeed = tabSpeeds.addPersistent("Max Smart Down Intake Pivot speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(1, 1).withPosition(2, 1).getEntry();  //double
-			NetworkEntries.m_nteMaxSmartIntakePivotUpSpeed = tabSpeeds.addPersistent("Max Smart Up Intake Pivot speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(1, 1).withPosition(5, 1).getEntry();  //double
-			NetworkEntries.m_nteMaxCargoCollectDriveSpeed = tabSpeeds.addPersistent("Max Cargo Collect Drive speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(3, 1).getEntry(); //double
 			NetworkEntries.m_nteMaxIntakeRollerSpeed = tabSpeeds.addPersistent("Max Intake Roller Speed", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(3, 2).getEntry();  //double
 
 		// Test Tab
@@ -127,15 +122,11 @@ public class Dashboard extends SubsystemBase {
 		//updates the following speeds
 		m_oi.setMaxDriveSpeed(NetworkEntries.m_nteMaxDriveSpeed.getDouble(0));
 		m_oi.setMaxIndexerSpeed(NetworkEntries.m_nteMaxIndexerSpeed.getDouble(0));
-		m_oi.setMaxAutoIndexerSpeed(NetworkEntries.m_nteMaxAutoIndexerSpeed.getDouble(0));
 		m_oi.setMaxIntakePivotSpeed(NetworkEntries.m_nteMaxIntakePivotSpeed.getDouble(0));
 		m_oi.setMaxArmSpeed(NetworkEntries.m_nteMaxArmSpeed.getDouble(0));
 		m_oi.setMaxIntakeRollerSpeed(NetworkEntries.m_nteMaxIntakeRollerSpeed.getDouble(0));
-		m_oi.setMaxSmartIntakePivotUpSpeed(NetworkEntries.m_nteMaxSmartIntakePivotUpSpeed.getDouble(0));
-		m_oi.setMaxSmartIntakePivotDownSpeed(NetworkEntries.m_nteMaxSmartIntakePivotDownSpeed.getDouble(0));
 		m_oi.setMaxIntakeRollerSpeed(NetworkEntries.m_nteMaxIntakeRollerSpeed.getDouble(0));
 		m_oi.setMaxShootSpeed(NetworkEntries.m_nteMaxShootSpeed.getDouble(0));
-		m_oi.setMaxCargoCollectDriveSpeed(NetworkEntries.m_nteMaxCargoCollectDriveSpeed.getDouble(0));
 
 		//Updates the PhotoElectric sensors in the dashboard
 		NetworkEntries.m_nteLowerStoragePE.setBoolean(m_si.isLowerStorageClosed());

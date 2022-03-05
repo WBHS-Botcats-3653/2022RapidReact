@@ -37,6 +37,7 @@ public class ArcadeDriveCommand extends CommandBase {
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
+		//Stop the drive train
 		m_driveTrain.arcadeDrived(0, 0);
 	}
 

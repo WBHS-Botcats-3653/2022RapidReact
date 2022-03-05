@@ -4,6 +4,8 @@
 
 package frc.robot.commands.autoCommands;
 
+import static frc.robot.Constants.AutoConstants.kAutoTurnSpeed;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Direction;
 import frc.robot.subsystems.DriveTrain;
@@ -12,14 +14,14 @@ public class TurnCommand extends CommandBase {
 	private DriveTrain m_driveTrain;
 	private Direction m_direction;
 
-	private double turnSpeed = 0.6;  //Change later maybe
-	private double angle;
-	private double startAngle;
+	private double turnSpeed = kAutoTurnSpeed;
+	private double angle, startAngle;
 	
 	public TurnCommand(double angle) {
 		m_driveTrain = DriveTrain.getInstance();
 		m_direction = Direction.getInstance();
 		this.angle = angle;
+		//If the angle is negative reverse the turn speed
 		if (angle < 0) turnSpeed *= -1;
 		// Use addRequirements() here to declare subsystem dependencies.
 		addRequirements(m_driveTrain, m_direction);

@@ -10,28 +10,17 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.inputs.OI;
 
 public class Intake extends SubsystemBase {
 	private static Intake m_singleton = null;
-	private OI m_oi = OI.getInstance();
 
-	private WPI_VictorSPX pivot;
-	private WPI_VictorSPX rollers;
-	private double maxPivotSpeed;
-	private double maxRollerSpeed;
+	private WPI_VictorSPX pivot, rollers;
 
 	private Intake() {
 		//Creates WPI_VictorSPX motor controllers for the Pivot and Rollers in the Intake
 		pivot = new WPI_VictorSPX(kPivotMotorID);
 		rollers = new WPI_VictorSPX(kRollersMotorID);
 		rollers.setInverted(true);
-	}
-
-	@Override
-	public void periodic() {
-		maxPivotSpeed = m_oi.getMaxIntakePivotSpeed();
-		maxRollerSpeed = m_oi.getMaxIntakeRollerSpeed();
 	}
 	
 	//Returns an instance of Intake, creating an instance only when one does not already exist (singleton)
@@ -43,16 +32,12 @@ public class Intake extends SubsystemBase {
 
 	//Sets the intake pivot speed
 	public void setPivotSpeed(double speed) {
-		//Caps the speed from exceeding the set maxIntakePivotSpeed
-		if (Math.abs(speed) > maxPivotSpeed) speed = (speed < 0 ? -1 : 1) * maxPivotSpeed;
 		//Sets the pivot speed
 		pivot.set(speed);
 	}
 
 	//Sets the intake roller speed
 	public void setRollerSpeed(double speed) {
-		//Caps the speed from exceeding the set maxIntakeRollerSpeed
-		if (Math.abs(speed) > maxRollerSpeed) speed = (speed < 0 ? -1 : 1) * maxRollerSpeed;
 		//Sets the roller speed
 		rollers.set(speed);
 	}

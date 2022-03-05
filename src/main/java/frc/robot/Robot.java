@@ -7,7 +7,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.commands.*;
-import frc.robot.inputs.OI;
 import frc.robot.subsystems.*;
 
 /**
@@ -27,9 +26,6 @@ public class Robot extends TimedRobot {
 	private final Shooter m_shooterSubsystem = Shooter.getInstance();
 	private final Direction m_directionSubsystem = Direction.getInstance();
 	private final Indexer m_indexerSubsystem = Indexer.getInstance();
-
-	//Inputs
-	private final OI m_oi = OI.getInstance();
 
 	//Commands
 	private AutoCommand m_autonomousCommand;
@@ -88,15 +84,10 @@ public class Robot extends TimedRobot {
 		//TODO:
 		NetworkEntries.m_nteMaxShootSpeed.setDouble(0);
 		NetworkEntries.m_nteMaxIntakePivotSpeed.setDouble(0);
-		NetworkEntries.m_nteMaxSmartIntakePivotDownSpeed.setDouble(0);
-		NetworkEntries.m_nteMaxSmartIntakePivotUpSpeed.setDouble(0);
 		NetworkEntries.m_nteMaxIntakeRollerSpeed.setDouble(0);
 		NetworkEntries.m_nteMaxArmSpeed.setDouble(0);
 		NetworkEntries.m_nteMaxDriveSpeed.setDouble(0);
 		NetworkEntries.m_nteMaxIndexerSpeed.setDouble(0);
-		NetworkEntries.m_nteMaxAutoIndexerSpeed.setDouble(0);
-		NetworkEntries.m_nteMaxPivotAssistSpeed.setDouble(0);
-		NetworkEntries.m_nteMaxCargoCollectDriveSpeed.setDouble(0);
 	}
 
 	/** This function is called periodically when disabled. */
@@ -131,15 +122,10 @@ public class Robot extends TimedRobot {
 		//TODO:
 		NetworkEntries.m_nteMaxShootSpeed.setDouble(0.85);
 		NetworkEntries.m_nteMaxIntakePivotSpeed.setDouble(0.5);
-		NetworkEntries.m_nteMaxSmartIntakePivotDownSpeed.setDouble(0);
-		NetworkEntries.m_nteMaxSmartIntakePivotUpSpeed.setDouble(0);
 		NetworkEntries.m_nteMaxIntakeRollerSpeed.setDouble(1.0);
 		NetworkEntries.m_nteMaxArmSpeed.setDouble(1.0);
 		NetworkEntries.m_nteMaxDriveSpeed.setDouble(0.5);
 		NetworkEntries.m_nteMaxIndexerSpeed.setDouble(1.0);
-		NetworkEntries.m_nteMaxAutoIndexerSpeed.setDouble(0.5);
-		NetworkEntries.m_nteMaxPivotAssistSpeed.setDouble(0.1);
-		NetworkEntries.m_nteMaxCargoCollectDriveSpeed.setDouble(0.5);
 	}
 
 	/** This function is called periodically during autonomous. */
@@ -186,15 +172,10 @@ public class Robot extends TimedRobot {
 		//TODO:
 		NetworkEntries.m_nteMaxShootSpeed.setDouble(0.85);
 		NetworkEntries.m_nteMaxIntakePivotSpeed.setDouble(0.5);
-		NetworkEntries.m_nteMaxSmartIntakePivotDownSpeed.setDouble(0.15);
-		NetworkEntries.m_nteMaxSmartIntakePivotUpSpeed.setDouble(0.35);
 		NetworkEntries.m_nteMaxIntakeRollerSpeed.setDouble(1.0);
 		NetworkEntries.m_nteMaxArmSpeed.setDouble(1.0);
 		NetworkEntries.m_nteMaxDriveSpeed.setDouble(1.0);
 		NetworkEntries.m_nteMaxIndexerSpeed.setDouble(1.0);
-		NetworkEntries.m_nteMaxAutoIndexerSpeed.setDouble(0);
-		NetworkEntries.m_nteMaxPivotAssistSpeed.setDouble(0.1);
-		NetworkEntries.m_nteMaxCargoCollectDriveSpeed.setDouble(0);
 	}
 
 	/** This function is called periodically during operator control. */
@@ -223,15 +204,10 @@ public class Robot extends TimedRobot {
 		//TODO:
 		NetworkEntries.m_nteMaxShootSpeed.setDouble(0.3);
 		NetworkEntries.m_nteMaxIntakePivotSpeed.setDouble(0.5);
-		NetworkEntries.m_nteMaxSmartIntakePivotDownSpeed.setDouble(0.3);
-		NetworkEntries.m_nteMaxSmartIntakePivotUpSpeed.setDouble(0.4);
 		NetworkEntries.m_nteMaxIntakeRollerSpeed.setDouble(0.5);
 		NetworkEntries.m_nteMaxArmSpeed.setDouble(1.0);
 		NetworkEntries.m_nteMaxDriveSpeed.setDouble(0.5);
 		NetworkEntries.m_nteMaxIndexerSpeed.setDouble(0.5);
-		NetworkEntries.m_nteMaxAutoIndexerSpeed.setDouble(0);
-		NetworkEntries.m_nteMaxPivotAssistSpeed.setDouble(0.1);
-		NetworkEntries.m_nteMaxCargoCollectDriveSpeed.setDouble(0);
 	}
 
 	/** This function is called periodically during test mode. */

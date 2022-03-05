@@ -14,8 +14,7 @@ public class DriveCommand extends CommandBase {
 	private DriveTrain m_driveTrain;
 	private Direction m_direction;
 
-	private double distance;
-	private double speed;
+	private double distance, speed;
 	private boolean isCollectingCargo;
 
 	private double currentDistance;

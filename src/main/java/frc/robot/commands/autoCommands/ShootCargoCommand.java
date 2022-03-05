@@ -4,8 +4,9 @@
 
 package frc.robot.commands.autoCommands;
 
+import static frc.robot.Constants.AutoConstants.*;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.inputs.OI;
 import frc.robot.inputs.SI;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Shooter;
@@ -13,16 +14,13 @@ import frc.robot.subsystems.Shooter;
 public class ShootCargoCommand extends CommandBase {
 	private Shooter m_shooter;
 	private Indexer m_indexer;
-	private OI m_oi;
 	private SI m_si;
 
-	private boolean hasFinished;
-	private boolean shooterTriggered;
+	private boolean hasFinished, shooterTriggered;
 
 	public ShootCargoCommand() {
 		m_shooter = Shooter.getInstance();
 		m_indexer = Indexer.getInstance();
-		m_oi = OI.getInstance();
 		m_si = SI.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
 		addRequirements(m_shooter, m_indexer);
@@ -32,7 +30,7 @@ public class ShootCargoCommand extends CommandBase {
 	@Override
 	public void initialize() {
 		//Spins the shooter at max speed
-		m_shooter.setShootSpeed(m_oi.getMaxShootSpeed());
+		m_shooter.setShootSpeed(kAutoShootSpeed);
 		//The command has not finished
 		hasFinished = false;
 		//The shooter photoelectric sensor has not been triggered
@@ -44,7 +42,7 @@ public class ShootCargoCommand extends CommandBase {
 	public void execute() {
 		if (m_si.isLowerStorageClosed()) {  //If there is cargo in the lower storage area
 			//Sets the indexer to max speed
-			m_indexer.setIndexerSpeed(m_oi.getMaxAutoIndexerSpeed());
+			m_indexer.setIndexerSpeed(kAutoIndexSpeed);
 		}
 		if (m_si.isShooterClosed()) {  //If cargo has moved into the shooter
 			//The shooter photoelectric sensor has been triggered

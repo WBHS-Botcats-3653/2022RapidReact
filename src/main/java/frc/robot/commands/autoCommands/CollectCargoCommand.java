@@ -4,9 +4,11 @@
 
 package frc.robot.commands.autoCommands;
 
+import static frc.robot.Constants.AutoConstants.*;
+import static frc.robot.Constants.IntakeConstants.kIntakePivotAssistSpeed;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.commands.AutoCommand;
-import frc.robot.inputs.OI;
 import frc.robot.inputs.SI;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
@@ -14,7 +16,6 @@ import frc.robot.subsystems.Intake;
 public class CollectCargoCommand extends CommandBase {
 	private Intake m_intake;
 	private Indexer m_indexer;
-	private OI m_oi;
 	private SI m_si;
 
 	public static boolean endCommand;
@@ -22,7 +23,6 @@ public class CollectCargoCommand extends CommandBase {
 	public CollectCargoCommand() {
 		m_intake = Intake.getInstance();
 		m_indexer =  Indexer.getInstance();
-		m_oi = OI.getInstance();
 		m_si = SI.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
 		addRequirements(m_intake, m_indexer);
@@ -33,8 +33,8 @@ public class CollectCargoCommand extends CommandBase {
 	public void initialize() {
 		//Do not end the command
 		endCommand = false;
-		//Sets the pivot to max speed down
-		m_intake.setPivotSpeed(m_oi.getMaxSmartIntakePivotDownSpeed());
+		//Pivots the intake down
+		m_intake.setPivotSpeed(kAutoIntakePivotDownSpeed);
 	}
 
 	// Called every time the scheduler runs while the command is scheduled.
@@ -42,12 +42,12 @@ public class CollectCargoCommand extends CommandBase {
 	public void execute() {
 		if (m_si.isPivotDownLimitClosed() && !endCommand) {  //If the intake has finished it's downward pivot
 			//Stops the intake pivot
-			m_intake.setPivotSpeed(m_oi.getMaxPivotAssistSpeed());
-			//Sets the intake roller speed to max
-			m_intake.setRollerSpeed(m_oi.getMaxIntakeRollerSpeed());
+			m_intake.setPivotSpeed(kIntakePivotAssistSpeed);
+			//Spins the intake rollers
+			m_intake.setRollerSpeed(kAutoIntakeRollerSpeed);
 		} else if (endCommand) {  //If the command has been told to end
-			//Sets the intake pivot speed to max up
-			m_intake.setPivotSpeed(-m_oi.getMaxSmartIntakePivotUpSpeed());
+			//Pivots the intake up
+			m_intake.setPivotSpeed(-kAutoIntakePivotUpSpeed);
 			//Stops the intake rollers
 			m_intake.setRollerSpeed(0);
 		}

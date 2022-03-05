@@ -4,29 +4,21 @@
 
 package frc.robot.subsystems;
 
-import static frc.robot.Constants.ShooterConstants.kFlyWheelMotorID;
+import static frc.robot.Constants.ShooterConstants.kFlywheelMotorID;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.inputs.OI;
 
 public class Shooter extends SubsystemBase {
 	private static Shooter shooter = null;
-	private OI m_oi = OI.getInstance();
 
-	private static WPI_VictorSPX flyWheel;
-	private double maxFlyWheelSpeed;
+	private static WPI_VictorSPX flywheel;
 
 	public Shooter() {
 		//Creates WPI_VictorSPX motor controller for the fly wheel
-		flyWheel = new WPI_VictorSPX(kFlyWheelMotorID);
-		flyWheel.setInverted(true);
-	}
-
-	@Override
-	public void periodic() {
-		maxFlyWheelSpeed = m_oi.getMaxShootSpeed();
+		flywheel = new WPI_VictorSPX(kFlywheelMotorID);
+		flywheel.setInverted(true);
 	}
 
 	//Returns an instance of Shooter, creating an instance only when one does not already exist (singleton)
@@ -41,9 +33,7 @@ public class Shooter extends SubsystemBase {
 	 * 
 	 */
 	public void setShootSpeed(double speed) {
-		//Caps the fly wheel speed from exceeding the set maxShootSpeed
-		if (Math.abs(speed) > maxFlyWheelSpeed) speed = (speed < 0 ? -1 : 1) * maxFlyWheelSpeed;
 		//Sets the fly wheel speed
-		flyWheel.set(speed);
+		flywheel.set(speed);
 	}
 }

@@ -17,12 +17,9 @@ public class SI {
 	private static SI m_singleton;
 
 	//Photoelectric sensors
-	private static DigitalInput lowerStoragePE;
-	private static DigitalInput upperStoragePE;
-	private static DigitalInput shooterPE;
+	private static DigitalInput lowerStoragePE, upperStoragePE, shooterPE;
 	//Limit switches
-	private static DigitalInput topPivotLimitSwitch;
-	private static DigitalInput bottomPivotLimitSwitch;
+	private static DigitalInput topPivotLimitSwitch, bottomPivotLimitSwitch;
 
 	public SI() {
 		//Photoelectric sensors

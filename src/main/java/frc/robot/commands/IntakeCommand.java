@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import static frc.robot.Constants.IntakeConstants.*;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.NetworkEntries;
 import frc.robot.inputs.OI;
@@ -16,8 +18,7 @@ public class IntakeCommand extends CommandBase {
 	private SI m_si;
 
 	private static boolean smartControl = false;
-	private boolean smartPivotGoingUp;
-	private boolean smartPivotGoingDown;
+	private boolean smartPivotGoingUp, smartPivotGoingDown;
 
 	/**Creates a new IntakeCommand.
 	 * @param subsystem The subsystem used by this command.
@@ -67,7 +68,9 @@ public class IntakeCommand extends CommandBase {
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
+		//Stop the intake pivot
 		m_intake.setPivotSpeed(0);
+		//Stops the intake rollers
 		m_intake.setRollerSpeed(0);
 	}
 
@@ -99,7 +102,7 @@ public class IntakeCommand extends CommandBase {
 			//Pivot assist (pivots the intake down at a low speed when spinning the rollers)
 			if (NetworkEntries.isPivotAssistEnabled()) {  //If pivot assist is enabled in the Dashboard
 				//Sets the pivot speed to max assist speed
-				m_intake.setPivotSpeed(m_oi.getMaxPivotAssistSpeed());
+				m_intake.setPivotSpeed(kIntakePivotAssistSpeed);
 			}
 		} else if (m_oi.getManualIntakeOut()) {  //If the X button is being pressed
 			//Reverse the rollers and spin at max speed
@@ -114,14 +117,14 @@ public class IntakeCommand extends CommandBase {
 	public void smartIntakeLogic() {
 		if (m_oi.getSmartIntakeUp() && !m_si.isPivotUpLimitClosed()) {  //If the smart intake is being called to go up and the top pivot limit switch is open
 			//Pivots the intake up at the set max speed
-			m_intake.setPivotSpeed(-m_oi.getMaxSmartIntakePivotUpSpeed());
+			m_intake.setPivotSpeed(-kSmartIntakePivotUpSpeed);
 			//Initial pivot up started
 			smartPivotGoingUp = true;
 			//Stop downward pivot
 			smartPivotGoingDown = false;
 		} else if (m_oi.getSmartIntakeDown() && !m_si.isPivotDownLimitClosed()) {  //If the smart intake is being called to go down and the bottom pivot limit switch is open
 			//Pivots the intake down at the set max speed
-			m_intake.setPivotSpeed(m_oi.getMaxSmartIntakePivotDownSpeed());
+			m_intake.setPivotSpeed(kSmartIntakePivotDownSpeed);
 			//Prevents manual control from interferring with smart control
 			smartControl = true;
 			//Initial pivot down started
@@ -153,7 +156,7 @@ public class IntakeCommand extends CommandBase {
 			}
 		} else if (NetworkEntries.isPivotAssistEnabled() && smartControl && !smartPivotGoingDown && !smartPivotGoingUp) {  //If pivot assist is enabled and neither limit switch is closed and the intake is not pivoting up or down
 			//Pivots the intake down at the set pivot assist speed
-			m_intake.setPivotSpeed(m_oi.getMaxPivotAssistSpeed());
+			m_intake.setPivotSpeed(kIntakePivotAssistSpeed);
 		}
 		//Rollers
 		if (smartControl && !smartPivotGoingUp && !m_si.isPivotUpLimitClosed()) {  //If smart control has priority over manual controls and the intake is not up and is not pivoting up

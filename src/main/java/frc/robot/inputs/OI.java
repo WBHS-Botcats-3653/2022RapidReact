@@ -14,14 +14,9 @@ public class OI {
 	private double maxDriveSpeed = 0;
 	private double maxArmSpeed = 0;
 	private double maxIntakePivotSpeed = 0;
-	private double maxSmartIntakePivotDownSpeed = 0;
-	private double maxSmartIntakePivotUpSpeed = 0;
 	private double maxIntakeRollerSpeed = 0;
 	private double maxShootSpeed = 0;
 	private double maxIndexerSpeed = 0;
-	private double maxAutoIndexerSpeed = 0;
-	private double maxPivotAssistSpeed = 0;
-	private double maxCargoCollectDriveSpeed = 0;
 
 	public OI() {
 		m_controller = new XboxController(0);
@@ -71,30 +66,6 @@ public class OI {
 		return maxIntakePivotSpeed;
 	}
 
-	//Sets the max smart intake pivot speed
-	public void setMaxSmartIntakePivotDownSpeed(double speed) {
-		if (0.0 < speed && speed <= 1.0) {
-			maxSmartIntakePivotDownSpeed = speed;
-		}
-	}
-
-	//Returns the max smart intake pivot speed
-	public double getMaxSmartIntakePivotDownSpeed(){
-		return maxSmartIntakePivotDownSpeed;
-	}
-
-	//Sets the max smart intake pivot speed
-	public void setMaxSmartIntakePivotUpSpeed(double speed) {
-		if (0.0 < speed && speed <= 1.0) {
-			maxSmartIntakePivotUpSpeed = speed;
-		}
-	}
-
-	//Returns the max smart intake pivot speed
-	public double getMaxSmartIntakePivotUpSpeed(){
-		return maxSmartIntakePivotUpSpeed;
-	}
-
 	//Sets the max intake roller speed
 	public void setMaxIntakeRollerSpeed(double speed) {
 		if (0.0 < speed && speed <= 1.0) {
@@ -119,18 +90,6 @@ public class OI {
 		return maxIndexerSpeed;
 	}
 
-	//Sets the max indexer speed
-	public void setMaxAutoIndexerSpeed(double speed) {
-		if (0.0 < speed && speed <= 1.0) {
-			maxAutoIndexerSpeed = speed;
-		}
-	}
-
-	//Returns the max indexer speed
-	public double getMaxAutoIndexerSpeed() {
-		return maxAutoIndexerSpeed;
-	}
-
 	//Sets the max shoot speed
 	public void setMaxShootSpeed(double speed) {
 		if (0.0 < speed && speed <= 1.0) {
@@ -141,30 +100,6 @@ public class OI {
 	//Returns the max shoot speed (invert after return)
 	public double getMaxShootSpeed() {
 		return maxShootSpeed;
-	}
-
-	//Sets the max pivot assist speed
-	public void setMaxPivotAssistSpeed(double speed) {
-		if (0.0 < speed && speed <= 1.0) {
-			maxPivotAssistSpeed = speed;
-		}
-	}
-	
-	//Returns the max pivot assist speed
-	public double getMaxPivotAssistSpeed() {
-		return maxPivotAssistSpeed;
-	}
-	
-	//Sets the cargo collect drive speed
-	public void setMaxCargoCollectDriveSpeed(double speed) {
-		if (0.0 < speed && speed <= 1.0) {
-			maxCargoCollectDriveSpeed = speed;
-		}
-	}
-	
-	//Returns the cargo collect drive speed
-	public double getMaxCargoCollectDriveSpeed() {
-		return maxCargoCollectDriveSpeed;
 	}
 	
 	//Returns the speed to move forward/backward

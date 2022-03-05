@@ -47,6 +47,7 @@ public class IndexerCommand extends CommandBase {
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
+		//Stop the indexer
 		m_indexer.setIndexerSpeed(0);
 	}
 
