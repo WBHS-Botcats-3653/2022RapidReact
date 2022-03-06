@@ -56,17 +56,7 @@ public class DriveTrain extends SubsystemBase {
 	 */
 	public void arcadeDrived(double speed, double rotation) {
 		//Sets the differential drive speed and rotation
-		diffDrive.arcadeDrive(speed, rotation);
-	}
-
-	/**Sets the tank drive left wheel speed and right wheel speed
-	 * Used for autonomous
-	 * @param leftSpeed Speed to set to the left side of the drive train
-	 * @param rightSpeed Speed to set to the right side of the drive train
-	 */
-	public void tankDrived(double leftSpeed, double rightSpeed) {
-		//Sets the differential drive left wheel speed and right wheel speed
-		diffDrive.tankDrive(leftSpeed, rightSpeed);
+		diffDrive.arcadeDrive(speed, rotation, false);
 	}
 
 	//Enables or disabled the neutral brake on the motors

@@ -37,8 +37,7 @@ public final class Constants {
 
 		//Speeds
 		public static final double kAutoFastDriveSpeed = 1.0;
-		public static final double kAutoSlowDriveSpeed = 1.0;
-		public static final double kAutoTurnSpeed = 0.6;
+		public static final double kAutoSlowDriveSpeed = 0.5;
 		public static final double kAutoIntakePivotDownSpeed = 0.15;
 		public static final double kAutoIntakePivotUpSpeed = 0.35;
 		public static final double kAutoIntakeRollerSpeed = 1.0;
@@ -71,6 +70,7 @@ public final class Constants {
 
 		//Something
 		public static final int kP = 1;
+		public static final double kThreshold = 3.0;
 	}
 
 	//Climber Constants

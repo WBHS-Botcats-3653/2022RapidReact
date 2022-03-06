@@ -4,7 +4,7 @@
 
 package frc.robot.commands.autoCommands;
 
-import static frc.robot.Constants.AutoConstants.kAutoTurnSpeed;
+import static frc.robot.Constants.DriveConstants.*;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Direction;
@@ -14,15 +14,13 @@ public class TurnCommand extends CommandBase {
 	private DriveTrain m_driveTrain;
 	private Direction m_direction;
 
-	private double turnSpeed = kAutoTurnSpeed;
-	private double angle, startAngle;
+	private double angle, targetAngle;
+	private boolean hasFinished = false;
 	
 	public TurnCommand(double angle) {
 		m_driveTrain = DriveTrain.getInstance();
 		m_direction = Direction.getInstance();
 		this.angle = angle;
-		//If the angle is negative reverse the turn speed
-		if (angle < 0) turnSpeed *= -1;
 		// Use addRequirements() here to declare subsystem dependencies.
 		addRequirements(m_driveTrain, m_direction);
 	}
@@ -30,15 +28,27 @@ public class TurnCommand extends CommandBase {
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
-		//Gets the angle of the robot when the turn command is first called
-		startAngle = m_direction.getAngle();
-		//Turns the robot 
-		m_driveTrain.arcadeDrived(0, turnSpeed);
+		//Calculates the desired angle based off the current angle
+		targetAngle = m_direction.getAngle() + angle;
 	}
 
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
-	public void execute() {}
+	public void execute() {
+		//Difference of the between the desired angle the current angle of the robot
+		double difference = targetAngle - m_direction.getAngle();
+		if (Math.abs(difference) > kThreshold) {  //Robot is not within the threshold of the desired angle
+			//Turn towards the desired angle
+			m_driveTrain.arcadeDrived(0, difference * kP);
+			//Has not finished turning
+			hasFinished = false;
+		} else {  //Robot is withing the threshold of the desired angle
+			//Stops the drive
+			m_driveTrain.arcadeDrived(0, 0);
+			//Has finished turning
+			hasFinished = true;
+		}
+	}
 
 	// Called once the command ends or is interrupted.
 	@Override
@@ -50,7 +60,7 @@ public class TurnCommand extends CommandBase {
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() {
-		//If the robot has turned to the specified angle
-		return Math.abs(m_direction.getAngle() - startAngle) >= Math.abs(angle);
+		//Whether the robot has finished it's turn
+		return hasFinished;
 	}
 }

@@ -14,18 +14,14 @@ public class DriveCommand extends CommandBase {
 	private DriveTrain m_driveTrain;
 	private Direction m_direction;
 
-	private double distance, speed;
+	private double distance, speed, currentDistance;
 	private boolean isCollectingCargo;
-
-	private double currentDistance;
-	private int direction;
 
 	public DriveCommand(double distance, double speed, boolean isCollectingCargo) {
 		m_driveTrain = DriveTrain.getInstance();
 		m_direction = Direction.getInstance();
 		this.distance = distance;
-		direction = distance < 0 ? -1 : 1;
-		this.speed = speed * direction;
+		this.speed = speed * distance < 0 ? -1 : 1;
 		this.isCollectingCargo = isCollectingCargo;
 		// Use addRequirements() here to declare subsystem dependencies.
 		addRequirements(m_driveTrain, m_direction);
@@ -46,9 +42,9 @@ public class DriveCommand extends CommandBase {
 		//Gets the distance the robot has moved from the encoders
 		currentDistance = m_direction.getDistance();
 		//Gets the error rate
-		double error = kP * m_direction.getError() * direction;
+		double error = kP * m_direction.getError();
 		//Moves the robot at the set speed and makes course corrections based off the encoders
-		m_driveTrain.tankDrived(speed + error, speed - error);
+		m_driveTrain.arcadeDrived(speed, error);
 	}
 
 	// Called once the command ends or is interrupted.
@@ -60,7 +56,7 @@ public class DriveCommand extends CommandBase {
 			CollectCargoCommand.endCommand = true;
 		}
 		//Stops the robot
-		m_driveTrain.tankDrived(0, 0);
+		m_driveTrain.arcadeDrived(0, 0);
 	}
 
 	// Returns true when the command should end.

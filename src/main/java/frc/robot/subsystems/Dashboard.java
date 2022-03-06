@@ -67,28 +67,30 @@ public class Dashboard extends SubsystemBase {
 			tabDrive.add("Field View", cam0).withSize(3, 2).withPosition(6, 0);
 			tabDrive.add("Gyro", Direction.getInstance().getGyro()).withSize(2, 2).withPosition(3, 0);
 			*/
-			NetworkEntries.m_nteIsSmartIntakeEnabled = tabDrive.addPersistent("is Smart Intake Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
+			NetworkEntries.m_nteIsSmartIntakeEnabled = tabDrive.addPersistent("Is Smart Intake Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
 			.withSize(1, 1).withPosition(5, 1).getEntry();
 
 			NetworkEntries.m_nteDriveDistance = tabDrive.add("Drived Distance", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(3, 0).getEntry();
 			NetworkEntries.m_nteEndSmartIntake = tabDrive.add("End Smart Intake", false).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 1).withPosition(3, 6).getEntry();
 			// Config Tab
-			NetworkEntries.m_nteIsPivotAssistEnabled = tabConfig.addPersistent("is Pivot Assist Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
+			NetworkEntries.m_nteIsPivotAssistEnabled = tabConfig.addPersistent("Is Pivot Assist Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
 			.withSize(1, 1).withPosition(0, 1).getEntry();
+			NetworkEntries.m_nteIsErrorCorrectionEnabled = tabConfig.addPersistent("Is Error Correction Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
+			.withSize(1, 1).withPosition(6, 1).getEntry();
 		//Speeds Tab			
-			NetworkEntries.m_nteMaxDriveSpeed = tabSpeeds.addPersistent("Max Drive speed", kDefaultDriveSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(0, 0).getEntry();  //double
-			NetworkEntries.m_nteMaxArmSpeed = tabSpeeds.addPersistent("Max Arm speed", kDefaultClimbSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(2, 0).getEntry();  //double
-			NetworkEntries.m_nteMaxIntakePivotSpeed = tabSpeeds.addPersistent("Max Intake Pivot speed", kDefaultIntakePivotSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(4, 0).getEntry();  //double
-			NetworkEntries.m_nteMaxShootSpeed = tabSpeeds.addPersistent("Max Shoot speed", kDefaultShootSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(6, 0).getEntry();  //double
-			NetworkEntries.m_nteMaxIndexerSpeed = tabSpeeds.addPersistent("Max Indexer speed", kDefaultIndexSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(0, 1).getEntry();  //double
+			NetworkEntries.m_nteMaxDriveSpeed = tabSpeeds.addPersistent("Max Drive Speed", kDefaultDriveSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(0, 0).getEntry();  //double
+			NetworkEntries.m_nteMaxArmSpeed = tabSpeeds.addPersistent("Max Climb Speed", kDefaultClimbSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(2, 0).getEntry();  //double
+			NetworkEntries.m_nteMaxIntakePivotSpeed = tabSpeeds.addPersistent("Max Intake Pivot Speed", kDefaultIntakePivotSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(4, 0).getEntry();  //double
+			NetworkEntries.m_nteMaxShootSpeed = tabSpeeds.addPersistent("Max Shoot Speed", kDefaultShootSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(6, 0).getEntry();  //double
+			NetworkEntries.m_nteMaxIndexerSpeed = tabSpeeds.addPersistent("Max Indexer Speed", kDefaultIndexSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(0, 1).getEntry();  //double
 			NetworkEntries.m_nteMaxIntakeRollerSpeed = tabSpeeds.addPersistent("Max Intake Roller Speed", kDefaultIntakeRollerSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(3, 2).getEntry();  //double
 
 		// Test Tab
-			NetworkEntries.m_nteIntakeUpLimit = tabTest.add("Intake up limit", false).withSize(1, 1).withPosition(3, 0).getEntry();
-			NetworkEntries.m_nteIntakeDownLimit = tabTest.add("Intake Down limit", false).withSize(1, 1).withPosition(4, 0).getEntry();
-			NetworkEntries.m_nteLowerStoragePE = tabTest.add("lower pe", false).withSize(1, 1).withPosition(1, 0).getEntry();
-			NetworkEntries.m_nteUpperStoragePE = tabTest.add("upper pe", false).withSize(1, 1).withPosition(2, 0).getEntry();
-			NetworkEntries.m_nteShooterPE = tabTest.add("shooter", false).withSize(1, 1).withPosition(2, 1).getEntry();
+			NetworkEntries.m_nteIntakeUpLimit = tabTest.add("Intake Up Limit", false).withSize(1, 1).withPosition(3, 0).getEntry();
+			NetworkEntries.m_nteIntakeDownLimit = tabTest.add("Intake Down Limit", false).withSize(1, 1).withPosition(4, 0).getEntry();
+			NetworkEntries.m_nteLowerStoragePE = tabTest.add("Lower Storage PE", false).withSize(1, 1).withPosition(1, 0).getEntry();
+			NetworkEntries.m_nteUpperStoragePE = tabTest.add("Upper Storage PE", false).withSize(1, 1).withPosition(2, 0).getEntry();
+			NetworkEntries.m_nteShooterPE = tabTest.add("Shooter PE", false).withSize(1, 1).withPosition(2, 1).getEntry();
 			NetworkEntries.m_nteResetEncoders = tabTest.add("Reset Encoders", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1,1).withPosition(4,1).getEntry();
 
 			NetworkEntries.m_nteDriveEncLeft = tabTest.add("Drive Left", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(0, 1).getEntry();
