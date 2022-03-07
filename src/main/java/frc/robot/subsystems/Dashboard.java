@@ -86,6 +86,7 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteMaxIntakePivotSpeed = tabSpeeds.addPersistent("Max Intake Pivot Speed", kDefaultIntakePivotSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(4, 0).getEntry();  //double
 			NetworkEntries.m_nteMaxShootSpeed = tabSpeeds.addPersistent("Max Shoot Speed", kDefaultShootSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(6, 0).getEntry();  //double
 			NetworkEntries.m_nteMaxIndexerSpeed = tabSpeeds.addPersistent("Max Indexer Speed", kDefaultIndexSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(0, 1).getEntry();  //double
+			NetworkEntries.m_nteMaxSmartIndexerSpeed = tabSpeeds.addPersistent("Max Smart Indexer Speed", kDefaultSmartIndexSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(0, 1).getEntry();  //double
 			NetworkEntries.m_nteMaxIntakeRollerSpeed = tabSpeeds.addPersistent("Max Intake Roller Speed", kDefaultIntakeRollerSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(3, 2).getEntry();  //double
 
 		// Test Tab
@@ -176,6 +177,7 @@ public class Dashboard extends SubsystemBase {
 			m_oi.setMaxIntakePivotSpeed(0);
 			m_oi.setMaxIntakeRollerSpeed(0);
 			m_oi.setMaxIndexSpeed(0);
+			m_oi.setMaxSmartIndexSpeed(0);
 			m_oi.setMaxShootSpeed(0);
 			m_oi.setMaxClimbSpeed(0);
 		} else {
@@ -184,6 +186,7 @@ public class Dashboard extends SubsystemBase {
 			m_oi.setMaxIntakePivotSpeed(NetworkEntries.m_nteMaxIntakePivotSpeed.getDouble(0));
 			m_oi.setMaxIntakeRollerSpeed(NetworkEntries.m_nteMaxIntakeRollerSpeed.getDouble(0));
 			m_oi.setMaxIndexSpeed(NetworkEntries.m_nteMaxIndexerSpeed.getDouble(0));
+			m_oi.setMaxSmartIndexSpeed(NetworkEntries.m_nteMaxSmartIndexerSpeed.getDouble(0));
 			m_oi.setMaxShootSpeed(NetworkEntries.m_nteMaxShootSpeed.getDouble(0));
 			m_oi.setMaxClimbSpeed(NetworkEntries.m_nteMaxArmSpeed.getDouble(0));
 		}

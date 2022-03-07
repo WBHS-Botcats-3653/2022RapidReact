@@ -15,6 +15,7 @@ public class OI {
 	private double maxIntakePivotSpeed = 0;
 	private double maxIntakeRollerSpeed = 0;
 	private double maxIndexSpeed = 0;
+	private double maxSmartIndexSpeed = 0;
 	private double maxShootSpeed = 0;
 	private double maxClimbSpeed = 0;
 
@@ -88,6 +89,18 @@ public class OI {
 	//Returns the max indexer speed
 	public double getMaxIndexSpeed() {
 		return maxIndexSpeed;
+	}
+
+	//Sets the max indexer speed
+	public void setMaxSmartIndexSpeed(double speed) {
+		if (0.0 < speed && speed <= 1.0) {
+			maxSmartIndexSpeed = speed;
+		}
+	}
+
+	//Returns the max indexer speed
+	public double getMaxSmartIndexSpeed() {
+		return maxSmartIndexSpeed;
 	}
 
 	//Sets the max shoot speed

@@ -82,7 +82,7 @@ public class IndexerCommand extends CommandBase {
 			//Is under smart control
 			smartControl = true;
 			//Sets the indexer to max speed
-			m_indexer.setIndexerSpeed(m_oi.getMaxIndexSpeed());
+			m_indexer.setIndexerSpeed(m_oi.getMaxSmartIndexSpeed());
 		}
 	}
 }
