@@ -31,6 +31,9 @@ public class Dashboard extends SubsystemBase {
 
 	public boolean speedsDisabled = true;
 
+	private static boolean tempTaxi;
+	private static boolean tempCollect;
+
 	private Dashboard() {
 		tabAutoConfig = Shuffleboard.getTab("AutoConfig");
 		tabDrive = Shuffleboard.getTab("Drive");
@@ -96,9 +99,37 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteDriveEncLeft = tabTest.add("Drive Left", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(0, 1).getEntry();
 			NetworkEntries.m_nteDriveEncRight = tabTest.add("Drive Right", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(1, 1).getEntry();	
 	}
+	public void InitializeTemp(){
+		if(NetworkEntries.m_isAutoTaxiOn != null){
+			tempTaxi = NetworkEntries.m_isAutoTaxiOn.getBoolean(false);
+		}
+		if(NetworkEntries.m_isAutoCollectOn != null){
+			tempCollect = NetworkEntries.m_isAutoCollectOn.getBoolean(false);
+		}
 
+	}
+
+	private static boolean updateTempTaxi(){
+		if(tempTaxi != NetworkEntries.m_isAutoTaxiOn.getBoolean(!tempTaxi)){
+			return true;
+		}
+		else {
+			return false;
+		}
+
+	}
+	private static boolean updateTempCollect(){
+		if(tempCollect != NetworkEntries.m_isAutoCollectOn.getBoolean(!tempCollect)){
+			return true;
+		}
+		else {
+			return false;
+		}
+
+	}
 	/**This is in charge of making sure the user won't be able to select the cargo that are too far.*/
 	public static void selectorLogic() {
+		/**Makes sure the tarmac & cargos are properly selecter */
 		if (NetworkEntries.m_nteTarmac.getBoolean(false)) {
 			NetworkEntries.m_nteLLCargo.setBoolean(false);
 			NetworkEntries.m_nteLRCargo.setBoolean(false);
@@ -106,8 +137,21 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteRLCargo.setBoolean(false);
 			NetworkEntries.m_nteRRCargo.setBoolean(false);
 		}
-	}
 
+		phaseLogic();
+	}
+	/**if autocollect is on, then
+	 * 
+	 */
+	public static void phaseLogic(){
+		/**makes sure that the phases are properly selected */
+		if(updateTempTaxi() && NetworkEntries.m_isAutoCollectOn.getBoolean(false)){
+			NetworkEntries.m_isAutoTaxiOn.setBoolean(true);
+		}
+		if(updateTempCollect() && !NetworkEntries.m_isAutoTaxiOn.getBoolean(true)){
+			NetworkEntries.m_isAutoCollectOn.setBoolean(false);
+		}
+	}
 	/**@Important This Method method should be executed in RobotPeriodic().
 	 * It is an alternative to the refresh() method.
 	 * 
