@@ -98,6 +98,7 @@ public final class Constants {
 		public static final double kSmartIntakePivotDownSpeed = 0.15;
 		public static final double kSmartIntakePivotUpSpeed = 0.35;
 		public static final double kIntakePivotAssistSpeed = 0.1;
+		public static final double kSmartIndexSpeed = 0.7;
 	}
 
 	//Shooter Constants

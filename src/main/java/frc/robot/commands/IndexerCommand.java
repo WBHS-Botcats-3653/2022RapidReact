@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import static frc.robot.Constants.IntakeConstants.kSmartIndexSpeed;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.inputs.OI;
 import frc.robot.inputs.SI;
@@ -81,8 +83,8 @@ public class IndexerCommand extends CommandBase {
 		} else if (m_si.isLowerStorageClosed()) {  //If there is cargo in the lower storage
 			//Is under smart control
 			smartControl = true;
-			//Sets the indexer to max speed
-			m_indexer.setIndexerSpeed(m_oi.getMaxSmartIndexSpeed());
+			//Spins the indexer
+			m_indexer.setIndexerSpeed(kSmartIndexSpeed);
 		}
 	}
 }

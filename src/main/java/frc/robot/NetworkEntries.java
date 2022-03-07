@@ -46,9 +46,8 @@ public class NetworkEntries {
 	public static NetworkTableEntry m_nteMaxIntakePivotSpeed;  //double
 	public static NetworkTableEntry m_nteMaxIntakeRollerSpeed;  //double
 	public static NetworkTableEntry m_nteMaxIndexerSpeed;  //double
-	public static NetworkTableEntry m_nteMaxSmartIndexerSpeed;  //double
 	public static NetworkTableEntry m_nteMaxShootSpeed;  //double
-	public static NetworkTableEntry m_nteMaxArmSpeed;  //double
+	public static NetworkTableEntry m_nteMaxClimbSpeed;  //double
 
 	//Ball Pos
 	public static NetworkTableEntry m_nteTarmac;  //boolean
