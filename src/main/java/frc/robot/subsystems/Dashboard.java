@@ -140,7 +140,7 @@ public class Dashboard extends SubsystemBase {
 
 		phaseLogic();
 	}
-	/**if autocollect is on, then
+	/**if autocollect is on, then taxi must be on
 	 * 
 	 */
 	public static void phaseLogic(){
