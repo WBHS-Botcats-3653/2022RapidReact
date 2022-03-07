@@ -122,17 +122,19 @@ public class Dashboard extends SubsystemBase {
 		phaseLogic();
 	}
 
-	/**if autocollect is on, then taxi must be on
+	/**If autocollect is on, then taxi must be on
 	 * 
 	 */
 	public static void phaseLogic() {
-		/**makes sure that the phases are properly selected */
+		/**Makes sure that the phases are properly selected */
 		if (NetworkEntries.m_isAutoCollectOn.getBoolean(false) && !previousCollect) {
 			NetworkEntries.m_isAutoTaxiOn.setBoolean(true);
 		}
 		if (!NetworkEntries.m_isAutoTaxiOn.getBoolean(true) && previousTaxi) {
 			NetworkEntries.m_isAutoCollectOn.setBoolean(false);
 		}
+		previousCollect = NetworkEntries.m_isAutoCollectOn.getBoolean(false);
+		previousTaxi = NetworkEntries.m_isAutoTaxiOn.getBoolean(false);
 	}
 
 	/**@Important This Method method should be executed in RobotPeriodic().
