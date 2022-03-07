@@ -116,7 +116,7 @@ public final class Constants {
 		public static final double kDefaultIntakePivotSpeed = 0.5;
 		public static final double kDefaultIntakeRollerSpeed = 1.0;
 		public static final double kDefaultIndexSpeed = 1.0;
-		public static final double kDefaultSmartIndexSpeed = 1.0;
+		public static final double kDefaultSmartIndexSpeed = 0.7;
 		public static final double kDefaultShootSpeed = 0.85;
 		public static final double kDefaultClimbSpeed = 1.0;
 	}
