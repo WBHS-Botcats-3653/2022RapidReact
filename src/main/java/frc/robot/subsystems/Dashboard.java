@@ -71,13 +71,13 @@ public class Dashboard extends SubsystemBase {
 			*/
 
 			NetworkEntries.m_nteIsSmartIntakeEnabled = tabDrive.addPersistent("Is Smart Intake Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
-			.withSize(1, 1).withPosition(0, 0).getEntry();
+			.withSize(2, 1).withPosition(0, 0).getEntry();
 			NetworkEntries.m_nteIsPivotAssistEnabled = tabDrive.addPersistent("Is Pivot Assist Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
-			.withSize(1, 1).withPosition(2, 0).getEntry();
+			.withSize(2, 1).withPosition(2, 0).getEntry();
 			NetworkEntries.m_nteIsErrorCorrectionEnabled = tabDrive.addPersistent("Is Error Correction Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
-			.withSize(1, 1).withPosition(4, 0).getEntry();
+			.withSize(2, 1).withPosition(4, 0).getEntry();
 			NetworkEntries.m_nteEndSmartIntake = tabDrive.add("End Smart Intake", false).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 0).withPosition(0, 1).getEntry();
-			NetworkEntries.m_nteDriveDistance = tabDrive.add("Drived Distance", 0).withWidget(BuiltInWidgets.kTextView).withSize(0, 0).withPosition(1, 1).getEntry();
+			NetworkEntries.m_nteDriveDistance = tabDrive.add("Distance Drived", 0).withWidget(BuiltInWidgets.kTextView).withSize(0, 0).withPosition(1, 1).getEntry();
 			// Config Tab
 			
 		//Speeds Tab			
