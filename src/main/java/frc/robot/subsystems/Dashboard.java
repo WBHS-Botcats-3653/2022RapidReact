@@ -17,9 +17,9 @@ import frc.robot.inputs.SI;
 
 public class Dashboard extends SubsystemBase {
 	private static Dashboard m_singleton;
+	private static Direction m_direction = Direction.getInstance();
 	private static OI m_oi = OI.getInstance();
 	private static SI m_si =  SI.getInstance();
-	private static Direction m_direction = Direction.getInstance();
 
 	//private UsbCamera cam0 = null;
 
@@ -74,7 +74,7 @@ public class Dashboard extends SubsystemBase {
 			.withSize(2, 1).withPosition(0, 0).getEntry();
 			NetworkEntries.m_nteIsPivotAssistEnabled = tabDrive.addPersistent("Is Pivot Assist Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
 			.withSize(2, 1).withPosition(2, 0).getEntry();
-			NetworkEntries.m_nteIsErrorCorrectionEnabled = tabDrive.addPersistent("Is Error Correction Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
+			NetworkEntries.m_nteIsErrorCorrectionEnabled = tabDrive.addPersistent("Is Error Correction Enabled", false).withWidget(BuiltInWidgets.kToggleButton)
 			.withSize(2, 1).withPosition(4, 0).getEntry();
 			NetworkEntries.m_nteEndSmartIntake = tabDrive.add("End Smart Intake", false).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 1).withPosition(0, 1).getEntry();
 			NetworkEntries.m_nteDriveDistance = tabDrive.add("Distance Drived", 0).withWidget(BuiltInWidgets.kTextView).withSize(0, 0).withPosition(2, 1).getEntry();
@@ -99,16 +99,12 @@ public class Dashboard extends SubsystemBase {
 
 			NetworkEntries.m_nteDriveEncLeft = tabTest.add("Drive Left", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(2, 1).getEntry();
 			NetworkEntries.m_nteDriveEncRight = tabTest.add("Drive Right", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(3, 1).getEntry();	
-	}
-	public void InitializeTemp() {
-		if (NetworkEntries.m_isAutoTaxiOn != null) {
+	
+			//Initialize variables
 			previousTaxi = NetworkEntries.m_isAutoTaxiOn.getBoolean(false);
-		}
-		if (NetworkEntries.m_isAutoCollectOn != null) {
 			previousCollect = NetworkEntries.m_isAutoCollectOn.getBoolean(false);
 		}
 
-	}
 	/**This is in charge of making sure the user won't be able to select the cargo that are too far.*/
 	public static void selectorLogic() {
 		/**Makes sure the tarmac & cargos are properly selecter */
@@ -119,8 +115,6 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteRLCargo.setBoolean(false);
 			NetworkEntries.m_nteRRCargo.setBoolean(false);
 		}
-
-		phaseLogic();
 	}
 
 	/**If autocollect is on, then taxi must be on
@@ -146,6 +140,9 @@ public class Dashboard extends SubsystemBase {
 	 */
 	@Override
 	public void periodic() {
+		selectorLogic();
+		phaseLogic();
+
 		NetworkEntries.m_nteDriveEncLeft.setDouble(m_direction.getLeftDistance());
 		NetworkEntries.m_nteDriveEncRight.setDouble(m_direction.getRightDistance());
 

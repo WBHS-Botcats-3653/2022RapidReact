@@ -21,7 +21,7 @@ public class DriveCommand extends CommandBase {
 		m_driveTrain = DriveTrain.getInstance();
 		m_direction = Direction.getInstance();
 		this.distance = distance;
-		this.speed = speed * distance < 0 ? -1 : 1;
+		this.speed = speed * (distance < 0 ? -1 : 1);
 		this.isCollectingCargo = isCollectingCargo;
 		// Use addRequirements() here to declare subsystem dependencies.
 		addRequirements(m_driveTrain, m_direction);

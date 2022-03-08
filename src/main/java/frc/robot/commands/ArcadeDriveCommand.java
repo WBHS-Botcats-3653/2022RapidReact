@@ -38,25 +38,24 @@ public class ArcadeDriveCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		//Gets the throttle from the controller
+		//Gets the throttle and steering from the controller
 		double throttle = m_oi.getThrottle();
-		//Gets the steering from the controller
 		double steering = m_oi.getSteering();
 		//If drive error correction is enabled and the controller is not giving any steering input
-		if (NetworkEntries.isErrorCorrectionEnabled() && steering == 0 && throttle !=0) {
+		if (NetworkEntries.isErrorCorrectionEnabled() && steering == 0 && throttle > 0.2) {
 			//If not already correcting drive errors
 			if (!errorCorrectionOn) {
 				//Reset the drive encoders
 				m_direction.resetEncoders();
-				//Now correcting errros
+				//Now correcting drive errors
 				errorCorrectionOn = true;
 			}
 			//Calculates the steering to keep the robot straight
 			steering = kP * m_direction.getError();
 			//Ensures the steering is never more than 1 (or less than -1)
-			if (Math.abs(steering) > 1.0) steering = 1.0 * steering < 0 ? -1 : 1;
+			if (Math.abs(steering) > 1.0) steering = steering < 0 ? -1.0 : 1.0;
 		} else {  //Drive error correction is disabled or player is giving steering input or the robot is not moving
-			//Not correcting drive error
+			//Not correcting drive errors
 			errorCorrectionOn = false;
 		}
 		//Drives the robot
