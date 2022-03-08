@@ -23,7 +23,8 @@ public class NetworkEntries {
 	public static NetworkTableEntry m_nteDriveEncRight;  //double
 	public static NetworkTableEntry m_nteIntakeUpLimit;
     public static NetworkTableEntry m_nteIntakeDownLimit;
-	public static NetworkTableEntry m_nteResetEncoders;
+	public static NetworkTableEntry m_nteResetEncoders;  //boolean
+	public static NetworkTableEntry m_nteCalibrateGyro;  //boolean
 		
 
 	// Photoelectric sensors

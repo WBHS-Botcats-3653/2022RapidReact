@@ -76,17 +76,17 @@ public class Dashboard extends SubsystemBase {
 			.withSize(2, 1).withPosition(2, 0).getEntry();
 			NetworkEntries.m_nteIsErrorCorrectionEnabled = tabDrive.addPersistent("Is Error Correction Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
 			.withSize(2, 1).withPosition(4, 0).getEntry();
-			NetworkEntries.m_nteEndSmartIntake = tabDrive.add("End Smart Intake", false).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 0).withPosition(0, 1).getEntry();
-			NetworkEntries.m_nteDriveDistance = tabDrive.add("Distance Drived", 0).withWidget(BuiltInWidgets.kTextView).withSize(0, 0).withPosition(1, 1).getEntry();
+			NetworkEntries.m_nteEndSmartIntake = tabDrive.add("End Smart Intake", false).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 1).withPosition(0, 1).getEntry();
+			NetworkEntries.m_nteDriveDistance = tabDrive.add("Distance Drived", 0).withWidget(BuiltInWidgets.kTextView).withSize(0, 0).withPosition(2, 1).getEntry();
 			// Config Tab
 			
 		//Speeds Tab			
 			NetworkEntries.m_nteMaxDriveSpeed = tabSpeeds.addPersistent("Max Drive Speed", kDefaultDriveSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(0, 0).getEntry();  //double
 			NetworkEntries.m_nteMaxIntakePivotSpeed = tabSpeeds.addPersistent("Max Intake Pivot Speed", kDefaultIntakePivotSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 0).withPosition(2, 0).getEntry();  //double
-			NetworkEntries.m_nteMaxIntakeRollerSpeed = tabSpeeds.addPersistent("Max Intake Roller Speed", kDefaultIntakeRollerSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(4, 0).withPosition(3, 2).getEntry();  //double
+			NetworkEntries.m_nteMaxIntakeRollerSpeed = tabSpeeds.addPersistent("Max Intake Roller Speed", kDefaultIntakeRollerSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(4, 0).withPosition(4, 0).getEntry();  //double
 			NetworkEntries.m_nteMaxIndexerSpeed = tabSpeeds.addPersistent("Max Indexer Speed", kDefaultIndexSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(6, 0).getEntry();  //double
-			NetworkEntries.m_nteMaxShootSpeed = tabSpeeds.addPersistent("Max Shoot Speed", kDefaultShootSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(0, 1).getEntry();  //double
-			NetworkEntries.m_nteMaxClimbSpeed = tabSpeeds.addPersistent("Max Climb Speed", kDefaultClimbSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(2, 1).getEntry();  //double
+			NetworkEntries.m_nteMaxShootSpeed = tabSpeeds.addPersistent("Max Shoot Speed", kDefaultShootSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(2, 1).getEntry();  //double
+			NetworkEntries.m_nteMaxClimbSpeed = tabSpeeds.addPersistent("Max Climb Speed", kDefaultClimbSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(4, 1).getEntry();  //double
 			
 		// Test Tab
 			NetworkEntries.m_nteIntakeUpLimit = tabTest.add("Intake Up Limit", false).withSize(1, 1).withPosition(0, 0).getEntry();
@@ -95,6 +95,7 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteLowerStoragePE = tabTest.add("Lower Storage PE", false).withSize(1, 1).withPosition(1, 1).getEntry();
 			NetworkEntries.m_nteShooterPE = tabTest.add("Shooter PE", false).withSize(1, 1).withPosition(2, 0).getEntry();
 			NetworkEntries.m_nteResetEncoders = tabTest.add("Reset Encoders", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1,1).withPosition(3,0).getEntry();
+			NetworkEntries.m_nteCalibrateGyro = tabTest.add("Calibrate Gyro", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1,1).withPosition(4,0).getEntry();
 
 			NetworkEntries.m_nteDriveEncLeft = tabTest.add("Drive Left", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(2, 1).getEntry();
 			NetworkEntries.m_nteDriveEncRight = tabTest.add("Drive Right", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(3, 1).getEntry();	
@@ -183,6 +184,12 @@ public class Dashboard extends SubsystemBase {
 		if (NetworkEntries.m_nteResetEncoders.getBoolean(false)) {
 			m_direction.resetEncoders();
 			NetworkEntries.m_nteResetEncoders.setBoolean(false);
+		}
+
+		//In charge of calibrating the gyro
+		if (NetworkEntries.m_nteCalibrateGyro.getBoolean(false)) {
+			m_direction.calibrateGyro();
+			NetworkEntries.m_nteCalibrateGyro.setBoolean(false);
 		}
 
 		//In charge of ending the smart intake
