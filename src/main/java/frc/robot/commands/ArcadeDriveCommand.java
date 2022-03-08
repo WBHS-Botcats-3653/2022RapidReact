@@ -41,8 +41,9 @@ public class ArcadeDriveCommand extends CommandBase {
 		//Gets the throttle and steering from the controller
 		double throttle = m_oi.getThrottle();
 		double steering = m_oi.getSteering();
+		boolean f = false;  //DELETE WHEN ENCODERS WORK
 		//If drive error correction is enabled and the controller is not giving any steering input
-		if (NetworkEntries.isErrorCorrectionEnabled() && steering == 0 && throttle > 0.2) {
+		if (f && NetworkEntries.isErrorCorrectionEnabled() && steering == 0 && throttle > 0.2) {
 			//If not already correcting drive errors
 			if (!errorCorrectionOn) {
 				//Reset the drive encoders
