@@ -15,7 +15,7 @@ public final class Constants {
 	public static final class AutoConstants {
 
 		//The distance to travel in reverse when taxiing
-		public static final double kTaxiDistanceInInches = -86.0;
+		public static final double kTaxiDistanceInInches = 86.0;  //Backwards but needs to be positive for some reason
 
 		/*Distances and angles to cargo after taxi during auto
 		 *<String cargoID, double[angle, distance]>

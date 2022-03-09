@@ -36,11 +36,11 @@ public class IndexerCommand extends CommandBase {
 		if (IntakeCommand.isUnderSmartControl()) {  //If the intake is under smart control
 			//Smart indexer logic
 			smartIndexerLogic();
-		} else {
+		} else {  //If the intake is not under smart control
 			//Is not under smart control
 			smartControl = false;
 		}
-		if (!smartControl) {  //If the indexer is not in smart control
+		if (!smartControl) {  //If the indexer is not under smart control
 			//Manual indexer logic
 			manualIndexerLogic();
 		}

@@ -24,7 +24,6 @@ public class NetworkEntries {
 	public static NetworkTableEntry m_nteIntakeUpLimit;
     public static NetworkTableEntry m_nteIntakeDownLimit;
 	public static NetworkTableEntry m_nteResetEncoders;  //boolean
-	public static NetworkTableEntry m_nteCalibrateGyro;  //boolean
 		
 
 	// Photoelectric sensors
@@ -51,7 +50,7 @@ public class NetworkEntries {
 	public static NetworkTableEntry m_nteMaxClimbSpeed;  //double
 
 	//Ball Pos
-	public static NetworkTableEntry m_nteTarmac;  //boolean
+	public static NetworkTableEntry m_nteRightTarmac;  //boolean
 
 	public static NetworkTableEntry m_nteLLCargo;  //boolean
 	public static NetworkTableEntry m_nteLRCargo;  //boolean
@@ -62,7 +61,7 @@ public class NetworkEntries {
 
 	//Returns the selected Tarmac
 	public static char getTarmac() {
-		return m_nteTarmac.getBoolean(false) ? 'R' : 'L';
+		return m_nteRightTarmac.getBoolean(false) ? 'R' : 'L';
 	}
 
 	//Returns the selected cargo to target

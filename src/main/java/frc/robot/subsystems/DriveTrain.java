@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
 public class DriveTrain extends SubsystemBase {
-	private static DriveTrain driveTrain = null;
+	private static DriveTrain m_singleton = null;
 
 	private WPI_VictorSPX driveFrontLeft, driveBackLeft, driveFrontRight, driveBackRight;
 	private DifferentialDrive diffDrive;
@@ -44,17 +44,17 @@ public class DriveTrain extends SubsystemBase {
 	
 	//Returns an instance of DrainTrain, creating an instance only when one does not already exist
 	public static DriveTrain getInstance() {
-		if (driveTrain == null) {
-			driveTrain = new DriveTrain();
+		if (m_singleton == null) {
+			m_singleton = new DriveTrain();
 		}
-		return driveTrain;
+		return m_singleton;
 	}
 
 	/**Sets the arcade drive speed and rotation
 	 * @param speed Speed to drive the robot
 	 * @param rotation Amount to rotate
 	 */
-	public void arcadeDrived(double speed, double rotation) {
+	public void arcadeDrive(double speed, double rotation) {
 		//Sets the differential drive speed and rotation
 		diffDrive.arcadeDrive(speed, rotation, false);
 	}

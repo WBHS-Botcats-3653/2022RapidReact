@@ -55,19 +55,19 @@ public class ArcadeDriveCommand extends CommandBase {
 			steering = kP * m_direction.getError();
 			//Ensures the steering is never more than 1 (or less than -1)
 			if (Math.abs(steering) > 1.0) steering = steering < 0 ? -1.0 : 1.0;
-		} else {  //Drive error correction is disabled or player is giving steering input or the robot is not moving
+		} else {  //Drive error correction is disabled or player is giving steering input or the robot is not moving at a high enough speed
 			//Not correcting drive errors
 			errorCorrectionOn = false;
 		}
 		//Drives the robot
-		m_driveTrain.arcadeDrived(throttle, steering);
+		m_driveTrain.arcadeDrive(throttle, steering);
 	}
 
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
 		//Stop the drive train
-		m_driveTrain.arcadeDrived(0, 0);
+		m_driveTrain.arcadeDrive(0, 0);
 	}
 
 	// Returns true when the command should end.

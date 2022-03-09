@@ -51,7 +51,7 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_isAutoCollectOn = tabAutoConfig.addPersistent("Auto Collect", true).withWidget(BuiltInWidgets.kToggleButton)
 			.withSize(1, 1).withPosition(2, 0).getEntry();
 			//AutoConfig Tab
-			NetworkEntries.m_nteTarmac = tabAutoConfig.add("Is Right Tarmac?", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(3, 0).getEntry(); //boolean
+			NetworkEntries.m_nteRightTarmac = tabAutoConfig.add("Is Right Tarmac?", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(3, 0).getEntry(); //boolean
 			
 			NetworkEntries.m_nteLLCargo = tabAutoConfig.add("LL Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(4, 0).getEntry(); //boolean
 			NetworkEntries.m_nteLRCargo = tabAutoConfig.add("LR Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(4, 1).getEntry(); //boolean
@@ -95,8 +95,7 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteLowerStoragePE = tabTest.add("Lower Storage PE", false).withSize(1, 1).withPosition(1, 1).getEntry();
 			NetworkEntries.m_nteShooterPE = tabTest.add("Shooter PE", false).withSize(1, 1).withPosition(2, 0).getEntry();
 			NetworkEntries.m_nteResetEncoders = tabTest.add("Reset Encoders", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1,1).withPosition(3,0).getEntry();
-			NetworkEntries.m_nteCalibrateGyro = tabTest.add("Calibrate Gyro", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1,1).withPosition(4,0).getEntry();
-
+			
 			NetworkEntries.m_nteDriveEncLeft = tabTest.add("Drive Left", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(2, 1).getEntry();
 			NetworkEntries.m_nteDriveEncRight = tabTest.add("Drive Right", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(3, 1).getEntry();	
 	
@@ -106,50 +105,22 @@ public class Dashboard extends SubsystemBase {
 			previousSmartIntake = NetworkEntries.m_nteIsSmartIntakeEnabled.getBoolean(false);
 		}
 
-	/**This is in charge of making sure the user won't be able to select the cargo that are too far.*/
-	public static void selectorLogic() {
-		/**Makes sure the tarmac & cargos are properly selecter */
-		if (NetworkEntries.m_nteTarmac.getBoolean(false)) {
-			NetworkEntries.m_nteLLCargo.setBoolean(false);
-			NetworkEntries.m_nteLRCargo.setBoolean(false);
-		} else if (!NetworkEntries.m_nteTarmac.getBoolean(false)) {
-			NetworkEntries.m_nteRLCargo.setBoolean(false);
-			NetworkEntries.m_nteRRCargo.setBoolean(false);
-		}
-	}
-
-	/**If autocollect is on, then taxi must be on
-	 * 
-	 */
-	public static void phaseLogic() {
-		/**Makes sure that the phases are properly selected */
-		if (NetworkEntries.m_isAutoCollectOn.getBoolean(false) && !previousCollect) {
-			NetworkEntries.m_isAutoTaxiOn.setBoolean(true);
-		}
-		if (!NetworkEntries.m_isAutoTaxiOn.getBoolean(true) && previousTaxi) {
-			NetworkEntries.m_isAutoCollectOn.setBoolean(false);
-		}
-		previousCollect = NetworkEntries.m_isAutoCollectOn.getBoolean(false);
-		previousTaxi = NetworkEntries.m_isAutoTaxiOn.getBoolean(false);
-	}
-
-	/**@Important This Method method should be executed in RobotPeriodic().
-	 * It is an alternative to the refresh() method.
-	 * 
-	 * @description This Method will update the values in the dashboard and in the networkTable
-	 * in order to change the aprepiate values accordingly
+	/**@description This Method will update the values in the dashboard and in the networkTable
+	 * in order to change the appropriate values accordingly
 	 */
 	@Override
 	public void periodic() {
 		selectorLogic();
-		phaseLogic();
 
+		//Relay sensor readings to the dashboard
+		//Encoders
 		NetworkEntries.m_nteDriveEncLeft.setDouble(m_direction.getLeftDistance());
 		NetworkEntries.m_nteDriveEncRight.setDouble(m_direction.getRightDistance());
 
-		//drived distance:
+		//Distance Drived
 		NetworkEntries.m_nteDriveDistance.setDouble(m_direction.getDistance());
 
+		//Limit switches
 		NetworkEntries.m_nteIntakeUpLimit.setBoolean(m_si.isPivotUpLimitClosed());
 		NetworkEntries.m_nteIntakeDownLimit.setBoolean(m_si.isPivotDownLimitClosed());
 
@@ -176,35 +147,6 @@ public class Dashboard extends SubsystemBase {
 		NetworkEntries.m_nteLowerStoragePE.setBoolean(m_si.isLowerStorageClosed());
 		NetworkEntries.m_nteUpperStoragePE.setBoolean(m_si.isUpperStorageClosed());
 		NetworkEntries.m_nteShooterPE.setBoolean(m_si.isShooterClosed());
-
-		//In charge of resetting the encoders
-		if (NetworkEntries.m_nteResetEncoders.getBoolean(false)) {
-			m_direction.resetEncoders();
-			NetworkEntries.m_nteResetEncoders.setBoolean(false);
-		}
-
-		//In charge of calibrating the gyro
-		if (NetworkEntries.m_nteCalibrateGyro.getBoolean(false)) {
-			m_direction.calibrateGyro();
-			NetworkEntries.m_nteCalibrateGyro.setBoolean(false);
-		}
-
-		//In charge of ending the smart intake
-		if (NetworkEntries.m_nteEndSmartIntake.getBoolean(false)) {
-			IntakeCommand.endSmartIntake();
-			NetworkEntries.m_nteEndSmartIntake.setBoolean(false);
-		}
-
-		//In charge of ending the smart intake when it is disabled
-		if (!NetworkEntries.m_nteIsSmartIntakeEnabled.getBoolean(true) && previousSmartIntake) {
-			IntakeCommand.endSmartIntake();
-		}
-		previousSmartIntake = NetworkEntries.m_nteIsSmartIntakeEnabled.getBoolean(false);
-	}
-
-	/**Disables or enables the speeds*/
-	public void disableSpeeds(boolean disabled) {
-		speedsDisabled = disabled;
 	}
 
 	/**Returns an instance of Dashboard, creating an instance only when one does not already exist (singleton)*/
@@ -213,5 +155,63 @@ public class Dashboard extends SubsystemBase {
 			m_singleton = new Dashboard();
 		}
 		return m_singleton;
+	}
+
+	/**Makes sure buttons do not conflict and are reset properly
+	 */
+	public static void selectorLogic() {
+		//If auto collect has been enabled
+		if (NetworkEntries.m_isAutoCollectOn.getBoolean(false) && !previousCollect) {
+			//Enable auto taxi
+			NetworkEntries.m_isAutoTaxiOn.setBoolean(true);
+		}
+		//If auto taxi has been disabled
+		if (!NetworkEntries.m_isAutoTaxiOn.getBoolean(true) && previousTaxi) {
+			//Disable auto collect
+			NetworkEntries.m_isAutoCollectOn.setBoolean(false);
+		}
+		//Set with the current reading of the auto collect and taxi
+		previousCollect = NetworkEntries.m_isAutoCollectOn.getBoolean(false);
+		previousTaxi = NetworkEntries.m_isAutoTaxiOn.getBoolean(false);
+
+		//If the right tarmac is selected
+		if (NetworkEntries.m_nteRightTarmac.getBoolean(false)) {
+			//Deselect the left most cargo
+			NetworkEntries.m_nteLLCargo.setBoolean(false);
+			NetworkEntries.m_nteLRCargo.setBoolean(false);
+		} else {  //If the left tarmac is selected
+			//Deselect the right most cargo
+			NetworkEntries.m_nteRLCargo.setBoolean(false);
+			NetworkEntries.m_nteRRCargo.setBoolean(false);
+		}
+
+		//If the reset encoders button has been pressed
+		if (NetworkEntries.m_nteResetEncoders.getBoolean(false)) {
+			//Reset the encoders
+			m_direction.resetEncoders();
+			//Deselect the reset encoders button
+			NetworkEntries.m_nteResetEncoders.setBoolean(false);
+		}
+
+		//If the end smart intake button has been pressed
+		if (NetworkEntries.m_nteEndSmartIntake.getBoolean(false)) {
+			//End the smart intake
+			IntakeCommand.endSmartIntake();
+			//Deselect the end smart intake button
+			NetworkEntries.m_nteEndSmartIntake.setBoolean(false);
+		}
+
+		//If the smart intake has been disabled
+		if (!NetworkEntries.m_nteIsSmartIntakeEnabled.getBoolean(true) && previousSmartIntake) {
+			//End the smart intake
+			IntakeCommand.endSmartIntake();
+		}
+		//Set with the current reading of the smart intake button
+		previousSmartIntake = NetworkEntries.m_nteIsSmartIntakeEnabled.getBoolean(false);
+	}
+
+	/**Disables or enables the speeds*/
+	public void disableSpeeds(boolean disabled) {
+		speedsDisabled = disabled;
 	}
 }

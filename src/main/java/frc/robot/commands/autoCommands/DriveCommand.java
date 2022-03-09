@@ -44,7 +44,7 @@ public class DriveCommand extends CommandBase {
 		//Gets the error rate
 		double error = kP * m_direction.getError();
 		//Moves the robot at the set speed and makes course corrections based off the encoders
-		m_driveTrain.arcadeDrived(speed, error);
+		m_driveTrain.arcadeDrive(speed, error);
 	}
 
 	// Called once the command ends or is interrupted.
@@ -56,7 +56,7 @@ public class DriveCommand extends CommandBase {
 			CollectCargoCommand.endCommand = true;
 		}
 		//Stops the robot
-		m_driveTrain.arcadeDrived(0, 0);
+		m_driveTrain.arcadeDrive(0, 0);
 	}
 
 	// Returns true when the command should end.
