@@ -70,9 +70,9 @@ public class Dashboard extends SubsystemBase {
 			tabDrive.add("Gyro", Direction.getInstance().getGyro()).withSize(2, 2).withPosition(3, 0);
 			*/
 
-			NetworkEntries.m_nteIsSmartIntakeEnabled = tabDrive.addPersistent("Is Smart Intake Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
+			NetworkEntries.m_nteIsSmartIntakeEnabled = tabDrive.add("Is Smart Intake Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
 			.withSize(2, 1).withPosition(0, 0).getEntry();
-			NetworkEntries.m_nteIsPivotAssistEnabled = tabDrive.addPersistent("Is Pivot Assist Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
+			NetworkEntries.m_nteIsPivotAssistEnabled = tabDrive.add("Is Pivot Assist Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
 			.withSize(2, 1).withPosition(2, 0).getEntry();
 			NetworkEntries.m_nteIsErrorCorrectionEnabled = tabDrive.addPersistent("Is Error Correction Enabled", false).withWidget(BuiltInWidgets.kToggleButton)
 			.withSize(2, 1).withPosition(4, 0).getEntry();
