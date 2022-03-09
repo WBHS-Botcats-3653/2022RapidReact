@@ -104,7 +104,7 @@ public class IntakeCommand extends CommandBase {
 
 	//Smart control pivot/roller logic (button down-pivot down, button pressed-spin rollers, button released-pivot up)
 	public void smartIntakeLogic() {
-		if (m_oi.getSmartIntakeUp() && !m_si.isPivotUpLimitClosed()) {  //If the smart intake is being called to go up and the top pivot limit switch is open
+		if (m_oi.getSmartIntakeUp() && smartControl && !m_si.isPivotUpLimitClosed()) {  //If the smart intake is being called to go up and the top pivot limit switch is open
 			//Pivots the intake up at the set max speed
 			m_intake.setPivotSpeed(-kSmartIntakePivotUpSpeed);
 			//Initial pivot up started

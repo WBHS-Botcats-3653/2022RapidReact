@@ -31,7 +31,7 @@ public class Dashboard extends SubsystemBase {
 
 	public boolean speedsDisabled = true;
 
-	private static boolean previousTaxi, previousCollect;
+	private static boolean previousTaxi, previousCollect, previousSmartIntake;
 
 	private Dashboard() {
 		tabAutoConfig = Shuffleboard.getTab("AutoConfig");
@@ -103,6 +103,7 @@ public class Dashboard extends SubsystemBase {
 			//Initialize variables
 			previousTaxi = NetworkEntries.m_isAutoTaxiOn.getBoolean(false);
 			previousCollect = NetworkEntries.m_isAutoCollectOn.getBoolean(false);
+			previousSmartIntake = NetworkEntries.m_nteIsSmartIntakeEnabled.getBoolean(false);
 		}
 
 	/**This is in charge of making sure the user won't be able to select the cargo that are too far.*/
@@ -149,7 +150,6 @@ public class Dashboard extends SubsystemBase {
 		//drived distance:
 		NetworkEntries.m_nteDriveDistance.setDouble(m_direction.getDistance());
 
-
 		NetworkEntries.m_nteIntakeUpLimit.setBoolean(m_si.isPivotUpLimitClosed());
 		NetworkEntries.m_nteIntakeDownLimit.setBoolean(m_si.isPivotDownLimitClosed());
 
@@ -172,7 +172,7 @@ public class Dashboard extends SubsystemBase {
 			m_oi.setMaxClimbSpeed(NetworkEntries.m_nteMaxClimbSpeed.getDouble(0));
 		}
 
-		//Updates the PhotoElectric sensors in the dashboard
+		//Updates the photoelectric sensors in the dashboard
 		NetworkEntries.m_nteLowerStoragePE.setBoolean(m_si.isLowerStorageClosed());
 		NetworkEntries.m_nteUpperStoragePE.setBoolean(m_si.isUpperStorageClosed());
 		NetworkEntries.m_nteShooterPE.setBoolean(m_si.isShooterClosed());
@@ -194,6 +194,12 @@ public class Dashboard extends SubsystemBase {
 			IntakeCommand.endSmartIntake();
 			NetworkEntries.m_nteEndSmartIntake.setBoolean(false);
 		}
+
+		//In charge of ending the smart intake when it is disabled
+		if (!NetworkEntries.m_nteIsSmartIntakeEnabled.getBoolean(true) && previousSmartIntake) {
+			IntakeCommand.endSmartIntake();
+		}
+		previousSmartIntake = NetworkEntries.m_nteIsSmartIntakeEnabled.getBoolean(false);
 	}
 
 	/**Disables or enables the speeds*/
