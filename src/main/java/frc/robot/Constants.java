@@ -15,7 +15,7 @@ public final class Constants {
 	public static final class AutoConstants {
 
 		//The distance to travel in reverse when taxiing
-		public static final double kTaxiDistanceInInches = 86.0;  //Backwards but needs to be positive for some reason
+		public static final double kTaxiDistanceInInches = 80.0;  //Backwards but needs to be positive for some reason (86.0)
 
 		/*Distances and angles to cargo after taxi during auto
 		 *<String cargoID, double[angle, distance]>
@@ -36,12 +36,12 @@ public final class Constants {
 		}};
 
 		//Speeds
-		public static final double kAutoFastDriveSpeed = 0.75;
+		public static final double kAutoFastDriveSpeed = 0.5;
 		public static final double kAutoSlowDriveSpeed = 0.5;
 		public static final double kAutoIntakePivotDownSpeed = 0.15;
 		public static final double kAutoIntakePivotUpSpeed = 0.35;
 		public static final double kAutoIntakeRollerSpeed = 1.0;
-		public static final double kAutoIndexSpeed = 0.25;
+		public static final double kAutoIndexSpeed = 0.5;
 		public static final double kAutoShootSpeed = 0.82;
 	}
 
