@@ -42,7 +42,7 @@ public final class Constants {
 		public static final double kAutoIntakePivotUpSpeed = 0.35;
 		public static final double kAutoIntakeRollerSpeed = 1.0;
 		public static final double kAutoIndexSpeed = 0.5;
-		public static final double kAutoShootSpeed = 0.82;
+		public static final double kAutoShootSpeed = 0.85;
 	}
 
 	//Drive Constants
@@ -114,11 +114,11 @@ public final class Constants {
 	public static final class DefaultSpeedsConstants {
 		//Default Speeds
 		public static final double kDefaultDriveSpeed = 1.0;
-		public static final double kDefaultIntakePivotSpeed = 0.5;
+		public static final double kDefaultIntakePivotSpeed = 0.7;
 		public static final double kDefaultIntakeRollerSpeed = 1.0;
 		public static final double kDefaultIndexSpeed = 1.0;
 		public static final double kDefaultSmartIndexSpeed = 0.7;
-		public static final double kDefaultShootSpeed = 0.82;
+		public static final double kDefaultShootSpeed = 0.85;
 		public static final double kDefaultClimbSpeed = 1.0;
 	}
 }
