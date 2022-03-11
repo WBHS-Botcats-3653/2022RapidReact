@@ -73,7 +73,7 @@ public class AutoCommand extends CommandBase {
 		commandToScheduleNext = "Sequential";
 		sequentialCommandToSchedule = new SequentialCommandGroup(
 			isAutoShootOn ? new ShootCargoCommand() : new PrintCommand("Auto shoot preload disabled"),   //Shoots Preload
-			isAutoTaxiOn || isAutoCollectOn ? new DriveCommand(kTaxiDistanceInInches, kAutoFastDriveSpeed, false) : new PrintCommand ("Taxi is disabled"),
+			isAutoTaxiOn || isAutoCollectOn ? new DriveCommand(kTaxiDistanceInInches, kAutoDriveSpeed, false) : new PrintCommand ("Taxi is disabled"),
 			new InstantCommand(() -> {AutoCommand.stage = "Taxi";}),  //Switches to Taxi stage
 			new InstantCommand(() -> {AutoCommand.executingCommand = false;})  //Completed executing a sequential command
 		);
@@ -89,10 +89,10 @@ public class AutoCommand extends CommandBase {
 			//Breaks out of the switch
 			return;
 		}
-		/*The distance and angle the robot needs to move to get to the desired cargo
+		/*The angle and distance the robot needs to move to get to the desired cargo
 		 *double[angle, distance]
 		 */
-		double[] distanceAndAngle = kDistancesAndAngles.get(startingTarmac + cargoToTarget.get(cargoTargetIndex));
+		double[] distanceAndAngle = kAnglesAndDistances.get(startingTarmac + cargoToTarget.get(cargoTargetIndex));
 		//If there is no distance or angle to move skip this cargo
 		if (distanceAndAngle[0] != 0 && distanceAndAngle[1] != 0) {
 			commandToScheduleNext = "Sequential";
@@ -105,10 +105,10 @@ public class AutoCommand extends CommandBase {
 				//End command
 				new InstantCommand(() -> {AutoCommand.executingCommand = false;})
 			);
-			//Creates a new parallel command to be scheduled
+			//Creates a new parallel command to be scheduled (Collect cargo)
 			parallelCommandToSchedule = new ParallelCommandGroup(
 				//Drive specified distance
-				new DriveCommand(distanceAndAngle[1], kAutoSlowDriveSpeed, true),
+				new DriveCommand(distanceAndAngle[1], kAutoDriveSpeed, true),
 				//Intake the cargo
 				new CollectCargoCommand(),
 				//Execute parallel command next

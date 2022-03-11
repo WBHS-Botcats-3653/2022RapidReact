@@ -15,12 +15,12 @@ public final class Constants {
 	public static final class AutoConstants {
 
 		//The distance to travel in reverse when taxiing
-		public static final double kTaxiDistanceInInches = 80.0;  //Backwards but needs to be positive for some reason (86.0)
+		public static final double kTaxiDistanceInInches = -80.0;  //-86.0
 
 		/*Distances and angles to cargo after taxi during auto
 		 *<String cargoID, double[angle, distance]>
 		 */
-		public static final HashMap<String, double[]> kDistancesAndAngles = new HashMap<>() {{
+		public static final HashMap<String, double[]> kAnglesAndDistances = new HashMap<>() {{
 			put("LLL", new double[] {100.78, -86.53});
 			put("LLR", new double[] {77.43, -30.58});
 			put("LML", new double[] {-100.78, -86.53});
@@ -36,8 +36,7 @@ public final class Constants {
 		}};
 
 		//Speeds
-		public static final double kAutoFastDriveSpeed = 0.5;
-		public static final double kAutoSlowDriveSpeed = 0.5;
+		public static final double kAutoDriveSpeed = 0.5;
 		public static final double kAutoIntakePivotDownSpeed = 0.15;
 		public static final double kAutoIntakePivotUpSpeed = 0.35;
 		public static final double kAutoIntakeRollerSpeed = 1.0;
