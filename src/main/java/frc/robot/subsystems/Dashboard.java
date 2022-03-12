@@ -80,7 +80,6 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteEndSmartIntake = tabDrive.add("End Smart Intake", false).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 1).withPosition(0, 1).getEntry();
 			NetworkEntries.m_nteDriveDistance = tabDrive.add("Distance Drived", 0).withWidget(BuiltInWidgets.kTextView).withSize(0, 0).withPosition(2, 1).getEntry();
 			
-			NetworkEntries.m_nteGyroEntry = tabDrive.add("Gyro's angle", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(2, 2).getEntry();
 			// Config Tab
 			
 		//Speeds Tab			
@@ -101,7 +100,8 @@ public class Dashboard extends SubsystemBase {
 			
 			NetworkEntries.m_nteDriveEncLeft = tabTest.add("Drive Left", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(2, 1).getEntry();
 			NetworkEntries.m_nteDriveEncRight = tabTest.add("Drive Right", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(3, 1).getEntry();	
-	
+			NetworkEntries.m_nteGyroEntry = tabTest.add("Gyro's angle", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(2, 2).getEntry();
+			
 			//Initialize variables
 			previousTaxi = NetworkEntries.m_isAutoTaxiOn.getBoolean(false);
 			previousCollect = NetworkEntries.m_isAutoCollectOn.getBoolean(false);
