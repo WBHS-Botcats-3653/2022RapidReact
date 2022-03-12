@@ -35,6 +35,7 @@ public class NetworkEntries {
 	// Drive Tab
 	public static NetworkTableEntry m_nteDriveDistance;  //double
 	public static NetworkTableEntry m_nteEndSmartIntake;  //boolean
+	public static NetworkTableEntry m_nteGyroEntry; //double (degrees)
 
     //Auto Phases
 	public static NetworkTableEntry m_isAutoShootOn;  //boolean

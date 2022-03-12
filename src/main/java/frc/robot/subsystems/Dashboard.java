@@ -14,6 +14,7 @@ import frc.robot.NetworkEntries;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.inputs.OI;
 import frc.robot.inputs.SI;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 
 public class Dashboard extends SubsystemBase {
 	private static Dashboard m_singleton;
@@ -78,6 +79,8 @@ public class Dashboard extends SubsystemBase {
 			.withSize(2, 1).withPosition(4, 0).getEntry();
 			NetworkEntries.m_nteEndSmartIntake = tabDrive.add("End Smart Intake", false).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 1).withPosition(0, 1).getEntry();
 			NetworkEntries.m_nteDriveDistance = tabDrive.add("Distance Drived", 0).withWidget(BuiltInWidgets.kTextView).withSize(0, 0).withPosition(2, 1).getEntry();
+			
+			NetworkEntries.m_nteGyroEntry = tabDrive.add("Gyro's angle", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(2, 2).getEntry();
 			// Config Tab
 			
 		//Speeds Tab			
@@ -123,6 +126,9 @@ public class Dashboard extends SubsystemBase {
 		//Limit switches
 		NetworkEntries.m_nteIntakeUpLimit.setBoolean(m_si.isPivotUpLimitClosed());
 		NetworkEntries.m_nteIntakeDownLimit.setBoolean(m_si.isPivotDownLimitClosed());
+
+		//Gyro
+		NetworkEntries.m_nteGyroEntry.setDouble(m_direction.getAngle());
 
 		if (speedsDisabled) {
 			//Sets max speeds to 0
