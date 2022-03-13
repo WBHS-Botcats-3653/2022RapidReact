@@ -74,6 +74,11 @@ public class DriveTrain extends SubsystemBase {
 		diffDrive.tankDrive(leftSpeed, rightSpeed);
 	}
 
+	//Returns the differential drive
+	public DifferentialDrive getDiffDrive() {
+		return diffDrive;
+	}
+
 	//Enables or disabled the neutral brake on the motors
 	public void enableMotors(boolean enable) {
 		NeutralMode mode = enable ? NeutralMode.Brake : NeutralMode.Coast;

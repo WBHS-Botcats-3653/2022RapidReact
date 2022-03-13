@@ -18,6 +18,7 @@ import frc.robot.inputs.SI;
 public class Dashboard extends SubsystemBase {
 	private static Dashboard m_singleton;
 	private static Direction m_direction = Direction.getInstance();
+	private static DriveTrain m_driveTrain = DriveTrain.getInstance();
 	private static OI m_oi = OI.getInstance();
 	private static SI m_si =  SI.getInstance();
 
@@ -97,10 +98,8 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteLowerStoragePE = tabTest.add("Lower Storage PE", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(1, 1).getEntry();
 			NetworkEntries.m_nteShooterPE = tabTest.add("Shooter PE", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(2, 0).getEntry();
 			NetworkEntries.m_nteResetEncoders = tabTest.add("Reset Encoders", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1,1).withPosition(3,0).getEntry();
-			
 			NetworkEntries.m_nteDriveEncLeft = tabTest.add("Left Encoder", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(2, 1).getEntry();
 			NetworkEntries.m_nteDriveEncRight = tabTest.add("Right Encoder", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(3, 1).getEntry();
-
 			NetworkEntries.m_nteDiffDrive = tabTest.add("Differential Drive", 0).withWidget(BuiltInWidgets.kDifferentialDrive).withSize(1, 1).withPosition(4, 4).getEntry();
 			
 			//Initialize variables
@@ -130,6 +129,9 @@ public class Dashboard extends SubsystemBase {
 
 		//Gyro
 		NetworkEntries.m_nteGyro.setValue(m_direction.getGyro());
+
+		//Differential Drive
+		NetworkEntries.m_nteDiffDrive.setValue(m_driveTrain.getDiffDrive());
 
 		if (speedsDisabled) {
 			//Sets max speeds to 0
