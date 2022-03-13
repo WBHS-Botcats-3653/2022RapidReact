@@ -21,21 +21,22 @@ public class NetworkEntries {
 	// Test Tab
 	public static NetworkTableEntry m_nteDriveEncLeft;  //double
 	public static NetworkTableEntry m_nteDriveEncRight;  //double
-	public static NetworkTableEntry m_nteIntakeUpLimit;
-    public static NetworkTableEntry m_nteIntakeDownLimit;
+	public static NetworkTableEntry m_nteIntakeUpLimit;  //boolean
+    public static NetworkTableEntry m_nteIntakeDownLimit;  //boolean
 	public static NetworkTableEntry m_nteResetEncoders;  //boolean
+	public static NetworkTableEntry m_nteDiffDrive;  //Differential Drive
 		
 
 	// Photoelectric sensors
-	public static NetworkTableEntry m_nteLowerStoragePE;
-    public static NetworkTableEntry m_nteUpperStoragePE;
-	public static NetworkTableEntry m_nteShooterPE;
+	public static NetworkTableEntry m_nteLowerStoragePE;  //boolean
+    public static NetworkTableEntry m_nteUpperStoragePE;  //boolean
+	public static NetworkTableEntry m_nteShooterPE;  //boolean
 	
 
 	// Drive Tab
 	public static NetworkTableEntry m_nteDriveDistance;  //double
 	public static NetworkTableEntry m_nteEndSmartIntake;  //boolean
-	public static NetworkTableEntry m_nteGyroEntry; //double (degrees)
+	public static NetworkTableEntry m_nteGyro; //double (degrees)
 
     //Auto Phases
 	public static NetworkTableEntry m_isAutoShootOn;  //boolean

@@ -14,7 +14,6 @@ import frc.robot.NetworkEntries;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.inputs.OI;
 import frc.robot.inputs.SI;
-import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 
 public class Dashboard extends SubsystemBase {
 	private static Dashboard m_singleton;
@@ -79,6 +78,7 @@ public class Dashboard extends SubsystemBase {
 			.withSize(2, 1).withPosition(4, 0).getEntry();
 			NetworkEntries.m_nteEndSmartIntake = tabDrive.add("End Smart Intake", false).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 1).withPosition(0, 1).getEntry();
 			NetworkEntries.m_nteDriveDistance = tabDrive.add("Distance Drived", 0).withWidget(BuiltInWidgets.kTextView).withSize(0, 0).withPosition(2, 1).getEntry();
+			NetworkEntries.m_nteGyro = tabDrive.add("Gyro", 0).withWidget(BuiltInWidgets.kGyro).withSize(1, 1).withPosition(3, 1).getEntry();
 			
 			// Config Tab
 			
@@ -91,16 +91,17 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteMaxClimbSpeed = tabSpeeds.addPersistent("Max Climb Speed", kDefaultClimbSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(4, 1).getEntry();  //double
 			
 		// Test Tab
-			NetworkEntries.m_nteIntakeUpLimit = tabTest.add("Intake Up Limit", false).withSize(1, 1).withPosition(0, 0).getEntry();
-			NetworkEntries.m_nteIntakeDownLimit = tabTest.add("Intake Down Limit", false).withSize(1, 1).withPosition(0, 1).getEntry();
-			NetworkEntries.m_nteUpperStoragePE = tabTest.add("Upper Storage PE", false).withSize(1, 1).withPosition(1, 0).getEntry();
-			NetworkEntries.m_nteLowerStoragePE = tabTest.add("Lower Storage PE", false).withSize(1, 1).withPosition(1, 1).getEntry();
-			NetworkEntries.m_nteShooterPE = tabTest.add("Shooter PE", false).withSize(1, 1).withPosition(2, 0).getEntry();
+			NetworkEntries.m_nteIntakeUpLimit = tabTest.add("Intake Up Limit", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(0, 0).getEntry();
+			NetworkEntries.m_nteIntakeDownLimit = tabTest.add("Intake Down Limit", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(0, 1).getEntry();
+			NetworkEntries.m_nteUpperStoragePE = tabTest.add("Upper Storage PE", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(1, 0).getEntry();
+			NetworkEntries.m_nteLowerStoragePE = tabTest.add("Lower Storage PE", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(1, 1).getEntry();
+			NetworkEntries.m_nteShooterPE = tabTest.add("Shooter PE", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(2, 0).getEntry();
 			NetworkEntries.m_nteResetEncoders = tabTest.add("Reset Encoders", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1,1).withPosition(3,0).getEntry();
 			
-			NetworkEntries.m_nteDriveEncLeft = tabTest.add("Drive Left", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(2, 1).getEntry();
-			NetworkEntries.m_nteDriveEncRight = tabTest.add("Drive Right", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(3, 1).getEntry();	
-			NetworkEntries.m_nteGyroEntry = tabTest.add("Gyro's angle", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(2, 2).getEntry();
+			NetworkEntries.m_nteDriveEncLeft = tabTest.add("Left Encoder", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(2, 1).getEntry();
+			NetworkEntries.m_nteDriveEncRight = tabTest.add("Right Encoder", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(3, 1).getEntry();
+
+			NetworkEntries.m_nteDiffDrive = tabTest.add("Differential Drive", 0).withWidget(BuiltInWidgets.kDifferentialDrive).withSize(1, 1).withPosition(4, 4).getEntry();
 			
 			//Initialize variables
 			previousTaxi = NetworkEntries.m_isAutoTaxiOn.getBoolean(false);
@@ -128,7 +129,7 @@ public class Dashboard extends SubsystemBase {
 		NetworkEntries.m_nteIntakeDownLimit.setBoolean(m_si.isPivotDownLimitClosed());
 
 		//Gyro
-		NetworkEntries.m_nteGyroEntry.setDouble(m_direction.getAngle());
+		NetworkEntries.m_nteGyro.setValue(m_direction.getGyro());
 
 		if (speedsDisabled) {
 			//Sets max speeds to 0
