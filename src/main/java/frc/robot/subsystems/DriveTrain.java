@@ -55,8 +55,23 @@ public class DriveTrain extends SubsystemBase {
 	 * @param rotation Amount to rotate
 	 */
 	public void arcadeDrive(double speed, double rotation) {
+		//Prevents speed and rotation from exceeding maximum limit
+		if (Math.abs(speed) > 1.0) speed = (speed < 0) ? -1.0 : 1.0;
+		if (Math.abs(rotation) > 1.0) rotation = (rotation < 0) ? -1.0 : 1.0;
 		//Sets the differential drive speed and rotation
 		diffDrive.arcadeDrive(speed, rotation, false);
+	}
+ 
+	/**Sets the tank drive left and right drive speeds
+	 * @param leftSpeed Speed of the left drive train
+	 * @param rightSpeed Speed of the right drive train
+	 */
+	public void tankDrive(double leftSpeed, double rightSpeed) {
+		//Prevents speeds from exceeding the maximum limit
+		if (Math.abs(leftSpeed) > 1.0) leftSpeed = (leftSpeed < 0) ? -1.0 : 1.0;
+		if (Math.abs(rightSpeed) > 1.0) rightSpeed = (rightSpeed < 0) ? -1.0 : 1.0;
+		//Sets the left and right drive train speeds
+		diffDrive.tankDrive(leftSpeed, rightSpeed);
 	}
 
 	//Enables or disabled the neutral brake on the motors

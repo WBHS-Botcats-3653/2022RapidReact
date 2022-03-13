@@ -42,7 +42,7 @@ public class TurnCommand extends CommandBase {
 			m_driveTrain.arcadeDrive(0, -difference * kP);
 			//Has not finished turning
 			hasFinished = false;
-		} else {  //Robot is withing the threshold of the desired angle
+		} else {  //Robot is within the threshold of the desired angle
 			//Stops the drive
 			m_driveTrain.arcadeDrive(0, 0);
 			//Has finished turning
