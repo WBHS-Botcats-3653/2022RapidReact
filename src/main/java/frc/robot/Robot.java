@@ -124,10 +124,10 @@ public class Robot extends TimedRobot {
 		if (AutoCommand.executingCommand) return;
 		SequentialCommandGroup sequentialCommand = m_autonomousCommand.getSequentialCommand();
 		ParallelCommandGroup parallelCommand = m_autonomousCommand.getParallelCommand();
-		if (AutoCommand.commandToScheduleNext.equals("Sequential") && sequentialCommand != null) {
+		if (AutoCommand.commandToScheduleNext == 'S' && sequentialCommand != null) {
 			AutoCommand.executingCommand = true;
 			CommandScheduler.getInstance().schedule(sequentialCommand);
-		} else if (AutoCommand.commandToScheduleNext.equals("Parallel") && parallelCommand != null) {
+		} else if (AutoCommand.commandToScheduleNext == 'P' && parallelCommand != null) {
 			AutoCommand.executingCommand = true;
 			CommandScheduler.getInstance().schedule(parallelCommand);
 		}
