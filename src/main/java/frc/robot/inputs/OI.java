@@ -18,6 +18,7 @@ public class OI {
 	private double maxSmartIndexSpeed = 0;
 	private double maxShootSpeed = 0;
 	private double maxClimbSpeed = 0;
+	private double maxExtendSpeed = 0;
 	private double maxWenchSpeed = 0;
 
 	public OI() {
@@ -54,6 +55,18 @@ public class OI {
 	//Returns the max arm speed
 	public double getMaxClimbSpeed(){
 		return maxClimbSpeed;
+	}
+
+	//Sets the max extend speed
+	public void setMaxExtendSpeed(double speed) {
+		if (0.0 < speed && speed <= 1.0) {
+			maxExtendSpeed = speed;
+		}
+	}
+
+	//Returns the max extend speed
+	public double getMaxExtendSpeed(){
+		return maxExtendSpeed;
 	}
 
 	//Sets the max wench speed

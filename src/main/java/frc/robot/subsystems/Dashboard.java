@@ -90,6 +90,7 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteMaxIndexerSpeed = tabSpeeds.addPersistent("Max Indexer Speed", kDefaultIndexSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(6, 0).getEntry();  //double
 			NetworkEntries.m_nteMaxShootSpeed = tabSpeeds.addPersistent("Max Shoot Speed", kDefaultShootSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(2, 1).getEntry();  //double
 			NetworkEntries.m_nteMaxClimbSpeed = tabSpeeds.addPersistent("Max Climb Speed", kDefaultClimbSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(2, 1).getEntry();  //double
+			NetworkEntries.m_nteMaxExtendSpeed = tabSpeeds.addPersistent("Max Extend Speed", kDefaultExtendSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(2, 1).getEntry();  //double
 			NetworkEntries.m_nteMaxWenchSpeed = tabSpeeds.addPersistent("Max Wench Speed", kDefaultWenchSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(4, 1).getEntry();  //double
 			
 		// Test Tab
@@ -129,10 +130,10 @@ public class Dashboard extends SubsystemBase {
 		NetworkEntries.m_nteIntakeDownLimit.setBoolean(m_si.isPivotDownLimitClosed());
 
 		//Gyro
-		NetworkEntries.m_nteGyro.setValue(m_direction.getGyro());
+		//NetworkEntries.m_nteGyro.setValue(m_direction.getGyro());
 
 		//Differential Drive
-		NetworkEntries.m_nteDiffDrive.setValue(m_driveTrain.getDiffDrive());
+		//NetworkEntries.m_nteDiffDrive.setValue(m_driveTrain.getDiffDrive());
 
 		if (speedsDisabled) {
 			//Sets max speeds to 0
@@ -143,6 +144,7 @@ public class Dashboard extends SubsystemBase {
 			m_oi.setMaxSmartIndexSpeed(0);
 			m_oi.setMaxShootSpeed(0);
 			m_oi.setMaxClimbSpeed(0);
+			m_oi.setMaxExtendSpeed(0);
 			m_oi.setMaxWenchSpeed(0);
 		} else {
 			//Sets max speeds from shuffleboard
@@ -152,6 +154,7 @@ public class Dashboard extends SubsystemBase {
 			m_oi.setMaxIndexSpeed(NetworkEntries.m_nteMaxIndexerSpeed.getDouble(0));
 			m_oi.setMaxShootSpeed(NetworkEntries.m_nteMaxShootSpeed.getDouble(0));
 			m_oi.setMaxClimbSpeed(NetworkEntries.m_nteMaxClimbSpeed.getDouble(0));
+			m_oi.setMaxExtendSpeed(NetworkEntries.m_nteMaxExtendSpeed.getDouble(0));
 			m_oi.setMaxWenchSpeed(NetworkEntries.m_nteMaxWenchSpeed.getDouble(0));
 		}
 

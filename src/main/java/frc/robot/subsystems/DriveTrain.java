@@ -13,9 +13,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
-import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
-import edu.wpi.first.math.util.Units;
+import edu.wpi.first.math.kinematics.*;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -28,7 +26,6 @@ public class DriveTrain extends SubsystemBase {
 	private WPI_VictorSPX driveFrontLeft, driveBackLeft, driveFrontRight, driveBackRight;
 	private DifferentialDrive diffDrive;
 
-	private DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(Units.inchesToMeters(kTrackWidth));
 	private DifferentialDriveOdometry odometry = new DifferentialDriveOdometry(m_direction.getHeading(), new Pose2d(0.0, 0.0, new Rotation2d()));
 
 	private SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(kS, kV, kA);
@@ -36,7 +33,7 @@ public class DriveTrain extends SubsystemBase {
 	private PIDController leftPIDController = new PIDController(kP, kI, kD);
 	private PIDController rightPIDController = new PIDController(kP, kI, kD);
 
-	private Pose2d position;
+	private Pose2d pose;
 
 	//documentation for WPI_VictorSPX: 
 	//https://robotpy.readthedocs.io/projects/ctre/en/stable/ctre/WPI_VictorSPX.html
@@ -62,7 +59,7 @@ public class DriveTrain extends SubsystemBase {
 
 	@Override
 	public void periodic() {
-		position = odometry.update(m_direction.getHeading(), m_direction.getLeftDistance(), m_direction.getRightDistance());
+		pose = odometry.update(m_direction.getHeading(), m_direction.getLeftDistance(), m_direction.getRightDistance());
 	}
 	
 	//Returns an instance of DrainTrain, creating an instance only when one does not already exist
@@ -97,9 +94,22 @@ public class DriveTrain extends SubsystemBase {
 		diffDrive.tankDrive(leftSpeed, rightSpeed);
 	}
 
+	/**Sets the tank drive left and right drive volts
+	 * @param leftVolts Volts of the left drive train
+	 * @param rightVolts Volts of the right drive train
+	 */
+	public void tankDriveVolts(double leftVolts, double rightVolts) {
+		diffDrive.tankDrive(leftVolts / 12, rightVolts / 12);
+	}
+
 	//Returns the differential drive
 	public DifferentialDrive getDiffDrive() {
 		return diffDrive;
+	}
+
+	//Returns the left and right wheel speeds
+	public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+		return new DifferentialDriveWheelSpeeds(m_direction.getLeftRate(), m_direction.getRightRate());
 	}
 
 	//Returns the feedforward
@@ -115,6 +125,16 @@ public class DriveTrain extends SubsystemBase {
 	//Returns the right PIDController
 	public PIDController getRightPIDController() {
 		return rightPIDController;
+	}
+
+	//Returns the kinematics
+	public DifferentialDriveKinematics getKinematics() {
+		return kKinematics;
+	}
+
+	//Returns the pose
+	public Pose2d getPose() {
+		return pose;
 	}
 
 	//Enables or disabled the neutral brake on the motors

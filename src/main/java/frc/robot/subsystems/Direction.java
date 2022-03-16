@@ -7,7 +7,6 @@ package frc.robot.subsystems;
 import static frc.robot.Constants.DriveConstants.*;
 
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -84,16 +83,21 @@ public class Direction extends SubsystemBase {
 		return -leftEncoder.getDistance() / 1.11019;  //Inverted
 	}
 
+	//Return the rate of the right encoder
+	public double getRightRate() {
+		return rightEncoder.getRate();
+	}
+
+	//Return the rate of the left encoder
+	public double getLeftRate() {
+		return -leftEncoder.getRate();  //Inverted
+	}
+
 	/**
 	 * @return encoder's distance
 	 */
 	public double getDistance() {
 		return (this.getRightDistance() + this.getLeftDistance()) / 2;
-	}
-
-	//Returns the left and right wheel speeds
-	public DifferentialDriveWheelSpeeds getWheelSpeeds() {
-		return new DifferentialDriveWheelSpeeds(leftEncoder.getRate(), rightEncoder.getRate());
 	}
 
 	/**

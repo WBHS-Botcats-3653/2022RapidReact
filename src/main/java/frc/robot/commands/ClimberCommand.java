@@ -43,26 +43,26 @@ public class ClimberCommand extends CommandBase {
 			m_climber.setClimberArmSpeed(0);
 		}
 
-		//Traversal arm
-		//Checks whether there is input coming in to move the traversal arm
+		//Extender
+		//Checks whether there is input coming in to move the extender
 		if (m_oi.getTraverseUp()) {  //If Dpad right is pressed
-			//Move traversal arm up
-			m_climber.setTraversalArmSpeed(-m_oi.getMaxClimbSpeed());
+			//Move extender up
+			m_climber.setExtensionSpeed(-m_oi.getMaxClimbSpeed());
 		} else if (m_oi.getTraverseDown()) {  //If Dpad left is pressed
-			//Move traversal arm down
-			m_climber.setTraversalArmSpeed(m_oi.getMaxClimbSpeed());
-		} else {  //Nothing being pressed (traversal wise)
-			//Stop traversal arm
-			m_climber.setTraversalArmSpeed(0);
+			//Move extender down
+			m_climber.setExtensionSpeed(m_oi.getMaxClimbSpeed());
+		} else {  //Nothing being pressed (extender wise)
+			//Stop extender
+			m_climber.setExtensionSpeed(0);
 		}
 
-		//Traversal Wench
+		//Wench
 		if (m_oi.getWench()) {  //If the back button is being pressed
-			//Wench the traversal thing
-			m_climber.setTraversalWenchSpeed(m_oi.getMaxWenchSpeed());
+			//Wench the hook
+			m_climber.setWenchSpeed(m_oi.getMaxWenchSpeed());
 		} else {  //If the back button is not being pressed
-			//Stop the traversal wench
-			m_climber.setTraversalArmSpeed(0);
+			//Stop the hook
+			m_climber.setWenchSpeed(0);
 		}
 	}
 
@@ -71,8 +71,10 @@ public class ClimberCommand extends CommandBase {
 	public void end(boolean interrupted) {
 		//Stop the climber arm
 		m_climber.setClimberArmSpeed(0);
-		//Stop the traversal arm
-		m_climber.setTraversalArmSpeed(0);
+		//Stop the extender
+		m_climber.setExtensionSpeed(0);
+		//Stop the wench
+		m_climber.setWenchSpeed(0);
 	}
 
 	// Returns true when the command should end.

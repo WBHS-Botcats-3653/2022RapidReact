@@ -2,6 +2,9 @@ package frc.robot;
 
 import java.util.HashMap;
 
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+import edu.wpi.first.math.util.Units;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -114,8 +117,8 @@ public final class Constants {
 		//public static final int kP = 1;
 		public static final double kThreshold = 3.0;
 
-		//TO DO: Find values
-		public static final double kTrackWidth = 0.0;
+		private static final double kTrackWidth = 0.0;
+		public static final DifferentialDriveKinematics kKinematics = new DifferentialDriveKinematics(Units.inchesToMeters(kTrackWidth));
 
 		public static final double kS = 0.0;
 		public static final double kV = 0.0;
@@ -123,6 +126,9 @@ public final class Constants {
 		public static final double kP = 0.0;
 		public static final double kI = 0.0;
 		public static final double kD = 0.0;
+
+		public static final double kRamseteB = 2.0;  //DO NOT CHANGE
+		public static final double kRamseteZeta = 0.7;  //DO NOT CHANGE
 	}
 
 	//Climber Constants
@@ -174,6 +180,7 @@ public final class Constants {
 		public static final double kDefaultSmartIndexSpeed = 0.7;
 		public static final double kDefaultShootSpeed = 0.85;
 		public static final double kDefaultClimbSpeed = 1.0;
+		public static final double kDefaultExtendSpeed = 0.5;
 		public static final double kDefaultWenchSpeed = 1.0;
 	}
 }
