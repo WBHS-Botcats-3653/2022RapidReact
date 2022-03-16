@@ -44,16 +44,16 @@ public class ClimberCommand extends CommandBase {
 		}
 
 		//Traversal
-		//Checks whether there is input coming in to move the traversal arms
+		//Checks whether there is input coming in to move the traversal arm
 		if (m_oi.getTraverseUp()) {  //If Dpad right is pressed
-			//Move traversal arms up
-			m_climber.setTraversalArmsSpeed(-m_oi.getMaxClimbSpeed());
+			//Move traversal arm up
+			m_climber.setTraversalArmSpeed(-m_oi.getMaxClimbSpeed());
 		} else if (m_oi.getTraverseDown()) {  //If Dpad left is pressed
-			//Move traversal arms down
-			m_climber.setTraversalArmsSpeed(m_oi.getMaxClimbSpeed());
+			//Move traversal arm down
+			m_climber.setTraversalArmSpeed(m_oi.getMaxClimbSpeed());
 		} else {  //Nothing being pressed (traversal wise)
-			//Stop traversal arms
-			m_climber.setTraversalArmsSpeed(0);
+			//Stop traversal arm
+			m_climber.setTraversalArmSpeed(0);
 		}
 	}
 
@@ -62,8 +62,8 @@ public class ClimberCommand extends CommandBase {
 	public void end(boolean interrupted) {
 		//Stop the climber arm
 		m_climber.setClimberArmSpeed(0);
-		//Stop the traversal arms
-		m_climber.setTraversalArmsSpeed(0);
+		//Stop the traversal arm
+		m_climber.setTraversalArmSpeed(0);
 	}
 
 	// Returns true when the command should end.

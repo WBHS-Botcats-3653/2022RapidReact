@@ -14,13 +14,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Climber extends SubsystemBase {
 	private static Climber m_singleton = null;
 
-	private WPI_VictorSPX climberArm, rightTraversalArm, leftTraversalArm;
+	private WPI_VictorSPX climberArm, traversalArm;
 
 	//Constructor
 	private Climber() {
 		climberArm = new WPI_VictorSPX(kClimberArmMotorID);
-		rightTraversalArm = new WPI_VictorSPX(kRightTraversalArmMotorID);
-		leftTraversalArm = new WPI_VictorSPX(kLeftTraversalArmMotorID);
+		traversalArm = new WPI_VictorSPX(kTraversalArmMotorID);
 	}
 
 	//Returns an instance of Climber, creating an instance only when one does not already exist (singleton)
@@ -37,18 +36,16 @@ public class Climber extends SubsystemBase {
 		climberArm.set(speed);
 	}
 
-	//Sets the speeds of the traversal arms
-	public void setTraversalArmsSpeed(double speed) {
-		//Sets the speed of the traversal arms
-		rightTraversalArm.set(speed);
-		leftTraversalArm.set(speed);
+	//Sets the traversal arm speed
+	public void setTraversalArmSpeed(double speed) {
+		//Sets the traversal arm speed
+		traversalArm.set(speed);
 	}
 	
 	//Enables or disabled the neutral brake on the motors
 	public void enableMotors(boolean enable) {
 		NeutralMode mode = enable ? NeutralMode.Brake : NeutralMode.Coast;
 		climberArm.setNeutralMode(mode);
-		rightTraversalArm.setNeutralMode(mode);
-		leftTraversalArm.setNeutralMode(mode);
+		traversalArm.setNeutralMode(mode);
 	}
 }
