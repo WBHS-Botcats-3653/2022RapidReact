@@ -6,10 +6,8 @@ package frc.robot.subsystems;
 
 import static frc.robot.Constants.DriveConstants.*;
 
-import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.kinematics.*;
-import edu.wpi.first.math.util.Units;
+import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -22,10 +20,6 @@ public class Direction extends SubsystemBase {
 	
 	private ADXRS450_Gyro gyro;
 	private Encoder leftEncoder, rightEncoder;
-
-	private DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(Units.inchesToMeters(kTrackWidth));
-	private DifferentialDriveOdometry odometry = new DifferentialDriveOdometry(kinematics, getHeading());
-	private Pose2d position;
 	
 	public Direction() {
 		gyro = new ADXRS450_Gyro();
@@ -39,11 +33,6 @@ public class Direction extends SubsystemBase {
 			m_singleton = new Direction();
 		}
 		return m_singleton;
-	}
-
-	@Override
-	public void periodic() {
-		position = odometry.update(getHeading(), getWheelSpeeds());
 	}
 
 	//Calibrates the gyro
@@ -71,10 +60,12 @@ public class Direction extends SubsystemBase {
 		return Rotation2d.fromDegrees(-getAngle());
 	}
 
+	//Returns the right encoder
 	public Encoder getRightEncoder() {
 		return rightEncoder;
 	}
 
+	//Returns the left encoder
 	public Encoder getLeftEncoder() {
 		return leftEncoder;
 	}
@@ -100,6 +91,7 @@ public class Direction extends SubsystemBase {
 		return (this.getRightDistance() + this.getLeftDistance()) / 2;
 	}
 
+	//Returns the left and right wheel speeds
 	public DifferentialDriveWheelSpeeds getWheelSpeeds() {
 		return new DifferentialDriveWheelSpeeds(leftEncoder.getRate(), rightEncoder.getRate());
 	}

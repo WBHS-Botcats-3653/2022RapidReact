@@ -111,11 +111,18 @@ public final class Constants {
 		//public static final double kDistancePerPulse = 1.0/256.0;
 
 		//Something
-		public static final int kP = 1;
+		//public static final int kP = 1;
 		public static final double kThreshold = 3.0;
 
-		//TO DO: Find value
-		public static final double kTrackWidth;
+		//TO DO: Find values
+		public static final double kTrackWidth = 0.0;
+
+		public static final double kS = 0.0;
+		public static final double kV = 0.0;
+		public static final double kA = 0.0;
+		public static final double kP = 0.0;
+		public static final double kI = 0.0;
+		public static final double kD = 0.0;
 	}
 
 	//Climber Constants
@@ -123,6 +130,7 @@ public final class Constants {
 		//Motor ID
 		public static final int kClimberArmMotorID = 10;  //CAN
 		public static final int kTraversalArmMotorID = 11;  //CAN
+		public static final int kTraversalWenchMotorID = 12;  //CAN
 	}
 
 	//Intake Constants
@@ -166,5 +174,6 @@ public final class Constants {
 		public static final double kDefaultSmartIndexSpeed = 0.7;
 		public static final double kDefaultShootSpeed = 0.85;
 		public static final double kDefaultClimbSpeed = 1.0;
+		public static final double kDefaultWenchSpeed = 1.0;
 	}
 }

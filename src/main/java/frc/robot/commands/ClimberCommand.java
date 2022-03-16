@@ -30,7 +30,7 @@ public class ClimberCommand extends CommandBase {
 	@Override
 	// Called every time the scheduler runs while the command is scheduled.
 	public void execute() {
-		//Climber
+		//Climber arm
 		//Checks whether there is input coming in to move the climber arm
 		if (m_oi.getClimbUp()) {  //If Dpad up is pressed
 			//Move climber arm up
@@ -43,7 +43,7 @@ public class ClimberCommand extends CommandBase {
 			m_climber.setClimberArmSpeed(0);
 		}
 
-		//Traversal
+		//Traversal arm
 		//Checks whether there is input coming in to move the traversal arm
 		if (m_oi.getTraverseUp()) {  //If Dpad right is pressed
 			//Move traversal arm up
@@ -53,6 +53,15 @@ public class ClimberCommand extends CommandBase {
 			m_climber.setTraversalArmSpeed(m_oi.getMaxClimbSpeed());
 		} else {  //Nothing being pressed (traversal wise)
 			//Stop traversal arm
+			m_climber.setTraversalArmSpeed(0);
+		}
+
+		//Traversal Wench
+		if (m_oi.getWench()) {  //If the back button is being pressed
+			//Wench the traversal thing
+			m_climber.setTraversalWenchSpeed(m_oi.getMaxWenchSpeed());
+		} else {  //If the back button is not being pressed
+			//Stop the traversal wench
 			m_climber.setTraversalArmSpeed(0);
 		}
 	}

@@ -18,6 +18,7 @@ public class OI {
 	private double maxSmartIndexSpeed = 0;
 	private double maxShootSpeed = 0;
 	private double maxClimbSpeed = 0;
+	private double maxWenchSpeed = 0;
 
 	public OI() {
 		m_controller = new XboxController(0);
@@ -53,6 +54,18 @@ public class OI {
 	//Returns the max arm speed
 	public double getMaxClimbSpeed(){
 		return maxClimbSpeed;
+	}
+
+	//Sets the max wench speed
+	public void setMaxWenchSpeed(double speed) {
+		if (0.0 < speed && speed <= 1.0) {
+			maxWenchSpeed = speed;
+		}
+	}
+
+	//Returns the max wench speed
+	public double getMaxWenchSpeed(){
+		return maxWenchSpeed;
 	}
 
 	//Sets the max intake pivot speed
@@ -214,6 +227,11 @@ public class OI {
 	//Whether the left button on the DPad is being pressed
 	public boolean getTraverseDown() {
 		return POVIsLeft();
+	}
+
+	//Whether the back button is being pressed
+	public boolean getWench() {
+		return m_controller.getBackButton();
 	}
 
 	//Returns whether the up botton on the DPad is being pressed
