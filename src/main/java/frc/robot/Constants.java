@@ -21,6 +21,7 @@ public final class Constants {
 		 *<String cargoID, double[angle, distance]>
 		 */
 		public static final HashMap<String, double[]> kAnglesAndDistances = new HashMap<>() {{
+			//Taxi to cargo
 			put("LLL", new double[] {100.78, -86.53});
 			put("LLR", new double[] {77.43, -30.58});
 			put("LML", new double[] {-100.78, -86.53});
@@ -33,6 +34,48 @@ public final class Constants {
 			put("RMR", new double[] {100.78, -86.53});
 			put("RRL", new double[] {-77.43, -30.58});
 			put("RRR", new double[] {-100.78, -86.53});
+
+			//Cargo to cargo
+			put("L LL-LR", new double[] {0.0, 0.0});
+			put("L LL-ML", new double[] {0.0, 0.0});
+			put("L LL-MR", new double[] {0.0, 0.0});
+			put("L LL-RL", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
+			put("L LL-RR", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
+			put("L LR-LL", new double[] {0.0, 0.0});
+			put("L LR-ML", new double[] {0.0, 0.0});
+			put("L LR-MR", new double[] {0.0, 0.0});
+			put("L LR-RL", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
+			put("L LR-RR", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
+			put("L ML-LL", new double[] {0.0, 0.0});
+			put("L ML-LR", new double[] {0.0, 0.0});
+			put("L ML-MR", new double[] {0.0, 0.0});
+			put("L ML-RL", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
+			put("L ML-RR", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
+			put("L MR-LL", new double[] {0.0, 0.0});
+			put("L MR-LR", new double[] {0.0, 0.0});
+			put("L MR-ML", new double[] {0.0, 0.0});
+			put("L MR-RL", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
+			put("L MR-RR", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
+			put("R RL-LL", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
+			put("R RL-LR", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
+			put("R RL-RR", new double[] {0.0, 0.0});
+			put("R RL-ML", new double[] {0.0, 0.0});
+			put("R RL-MR", new double[] {0.0, 0.0});
+			put("R RR-LL", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
+			put("R RR-LR", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
+			put("R RR-RL", new double[] {0.0, 0.0});
+			put("R RR-ML", new double[] {0.0, 0.0});
+			put("R RR-MR", new double[] {0.0, 0.0});
+			put("R ML-LL", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
+			put("R ML-LR", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
+			put("R ML-RL", new double[] {0.0, 0.0});
+			put("R ML-RR", new double[] {0.0, 0.0});
+			put("R ML-MR", new double[] {0.0, 0.0});
+			put("R MR-LL", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
+			put("R MR-LR", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
+			put("R MR-RL", new double[] {0.0, 0.0});
+			put("R MR-RR", new double[] {0.0, 0.0});
+			put("R MR-ML", new double[] {0.0, 0.0});
 		}};
 
 		//Speeds
@@ -75,7 +118,8 @@ public final class Constants {
 	//Climber Constants
 	public static final class ClimberConstants {
 		//Motor ID
-		public static final int kArmMotorID = 10;  //CAN
+		public static final int kClimberArmMotorID = 10;  //CAN
+		public static final int kTraversalArmMotorID = 11;  //CAN
 	}
 
 	//Intake Constants

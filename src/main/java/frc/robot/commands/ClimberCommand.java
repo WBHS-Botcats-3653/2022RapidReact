@@ -30,24 +30,40 @@ public class ClimberCommand extends CommandBase {
 	@Override
 	// Called every time the scheduler runs while the command is scheduled.
 	public void execute() {
-		//Checks whether there is input coming in to move the arm
-		if (m_oi.getClimbUp()) {  //If up Dpad up is pressed
-			//Move arm up
-			m_climber.setArmSpeed(-m_oi.getMaxClimbSpeed());  //Climber motor is inverted
+		//Climber
+		//Checks whether there is input coming in to move the climber arm
+		if (m_oi.getClimbUp()) {  //If Dpad up is pressed
+			//Move climber arm up
+			m_climber.setClimberArmSpeed(-m_oi.getMaxClimbSpeed());
 		} else if (m_oi.getClimbDown()) {  //If Dpad down is pressed
-			//Move arm down
-			m_climber.setArmSpeed(m_oi.getMaxClimbSpeed());  //Climber motor is inverted
+			//Move climber arm down
+			m_climber.setClimberArmSpeed(m_oi.getMaxClimbSpeed());
 		} else {  //Nothing being pressed (climber wise)
-			//Stop arm
-			m_climber.setArmSpeed(0);
+			//Stop climber arm
+			m_climber.setClimberArmSpeed(0);
+		}
+
+		//Traversal
+		//Checks whether there is input coming in to move the traversal arm
+		if (m_oi.getTraverseUp()) {  //If Dpad right is pressed
+			//Move traversal arm up
+			m_climber.setTraversalArmSpeed(-m_oi.getMaxClimbSpeed());
+		} else if (m_oi.getTraverseDown()) {  //If Dpad left is pressed
+			//Move traversal arm down
+			m_climber.setTraversalArmSpeed(m_oi.getMaxClimbSpeed());
+		} else {  //Nothing being pressed (traversal wise)
+			//Stop traversal arm
+			m_climber.setTraversalArmSpeed(0);
 		}
 	}
 
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
-		//Stop arm
-		m_climber.setArmSpeed(0);
+		//Stop the climber arm
+		m_climber.setClimberArmSpeed(0);
+		//Stop the traversal arm
+		m_climber.setTraversalArmSpeed(0);
 	}
 
 	// Returns true when the command should end.

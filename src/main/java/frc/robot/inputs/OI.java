@@ -201,9 +201,19 @@ public class OI {
 		return POVIsUp();
 	}
 
-	//Whether the down button on the DPas is being pressed
+	//Whether the down button on the DPad is being pressed
 	public boolean getClimbDown() {
 		return POVIsDown();
+	}
+
+	//Whether the right botton on the DPad is being pressed
+	public boolean getTraverseUp() {
+		return POVIsRight();
+	}
+
+	//Whether the left button on the DPad is being pressed
+	public boolean getTraverseDown() {
+		return POVIsLeft();
 	}
 
 	//Returns whether the up botton on the DPad is being pressed

@@ -4,7 +4,7 @@
 
 package frc.robot.subsystems;
 
-import static frc.robot.Constants.ClimberConstants.kArmMotorID;
+import static frc.robot.Constants.ClimberConstants.*;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
@@ -14,12 +14,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Climber extends SubsystemBase {
 	private static Climber m_singleton = null;
 
-	private WPI_VictorSPX arm;
+	private WPI_VictorSPX climberArm, traversalArm;
 
 	//Constructor
 	private Climber() {
-		//Creates VictorSPX motor controller for the arm
-		arm = new WPI_VictorSPX(kArmMotorID);
+		climberArm = new WPI_VictorSPX(kClimberArmMotorID);
+		traversalArm = new WPI_VictorSPX(kTraversalArmMotorID);
 	}
 
 	//Returns an instance of Climber, creating an instance only when one does not already exist (singleton)
@@ -30,14 +30,22 @@ public class Climber extends SubsystemBase {
 		return m_singleton;
 	}
 
-	//Sets the arms speed
-	public void setArmSpeed(double speed) {
-		//Sets the arm speed
-		arm.set(speed);
+	//Sets the climber arm speed
+	public void setClimberArmSpeed(double speed) {
+		//Sets the climber arm speed
+		climberArm.set(speed);
+	}
+
+	//Sets the traversal arm speed
+	public void setTraversalArmSpeed(double speed) {
+		//Sets the traversal arm speed
+		traversalArm.set(speed);
 	}
 	
 	//Enables or disabled the neutral brake on the motors
 	public void enableMotors(boolean enable) {
-		arm.setNeutralMode(enable ? NeutralMode.Brake : NeutralMode.Coast);
+		NeutralMode mode = enable ? NeutralMode.Brake : NeutralMode.Coast;
+		climberArm.setNeutralMode(mode);
+		traversalArm.setNeutralMode(mode);
 	}
 }
