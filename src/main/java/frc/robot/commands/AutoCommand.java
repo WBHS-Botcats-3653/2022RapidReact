@@ -20,14 +20,13 @@ public class AutoCommand extends CommandBase {
 	private ArrayList<String> cargoToTarget;
 
 	public static boolean executingCommand;
-	public static String stage;
 
 	private boolean hasFinished;
 	private int cargoTargetIndex;
 
 	public static boolean isAutoShootOn, isAutoTaxiOn, isAutoCollectOn;
 
-	public static String commandToScheduleNext;
+	public static char commandToScheduleNext;  //'S' = Sequential command / 'P' = Parallel command
 	private SequentialCommandGroup sequentialCommandToSchedule;
 	private ParallelCommandGroup parallelCommandToSchedule;
 
@@ -70,11 +69,10 @@ public class AutoCommand extends CommandBase {
 		//Target first selected cargo
 		cargoTargetIndex = 0;
 		//Schedules preload shoot and taxi if applicable
-		commandToScheduleNext = "Sequential";
+		commandToScheduleNext = 'S';
 		sequentialCommandToSchedule = new SequentialCommandGroup(
 			isAutoShootOn ? new ShootCargoCommand() : new PrintCommand("Auto shoot preload disabled"),   //Shoots Preload
 			isAutoTaxiOn || isAutoCollectOn ? new DriveCommand(kTaxiDistanceInInches, kAutoDriveSpeed, false) : new PrintCommand ("Taxi is disabled"),
-			new InstantCommand(() -> {AutoCommand.stage = "Taxi";}),  //Switches to Taxi stage
 			new InstantCommand(() -> {AutoCommand.executingCommand = false;})  //Completed executing a sequential command
 		);
 	}
@@ -95,13 +93,13 @@ public class AutoCommand extends CommandBase {
 		double[] distanceAndAngle = kAnglesAndDistances.get(startingTarmac + cargoToTarget.get(cargoTargetIndex));
 		//If there is no distance or angle to move skip this cargo
 		if (distanceAndAngle[0] != 0 && distanceAndAngle[1] != 0) {
-			commandToScheduleNext = "Sequential";
+			commandToScheduleNext = 'S';
 			//Creates a new sequential command to be scheduled
 			sequentialCommandToSchedule = new SequentialCommandGroup(
 				//Turn specified distance
 				new TurnCommand(distanceAndAngle[0]),
 				//Execute parallel command next
-				new InstantCommand(() -> {AutoCommand.commandToScheduleNext = "Parallel";}),
+				new InstantCommand(() -> {AutoCommand.commandToScheduleNext = 'P';}),
 				//End command
 				new InstantCommand(() -> {AutoCommand.executingCommand = false;})
 			);
@@ -112,7 +110,7 @@ public class AutoCommand extends CommandBase {
 				//Intake the cargo
 				new CollectCargoCommand(),
 				//Execute parallel command next
-				new InstantCommand(() -> {AutoCommand.commandToScheduleNext = "Sequential";})
+				new InstantCommand(() -> {AutoCommand.commandToScheduleNext = 'S';})
 			);
 		}
 		//Target next cargo

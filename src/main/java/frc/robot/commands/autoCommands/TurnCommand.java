@@ -39,10 +39,10 @@ public class TurnCommand extends CommandBase {
 		double difference = targetAngle - m_direction.getAngle();
 		if (Math.abs(difference) > kThreshold) {  //Robot is not within the threshold of the desired angle
 			//Turn towards the desired angle
-			m_driveTrain.arcadeDrive(0, -difference * kP);
+			m_driveTrain.arcadeDrive(0, difference * kP);
 			//Has not finished turning
 			hasFinished = false;
-		} else {  //Robot is withing the threshold of the desired angle
+		} else {  //Robot is within the threshold of the desired angle
 			//Stops the drive
 			m_driveTrain.arcadeDrive(0, 0);
 			//Has finished turning

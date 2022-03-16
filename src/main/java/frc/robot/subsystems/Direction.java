@@ -6,7 +6,6 @@ package frc.robot.subsystems;
 
 import static frc.robot.Constants.DriveConstants.*;
 
-import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -41,7 +40,7 @@ public class Direction extends SubsystemBase {
 	}
 	
 	//Returns the gyro
-	public Sendable getGyro() {
+	public ADXRS450_Gyro getGyro() {
 		return gyro;
 	}
 
@@ -54,11 +53,11 @@ public class Direction extends SubsystemBase {
 	public double getRate() {
 		return gyro.getRate();
 	}
-	public Encoder getRightEncoder(){
+	public Encoder getRightEncoder() {
 		return rightEncoder;
 	}
 
-	public Encoder getLeftEncoder(){
+	public Encoder getLeftEncoder() {
 		return leftEncoder;
 	}
 
@@ -91,7 +90,7 @@ public class Direction extends SubsystemBase {
 	}
 
 	//Resets the encoders
-	public void resetEncoders(){
+	public void resetEncoders() {
 		rightEncoder.reset();
 		leftEncoder.reset();
 		// Configures the encoders' distance-per-pulse
