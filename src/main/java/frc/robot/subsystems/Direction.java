@@ -6,6 +6,10 @@ package frc.robot.subsystems;
 
 import static frc.robot.Constants.DriveConstants.*;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.*;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -19,6 +23,9 @@ public class Direction extends SubsystemBase {
 	private ADXRS450_Gyro gyro;
 	private Encoder leftEncoder, rightEncoder;
 
+	private DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(Units.inchesToMeters(kTrackWidth));
+	private DifferentialDriveOdometry odometry = new DifferentialDriveOdometry(kinematics, getHeading());
+	private Pose2d position;
 	
 	public Direction() {
 		gyro = new ADXRS450_Gyro();
@@ -32,6 +39,11 @@ public class Direction extends SubsystemBase {
 			m_singleton = new Direction();
 		}
 		return m_singleton;
+	}
+
+	@Override
+	public void periodic() {
+		position = odometry.update(getHeading(), getWheelSpeeds());
 	}
 
 	//Calibrates the gyro
@@ -53,6 +65,12 @@ public class Direction extends SubsystemBase {
 	public double getRate() {
 		return gyro.getRate();
 	}
+
+	//Returns the current heading of the robot
+	public Rotation2d getHeading() {
+		return Rotation2d.fromDegrees(-getAngle());
+	}
+
 	public Encoder getRightEncoder() {
 		return rightEncoder;
 	}
@@ -80,6 +98,10 @@ public class Direction extends SubsystemBase {
 	 */
 	public double getDistance() {
 		return (this.getRightDistance() + this.getLeftDistance()) / 2;
+	}
+
+	public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+		return new DifferentialDriveWheelSpeeds(leftEncoder.getRate(), rightEncoder.getRate());
 	}
 
 	/**

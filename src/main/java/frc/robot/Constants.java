@@ -113,6 +113,9 @@ public final class Constants {
 		//Something
 		public static final int kP = 1;
 		public static final double kThreshold = 3.0;
+
+		//TO DO: Find value
+		public static final double kTrackWidth;
 	}
 
 	//Climber Constants
