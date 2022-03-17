@@ -56,13 +56,13 @@ public class ClimberCommand extends CommandBase {
 			m_climber.setExtensionSpeed(0);
 		}
 
-		//Wench
-		if (m_oi.getWench()) {  //If the back button is being pressed
-			//Wench the hook
-			m_climber.setWenchSpeed(m_oi.getMaxWenchSpeed());
+		//Winch
+		if (m_oi.getWinch()) {  //If the back button is being pressed
+			//Winch the hook
+			m_climber.setWinchSpeed(m_oi.getMaxWinchSpeed());
 		} else {  //If the back button is not being pressed
 			//Stop the hook
-			m_climber.setWenchSpeed(0);
+			m_climber.setWinchSpeed(0);
 		}
 	}
 
@@ -74,7 +74,7 @@ public class ClimberCommand extends CommandBase {
 		//Stop the extender
 		m_climber.setExtensionSpeed(0);
 		//Stop the wench
-		m_climber.setWenchSpeed(0);
+		m_climber.setWinchSpeed(0);
 	}
 
 	// Returns true when the command should end.

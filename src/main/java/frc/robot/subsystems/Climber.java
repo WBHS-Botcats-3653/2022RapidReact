@@ -14,15 +14,15 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Climber extends SubsystemBase {
 	private static Climber m_singleton = null;
 
-	private WPI_VictorSPX climberArm, extender, wench;
+	private WPI_VictorSPX climberArm, extender, winch;
 
 	//Constructor
 	private Climber() {
 		climberArm = new WPI_VictorSPX(kClimberArmMotorID);
 		extender = new WPI_VictorSPX(kTraversalArmMotorID);
-		wench = new WPI_VictorSPX(kTraversalWenchMotorID);
+		winch = new WPI_VictorSPX(kTraversalWinchMotorID);
 		extender.setInverted(true);
-		wench.setInverted(true);
+		winch.setInverted(true);
 	}
 
 	//Returns an instance of Climber, creating an instance only when one does not already exist (singleton)
@@ -45,10 +45,10 @@ public class Climber extends SubsystemBase {
 		extender.set(speed);
 	}
 
-	//Sets the wench speed
-	public void setWenchSpeed(double speed) {
-		//Sets the traversal wench speed
-		wench.set(speed);
+	//Sets the winch speed
+	public void setWinchSpeed(double speed) {
+		//Sets the traversal winch speed
+		winch.set(speed);
 	}
 	
 	//Enables or disabled the neutral brake on the motors
@@ -56,5 +56,6 @@ public class Climber extends SubsystemBase {
 		NeutralMode mode = enable ? NeutralMode.Brake : NeutralMode.Coast;
 		climberArm.setNeutralMode(mode);
 		extender.setNeutralMode(mode);
+		winch.setNeutralMode(mode);
 	}
 }

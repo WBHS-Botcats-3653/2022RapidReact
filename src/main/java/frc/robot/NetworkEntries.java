@@ -51,7 +51,7 @@ public class NetworkEntries {
 	public static NetworkTableEntry m_nteMaxShootSpeed;  //double
 	public static NetworkTableEntry m_nteMaxClimbSpeed;  //double
 	public static NetworkTableEntry m_nteMaxExtendSpeed;  //double
-	public static NetworkTableEntry m_nteMaxWenchSpeed;  //double
+	public static NetworkTableEntry m_nteMaxWinchSpeed;  //double
 
 	//Ball Pos
 	public static NetworkTableEntry m_nteRightTarmac;  //boolean

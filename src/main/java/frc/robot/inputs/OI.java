@@ -19,7 +19,7 @@ public class OI {
 	private double maxShootSpeed = 0;
 	private double maxClimbSpeed = 0;
 	private double maxExtendSpeed = 0;
-	private double maxWenchSpeed = 0;
+	private double maxWinchSpeed = 0;
 
 	public OI() {
 		m_controller = new XboxController(0);
@@ -41,7 +41,7 @@ public class OI {
 	}
 
 	//Returns the max drive speed
-	public double getMaxDriveSpeed(){
+	public double getMaxDriveSpeed() {
 		return maxDriveSpeed;
 	}
 
@@ -53,7 +53,7 @@ public class OI {
 	}
 
 	//Returns the max arm speed
-	public double getMaxClimbSpeed(){
+	public double getMaxClimbSpeed() {
 		return maxClimbSpeed;
 	}
 
@@ -65,20 +65,20 @@ public class OI {
 	}
 
 	//Returns the max extend speed
-	public double getMaxExtendSpeed(){
+	public double getMaxExtendSpeed() {
 		return maxExtendSpeed;
 	}
 
-	//Sets the max wench speed
-	public void setMaxWenchSpeed(double speed) {
+	//Sets the max winch speed
+	public void setMaxWinchSpeed(double speed) {
 		if (0.0 < speed && speed <= 1.0) {
-			maxWenchSpeed = speed;
+			maxWinchSpeed = speed;
 		}
 	}
 
-	//Returns the max wench speed
-	public double getMaxWenchSpeed(){
-		return maxWenchSpeed;
+	//Returns the max winch speed
+	public double getMaxWinchSpeed() {
+		return maxWinchSpeed;
 	}
 
 	//Sets the max intake pivot speed
@@ -89,7 +89,7 @@ public class OI {
 	}
 
 	//Returns the max intake pivot speed
-	public double getMaxIntakePivotSpeed(){
+	public double getMaxIntakePivotSpeed() {
 		return maxIntakePivotSpeed;
 	}
 
@@ -101,7 +101,7 @@ public class OI {
 	}
 
 	//Returns the max intake roller speed
-	public double getMaxIntakeRollerSpeed(){
+	public double getMaxIntakeRollerSpeed() {
 		return maxIntakeRollerSpeed;
 	}
 
@@ -243,7 +243,7 @@ public class OI {
 	}
 
 	//Whether the back button is being pressed
-	public boolean getWench() {
+	public boolean getWinch() {
 		return m_controller.getBackButton();
 	}
 

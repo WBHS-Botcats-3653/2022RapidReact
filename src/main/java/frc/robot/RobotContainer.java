@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import frc.robot.commands.AutoCommand;
+import frc.robot.subsystems.Direction;
 import frc.robot.subsystems.DriveTrain;
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -28,6 +29,7 @@ public class RobotContainer {
 	// The robot's subsystems and commands are defined here...
 	private final AutoCommand m_autoCommand = new AutoCommand();
 	private final DriveTrain m_driveTrain = DriveTrain.getInstance();
+	private final Direction m_direction = Direction.getInstance();
 
 	/** The container for the robot. Contains subsystems, OI devices, and commands. */
 	
@@ -61,11 +63,12 @@ public class RobotContainer {
 				new RamseteController(kRamseteB, kRamseteZeta),
 				m_driveTrain.getFeedForward(),
 				m_driveTrain.getKinematics(),
-				m_driveTrain::getSpeeds,
+				m_driveTrain::getWheelSpeeds,
 				m_driveTrain.getLeftPIDController(),
 				m_driveTrain.getRightPIDController(),
 				m_driveTrain::tankDriveVolts,
-				m_driveTrain
+				m_driveTrain,
+				m_direction
 			);
 		//return ramCommand;  //Set return type to Command
 		return m_autoCommand;

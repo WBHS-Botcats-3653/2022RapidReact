@@ -88,16 +88,44 @@ public class AutoCommand extends CommandBase {
 			return;
 		}
 		/*The angle and distance the robot needs to move to get to the desired cargo
-		 *double[angle, distance]
-		 */
-		double[] distanceAndAngle = kAnglesAndDistances.get(startingTarmac + cargoToTarget.get(cargoTargetIndex));
-		//If there is no distance or angle to move skip this cargo
-		if (distanceAndAngle[0] != 0 && distanceAndAngle[1] != 0) {
+		*double[angle, distance]
+		*/
+		double[] angleAndDistance = kAnglesAndDistances.get(startingTarmac + cargoToTarget.get(cargoTargetIndex));
+		if (cargoTargetIndex == 0) {
+			//If there is no distance or angle to move skip this cargo
+			if (angleAndDistance[0] != 0 && angleAndDistance[1] != 0) {
+				commandToScheduleNext = 'S';
+				//Creates a new sequential command to be scheduled
+				sequentialCommandToSchedule = new SequentialCommandGroup(
+					//Turn specified distance
+					new TurnCommand(angleAndDistance[0]),
+					//Execute parallel command next
+					new InstantCommand(() -> {AutoCommand.commandToScheduleNext = 'P';}),
+					//End command
+					new InstantCommand(() -> {AutoCommand.executingCommand = false;})
+				);
+				//Creates a new parallel command to be scheduled (Collect cargo)
+				parallelCommandToSchedule = new ParallelCommandGroup(
+					//Drive specified distance
+					new DriveCommand(angleAndDistance[1], kAutoDriveSpeed, true),
+					//Intake the cargo
+					new CollectCargoCommand(),
+					//Execute parallel command next
+					new InstantCommand(() -> {AutoCommand.commandToScheduleNext = 'S';})
+				);
+			}
+		} else {
+			double[] prevAngleAndDistance = kAnglesAndDistances.get(startingTarmac + cargoToTarget.get(cargoTargetIndex - 1));
+			double a = prevAngleAndDistance[1];
+			double b = angleAndDistance[1];
+			double C = prevAngleAndDistance[0] - angleAndDistance[0];
+			double dist = FindMissingSide(a, b, C);
+			double ang = FindMissingAngle(a, b, dist);
 			commandToScheduleNext = 'S';
 			//Creates a new sequential command to be scheduled
 			sequentialCommandToSchedule = new SequentialCommandGroup(
 				//Turn specified distance
-				new TurnCommand(distanceAndAngle[0]),
+				new TurnCommand(dist),
 				//Execute parallel command next
 				new InstantCommand(() -> {AutoCommand.commandToScheduleNext = 'P';}),
 				//End command
@@ -106,7 +134,7 @@ public class AutoCommand extends CommandBase {
 			//Creates a new parallel command to be scheduled (Collect cargo)
 			parallelCommandToSchedule = new ParallelCommandGroup(
 				//Drive specified distance
-				new DriveCommand(distanceAndAngle[1], kAutoDriveSpeed, true),
+				new DriveCommand(ang, kAutoDriveSpeed, true),
 				//Intake the cargo
 				new CollectCargoCommand(),
 				//Execute parallel command next
@@ -115,6 +143,26 @@ public class AutoCommand extends CommandBase {
 		}
 		//Target next cargo
 		cargoTargetIndex++;
+	}
+
+	/**Return the missing side of a scalene triangle
+	 *@param a Side a length
+	 *@param b Side b length
+	 *@param C Angle C in degrees
+	 *@return Length of side c
+	 */
+	public double FindMissingSide(double a, double b, double C) {
+		return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2) - 2 * a * b * Math.cos(C));
+	}
+
+	/**Finds the missing angle of a scalemne triangle
+	 *@param a Side a length
+	 *@param b Side b length
+	 *@param c Side c length
+	 *@return Angle C in degrees
+	 */
+	public double FindMissingAngle(double a, double b, double c) {
+		return Math.acos((Math.pow(a, 2) + Math.pow(b, 2) - Math.pow(c, 2)) / 2 * a * b);
 	}
 
 	// Called once the command ends or is interrupted.
