@@ -8,40 +8,34 @@ import java.util.ArrayList;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
 
-/** This class will store the NetworkTableEntry(ies)
- * 
- * 
-*/
+/** This class stores the NetworkTableEntries */
 public class NetworkEntries {
-    // Config Tab
-	public static NetworkTableEntry m_nteIsPivotAssistEnabled;
-	public static NetworkTableEntry m_nteIsSmartIntakeEnabled;
-	public static NetworkTableEntry m_nteIsErrorCorrectionEnabled;
-
-	// Test Tab
-	public static NetworkTableEntry m_nteDriveEncLeft;  //double
-	public static NetworkTableEntry m_nteDriveEncRight;  //double
-	public static NetworkTableEntry m_nteIntakeUpLimit;  //boolean
-    public static NetworkTableEntry m_nteIntakeDownLimit;  //boolean
-	public static NetworkTableEntry m_nteResetEncoders;  //boolean
-	public static NetworkTableEntry m_nteDiffDrive;  //Differential Drive
-		
-
-	// Photoelectric sensors
-	public static NetworkTableEntry m_nteLowerStoragePE;  //boolean
-    public static NetworkTableEntry m_nteUpperStoragePE;  //boolean
-	public static NetworkTableEntry m_nteShooterPE;  //boolean
-	
-
-	// Drive Tab
-	public static NetworkTableEntry m_nteDriveDistance;  //double
-	public static NetworkTableEntry m_nteEndSmartIntake;  //boolean
-	public static NetworkTableEntry m_nteGyro; //double (degrees)
-
-    //Auto Phases
+	//Auto Tab
 	public static NetworkTableEntry m_isAutoShootOn;  //boolean
 	public static NetworkTableEntry m_isAutoTaxiOn;  //boolean
 	public static NetworkTableEntry m_isAutoCollectOn;  //boolean
+
+	public static NetworkTableEntry m_nteRightTarmac;  //boolean
+
+	public static NetworkTableEntry m_nteLLCargo;  //boolean
+	public static NetworkTableEntry m_nteLRCargo;  //boolean
+	public static NetworkTableEntry m_nteMLCargo;  //boolean
+	public static NetworkTableEntry m_nteMRCargo;  //boolean
+	public static NetworkTableEntry m_nteRLCargo;  //boolean
+	public static NetworkTableEntry m_nteRRCargo;  //boolean
+
+	//Drive Tab
+	public static NetworkTableEntry m_nteIsPivotAssistEnabled;  //boolean
+	public static NetworkTableEntry m_nteIsSmartIntakeEnabled;  //boolean
+	public static NetworkTableEntry m_nteIsErrorCorrectionEnabled;  //boolean
+
+	public static NetworkTableEntry m_nteEndSmartIntake;  //boolean
+
+	public static NetworkTableEntry m_nteDriveDistance;  //double
+	public static NetworkTableEntry m_nteGyro; //double (degrees)
+
+	public static NetworkTableEntry m_nteFieldCamera;  //UsbCamera
+	public static NetworkTableEntry m_nteIndexerCamera;  //UsbCamera
 
 	//Speeds Tab
 	public static NetworkTableEntry m_nteMaxDriveSpeed;  //double
@@ -53,15 +47,18 @@ public class NetworkEntries {
 	public static NetworkTableEntry m_nteMaxExtendSpeed;  //double
 	public static NetworkTableEntry m_nteMaxWinchSpeed;  //double
 
-	//Ball Pos
-	public static NetworkTableEntry m_nteRightTarmac;  //boolean
+	//Test Tab
+	public static NetworkTableEntry m_nteLowerStoragePE;  //boolean
+    public static NetworkTableEntry m_nteUpperStoragePE;  //boolean
+	public static NetworkTableEntry m_nteShooterPE;  //boolean
 
-	public static NetworkTableEntry m_nteLLCargo;  //boolean
-	public static NetworkTableEntry m_nteLRCargo;  //boolean
-	public static NetworkTableEntry m_nteMLCargo;  //boolean
-	public static NetworkTableEntry m_nteMRCargo;  //boolean
-	public static NetworkTableEntry m_nteRLCargo;  //boolean
-	public static NetworkTableEntry m_nteRRCargo;  //boolean
+	public static NetworkTableEntry m_nteIntakeUpLimit;  //boolean
+    public static NetworkTableEntry m_nteIntakeDownLimit;  //boolean
+
+	public static NetworkTableEntry m_nteDriveEncLeft;  //double
+	public static NetworkTableEntry m_nteDriveEncRight;  //double
+
+	public static NetworkTableEntry m_nteResetEncoders;  //boolean
 
 	//Returns the selected Tarmac
 	public static char getTarmac() {
