@@ -11,15 +11,13 @@ import frc.robot.subsystems.Direction;
 import frc.robot.subsystems.DriveTrain;
 
 public class DriveCommand extends CommandBase {
-	private DriveTrain m_driveTrain;
-	private Direction m_direction;
+	private DriveTrain m_driveTrain = DriveTrain.getInstance();
+	private Direction m_direction = Direction.getInstance();
 
 	private double distance, speed, currentDistance;
 	private boolean isCollectingCargo;
 
 	public DriveCommand(double distance, double speed, boolean isCollectingCargo) {
-		m_driveTrain = DriveTrain.getInstance();
-		m_direction = Direction.getInstance();
 		this.distance = -distance;  //Inverted (moves in the correct direction)
 		this.speed = Math.signum(this.distance) * speed;
 		this.isCollectingCargo = isCollectingCargo;

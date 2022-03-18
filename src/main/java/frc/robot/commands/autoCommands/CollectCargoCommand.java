@@ -14,16 +14,13 @@ import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
 
 public class CollectCargoCommand extends CommandBase {
-	private Intake m_intake;
-	private Indexer m_indexer;
-	private SI m_si;
+	private Intake m_intake = Intake.getInstance();
+	private Indexer m_indexer = Indexer.getInstance();
+	private SI m_si = SI.getInstance();
 
 	public static boolean endCommand;
 
 	public CollectCargoCommand() {
-		m_intake = Intake.getInstance();
-		m_indexer =  Indexer.getInstance();
-		m_si = SI.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
 		addRequirements(m_intake, m_indexer);
 	}

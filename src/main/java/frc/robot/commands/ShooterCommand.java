@@ -10,11 +10,10 @@ import frc.robot.subsystems.Shooter;
 
 public class ShooterCommand extends CommandBase {
 	private Shooter m_shooter;
-	private OI m_oi;
+	private OI m_oi = OI.getInstance();
 
 	public ShooterCommand(Shooter p_shooter) {
 		m_shooter = p_shooter;
-		m_oi = OI.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
 		addRequirements(p_shooter);
 	}

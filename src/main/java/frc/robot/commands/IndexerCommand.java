@@ -13,16 +13,14 @@ import frc.robot.subsystems.Indexer;
 
 public class IndexerCommand extends CommandBase {
 	private Indexer m_indexer;
-	private OI m_oi;
-	private SI m_si;
+	private OI m_oi = OI.getInstance();
+	private SI m_si = SI.getInstance();
 
 	private boolean smartControl;
 
 	/** Creates a new StorageCommand. */
 	public IndexerCommand(Indexer p_indexer) {
 		m_indexer = p_indexer;
-		m_oi = OI.getInstance();
-		m_si = SI.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
 		addRequirements(p_indexer);
 	}

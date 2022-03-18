@@ -9,7 +9,7 @@ import frc.robot.commands.autoCommands.*;
 import frc.robot.subsystems.Direction;
 
 public class AutoCommand extends CommandBase {
-	private Direction m_direction;
+	private Direction m_direction = Direction.getInstance();
 
 	/*Which Tarmac the robot is starting in (defaults to left tarmac)
 	*"L"=Left, "R"=Right
@@ -32,8 +32,6 @@ public class AutoCommand extends CommandBase {
 
 	//Constructor
 	public AutoCommand() {
-		m_direction = Direction.getInstance();
-		
 		hasFinished = false;
 		executingCommand = false;
 	}

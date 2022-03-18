@@ -12,18 +12,15 @@ import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Shooter;
 
 public class ShootCargoCommand extends CommandBase {
-	private Shooter m_shooter;
-	private Indexer m_indexer;
-	private SI m_si;
+	private Indexer m_indexer = Indexer.getInstance();
+	private Shooter m_shooter = Shooter.getInstance();
+	private SI m_si = SI.getInstance();
 
 	private boolean hasFinished, shooterTriggered;
 
 	public ShootCargoCommand() {
-		m_shooter = Shooter.getInstance();
-		m_indexer = Indexer.getInstance();
-		m_si = SI.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
-		addRequirements(m_shooter, m_indexer);
+		addRequirements(m_indexer, m_shooter);
 	}
 
 	// Called when the command is initially scheduled.

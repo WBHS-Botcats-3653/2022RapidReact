@@ -11,15 +11,13 @@ import frc.robot.subsystems.Direction;
 import frc.robot.subsystems.DriveTrain;
 
 public class TurnCommand extends CommandBase {
-	private DriveTrain m_driveTrain;
-	private Direction m_direction;
+	private DriveTrain m_driveTrain = DriveTrain.getInstance();
+	private Direction m_direction = Direction.getInstance();
 
 	private double angle, targetAngle;
 	private boolean hasFinished = false;
 	
 	public TurnCommand(double angle) {
-		m_driveTrain = DriveTrain.getInstance();
-		m_direction = Direction.getInstance();
 		this.angle = angle;
 		// Use addRequirements() here to declare subsystem dependencies.
 		addRequirements(m_driveTrain, m_direction);

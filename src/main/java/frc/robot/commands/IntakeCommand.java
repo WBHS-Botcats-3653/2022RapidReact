@@ -14,8 +14,8 @@ import frc.robot.subsystems.Intake;
 
 public class IntakeCommand extends CommandBase {
 	private Intake m_intake;
-	private OI m_oi;
-	private SI m_si;
+	private OI m_oi = OI.getInstance();
+	private SI m_si = SI.getInstance();
 
 	private static boolean smartControl = false;
 	private static boolean smartPivotGoingUp, smartPivotGoingDown;
@@ -25,8 +25,6 @@ public class IntakeCommand extends CommandBase {
 	 */
 	public IntakeCommand(Intake p_intake) {
 		m_intake = p_intake;
-		m_oi = OI.getInstance();
-		m_si = SI.getInstance();
 		//Not pivoting up while under smart control
 		smartPivotGoingUp = false;
 		// Use addRequirements() here to declare subsystem dependencies.

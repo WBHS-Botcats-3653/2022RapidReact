@@ -14,8 +14,8 @@ import frc.robot.subsystems.DriveTrain;
 
 public class ArcadeDriveCommand extends CommandBase {
 	private DriveTrain m_driveTrain;
-	private Direction m_direction;
-	private OI m_oi;
+	private Direction m_direction = Direction.getInstance();
+	private OI m_oi = OI.getInstance();
 
 	private boolean errorCorrectionOn = false;
 
@@ -24,8 +24,6 @@ public class ArcadeDriveCommand extends CommandBase {
 	 */
 	public ArcadeDriveCommand(DriveTrain p_driveTrain) {
 		m_driveTrain = p_driveTrain;
-		m_direction = Direction.getInstance();
-		m_oi = OI.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
 		addRequirements(p_driveTrain);
 	}
