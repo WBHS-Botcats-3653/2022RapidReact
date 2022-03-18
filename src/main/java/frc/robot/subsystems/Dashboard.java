@@ -22,14 +22,14 @@ public class Dashboard extends SubsystemBase {
 	private OI m_oi = OI.getInstance();
 	private SI m_si =  SI.getInstance();
 
-	public static ShuffleboardTab tabDrive;
-	public static ShuffleboardTab tabTest;
-	public static ShuffleboardTab tabSpeeds;
-	public static ShuffleboardTab tabAuto;
+	public ShuffleboardTab tabDrive;
+	public ShuffleboardTab tabTest;
+	public ShuffleboardTab tabSpeeds;
+	public ShuffleboardTab tabAuto;
 
 	public boolean speedsDisabled = true;
 
-	private static boolean previousTaxi, previousCollect, previousSmartIntake;
+	private boolean previousTaxi, previousCollect, previousSmartIntake;
 
 	private Dashboard() {
 		tabAuto = Shuffleboard.getTab("Auto");
@@ -38,16 +38,10 @@ public class Dashboard extends SubsystemBase {
 		tabTest = Shuffleboard.getTab("Test");
 
 		//Auto Tab
-			//Auto Shoot
-			NetworkEntries.m_isAutoShootOn = tabAuto.addPersistent("Auto Shoot", true).withWidget(BuiltInWidgets.kToggleButton)
-			.withSize(1, 1).withPosition(0, 0).getEntry();
-			//Auto Taxi
-			NetworkEntries.m_isAutoTaxiOn = tabAuto.addPersistent("Auto Taxi", true).withWidget(BuiltInWidgets.kToggleButton)
-			.withSize(1, 1).withPosition(1, 0).getEntry();
-			//Auto collect
-			NetworkEntries.m_isAutoCollectOn = tabAuto.addPersistent("Auto Collect", true).withWidget(BuiltInWidgets.kToggleButton)
-			.withSize(1, 1).withPosition(2, 0).getEntry();
-			//Auto Tab
+			NetworkEntries.m_isAutoShootOn = tabAuto.addPersistent("Auto Shoot", true).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(0, 0).getEntry();
+			NetworkEntries.m_isAutoTaxiOn = tabAuto.addPersistent("Auto Taxi", true).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(1, 0).getEntry();
+			NetworkEntries.m_isAutoCollectOn = tabAuto.addPersistent("Auto Collect", true).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(2, 0).getEntry();
+			
 			NetworkEntries.m_nteRightTarmac = tabAuto.add("Is Right Tarmac?", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(3, 0).getEntry(); //boolean
 			
 			NetworkEntries.m_nteLLCargo = tabAuto.add("LL Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(4, 0).getEntry(); //boolean
@@ -58,19 +52,18 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteRRCargo = tabAuto.add("RR Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(6, 1).getEntry(); //boolean
 
 
-		// Drive Tab
-			//NetworkEntries.m_nteFieldCamera = tabDrive.add("Field View", m_cameras.getFieldCamera()).withWidget(BuiltInWidgets.kCameraStream).withSize(3, 2).withPosition(6, 0);
-			//NetworkEntries.m_nteIndexerCamera = tabDrive.add("Indexer View", m_cameras.getIndexerCamera()).withWidget(BuiltInWidgets.kCameraStream).withSize(3, 2).withPosition(6, 0);
-
-			NetworkEntries.m_nteIsSmartIntakeEnabled = tabDrive.add("Is Smart Intake Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
-			.withSize(2, 1).withPosition(0, 0).getEntry();
-			NetworkEntries.m_nteIsPivotAssistEnabled = tabDrive.add("Is Pivot Assist Enabled", true).withWidget(BuiltInWidgets.kToggleButton)
-			.withSize(2, 1).withPosition(2, 0).getEntry();
-			NetworkEntries.m_nteIsErrorCorrectionEnabled = tabDrive.addPersistent("Is Error Correction Enabled", false).withWidget(BuiltInWidgets.kToggleButton)
-			.withSize(2, 1).withPosition(4, 0).getEntry();
+		//Drive Tab
+			NetworkEntries.m_nteIsSmartIntakeEnabled = tabDrive.add("Is Smart Intake Enabled", true).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 1).withPosition(0, 0).getEntry();
+			NetworkEntries.m_nteIsPivotAssistEnabled = tabDrive.add("Is Pivot Assist Enabled", true).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 1).withPosition(2, 0).getEntry();
+			NetworkEntries.m_nteIsErrorCorrectionEnabled = tabDrive.addPersistent("Is Error Correction Enabled", false).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 1).withPosition(4, 0).getEntry();
+			
 			NetworkEntries.m_nteEndSmartIntake = tabDrive.add("End Smart Intake", false).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 1).withPosition(0, 1).getEntry();
+			
 			NetworkEntries.m_nteDriveDistance = tabDrive.add("Distance Drived", 0).withWidget(BuiltInWidgets.kTextView).withSize(0, 0).withPosition(2, 1).getEntry();
-			NetworkEntries.m_nteGyro = tabDrive.add("Gyro", 0).withWidget(BuiltInWidgets.kGyro).withSize(1, 1).withPosition(3, 1).getEntry();
+			//NetworkEntries.m_nteGyro = tabDrive.add("Gyro", m_direction.getGyro()).withWidget(BuiltInWidgets.kGyro).withSize(1, 1).withPosition(3, 1).getEntry();
+
+			//NetworkEntries.m_nteFieldCamera = tabDrive.add("Field View", m_cameras.getFieldCamera()).withWidget(BuiltInWidgets.kCameraStream).withSize(3, 2).withPosition(6, 0).getEntry();
+			//NetworkEntries.m_nteIndexerCamera = tabDrive.add("Indexer View", m_cameras.getIndexerCamera()).withWidget(BuiltInWidgets.kCameraStream).withSize(3, 2).withPosition(6, 0).getEntry();
 			
 		//Speeds Tab			
 			NetworkEntries.m_nteMaxDriveSpeed = tabSpeeds.addPersistent("Max Drive Speed", kDefaultDriveSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(0, 0).getEntry();  //double
@@ -82,21 +75,24 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteMaxExtendSpeed = tabSpeeds.addPersistent("Max Extend Speed", kDefaultExtendSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(2, 1).getEntry();  //double
 			NetworkEntries.m_nteMaxWinchSpeed = tabSpeeds.addPersistent("Max Winch Speed", kDefaultWinchSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(4, 1).getEntry();  //double
 			
-		// Test Tab
-			NetworkEntries.m_nteIntakeUpLimit = tabTest.add("Intake Up Limit", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(0, 0).getEntry();
-			NetworkEntries.m_nteIntakeDownLimit = tabTest.add("Intake Down Limit", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(0, 1).getEntry();
+		//Test Tab
 			NetworkEntries.m_nteUpperStoragePE = tabTest.add("Upper Storage PE", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(1, 0).getEntry();
 			NetworkEntries.m_nteLowerStoragePE = tabTest.add("Lower Storage PE", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(1, 1).getEntry();
 			NetworkEntries.m_nteShooterPE = tabTest.add("Shooter PE", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(2, 0).getEntry();
-			NetworkEntries.m_nteResetEncoders = tabTest.add("Reset Encoders", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1,1).withPosition(3,0).getEntry();
+			
+			NetworkEntries.m_nteIntakeUpLimit = tabTest.add("Intake Up Limit", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(0, 0).getEntry();
+			NetworkEntries.m_nteIntakeDownLimit = tabTest.add("Intake Down Limit", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(0, 1).getEntry();
+			
 			NetworkEntries.m_nteDriveEncLeft = tabTest.add("Left Encoder", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(2, 1).getEntry();
 			NetworkEntries.m_nteDriveEncRight = tabTest.add("Right Encoder", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(3, 1).getEntry();
 			
-			//Initialize variables
-			previousTaxi = NetworkEntries.m_isAutoTaxiOn.getBoolean(false);
-			previousCollect = NetworkEntries.m_isAutoCollectOn.getBoolean(false);
-			previousSmartIntake = NetworkEntries.m_nteIsSmartIntakeEnabled.getBoolean(false);
-		}
+			NetworkEntries.m_nteResetEncoders = tabTest.add("Reset Encoders", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1,1).withPosition(3,0).getEntry();
+			
+		//Initialize variables
+		previousTaxi = NetworkEntries.m_isAutoTaxiOn.getBoolean(false);
+		previousCollect = NetworkEntries.m_isAutoCollectOn.getBoolean(false);
+		previousSmartIntake = NetworkEntries.m_nteIsSmartIntakeEnabled.getBoolean(false);
+	}
 
 	/**@description This Method will update the values in the dashboard and in the networkTable
 	 * in order to change the appropriate values accordingly
@@ -116,9 +112,6 @@ public class Dashboard extends SubsystemBase {
 		//Limit switches
 		NetworkEntries.m_nteIntakeUpLimit.setBoolean(m_si.isPivotUpLimitClosed());
 		NetworkEntries.m_nteIntakeDownLimit.setBoolean(m_si.isPivotDownLimitClosed());
-
-		//Gyro
-		//NetworkEntries.m_nteGyro.setValue(m_direction.getGyro());
 
 		if (speedsDisabled) {
 			//Sets max speeds to 0
@@ -211,7 +204,7 @@ public class Dashboard extends SubsystemBase {
 	}
 
 	/**Disables or enables the speeds*/
-	public void disableSpeeds(boolean disabled) {
-		speedsDisabled = disabled;
+	public void disableSpeeds(boolean disable) {
+		speedsDisabled = disable;
 	}
 }
