@@ -49,7 +49,7 @@ public class ArcadeDriveCommand extends CommandBase {
 				errorCorrectionOn = true;
 			}
 			//Calculates the steering to keep the robot straight
-			steering = kP * m_direction.getError();
+			steering = kP * m_direction.getEncoderError();
 		} else {  //Drive error correction is disabled or player is giving steering input or the robot is not moving at a high enough speed
 			//Not correcting drive errors
 			errorCorrectionOn = false;

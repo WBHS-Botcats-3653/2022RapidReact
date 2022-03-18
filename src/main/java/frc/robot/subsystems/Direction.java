@@ -24,6 +24,8 @@ public class Direction extends SubsystemBase {
 		gyro = new ADXRS450_Gyro();
 		leftEncoder = new Encoder(kLeftMotorGroupEncoder1, kLeftMotorGroupEncoder2);
 		rightEncoder = new Encoder(kRightMotorGroupEncoder1, kRightMotorGroupEncoder2);
+		leftEncoder.setReverseDirection(true);
+		rightEncoder.setReverseDirection(true);
 	}
 
 	//Returns an instance of Direction, creating an instance only when one does not already exist
@@ -45,18 +47,18 @@ public class Direction extends SubsystemBase {
 	}
 
 	//Returns the angle
-	public double getAngle() {
+	public double getGyroAngle() {
 		return gyro.getAngle();
 	}
 
 	//Returns the rate
-	public double getRate() {
+	public double getGyroRate() {
 		return gyro.getRate();
 	}
 
 	//Returns the current heading of the robot
 	public Rotation2d getHeading() {
-		return Rotation2d.fromDegrees(-getAngle());
+		return Rotation2d.fromDegrees(-getGyroAngle());  //Counterclockwise = positive
 	}
 
 	//Returns the right encoder
@@ -72,39 +74,41 @@ public class Direction extends SubsystemBase {
 	/**
 	 * @return encoder's right distance
 	 */
-	public double getRightDistance() {
-		return rightEncoder.getDistance() / 1.11437;
+	public double getRightEncoderDistance() {
+		return rightEncoder.getDistance();
+		//return rightEncoder.getDistance() / 1.11437;
 	}
 
 	/**
 	 * @return encoder's left distance
 	 */
-	public double getLeftDistance() {
-		return -leftEncoder.getDistance() / 1.11019;  //Inverted
+	public double getLeftEncoderDistance() {
+		return leftEncoder.getDistance();
+		//return leftEncoder.getDistance() / 1.11019;
 	}
 
 	//Return the rate of the right encoder
-	public double getRightRate() {
+	public double getRightEncoderRate() {
 		return rightEncoder.getRate();
 	}
 
 	//Return the rate of the left encoder
-	public double getLeftRate() {
-		return -leftEncoder.getRate();  //Inverted
+	public double getLeftEncoderRate() {
+		return leftEncoder.getRate();
 	}
 
 	/**
 	 * @return encoder's distance
 	 */
-	public double getDistance() {
-		return (this.getRightDistance() + this.getLeftDistance()) / 2;
+	public double getEncoderDistance() {
+		return (this.getRightEncoderDistance() + this.getLeftEncoderDistance()) / 2;
 	}
 
 	/**
 	 * @return the error between the left and right distance
 	 */
-	public double getError() {
-		return this.getLeftDistance() - this.getRightDistance();
+	public double getEncoderError() {
+		return this.getLeftEncoderDistance() - this.getRightEncoderDistance();
 	}
 
 	//Resets the encoders

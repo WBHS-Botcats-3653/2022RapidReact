@@ -70,7 +70,7 @@ public class AutoCommand extends CommandBase {
 		commandToScheduleNext = 'S';
 		sequentialCommandToSchedule = new SequentialCommandGroup(
 			isAutoShootOn ? new ShootCargoCommand() : new PrintCommand("Auto shoot preload disabled"),   //Shoots Preload
-			isAutoTaxiOn || isAutoCollectOn ? new DriveCommand(kTaxiDistanceInInches, kAutoDriveSpeed, false) : new PrintCommand ("Taxi is disabled"),
+			isAutoTaxiOn || isAutoCollectOn ? new DriveCommand(kTaxiDistance, kAutoDriveSpeed, false) : new PrintCommand ("Taxi is disabled"),
 			new InstantCommand(() -> {AutoCommand.executingCommand = false;})  //Completed executing a sequential command
 		);
 	}

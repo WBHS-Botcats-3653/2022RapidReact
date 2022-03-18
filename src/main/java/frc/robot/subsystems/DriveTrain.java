@@ -14,6 +14,7 @@ import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.*;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -27,6 +28,7 @@ public class DriveTrain extends SubsystemBase {
 	private DifferentialDrive diffDrive;
 
 	private DifferentialDriveOdometry odometry = new DifferentialDriveOdometry(m_direction.getHeading(), new Pose2d(0.0, 0.0, new Rotation2d()));
+	private final DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(Units.inchesToMeters(kTrackWidth));
 
 	private SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(kS, kV, kA);
 
@@ -55,11 +57,12 @@ public class DriveTrain extends SubsystemBase {
 
 		//Reverses left motor direction
 		driveLeft.setInverted(true);
+		driveRight.setInverted(false);
 	}
 
 	@Override
 	public void periodic() {
-		pose = odometry.update(m_direction.getHeading(), m_direction.getLeftDistance(), m_direction.getRightDistance());
+		pose = odometry.update(m_direction.getHeading(), m_direction.getLeftEncoderDistance(), m_direction.getRightEncoderDistance());
 	}
 	
 	//Returns an instance of DrainTrain, creating an instance only when one does not already exist
@@ -109,7 +112,7 @@ public class DriveTrain extends SubsystemBase {
 
 	//Returns the left and right wheel speeds
 	public DifferentialDriveWheelSpeeds getWheelSpeeds() {
-		return new DifferentialDriveWheelSpeeds(m_direction.getLeftRate(), m_direction.getRightRate());
+		return new DifferentialDriveWheelSpeeds(m_direction.getLeftEncoderRate(), m_direction.getRightEncoderRate());
 	}
 
 	//Returns the feedforward
@@ -129,7 +132,7 @@ public class DriveTrain extends SubsystemBase {
 
 	//Returns the kinematics
 	public DifferentialDriveKinematics getKinematics() {
-		return kKinematics;
+		return kinematics;
 	}
 
 	//Returns the pose

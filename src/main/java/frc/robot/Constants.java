@@ -2,9 +2,6 @@ package frc.robot;
 
 import java.util.HashMap;
 
-import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
-import edu.wpi.first.math.util.Units;
-
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -18,7 +15,7 @@ public final class Constants {
 	public static final class AutoConstants {
 
 		//The distance to travel in reverse when taxiing
-		public static final double kTaxiDistanceInInches = -80.0;  //-86.0
+		public static final double kTaxiDistance = -80.0;  //Inches (-86.0)
 
 		/*Distances and angles to cargo after taxi during auto
 		 *<String cargoID, double[angle, distance]>
@@ -62,28 +59,39 @@ public final class Constants {
 		public static final int kRightMotorGroupEncoder1 = 3;  //DIO 1 pin
 		public static final int kRightMotorGroupEncoder2 = 2;  //DIO 3 pin
 
-		//Encoder distance per pulse
-		private static final double kWheelDiameter = 6.0;
+		//Diameter of the wheel directly mounted to the motor shaft
+		private static final double kWheelDiameter = 6.0;  //Inches
+		//The number of pulses per rotation of the motor (also known as the encoder resolution)
 		private static final double kPulsePerRevolution = 360.0;
+		//The gear ratio between the encoder shaft and the wheels
 		private static final double kEncoderGearRatio = 1.0 / 1.0;
+		//The gear ratio between the motors and the shaft
 		private static final double kGearRatio = 10.71 / 1.0;
-		private static final double kFudgefactor = 12.0;  //Unit conversion
+		//Custom variable to adjust what units the encoder returns a value in (in this case inches)
+		private static final double kFudgefactor = 12.0 / 1.11228;
+		//Encoder distance per pulse calculation
 		public static final double kDistancePerPulse = Math.PI * kWheelDiameter / kPulsePerRevolution / kEncoderGearRatio / kGearRatio * kFudgefactor;
-		//public static final double kDistancePerPulse = 1.0/256.0;
 
-		//Something
-		//public static final int kP = 1;
 		public static final double kThreshold = 3.0;
 
-		private static final double kTrackWidth = 0.0;
-		public static final DifferentialDriveKinematics kKinematics = new DifferentialDriveKinematics(Units.inchesToMeters(kTrackWidth));
+		//The distance between the center line of the left and right wheels
+		public static final double kTrackWidth = 0.0;  //Inches
 
+		/*Get kS, kV, kA, and kP from frc robot characterization tool (sysid)
+		 *The tool can be found in the WPILib Tools desktop folder (Windows)
+		 */
+		//Voltage required to overcome static friction
 		public static final double kS = 0.0;
+		//Some constant
 		public static final double kV = 0.0;
+		//Some constant
 		public static final double kA = 0.0;
+		//Proportion
 		public static final double kP = 0.0;
-		public static final double kI = 0.0;
-		public static final double kD = 0.0;
+		//Integral
+		public static final double kI = 0.0;  //Leave 0
+		//Derivative
+		public static final double kD = 0.0;  //Leave 0
 
 		public static final double kRamseteB = 2.0;  //DO NOT CHANGE
 		public static final double kRamseteZeta = 0.7;  //DO NOT CHANGE
@@ -115,8 +123,8 @@ public final class Constants {
 		//Speeds
 		public static final double kSmartIntakePivotDownSpeed = 0.15;
 		public static final double kSmartIntakePivotUpSpeed = 0.35;
-		public static final double kIntakePivotAssistSpeed = 0.1;
 		public static final double kSmartIndexSpeed = 0.7;
+		public static final double kIntakePivotAssistSpeed = 0.1;
 	}
 
 	//Shooter Constants
@@ -130,7 +138,7 @@ public final class Constants {
 
 	//Default Speeds Constants
 	public static final class DefaultSpeedsConstants {
-		//Default Speeds
+		//Default Max Speeds
 		public static final double kDefaultDriveSpeed = 1.0;
 		public static final double kDefaultIntakePivotSpeed = 0.5;
 		public static final double kDefaultIntakeRollerSpeed = 1.0;

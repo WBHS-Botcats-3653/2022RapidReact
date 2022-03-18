@@ -21,6 +21,7 @@ public class Climber extends SubsystemBase {
 		climberArm = new WPI_VictorSPX(kClimberArmMotorID);
 		extender = new WPI_VictorSPX(kTraversalArmMotorID);
 		winch = new WPI_VictorSPX(kTraversalWinchMotorID);
+		climberArm.setInverted(false);
 		extender.setInverted(true);
 		winch.setInverted(true);
 	}

@@ -38,9 +38,9 @@ public class DriveCommand extends CommandBase {
 	@Override
 	public void execute() {
 		//Gets the distance the robot has moved from the encoders
-		currentDistance = m_direction.getDistance();
+		currentDistance = m_direction.getEncoderDistance();
 		//Gets the error rate
-		double error = kP * m_direction.getError();
+		double error = kP * m_direction.getEncoderError();
 		//Moves the robot at the set speed and makes course corrections based off the encoders
 		m_driveTrain.arcadeDrive(speed, error);
 		//m_driveTrain.tankDrive(speed - error, speed + error);

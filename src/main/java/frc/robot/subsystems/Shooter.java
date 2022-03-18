@@ -28,10 +28,7 @@ public class Shooter extends SubsystemBase {
 		return shooter;
 	}
 
-	/**SHOOTER, but with another name
-	 * Spins the flyWheel to shoot the cargo
-	 * 
-	 */
+	//Spins the flyWheel at the given speed
 	public void setShootSpeed(double speed) {
 		//Sets the fly wheel speed
 		flywheel.set(speed);

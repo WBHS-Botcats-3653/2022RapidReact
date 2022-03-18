@@ -27,14 +27,14 @@ public class TurnCommand extends CommandBase {
 	@Override
 	public void initialize() {
 		//Calculates the desired angle based off the current angle
-		targetAngle = m_direction.getAngle() + angle;
+		targetAngle = m_direction.getGyroAngle() + angle;
 	}
 
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
 		//Difference of the between the desired angle the current angle of the robot
-		double difference = targetAngle - m_direction.getAngle();
+		double difference = targetAngle - m_direction.getGyroAngle();
 		if (Math.abs(difference) > kThreshold) {  //Robot is not within the threshold of the desired angle
 			//Turn towards the desired angle
 			m_driveTrain.arcadeDrive(0, difference * kP);
