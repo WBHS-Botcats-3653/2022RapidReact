@@ -17,6 +17,7 @@ import frc.robot.inputs.SI;
 
 public class Dashboard extends SubsystemBase {
 	private static Dashboard m_singleton;
+	private DriveTrain m_driveTrain = DriveTrain.getInstance();
 	private Direction m_direction = Direction.getInstance();
 	private Cameras m_cameras = Cameras.getInstance();
 	private OI m_oi = OI.getInstance();
@@ -42,14 +43,14 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_isAutoTaxiOn = tabAuto.addPersistent("Auto Taxi", true).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(1, 0).getEntry();
 			NetworkEntries.m_isAutoCollectOn = tabAuto.addPersistent("Auto Collect", true).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(2, 0).getEntry();
 			
-			NetworkEntries.m_nteRightTarmac = tabAuto.add("Is Right Tarmac?", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(3, 0).getEntry(); //boolean
+			NetworkEntries.m_nteRightTarmac = tabAuto.add("Is Right Tarmac?", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(3, 0).getEntry();
 			
-			NetworkEntries.m_nteLLCargo = tabAuto.add("LL Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(4, 0).getEntry(); //boolean
-			NetworkEntries.m_nteLRCargo = tabAuto.add("LR Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(4, 1).getEntry(); //boolean
-			NetworkEntries.m_nteMLCargo = tabAuto.add("ML Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(5, 0).getEntry(); //boolean
-			NetworkEntries.m_nteMRCargo = tabAuto.add("MR Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(5, 1).getEntry(); //boolean
-			NetworkEntries.m_nteRLCargo = tabAuto.add("RL Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(6, 0).getEntry(); //boolean
-			NetworkEntries.m_nteRRCargo = tabAuto.add("RR Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(6, 1).getEntry(); //boolean
+			NetworkEntries.m_nteLLCargo = tabAuto.add("LL Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(4, 0).getEntry();
+			NetworkEntries.m_nteLRCargo = tabAuto.add("LR Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(4, 1).getEntry();
+			NetworkEntries.m_nteMLCargo = tabAuto.add("ML Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(5, 0).getEntry();
+			NetworkEntries.m_nteMRCargo = tabAuto.add("MR Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(5, 1).getEntry();
+			NetworkEntries.m_nteRLCargo = tabAuto.add("RL Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(6, 0).getEntry();
+			NetworkEntries.m_nteRRCargo = tabAuto.add("RR Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(6, 1).getEntry();
 
 
 		//Drive Tab
@@ -60,10 +61,10 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteEndSmartIntake = tabDrive.add("End Smart Intake", false).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 1).withPosition(0, 1).getEntry();
 			
 			NetworkEntries.m_nteDriveDistance = tabDrive.add("Distance Drived", 0).withWidget(BuiltInWidgets.kTextView).withSize(0, 0).withPosition(2, 1).getEntry();
-			//NetworkEntries.m_nteGyro = tabDrive.add("Gyro", m_direction.getGyro()).withWidget(BuiltInWidgets.kGyro).withSize(1, 1).withPosition(3, 1).getEntry();
+			tabDrive.add("Gyro", m_direction.getGyro()).withSize(2, 2).withPosition(3, 1);
 
-			//NetworkEntries.m_nteFieldCamera = tabDrive.add("Field View", m_cameras.getFieldCamera()).withWidget(BuiltInWidgets.kCameraStream).withSize(3, 2).withPosition(6, 0).getEntry();
-			//NetworkEntries.m_nteIndexerCamera = tabDrive.add("Indexer View", m_cameras.getIndexerCamera()).withWidget(BuiltInWidgets.kCameraStream).withSize(3, 2).withPosition(6, 0).getEntry();
+			tabDrive.add("Field View", m_cameras.getFieldCamera()).withSize(3, 2).withPosition(3, 2);
+			tabDrive.add("Indexer View", m_cameras.getIndexerCamera()).withSize(3, 2).withPosition(6, 2);
 			
 		//Speeds Tab			
 			NetworkEntries.m_nteMaxDriveSpeed = tabSpeeds.addPersistent("Max Drive Speed", kDefaultDriveSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(0, 0).getEntry();  //double
@@ -86,7 +87,9 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteDriveEncLeft = tabTest.add("Left Encoder", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(2, 1).getEntry();
 			NetworkEntries.m_nteDriveEncRight = tabTest.add("Right Encoder", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(3, 1).getEntry();
 			
-			NetworkEntries.m_nteResetEncoders = tabTest.add("Reset Encoders", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1,1).withPosition(3,0).getEntry();
+			NetworkEntries.m_nteResetEncoders = tabTest.add("Reset Encoders", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(3, 0).getEntry();
+
+			tabTest.add("Differential Drive", m_driveTrain.getDiffDrive()).withSize(2, 2).withPosition(0, 2);
 			
 		//Initialize variables
 		previousTaxi = NetworkEntries.m_isAutoTaxiOn.getBoolean(false);

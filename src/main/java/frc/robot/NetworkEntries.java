@@ -32,10 +32,6 @@ public class NetworkEntries {
 	public static NetworkTableEntry m_nteEndSmartIntake;  //boolean
 
 	public static NetworkTableEntry m_nteDriveDistance;  //double
-	public static NetworkTableEntry m_nteGyro; //double (degrees)
-
-	public static NetworkTableEntry m_nteFieldCamera;  //UsbCamera
-	public static NetworkTableEntry m_nteIndexerCamera;  //UsbCamera
 
 	//Speeds Tab
 	public static NetworkTableEntry m_nteMaxDriveSpeed;  //double

@@ -17,10 +17,12 @@ public class Cameras extends SubsystemBase {
 	public Cameras() {
 		fieldCamera = CameraServer.startAutomaticCapture(0);
 		indexerCamera = CameraServer.startAutomaticCapture(1);
-		//fieldCamera.setResolution(142, 90);
-		//indexerCamera.setResolution(142, 90);
-		//fieldCamera.setFPS(20);
-		//indexerCamera.setFPS(20);
+
+		fieldCamera.setResolution(142, 90);
+		indexerCamera.setResolution(142, 90);
+
+		fieldCamera.setFPS(20);
+		indexerCamera.setFPS(20);
 	}
 
 	//Returns an instance of Camera
