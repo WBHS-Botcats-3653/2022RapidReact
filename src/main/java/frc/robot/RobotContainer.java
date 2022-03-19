@@ -56,7 +56,10 @@ public class RobotContainer {
 		config.setKinematics(m_drivePID.getKinematics());
 		//Test trajectory
 		Trajectory trajectory = TrajectoryGenerator.generateTrajectory(Arrays.asList(new Pose2d(), new Pose2d(1.0, 0.0, new Rotation2d())), config);
-		//Takes the robots current position, trajectory, and wheel speeds along with other methods and calculates a linear and angular velocity to move the robot
+		/*Takes the robots current position, trajectory, and wheel speeds along with other
+		 *Objects, Suppliers, and BiConsumers and calculates a linear and angular velocities to
+		 *move the robot in order to follow the path of the trajectory
+		 */
 		RamseteCommand ramCommand = 
 			new RamseteCommand(
 				trajectory,  //Trajectory to follow
@@ -65,8 +68,8 @@ public class RobotContainer {
 				m_drivePID.getFeedForward(),  //Gets SimpleMotorFeedForward which converts left and right wheel speeds to motor voltages
 				m_drivePID.getKinematics(),  //Gets Kinematics which converts linear and angular velocity into left and right wheel speeds
 				m_drivePID::getWheelSpeeds,  //Method to supply DifferentialDriveWheelSpeeds which contains the left and right wheel speeds (Supplier)
-				m_drivePID.getLeftPIDController(),  //Gets the left drivetrain PID controller which calculates the motor voltage required to correct the error between the actual and desired wheel speeds
-				m_drivePID.getRightPIDController(),  //Gets the right drivetrain PID controller which calculates the motor voltage required to correct the error between the actual and desired wheel speeds
+				m_drivePID.getLeftPIDController(),  //Gets the left drivetrain PID controller which calculates the motor voltage required to smoothly get the robot to the desired endpoint
+				m_drivePID.getRightPIDController(),  //Gets the right drivetrain PID controller which calculates the motor voltage required to smoothly get the robot to the desired endpoint
 				m_drivetrain::tankDriveVolts,  //Method to feed left and right motor voltages to (BiConsumer)
 				m_drivePID,  //Required subsystem
 				m_drivetrain,  //Required subsystem

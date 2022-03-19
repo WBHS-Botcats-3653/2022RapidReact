@@ -30,7 +30,7 @@ public class DrivePID extends SubsystemBase {
 	//Converts left and right wheels speeds to motor voltages needed to achieve those speeds, uses robot characterization to achieve this
 	private SimpleMotorFeedforward feedforward;
 
-	//Calculates the amount of voltage to adjust the motors to based on the error between the actual speeds and desired speeds of the motors
+	//Calculates the motor voltage required to smoothly get the robot to the desired endpoint
 	private PIDController leftPIDController;
 	private PIDController rightPIDController;
 
