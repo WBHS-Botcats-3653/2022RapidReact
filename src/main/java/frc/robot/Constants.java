@@ -101,8 +101,8 @@ public final class Constants {
 	public static final class ClimberConstants {
 		//Motor ID
 		public static final int kClimberArmMotorID = 10;  //CAN
-		public static final int kTraversalArmMotorID = 11;  //CAN
-		public static final int kTraversalWinchMotorID = 12;  //CAN
+		public static final int kExtenderWinchMotorID = 11;  //CAN
+		public static final int kHookWinchMotorID = 12;  //CAN
 	}
 
 	//Intake Constants

@@ -14,16 +14,16 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Climber extends SubsystemBase {
 	private static Climber m_singleton = null;
 
-	private WPI_VictorSPX climberArm, extender, winch;
+	private WPI_VictorSPX climberArm, extenderWinch, hookWinch;
 
 	//Constructor
 	private Climber() {
 		climberArm = new WPI_VictorSPX(kClimberArmMotorID);
-		extender = new WPI_VictorSPX(kTraversalArmMotorID);
-		winch = new WPI_VictorSPX(kTraversalWinchMotorID);
+		extenderWinch = new WPI_VictorSPX(kExtenderWinchMotorID);
+		hookWinch = new WPI_VictorSPX(kHookWinchMotorID);
 		climberArm.setInverted(false);
-		extender.setInverted(true);
-		winch.setInverted(true);
+		extenderWinch.setInverted(true);
+		hookWinch.setInverted(true);
 	}
 
 	//Returns an instance of Climber, creating an instance only when one does not already exist (singleton)
@@ -40,23 +40,23 @@ public class Climber extends SubsystemBase {
 		climberArm.set(speed);
 	}
 
-	//Sets the extension speed
-	public void setExtensionSpeed(double speed) {
-		//Sets the extension speed
-		extender.set(speed);
+	//Sets the extender winch speed
+	public void setExtenderWinchSpeed(double speed) {
+		//Sets the extender winch speed
+		extenderWinch.set(speed);
 	}
 
-	//Sets the winch speed
-	public void setWinchSpeed(double speed) {
-		//Sets the traversal winch speed
-		winch.set(speed);
+	//Sets the hook winch speed
+	public void setHookWinchSpeed(double speed) {
+		//Sets the hook winch speed
+		hookWinch.set(speed);
 	}
 	
 	//Enables or disabled the neutral brake on the motors
 	public void enableMotors(boolean enable) {
 		NeutralMode mode = enable ? NeutralMode.Brake : NeutralMode.Coast;
 		climberArm.setNeutralMode(mode);
-		extender.setNeutralMode(mode);
-		winch.setNeutralMode(mode);
+		extenderWinch.setNeutralMode(mode);
+		hookWinch.setNeutralMode(mode);
 	}
 }

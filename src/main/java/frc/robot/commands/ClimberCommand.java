@@ -29,7 +29,7 @@ public class ClimberCommand extends CommandBase {
 	@Override
 	// Called every time the scheduler runs while the command is scheduled.
 	public void execute() {
-		//Climber arm
+		//Climber
 		//Checks whether there is input coming in to move the climber arm
 		if (m_oi.getClimbUp()) {  //If Dpad up is pressed
 			//Move climber arm up
@@ -44,24 +44,27 @@ public class ClimberCommand extends CommandBase {
 
 		//Extender
 		//Checks whether there is input coming in to move the extender
-		if (m_oi.getTraverseUp()) {  //If Dpad right is pressed
-			//Move extender up
-			m_climber.setExtensionSpeed(-m_oi.getMaxClimbSpeed());
-		} else if (m_oi.getTraverseDown()) {  //If Dpad left is pressed
-			//Move extender down
-			m_climber.setExtensionSpeed(m_oi.getMaxClimbSpeed());
+		if (m_oi.getExtenderWinchClockwise()) {  //If Dpad right is pressed
+			//Winch extender clockwise
+			m_climber.setExtenderWinchSpeed(m_oi.getMaxExtenderWinchSpeed());
+		} else if (m_oi.getExtenderWinchCounterclockwise()) {  //If Dpad left is pressed
+			//Winch extender counterclockwise
+			m_climber.setExtenderWinchSpeed(-m_oi.getMaxExtenderWinchSpeed());
 		} else {  //Nothing being pressed (extender wise)
-			//Stop extender
-			m_climber.setExtensionSpeed(0);
+			//Stop the extender winch
+			m_climber.setExtenderWinchSpeed(0);
 		}
 
-		//Winch
-		if (m_oi.getWinch()) {  //If the back button is being pressed
-			//Winch the hook
-			m_climber.setWinchSpeed(m_oi.getMaxWinchSpeed());
-		} else {  //If the back button is not being pressed
-			//Stop the hook
-			m_climber.setWinchSpeed(0);
+		//Hook
+		if (m_oi.getHookWinchClockwise()) {  //If the start button is being pressed
+			//Winch the hook clockwise
+			m_climber.setHookWinchSpeed(m_oi.getMaxHookWinchSpeed());
+		} else if (m_oi.getHookWinchCounterclockwise()) {  //If the back button is being pressed
+			//Winch the hook counterclockwise
+			m_climber.setHookWinchSpeed(-m_oi.getMaxHookWinchSpeed());
+		} else {  //Nothing being pressed (winch wise)
+			//Stop the hook winch
+			m_climber.setHookWinchSpeed(0);
 		}
 	}
 
@@ -70,10 +73,10 @@ public class ClimberCommand extends CommandBase {
 	public void end(boolean interrupted) {
 		//Stop the climber arm
 		m_climber.setClimberArmSpeed(0);
-		//Stop the extender
-		m_climber.setExtensionSpeed(0);
-		//Stop the wench
-		m_climber.setWinchSpeed(0);
+		//Stop the extender winch
+		m_climber.setExtenderWinchSpeed(0);
+		//Stop the hook wench
+		m_climber.setHookWinchSpeed(0);
 	}
 
 	// Returns true when the command should end.

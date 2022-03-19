@@ -40,8 +40,8 @@ public class NetworkEntries {
 	public static NetworkTableEntry m_nteMaxIndexerSpeed;  //double
 	public static NetworkTableEntry m_nteMaxShootSpeed;  //double
 	public static NetworkTableEntry m_nteMaxClimbSpeed;  //double
-	public static NetworkTableEntry m_nteMaxExtendSpeed;  //double
-	public static NetworkTableEntry m_nteMaxWinchSpeed;  //double
+	public static NetworkTableEntry m_nteMaxExtenderWinchSpeed;  //double
+	public static NetworkTableEntry m_nteMaxHookWinchSpeed;  //double
 
 	//Test Tab
 	public static NetworkTableEntry m_nteLowerStoragePE;  //boolean

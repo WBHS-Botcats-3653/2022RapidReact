@@ -18,8 +18,8 @@ public class OI {
 	private double maxSmartIndexSpeed = 0;
 	private double maxShootSpeed = 0;
 	private double maxClimbSpeed = 0;
-	private double maxExtendSpeed = 0;
-	private double maxWinchSpeed = 0;
+	private double maxExtenderWinchSpeed = 0;
+	private double maxHookWinchSpeed = 0;
 
 	public OI() {
 		m_controller = new XboxController(0);
@@ -57,28 +57,28 @@ public class OI {
 		return maxClimbSpeed;
 	}
 
-	//Sets the max extend speed
-	public void setMaxExtendSpeed(double speed) {
+	//Sets the max extender winch speed
+	public void setMaxExtenderWinchSpeed(double speed) {
 		if (0.0 < speed && speed <= 1.0) {
-			maxExtendSpeed = speed;
+			maxExtenderWinchSpeed = speed;
 		}
 	}
 
-	//Returns the max extend speed
-	public double getMaxExtendSpeed() {
-		return maxExtendSpeed;
+	//Returns the max extender winch speed
+	public double getMaxExtenderWinchSpeed() {
+		return maxExtenderWinchSpeed;
 	}
 
-	//Sets the max winch speed
-	public void setMaxWinchSpeed(double speed) {
+	//Sets the max hook winch speed
+	public void setMaxHookWinchSpeed(double speed) {
 		if (0.0 < speed && speed <= 1.0) {
-			maxWinchSpeed = speed;
+			maxHookWinchSpeed = speed;
 		}
 	}
 
-	//Returns the max winch speed
-	public double getMaxWinchSpeed() {
-		return maxWinchSpeed;
+	//Returns the max hook winch speed
+	public double getMaxHookWinchSpeed() {
+		return maxHookWinchSpeed;
 	}
 
 	//Sets the max intake pivot speed
@@ -233,20 +233,26 @@ public class OI {
 	}
 
 	//Whether the right botton on the DPad is being pressed
-	public boolean getTraverseUp() {
+	public boolean getExtenderWinchClockwise() {
 		return POVIsRight();
 	}
 
 	//Whether the left button on the DPad is being pressed
-	public boolean getTraverseDown() {
+	public boolean getExtenderWinchCounterclockwise() {
 		return POVIsLeft();
 	}
 
+	//Whether the start button is being pressed
+	public boolean getHookWinchClockwise() {
+		return m_controller.getStartButton();
+	}
+
 	//Whether the back button is being pressed
-	public boolean getWinch() {
+	public boolean getHookWinchCounterclockwise() {
 		return m_controller.getBackButton();
 	}
 
+	//Converts the POV from the Dpad into boolean values for up, down, left, and right
 	//Returns whether the up botton on the DPad is being pressed
 	public boolean POVIsUp() {
 		return m_controller.getPOV() != -1 && (m_controller.getPOV() >= 315 || m_controller.getPOV() <= 45);

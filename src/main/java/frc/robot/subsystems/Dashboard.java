@@ -73,8 +73,8 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteMaxIndexerSpeed = tabSpeeds.addPersistent("Max Indexer Speed", kDefaultIndexSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(6, 0).getEntry();  //double
 			NetworkEntries.m_nteMaxShootSpeed = tabSpeeds.addPersistent("Max Shoot Speed", kDefaultShootSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(2, 1).getEntry();  //double
 			NetworkEntries.m_nteMaxClimbSpeed = tabSpeeds.addPersistent("Max Climb Speed", kDefaultClimbSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(2, 1).getEntry();  //double
-			NetworkEntries.m_nteMaxExtendSpeed = tabSpeeds.addPersistent("Max Extend Speed", kDefaultExtendSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(2, 1).getEntry();  //double
-			NetworkEntries.m_nteMaxWinchSpeed = tabSpeeds.addPersistent("Max Winch Speed", kDefaultWinchSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(4, 1).getEntry();  //double
+			NetworkEntries.m_nteMaxExtenderWinchSpeed = tabSpeeds.addPersistent("Max Extender Winch Speed", kDefaultExtendSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(2, 1).getEntry();  //double
+			NetworkEntries.m_nteMaxHookWinchSpeed = tabSpeeds.addPersistent("Max Hook Winch Speed", kDefaultWinchSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(4, 1).getEntry();  //double
 			
 		//Test Tab
 			NetworkEntries.m_nteUpperStoragePE = tabTest.add("Upper Storage PE", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(1, 0).getEntry();
@@ -125,8 +125,8 @@ public class Dashboard extends SubsystemBase {
 			m_oi.setMaxSmartIndexSpeed(0);
 			m_oi.setMaxShootSpeed(0);
 			m_oi.setMaxClimbSpeed(0);
-			m_oi.setMaxExtendSpeed(0);
-			m_oi.setMaxWinchSpeed(0);
+			m_oi.setMaxExtenderWinchSpeed(0);
+			m_oi.setMaxHookWinchSpeed(0);
 		} else {
 			//Sets max speeds from shuffleboard
 			m_oi.setMaxDriveSpeed(NetworkEntries.m_nteMaxDriveSpeed.getDouble(0));
@@ -135,8 +135,8 @@ public class Dashboard extends SubsystemBase {
 			m_oi.setMaxIndexSpeed(NetworkEntries.m_nteMaxIndexerSpeed.getDouble(0));
 			m_oi.setMaxShootSpeed(NetworkEntries.m_nteMaxShootSpeed.getDouble(0));
 			m_oi.setMaxClimbSpeed(NetworkEntries.m_nteMaxClimbSpeed.getDouble(0));
-			m_oi.setMaxExtendSpeed(NetworkEntries.m_nteMaxExtendSpeed.getDouble(0));
-			m_oi.setMaxWinchSpeed(NetworkEntries.m_nteMaxWinchSpeed.getDouble(0));
+			m_oi.setMaxExtenderWinchSpeed(NetworkEntries.m_nteMaxExtenderWinchSpeed.getDouble(0));
+			m_oi.setMaxHookWinchSpeed(NetworkEntries.m_nteMaxHookWinchSpeed.getDouble(0));
 		}
 
 		//Updates the photoelectric sensors in the dashboard
