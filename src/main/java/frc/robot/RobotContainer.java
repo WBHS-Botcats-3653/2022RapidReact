@@ -4,7 +4,7 @@
 
 package frc.robot;
 
-import static frc.robot.Constants.DriveConstants.*;
+import static frc.robot.Constants.DrivePIDConstants.*;
 
 import java.util.Arrays;
 
@@ -17,8 +17,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import frc.robot.commands.AutoCommand;
-import frc.robot.subsystems.Direction;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.*;
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -27,9 +26,10 @@ import frc.robot.subsystems.DriveTrain;
  */
 public class RobotContainer {
 	// The robot's subsystems and commands are defined here...
-	private final AutoCommand m_autoCommand = new AutoCommand();
 	private final DriveTrain m_driveTrain = DriveTrain.getInstance();
+	private final DrivePID m_drivePID = DrivePID.getInstance();
 	private final Direction m_direction = Direction.getInstance();
+	private final AutoCommand m_autoCommand = new AutoCommand();
 
 	/** The container for the robot. Contains subsystems, OI devices, and commands. */
 	
@@ -53,20 +53,22 @@ public class RobotContainer {
 	 */
 	public AutoCommand getAutonomousCommand() {
 		TrajectoryConfig config = new TrajectoryConfig(Units.feetToMeters(2), Units.feetToMeters(2));
-		config.setKinematics(m_driveTrain.getKinematics());
+		config.setKinematics(m_drivePID.getKinematics());
 		//Test trajectory
 		Trajectory trajectory = TrajectoryGenerator.generateTrajectory(Arrays.asList(new Pose2d(), new Pose2d(1.0, 0.0, new Rotation2d())), config);
+		//Takes the robots current position, trajectory, and wheel speeds along with other methods and calculates a linear and angular velocity to move the robot
 		RamseteCommand ramCommand = 
 			new RamseteCommand(
 				trajectory,
-				m_driveTrain::getPose,
+				m_drivePID::getPose,
 				new RamseteController(kRamseteB, kRamseteZeta),
-				m_driveTrain.getFeedForward(),
-				m_driveTrain.getKinematics(),
-				m_driveTrain::getWheelSpeeds,
-				m_driveTrain.getLeftPIDController(),
-				m_driveTrain.getRightPIDController(),
+				m_drivePID.getFeedForward(),
+				m_drivePID.getKinematics(),
+				m_drivePID::getWheelSpeeds,
+				m_drivePID.getLeftPIDController(),
+				m_drivePID.getRightPIDController(),
 				m_driveTrain::tankDriveVolts,
+				m_drivePID,
 				m_driveTrain,
 				m_direction
 			);

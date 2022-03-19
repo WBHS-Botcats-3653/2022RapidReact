@@ -9,12 +9,6 @@ import static frc.robot.Constants.DriveConstants.*;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.kinematics.*;
-import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -22,20 +16,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class DriveTrain extends SubsystemBase {
 	private static DriveTrain m_singleton = null;
-	private Direction m_direction = Direction.getInstance();
 
 	private WPI_VictorSPX driveFrontLeft, driveBackLeft, driveFrontRight, driveBackRight;
 	private DifferentialDrive diffDrive;
-
-	private DifferentialDriveOdometry odometry = new DifferentialDriveOdometry(m_direction.getHeading(), new Pose2d(0.0, 0.0, new Rotation2d()));
-	private final DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(Units.inchesToMeters(kTrackWidth));
-
-	private SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(kS, kV, kA);
-
-	private PIDController leftPIDController = new PIDController(kP, kI, kD);
-	private PIDController rightPIDController = new PIDController(kP, kI, kD);
-
-	private Pose2d pose;
 
 	//documentation for WPI_VictorSPX: 
 	//https://robotpy.readthedocs.io/projects/ctre/en/stable/ctre/WPI_VictorSPX.html
@@ -58,11 +41,6 @@ public class DriveTrain extends SubsystemBase {
 		//Reverses left motor direction
 		driveLeft.setInverted(true);
 		driveRight.setInverted(false);
-	}
-
-	@Override
-	public void periodic() {
-		pose = odometry.update(m_direction.getHeading(), m_direction.getLeftEncoderDistance(), m_direction.getRightEncoderDistance());
 	}
 	
 	//Returns an instance of DrainTrain, creating an instance only when one does not already exist
@@ -108,36 +86,6 @@ public class DriveTrain extends SubsystemBase {
 	//Returns the differential drive
 	public DifferentialDrive getDiffDrive() {
 		return diffDrive;
-	}
-
-	//Returns the left and right wheel speeds
-	public DifferentialDriveWheelSpeeds getWheelSpeeds() {
-		return new DifferentialDriveWheelSpeeds(m_direction.getLeftEncoderRate(), m_direction.getRightEncoderRate());
-	}
-
-	//Returns the feedforward
-	public SimpleMotorFeedforward getFeedForward() {
-		return feedforward;
-	}
-
-	//Returns the left PIDController
-	public PIDController getLeftPIDController() {
-		return leftPIDController;
-	}
-
-	//Returns the right PIDController
-	public PIDController getRightPIDController() {
-		return rightPIDController;
-	}
-
-	//Returns the kinematics
-	public DifferentialDriveKinematics getKinematics() {
-		return kinematics;
-	}
-
-	//Returns the pose
-	public Pose2d getPose() {
-		return pose;
 	}
 
 	//Enables or disabled the neutral brake on the motors

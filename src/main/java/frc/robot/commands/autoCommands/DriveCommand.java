@@ -4,7 +4,7 @@
 
 package frc.robot.commands.autoCommands;
 
-import static frc.robot.Constants.DriveConstants.kP;
+import static frc.robot.Constants.DrivePIDConstants.kP;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Direction;

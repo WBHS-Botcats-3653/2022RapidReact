@@ -45,6 +45,31 @@ public final class Constants {
 		public static final double kAutoShootSpeed = 0.85;
 	}
 
+	//Drive PID Constants
+	public static final class DrivePIDConstants {
+		//The distance between the center line of the left and right wheels
+		public static final double kTrackWidth = 0.0;  //Inches
+
+		/*Get kS, kV, kA, and kP from frc robot characterization tool (sysid)
+		 *The tool can be found in the WPILib Tools desktop folder (Windows)
+		 */
+		//Voltage required to overcome static friction
+		public static final double kS = 0.0;
+		//Some constant
+		public static final double kV = 0.0;
+		//Some constant
+		public static final double kA = 0.0;
+		//Proportion
+		public static final double kP = 0.0;
+		//Integral
+		public static final double kI = 0.0;  //Leave 0
+		//Derivative
+		public static final double kD = 0.0;  //Leave 0
+
+		public static final double kRamseteB = 2.0;  //DO NOT CHANGE
+		public static final double kRamseteZeta = 0.7;  //DO NOT CHANGE
+	}
+
 	//Drive Constants
 	public static final class DriveConstants {
 		//Motor IDs
@@ -73,28 +98,6 @@ public final class Constants {
 		public static final double kDistancePerPulse = Math.PI * kWheelDiameter / kPulsePerRevolution / kEncoderGearRatio / kGearRatio * kFudgefactor;
 
 		public static final double kThreshold = 3.0;
-
-		//The distance between the center line of the left and right wheels
-		public static final double kTrackWidth = 0.0;  //Inches
-
-		/*Get kS, kV, kA, and kP from frc robot characterization tool (sysid)
-		 *The tool can be found in the WPILib Tools desktop folder (Windows)
-		 */
-		//Voltage required to overcome static friction
-		public static final double kS = 0.0;
-		//Some constant
-		public static final double kV = 0.0;
-		//Some constant
-		public static final double kA = 0.0;
-		//Proportion
-		public static final double kP = 0.0;
-		//Integral
-		public static final double kI = 0.0;  //Leave 0
-		//Derivative
-		public static final double kD = 0.0;  //Leave 0
-
-		public static final double kRamseteB = 2.0;  //DO NOT CHANGE
-		public static final double kRamseteZeta = 0.7;  //DO NOT CHANGE
 	}
 
 	//Climber Constants
