@@ -17,16 +17,13 @@ import frc.robot.inputs.SI;
 
 public class Dashboard extends SubsystemBase {
 	private static Dashboard m_singleton;
-	private DriveTrain m_driveTrain = DriveTrain.getInstance();
+	private Drivetrain m_driveTrain = Drivetrain.getInstance();
 	private Direction m_direction = Direction.getInstance();
 	private Cameras m_cameras = Cameras.getInstance();
 	private OI m_oi = OI.getInstance();
 	private SI m_si =  SI.getInstance();
 
-	public ShuffleboardTab tabDrive;
-	public ShuffleboardTab tabTest;
-	public ShuffleboardTab tabSpeeds;
-	public ShuffleboardTab tabAuto;
+	public ShuffleboardTab tabDrive, tabTest, tabSpeeds, tabAuto;
 
 	public boolean speedsDisabled = true;
 
@@ -83,7 +80,7 @@ public class Dashboard extends SubsystemBase {
 			
 			NetworkEntries.m_nteIntakeUpLimit = tabTest.add("Intake Up Limit", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(0, 0).getEntry();
 			NetworkEntries.m_nteIntakeDownLimit = tabTest.add("Intake Down Limit", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(0, 1).getEntry();
-			
+
 			NetworkEntries.m_nteDriveEncLeft = tabTest.add("Left Encoder", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(2, 1).getEntry();
 			NetworkEntries.m_nteDriveEncRight = tabTest.add("Right Encoder", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(3, 1).getEntry();
 			

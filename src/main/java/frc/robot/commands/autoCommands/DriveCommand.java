@@ -8,10 +8,10 @@ import static frc.robot.Constants.DrivePIDConstants.kP;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Direction;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Drivetrain;
 
 public class DriveCommand extends CommandBase {
-	private DriveTrain m_driveTrain = DriveTrain.getInstance();
+	private Drivetrain m_drivetrain = Drivetrain.getInstance();
 	private Direction m_direction = Direction.getInstance();
 
 	private double distance, speed, currentDistance;
@@ -22,7 +22,7 @@ public class DriveCommand extends CommandBase {
 		this.speed = Math.signum(this.distance) * speed;
 		this.isCollectingCargo = isCollectingCargo;
 		// Use addRequirements() here to declare subsystem dependencies.
-		addRequirements(m_driveTrain, m_direction);
+		addRequirements(m_drivetrain, m_direction);
 	}
 
 	// Called when the command is initially scheduled.
@@ -42,8 +42,8 @@ public class DriveCommand extends CommandBase {
 		//Gets the error rate
 		double error = kP * m_direction.getEncoderError();
 		//Moves the robot at the set speed and makes course corrections based off the encoders
-		m_driveTrain.arcadeDrive(speed, error);
-		//m_driveTrain.tankDrive(speed - error, speed + error);
+		m_drivetrain.arcadeDrive(speed, error);
+		//m_drivetrain.tankDrive(speed - error, speed + error);
 	}
 
 	// Called once the command ends or is interrupted.
@@ -55,7 +55,7 @@ public class DriveCommand extends CommandBase {
 			CollectCargoCommand.endCommand = true;
 		}
 		//Stops the robot
-		m_driveTrain.arcadeDrive(0, 0);
+		m_drivetrain.arcadeDrive(0, 0);
 	}
 
 	// Returns true when the command should end.

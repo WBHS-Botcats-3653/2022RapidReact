@@ -19,21 +19,21 @@ public class Robot extends TimedRobot {
 	private RobotContainer m_robotContainer;
 
 	//Subsystems
-	private final Dashboard m_dashboardSubsystem = Dashboard.getInstance();
-	private final Direction m_directionSubsystem = Direction.getInstance();
-	private final DriveTrain m_driveTrainSubsystem = DriveTrain.getInstance();
-	private final Intake m_intakeSubsystem = Intake.getInstance();
-	private final Indexer m_indexerSubsystem = Indexer.getInstance();
-	private final Shooter m_shooterSubsystem = Shooter.getInstance();
-	private final Climber m_climberSubsystem = Climber.getInstance();
+	private final Dashboard m_dashboard = Dashboard.getInstance();
+	private final Direction m_direction = Direction.getInstance();
+	private final Drivetrain m_drivetrain = Drivetrain.getInstance();
+	private final Intake m_intake = Intake.getInstance();
+	private final Indexer m_indexer = Indexer.getInstance();
+	private final Shooter m_shooter = Shooter.getInstance();
+	private final Climber m_climber = Climber.getInstance();
 
 	//Commands
 	private AutoCommand m_autonomousCommand;
-	private final ArcadeDriveCommand m_arcadeDriveCommand = new ArcadeDriveCommand(m_driveTrainSubsystem);
-	private final IntakeCommand m_intakeCommand = new IntakeCommand(m_intakeSubsystem);
-	private final IndexerCommand m_indexerCommand = new IndexerCommand(m_indexerSubsystem);
-	private final ShooterCommand m_shooterCommand = new ShooterCommand(m_shooterSubsystem);
-	private final ClimberCommand m_climberCommand = new ClimberCommand(m_climberSubsystem);
+	private final ArcadeDriveCommand m_arcadeDriveCommand = new ArcadeDriveCommand(m_drivetrain);
+	private final IntakeCommand m_intakeCommand = new IntakeCommand(m_intake);
+	private final IndexerCommand m_indexerCommand = new IndexerCommand(m_indexer);
+	private final ShooterCommand m_shooterCommand = new ShooterCommand(m_shooter);
+	private final ClimberCommand m_climberCommand = new ClimberCommand(m_climber);
 	
 	/**
 	 * This function is run when the robot is first started up and should be used for any
@@ -45,9 +45,9 @@ public class Robot extends TimedRobot {
 		// autonomous chooser on the dashboard.
 		m_robotContainer = new RobotContainer();
 		//Calibrates the gyro
-		m_directionSubsystem.calibrateGyro();
+		m_direction.calibrateGyro();
 		//Resets the encoders
-		m_directionSubsystem.resetEncoders();
+		m_direction.resetEncoders();
 	}
 
 	/**
@@ -76,13 +76,13 @@ public class Robot extends TimedRobot {
 		IntakeCommand.endSmartIntake();
 
 		//Sets motors to coast or brake
-		m_driveTrainSubsystem.enableMotors(false);
-		m_intakeSubsystem.enableMotors(false);
-		m_indexerSubsystem.enableMotors(false);
-		m_climberSubsystem.enableMotors(true);
+		m_drivetrain.enableMotors(false);
+		m_intake.enableMotors(false);
+		m_indexer.enableMotors(false);
+		m_climber.enableMotors(true);
 
 		//Disables the speeds
-		m_dashboardSubsystem.disableSpeeds(true);
+		m_dashboard.disableSpeeds(true);
 	}
 
 	/** This function is called periodically when disabled. */
@@ -97,10 +97,10 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		//Sets motors to brake
-		m_driveTrainSubsystem.enableMotors(true);
-		m_intakeSubsystem.enableMotors(true);
-		m_indexerSubsystem.enableMotors(true);
-		m_climberSubsystem.enableMotors(true);
+		m_drivetrain.enableMotors(true);
+		m_intake.enableMotors(true);
+		m_indexer.enableMotors(true);
+		m_climber.enableMotors(true);
 
 		//Gets the autonomous command from robotContainer
 		m_autonomousCommand = m_robotContainer.getAutonomousCommand();
@@ -114,7 +114,7 @@ public class Robot extends TimedRobot {
 		}
 
 		//Disables the speeds
-		m_dashboardSubsystem.disableSpeeds(true);
+		m_dashboard.disableSpeeds(true);
 	}
 
 	/** This function is called periodically during autonomous. */
@@ -143,16 +143,16 @@ public class Robot extends TimedRobot {
 		IntakeCommand.endSmartIntake();
 
 		//Sets motors to coast or brake
-		m_driveTrainSubsystem.enableMotors(false);
-		m_intakeSubsystem.enableMotors(true);
-		m_indexerSubsystem.enableMotors(true);
-		m_climberSubsystem.enableMotors(true);
+		m_drivetrain.enableMotors(false);
+		m_intake.enableMotors(true);
+		m_indexer.enableMotors(true);
+		m_climber.enableMotors(true);
 
 		// Cancels all running commands at the start of Teleoperated mode.
 		CommandScheduler.getInstance().cancelAll();
 
 		//Resets the encoders
-		m_directionSubsystem.resetEncoders();
+		m_direction.resetEncoders();
 
 		CommandScheduler.getInstance().schedule(m_arcadeDriveCommand);
 		CommandScheduler.getInstance().schedule(m_intakeCommand);
@@ -161,7 +161,7 @@ public class Robot extends TimedRobot {
 		CommandScheduler.getInstance().schedule(m_climberCommand);
 
 		//Enables the speeds
-		m_dashboardSubsystem.disableSpeeds(false);
+		m_dashboard.disableSpeeds(false);
 	}
 
 	/** This function is called periodically during operator control. */
@@ -178,10 +178,10 @@ public class Robot extends TimedRobot {
 		IntakeCommand.endSmartIntake();
 
 		//Sets motors to coast
-		m_climberSubsystem.enableMotors(true);
-		m_driveTrainSubsystem.enableMotors(false);
-		m_indexerSubsystem.enableMotors(true);
-		m_intakeSubsystem.enableMotors(true);
+		m_climber.enableMotors(true);
+		m_drivetrain.enableMotors(false);
+		m_indexer.enableMotors(true);
+		m_intake.enableMotors(true);
 
 		CommandScheduler.getInstance().schedule(m_arcadeDriveCommand);
 		CommandScheduler.getInstance().schedule(m_intakeCommand);
@@ -190,7 +190,7 @@ public class Robot extends TimedRobot {
 		CommandScheduler.getInstance().schedule(m_climberCommand);
 
 		//Enables the speeds
-		m_dashboardSubsystem.disableSpeeds(false);
+		m_dashboard.disableSpeeds(false);
 	}
 
 	/** This function is called periodically during test mode. */

@@ -25,9 +25,9 @@ public class DrivePID extends SubsystemBase {
 	private DifferentialDriveOdometry odometry;
 
 	//Converts linear and angular velocity into left and right wheel speeds
-	private final DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(Units.inchesToMeters(kTrackWidth));
+	private DifferentialDriveKinematics kinematics;
 
-	//Converts left and right wheels speeds to left and right motor voltages needed to achieve those speeds, uses robot characterization to achieve this
+	//Converts left and right wheels speeds to motor voltages needed to achieve those speeds, uses robot characterization to achieve this
 	private SimpleMotorFeedforward feedforward;
 
 	//Calculates the amount of voltage to adjust the motors to based on the error between the actual speeds and desired speeds of the motors
@@ -40,6 +40,7 @@ public class DrivePID extends SubsystemBase {
 	/** Creates a new DrivePID. */
 	public DrivePID() {
 		odometry = new DifferentialDriveOdometry(m_direction.getHeading(), new Pose2d(0.0, 0.0, new Rotation2d()));
+		kinematics = new DifferentialDriveKinematics(Units.inchesToMeters(kTrackWidth));
 		feedforward = new SimpleMotorFeedforward(kS, kV, kA);
 		leftPIDController = new PIDController(kP, kI, kD);
 		rightPIDController = new PIDController(kP, kI, kD);
@@ -59,15 +60,25 @@ public class DrivePID extends SubsystemBase {
 		return m_singleton;
 	}
 
-	//Returns the left and right wheel speeds
-	public DifferentialDriveWheelSpeeds getWheelSpeeds() {
-		//Converts the left and right encoder rates into left and right wheel speeds
-		return new DifferentialDriveWheelSpeeds(m_direction.getLeftEncoderRate(), m_direction.getRightEncoderRate());
+	//Returns the pose
+	public Pose2d getPose() {
+		return pose;
 	}
 
 	//Returns the feedforward
 	public SimpleMotorFeedforward getFeedForward() {
 		return feedforward;
+	}
+
+	//Returns the kinematics
+	public DifferentialDriveKinematics getKinematics() {
+		return kinematics;
+	}
+
+	//Returns the left and right wheel speeds
+	public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+		//Converts the left and right encoder rates into left and right wheel speeds
+		return new DifferentialDriveWheelSpeeds(m_direction.getLeftEncoderRate(), m_direction.getRightEncoderRate());
 	}
 
 	//Returns the left PIDController
@@ -78,15 +89,5 @@ public class DrivePID extends SubsystemBase {
 	//Returns the right PIDController
 	public PIDController getRightPIDController() {
 		return rightPIDController;
-	}
-
-	//Returns the kinematics
-	public DifferentialDriveKinematics getKinematics() {
-		return kinematics;
-	}
-
-	//Returns the pose
-	public Pose2d getPose() {
-		return pose;
 	}
 }

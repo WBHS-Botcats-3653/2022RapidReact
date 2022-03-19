@@ -26,7 +26,7 @@ import frc.robot.subsystems.*;
  */
 public class RobotContainer {
 	// The robot's subsystems and commands are defined here...
-	private final DriveTrain m_driveTrain = DriveTrain.getInstance();
+	private final Drivetrain m_drivetrain = Drivetrain.getInstance();
 	private final DrivePID m_drivePID = DrivePID.getInstance();
 	private final Direction m_direction = Direction.getInstance();
 	private final AutoCommand m_autoCommand = new AutoCommand();
@@ -59,18 +59,18 @@ public class RobotContainer {
 		//Takes the robots current position, trajectory, and wheel speeds along with other methods and calculates a linear and angular velocity to move the robot
 		RamseteCommand ramCommand = 
 			new RamseteCommand(
-				trajectory,
-				m_drivePID::getPose,
-				new RamseteController(kRamseteB, kRamseteZeta),
-				m_drivePID.getFeedForward(),
-				m_drivePID.getKinematics(),
-				m_drivePID::getWheelSpeeds,
-				m_drivePID.getLeftPIDController(),
-				m_drivePID.getRightPIDController(),
-				m_driveTrain::tankDriveVolts,
-				m_drivePID,
-				m_driveTrain,
-				m_direction
+				trajectory,  //Trajectory to follow
+				m_drivePID::getPose,  //Method to supply the current position (Supplier)
+				new RamseteController(kRamseteB, kRamseteZeta),  //Calculates the current linear and angular velocity of the robot
+				m_drivePID.getFeedForward(),  //Gets SimpleMotorFeedForward which converts left and right wheel speeds to motor voltages
+				m_drivePID.getKinematics(),  //Gets Kinematics which converts linear and angular velocity into left and right wheel speeds
+				m_drivePID::getWheelSpeeds,  //Method to supply DifferentialDriveWheelSpeeds which contains the left and right wheel speeds (Supplier)
+				m_drivePID.getLeftPIDController(),  //Gets the left drivetrain PID controller which calculates the motor voltage required to correct the error between the actual and desired wheel speeds
+				m_drivePID.getRightPIDController(),  //Gets the right drivetrain PID controller which calculates the motor voltage required to correct the error between the actual and desired wheel speeds
+				m_drivetrain::tankDriveVolts,  //Method to feed left and right motor voltages to (BiConsumer)
+				m_drivePID,  //Required subsystem
+				m_drivetrain,  //Required subsystem
+				m_direction  //Required subsystem
 			);
 		//return ramCommand;  //Set return type to Command
 		return m_autoCommand;

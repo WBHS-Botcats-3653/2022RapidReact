@@ -22,10 +22,8 @@ public class Direction extends SubsystemBase {
 	
 	public Direction() {
 		gyro = new ADXRS450_Gyro();
-		leftEncoder = new Encoder(kLeftMotorGroupEncoder1, kLeftMotorGroupEncoder2);
-		rightEncoder = new Encoder(kRightMotorGroupEncoder1, kRightMotorGroupEncoder2);
-		leftEncoder.setReverseDirection(true);
-		rightEncoder.setReverseDirection(true);
+		leftEncoder = new Encoder(kLeftMotorGroupEncoderID1, kLeftMotorGroupEncoderID2, true);  //Direction reversed
+		rightEncoder = new Encoder(kRightMotorGroupEncoderID1, kRightMotorGroupEncoderID2, false);
 	}
 
 	//Returns an instance of Direction, creating an instance only when one does not already exist

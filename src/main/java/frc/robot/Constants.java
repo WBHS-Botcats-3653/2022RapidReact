@@ -2,6 +2,8 @@ package frc.robot;
 
 import java.util.HashMap;
 
+import edu.wpi.first.math.util.Units;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -50,21 +52,22 @@ public final class Constants {
 		//The distance between the center line of the left and right wheels
 		public static final double kTrackWidth = 0.0;  //Inches
 
-		/*Get kS, kV, kA, and kP from frc robot characterization tool (sysid)
+		/*You can get kS, kV, kA, and kP from the frc robot characterization tool (sysid)
 		 *The tool can be found in the WPILib Tools desktop folder (Windows)
+		 *You should perform this characterization while the robot in on a surface similar to that on the game field
 		 */
 		//Voltage required to overcome static friction
-		public static final double kS = 0.0;
+		public static final double kS = 0.0;  //Get correct value
 		//Some constant
-		public static final double kV = 0.0;
+		public static final double kV = 0.0;  //Get correct value
 		//Some constant
-		public static final double kA = 0.0;
-		//Proportion
-		public static final double kP = 0.0;
-		//Integral
-		public static final double kI = 0.0;  //Leave 0
-		//Derivative
-		public static final double kD = 0.0;  //Leave 0
+		public static final double kA = 0.0;  //Get correct value
+		//Proportional (multiplied to the error)
+		public static final double kP = 0.4;  //Get correct value
+		//Integral (multiplied to the error sum)
+		public static final double kI = 0.1;  //Find good value
+		//Derivative (multiplied to the error rate)
+		public static final double kD = 0.1;  //Find good value
 
 		public static final double kRamseteB = 2.0;  //DO NOT CHANGE
 		public static final double kRamseteZeta = 0.7;  //DO NOT CHANGE
@@ -79,23 +82,28 @@ public final class Constants {
 		public static final int kBackRightMotorID = 3;  //CAN
 		
 		//Encoder IDs
-		public static final int kLeftMotorGroupEncoder1 = 5;  //DIO 1 pin
-		public static final int kLeftMotorGroupEncoder2 = 4; //DIO 3 pin
-		public static final int kRightMotorGroupEncoder1 = 3;  //DIO 1 pin
-		public static final int kRightMotorGroupEncoder2 = 2;  //DIO 3 pin
+		public static final int kLeftMotorGroupEncoderID1 = 5;  //DIO 1 pin
+		public static final int kLeftMotorGroupEncoderID2 = 4; //DIO 3 pin
+		public static final int kRightMotorGroupEncoderID1 = 3;  //DIO 1 pin
+		public static final int kRightMotorGroupEncoderID2 = 2;  //DIO 3 pin
 
 		//Diameter of the wheel directly mounted to the motor shaft
-		private static final double kWheelDiameter = 6.0;  //Inches
+		//private static final double kWheelDiameter = 6.0;  //Inches
+		private static final double kWheelDiameter = Units.inchesToMeters(6.0) / 100;  //Meters
+		//Perimeter of the wheel directly mounted to the motor shaft
+		private static final double kWheelPerimeter = kWheelDiameter * Math.PI;  //Meters
 		//The number of pulses per rotation of the motor (also known as the encoder resolution)
-		private static final double kPulsePerRevolution = 360.0;
+		//private static final double kPulsePerRevolution = 360.0;  //This is not the correct value
+		private static final double kPulsePerRevolution = 3900.0;
 		//The gear ratio between the encoder shaft and the wheels
 		private static final double kEncoderGearRatio = 1.0 / 1.0;
 		//The gear ratio between the motors and the shaft
 		private static final double kGearRatio = 10.71 / 1.0;
 		//Custom variable to adjust what units the encoder returns a value in (in this case inches)
-		private static final double kFudgefactor = 12.0 / 1.11228;
+		//private static final double kFudgefactor = 12.0 / 1.11228;
 		//Encoder distance per pulse calculation
-		public static final double kDistancePerPulse = Math.PI * kWheelDiameter / kPulsePerRevolution / kEncoderGearRatio / kGearRatio * kFudgefactor;
+		//public static final double kDistancePerPulse = Math.PI * kWheelDiameter / kPulsePerRevolution / kEncoderGearRatio / kGearRatio * kFudgefactor;
+		public static final double kDistancePerPulse = kWheelPerimeter / kPulsePerRevolution / kEncoderGearRatio / kGearRatio;
 
 		public static final double kThreshold = 3.0;
 	}
