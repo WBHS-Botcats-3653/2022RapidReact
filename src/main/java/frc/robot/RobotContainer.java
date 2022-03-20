@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import frc.robot.commands.AutoCommand;
 import frc.robot.subsystems.*;
+
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -52,7 +53,9 @@ public class RobotContainer {
 	 * @return the command to run in autonomous
 	 */
 	public AutoCommand getAutonomousCommand() {
+		//Creates a trajectory configuration with a max velocity of 2 meters per second and a max acceleration of 2 meters per seconds squared
 		TrajectoryConfig config = new TrajectoryConfig(Units.feetToMeters(2), Units.feetToMeters(2));
+		//Passes a Kinematics object to the trajectory config
 		config.setKinematics(m_drivePID.getKinematics());
 		//Test trajectory
 		Trajectory trajectory = TrajectoryGenerator.generateTrajectory(Arrays.asList(new Pose2d(), new Pose2d(1.0, 0.0, new Rotation2d())), config);
@@ -70,7 +73,7 @@ public class RobotContainer {
 				m_drivePID::getWheelSpeeds,  //Method to supply DifferentialDriveWheelSpeeds which contains the left and right wheel speeds (Supplier)
 				m_drivePID.getLeftPIDController(),  //Gets the left drivetrain PID controller which calculates the motor voltage required to smoothly get the robot to the desired endpoint
 				m_drivePID.getRightPIDController(),  //Gets the right drivetrain PID controller which calculates the motor voltage required to smoothly get the robot to the desired endpoint
-				m_drivetrain::tankDriveVolts,  //Method to feed left and right motor voltages to (BiConsumer)
+				m_drivetrain::tankDriveVolts,  //Method which sets the left and right motor voltages of the drivetrain (BiConsumer)
 				m_drivePID,  //Required subsystem
 				m_drivetrain,  //Required subsystem
 				m_direction  //Required subsystem
