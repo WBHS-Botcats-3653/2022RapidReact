@@ -8,6 +8,7 @@ import static frc.robot.Constants.DefaultSpeedsConstants.*;
 
 import java.util.Map;
 
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.shuffleboard.*;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.NetworkEntries;
@@ -103,11 +104,11 @@ public class Dashboard extends SubsystemBase {
 
 		//Relay sensor readings to the dashboard
 		//Encoders
-		NetworkEntries.m_nteDriveEncLeft.setDouble(m_direction.getLeftEncoderDistance());
-		NetworkEntries.m_nteDriveEncRight.setDouble(m_direction.getRightEncoderDistance());
+		NetworkEntries.m_nteDriveEncLeft.setDouble(Units.metersToInches(m_direction.getLeftEncoderDistance()));  //Inches
+		NetworkEntries.m_nteDriveEncRight.setDouble(Units.metersToInches(m_direction.getRightEncoderDistance()));  //Inches
 
 		//Distance Drived
-		NetworkEntries.m_nteDriveDistance.setDouble(m_direction.getEncoderDistance());
+		NetworkEntries.m_nteDriveDistance.setDouble(Units.metersToInches(m_direction.getEncoderDistance()));  //Inches
 
 		//Limit switches
 		NetworkEntries.m_nteIntakeUpLimit.setBoolean(m_si.isPivotUpLimitClosed());

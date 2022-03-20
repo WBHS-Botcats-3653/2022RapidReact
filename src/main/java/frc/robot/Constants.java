@@ -89,7 +89,7 @@ public final class Constants {
 
 		//Diameter of the wheel directly mounted to the motor shaft
 		//private static final double kWheelDiameter = 6.0;  //Inches
-		private static final double kWheelDiameter = Units.inchesToMeters(6.0) / 100;  //Meters
+		private static final double kWheelDiameter = Units.inchesToMeters(6.0);  //Meters
 		//Perimeter of the wheel directly mounted to the motor shaft
 		private static final double kWheelPerimeter = kWheelDiameter * Math.PI;  //Meters
 		//The number of pulses per rotation of the motor (also known as the encoder resolution)

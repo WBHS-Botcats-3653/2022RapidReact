@@ -31,7 +31,7 @@ public class NetworkEntries {
 
 	public static NetworkTableEntry m_nteEndSmartIntake;  //boolean
 
-	public static NetworkTableEntry m_nteDriveDistance;  //double
+	public static NetworkTableEntry m_nteDriveDistance;  //double (inches)
 
 	//Speeds Tab
 	public static NetworkTableEntry m_nteMaxDriveSpeed;  //double
@@ -51,8 +51,8 @@ public class NetworkEntries {
 	public static NetworkTableEntry m_nteIntakeUpLimit;  //boolean
     public static NetworkTableEntry m_nteIntakeDownLimit;  //boolean
 
-	public static NetworkTableEntry m_nteDriveEncLeft;  //double
-	public static NetworkTableEntry m_nteDriveEncRight;  //double
+	public static NetworkTableEntry m_nteDriveEncLeft;  //double (inches)
+	public static NetworkTableEntry m_nteDriveEncRight;  //double (inches)
 
 	public static NetworkTableEntry m_nteResetEncoders;  //boolean
 
