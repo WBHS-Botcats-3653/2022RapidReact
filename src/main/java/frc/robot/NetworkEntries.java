@@ -27,7 +27,6 @@ public class NetworkEntries {
 	//Drive Tab
 	public static NetworkTableEntry m_nteIsPivotAssistEnabled;  //boolean
 	public static NetworkTableEntry m_nteIsSmartIntakeEnabled;  //boolean
-	public static NetworkTableEntry m_nteIsErrorCorrectionEnabled;  //boolean
 
 	public static NetworkTableEntry m_nteEndSmartIntake;  //boolean
 
@@ -93,10 +92,5 @@ public class NetworkEntries {
 	//Returns whether the smart intake is enabled
 	public static boolean isSmartIntakeEnabled() {
 		return m_nteIsSmartIntakeEnabled.getBoolean(false);
-	}
-
-	//Returns whether drive error correction is enabled
-	public static boolean isErrorCorrectionEnabled() {
-		return m_nteIsErrorCorrectionEnabled.getBoolean(false);
 	}
 }
