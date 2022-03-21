@@ -27,7 +27,7 @@ import frc.robot.subsystems.*;
  */
 public class RobotContainer {
 	// The robot's subsystems and commands are defined here...
-	private final Drivetrain m_drivetrain = Drivetrain.getInstance();
+	private final DriveTrain m_drivetrain = DriveTrain.getInstance();
 	private final DrivePID m_drivePID = DrivePID.getInstance();
 	private final Direction m_direction = Direction.getInstance();
 	private final AutoCommand m_autoCommand = new AutoCommand();

@@ -18,7 +18,7 @@ import frc.robot.inputs.SI;
 
 public class Dashboard extends SubsystemBase {
 	private static Dashboard m_singleton;
-	private Drivetrain m_driveTrain = Drivetrain.getInstance();
+	private DriveTrain m_driveTrain = DriveTrain.getInstance();
 	private Direction m_direction = Direction.getInstance();
 	private Cameras m_cameras = Cameras.getInstance();
 	private OI m_oi = OI.getInstance();
@@ -59,10 +59,11 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteEndSmartIntake = tabDrive.add("End Smart Intake", false).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 1).withPosition(0, 1).getEntry();
 			
 			NetworkEntries.m_nteDriveDistance = tabDrive.add("Distance Drived", 0).withWidget(BuiltInWidgets.kTextView).withSize(0, 0).withPosition(2, 1).getEntry();
-			tabDrive.add("Gyro", m_direction.getGyro()).withSize(2, 2).withPosition(3, 1);
+			//TODO: change the position of the widgets
+			tabDrive.add("Gyro", m_direction.getGyro()).withWidget(BuiltInWidgets.kGyro).withSize(2, 2).withPosition(3, 1);
 
-			tabDrive.add("Field View", m_cameras.getFieldCamera()).withSize(3, 2).withPosition(3, 2);
-			tabDrive.add("Indexer View", m_cameras.getIndexerCamera()).withSize(3, 2).withPosition(6, 2);
+			tabDrive.add("Field View", m_cameras.getFieldCamera()).withWidget(BuiltInWidgets.kCameraStream).withSize(3, 2).withPosition(3, 2);
+			tabDrive.add("Indexer View", m_cameras.getIndexerCamera()).withWidget(BuiltInWidgets.kCameraStream).withSize(3, 2).withPosition(6, 2);
 			
 		//Speeds Tab			
 			NetworkEntries.m_nteMaxDriveSpeed = tabSpeeds.addPersistent("Max Drive Speed", kDefaultDriveSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(0, 0).getEntry();  //double
