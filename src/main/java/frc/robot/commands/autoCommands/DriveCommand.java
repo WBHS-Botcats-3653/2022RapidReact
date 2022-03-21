@@ -8,10 +8,10 @@ import static frc.robot.Constants.DrivePIDConstants.kP;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Direction;
-import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.DriveTrain;
 
 public class DriveCommand extends CommandBase {
-	private Drivetrain m_drivetrain = Drivetrain.getInstance();
+	private DriveTrain m_drivetrain = DriveTrain.getInstance();
 	private Direction m_direction = Direction.getInstance();
 
 	private double distance, speed, currentDistance;

@@ -6,16 +6,16 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.inputs.OI;
-import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.DriveTrain;
 
 public class ArcadeDriveCommand extends CommandBase {
-	private Drivetrain m_drivetrain;
+	private DriveTrain m_drivetrain;
 	private OI m_oi = OI.getInstance();
 
 	/**Creates a new ArcadeDriveCommand.
 	 * @param subsystem The subsystem used by this command.
 	 */
-	public ArcadeDriveCommand(Drivetrain p_drivetrain) {
+	public ArcadeDriveCommand(DriveTrain p_drivetrain) {
 		m_drivetrain = p_drivetrain;
 		// Use addRequirements() here to declare subsystem dependencies.
 		addRequirements(p_drivetrain);

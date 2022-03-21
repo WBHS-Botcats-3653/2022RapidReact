@@ -14,8 +14,8 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
-public class Drivetrain extends SubsystemBase {
-	private static Drivetrain m_singleton = null;
+public class DriveTrain extends SubsystemBase {
+	private static DriveTrain m_singleton = null;
 
 	private WPI_VictorSPX driveFrontLeft, driveBackLeft, driveFrontRight, driveBackRight;
 	private DifferentialDrive diffDrive;
@@ -24,7 +24,7 @@ public class Drivetrain extends SubsystemBase {
 	//https://robotpy.readthedocs.io/projects/ctre/en/stable/ctre/WPI_VictorSPX.html
 
 	//Constructor
-	private Drivetrain() {
+	private DriveTrain() {
 		//Wheel motors
 		driveFrontLeft = new WPI_VictorSPX(kFrontLeftMotorID);
 		driveBackLeft = new WPI_VictorSPX(kBackLeftMotorID);
@@ -44,9 +44,9 @@ public class Drivetrain extends SubsystemBase {
 	}
 	//
 	//Returns an instance of DrainTrain, creating an instance only when one does not already exist
-	public static Drivetrain getInstance() {
+	public static DriveTrain getInstance() {
 		if (m_singleton == null) {
-			m_singleton = new Drivetrain();
+			m_singleton = new DriveTrain();
 		}
 		return m_singleton;
 	}
