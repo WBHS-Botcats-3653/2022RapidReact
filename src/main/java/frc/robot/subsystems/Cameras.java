@@ -25,7 +25,7 @@ public class Cameras extends SubsystemBase {
 		indexerCamera.setFPS(20);
 	}
 
-	//Returns an instance of Camera
+	//Returns an instance of Cameras
 	public static Cameras getInstance() {
 		if (m_singleton == null) {
 			m_singleton = new Cameras();
