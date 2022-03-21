@@ -71,7 +71,7 @@ public class AutoCommand extends CommandBase {
 		sequentialCommandToSchedule = new SequentialCommandGroup(
 			isAutoShootOn ? new ShootCargoCommand() : new PrintCommand("Auto shoot preload disabled"),   //Shoots Preload
 			isAutoTaxiOn || isAutoCollectOn ? new DriveCommand(kTaxiDistance, kAutoDriveSpeed, false) : new PrintCommand ("Taxi is disabled"),
-			new InstantCommand(() -> {AutoCommand.executingCommand = false;})  //Completed executing a sequential command
+			new InstantCommand(() -> AutoCommand.executingCommand = false)  //Completed executing a sequential command
 		);
 	}
 
@@ -98,9 +98,9 @@ public class AutoCommand extends CommandBase {
 					//Turn specified distance
 					new TurnCommand(angleAndDistance[0]),
 					//Execute parallel command next
-					new InstantCommand(() -> {AutoCommand.commandToScheduleNext = 'P';}),
+					new InstantCommand(() -> AutoCommand.commandToScheduleNext = 'P'),
 					//End command
-					new InstantCommand(() -> {AutoCommand.executingCommand = false;})
+					new InstantCommand(() -> AutoCommand.executingCommand = false)
 				);
 				//Creates a new parallel command to be scheduled (Collect cargo)
 				parallelCommandToSchedule = new ParallelCommandGroup(
@@ -109,7 +109,7 @@ public class AutoCommand extends CommandBase {
 					//Intake the cargo
 					new CollectCargoCommand(),
 					//Execute parallel command next
-					new InstantCommand(() -> {AutoCommand.commandToScheduleNext = 'S';})
+					new InstantCommand(() -> AutoCommand.commandToScheduleNext = 'S')
 				);
 			}
 		} else {
@@ -125,9 +125,9 @@ public class AutoCommand extends CommandBase {
 				//Turn specified distance
 				new TurnCommand(dist),
 				//Execute parallel command next
-				new InstantCommand(() -> {AutoCommand.commandToScheduleNext = 'P';}),
+				new InstantCommand(() -> AutoCommand.commandToScheduleNext = 'P'),
 				//End command
-				new InstantCommand(() -> {AutoCommand.executingCommand = false;})
+				new InstantCommand(() -> AutoCommand.executingCommand = false)
 			);
 			//Creates a new parallel command to be scheduled (Collect cargo)
 			parallelCommandToSchedule = new ParallelCommandGroup(
@@ -136,7 +136,7 @@ public class AutoCommand extends CommandBase {
 				//Intake the cargo
 				new CollectCargoCommand(),
 				//Execute parallel command next
-				new InstantCommand(() -> {AutoCommand.commandToScheduleNext = 'S';})
+				new InstantCommand(() -> AutoCommand.commandToScheduleNext = 'S')
 			);
 		}
 		//Target next cargo

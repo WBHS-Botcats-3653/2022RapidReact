@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import static frc.robot.Constants.ShooterConstants.kFlywheelMotorID;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -19,6 +20,7 @@ public class Shooter extends SubsystemBase {
 		//Creates WPI_VictorSPX motor controller for the fly wheel
 		flywheel = new WPI_VictorSPX(kFlywheelMotorID);
 		flywheel.setInverted(true);
+		flywheel.setNeutralMode(NeutralMode.Coast);
 	}
 
 	//Returns an instance of Shooter, creating an instance only when one does not already exist (singleton)

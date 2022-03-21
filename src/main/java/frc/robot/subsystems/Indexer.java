@@ -20,6 +20,7 @@ public class Indexer extends SubsystemBase {
 	public Indexer() {
 		indexer = new WPI_VictorSPX(kIndexerMotorID);
 		indexer.setInverted(true);
+		indexer.setNeutralMode(NeutralMode.Brake);
 	}
 
 	//Returns an instance of Indexer, creating an instance only when one does not already exist (singleton)
@@ -38,8 +39,8 @@ public class Indexer extends SubsystemBase {
 		indexer.set(speed);
 	}
 
-	//Enables or disabled the neutral brake on the motors
-	public void enableMotors(boolean enable) {
+	//Enable or disable the neutral brake on the motor
+	public void enableBrake(boolean enable) {
 		indexer.setNeutralMode(enable ? NeutralMode.Brake : NeutralMode.Coast);
 	}
 }

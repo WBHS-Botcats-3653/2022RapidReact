@@ -27,7 +27,7 @@ import frc.robot.subsystems.*;
  */
 public class RobotContainer {
 	// The robot's subsystems and commands are defined here...
-	private final DriveTrain m_drivetrain = DriveTrain.getInstance();
+	private final Drivetrain m_drivetrain = Drivetrain.getInstance();
 	private final DrivePID m_drivePID = DrivePID.getInstance();
 	private final Direction m_direction = Direction.getInstance();
 	private final AutoCommand m_autoCommand = new AutoCommand();
@@ -58,26 +58,30 @@ public class RobotContainer {
 		//Passes a Kinematics object to the trajectory config
 		config.setKinematics(m_drivePID.getKinematics());
 		//Test trajectory
-		Trajectory trajectory = TrajectoryGenerator.generateTrajectory(Arrays.asList(new Pose2d(), new Pose2d(1.0, 1.0, new Rotation2d())), config);
+		Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
+			Arrays.asList(
+				new Pose2d(),  //Starting position
+				new Pose2d(1.0, 1.0, new Rotation2d())),  //End position
+			config
+		);
 		/*Takes the robots current position, trajectory, and wheel speeds along with other
 		 *Objects, Suppliers, and BiConsumers and calculates the linear and angular velocities to
 		 *move the robot in order to follow the path of the trajectory
 		 */
-		RamseteCommand ramCommand = 
-			new RamseteCommand(
-				trajectory,  //Trajectory to follow
-				m_drivePID::getPose,  //Method to supply the current position (Supplier)
-				new RamseteController(kRamseteB, kRamseteZeta),  //Calculates the current linear and angular velocity of the robot
-				m_drivePID.getFeedForward(),  //Gets SimpleMotorFeedForward which converts left and right wheel speeds to motor voltages
-				m_drivePID.getKinematics(),  //Gets Kinematics which converts linear and angular velocity into left and right wheel speeds
-				m_drivePID::getWheelSpeeds,  //Method to supply DifferentialDriveWheelSpeeds which contains the left and right wheel speeds (Supplier)
-				m_drivePID.getLeftPIDController(),  //Gets the left drivetrain PID controller which calculates the motor voltage required to smoothly get the robot to the desired endpoint
-				m_drivePID.getRightPIDController(),  //Gets the right drivetrain PID controller which calculates the motor voltage required to smoothly get the robot to the desired endpoint
-				m_drivetrain::tankDriveVolts,  //Method which sets the left and right motor voltages of the drivetrain (BiConsumer)
-				m_drivePID,  //Required subsystem
-				m_drivetrain,  //Required subsystem
-				m_direction  //Required subsystem
-			);
+		RamseteCommand ramCommand = new RamseteCommand(
+			trajectory,  //Trajectory to follow
+			m_drivePID::getPose,  //Method to supply the current position (Supplier)
+			new RamseteController(kRamseteB, kRamseteZeta),  //Calculates the current linear and angular velocity of the robot
+			m_drivePID.getFeedForward(),  //Gets SimpleMotorFeedForward which converts left and right wheel speeds to motor voltages
+			m_drivePID.getKinematics(),  //Gets Kinematics which converts linear and angular velocity into left and right wheel speeds
+			m_drivePID::getWheelSpeeds,  //Method to supply DifferentialDriveWheelSpeeds which contains the left and right wheel speeds (Supplier)
+			m_drivePID.getLeftPIDController(),  //Gets the left drivetrain PID controller which calculates the motor voltage required to smoothly get the robot to the desired endpoint
+			m_drivePID.getRightPIDController(),  //Gets the right drivetrain PID controller which calculates the motor voltage required to smoothly get the robot to the desired endpoint
+			m_drivetrain::tankDriveVolts,  //Method which sets the left and right motor voltages of the drivetrain (BiConsumer)
+			m_drivePID,  //Required subsystem
+			m_drivetrain,  //Required subsystem
+			m_direction  //Required subsystem
+		);
 		//return ramCommand;  //Set return type to Command
 		return m_autoCommand;
 	}

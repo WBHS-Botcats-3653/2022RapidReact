@@ -21,9 +21,14 @@ public class Climber extends SubsystemBase {
 		climberArm = new WPI_VictorSPX(kClimberArmMotorID);
 		extenderWinch = new WPI_VictorSPX(kExtenderWinchMotorID);
 		hookWinch = new WPI_VictorSPX(kHookWinchMotorID);
+
 		climberArm.setInverted(false);
 		extenderWinch.setInverted(true);
 		hookWinch.setInverted(true);
+
+		climberArm.setNeutralMode(NeutralMode.Brake);
+		extenderWinch.setNeutralMode(NeutralMode.Coast);
+		hookWinch.setNeutralMode(NeutralMode.Brake);
 	}
 
 	//Returns an instance of Climber, creating an instance only when one does not already exist (singleton)
@@ -50,13 +55,5 @@ public class Climber extends SubsystemBase {
 	public void setHookWinchSpeed(double speed) {
 		//Sets the hook winch speed
 		hookWinch.set(speed);
-	}
-	
-	//Enables or disabled the neutral brake on the motors
-	public void enableMotors(boolean enable) {
-		NeutralMode mode = enable ? NeutralMode.Brake : NeutralMode.Coast;
-		climberArm.setNeutralMode(mode);
-		extenderWinch.setNeutralMode(mode);
-		hookWinch.setNeutralMode(mode);
 	}
 }

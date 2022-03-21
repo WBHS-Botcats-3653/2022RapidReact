@@ -22,6 +22,8 @@ public class Intake extends SubsystemBase {
 		rollers = new WPI_VictorSPX(kRollersMotorID);
 		pivot.setInverted(false);
 		rollers.setInverted(false);
+		pivot.setNeutralMode(NeutralMode.Brake);
+		rollers.setNeutralMode(NeutralMode.Coast);
 	}
 	
 	//Returns an instance of Intake, creating an instance only when one does not already exist (singleton)
@@ -43,8 +45,8 @@ public class Intake extends SubsystemBase {
 		rollers.set(speed);
 	}
 
-	//Enables or disabled the neutral brake on the motors
-	public void enableMotors(boolean enable) {
+	//Enables or disables the neutral brake on the motors
+	public void enableBrake(boolean enable) {
 		pivot.setNeutralMode(enable ? NeutralMode.Brake : NeutralMode.Coast);
 	}
 }

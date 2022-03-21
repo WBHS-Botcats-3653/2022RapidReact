@@ -14,8 +14,8 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
-public class DriveTrain extends SubsystemBase {
-	private static DriveTrain m_singleton = null;
+public class Drivetrain extends SubsystemBase {
+	private static Drivetrain m_singleton = null;
 
 	private WPI_VictorSPX driveFrontLeft, driveBackLeft, driveFrontRight, driveBackRight;
 	private DifferentialDrive diffDrive;
@@ -24,7 +24,7 @@ public class DriveTrain extends SubsystemBase {
 	//https://robotpy.readthedocs.io/projects/ctre/en/stable/ctre/WPI_VictorSPX.html
 
 	//Constructor
-	private DriveTrain() {
+	private Drivetrain() {
 		//Wheel motors
 		driveFrontLeft = new WPI_VictorSPX(kFrontLeftMotorID);
 		driveBackLeft = new WPI_VictorSPX(kBackLeftMotorID);
@@ -41,12 +41,15 @@ public class DriveTrain extends SubsystemBase {
 		//Reverses left motor direction
 		driveLeft.setInverted(true);
 		driveRight.setInverted(false);
+
+		//Sets motors to coast
+		enableBrake(false);
 	}
-	//
+
 	//Returns an instance of DrainTrain, creating an instance only when one does not already exist
-	public static DriveTrain getInstance() {
+	public static Drivetrain getInstance() {
 		if (m_singleton == null) {
-			m_singleton = new DriveTrain();
+			m_singleton = new Drivetrain();
 		}
 		return m_singleton;
 	}
@@ -88,8 +91,8 @@ public class DriveTrain extends SubsystemBase {
 		return diffDrive;
 	}
 
-	//Enables or disabled the neutral brake on the motors
-	public void enableMotors(boolean enable) {
+	//Enables or disables the neutral brake on the motors
+	public void enableBrake(boolean enable) {
 		NeutralMode mode = enable ? NeutralMode.Brake : NeutralMode.Coast;
 		driveFrontLeft.setNeutralMode(mode);
 		driveBackLeft.setNeutralMode(mode);

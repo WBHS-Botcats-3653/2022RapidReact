@@ -21,7 +21,7 @@ public class Robot extends TimedRobot {
 	//Subsystems
 	private final Dashboard m_dashboard = Dashboard.getInstance();
 	private final Direction m_direction = Direction.getInstance();
-	private final DriveTrain m_drivetrain = DriveTrain.getInstance();
+	private final Drivetrain m_drivetrain = Drivetrain.getInstance();
 	private final Intake m_intake = Intake.getInstance();
 	private final Indexer m_indexer = Indexer.getInstance();
 	private final Shooter m_shooter = Shooter.getInstance();
@@ -76,10 +76,9 @@ public class Robot extends TimedRobot {
 		IntakeCommand.endSmartIntake();
 
 		//Sets motors to coast or brake
-		m_drivetrain.enableMotors(false);
-		m_intake.enableMotors(false);
-		m_indexer.enableMotors(false);
-		m_climber.enableMotors(true);
+		m_drivetrain.enableBrake(false);
+		m_intake.enableBrake(false);
+		m_indexer.enableBrake(false);
 
 		//Disables the speeds
 		m_dashboard.disableSpeeds(true);
@@ -97,10 +96,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		//Sets motors to brake
-		m_drivetrain.enableMotors(true);
-		m_intake.enableMotors(true);
-		m_indexer.enableMotors(true);
-		m_climber.enableMotors(true);
+		m_drivetrain.enableBrake(true);
+		m_intake.enableBrake(true);
+		m_indexer.enableBrake(true);
 
 		//Gets the autonomous command from robotContainer
 		m_autonomousCommand = m_robotContainer.getAutonomousCommand();
@@ -143,10 +141,9 @@ public class Robot extends TimedRobot {
 		IntakeCommand.endSmartIntake();
 
 		//Sets motors to coast or brake
-		m_drivetrain.enableMotors(false);
-		m_intake.enableMotors(true);
-		m_indexer.enableMotors(true);
-		m_climber.enableMotors(true);
+		m_drivetrain.enableBrake(false);
+		m_intake.enableBrake(true);
+		m_indexer.enableBrake(true);
 
 		// Cancels all running commands at the start of Teleoperated mode.
 		CommandScheduler.getInstance().cancelAll();
@@ -177,11 +174,10 @@ public class Robot extends TimedRobot {
 		//Ends the smart intake
 		IntakeCommand.endSmartIntake();
 
-		//Sets motors to coast
-		m_climber.enableMotors(true);
-		m_drivetrain.enableMotors(false);
-		m_indexer.enableMotors(true);
-		m_intake.enableMotors(true);
+		//Sets motors to coast or brake
+		m_drivetrain.enableBrake(false);
+		m_indexer.enableBrake(true);
+		m_intake.enableBrake(true);
 
 		CommandScheduler.getInstance().schedule(m_arcadeDriveCommand);
 		CommandScheduler.getInstance().schedule(m_intakeCommand);

@@ -18,7 +18,7 @@ import frc.robot.inputs.SI;
 
 public class Dashboard extends SubsystemBase {
 	private static Dashboard m_singleton;
-	private DriveTrain m_driveTrain = DriveTrain.getInstance();
+	private Drivetrain m_driveTrain = Drivetrain.getInstance();
 	private Direction m_direction = Direction.getInstance();
 	private Cameras m_cameras = Cameras.getInstance();
 	private OI m_oi = OI.getInstance();
@@ -37,9 +37,9 @@ public class Dashboard extends SubsystemBase {
 		tabTest = Shuffleboard.getTab("Test");
 
 		//Auto Tab
-			NetworkEntries.m_isAutoShootOn = tabAuto.addPersistent("Auto Shoot", true).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(0, 0).getEntry();
-			NetworkEntries.m_isAutoTaxiOn = tabAuto.addPersistent("Auto Taxi", true).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(1, 0).getEntry();
-			NetworkEntries.m_isAutoCollectOn = tabAuto.addPersistent("Auto Collect", true).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(2, 0).getEntry();
+			NetworkEntries.m_isAutoShootOn = tabAuto.addPersistent("Auto Shoot", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(0, 0).getEntry();
+			NetworkEntries.m_isAutoTaxiOn = tabAuto.addPersistent("Auto Taxi", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(1, 0).getEntry();
+			NetworkEntries.m_isAutoCollectOn = tabAuto.addPersistent("Auto Collect", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(2, 0).getEntry();
 			
 			NetworkEntries.m_nteRightTarmac = tabAuto.add("Is Right Tarmac?", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(3, 0).getEntry();
 			
@@ -58,7 +58,7 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteEndSmartIntake = tabDrive.add("End Smart Intake", false).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 1).withPosition(0, 1).getEntry();
 			
 			NetworkEntries.m_nteDriveDistance = tabDrive.add("Distance Drived", 0).withWidget(BuiltInWidgets.kTextView).withSize(0, 0).withPosition(2, 1).getEntry();
-			//TODO: change the position of the widgets
+			
 			tabDrive.add("Gyro", m_direction.getGyro()).withWidget(BuiltInWidgets.kGyro).withSize(2, 2).withPosition(3, 1);
 
 			tabDrive.add("Field View", m_cameras.getFieldCamera()).withWidget(BuiltInWidgets.kCameraStream).withSize(3, 2).withPosition(3, 2);
