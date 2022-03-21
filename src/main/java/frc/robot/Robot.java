@@ -21,7 +21,7 @@ public class Robot extends TimedRobot {
 	//Subsystems
 	private final Dashboard m_dashboard = Dashboard.getInstance();
 	private final Direction m_direction = Direction.getInstance();
-	private final DriveTrain m_drivetrain = DriveTrain.getInstance();
+	private final Drivetrain m_drivetrain = Drivetrain.getInstance();
 	private final Intake m_intake = Intake.getInstance();
 	private final Indexer m_indexer = Indexer.getInstance();
 	private final Shooter m_shooter = Shooter.getInstance();

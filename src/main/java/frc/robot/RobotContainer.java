@@ -27,7 +27,7 @@ import frc.robot.subsystems.*;
  */
 public class RobotContainer {
 	// The robot's subsystems and commands are defined here...
-	private final DriveTrain m_drivetrain = DriveTrain.getInstance();
+	private final Drivetrain m_drivetrain = Drivetrain.getInstance();
 	private final DrivePID m_drivePID = DrivePID.getInstance();
 	private final Direction m_direction = Direction.getInstance();
 	private final AutoCommand m_autoCommand = new AutoCommand();
@@ -58,9 +58,9 @@ public class RobotContainer {
 		//Passes a Kinematics object to the trajectory config
 		config.setKinematics(m_drivePID.getKinematics());
 		//Test trajectory
-		Trajectory trajectory = TrajectoryGenerator.generateTrajectory(Arrays.asList(new Pose2d(), new Pose2d(1.0, 0.0, new Rotation2d())), config);
+		Trajectory trajectory = TrajectoryGenerator.generateTrajectory(Arrays.asList(new Pose2d(), new Pose2d(1.0, 1.0, new Rotation2d())), config);
 		/*Takes the robots current position, trajectory, and wheel speeds along with other
-		 *Objects, Suppliers, and BiConsumers and calculates a linear and angular velocities to
+		 *Objects, Suppliers, and BiConsumers and calculates the linear and angular velocities to
 		 *move the robot in order to follow the path of the trajectory
 		 */
 		RamseteCommand ramCommand = 

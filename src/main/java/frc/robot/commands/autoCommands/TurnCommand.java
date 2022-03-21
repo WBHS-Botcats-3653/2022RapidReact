@@ -9,10 +9,10 @@ import static frc.robot.Constants.DrivePIDConstants.kP;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Direction;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Drivetrain;
 
 public class TurnCommand extends CommandBase {
-	private DriveTrain m_drivetrain = DriveTrain.getInstance();
+	private Drivetrain m_drivetrain = Drivetrain.getInstance();
 	private Direction m_direction = Direction.getInstance();
 
 	private double angle, targetAngle;
