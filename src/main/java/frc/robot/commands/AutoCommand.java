@@ -33,20 +33,14 @@ public class AutoCommand extends CommandBase {
 			new Pose2d(0, Units.feetToMeters(kTaxiDistance), new Rotation2d())  //End position
 		)
 	);
-	private static RamseteCommand collectCargoRamCommand;
-	private static RamseteCommand customRamCommand;
+	private static RamseteCommand collectCargoRamCommand, customRamCommand;
 
 	private static int numCargoCollected = 0;
 
 	private char commandToScheduleNext;
 	private static boolean executingCommand = false;
 
-	private boolean shootPreloadEnabled;
-	private boolean hasPreload;
-	private boolean taxiEnabled;
-	private boolean collectCargoEnabled;
-	private boolean shootCollectedCargoEnabled;
-	private boolean customTrajectoryEnabled;
+	private boolean shootPreloadEnabled, hasPreload, taxiEnabled, collectCargoEnabled, shootCollectedCargoEnabled, customTrajectoryEnabled;
 
 	private int collectStage = 0;
 
