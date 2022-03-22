@@ -11,8 +11,8 @@ import frc.robot.subsystems.Direction;
 import frc.robot.subsystems.Drivetrain;
 
 public class DriveCommand extends CommandBase {
-	private Drivetrain m_drivetrain = Drivetrain.getInstance();
-	private Direction m_direction = Direction.getInstance();
+	private final Drivetrain m_drivetrain = Drivetrain.getInstance();
+	private final Direction m_direction = Direction.getInstance();
 
 	private double distance, speed, currentDistance;
 	private boolean isCollectingCargo;

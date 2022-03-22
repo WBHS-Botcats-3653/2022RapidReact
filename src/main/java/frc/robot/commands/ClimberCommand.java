@@ -10,7 +10,7 @@ import frc.robot.subsystems.Climber;
 
 public class ClimberCommand extends CommandBase {
 	private Climber m_climber;
-	private OI m_oi = OI.getInstance();
+	private final OI m_oi = OI.getInstance();
 
 	/**Creates a new ClimberCommand.
 	 * @param subsystem The subsystem used by this command.

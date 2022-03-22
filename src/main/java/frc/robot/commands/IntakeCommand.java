@@ -14,8 +14,8 @@ import frc.robot.subsystems.Intake;
 
 public class IntakeCommand extends CommandBase {
 	private Intake m_intake;
-	private OI m_oi = OI.getInstance();
-	private SI m_si = SI.getInstance();
+	private final OI m_oi = OI.getInstance();
+	private final SI m_si = SI.getInstance();
 
 	private static boolean smartControl = false;
 	private static boolean smartPivotGoingUp, smartPivotGoingDown;

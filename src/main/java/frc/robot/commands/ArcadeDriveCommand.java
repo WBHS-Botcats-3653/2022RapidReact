@@ -10,7 +10,7 @@ import frc.robot.subsystems.Drivetrain;
 
 public class ArcadeDriveCommand extends CommandBase {
 	private Drivetrain m_drivetrain;
-	private OI m_oi = OI.getInstance();
+	private final OI m_oi = OI.getInstance();
 
 	/**Creates a new ArcadeDriveCommand.
 	 * @param subsystem The subsystem used by this command.

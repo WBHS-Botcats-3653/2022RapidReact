@@ -175,7 +175,7 @@ public final class Constants {
 		public static final double kDefaultSmartIndexSpeed = 0.7;
 		public static final double kDefaultShootSpeed = 0.85;
 		public static final double kDefaultClimbSpeed = 1.0;
-		public static final double kDefaultExtendSpeed = 0.5;
-		public static final double kDefaultWinchSpeed = 1.0;
+		public static final double kDefaultExtenderWinchSpeed = 0.5;
+		public static final double kDefaultHookWinchSpeed = 1.0;
 	}
 }

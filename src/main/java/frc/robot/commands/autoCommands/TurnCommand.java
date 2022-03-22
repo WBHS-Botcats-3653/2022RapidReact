@@ -12,8 +12,8 @@ import frc.robot.subsystems.Direction;
 import frc.robot.subsystems.Drivetrain;
 
 public class TurnCommand extends CommandBase {
-	private Drivetrain m_drivetrain = Drivetrain.getInstance();
-	private Direction m_direction = Direction.getInstance();
+	private final Drivetrain m_drivetrain = Drivetrain.getInstance();
+	private final Direction m_direction = Direction.getInstance();
 
 	private double angle, targetAngle;
 	private boolean hasFinished = false;

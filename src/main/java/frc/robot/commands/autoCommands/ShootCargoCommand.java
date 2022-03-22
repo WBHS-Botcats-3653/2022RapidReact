@@ -12,9 +12,9 @@ import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Shooter;
 
 public class ShootCargoCommand extends CommandBase {
-	private Indexer m_indexer = Indexer.getInstance();
-	private Shooter m_shooter = Shooter.getInstance();
-	private SI m_si = SI.getInstance();
+	private final Indexer m_indexer = Indexer.getInstance();
+	private final Shooter m_shooter = Shooter.getInstance();
+	private final SI m_si = SI.getInstance();
 
 	private int numCargo, numShot;
 

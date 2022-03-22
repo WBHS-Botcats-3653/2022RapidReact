@@ -13,9 +13,9 @@ import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
 
 public class CollectCargoCommand extends CommandBase {
-	private Intake m_intake = Intake.getInstance();
-	private Indexer m_indexer = Indexer.getInstance();
-	private SI m_si = SI.getInstance();
+	private final Intake m_intake = Intake.getInstance();
+	private final Indexer m_indexer = Indexer.getInstance();
+	private final SI m_si = SI.getInstance();
 
 	public static boolean endCommand;
 

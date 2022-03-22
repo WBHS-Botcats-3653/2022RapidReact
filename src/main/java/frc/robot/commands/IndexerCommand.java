@@ -13,8 +13,8 @@ import frc.robot.subsystems.Indexer;
 
 public class IndexerCommand extends CommandBase {
 	private Indexer m_indexer;
-	private OI m_oi = OI.getInstance();
-	private SI m_si = SI.getInstance();
+	private final OI m_oi = OI.getInstance();
+	private final SI m_si = SI.getInstance();
 
 	private boolean smartControl;
 
