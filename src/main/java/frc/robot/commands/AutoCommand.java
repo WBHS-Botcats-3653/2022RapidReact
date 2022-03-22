@@ -110,8 +110,10 @@ public class AutoCommand extends CommandBase {
 			case (1):  //Shooting cargo
 				//If the robot is moving
 				if (m_direction.isMoving()) {
+					//Break out of the switch
 					break;
 				} else {  //If the robot is not moving
+					//Not currently executing an auto command
 					executingCommand = false;
 				}
 				//If shoot collected cargo is disabled
@@ -251,9 +253,6 @@ public class AutoCommand extends CommandBase {
 		return command;
 	}
 
-	//Returns whether all the auto commands have finished
+	//Returns whether all of the auto commands have finished executing
 	public boolean hasFinished() {return hasFinished;}
-
-	//Sets whether all the auto commands have finished
-	public void setHasFinished(boolean isFinished) {hasFinished = isFinished;}
 }
