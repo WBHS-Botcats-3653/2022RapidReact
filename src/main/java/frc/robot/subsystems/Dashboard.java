@@ -20,17 +20,17 @@ import frc.robot.inputs.SI;
 
 public class Dashboard extends SubsystemBase {
 	private static Dashboard m_singleton;
-	private Drivetrain m_driveTrain = Drivetrain.getInstance();
-	private Direction m_direction = Direction.getInstance();
-	private Cameras m_cameras = Cameras.getInstance();
-	private OI m_oi = OI.getInstance();
-	private SI m_si =  SI.getInstance();
+	private final Drivetrain m_driveTrain = Drivetrain.getInstance();
+	private final Direction m_direction = Direction.getInstance();
+	private final Cameras m_cameras = Cameras.getInstance();
+	private final OI m_oi = OI.getInstance();
+	private final SI m_si =  SI.getInstance();
 
 	public ShuffleboardTab tabDrive, tabTest, tabSpeeds, tabAuto;
 
 	private boolean prevShootPreload, prevTaxi, prevCollectCargo, prevShootCollectedCargo, prevCustomTrajectory, prevTarmac, prevSmartIntake;
 	private String[] prevCargoToTarget;
-	private double prevVelocity, prevAcceleration, prevX, prevY, prevEndAngle;
+	private double genVelocity, genAcceleration, genX, genY, genEndAngle;
 
 	public boolean speedsDisabled = true;
 
@@ -85,8 +85,8 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteMaxIndexerSpeed = tabSpeeds.addPersistent("Max Indexer Speed", kDefaultIndexSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(6, 0).getEntry();  //double
 			NetworkEntries.m_nteMaxShootSpeed = tabSpeeds.addPersistent("Max Shoot Speed", kDefaultShootSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(2, 1).getEntry();  //double
 			NetworkEntries.m_nteMaxClimbSpeed = tabSpeeds.addPersistent("Max Climb Speed", kDefaultClimbSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(2, 1).getEntry();  //double
-			NetworkEntries.m_nteMaxExtenderWinchSpeed = tabSpeeds.addPersistent("Max Extender Winch Speed", kDefaultExtendSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(2, 1).getEntry();  //double
-			NetworkEntries.m_nteMaxHookWinchSpeed = tabSpeeds.addPersistent("Max Hook Winch Speed", kDefaultWinchSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(4, 1).getEntry();  //double
+			NetworkEntries.m_nteMaxExtenderWinchSpeed = tabSpeeds.addPersistent("Max Extender Winch Speed", kDefaultExtenderWinchSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(2, 1).getEntry();  //double
+			NetworkEntries.m_nteMaxHookWinchSpeed = tabSpeeds.addPersistent("Max Hook Winch Speed", kDefaultHookWinchSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(4, 1).getEntry();  //double
 			
 		//Test Tab
 			NetworkEntries.m_nteUpperStoragePE = tabTest.add("Upper Storage PE", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(1, 0).getEntry();
@@ -111,11 +111,6 @@ public class Dashboard extends SubsystemBase {
 		prevTarmac = NetworkEntries.m_nteRightTarmac.getBoolean(false);
 		prevCargoToTarget = NetworkEntries.getCargoToTarget();
 		prevShootCollectedCargo = NetworkEntries.m_nteShootCollectedCargoSelected.getBoolean(false);
-		prevVelocity = NetworkEntries.m_nteMaxVelocity.getDouble(0);
-		prevAcceleration = NetworkEntries.m_nteMaxAcceleration.getDouble(0);
-		prevX = NetworkEntries.m_nteX.getDouble(0);
-		prevY = NetworkEntries.m_nteY.getDouble(0);
-		prevEndAngle = NetworkEntries.m_nteEndAngle.getDouble(0);
 		prevSmartIntake = NetworkEntries.m_nteIsSmartIntakeEnabled.getBoolean(false);
 	}
 
@@ -225,16 +220,12 @@ public class Dashboard extends SubsystemBase {
 		prevCargoToTarget = NetworkEntries.getCargoToTarget();
 
 		//If any custom trajectory settings have been changed
-		if (NetworkEntries.m_nteMaxVelocity.getDouble(0) != prevVelocity || NetworkEntries.m_nteMaxAcceleration.getDouble(0) != prevAcceleration || NetworkEntries.m_nteX.getDouble(0) != prevX || NetworkEntries.m_nteY.getDouble(0) != prevY || NetworkEntries.m_nteEndAngle.getDouble(0) != prevEndAngle) {
+		if (NetworkEntries.m_nteMaxVelocity.getDouble(0) != genVelocity || NetworkEntries.m_nteMaxAcceleration.getDouble(0) != genAcceleration || NetworkEntries.m_nteX.getDouble(0) != genX || NetworkEntries.m_nteY.getDouble(0) != genY || NetworkEntries.m_nteEndAngle.getDouble(0) != genEndAngle) {
 			//Custom trajectory has not been updated
 			NetworkEntries.m_nteCustomTrajectoryHasGenerated.setBoolean(false);
+		} else {
+			NetworkEntries.m_nteCustomTrajectoryHasGenerated.setBoolean(true);
 		}
-		//Update previous values
-		prevVelocity = NetworkEntries.m_nteMaxVelocity.getDouble(0);
-		prevAcceleration = NetworkEntries.m_nteMaxAcceleration.getDouble(0);
-		prevX = NetworkEntries.m_nteX.getDouble(0);
-		prevY = NetworkEntries.m_nteY.getDouble(0);
-		prevEndAngle = NetworkEntries.m_nteEndAngle.getDouble(0);
 
 		//If the generate cargo collection has been pressed
 		if (NetworkEntries.m_nteGenerateCargoCollection.getBoolean(false)) {
@@ -248,14 +239,14 @@ public class Dashboard extends SubsystemBase {
 
 		//If the generate custom trajectory has been pressed
 		if (NetworkEntries.m_nteGenerateCustomTrajectory.getBoolean(false)) {
+			//Update generated values
+			genVelocity = NetworkEntries.m_nteMaxVelocity.getDouble(0);
+			genAcceleration = NetworkEntries.m_nteMaxAcceleration.getDouble(0);
+			genX = NetworkEntries.m_nteX.getDouble(0);
+			genY = NetworkEntries.m_nteY.getDouble(0);
+			genEndAngle = NetworkEntries.m_nteEndAngle.getDouble(0);
 			//Generate custom trajectory
-			AutoCommand.generateCustomTrajectory(
-				NetworkEntries.m_nteMaxVelocity.getDouble(0.0),
-				NetworkEntries.m_nteMaxAcceleration.getDouble(0.0),
-				NetworkEntries.m_nteX.getDouble(0.0),
-				NetworkEntries.m_nteY.getDouble(0.0),
-				NetworkEntries.m_nteEndAngle.getDouble(0.0)
-			);
+			AutoCommand.generateCustomTrajectory(genVelocity, genAcceleration, genX, genY, genEndAngle);
 			//Deselect the generate custom trajectory button
 			NetworkEntries.m_nteGenerateCustomTrajectory.setBoolean(false);
 			//Custom trajectory has been generated

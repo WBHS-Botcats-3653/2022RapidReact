@@ -65,6 +65,10 @@ public class AutoCommand extends CommandBase {
 		shootCollectedCargoEnabled = NetworkEntries.m_nteShootCollectedCargoSelected.getBoolean(false);
 		customTrajectoryEnabled = NetworkEntries.m_nteCustomTrajectorySelected.getBoolean(false);
 
+		//If the the collect cargo or custom trajectories have not been generated set their execution to false
+		if (collectCargoRamCommand == null) collectCargoEnabled = false;
+		if (customRamCommand == null) customTrajectoryEnabled = false;
+
 		//Resets the encoders to ensure robot starts zeroed
 		m_direction.resetEncoders();
 		//Next command to be schedule will be a SequentialCommandGroup
