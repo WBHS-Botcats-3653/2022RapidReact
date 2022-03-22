@@ -16,9 +16,12 @@ public class ShootCargoCommand extends CommandBase {
 	private Shooter m_shooter = Shooter.getInstance();
 	private SI m_si = SI.getInstance();
 
-	private boolean hasFinished, shooterTriggered;
+	private int numCargo, numShot;
 
-	public ShootCargoCommand() {
+	private boolean shooterTriggered;
+
+	public ShootCargoCommand(int numCargo) {
+		this.numCargo = numCargo;
 		// Use addRequirements() here to declare subsystem dependencies.
 		addRequirements(m_indexer, m_shooter);
 	}
@@ -28,8 +31,6 @@ public class ShootCargoCommand extends CommandBase {
 	public void initialize() {
 		//Spins the shooter at max speed
 		m_shooter.setShootSpeed(kAutoShootSpeed);
-		//The command has not finished
-		hasFinished = false;
 		//The shooter photoelectric sensor has not been triggered
 		shooterTriggered = false;
 	}
@@ -45,8 +46,8 @@ public class ShootCargoCommand extends CommandBase {
 			//The shooter photoelectric sensor has been triggered
 			shooterTriggered = true;
 		} else {  //If cargo is not in the shooter
-			//If the shooter has been previously triggered the command should finish
-			if (shooterTriggered) hasFinished = true;
+			//If the shooter has been previously triggered increment the number of cargo that has been shot by 1
+			if (shooterTriggered) numShot++;
 		}
 	}
 
@@ -62,7 +63,7 @@ public class ShootCargoCommand extends CommandBase {
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() {
-		//Stops the command when the cargo has left the shooter
-		return hasFinished;
+		//Stops the command when the correct number of cargo to be shot have left the shooter
+		return numShot >= numCargo;
 	}
 }

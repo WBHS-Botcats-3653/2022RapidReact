@@ -37,6 +37,24 @@ public final class Constants {
 			put("RRL", new double[] {-77.43, -30.58});
 			put("RRR", new double[] {-100.78, -86.53});
 		}};
+		
+		/*Holds the coordinates of the different pre-positioned cargo with the robot in the left or right Tarmac at X = 0 Y = 0
+		 *<String cargoID, double[X, Y]>
+		 */
+		public static final HashMap<String, double[]> kCargoCoordinates = new HashMap<>() {{
+			put("LLL", new double[] {Units.feetToMeters(0.0), Units.feetToMeters(0.0)});
+			put("LLR", new double[] {Units.feetToMeters(0.0), Units.feetToMeters(0.0)});
+			put("LML", new double[] {Units.feetToMeters(0.0), Units.feetToMeters(0.0)});
+			put("LMR", new double[] {Units.feetToMeters(0.0), Units.feetToMeters(0.0)});
+			put("LRL", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
+			put("LRR", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
+			put("RLL", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
+			put("RLR", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
+			put("RML", new double[] {Units.feetToMeters(0.0), Units.feetToMeters(0.0)});
+			put("RMR", new double[] {Units.feetToMeters(0.0), Units.feetToMeters(0.0)});
+			put("RRL", new double[] {Units.feetToMeters(0.0), Units.feetToMeters(0.0)});
+			put("RRR", new double[] {Units.feetToMeters(0.0), Units.feetToMeters(0.0)});
+		}};
 
 		//Speeds
 		public static final double kAutoDriveSpeed = 0.5;

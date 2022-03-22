@@ -95,18 +95,24 @@ public class Direction extends SubsystemBase {
 		return leftEncoder.getRate();
 	}
 
+	//Returns whether the robot is currently moving
+	public boolean isMoving() {
+		//Returns if the rate either the left or the right encoder rate are changing
+		return getLeftEncoderRate() != 0 || getRightEncoderRate() != 0;
+	}
+
 	/**
 	 * @return encoder's distance
 	 */
 	public double getEncoderDistance() {
-		return (this.getRightEncoderDistance() + this.getLeftEncoderDistance()) / 2;
+		return (getRightEncoderDistance() + getLeftEncoderDistance()) / 2;
 	}
 
 	/**
 	 * @return the error between the left and right distance
 	 */
 	public double getEncoderError() {
-		return this.getLeftEncoderDistance() - this.getRightEncoderDistance();
+		return getLeftEncoderDistance() - getRightEncoderDistance();
 	}
 
 	//Resets the encoders

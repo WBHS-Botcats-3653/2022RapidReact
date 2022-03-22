@@ -8,7 +8,6 @@ import static frc.robot.Constants.AutoConstants.*;
 import static frc.robot.Constants.IntakeConstants.kIntakePivotAssistSpeed;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.commands.AutoCommand;
 import frc.robot.inputs.SI;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
@@ -59,8 +58,6 @@ public class CollectCargoCommand extends CommandBase {
 		m_intake.setRollerSpeed(0);
 		//Stops the indexer
 		m_indexer.setIndexerSpeed(0);
-		//No longer executing a command
-		AutoCommand.executingCommand = false;
 	}
 
 	// Returns true when the command should end.

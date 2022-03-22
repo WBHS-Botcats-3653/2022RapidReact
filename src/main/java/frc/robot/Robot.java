@@ -28,7 +28,7 @@ public class Robot extends TimedRobot {
 	private final Climber m_climber = Climber.getInstance();
 
 	//Commands
-	private AutoCommand m_autonomousCommand;
+	private AutoCommand m_autoCommand;
 	private final ArcadeDriveCommand m_arcadeDriveCommand = new ArcadeDriveCommand(m_drivetrain);
 	private final IntakeCommand m_intakeCommand = new IntakeCommand(m_intake);
 	private final IndexerCommand m_indexerCommand = new IndexerCommand(m_indexer);
@@ -86,11 +86,7 @@ public class Robot extends TimedRobot {
 
 	/** This function is called periodically when disabled. */
 	@Override
-	public void disabledPeriodic() {
-		AutoCommand.isAutoShootOn = NetworkEntries.m_isAutoShootOn.getBoolean(true);
-		AutoCommand.isAutoTaxiOn = NetworkEntries.m_isAutoTaxiOn.getBoolean(true);
-		AutoCommand.isAutoCollectOn = NetworkEntries.m_isAutoCollectOn.getBoolean(true);
-	}
+	public void disabledPeriodic() {}
 
 	/** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
 	@Override
@@ -101,14 +97,11 @@ public class Robot extends TimedRobot {
 		m_indexer.enableBrake(true);
 
 		//Gets the autonomous command from robotContainer
-		m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-
-		m_autonomousCommand.setTarmac(NetworkEntries.getTarmac());
-		m_autonomousCommand.setCargoToTarget(NetworkEntries.getCargos());
+		m_autoCommand = m_robotContainer.getAutonomousCommand();
 
 		// Schedules the autonomous command
-		if (m_autonomousCommand != null) {
-			CommandScheduler.getInstance().schedule(m_autonomousCommand);
+		if (m_autoCommand != null) {
+			CommandScheduler.getInstance().schedule(m_autoCommand);
 		}
 
 		//Disables the speeds
@@ -119,14 +112,15 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		//Schedules sequential and parallel command groups fed from the AutoCommand
-		if (AutoCommand.executingCommand) return;
-		SequentialCommandGroup sequentialCommand = m_autonomousCommand.getSequentialCommand();
-		ParallelCommandGroup parallelCommand = m_autonomousCommand.getParallelCommand();
-		if (AutoCommand.commandToScheduleNext == 'S' && sequentialCommand != null) {
-			AutoCommand.executingCommand = true;
+		if (m_autoCommand.hasFinished()) return;
+		if (m_autoCommand.getExecutingCommand()) return;
+		SequentialCommandGroup sequentialCommand = m_autoCommand.getSequentialCommandGroup();
+		ParallelCommandGroup parallelCommand = m_autoCommand.getParallelCommandGroup();
+		if (m_autoCommand.getCommandToScheduleNext() == 'S' && sequentialCommand != null) {
+			AutoCommand.setExecutingCommand(true);
 			CommandScheduler.getInstance().schedule(sequentialCommand);
-		} else if (AutoCommand.commandToScheduleNext == 'P' && parallelCommand != null) {
-			AutoCommand.executingCommand = true;
+		} else if (m_autoCommand.getCommandToScheduleNext() == 'P' && parallelCommand != null) {
+			AutoCommand.setExecutingCommand(true);
 			CommandScheduler.getInstance().schedule(parallelCommand);
 		}
 	} 

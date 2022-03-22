@@ -11,18 +11,30 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 /** This class stores the NetworkTableEntries */
 public class NetworkEntries {
 	//Auto Tab
-	public static NetworkTableEntry m_isAutoShootOn;  //boolean
-	public static NetworkTableEntry m_isAutoTaxiOn;  //boolean
-	public static NetworkTableEntry m_isAutoCollectOn;  //boolean
+	public static NetworkTableEntry m_nteShootPreloadSelected;  //boolean
+	public static NetworkTableEntry m_nteHasPreload; //boolean
+	public static NetworkTableEntry m_nteTaxiSelected;  //boolean
+	public static NetworkTableEntry m_nteCollectCargoSelected;  //boolean
+	public static NetworkTableEntry m_nteShootCollectedCargoSelected; //boolean
+	public static NetworkTableEntry m_nteCustomTrajectorySelected;  //boolean
 
 	public static NetworkTableEntry m_nteRightTarmac;  //boolean
-
 	public static NetworkTableEntry m_nteLLCargo;  //boolean
 	public static NetworkTableEntry m_nteLRCargo;  //boolean
 	public static NetworkTableEntry m_nteMLCargo;  //boolean
 	public static NetworkTableEntry m_nteMRCargo;  //boolean
 	public static NetworkTableEntry m_nteRLCargo;  //boolean
 	public static NetworkTableEntry m_nteRRCargo;  //boolean
+	public static NetworkTableEntry m_nteGenerateCargoCollection;  //boolean
+	public static NetworkTableEntry m_nteCargoCollectionHasGenerated;  //boolean
+
+	public static NetworkTableEntry m_nteMaxVelocity;  //double (meters per second)
+	public static NetworkTableEntry m_nteMaxAcceleration;  //double (meters per second squared)
+	public static NetworkTableEntry m_nteX;  //double
+	public static NetworkTableEntry m_nteY;  //double
+	public static NetworkTableEntry m_nteEndAngle;  //double
+	public static NetworkTableEntry m_nteGenerateCustomTrajectory;  //boolean
+	public static NetworkTableEntry m_nteCustomTrajectoryHasGenerated;  //boolean
 
 	//Drive Tab
 	public static NetworkTableEntry m_nteIsPivotAssistEnabled;  //boolean
@@ -61,7 +73,7 @@ public class NetworkEntries {
 	}
 
 	//Returns the selected cargo to target
-	public static ArrayList<String> getCargos() {
+	public static String[] getCargoToTarget() {
 		ArrayList<String> cargo = new ArrayList<>();
 		if (m_nteLLCargo.getBoolean(false)) {
 			cargo.add("LL");
@@ -81,7 +93,7 @@ public class NetworkEntries {
 		if (m_nteRRCargo.getBoolean(false)) {
 			cargo.add("RR");
 		}
-		return cargo;
+		return (String[]) cargo.toArray();
 	}
 
 	//Returns whether the pivot assist is enabled

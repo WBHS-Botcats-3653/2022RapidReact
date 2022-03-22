@@ -1,179 +1,261 @@
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
 package frc.robot.commands;
 
 import static frc.robot.Constants.AutoConstants.*;
+import static frc.robot.Constants.DrivePIDConstants.*;
 
-import java.util.ArrayList;
+import java.util.*;
 
+import edu.wpi.first.math.controller.RamseteController;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.trajectory.*;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.*;
-import frc.robot.commands.autoCommands.*;
-import frc.robot.subsystems.Direction;
+import frc.robot.NetworkEntries;
+import frc.robot.commands.autoCommands.CollectCargoCommand;
+import frc.robot.commands.autoCommands.ShootCargoCommand;
+import frc.robot.subsystems.*;
 
 public class AutoCommand extends CommandBase {
-	private Direction m_direction = Direction.getInstance();
+	private static final DrivePID m_drivePID = DrivePID.getInstance();
+	private static final Drivetrain m_drivetrain = Drivetrain.getInstance();
+	private static final Direction m_direction = Direction.getInstance();
 
-	/*Which Tarmac the robot is starting in (defaults to left tarmac)
-	*"L"=Left, "R"=Right
-	*/
-	private char startingTarmac;
+	private static final RamseteCommand taxiRamCommand = generateTrajectory(
+		Units.feetToMeters(2.0),  //Max velocity (Meters per second)
+		Units.feetToMeters(2.0),  //Max acceleration (Meters per seconds squared)
+		Arrays.asList(
+			new Pose2d(),  //Starting position
+			new Pose2d(0, Units.feetToMeters(kTaxiDistance), new Rotation2d())  //End position
+		)
+	);
+	private static RamseteCommand collectCargoRamCommand;
+	private static RamseteCommand customRamCommand;
 
-	//Which cargo the robot should target during autonomous
-	private ArrayList<String> cargoToTarget;
+	private static int numCargoCollected = 0;
 
-	public static boolean executingCommand;
+	private char commandToScheduleNext;
+	private static boolean executingCommand = false;
 
-	private boolean hasFinished;
-	private int cargoTargetIndex;
+	private boolean shootPreloadEnabled;
+	private boolean hasPreload;
+	private boolean taxiEnabled;
+	private boolean collectCargoEnabled;
+	private boolean shootCollectedCargoEnabled;
+	private boolean customTrajectoryEnabled;
 
-	public static boolean isAutoShootOn, isAutoTaxiOn, isAutoCollectOn;
+	private int collectStage = 0;
 
-	public static char commandToScheduleNext;  //'S' = Sequential command / 'P' = Parallel command
-	private SequentialCommandGroup sequentialCommandToSchedule;
-	private ParallelCommandGroup parallelCommandToSchedule;
+	private SequentialCommandGroup sequential;
+	private ParallelCommandGroup parallel;
 
-	//Constructor
+	private static boolean hasFinished = false;
+		
+	/** Creates a new AutoCommand. */
 	public AutoCommand() {
-		hasFinished = false;
-		executingCommand = false;
+		// Use addRequirements() here to declare subsystem dependencies.
 	}
 
-	//Returns the next SequentialCommandGroup to be scheduled
-	public SequentialCommandGroup getSequentialCommand() {
-		SequentialCommandGroup cmd = sequentialCommandToSchedule;
-		sequentialCommandToSchedule = null;
-		return cmd;
-	}
-
-	//Returns the next ParallelCommandGroup to be scheduled
-	public ParallelCommandGroup getParallelCommand() {
-		ParallelCommandGroup cmd = parallelCommandToSchedule;
-		parallelCommandToSchedule = null;
-		return cmd;
-	}
-
-	//Sets the tarmax the robot is starting in
-	public void setTarmac(char tarmac) {
-		startingTarmac = tarmac;
-	}
-
-	//Sets the cargo the robot should target during auto
-	public void setCargoToTarget(ArrayList<String> cargo) {
-		cargoToTarget = cargo;
-	}
-
+	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
-		//Resets the encoders
+		//Gets user selections
+		shootPreloadEnabled = NetworkEntries.m_nteShootPreloadSelected.getBoolean(false);
+		hasPreload = NetworkEntries.m_nteHasPreload.getBoolean(false);
+		taxiEnabled = NetworkEntries.m_nteTaxiSelected.getBoolean(false);
+		collectCargoEnabled = NetworkEntries.m_nteCollectCargoSelected.getBoolean(false);
+		shootCollectedCargoEnabled = NetworkEntries.m_nteShootCollectedCargoSelected.getBoolean(false);
+		customTrajectoryEnabled = NetworkEntries.m_nteCustomTrajectorySelected.getBoolean(false);
+
+		//Resets the encoders to ensure robot starts zeroed
 		m_direction.resetEncoders();
-		//Target first selected cargo
-		cargoTargetIndex = 0;
-		//Schedules preload shoot and taxi if applicable
+		//Next command to be schedule will be a SequentialCommandGroup
 		commandToScheduleNext = 'S';
-		sequentialCommandToSchedule = new SequentialCommandGroup(
-			isAutoShootOn ? new ShootCargoCommand() : new PrintCommand("Auto shoot preload disabled"),   //Shoots Preload
-			isAutoTaxiOn || isAutoCollectOn ? new DriveCommand(kTaxiDistance, kAutoDriveSpeed, false) : new PrintCommand ("Taxi is disabled"),
-			new InstantCommand(() -> AutoCommand.executingCommand = false)  //Completed executing a sequential command
+		//Auto commands to be scheduled sequentially
+		sequential = new SequentialCommandGroup(
+			shootPreloadEnabled ? new ShootCargoCommand(1) : new PrintCommand("Auto shoot disabled"),  //Shoot preload
+			taxiEnabled ? taxiRamCommand : new PrintCommand("Taxi disabled"),  //Taxi
+			customTrajectoryEnabled ? customRamCommand : new PrintCommand("Custom trajectory disabled"),  //Custom trajectory
+			new InstantCommand(() -> executingCommand = false)  //Has finished executing the SequentialCommandGroup
 		);
 	}
 
+	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
 		//If currently executing an auto command break out of the method
 		if (executingCommand) return;
-		if (!isAutoCollectOn || cargoTargetIndex == cargoToTarget.size()) {  //If collect cargo is disabled in the Dashboard or there is no more cargo left to collect
-			//Ends auto command
+		//If collect cargo is disabled
+		if (!collectCargoEnabled) {
+			//Auto has finished
 			hasFinished = true;
-			//Breaks out of the switch
+			//Break out of the method
 			return;
 		}
-		/*The angle and distance the robot needs to move to get to the desired cargo
-		*double[angle, distance]
-		*/
-		double[] angleAndDistance = kAnglesAndDistances.get(startingTarmac + cargoToTarget.get(cargoTargetIndex));
-		if (cargoTargetIndex == 0) {
-			//If there is no distance or angle to move skip this cargo
-			if (angleAndDistance[0] != 0 && angleAndDistance[1] != 0) {
+		switch (collectStage) {
+			case (0): //Collecting cargo
+				//The next command to be scheduled will be a ParallelCommandGroup
+				commandToScheduleNext = 'P';
+				//Auto commands to be scheduled parallel
+				parallel = new ParallelCommandGroup(
+					new CollectCargoCommand(),  //Intake cargo
+					collectCargoRamCommand  //Drive along tajectory where cargo will be located
+				);
+				//Switch to the next stage of auto collection
+				collectStage++;
+				//Break out of the switch
+				break;
+			case (1):  //Shooting cargo
+				//If the robot is moving
+				if (m_direction.isMoving()) {
+					break;
+				} else {  //If the robot is not moving
+					executingCommand = false;
+				}
+				//If shoot collected cargo is disabled
+				if (!shootCollectedCargoEnabled) {
+					//Auto has finished
+					hasFinished = true;
+					//Break out of the switch
+					break;
+				}
+				//The next command to be scheduled will be a SequentialCommandGroup
 				commandToScheduleNext = 'S';
-				//Creates a new sequential command to be scheduled
-				sequentialCommandToSchedule = new SequentialCommandGroup(
-					//Turn specified distance
-					new TurnCommand(angleAndDistance[0]),
-					//Execute parallel command next
-					new InstantCommand(() -> AutoCommand.commandToScheduleNext = 'P'),
-					//End command
-					new InstantCommand(() -> AutoCommand.executingCommand = false)
+				//Auto commands to be scheduled sequentially
+				sequential = new SequentialCommandGroup(
+					new ShootCargoCommand(numCargoCollected + (hasPreload ? 1 : 0)),  //Shoot cargo
+					new InstantCommand(() -> hasFinished = true),  //Auto has finished
+					new InstantCommand(() -> executingCommand = false)  //Has finished executing the sequential command
 				);
-				//Creates a new parallel command to be scheduled (Collect cargo)
-				parallelCommandToSchedule = new ParallelCommandGroup(
-					//Drive specified distance
-					new DriveCommand(angleAndDistance[1], kAutoDriveSpeed, true),
-					//Intake the cargo
-					new CollectCargoCommand(),
-					//Execute parallel command next
-					new InstantCommand(() -> AutoCommand.commandToScheduleNext = 'S')
-				);
-			}
-		} else {
-			double[] prevAngleAndDistance = kAnglesAndDistances.get(startingTarmac + cargoToTarget.get(cargoTargetIndex - 1));
-			double a = prevAngleAndDistance[1];
-			double b = angleAndDistance[1];
-			double C = prevAngleAndDistance[0] - angleAndDistance[0];
-			double dist = FindMissingSide(a, b, C);
-			double ang = FindMissingAngle(a, b, dist);
-			commandToScheduleNext = 'S';
-			//Creates a new sequential command to be scheduled
-			sequentialCommandToSchedule = new SequentialCommandGroup(
-				//Turn specified distance
-				new TurnCommand(dist),
-				//Execute parallel command next
-				new InstantCommand(() -> AutoCommand.commandToScheduleNext = 'P'),
-				//End command
-				new InstantCommand(() -> AutoCommand.executingCommand = false)
-			);
-			//Creates a new parallel command to be scheduled (Collect cargo)
-			parallelCommandToSchedule = new ParallelCommandGroup(
-				//Drive specified distance
-				new DriveCommand(ang, kAutoDriveSpeed, true),
-				//Intake the cargo
-				new CollectCargoCommand(),
-				//Execute parallel command next
-				new InstantCommand(() -> AutoCommand.commandToScheduleNext = 'S')
-			);
+				//Break out of the switch
+				break;
 		}
-		//Target next cargo
-		cargoTargetIndex++;
-	}
-
-	/**Return the missing side of a scalene triangle
-	 *@param a Side a length
-	 *@param b Side b length
-	 *@param C Angle C in degrees
-	 *@return Length of side c
-	 */
-	public double FindMissingSide(double a, double b, double C) {
-		return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2) - 2 * a * b * Math.cos(C));
-	}
-
-	/**Finds the missing angle of a scalemne triangle
-	 *@param a Side a length
-	 *@param b Side b length
-	 *@param c Side c length
-	 *@return Angle C in degrees
-	 */
-	public double FindMissingAngle(double a, double b, double c) {
-		return Math.acos((Math.pow(a, 2) + Math.pow(b, 2) - Math.pow(c, 2)) / 2 * a * b);
 	}
 
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
-		m_direction.resetEncoders();
+		//Stop the drivetrain
+		m_drivetrain.arcadeDrive(0, 0);
 	}
 
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() {
-		//If auto has finished
+		//Return whether all auto commands have finished
 		return hasFinished;
 	}
-	//esteban is driving us nuts :):)
+
+	/** Generates a new trajectory for the robot to follow during the autonomous period
+	 * @param maxVelocityMetersPerSecond The max velocity the robot can travel
+	 * @param maxAccelerationMetersPerSecondSq The max the robot can accelerate
+	 * @param waypoints The points the robot will travel through during the trajectory
+	 * @return RamseteCommand to be executed by the scheduler
+	 */
+	public static RamseteCommand generateTrajectory(double maxVelocityMetersPerSecond, double maxAccelerationMetersPerSecondSq, List<Pose2d> waypoints) {
+		//Creates a trajectory config with the given max velocity and acceleration
+		TrajectoryConfig config = new TrajectoryConfig(maxVelocityMetersPerSecond, maxAccelerationMetersPerSecondSq);
+		//Passes a Kinematics object to the trajectory config
+		config.setKinematics(m_drivePID.getKinematics());
+		//Creates a new trajectory with the given waypoints
+		Trajectory trajectory = TrajectoryGenerator.generateTrajectory(waypoints, config);
+		/*Takes the robots current position, trajectory, and wheel speeds along with other
+		 *Objects, Suppliers, and BiConsumers and calculates the linear and angular velocities to
+		 *move the robot in order to follow the path of the trajectory
+		 */
+		return new RamseteCommand(
+			trajectory,  //Trajectory to follow
+			m_drivePID::getPose,  //Method to supply the current position (Supplier)
+			new RamseteController(kRamseteB, kRamseteZeta),  //Calculates the current linear and angular velocity of the robot
+			m_drivePID.getFeedForward(),  //Gets SimpleMotorFeedForward which converts left and right wheel speeds to motor voltages
+			m_drivePID.getKinematics(),  //Gets Kinematics which converts linear and angular velocity into left and right wheel speeds
+			m_drivePID::getWheelSpeeds,  //Method to supply DifferentialDriveWheelSpeeds which contains the left and right wheel speeds (Supplier)
+			m_drivePID.getLeftPIDController(),  //Gets the left drivetrain PID controller which calculates the motor voltage required to smoothly get the robot to the desired endpoint
+			m_drivePID.getRightPIDController(),  //Gets the right drivetrain PID controller which calculates the motor voltage required to smoothly get the robot to the desired endpoint
+			m_drivetrain::tankDriveVolts,  //Method which sets the left and right motor voltages of the drivetrain (BiConsumer)
+			m_drivePID,  //Required subsystem
+			m_drivetrain,  //Required subsystem
+			m_direction  //Required subsystem
+		);
+	}
+
+	/** Generates a trajectory which passes through all the targeted cargo
+	 * @param tarmac The tarmac the robot starts the match in
+	 * @param cargo The cargo to be targeted
+	 */
+	public static void generateCargoCollectionTrajectory(char tarmac, String[] cargo) {
+		ArrayList<Pose2d> waypoints = new ArrayList<>();
+		//Starting waypoint
+		waypoints.add(new Pose2d());
+		//Traverse the cargo pieces to be targeted
+		for (String c : cargo) {
+			//Get the waypoint for each piece of cargo
+			waypoints.add(new Pose2d(kCargoCoordinates.get(tarmac + c)[0], kCargoCoordinates.get(tarmac + c)[1], new Rotation2d()));
+		}
+		//Generate the trajectory
+		collectCargoRamCommand = generateTrajectory(
+			Units.feetToMeters(2),  //Max velocity (meters per second)
+			Units.feetToMeters(2),  //Max acceleration (meters per second squared)
+			waypoints  //Waypoints
+		);
+		//Sets the number of cargo to be collected
+		numCargoCollected = cargo.length;
+	}
+
+	/** Generates a new custom trajectory for the robot to follow during the autonomous period
+	 * @param maxVelocityMetersPerSecond The max velocity the robot can travel
+	 * @param maxAccelerationMetersPerSecondSq The max the robot can accelerate
+	 * @param x The distance the robot should move along the x-axis (Feet)
+	 * @param y The distance the robot should move along the y-axis (Feet)
+	 * @param endAngle The angle the robot should end the trajectory at (Degrees)
+	 */
+	public static void generateCustomTrajectory(double maxVelocityMetersPerSecond, double maxAccelerationMetersPerSecondSq, double x, double y, double endAngle) {
+		//Converts x and y from feet to meters
+		x = Units.feetToMeters(x);
+		y = Units.feetToMeters(y);
+		//Converts the angle from degrees to radians
+		endAngle = Units.degreesToRadians(endAngle);
+		//Generates a RamseteCommand with the custom trajectory
+		customRamCommand = generateTrajectory(
+			maxVelocityMetersPerSecond,  //Max velocity (meters per second)
+			maxAccelerationMetersPerSecondSq,  //Max acceleration (meters per seconds squared)
+			Arrays.asList(
+				new Pose2d(),  //Starting waypoint
+				new Pose2d(x, y, new Rotation2d(endAngle))  //End waypoint
+			)
+		);
+	}
+
+	//Returns where an auto command is currently being executed
+	public boolean getExecutingCommand() {return executingCommand;}
+
+	//Sets whether an auto command is currently being executed
+	public static void setExecutingCommand(boolean isExecuting) {executingCommand = isExecuting;}
+
+	//Returns the type of command which is to be scheduled next
+	public char getCommandToScheduleNext() {return commandToScheduleNext;}
+
+	//Returns the SequentialCommandGroup to be scheduled
+	public SequentialCommandGroup getSequentialCommandGroup() {
+		SequentialCommandGroup command = sequential;
+		sequential = null;
+		return command;
+	}
+
+	//Returns the ParallelCommandGroup to be scheduled
+	public ParallelCommandGroup getParallelCommandGroup() {
+		ParallelCommandGroup command = parallel;
+		parallel = null;
+		return command;
+	}
+
+	//Returns whether all the auto commands have finished
+	public boolean hasFinished() {return hasFinished;}
+
+	//Sets whether all the auto commands have finished
+	public void setHasFinished(boolean isFinished) {hasFinished = isFinished;}
 }
