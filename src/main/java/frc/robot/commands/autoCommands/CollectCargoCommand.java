@@ -20,7 +20,6 @@ public class CollectCargoCommand extends CommandBase {
 	public static boolean endCommand;
 
 	public CollectCargoCommand() {
-		// Use addRequirements() here to declare subsystem dependencies.
 		addRequirements(m_intake, m_indexer);
 	}
 
@@ -36,16 +35,16 @@ public class CollectCargoCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		if (m_si.isPivotDownLimitClosed() && !endCommand) {  //If the intake has finished it's downward pivot
-			//Stops the intake pivot
-			m_intake.setPivotSpeed(kIntakePivotAssistSpeed);
-			//Spins the intake rollers
-			m_intake.setRollerSpeed(kAutoIntakeRollerSpeed);
-		} else if (endCommand) {  //If the command has been told to end
+		if (endCommand) {  //If the command has been told to end
 			//Pivots the intake up
 			m_intake.setPivotSpeed(-kAutoIntakePivotUpSpeed);
 			//Stops the intake rollers
 			m_intake.setRollerSpeed(0);
+		} else if (m_si.isPivotDownLimitClosed()) {  //If the intake has finished it's downward pivot
+			//Pivot assist
+			m_intake.setPivotSpeed(kIntakePivotAssistSpeed);
+			//Spins the intake rollers
+			m_intake.setRollerSpeed(kAutoIntakeRollerSpeed);
 		}
 	}
 

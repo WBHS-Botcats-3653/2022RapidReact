@@ -22,7 +22,6 @@ public class ShootCargoCommand extends CommandBase {
 
 	public ShootCargoCommand(int numCargo) {
 		this.numCargo = numCargo;
-		// Use addRequirements() here to declare subsystem dependencies.
 		addRequirements(m_indexer, m_shooter);
 	}
 
@@ -45,9 +44,11 @@ public class ShootCargoCommand extends CommandBase {
 		if (m_si.isShooterClosed()) {  //If cargo has moved into the shooter
 			//The shooter photoelectric sensor has been triggered
 			shooterTriggered = true;
-		} else {  //If cargo is not in the shooter
-			//If the shooter has been previously triggered increment the number of cargo that has been shot by 1
-			if (shooterTriggered) numShot++;
+		} else if (shooterTriggered) {  //If the shooter has been previously triggered
+			//Increment the number of cargo that has been shot by 1
+			numShot++;
+			//The shooter photoelectric sensor has not been triggered
+			shooterTriggered = false;
 		}
 	}
 
