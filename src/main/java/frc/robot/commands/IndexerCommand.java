@@ -58,12 +58,12 @@ public class IndexerCommand extends CommandBase {
 
 	//Manual control indexer logic, returns whether any user input was given to the indexer
 	public boolean manualIndexerLogic() {
-		if (m_oi.getIndexerIn()) {  //If the A button is being pressed
+		if (m_oi.getIndexerIn()) {  //If the index in button is being pressed
 			//Sets the indexer speed to the set max
 			m_indexer.setIndexerSpeed(m_oi.getMaxIndexSpeed());
 			//Returns user input given
 			return true;
-		} else if (m_oi.getIndexerOut()) {  //If the Y button is being pressed
+		} else if (m_oi.getIndexerOut()) {  //If the index out button is being pressed
 			//Sets the indexer speed to the negative set max
 			m_indexer.setIndexerSpeed(-m_oi.getMaxIndexSpeed());  //Reverse indexer
 			//Returns user input given
@@ -95,7 +95,7 @@ public class IndexerCommand extends CommandBase {
 		} else if (m_si.isIntakeClosed()) {  //If there is cargo in the intake but not in the upper storage area
 			//Spins the indexer
 			m_indexer.setIndexerSpeed(kSmartIndexSpeed);
-		} else if (m_si.isLowerStorageClosed()) {  //If the is cargo only in the lower storage
+		} else if (m_si.isLowerStorageClosed()) {  //If there is cargo only in the lower storage
 			//Stops the indexer
 			m_indexer.setIndexerSpeed(0);
 		}

@@ -24,10 +24,10 @@ public class ShooterCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		if (m_oi.getShoot()) {  //If the right trigger is being pressed
+		if (m_oi.getShoot()) {  //If the shoot button is being pressed
 			//Spins the shooter at max speed
 			m_shooter.setShootSpeed(m_oi.getMaxShootSpeed());
-		} else if (m_oi.getShootReverse()) {  //If the right bumper is being pressed
+		} else if (m_oi.getShootReverse()) {  //If the reverse shoot button is being pressed
 			//Spins the shooter at max speed in reverse
 			m_shooter.setShootSpeed(-m_oi.getMaxShootSpeed());
 		} else {  //Nothing is being pressed (shooter wise)

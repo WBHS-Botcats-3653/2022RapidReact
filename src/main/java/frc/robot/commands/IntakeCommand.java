@@ -69,10 +69,10 @@ public class IntakeCommand extends CommandBase {
 
 	//Manual pivot OI logic
 	public void manualPivotLogic() {
-		if (m_oi.getManualIntakeDown()) {  //If the left trigger is being pressed
+		if (m_oi.getManualIntakeDown()) {  //If the intake down button is being pressed
 			//Pivot the intake down
 			m_intake.setPivotSpeed(m_oi.getMaxIntakePivotSpeed());
-		} else if (m_oi.getManualIntakeUp()) {  //If the left bumper is being pressed
+		} else if (m_oi.getManualIntakeUp()) {  //If the intake up button is being pressed
 			//Pivot the intake up
 			m_intake.setPivotSpeed(-m_oi.getMaxIntakePivotSpeed());
 		} else {  //Nothing being pressed (intake pivot wise)
@@ -83,7 +83,7 @@ public class IntakeCommand extends CommandBase {
 
 	//Manual roller OI logic
 	public void manualRollerLogic() {
-		if (m_oi.getManualIntakeIn()) {  //If the A button is being pressed
+		if (m_oi.getManualIntakeIn()) {  //If the intake in button is being pressed
 			//Spin the rollers at max speed
 			m_intake.setRollerSpeed(m_oi.getMaxIntakeRollerSpeed());
 			//Pivot assist (pivots the intake down at a low speed when spinning the rollers)
@@ -91,7 +91,7 @@ public class IntakeCommand extends CommandBase {
 				//Sets the pivot speed to max assist speed
 				m_intake.setPivotSpeed(kIntakePivotAssistSpeed);
 			}
-		} else if (m_oi.getManualIntakeOut()) {  //If the X button is being pressed
+		} else if (m_oi.getManualIntakeOut()) {  //If the intake out button is being pressed
 			//Reverse the rollers and spin at max speed
 			m_intake.setRollerSpeed(-m_oi.getMaxIntakeRollerSpeed());
 		} else {  //Nothing being pressed (intake roller wise)

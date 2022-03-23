@@ -30,10 +30,10 @@ public class ClimberCommand extends CommandBase {
 	public void execute() {
 		//Climber
 		//Checks whether there is input coming in to move the climber arm
-		if (m_oi.getClimbUp()) {  //If Dpad up is pressed
+		if (m_oi.getClimbUp()) {  //If climber up button is pressed
 			//Move climber arm up
 			m_climber.setClimberArmSpeed(-m_oi.getMaxClimbSpeed());
-		} else if (m_oi.getClimbDown()) {  //If Dpad down is pressed
+		} else if (m_oi.getClimbDown()) {  //If climber down button is pressed
 			//Move climber arm down
 			m_climber.setClimberArmSpeed(m_oi.getMaxClimbSpeed());
 		} else {  //Nothing being pressed (climber wise)
@@ -41,12 +41,12 @@ public class ClimberCommand extends CommandBase {
 			m_climber.setClimberArmSpeed(0);
 		}
 
-		//Extender
+		//Extender winch
 		//Checks whether there is input coming in to move the extender
-		if (m_oi.getExtenderWinchClockwise()) {  //If Dpad right is pressed
+		if (m_oi.getExtenderWinchClockwise()) {  //If extender winch clockwise button is pressed
 			//Winch extender clockwise
 			m_climber.setExtenderWinchSpeed(m_oi.getMaxExtenderWinchSpeed());
-		} else if (m_oi.getExtenderWinchCounterclockwise()) {  //If Dpad left is pressed
+		} else if (m_oi.getExtenderWinchCounterclockwise()) {  //If extender winch counterclockwise button is pressed
 			//Winch extender counterclockwise
 			m_climber.setExtenderWinchSpeed(-m_oi.getMaxExtenderWinchSpeed());
 		} else {  //Nothing being pressed (extender wise)
@@ -54,11 +54,11 @@ public class ClimberCommand extends CommandBase {
 			m_climber.setExtenderWinchSpeed(0);
 		}
 
-		//Hook
-		if (m_oi.getHookWinchClockwise()) {  //If the start button is being pressed
+		//Hook winch
+		if (m_oi.getHookWinchClockwise()) {  //If the hook winch clockwise button is being pressed
 			//Winch the hook clockwise
 			m_climber.setHookWinchSpeed(m_oi.getMaxHookWinchSpeed());
-		} else if (m_oi.getHookWinchCounterclockwise()) {  //If the back button is being pressed
+		} else if (m_oi.getHookWinchCounterclockwise()) {  //If the hook winch counterclockwise button is being pressed
 			//Winch the hook counterclockwise
 			m_climber.setHookWinchSpeed(-m_oi.getMaxHookWinchSpeed());
 		} else {  //Nothing being pressed (winch wise)
