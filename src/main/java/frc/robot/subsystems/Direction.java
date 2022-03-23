@@ -49,14 +49,9 @@ public class Direction extends SubsystemBase {
 		return gyro.getAngle();
 	}
 
-	//Returns the rate
-	public double getGyroRate() {
-		return gyro.getRate();
-	}
-
 	//Returns the current heading of the robot
 	public Rotation2d getHeading() {
-		return Rotation2d.fromDegrees(-getGyroAngle());  //Counterclockwise = positive
+		return Rotation2d.fromDegrees(-this.getGyroAngle());  //Counterclockwise = positive
 	}
 
 	//Returns the right encoder
@@ -98,21 +93,21 @@ public class Direction extends SubsystemBase {
 	//Returns whether the robot is currently moving
 	public boolean isMoving() {
 		//Returns if the rate either the left or the right encoder rate are changing
-		return getLeftEncoderRate() != 0 || getRightEncoderRate() != 0;
+		return this.getLeftEncoderRate() != 0 || this.getRightEncoderRate() != 0;
 	}
 
 	/**
 	 * @return encoder's distance
 	 */
 	public double getEncoderDistance() {
-		return (getRightEncoderDistance() + getLeftEncoderDistance()) / 2;
+		return (this.getRightEncoderDistance() + this.getLeftEncoderDistance()) / 2;
 	}
 
 	/**
 	 * @return the error between the left and right distance
 	 */
 	public double getEncoderError() {
-		return getLeftEncoderDistance() - getRightEncoderDistance();
+		return this.getLeftEncoderDistance() - this.getRightEncoderDistance();
 	}
 
 	//Resets the encoders

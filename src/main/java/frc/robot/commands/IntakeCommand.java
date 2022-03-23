@@ -27,7 +27,6 @@ public class IntakeCommand extends CommandBase {
 		m_intake = p_intake;
 		//Not pivoting up while under smart control
 		smartPivotGoingUp = false;
-		// Use addRequirements() here to declare subsystem dependencies.
 		addRequirements(p_intake);
 	}
 

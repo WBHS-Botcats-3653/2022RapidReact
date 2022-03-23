@@ -50,9 +50,7 @@ public class AutoCommand extends CommandBase {
 	private static boolean hasFinished = false;
 		
 	/** Creates a new AutoCommand. */
-	public AutoCommand() {
-		// Use addRequirements() here to declare subsystem dependencies.
-	}
+	public AutoCommand() {}
 
 	// Called when the command is initially scheduled.
 	@Override

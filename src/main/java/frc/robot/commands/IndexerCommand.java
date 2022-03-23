@@ -21,7 +21,6 @@ public class IndexerCommand extends CommandBase {
 	/** Creates a new StorageCommand. */
 	public IndexerCommand(Indexer p_indexer) {
 		m_indexer = p_indexer;
-		// Use addRequirements() here to declare subsystem dependencies.
 		addRequirements(p_indexer);
 	}
 	

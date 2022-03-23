@@ -17,7 +17,6 @@ public class ArcadeDriveCommand extends CommandBase {
 	 */
 	public ArcadeDriveCommand(Drivetrain p_drivetrain) {
 		m_drivetrain = p_drivetrain;
-		// Use addRequirements() here to declare subsystem dependencies.
 		addRequirements(p_drivetrain);
 	}
 

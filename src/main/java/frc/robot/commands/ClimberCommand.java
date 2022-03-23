@@ -17,7 +17,6 @@ public class ClimberCommand extends CommandBase {
 	 */
 	public ClimberCommand(Climber p_climber) {
 		m_climber = p_climber;
-		// Use addRequirements() here to declare subsystem dependencies.
 		addRequirements(p_climber);
 	}
 
