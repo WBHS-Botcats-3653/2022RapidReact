@@ -17,12 +17,13 @@ public class SI {
 	private static SI m_singleton;
 
 	//Photoelectric sensors
-	private static DigitalInput lowerStoragePE, upperStoragePE, shooterPE;
+	private static DigitalInput intakePE, lowerStoragePE, upperStoragePE, shooterPE;
 	//Limit switches
 	private static DigitalInput topPivotLimitSwitch, bottomPivotLimitSwitch;
 
 	public SI() {
 		//Photoelectric sensors
+		intakePE = new DigitalInput(kIntakePESensorID);
 		lowerStoragePE = new DigitalInput(kLowerStoragePESensorID);
 		upperStoragePE = new DigitalInput(kUpperStoragePESensorID);
 		shooterPE = new DigitalInput(kShooterPESensorID);
@@ -37,6 +38,11 @@ public class SI {
 			m_singleton = new SI();
 		}
 		return m_singleton;
+	}
+
+	//Returns input from the intake photoelectric sensor
+	public boolean isIntakeClosed() {
+		return intakePE.get();
 	}
 
 	//Returns input from the lower storage photoelectric sensor

@@ -142,6 +142,7 @@ public final class Constants {
 		public static final int kIndexerMotorID = 22;  //CAN
 
 		//Storage photoelectric sensor IDs
+		public static final int kIntakePESensorID = 9;  //DIO
 		public static final int kLowerStoragePESensorID = 6;  //DIO
 		public static final int kUpperStoragePESensorID = 7;  //DIO
 		

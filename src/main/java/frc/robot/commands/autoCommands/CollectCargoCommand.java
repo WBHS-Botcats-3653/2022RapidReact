@@ -35,6 +35,7 @@ public class CollectCargoCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
+		//Intake pivot and rollers
 		if (endCommand) {  //If the command has been told to end
 			//Pivots the intake up
 			m_intake.setPivotSpeed(-kAutoIntakePivotUpSpeed);
@@ -45,6 +46,17 @@ public class CollectCargoCommand extends CommandBase {
 			m_intake.setPivotSpeed(kIntakePivotAssistSpeed);
 			//Spins the intake rollers
 			m_intake.setRollerSpeed(kAutoIntakeRollerSpeed);
+		}
+		//Indexer
+		if (m_si.isUpperStorageClosed()) {  //If there is cargo in the upper storage area
+			//Spin the indexer in reverse
+			m_indexer.setIndexerSpeed(-kAutoIndexSpeed);
+		} else if (m_si.isLowerStorageClosed()) {  //If there is cargo is the lower storage area
+			//Stop the indexer
+			m_indexer.setIndexerSpeed(0);
+		} else if (m_si.isIntakeClosed()) {  //If there is cargo in the intake
+			//Spin the indexer
+			m_indexer.setIndexerSpeed(kAutoIndexSpeed);
 		}
 	}
 

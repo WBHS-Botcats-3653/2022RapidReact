@@ -18,7 +18,8 @@ public class IntakeCommand extends CommandBase {
 	private final SI m_si = SI.getInstance();
 
 	private static boolean smartControl = false;
-	private static boolean smartPivotGoingUp, smartPivotGoingDown;
+	private static boolean smartPivotGoingUp = false;
+	private static boolean smartPivotGoingDown = false;
 
 	/**Creates a new IntakeCommand.
 	 * @param subsystem The subsystem used by this command.
@@ -178,6 +179,13 @@ public class IntakeCommand extends CommandBase {
 
 	//Returns whether the intake in under smart control
 	public static boolean isUnderSmartControl() {
+		//Returns if the intake is currently in a smart control period
 		return smartControl;
+	}
+
+	//Returns whether the intake is ending it's smart control period
+	public static boolean isEndingSmartControl() {
+		//Returns if the intake is ending it's smart control period by returning if the intake is pivoting up
+		return smartPivotGoingUp;
 	}
 }

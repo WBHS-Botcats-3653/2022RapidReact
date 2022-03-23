@@ -32,13 +32,19 @@ public class ShootCargoCommand extends CommandBase {
 		m_shooter.setShootSpeed(kAutoShootSpeed);
 		//The shooter photoelectric sensor has not been triggered
 		shooterTriggered = false;
+		//If there is cargo in the upper storage area
+		if (m_si.isUpperStorageClosed()) {
+			//Spins the indexer in reverse
+			m_indexer.setIndexerSpeed(-kAutoIndexSpeed);
+		}
 	}
 
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		if (m_si.isLowerStorageClosed()) {  //If there is cargo in the lower storage area
-			//Sets the indexer to max speed
+		//If there is cargo in the intake or lower storage area
+		if (!m_si.isUpperStorageClosed() && (m_si.isIntakeClosed() || m_si.isLowerStorageClosed())) {
+			//Spins the indexer
 			m_indexer.setIndexerSpeed(kAutoIndexSpeed);
 		}
 		if (m_si.isShooterClosed()) {  //If cargo has moved into the shooter

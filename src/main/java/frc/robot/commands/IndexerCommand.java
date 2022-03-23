@@ -16,7 +16,7 @@ public class IndexerCommand extends CommandBase {
 	private final OI m_oi = OI.getInstance();
 	private final SI m_si = SI.getInstance();
 
-	private boolean smartControl;
+	private boolean smartControl, endingSmartControl;
 
 	/** Creates a new StorageCommand. */
 	public IndexerCommand(Indexer p_indexer) {
@@ -25,22 +25,22 @@ public class IndexerCommand extends CommandBase {
 	}
 	
 	@Override
-	public void initialize() {}
+	public void initialize() {
+		//Is not under smart control
+		smartControl = false;
+		//Is not ending smart control
+		endingSmartControl = false;
+	}
 
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		if (IntakeCommand.isUnderSmartControl()) {  //If the intake is under smart control
-			//Smart indexer logic
-			smartIndexerLogic();
-		} else {  //If the intake is not under smart control
-			//Is not under smart control
-			smartControl = false;
-		}
-		if (!smartControl) {  //If the indexer is not under smart control
-			//Manual indexer logic
-			manualIndexerLogic();
-		}
+		//If the intake is under smart control put the indexer under smart control
+		if (IntakeCommand.isUnderSmartControl()) smartControl = true;
+		//If the intake is ending it's smart control period then indexer smart control is ending
+		if (smartControl && IntakeCommand.isEndingSmartControl()) endingSmartControl = true;
+		//Run manual indexer logic, If no user input is given to the indexer by the driver and under smart control then run the smart indexer logic
+		if (manualIndexerLogic() && smartControl) smartIndexerLogic();
 	}
 
 	// Called once the command ends or is interrupted.
@@ -57,31 +57,47 @@ public class IndexerCommand extends CommandBase {
 	}
 
 	//Manual control indexer logic
-	public void manualIndexerLogic() {
+	public boolean manualIndexerLogic() {
 		if (m_oi.getIndexerIn()) {  //If the A button is being pressed
 			//Sets the indexer speed to the set max
 			m_indexer.setIndexerSpeed(m_oi.getMaxIndexSpeed());
+			//Returns user input given
+			return true;
 		} else if (m_oi.getIndexerOut()) {  //If the Y button is being pressed
 			//Sets the indexer speed to the negative set max
 			m_indexer.setIndexerSpeed(-m_oi.getMaxIndexSpeed());  //Reverse indexer
+			//Returns user input given
+			return true;
 		} else {  //Nothing being pressed (indexer wise)
 			//Stops the indexer
 			m_indexer.setIndexerSpeed(0);
 		}
+		//Returns user input not given
+		return false;
 	}
 
 	//Smart control indexer logic
 	public void smartIndexerLogic() {
-		if (m_si.isUpperStorageClosed()) {  //If there is cargo in the upper storage
-			//Is not under smart control
-			smartControl = false;
+		//If the smart control period is ending
+		if (endingSmartControl) {
+			if (!m_si.isUpperStorageClosed() && (m_si.isIntakeClosed() || m_si.isLowerStorageClosed())) {
+				//Spin the indexer
+				m_indexer.setIndexerSpeed(kSmartIndexSpeed);
+			} else {
+				//Is not under smart control
+				smartControl = false;
+				//Is not ending smart control
+				endingSmartControl = false;
+			}
+		} else if (m_si.isUpperStorageClosed()) {  //If there is cargo in the upper storage
 			//Stops the indexer
 			m_indexer.setIndexerSpeed(0);
-		} else if (m_si.isLowerStorageClosed()) {  //If there is cargo in the lower storage
-			//Is under smart control
-			smartControl = true;
+		} else if (m_si.isIntakeClosed()) {  //If there is cargo in the intake but not in the upper storage area
 			//Spins the indexer
 			m_indexer.setIndexerSpeed(kSmartIndexSpeed);
+		} else if (m_si.isLowerStorageClosed()) {  //If the is cargo only in the lower storage
+			//Stops the indexer
+			m_indexer.setIndexerSpeed(0);
 		}
 	}
 }
