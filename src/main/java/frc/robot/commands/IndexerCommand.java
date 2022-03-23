@@ -56,7 +56,7 @@ public class IndexerCommand extends CommandBase {
 		return false;
 	}
 
-	//Manual control indexer logic
+	//Manual control indexer logic, returns whether any user input was given to the indexer
 	public boolean manualIndexerLogic() {
 		if (m_oi.getIndexerIn()) {  //If the A button is being pressed
 			//Sets the indexer speed to the set max
