@@ -35,7 +35,7 @@ public class AutoCommand extends CommandBase {
 	);
 	private static RamseteCommand customRamCommand, collectCargoRamCommand;
 
-	private static int numCargoCollected = 0;
+	private static int numCargoToCollect = 0;
 
 	private char commandToScheduleNext;
 	private static boolean executingCommand = false;
@@ -125,7 +125,7 @@ public class AutoCommand extends CommandBase {
 				commandToScheduleNext = 'S';
 				//Auto commands to be scheduled sequentially
 				sequential = new SequentialCommandGroup(
-					new ShootCargoCommand(numCargoCollected + (hasPreload ? 1 : 0)),  //Shoot cargo
+					new ShootCargoCommand(numCargoToCollect + (hasPreload ? 1 : 0)),  //Shoot cargo
 					new InstantCommand(() -> hasFinished = true),  //Auto has finished
 					new InstantCommand(() -> executingCommand = false)  //Has finished executing the sequential command
 				);
@@ -201,7 +201,7 @@ public class AutoCommand extends CommandBase {
 			waypoints  //Waypoints
 		);
 		//Sets the number of cargo to be collected
-		numCargoCollected = cargo.length;
+		numCargoToCollect = cargo.length;
 	}
 
 	/** Generates a new custom trajectory for the robot to follow during the autonomous period

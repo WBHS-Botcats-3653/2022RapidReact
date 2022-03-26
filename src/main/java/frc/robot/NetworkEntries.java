@@ -75,24 +75,51 @@ public class NetworkEntries {
 	//Returns the selected cargo to target
 	public static String[] getCargoToTarget() {
 		ArrayList<String> cargo = new ArrayList<>();
-		if (m_nteLLCargo.getBoolean(false)) {
-			cargo.add("LL");
+		switch (getTarmac()) {  //Get the starting Tarmac
+			case ('L'):  //Starting in the left Tarmac
+				//Add the cargo to the ArrayList in the order they should be targeted in
+				if (m_nteLLCargo.getBoolean(false)) {
+					cargo.add("LL");
+				}
+				if (m_nteLRCargo.getBoolean(false)) {
+					cargo.add("LR");
+				}
+				if (m_nteMLCargo.getBoolean(false)) {
+					cargo.add("ML");
+				}
+				if (m_nteMRCargo.getBoolean(false)) {
+					cargo.add("MR");
+				}
+				if (m_nteRLCargo.getBoolean(false)) {
+					cargo.add("RL");
+				}
+				if (m_nteRRCargo.getBoolean(false)) {
+					cargo.add("RR");
+				}
+				break;
+			case ('R'):  //Starting in the right Tarmac
+				//Add the cargo to the ArrayList in the order they should be targeted in
+				if (m_nteRRCargo.getBoolean(false)) {
+					cargo.add("RR");
+				}
+				if (m_nteRLCargo.getBoolean(false)) {
+					cargo.add("RL");
+				}
+				if (m_nteMRCargo.getBoolean(false)) {
+					cargo.add("MR");
+				}
+				if (m_nteMLCargo.getBoolean(false)) {
+					cargo.add("ML");
+				}
+				if (m_nteLRCargo.getBoolean(false)) {
+					cargo.add("LR");
+				}
+				if (m_nteLLCargo.getBoolean(false)) {
+					cargo.add("LL");
+				}
+				break;
 		}
-		if (m_nteLRCargo.getBoolean(false)) {
-			cargo.add("LR");
-		}
-		if (m_nteMLCargo.getBoolean(false)) {
-			cargo.add("ML");
-		}
-		if (m_nteMRCargo.getBoolean(false)) {
-			cargo.add("MR");
-		}
-		if (m_nteRLCargo.getBoolean(false)) {
-			cargo.add("RL");
-		}
-		if (m_nteRRCargo.getBoolean(false)) {
-			cargo.add("RR");
-		}
+		//Returns the ArrayList containing the cargo to be targeted as a String array
 		return (String[]) cargo.toArray();
 	}
 

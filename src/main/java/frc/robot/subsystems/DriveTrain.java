@@ -93,7 +93,7 @@ public class Drivetrain extends SubsystemBase {
 
 	//Enables or disables the neutral brake on the motors
 	public void enableBrake(boolean enable) {
-		NeutralMode mode = enable ? NeutralMode.Brake : NeutralMode.Coast;
+		final NeutralMode mode = enable ? NeutralMode.Brake : NeutralMode.Coast;
 		driveFrontLeft.setNeutralMode(mode);
 		driveBackLeft.setNeutralMode(mode);
 		driveFrontRight.setNeutralMode(mode);
