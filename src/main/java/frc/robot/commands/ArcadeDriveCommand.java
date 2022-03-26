@@ -10,10 +10,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.NetworkEntries;
 import frc.robot.inputs.OI;
 import frc.robot.subsystems.Direction;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Drivetrain;
 
 public class ArcadeDriveCommand extends CommandBase {
-	private DriveTrain m_driveTrain;
+	private Drivetrain m_drivetrain;
 	private Direction m_direction;
 	private OI m_oi;
 
@@ -22,12 +22,12 @@ public class ArcadeDriveCommand extends CommandBase {
 	/**Creates a new ArcadeDriveCommand.
 	 * @param subsystem The subsystem used by this command.
 	 */
-	public ArcadeDriveCommand(DriveTrain p_driveTrain) {
-		m_driveTrain = p_driveTrain;
+	public ArcadeDriveCommand(Drivetrain p_drivetrain) {
+		m_drivetrain = p_drivetrain;
 		m_direction = Direction.getInstance();
 		m_oi = OI.getInstance();
 		// Use addRequirements() here to declare subsystem dependencies.
-		addRequirements(p_driveTrain);
+		addRequirements(p_drivetrain);
 	}
 
 	/*Called when the command is initially scheduled.
@@ -58,14 +58,14 @@ public class ArcadeDriveCommand extends CommandBase {
 			errorCorrectionOn = false;
 		}
 		//Drives the robot
-		m_driveTrain.arcadeDrive(throttle, steering);
+		m_drivetrain.arcadeDrive(throttle, steering);
 	}
 
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
 		//Stop the drive train
-		m_driveTrain.arcadeDrive(0, 0);
+		m_drivetrain.arcadeDrive(0, 0);
 	}
 
 	// Returns true when the command should end.

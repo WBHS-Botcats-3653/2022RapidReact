@@ -1,17 +1,11 @@
 package frc.robot.subsystems;
 
-//import static frc.robot.Constants.ClimberConstants.kArmMotorID;
-
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
 import edu.wpi.first.util.sendable.Sendable;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
 public class AutoLogic {
       
-    private static DriveTrain m_driveTrain = DriveTrain.getInstance();
+    private static Drivetrain m_drivetrain = Drivetrain.getInstance();
     private static Direction m_direction = Direction.getInstance();
     /**
      * 

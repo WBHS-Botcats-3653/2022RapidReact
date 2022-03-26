@@ -21,7 +21,7 @@ public class Robot extends TimedRobot {
 	//Subsystems
 	private final Dashboard m_dashboardSubsystem = Dashboard.getInstance();
 	private final Direction m_directionSubsystem = Direction.getInstance();
-	private final DriveTrain m_driveTrainSubsystem = DriveTrain.getInstance();
+	private final Drivetrain m_drivetrainSubsystem = Drivetrain.getInstance();
 	private final Intake m_intakeSubsystem = Intake.getInstance();
 	private final Indexer m_indexerSubsystem = Indexer.getInstance();
 	private final Shooter m_shooterSubsystem = Shooter.getInstance();
@@ -29,7 +29,7 @@ public class Robot extends TimedRobot {
 
 	//Commands
 	private AutoCommand m_autonomousCommand;
-	private final ArcadeDriveCommand m_arcadeDriveCommand = new ArcadeDriveCommand(m_driveTrainSubsystem);
+	private final ArcadeDriveCommand m_arcadeDriveCommand = new ArcadeDriveCommand(m_drivetrainSubsystem);
 	private final IntakeCommand m_intakeCommand = new IntakeCommand(m_intakeSubsystem);
 	private final IndexerCommand m_indexerCommand = new IndexerCommand(m_indexerSubsystem);
 	private final ShooterCommand m_shooterCommand = new ShooterCommand(m_shooterSubsystem);
@@ -76,7 +76,7 @@ public class Robot extends TimedRobot {
 		IntakeCommand.endSmartIntake();
 
 		//Sets motors to coast or brake
-		m_driveTrainSubsystem.enableMotors(false);
+		m_drivetrainSubsystem.enableMotors(false);
 		m_intakeSubsystem.enableMotors(false);
 		m_indexerSubsystem.enableMotors(false);
 		m_climberSubsystem.enableMotors(true);
@@ -97,7 +97,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		//Sets motors to brake
-		m_driveTrainSubsystem.enableMotors(true);
+		m_drivetrainSubsystem.enableMotors(true);
 		m_intakeSubsystem.enableMotors(true);
 		m_indexerSubsystem.enableMotors(true);
 		m_climberSubsystem.enableMotors(true);
@@ -143,7 +143,7 @@ public class Robot extends TimedRobot {
 		IntakeCommand.endSmartIntake();
 
 		//Sets motors to coast or brake
-		m_driveTrainSubsystem.enableMotors(false);
+		m_drivetrainSubsystem.enableMotors(false);
 		m_intakeSubsystem.enableMotors(true);
 		m_indexerSubsystem.enableMotors(true);
 		m_climberSubsystem.enableMotors(true);
@@ -179,7 +179,7 @@ public class Robot extends TimedRobot {
 
 		//Sets motors to coast
 		m_climberSubsystem.enableMotors(true);
-		m_driveTrainSubsystem.enableMotors(false);
+		m_drivetrainSubsystem.enableMotors(false);
 		m_indexerSubsystem.enableMotors(true);
 		m_intakeSubsystem.enableMotors(true);
 

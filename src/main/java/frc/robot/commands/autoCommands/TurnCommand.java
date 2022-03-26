@@ -8,21 +8,21 @@ import static frc.robot.Constants.DriveConstants.*;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Direction;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Drivetrain;
 
 public class TurnCommand extends CommandBase {
-	private DriveTrain m_driveTrain;
+	private Drivetrain m_drivetrain;
 	private Direction m_direction;
 
 	private double angle, targetAngle;
 	private boolean hasFinished = false;
 	
 	public TurnCommand(double angle) {
-		m_driveTrain = DriveTrain.getInstance();
+		m_drivetrain = Drivetrain.getInstance();
 		m_direction = Direction.getInstance();
 		this.angle = angle;
 		// Use addRequirements() here to declare subsystem dependencies.
-		addRequirements(m_driveTrain, m_direction);
+		addRequirements(m_drivetrain, m_direction);
 	}
 
 	// Called when the command is initially scheduled.
@@ -39,12 +39,12 @@ public class TurnCommand extends CommandBase {
 		double difference = targetAngle - m_direction.getAngle();
 		if (Math.abs(difference) > kThreshold) {  //Robot is not within the threshold of the desired angle
 			//Turn towards the desired angle
-			m_driveTrain.arcadeDrive(0, difference * kP);
+			m_drivetrain.arcadeDrive(0, difference * kP);
 			//Has not finished turning
 			hasFinished = false;
 		} else {  //Robot is within the threshold of the desired angle
 			//Stops the drive
-			m_driveTrain.arcadeDrive(0, 0);
+			m_drivetrain.arcadeDrive(0, 0);
 			//Has finished turning
 			hasFinished = true;
 		}
@@ -54,7 +54,7 @@ public class TurnCommand extends CommandBase {
 	@Override
 	public void end(boolean interrupted) {
 		//Stops the robot
-		m_driveTrain.arcadeDrive(0, 0);
+		m_drivetrain.arcadeDrive(0, 0);
 	}
 
 	// Returns true when the command should end.

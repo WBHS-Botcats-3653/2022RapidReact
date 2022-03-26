@@ -18,7 +18,7 @@ import frc.robot.inputs.SI;
 public class Dashboard extends SubsystemBase {
 	private static Dashboard m_singleton;
 	private static Direction m_direction = Direction.getInstance();
-	private static DriveTrain m_driveTrain = DriveTrain.getInstance();
+	private static Drivetrain m_drivetrain = Drivetrain.getInstance();
 	private static OI m_oi = OI.getInstance();
 	private static SI m_si =  SI.getInstance();
 
@@ -131,7 +131,7 @@ public class Dashboard extends SubsystemBase {
 		NetworkEntries.m_nteGyro.setValue(m_direction.getGyro());
 
 		//Differential Drive
-		NetworkEntries.m_nteDiffDrive.setValue(m_driveTrain.getDiffDrive());
+		NetworkEntries.m_nteDiffDrive.setValue(m_drivetrain.getDiffDrive());
 
 		if (speedsDisabled) {
 			//Sets max speeds to 0
