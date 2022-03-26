@@ -33,14 +33,14 @@ public class AutoCommand extends CommandBase {
 			new Pose2d(0, Units.feetToMeters(kTaxiDistance), new Rotation2d())  //End position
 		)
 	);
-	private static RamseteCommand collectCargoRamCommand, customRamCommand;
+	private static RamseteCommand customRamCommand, collectCargoRamCommand;
 
 	private static int numCargoCollected = 0;
 
 	private char commandToScheduleNext;
 	private static boolean executingCommand = false;
 
-	private boolean shootPreloadEnabled, hasPreload, taxiEnabled, collectCargoEnabled, shootCollectedCargoEnabled, customTrajectoryEnabled;
+	private boolean shootPreloadEnabled, hasPreload, taxiEnabled, customTrajectoryEnabled, collectCargoEnabled, shootCollectedCargoEnabled;
 
 	private int collectStage = 0;
 
@@ -59,13 +59,13 @@ public class AutoCommand extends CommandBase {
 		shootPreloadEnabled = NetworkEntries.m_nteShootPreloadSelected.getBoolean(false);
 		hasPreload = NetworkEntries.m_nteHasPreload.getBoolean(false);
 		taxiEnabled = NetworkEntries.m_nteTaxiSelected.getBoolean(false);
+		customTrajectoryEnabled = NetworkEntries.m_nteCustomTrajectorySelected.getBoolean(false);
 		collectCargoEnabled = NetworkEntries.m_nteCollectCargoSelected.getBoolean(false);
 		shootCollectedCargoEnabled = NetworkEntries.m_nteShootCollectedCargoSelected.getBoolean(false);
-		customTrajectoryEnabled = NetworkEntries.m_nteCustomTrajectorySelected.getBoolean(false);
 
-		//If the the collect cargo or custom trajectories have not been generated set their execution to false
-		if (collectCargoRamCommand == null) collectCargoEnabled = false;
+		//If the custom or collect cargo trajectories have not been generated set their execution to false
 		if (customRamCommand == null) customTrajectoryEnabled = false;
+		if (collectCargoRamCommand == null) collectCargoEnabled = false;
 
 		//Resets the encoders to ensure robot starts zeroed
 		m_direction.resetEncoders();

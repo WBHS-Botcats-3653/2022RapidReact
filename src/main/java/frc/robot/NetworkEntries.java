@@ -14,9 +14,9 @@ public class NetworkEntries {
 	public static NetworkTableEntry m_nteShootPreloadSelected;  //boolean
 	public static NetworkTableEntry m_nteHasPreload; //boolean
 	public static NetworkTableEntry m_nteTaxiSelected;  //boolean
+	public static NetworkTableEntry m_nteCustomTrajectorySelected;  //boolean
 	public static NetworkTableEntry m_nteCollectCargoSelected;  //boolean
 	public static NetworkTableEntry m_nteShootCollectedCargoSelected; //boolean
-	public static NetworkTableEntry m_nteCustomTrajectorySelected;  //boolean
 
 	public static NetworkTableEntry m_nteRightTarmac;  //boolean
 	public static NetworkTableEntry m_nteLLCargo;  //boolean
