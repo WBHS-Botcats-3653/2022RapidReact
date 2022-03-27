@@ -68,10 +68,9 @@ public class IndexerCommand extends CommandBase {
 			m_indexer.setIndexerSpeed(-m_oi.getMaxIndexSpeed());  //Reverse indexer
 			//Returns user input given
 			return true;
-		} else {  //Nothing being pressed (indexer wise)
-			//Stops the indexer
-			m_indexer.setIndexerSpeed(0);
 		}
+		//Stops the indexer
+		m_indexer.setIndexerSpeed(0);
 		//Returns user input not given
 		return false;
 	}
@@ -80,10 +79,11 @@ public class IndexerCommand extends CommandBase {
 	public void smartIndexerLogic() {
 		//If the smart control period is ending
 		if (endingSmartControl) {
+			//If there is no cargo in the upper storage but there is cargo in the lower storage or intake
 			if (!m_si.isUpperStorageClosed() && (m_si.isIntakeClosed() || m_si.isLowerStorageClosed())) {
 				//Spin the indexer
 				m_indexer.setIndexerSpeed(kSmartIndexSpeed);
-			} else {
+			} else {  //If there is cargo in the upper storage or no cargo in the lower storage or intake
 				//Is not under smart control
 				smartControl = false;
 				//Is not ending smart control
