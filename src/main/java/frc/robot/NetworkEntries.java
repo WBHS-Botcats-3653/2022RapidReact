@@ -39,8 +39,9 @@ public class NetworkEntries {
 	public static NetworkTableEntry m_nteCustomTrajectoryHasGenerated;  //boolean
 
 	//Drive Tab
-	public static NetworkTableEntry m_nteIsPivotAssistEnabled;  //boolean
 	public static NetworkTableEntry m_nteIsSmartIntakeEnabled;  //boolean
+	public static NetworkTableEntry m_nteIsSmartIndexerEnabled;  //boolean
+	public static NetworkTableEntry m_nteIsPivotAssistEnabled;  //boolean
 
 	public static NetworkTableEntry m_nteEndSmartIntake;  //boolean
 
@@ -48,8 +49,8 @@ public class NetworkEntries {
 
 	//Speeds Tab
 	public static NetworkTableEntry m_nteMaxDriveSpeed;  //double
-	public static NetworkTableEntry m_nteMaxIntakePivotSpeed;  //double
-	public static NetworkTableEntry m_nteMaxIntakeRollerSpeed;  //double
+	public static NetworkTableEntry m_nteMaxPivotSpeed;  //double
+	public static NetworkTableEntry m_nteMaxRollerSpeed;  //double
 	public static NetworkTableEntry m_nteMaxIndexerSpeed;  //double
 	public static NetworkTableEntry m_nteMaxShootSpeed;  //double
 	public static NetworkTableEntry m_nteMaxClimbSpeed;  //double
@@ -133,5 +134,10 @@ public class NetworkEntries {
 	//Returns whether the smart intake is enabled
 	public static boolean isSmartIntakeEnabled() {
 		return m_nteIsSmartIntakeEnabled.getBoolean(false);
+	}
+
+	//Returns whether the smart indexer is enabled
+	public static boolean isSmartIndexerEnabled() {
+		return m_nteIsSmartIndexerEnabled.getBoolean(false);
 	}
 }

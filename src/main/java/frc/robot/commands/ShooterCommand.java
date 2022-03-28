@@ -10,7 +10,7 @@ import frc.robot.subsystems.Shooter;
 
 public class ShooterCommand extends CommandBase {
 	private Shooter m_shooter;
-	private final OI m_oi = OI.getInstance();
+	private static final OI m_oi = OI.getInstance();
 
 	public ShooterCommand(Shooter p_shooter) {
 		m_shooter = p_shooter;
@@ -47,5 +47,11 @@ public class ShooterCommand extends CommandBase {
 	@Override
 	public boolean isFinished() {
 		return false;
+	}
+
+	//Returns whether the driver is giving any shooting input (only input which ejects cargo)
+	public static boolean isGivingInput() {
+		//Returns if the shoot button is being pressed
+		return m_oi.getShoot();
 	}
 }

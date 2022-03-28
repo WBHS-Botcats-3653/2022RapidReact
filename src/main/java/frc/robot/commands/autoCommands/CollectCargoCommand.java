@@ -5,7 +5,7 @@
 package frc.robot.commands.autoCommands;
 
 import static frc.robot.Constants.AutoConstants.*;
-import static frc.robot.Constants.IntakeConstants.kIntakePivotAssistSpeed;
+import static frc.robot.Constants.IntakeConstants.kPivotAssistSpeed;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.inputs.SI;
@@ -43,7 +43,7 @@ public class CollectCargoCommand extends CommandBase {
 			m_intake.setRollerSpeed(0);
 		} else if (m_si.isPivotDownLimitClosed()) {  //If the intake has finished it's downward pivot
 			//Pivot assist
-			m_intake.setPivotSpeed(kIntakePivotAssistSpeed);
+			m_intake.setPivotSpeed(kPivotAssistSpeed);
 			//Spins the intake rollers
 			m_intake.setRollerSpeed(kAutoIntakeRollerSpeed);
 		}

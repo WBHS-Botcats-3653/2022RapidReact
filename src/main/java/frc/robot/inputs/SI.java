@@ -7,6 +7,7 @@
 
 package frc.robot.inputs;
 
+import static frc.robot.Constants.IndexerConstants.*;
 import static frc.robot.Constants.IntakeConstants.*;
 import static frc.robot.Constants.ShooterConstants.kShooterPESensorID;
 

@@ -71,10 +71,10 @@ public class IntakeCommand extends CommandBase {
 	public void manualPivotLogic() {
 		if (m_oi.getManualIntakeDown()) {  //If the intake down button is being pressed
 			//Pivot the intake down
-			m_intake.setPivotSpeed(m_oi.getMaxIntakePivotSpeed());
+			m_intake.setPivotSpeed(m_oi.getMaxPivotSpeed());
 		} else if (m_oi.getManualIntakeUp()) {  //If the intake up button is being pressed
 			//Pivot the intake up
-			m_intake.setPivotSpeed(-m_oi.getMaxIntakePivotSpeed());
+			m_intake.setPivotSpeed(-m_oi.getMaxPivotSpeed());
 		} else {  //Nothing being pressed (intake pivot wise)
 			//Stops the intake pivot
 			m_intake.setPivotSpeed(0);
@@ -85,15 +85,15 @@ public class IntakeCommand extends CommandBase {
 	public void manualRollerLogic() {
 		if (m_oi.getManualIntakeIn()) {  //If the intake in button is being pressed
 			//Spin the rollers at max speed
-			m_intake.setRollerSpeed(m_oi.getMaxIntakeRollerSpeed());
+			m_intake.setRollerSpeed(m_oi.getMaxRollerSpeed());
 			//Pivot assist (pivots the intake down at a low speed when spinning the rollers)
 			if (NetworkEntries.isPivotAssistEnabled()) {  //If pivot assist is enabled in the Dashboard
 				//Sets the pivot speed to max assist speed
-				m_intake.setPivotSpeed(kIntakePivotAssistSpeed);
+				m_intake.setPivotSpeed(kPivotAssistSpeed);
 			}
 		} else if (m_oi.getManualIntakeOut()) {  //If the intake out button is being pressed
 			//Reverse the rollers and spin at max speed
-			m_intake.setRollerSpeed(-m_oi.getMaxIntakeRollerSpeed());
+			m_intake.setRollerSpeed(-m_oi.getMaxRollerSpeed());
 		} else {  //Nothing being pressed (intake roller wise)
 			//Stops the rollers
 			m_intake.setRollerSpeed(0);
@@ -138,7 +138,7 @@ public class IntakeCommand extends CommandBase {
 					//If pivot assist is enabled
 					if (NetworkEntries.isPivotAssistEnabled()) {
 						//Pivots the intake down at the set pivot assist speed
-						m_intake.setPivotSpeed(kIntakePivotAssistSpeed);
+						m_intake.setPivotSpeed(kPivotAssistSpeed);
 					} else {  //If pivot assist is disabled
 						//Stops the intake pivot
 						m_intake.setPivotSpeed(0);
@@ -156,7 +156,7 @@ public class IntakeCommand extends CommandBase {
 		//Rollers
 		if (smartControl && !smartPivotGoingUp && !m_si.isPivotUpLimitClosed()) {  //If smart control has priority over manual controls and the intake is not up and is not pivoting up
 			//Sets the speed of the intake rollers based off whether the left bumper is being pressed
-			m_intake.setRollerSpeed(m_oi.getMaxIntakeRollerSpeed());
+			m_intake.setRollerSpeed(m_oi.getMaxRollerSpeed());
 		} else {  //If smart control does not have priority over manual controls or the intake is up or is pivoting up
 			//Stops the intake rollers
 			m_intake.setRollerSpeed(0);

@@ -20,8 +20,10 @@ public class Intake extends SubsystemBase {
 		//Creates WPI_VictorSPX motor controllers for the Pivot and Rollers in the Intake
 		pivot = new WPI_VictorSPX(kPivotMotorID);
 		rollers = new WPI_VictorSPX(kRollersMotorID);
+
 		pivot.setInverted(false);
 		rollers.setInverted(false);
+		
 		pivot.setNeutralMode(NeutralMode.Brake);
 		rollers.setNeutralMode(NeutralMode.Coast);
 	}

@@ -135,7 +135,7 @@ public final class Constants {
 
 	//Climber Constants
 	public static final class ClimberConstants {
-		//Motor ID
+		//Motor IDs
 		public static final int kClimberArmMotorID = 10;  //CAN
 		public static final int kExtenderWinchMotorID = 11;  //CAN
 		public static final int kHookWinchMotorID = 12;  //CAN
@@ -146,12 +146,9 @@ public final class Constants {
 		//Motor IDs
 		public static final int kPivotMotorID = 20;  //CAN
 		public static final int kRollersMotorID = 21;  //CAN
-		public static final int kIndexerMotorID = 22;  //CAN
 
-		//Storage photoelectric sensor IDs
+		//Photoelectric sensor ID
 		public static final int kIntakePESensorID = 9;  //DIO
-		public static final int kLowerStoragePESensorID = 6;  //DIO
-		public static final int kUpperStoragePESensorID = 7;  //DIO
 		
 		//Pivot limit switch IDs
 		public static final int kBottomPivotLimitSwitchID = 0;  //DIO
@@ -160,8 +157,20 @@ public final class Constants {
 		//Speeds
 		public static final double kSmartIntakePivotDownSpeed = 0.15;
 		public static final double kSmartIntakePivotUpSpeed = 0.35;
+		public static final double kPivotAssistSpeed = 0.1;
+	}
+
+	//Indexer Constants
+	public static final class IndexerConstants {
+		//Motor ID
+		public static final int kIndexerMotorID = 22;  //CAN
+
+		//Photoelectric sensor IDs
+		public static final int kLowerStoragePESensorID = 6;  //DIO
+		public static final int kUpperStoragePESensorID = 7;  //DIO
+
+		//Speed
 		public static final double kSmartIndexSpeed = 0.7;
-		public static final double kIntakePivotAssistSpeed = 0.1;
 	}
 
 	//Shooter Constants
@@ -177,8 +186,8 @@ public final class Constants {
 	public static final class DefaultSpeedsConstants {
 		//Default Max Speeds
 		public static final double kDefaultDriveSpeed = 1.0;
-		public static final double kDefaultIntakePivotSpeed = 0.5;
-		public static final double kDefaultIntakeRollerSpeed = 1.0;
+		public static final double kDefaultPivotSpeed = 0.5;
+		public static final double kDefaultRollerSpeed = 1.0;
 		public static final double kDefaultIndexSpeed = 1.0;
 		public static final double kDefaultSmartIndexSpeed = 0.7;
 		public static final double kDefaultShootSpeed = 0.85;

@@ -4,7 +4,7 @@
 
 package frc.robot.subsystems;
 
-import static frc.robot.Constants.IntakeConstants.kIndexerMotorID;
+import static frc.robot.Constants.IndexerConstants.kIndexerMotorID;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;

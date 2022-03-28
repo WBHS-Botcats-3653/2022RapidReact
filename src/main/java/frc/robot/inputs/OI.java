@@ -12,8 +12,8 @@ public class OI {
 	
 	//Max speeds
 	private double maxDriveSpeed = 0;
-	private double maxIntakePivotSpeed = 0;
-	private double maxIntakeRollerSpeed = 0;
+	private double maxPivotSpeed = 0;
+	private double maxRollerSpeed = 0;
 	private double maxIndexSpeed = 0;
 	private double maxSmartIndexSpeed = 0;
 	private double maxShootSpeed = 0;
@@ -81,31 +81,31 @@ public class OI {
 		return maxHookWinchSpeed;
 	}
 
-	//Sets the max intake pivot speed
-	public void setMaxIntakePivotSpeed(double speed) {
+	//Sets the max pivot speed
+	public void setMaxPivotSpeed(double speed) {
 		if (0.0 < speed && speed <= 1.0) {
-			maxIntakePivotSpeed = speed;
+			maxPivotSpeed = speed;
 		}
 	}
 
-	//Returns the max intake pivot speed
-	public double getMaxIntakePivotSpeed() {
-		return maxIntakePivotSpeed;
+	//Returns the max pivot speed
+	public double getMaxPivotSpeed() {
+		return maxPivotSpeed;
 	}
 
-	//Sets the max intake roller speed
-	public void setMaxIntakeRollerSpeed(double speed) {
+	//Sets the max roller speed
+	public void setMaxRollerSpeed(double speed) {
 		if (0.0 < speed && speed <= 1.0) {
-			maxIntakeRollerSpeed = speed;
+			maxRollerSpeed = speed;
 		}
 	}
 
-	//Returns the max intake roller speed
-	public double getMaxIntakeRollerSpeed() {
-		return maxIntakeRollerSpeed;
+	//Returns the max roller speed
+	public double getMaxRollerSpeed() {
+		return maxRollerSpeed;
 	}
 
-	//Sets the max indexer speed
+	//Sets the max index speed
 	public void setMaxIndexSpeed(double speed) {
 		if (0.0 < speed && speed <= 1.0) {
 			maxIndexSpeed = speed;
