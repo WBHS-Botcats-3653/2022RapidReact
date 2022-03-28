@@ -79,6 +79,7 @@ public final class Constants {
 		/*You can get kS, kV, kA, and kP from the frc robot characterization tool (sysid)
 		 *The tool can be found in the WPILib Tools desktop folder (Windows)
 		 *You should perform this characterization while the robot in on a surface similar to that on the game field
+		 *Instructions: https://docs.wpilib.org/en/stable/docs/software/pathplanning/system-identification/identification-routine.html#running-the-identification-routine
 		 */
 		//Voltage required to overcome static friction
 		public static final double kS = 0.0;  //Get correct value
@@ -114,8 +115,8 @@ public final class Constants {
 		//Diameter of the wheel directly mounted to the motor shaft
 		//private static final double kWheelDiameter = 6.0;  //Inches
 		private static final double kWheelDiameter = Units.inchesToMeters(6.0);  //Meters
-		//Perimeter of the wheel directly mounted to the motor shaft
-		private static final double kWheelPerimeter = kWheelDiameter * Math.PI;  //Meters
+		//Circumference of the wheel directly mounted to the motor shaft
+		private static final double kWheelCircumference = kWheelDiameter * Math.PI;  //Meters
 		//The number of pulses per rotation of the motor (also known as the encoder resolution)
 		//private static final double kPulsePerRevolution = 360.0;  //This is not the correct value
 		private static final double kPulsePerRevolution = 3900.0;
@@ -127,7 +128,7 @@ public final class Constants {
 		//private static final double kFudgefactor = 12.0 / 1.11228;
 		//Encoder distance per pulse calculation
 		//public static final double kDistancePerPulse = Math.PI * kWheelDiameter / kPulsePerRevolution / kEncoderGearRatio / kGearRatio * kFudgefactor;
-		public static final double kDistancePerPulse = kWheelPerimeter / kPulsePerRevolution / kEncoderGearRatio / kGearRatio;
+		public static final double kDistancePerPulse = kWheelCircumference / kPulsePerRevolution / kEncoderGearRatio / kGearRatio;
 
 		public static final double kThreshold = 3.0;
 	}
