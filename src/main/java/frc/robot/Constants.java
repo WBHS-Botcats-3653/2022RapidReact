@@ -20,47 +20,28 @@ public final class Constants {
 
 		//The distance to travel in reverse when taxiing
 		public static final double kTaxiDistance = -80.0;  //Inches (-86.0)
-
-		/*Distances and angles to cargo after taxi during auto
-		 *<String cargoID, double[angle, distance]>
-		 */
-		public static final HashMap<String, double[]> kAnglesAndDistances = new HashMap<>() {{
-			//Taxi to cargo
-			put("LLL", new double[] {100.78, -86.53});
-			put("LLR", new double[] {77.43, -30.58});
-			put("LML", new double[] {-100.78, -86.53});
-			put("LMR", new double[] {-114.66, -139.98});
-			put("LRL", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
-			put("LRR", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
-			put("RLL", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
-			put("RLR", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
-			put("RML", new double[] {114.66, -139.98});
-			put("RMR", new double[] {100.78, -86.53});
-			put("RRL", new double[] {-77.43, -30.58});
-			put("RRR", new double[] {-100.78, -86.53});
-		}};
 		
 		/*Holds the coordinates of the different pre-positioned cargo with the robot in the left or right Tarmac at x = 0, y = 0, angle = 0
 		 *<String cargoID, Pose2d(x, y, Rotation2d(angle))>
 		 */
 		public static final HashMap<String, Pose2d> kCargoCoordinates = new HashMap<>() {{
-			put("LLL", new Pose2d(Units.feetToMeters(0.0), Units.feetToMeters(0.0), Rotation2d.fromDegrees(0.0)));
-			put("LLR", new Pose2d(Units.feetToMeters(0.0), Units.feetToMeters(0.0), Rotation2d.fromDegrees(0.0)));
-			put("LML", new Pose2d(Units.feetToMeters(0.0), Units.feetToMeters(0.0), Rotation2d.fromDegrees(0.0)));
-			put("LMR", new Pose2d(Units.feetToMeters(0.0), Units.feetToMeters(0.0), Rotation2d.fromDegrees(0.0)));
+			put("LLL", new Pose2d(Units.inchesToMeters(-105.82), Units.inchesToMeters(-38.46), Rotation2d.fromDegrees(-30.0)));
+			put("LLR", new Pose2d(Units.inchesToMeters(-62.52), Units.inchesToMeters(-79.56), Rotation2d.fromDegrees(-15.0)));
+			put("LML", new Pose2d(Units.inchesToMeters(52.9), Units.inchesToMeters(-99.39), Rotation2d.fromDegrees(120.0)));
+			put("LMR", new Pose2d(Units.inchesToMeters(107.43), Units.inchesToMeters(-75.11), Rotation2d.fromDegrees(150.0)));
 			put("LRL", null);  //DO NOT PUT VALUES
 			put("LRR", null);  //DO NOT PUT VALUES
 			put("RLL", null);  //DO NOT PUT VALUES
 			put("RLR", null);  //DO NOT PUT VALUES
-			put("RML", new Pose2d(Units.feetToMeters(0.0), Units.feetToMeters(0.0), Rotation2d.fromDegrees(0.0)));
-			put("RMR", new Pose2d(Units.feetToMeters(0.0), Units.feetToMeters(0.0), Rotation2d.fromDegrees(0.0)));
-			put("RRL", new Pose2d(Units.feetToMeters(0.0), Units.feetToMeters(0.0), Rotation2d.fromDegrees(0.0)));
-			put("RRR", new Pose2d(Units.feetToMeters(0.0), Units.feetToMeters(0.0), Rotation2d.fromDegrees(0.0)));
+			put("RML", new Pose2d(Units.inchesToMeters(-107.43), Units.inchesToMeters(-75.11), Rotation2d.fromDegrees(-150.0)));
+			put("RMR", new Pose2d(Units.inchesToMeters(-52.9), Units.inchesToMeters(-99.39), Rotation2d.fromDegrees(-120.0)));
+			put("RRL", new Pose2d(Units.inchesToMeters(62.52), Units.inchesToMeters(-79.56), Rotation2d.fromDegrees(15.0)));
+			put("RRR", new Pose2d(Units.inchesToMeters(105.82), Units.inchesToMeters(-38.46), Rotation2d.fromDegrees(30.0)));
 		}};
 
 		//The middle waypoint used in the return trajectory to avoid hitting any obstacles (L for the left Tarmac and R for the right Tarmac)
-		public static final Pose2d kReturnMiddleWaypointL = new Pose2d(Units.feetToMeters(0.0), Units.feetToMeters(0.0), Rotation2d.fromDegrees(0.0));
-		public static final Pose2d kReturnMiddleWaypointR = new Pose2d(Units.feetToMeters(0.0), Units.feetToMeters(0.0), Rotation2d.fromDegrees(0.0));
+		public static final Pose2d kReturnMiddleWaypointL = new Pose2d(Units.inchesToMeters(0.0), Units.inchesToMeters(kTaxiDistance), Rotation2d.fromDegrees(0.0));
+		public static final Pose2d kReturnMiddleWaypointR = new Pose2d(Units.inchesToMeters(0.0), Units.inchesToMeters(kTaxiDistance), Rotation2d.fromDegrees(0.0));
 
 		//Speeds
 		public static final double kAutoDriveSpeed = 0.5;
