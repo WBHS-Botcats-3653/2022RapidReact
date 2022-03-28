@@ -2,6 +2,8 @@ package frc.robot;
 
 import java.util.HashMap;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
 
 /**
@@ -38,23 +40,27 @@ public final class Constants {
 			put("RRR", new double[] {-100.78, -86.53});
 		}};
 		
-		/*Holds the coordinates of the different pre-positioned cargo with the robot in the left or right Tarmac at X = 0 Y = 0
-		 *<String cargoID, double[X, Y]>
+		/*Holds the coordinates of the different pre-positioned cargo with the robot in the left or right Tarmac at x = 0, y = 0, angle = 0
+		 *<String cargoID, Pose2d(x, y, Rotation2d(angle))>
 		 */
-		public static final HashMap<String, double[]> kCargoCoordinates = new HashMap<>() {{
-			put("LLL", new double[] {Units.feetToMeters(0.0), Units.feetToMeters(0.0)});
-			put("LLR", new double[] {Units.feetToMeters(0.0), Units.feetToMeters(0.0)});
-			put("LML", new double[] {Units.feetToMeters(0.0), Units.feetToMeters(0.0)});
-			put("LMR", new double[] {Units.feetToMeters(0.0), Units.feetToMeters(0.0)});
-			put("LRL", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
-			put("LRR", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
-			put("RLL", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
-			put("RLR", new double[] {0.0, 0.0});  //DO NOT PUT VALUES
-			put("RML", new double[] {Units.feetToMeters(0.0), Units.feetToMeters(0.0)});
-			put("RMR", new double[] {Units.feetToMeters(0.0), Units.feetToMeters(0.0)});
-			put("RRL", new double[] {Units.feetToMeters(0.0), Units.feetToMeters(0.0)});
-			put("RRR", new double[] {Units.feetToMeters(0.0), Units.feetToMeters(0.0)});
+		public static final HashMap<String, Pose2d> kCargoCoordinates = new HashMap<>() {{
+			put("LLL", new Pose2d(Units.feetToMeters(0.0), Units.feetToMeters(0.0), Rotation2d.fromDegrees(0.0)));
+			put("LLR", new Pose2d(Units.feetToMeters(0.0), Units.feetToMeters(0.0), Rotation2d.fromDegrees(0.0)));
+			put("LML", new Pose2d(Units.feetToMeters(0.0), Units.feetToMeters(0.0), Rotation2d.fromDegrees(0.0)));
+			put("LMR", new Pose2d(Units.feetToMeters(0.0), Units.feetToMeters(0.0), Rotation2d.fromDegrees(0.0)));
+			put("LRL", null);  //DO NOT PUT VALUES
+			put("LRR", null);  //DO NOT PUT VALUES
+			put("RLL", null);  //DO NOT PUT VALUES
+			put("RLR", null);  //DO NOT PUT VALUES
+			put("RML", new Pose2d(Units.feetToMeters(0.0), Units.feetToMeters(0.0), Rotation2d.fromDegrees(0.0)));
+			put("RMR", new Pose2d(Units.feetToMeters(0.0), Units.feetToMeters(0.0), Rotation2d.fromDegrees(0.0)));
+			put("RRL", new Pose2d(Units.feetToMeters(0.0), Units.feetToMeters(0.0), Rotation2d.fromDegrees(0.0)));
+			put("RRR", new Pose2d(Units.feetToMeters(0.0), Units.feetToMeters(0.0), Rotation2d.fromDegrees(0.0)));
 		}};
+
+		//The middle waypoint used in the return trajectory to avoid hitting any obstacles (L for the left Tarmac and R for the right Tarmac)
+		public static final Pose2d kReturnMiddleWaypointL = new Pose2d(Units.feetToMeters(0.0), Units.feetToMeters(0.0), Rotation2d.fromDegrees(0.0));
+		public static final Pose2d kReturnMiddleWaypointR = new Pose2d(Units.feetToMeters(0.0), Units.feetToMeters(0.0), Rotation2d.fromDegrees(0.0));
 
 		//Speeds
 		public static final double kAutoDriveSpeed = 0.5;

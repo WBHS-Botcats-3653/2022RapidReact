@@ -20,6 +20,7 @@ import frc.robot.inputs.SI;
 
 public class Dashboard extends SubsystemBase {
 	private static Dashboard m_singleton;
+	private final DrivePID m_drivePID = DrivePID.getInstance();
 	private final Drivetrain m_driveTrain = Drivetrain.getInstance();
 	private final Direction m_direction = Direction.getInstance();
 	private final Cameras m_cameras = Cameras.getInstance();
@@ -48,6 +49,8 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteCollectCargoSelected = tabAuto.addPersistent("Collect Cargo", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(2, 0).getEntry();
 			NetworkEntries.m_nteShootCollectedCargoSelected = tabAuto.addPersistent("Shoot Collected Cargo", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(2, 1).getEntry();
 
+			NetworkEntries.m_nteSetStartPose = tabAuto.add("Set Starting Position", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(2, 1).getEntry();
+			
 			NetworkEntries.m_nteRightTarmac = tabAuto.add("Is Right Tarmac?", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(3, 0).getEntry();
 			NetworkEntries.m_nteLLCargo = tabAuto.add("LL Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(4, 0).getEntry();
 			NetworkEntries.m_nteLRCargo = tabAuto.add("LR Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(4, 1).getEntry();
@@ -216,6 +219,14 @@ public class Dashboard extends SubsystemBase {
 		prevCustomTrajectory = NetworkEntries.m_nteCustomTrajectorySelected.getBoolean(false);
 		prevCollectCargo = NetworkEntries.m_nteCollectCargoSelected.getBoolean(false);
 
+		//If the set start pose button is pressed
+		if (NetworkEntries.m_nteSetStartPose.getBoolean(false)) {
+			//Set the starting pose
+			m_drivePID.setStartingPose();
+			//Deselect the set start pose button
+			NetworkEntries.m_nteSetStartPose.setBoolean(false);
+		}
+
 		//If any cargo collection settings have been changed
 		if (NetworkEntries.m_nteRightTarmac.getBoolean(false) != prevTarmac || Arrays.equals(NetworkEntries.getCargoToTarget(), prevCargoToTarget)) {
 			//Cargo collection trajectory has not been generated
@@ -236,28 +247,40 @@ public class Dashboard extends SubsystemBase {
 
 		//If the generate cargo collection has been pressed
 		if (NetworkEntries.m_nteGenerateCargoCollection.getBoolean(false)) {
-			//Generate trajectory for cargo collection
-			AutoCommand.generateCargoCollectionTrajectory(NetworkEntries.getTarmac(), NetworkEntries.getCargoToTarget());
-			//Deselect the generate cargo collection button
-			NetworkEntries.m_nteGenerateCargoCollection.setBoolean(false);
-			//Cargo collection tracjectory has been generated
-			NetworkEntries.m_nteCargoCollectionHasGenerated.setBoolean(true);
+			//If the starting position has not been set
+			if (m_drivePID.getStartingPose() == null) {
+				//Select the set start pose button
+				NetworkEntries.m_nteSetStartPose.setBoolean(true);
+			} else {  //If the starting position has been set
+				//Generate trajectory for cargo collection
+				AutoCommand.generateCargoCollectionTrajectory(NetworkEntries.getTarmac(), NetworkEntries.getCargoToTarget());
+				//Deselect the generate cargo collection button
+				NetworkEntries.m_nteGenerateCargoCollection.setBoolean(false);
+				//Cargo collection tracjectory has been generated
+				NetworkEntries.m_nteCargoCollectionHasGenerated.setBoolean(true);
+			}
 		}
 
 		//If the generate custom trajectory has been pressed
 		if (NetworkEntries.m_nteGenerateCustomTrajectory.getBoolean(false)) {
-			//Update generated values
-			genVelocity = NetworkEntries.m_nteMaxVelocity.getDouble(0);
-			genAcceleration = NetworkEntries.m_nteMaxAcceleration.getDouble(0);
-			genX = NetworkEntries.m_nteX.getDouble(0);
-			genY = NetworkEntries.m_nteY.getDouble(0);
-			genEndAngle = NetworkEntries.m_nteEndAngle.getDouble(0);
-			//Generate custom trajectory
-			AutoCommand.generateCustomTrajectory(genVelocity, genAcceleration, genX, genY, genEndAngle);
-			//Deselect the generate custom trajectory button
-			NetworkEntries.m_nteGenerateCustomTrajectory.setBoolean(false);
-			//Custom trajectory has been generated
-			NetworkEntries.m_nteCustomTrajectoryHasGenerated.setBoolean(true);
+			//If the starting position has not been set the select the set start pose button
+			if (m_drivePID.getStartingPose() == null) {
+				//Select the set start pose button
+				NetworkEntries.m_nteSetStartPose.setBoolean(true);
+			} else {  //If the starting position has been set
+				//Update generated values
+				genVelocity = NetworkEntries.m_nteMaxVelocity.getDouble(0);
+				genAcceleration = NetworkEntries.m_nteMaxAcceleration.getDouble(0);
+				genX = NetworkEntries.m_nteX.getDouble(0);
+				genY = NetworkEntries.m_nteY.getDouble(0);
+				genEndAngle = NetworkEntries.m_nteEndAngle.getDouble(0);
+				//Generate custom trajectory
+				AutoCommand.generateCustomTrajectory(genVelocity, genAcceleration, genX, genY, genEndAngle);
+				//Deselect the generate custom trajectory button
+				NetworkEntries.m_nteGenerateCustomTrajectory.setBoolean(false);
+				//Custom trajectory has been generated
+				NetworkEntries.m_nteCustomTrajectoryHasGenerated.setBoolean(true);
+			}
 		}
 
 		//If the reset encoders button has been pressed

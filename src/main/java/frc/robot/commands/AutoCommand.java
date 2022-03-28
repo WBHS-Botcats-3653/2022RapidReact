@@ -125,7 +125,7 @@ public class AutoCommand extends CommandBase {
 				commandToScheduleNext = 'S';
 				//Auto commands to be scheduled sequentially
 				sequential = new SequentialCommandGroup(
-					new ShootCargoCommand(numCargoToCollect + (hasPreload ? 1 : 0)),  //Shoot cargo
+					new ShootCargoCommand(numCargoToCollect + ((hasPreload && !shootPreloadEnabled) ? 1 : 0)),  //Shoot cargo (The amount of cargo to shoot is the number of cargo collected plus any preloaded cargo if it has not already been shot)
 					new InstantCommand(() -> hasFinished = true),  //Auto has finished
 					new InstantCommand(() -> executingCommand = false)  //Has finished executing the sequential command
 				);
@@ -188,12 +188,20 @@ public class AutoCommand extends CommandBase {
 	public static void generateCargoCollectionTrajectory(char tarmac, String[] cargo) {
 		ArrayList<Pose2d> waypoints = new ArrayList<>();
 		//Starting waypoint
-		waypoints.add(new Pose2d());
+		waypoints.add(m_drivePID.getStartingPose());
 		//Traverse the cargo pieces to be targeted
 		for (String c : cargo) {
+			//Stores the coordinates of the cargo
+			final Pose2d coords = kCargoCoordinates.get(tarmac + c);
+			//If the cargo is inaccessable from the starting Tarmac skip to the next piece of cargo
+			if (coords == null) continue;
 			//Get the waypoint for each piece of cargo
-			waypoints.add(new Pose2d(kCargoCoordinates.get(tarmac + c)[0], kCargoCoordinates.get(tarmac + c)[1], new Rotation2d()));
+			waypoints.add(coords);
 		}
+		//Add the trajectory's return middle waypoint (used to avoid hitting any potential obstacles)
+		waypoints.add(tarmac == 'L' ? kReturnMiddleWaypointL : kReturnMiddleWaypointR);
+		//Add the trajectory's end waypoint (where it will shoot from in front of the Hub)
+		waypoints.add(m_drivePID.getStartingPose());  //The starting position at the beginning of the game
 		//Generate the trajectory
 		collectCargoRamCommand = generateTrajectory(
 			Units.feetToMeters(2),  //Max velocity (meters per second)
@@ -222,7 +230,7 @@ public class AutoCommand extends CommandBase {
 			maxVelocityMetersPerSecond,  //Max velocity (meters per second)
 			maxAccelerationMetersPerSecondSq,  //Max acceleration (meters per seconds squared)
 			Arrays.asList(
-				new Pose2d(),  //Starting waypoint
+				m_drivePID.getStartingPose(),  //Starting waypoint
 				new Pose2d(x, y, new Rotation2d(endAngle))  //End waypoint
 			)
 		);

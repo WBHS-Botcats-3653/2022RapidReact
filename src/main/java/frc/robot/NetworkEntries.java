@@ -18,6 +18,8 @@ public class NetworkEntries {
 	public static NetworkTableEntry m_nteCollectCargoSelected;  //boolean
 	public static NetworkTableEntry m_nteShootCollectedCargoSelected; //boolean
 
+	public static NetworkTableEntry m_nteSetStartPose;  //boolean
+
 	public static NetworkTableEntry m_nteRightTarmac;  //boolean
 	public static NetworkTableEntry m_nteLLCargo;  //boolean
 	public static NetworkTableEntry m_nteLRCargo;  //boolean

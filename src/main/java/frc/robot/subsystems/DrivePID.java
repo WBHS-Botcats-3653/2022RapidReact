@@ -37,6 +37,9 @@ public class DrivePID extends SubsystemBase {
 	//Holds the current position of the robot on the field
 	private Pose2d pose;
 
+	//The pose at the start of the game
+	private Pose2d startingPose;
+
 	/** Creates a new DrivePID. */
 	public DrivePID() {
 		odometry = new DifferentialDriveOdometry(m_direction.getHeading(), new Pose2d(0.0, 0.0, new Rotation2d()));
@@ -63,6 +66,16 @@ public class DrivePID extends SubsystemBase {
 	//Returns the pose
 	public Pose2d getPose() {
 		return pose;
+	}
+
+	//Returns the starting pose
+	public Pose2d getStartingPose() {
+		return startingPose;
+	}
+
+	//Stores the starting pose (The current position when this method is called)
+	public void setStartingPose() {
+		startingPose = pose;
 	}
 
 	//Returns the feedforward
