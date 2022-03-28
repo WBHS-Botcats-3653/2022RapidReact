@@ -92,7 +92,7 @@ public class AutoCommand extends CommandBase {
 			//Break out of the method
 			return;
 		}
-		switch (collectStage) {
+		switch (collectStage) {  //The current stage of the cargo collection and shooting process
 			case (0): //Collecting cargo
 				//The next command to be scheduled will be a ParallelCommandGroup
 				commandToScheduleNext = 'P';
@@ -171,7 +171,7 @@ public class AutoCommand extends CommandBase {
 			new RamseteController(kRamseteB, kRamseteZeta),  //Calculates the current linear and angular velocity of the robot
 			m_drivePID.getFeedForward(),  //Gets SimpleMotorFeedForward which converts left and right wheel speeds to motor voltages
 			m_drivePID.getKinematics(),  //Gets Kinematics which converts linear and angular velocity into left and right wheel speeds
-			m_drivePID::getWheelSpeeds,  //Method to supply DifferentialDriveWheelSpeeds which contains the left and right wheel speeds (Supplier)
+			m_drivePID::getWheelSpeeds,  //Method to supply DifferentialDriveWheelSpeeds which contains the current left and right wheel speeds (Supplier)
 			m_drivePID.getLeftPIDController(),  //Gets the left drivetrain PID controller which calculates the motor voltage required to smoothly get the robot to the desired endpoint
 			m_drivePID.getRightPIDController(),  //Gets the right drivetrain PID controller which calculates the motor voltage required to smoothly get the robot to the desired endpoint
 			m_drivetrain::tankDriveVolts,  //Method which sets the left and right motor voltages of the drivetrain (BiConsumer)
