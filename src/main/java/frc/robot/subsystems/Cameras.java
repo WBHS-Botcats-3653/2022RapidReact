@@ -4,7 +4,6 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -15,14 +14,14 @@ public class Cameras extends SubsystemBase {
 
 	/** Creates a new Cameras. */
 	public Cameras() {
-		fieldCamera = CameraServer.startAutomaticCapture(0);
+		/*fieldCamera = CameraServer.startAutomaticCapture(0);
 		indexerCamera = CameraServer.startAutomaticCapture(1);
 
 		fieldCamera.setResolution(142, 90);
 		indexerCamera.setResolution(142, 90);
 
 		fieldCamera.setFPS(20);
-		indexerCamera.setFPS(20);
+		indexerCamera.setFPS(20);*/
 	}
 
 	//Returns an instance of Cameras
