@@ -58,6 +58,7 @@ public class NetworkEntries {
 	//Test Tab
 	public static NetworkTableEntry m_nteLowerStoragePE;  //boolean
     public static NetworkTableEntry m_nteUpperStoragePE;  //boolean
+	public static NetworkTableEntry m_nteIntakePE;  //boolean
 	public static NetworkTableEntry m_nteShooterPE;  //boolean
 
 	public static NetworkTableEntry m_nteIntakeUpLimit;  //boolean

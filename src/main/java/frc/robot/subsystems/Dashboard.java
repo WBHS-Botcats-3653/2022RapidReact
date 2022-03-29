@@ -92,19 +92,20 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteMaxHookWinchSpeed = tabSpeeds.addPersistent("Max Hook Winch Speed", kDefaultHookWinchSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(4, 1).getEntry();  //double
 			
 		//Test Tab
-			NetworkEntries.m_nteUpperStoragePE = tabTest.add("Upper Storage PE", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(1, 0).getEntry();
-			NetworkEntries.m_nteLowerStoragePE = tabTest.add("Lower Storage PE", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(1, 1).getEntry();
-			NetworkEntries.m_nteShooterPE = tabTest.add("Shooter PE", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(2, 0).getEntry();
+			NetworkEntries.m_nteUpperStoragePE = tabTest.add("Upper Storage PE", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(0, 0).getEntry();
+			NetworkEntries.m_nteLowerStoragePE = tabTest.add("Lower Storage PE", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(1, 0).getEntry();
+			NetworkEntries.m_nteIntakePE = tabTest.add("Intake PE", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(1, 1).getEntry();
+			NetworkEntries.m_nteShooterPE = tabTest.add("Shooter PE", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(1, 0).getEntry();
 			
-			NetworkEntries.m_nteIntakeUpLimit = tabTest.add("Intake Up Limit", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(0, 0).getEntry();
-			NetworkEntries.m_nteIntakeDownLimit = tabTest.add("Intake Down Limit", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(0, 1).getEntry();
+			NetworkEntries.m_nteIntakeUpLimit = tabTest.add("Intake Up Limit", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(2, 0).getEntry();
+			NetworkEntries.m_nteIntakeDownLimit = tabTest.add("Intake Down Limit", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(2, 1).getEntry();
 
-			NetworkEntries.m_nteDriveEncLeft = tabTest.add("Left Encoder", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(2, 1).getEntry();
-			NetworkEntries.m_nteDriveEncRight = tabTest.add("Right Encoder", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(3, 1).getEntry();
+			NetworkEntries.m_nteDriveEncLeft = tabTest.add("Left Encoder", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(3, 0).getEntry();
+			NetworkEntries.m_nteDriveEncRight = tabTest.add("Right Encoder", 0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(4, 0).getEntry();
 			
-			NetworkEntries.m_nteResetEncoders = tabTest.add("Reset Encoders", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(3, 0).getEntry();
+			NetworkEntries.m_nteResetEncoders = tabTest.add("Reset Encoders", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(3, 1).getEntry();
 
-			tabTest.add("Differential Drive", m_driveTrain.getDiffDrive()).withSize(2, 2).withPosition(0, 2);
+			tabTest.add("Differential Drive", m_driveTrain.getDiffDrive()).withSize(4, 2).withPosition(0, 2);
 			
 		//Initialize variables
 		prevShootPreload = NetworkEntries.m_nteShootPreloadSelected.getBoolean(false);
