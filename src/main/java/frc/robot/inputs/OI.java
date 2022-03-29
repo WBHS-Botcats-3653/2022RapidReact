@@ -234,12 +234,12 @@ public class OI {
 
 	//Whether the right botton on the DPad is being pressed
 	public boolean getExtenderWinchClockwise() {
-		return POVIsRight();
+		return POVIsLeft();
 	}
 
 	//Whether the left button on the DPad is being pressed
 	public boolean getExtenderWinchCounterclockwise() {
-		return POVIsLeft();
+		return POVIsRight();
 	}
 
 	//Whether the start button is being pressed
