@@ -121,7 +121,8 @@ public class NetworkEntries {
 				break;
 		}
 		//Returns the ArrayList containing the cargo to be targeted as a String array
-		return (String[]) cargo.toArray();
+		return new String[0];
+		//return (String[]) cargo.toArray();
 	}
 
 	//Returns whether the pivot assist is enabled
