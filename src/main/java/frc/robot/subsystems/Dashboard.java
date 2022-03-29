@@ -28,7 +28,7 @@ public class Dashboard extends SubsystemBase {
 
 	public ShuffleboardTab tabDrive, tabTest, tabSpeeds, tabAuto;
 
-	private boolean prevShootPreload, prevTaxi, prevCollectCargo, prevShootCollectedCargo, prevCustomTrajectory, prevTarmac, prevSmartIntake;
+	private boolean prevHasPreload, prevShootPreload, prevTaxi, prevCollectCargo, prevShootCollectedCargo, prevCustomTrajectory, prevTarmac, prevSmartIntake;
 	private String[] prevCargoToTarget;
 	private double genVelocity, genAcceleration, genX, genY, genEndAngle;
 
@@ -41,12 +41,12 @@ public class Dashboard extends SubsystemBase {
 		tabTest = Shuffleboard.getTab("Test");
 
 		//Auto Tab
-			NetworkEntries.m_nteShootPreloadSelected = tabAuto.addPersistent("Shoot Cargo", true).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(0, 0).getEntry();
-			NetworkEntries.m_nteHasPreload = tabAuto.addPersistent("Has Preload", true).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(0, 1).getEntry();
+			NetworkEntries.m_nteHasPreload = tabAuto.addPersistent("Has Preload", true).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(0, 0).getEntry();
+			NetworkEntries.m_nteShootPreloadSelected = tabAuto.addPersistent("Shoot Preload", true).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(0, 1).getEntry();
 			NetworkEntries.m_nteTaxiSelected = tabAuto.addPersistent("Taxi", true).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(1, 0).getEntry();
-			NetworkEntries.m_nteCustomTrajectorySelected = tabAuto.addPersistent("Custom trajectory", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(1, 1).getEntry();
+			NetworkEntries.m_nteCustomTrajectorySelected = tabAuto.addPersistent("Custom Trajectory", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(1, 1).getEntry();
 			NetworkEntries.m_nteCollectCargoSelected = tabAuto.addPersistent("Collect Cargo", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(2, 0).getEntry();
-			NetworkEntries.m_nteShootCollectedCargoSelected = tabAuto.addPersistent("Shoot Collected Cargo", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(2, 1).getEntry();
+			NetworkEntries.m_nteShootCollectedCargoSelected = tabAuto.addPersistent("Shoot Cargo", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(2, 1).getEntry();
 
 			NetworkEntries.m_nteRightTarmac = tabAuto.add("Is Right Tarmac?", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(3, 0).getEntry();
 			NetworkEntries.m_nteLLCargo = tabAuto.add("LL Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(4, 0).getEntry();
@@ -178,11 +178,15 @@ public class Dashboard extends SubsystemBase {
 	public void selectorLogic() {
 		//If shoot preload has been enabled
 		if (NetworkEntries.m_nteShootPreloadSelected.getBoolean(false) && !prevShootPreload) {
-			//Robot has a piece of cargo preloaded
+			//Enable has preload
 			NetworkEntries.m_nteHasPreload.setBoolean(true);
+		} else if (!NetworkEntries.m_nteHasPreload.getBoolean(false) && prevHasPreload) {
+			//Disable shoot preload
+			NetworkEntries.m_nteShootPreloadSelected.setBoolean(false);
 		}
-		//Updates previous value of shoot preload
+		//Updates previous value of shoot preload and has preload
 		prevShootPreload = NetworkEntries.m_nteShootPreloadSelected.getBoolean(false);
+		prevHasPreload = NetworkEntries.m_nteHasPreload.getBoolean(false);
 
 		//If shoot collected cargo has been enabled
 		if (NetworkEntries.m_nteShootCollectedCargoSelected.getBoolean(false) && !prevShootCollectedCargo) {
