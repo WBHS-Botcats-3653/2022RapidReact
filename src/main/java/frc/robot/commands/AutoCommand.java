@@ -187,7 +187,7 @@ public class AutoCommand extends CommandBase {
 	public static void generateCargoCollectionTrajectory(char tarmac, String[] cargo) {
 		ArrayList<Pose2d> waypoints = new ArrayList<>();
 		//Starting waypoint
-		waypoints.add(m_drivePID.getStartingPose());
+		waypoints.add(new Pose2d());
 		//Traverse the cargo pieces to be targeted
 		for (String c : cargo) {
 			//Stores the coordinates of the cargo
@@ -233,7 +233,7 @@ public class AutoCommand extends CommandBase {
 				new Pose2d(x, y, new Rotation2d(endAngle))  //End position
 			)
 		);
-	}`
+	}
 
 	//Returns where an auto command is currently being executed
 	public boolean getExecutingCommand() {return executingCommand;}
