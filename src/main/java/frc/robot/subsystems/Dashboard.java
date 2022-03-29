@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import static frc.robot.Constants.AutoConstants.kTaxiDistance;
 import static frc.robot.Constants.DefaultSpeedsConstants.*;
 
 import java.util.Arrays;
@@ -55,21 +56,21 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteMRCargo = tabAuto.add("MR Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(5, 1).getEntry();
 			NetworkEntries.m_nteRLCargo = tabAuto.add("RL Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(6, 0).getEntry();
 			NetworkEntries.m_nteRRCargo = tabAuto.add("RR Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(6, 1).getEntry();
-			NetworkEntries.m_nteGenerateCargoCollection = tabAuto.add("Generate Cargo Collection", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(3, 1).getEntry();
-			NetworkEntries.m_nteCargoCollectionHasGenerated = tabAuto.add("Cargo Collection Has Generated", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(3, 2).getEntry();
+			NetworkEntries.m_nteGenerateCargoCollection = tabAuto.add("Generate CC", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(3, 1).getEntry();
+			NetworkEntries.m_nteCargoCollectionHasGenerated = tabAuto.add("CC Generated", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(3, 2).getEntry();
 
-			NetworkEntries.m_nteMaxVelocity = tabAuto.add("Max Velocity m/s", 2.0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(0, 2).getEntry();
-			NetworkEntries.m_nteMaxAcceleration = tabAuto.add("Max Acceleration m/s^2", 2.0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(1, 2).getEntry();
+			NetworkEntries.m_nteMaxVelocity = tabAuto.add("Max Velocity", 2.0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(0, 2).getEntry();
+			NetworkEntries.m_nteMaxAcceleration = tabAuto.add("Max Acceleration", 2.0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(1, 2).getEntry();
 			NetworkEntries.m_nteX = tabAuto.add("X", 0.0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(0, 3).getEntry();
-			NetworkEntries.m_nteY = tabAuto.add("Y", 0.0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(1, 3).getEntry();
+			NetworkEntries.m_nteY = tabAuto.add("Y", kTaxiDistance).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(1, 3).getEntry();
 			NetworkEntries.m_nteEndAngle = tabAuto.add("End Angle", 0.0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(2, 3).getEntry();
-			NetworkEntries.m_nteGenerateCustomTrajectory = tabAuto.add("Generate Trajectory", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(0, 4).getEntry();
-			NetworkEntries.m_nteCustomTrajectoryHasGenerated = tabAuto.add("Custom Trajectory Has Generated", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(1, 4).getEntry();
+			NetworkEntries.m_nteGenerateCustomTrajectory = tabAuto.add("Generate Custom", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(0, 4).getEntry();
+			NetworkEntries.m_nteCustomTrajectoryHasGenerated = tabAuto.add("Custom Generated", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(1, 4).getEntry();
 
 		//Drive Tab
-			NetworkEntries.m_nteIsSmartIntakeEnabled = tabDrive.add("Is Smart Intake Enabled", true).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 1).withPosition(0, 0).getEntry();
-			NetworkEntries.m_nteIsSmartIndexerEnabled = tabDrive.add("Is Smart Indexer Enabled", true).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 1).withPosition(2, 0).getEntry();
-			NetworkEntries.m_nteIsPivotAssistEnabled = tabDrive.add("Is Pivot Assist Enabled", true).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 1).withPosition(4, 0).getEntry();
+			NetworkEntries.m_nteIsSmartIntakeEnabled = tabDrive.add("Smart Intake", true).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 1).withPosition(0, 0).getEntry();
+			NetworkEntries.m_nteIsSmartIndexerEnabled = tabDrive.add("Smart Indexer", true).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 1).withPosition(2, 0).getEntry();
+			NetworkEntries.m_nteIsPivotAssistEnabled = tabDrive.add("Pivot Assist", true).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 1).withPosition(4, 0).getEntry();
 			
 			NetworkEntries.m_nteEndSmartIntake = tabDrive.add("End Smart Intake", false).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 1).withPosition(0, 1).getEntry();
 			
