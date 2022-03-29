@@ -74,8 +74,7 @@ public class AutoCommand extends CommandBase {
 		//Auto commands to be scheduled sequentially
 		sequential = new SequentialCommandGroup(
 			shootPreloadEnabled ? new ShootCargoCommand(1) : new PrintCommand("Auto shoot disabled"),  //Shoot preload
-			taxiEnabled ? taxiRamCommand : new PrintCommand("Taxi disabled"),  //Taxi
-			customTrajectoryEnabled ? customRamCommand : new PrintCommand("Custom trajectory disabled"),  //Custom trajectory
+			taxiEnabled ? (customTrajectoryEnabled ? customRamCommand : taxiRamCommand) : new PrintCommand("Taxi and custom trajectory disabled"),  //Taxi and custom trajectory
 			new InstantCommand(() -> executingCommand = false)  //Has finished executing the SequentialCommandGroup
 		);
 	}
@@ -201,7 +200,7 @@ public class AutoCommand extends CommandBase {
 		//Add the trajectory's return middle waypoint (used to avoid hitting any potential obstacles)
 		waypoints.add(tarmac == 'L' ? kReturnMiddleWaypointL : kReturnMiddleWaypointR);
 		//Add the trajectory's end waypoint (where it will shoot from in front of the Hub)
-		waypoints.add(m_drivePID.getStartingPose());  //The starting position at the beginning of the game
+		waypoints.add(new Pose2d());  //Starting position
 		//Generate the trajectory
 		collectCargoRamCommand = generateTrajectory(
 			Units.feetToMeters(2),  //Max velocity (meters per second)
@@ -224,17 +223,17 @@ public class AutoCommand extends CommandBase {
 		x = Units.feetToMeters(x);
 		y = Units.feetToMeters(y);
 		//Converts the angle from degrees to radians
-		endAngle = Units.degreesToRadians(endAngle);
+		endAngle = Units.degreesToRadians(-endAngle);
 		//Generates a RamseteCommand with the custom trajectory
 		customRamCommand = generateTrajectory(
 			maxVelocityMetersPerSecond,  //Max velocity (meters per second)
 			maxAccelerationMetersPerSecondSq,  //Max acceleration (meters per seconds squared)
 			Arrays.asList(
-				m_drivePID.getStartingPose(),  //Starting waypoint
-				new Pose2d(x, y, new Rotation2d(endAngle))  //End waypoint
+				new Pose2d(),  //Start position
+				new Pose2d(x, y, new Rotation2d(endAngle))  //End position
 			)
 		);
-	}
+	}`
 
 	//Returns where an auto command is currently being executed
 	public boolean getExecutingCommand() {return executingCommand;}

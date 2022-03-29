@@ -57,24 +57,26 @@ public final class Constants {
 		//The distance between the center line of the left and right wheels
 		public static final double kTrackWidth = 0.0;  //Inches
 
-		/*You can get kS, kV, kA, and kP from the frc robot characterization tool (sysid)
+		/*You can get kS, kV, kA, and kP from the frc robot characterization tool (sysId)
 		 *The tool can be found in the WPILib Tools desktop folder (Windows)
-		 *You should perform this characterization while the robot in on a surface similar to that on the game field
+		 *The characterization should be performed while the robot in on a surface similar to that of the game field for the most accurate results
 		 *Instructions: https://docs.wpilib.org/en/stable/docs/software/pathplanning/system-identification/identification-routine.html#running-the-identification-routine
 		 */
-		//Voltage required to overcome static friction
+		//Static gain (voltage required to overcome static friction)
 		public static final double kS = 0.0;  //Get correct value
-		//Some constant
+		//Velocity gain
 		public static final double kV = 0.0;  //Get correct value
-		//Some constant
+		//Acceleration gain
 		public static final double kA = 0.0;  //Get correct value
+
 		//Proportional (multiplied to the error)
-		public static final double kP = 0.4;  //Get correct value
+		public static final double kP = 0.4;  //Find good value
 		//Integral (multiplied to the error sum)
 		public static final double kI = 0.1;  //Find good value
 		//Derivative (multiplied to the error rate)
 		public static final double kD = 0.1;  //Find good value
 
+		//Constants you don't need to understand
 		public static final double kRamseteB = 2.0;  //DO NOT CHANGE
 		public static final double kRamseteZeta = 0.7;  //DO NOT CHANGE
 	}
@@ -112,14 +114,6 @@ public final class Constants {
 		public static final double kDistancePerPulse = kWheelCircumference / kPulsePerRevolution / kEncoderGearRatio / kGearRatio;
 
 		public static final double kThreshold = 3.0;
-	}
-
-	//Climber Constants
-	public static final class ClimberConstants {
-		//Motor IDs
-		public static final int kClimberArmMotorID = 10;  //CAN
-		public static final int kExtenderWinchMotorID = 11;  //CAN
-		public static final int kHookWinchMotorID = 12;  //CAN
 	}
 
 	//Intake Constants
@@ -161,6 +155,14 @@ public final class Constants {
 
 		//Shooter photoelectric sensor ID
 		public static final int kShooterPESensorID = 8;  //DIO
+	}
+
+	//Climber Constants
+	public static final class ClimberConstants {
+		//Motor IDs
+		public static final int kClimberArmMotorID = 10;  //CAN
+		public static final int kExtenderWinchMotorID = 11;  //CAN
+		public static final int kHookWinchMotorID = 12;  //CAN
 	}
 
 	//Default Speeds Constants
