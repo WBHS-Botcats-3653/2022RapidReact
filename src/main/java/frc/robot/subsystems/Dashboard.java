@@ -20,7 +20,6 @@ import frc.robot.inputs.SI;
 
 public class Dashboard extends SubsystemBase {
 	private static Dashboard m_singleton;
-	private final DrivePID m_drivePID = DrivePID.getInstance();
 	private final Drivetrain m_driveTrain = Drivetrain.getInstance();
 	private final Direction m_direction = Direction.getInstance();
 	private final Cameras m_cameras = Cameras.getInstance();
