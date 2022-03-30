@@ -102,7 +102,7 @@ public final class Constants {
 		private static final double kWheelCircumference = kWheelDiameter * Math.PI;  //Meters
 		//The number of pulses per rotation of the motor (also known as the encoder resolution)
 		//private static final double kPulsePerRevolution = 360.0;  //This is not the correct value
-		private static final double kPulsePerRevolution = 1440.0;  //3900
+		private static final double kPulsePerRevolution = 400.0;  //3900
 		//The gear ratio between the encoder shaft and the wheels
 		private static final double kEncoderGearRatio = 1.0 / 1.0;
 		//The gear ratio between the motors and the shaft
