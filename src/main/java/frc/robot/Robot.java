@@ -77,7 +77,6 @@ public class Robot extends TimedRobot {
 
 		//Sets motors to coast or brake
 		m_drivetrain.enableBrake(false);
-		m_intake.enableBrake(false);
 		m_indexer.enableBrake(false);
 
 		//Disables the speeds
@@ -93,7 +92,6 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		//Sets motors to brake
 		m_drivetrain.enableBrake(true);
-		m_intake.enableBrake(true);
 		m_indexer.enableBrake(true);
 
 		//Gets the autonomous command from robotContainer
@@ -136,7 +134,6 @@ public class Robot extends TimedRobot {
 
 		//Sets motors to coast or brake
 		m_drivetrain.enableBrake(false);
-		m_intake.enableBrake(true);
 		m_indexer.enableBrake(true);
 
 		// Cancels all running commands at the start of Teleoperated mode.
@@ -171,7 +168,6 @@ public class Robot extends TimedRobot {
 		//Sets motors to coast or brake
 		m_drivetrain.enableBrake(false);
 		m_indexer.enableBrake(true);
-		m_intake.enableBrake(true);
 
 		CommandScheduler.getInstance().schedule(m_arcadeDriveCommand);
 		CommandScheduler.getInstance().schedule(m_intakeCommand);

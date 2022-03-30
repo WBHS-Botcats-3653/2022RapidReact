@@ -24,7 +24,7 @@ public class Intake extends SubsystemBase {
 		pivot.setInverted(false);
 		rollers.setInverted(false);
 		
-		pivot.setNeutralMode(NeutralMode.Brake);
+		pivot.setNeutralMode(NeutralMode.Coast);
 		rollers.setNeutralMode(NeutralMode.Coast);
 	}
 	
@@ -45,10 +45,5 @@ public class Intake extends SubsystemBase {
 	public void setRollerSpeed(double speed) {
 		//Sets the roller speed
 		rollers.set(speed);
-	}
-
-	//Enables or disables the neutral brake on the motors
-	public void enableBrake(boolean enable) {
-		pivot.setNeutralMode(enable ? NeutralMode.Brake : NeutralMode.Coast);
 	}
 }
