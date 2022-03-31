@@ -91,29 +91,27 @@ public final class Constants {
 		
 		//Encoder IDs
 		public static final int kLeftMotorGroupEncoderID1 = 5;  //DIO 1 pin
-		public static final int kLeftMotorGroupEncoderID2 = 4; //DIO 3 pin
+		public static final int kLeftMotorGroupEncoderID2 = 4;  //DIO 3 pin
 		public static final int kRightMotorGroupEncoderID1 = 3;  //DIO 1 pin
 		public static final int kRightMotorGroupEncoderID2 = 2;  //DIO 3 pin
 
 		//Diameter of the wheel directly mounted to the motor shaft
-		//private static final double kWheelDiameter = 6.0;  //Inches
+		//private static final double kWheelDiameter = 6.0;  //Inches OLD
 		private static final double kWheelDiameter = Units.inchesToMeters(6.0);  //Meters
 		//Circumference of the wheel directly mounted to the motor shaft
 		private static final double kWheelCircumference = kWheelDiameter * Math.PI;  //Meters
 		//The number of pulses per rotation of the motor (also known as the encoder resolution)
-		//private static final double kPulsePerRevolution = 360.0;  //This is not the correct value
+		//private static final double kPulsePerRevolution = 360.0;  //This is not the correct value OLD
 		private static final double kPulsePerRevolution = 400.0;  //3900
 		//The gear ratio between the encoder shaft and the wheels
 		private static final double kEncoderGearRatio = 1.0 / 1.0;
 		//The gear ratio between the motors and the shaft
 		private static final double kGearRatio = 10.71 / 1.0;
-		//Custom variable to adjust what units the encoder returns a value in (in this case inches)
-		//private static final double kFudgefactor = 12.0 / 1.11228;
+		//Custom variable to adjust what units the encoder returns a value in (in this case inches) OLD
+		//private static final double kFudgefactor = 12.0 / 1.11228; OLD
 		//Encoder distance per pulse calculation
-		//public static final double kDistancePerPulse = Math.PI * kWheelDiameter / kPulsePerRevolution / kEncoderGearRatio / kGearRatio * kFudgefactor;
+		//public static final double kDistancePerPulse = Math.PI * kWheelDiameter / kPulsePerRevolution / kEncoderGearRatio / kGearRatio * kFudgefactor; OLD
 		public static final double kDistancePerPulse = kWheelCircumference / kPulsePerRevolution / kEncoderGearRatio / kGearRatio;
-
-		public static final double kThreshold = 3.0;
 	}
 
 	//Intake Constants

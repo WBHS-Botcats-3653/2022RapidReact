@@ -55,15 +55,15 @@ public class Drivetrain extends SubsystemBase {
 	}
 
 	/**Sets the arcade drive speed and rotation
-	 * @param speed Speed to drive the robot
-	 * @param rotation Amount to rotate
+	 * @param xSpeed The speed along the x-axis
+	 * @param zRotation The rotation rate around the z-axis
 	 */
-	public void arcadeDrive(double speed, double rotation) {
+	public void arcadeDrive(double xSpeed, double zRotation) {
 		//Prevents speed and rotation from exceeding maximum limit
-		if (Math.abs(speed) > 1.0) speed = Math.signum(speed);
-		if (Math.abs(rotation) > 1.0) rotation = Math.signum(rotation);
+		if (Math.abs(xSpeed) > 1.0) xSpeed = Math.signum(xSpeed);
+		if (Math.abs(zRotation) > 1.0) zRotation = Math.signum(zRotation);
 		//Sets the differential drive speed and rotation
-		diffDrive.arcadeDrive(speed, rotation, false);
+		diffDrive.arcadeDrive(xSpeed, zRotation, false);
 	}
  
 	/**Sets the tank drive left and right drive speeds
