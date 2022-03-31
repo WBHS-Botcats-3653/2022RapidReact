@@ -56,8 +56,8 @@ public class AutoCommand extends CommandBase {
 	@Override
 	public void initialize() {
 		//Gets user selections
-		shootPreloadEnabled = NetworkEntries.m_nteShootPreloadSelected.getBoolean(false);
 		hasPreload = NetworkEntries.m_nteHasPreload.getBoolean(false);
+		shootPreloadEnabled = NetworkEntries.m_nteShootPreloadSelected.getBoolean(false);
 		taxiEnabled = NetworkEntries.m_nteTaxiSelected.getBoolean(false);
 		customTrajectoryEnabled = NetworkEntries.m_nteCustomTrajectorySelected.getBoolean(false);
 		collectCargoEnabled = NetworkEntries.m_nteCollectCargoSelected.getBoolean(false);
@@ -67,7 +67,7 @@ public class AutoCommand extends CommandBase {
 		if (customRamCommand == null) customTrajectoryEnabled = false;
 		if (collectCargoRamCommand == null) collectCargoEnabled = false;
 
-		//Resets the encoders to ensure robot starts zeroed
+		//Resets the encoders to ensure the robot starts zeroed
 		m_direction.resetEncoders();
 		//Next command to be schedule will be a SequentialCommandGroup
 		commandToScheduleNext = 'S';
