@@ -184,7 +184,7 @@ public class AutoCommand extends CommandBase {
 	 * @param tarmac The tarmac the robot starts the match in
 	 * @param cargo The cargo to be targeted
 	 */
-	public static void generateCargoCollectionTrajectory(char tarmac, String[] cargo) {
+	public static void generateCargoCollectionTrajectory(char tarmac, ArrayList<String> cargo) {
 		ArrayList<Pose2d> waypoints = new ArrayList<>();
 		//Starting waypoint
 		waypoints.add(new Pose2d());
@@ -208,7 +208,7 @@ public class AutoCommand extends CommandBase {
 			waypoints  //Waypoints
 		);
 		//Sets the number of cargo to be collected
-		numCargoToCollect = cargo.length;
+		numCargoToCollect = cargo.size();
 	}
 
 	/** Generates a new custom trajectory for the robot to follow during the autonomous period

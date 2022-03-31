@@ -7,7 +7,7 @@ package frc.robot.subsystems;
 import static frc.robot.Constants.AutoConstants.kTaxiDistance;
 import static frc.robot.Constants.DefaultSpeedsConstants.*;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Map;
 
 import edu.wpi.first.math.util.Units;
@@ -30,7 +30,7 @@ public class Dashboard extends SubsystemBase {
 	public ShuffleboardTab tabDrive, tabTest, tabSpeeds, tabAuto;
 
 	private boolean prevHasPreload, prevShootPreload, prevTaxi, prevCollectCargo, prevShootCollectedCargo, prevCustomTrajectory, prevTarmac, prevSmartIntake;
-	private String[] prevCargoToTarget;
+	private ArrayList<String> prevCargoToTarget;
 	private double genVelocity, genAcceleration, genX, genY, genEndAngle;
 
 	public boolean speedsDisabled = true;
@@ -225,7 +225,7 @@ public class Dashboard extends SubsystemBase {
 		prevCollectCargo = NetworkEntries.m_nteCollectCargoSelected.getBoolean(false);
 
 		//If any cargo collection settings have been changed
-		if (NetworkEntries.m_nteRightTarmac.getBoolean(false) != prevTarmac || Arrays.equals(NetworkEntries.getCargoToTarget(), prevCargoToTarget)) {
+		if (NetworkEntries.m_nteRightTarmac.getBoolean(false) != prevTarmac || NetworkEntries.getCargoToTarget().equals(prevCargoToTarget)) {
 			//Cargo collection trajectory has not been generated
 			NetworkEntries.m_nteCargoCollectionHasGenerated.setBoolean(false);
 		}

@@ -75,7 +75,7 @@ public class NetworkEntries {
 	}
 
 	//Returns the selected cargo to target
-	public static String[] getCargoToTarget() {
+	public static ArrayList<String> getCargoToTarget() {
 		ArrayList<String> cargo = new ArrayList<>();
 		switch (getTarmac()) {  //Get the starting Tarmac
 			case ('L'):  //Starting in the left Tarmac
@@ -121,9 +121,8 @@ public class NetworkEntries {
 				}
 				break;
 		}
-		//Returns the ArrayList containing the cargo to be targeted as a String array
-		return new String[0];
-		//return (String[]) cargo.toArray();
+		//Returns the cargo to be targeted
+		return cargo;
 	}
 
 	//Returns whether the pivot assist is enabled
