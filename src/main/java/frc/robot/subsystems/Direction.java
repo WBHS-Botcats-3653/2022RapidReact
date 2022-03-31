@@ -115,8 +115,6 @@ public class Direction extends SubsystemBase {
 		rightEncoder.reset();
 		leftEncoder.reset();
 		// Configures the encoders' distance-per-pulse
-		// The robot moves forward 1 foot per encoder rotation
-		// There are 256 pulses per encoder rotation
 		leftEncoder.setDistancePerPulse(kDistancePerPulse);
 		rightEncoder.setDistancePerPulse(kDistancePerPulse);
 	}
