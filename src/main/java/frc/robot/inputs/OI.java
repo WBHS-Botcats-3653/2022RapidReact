@@ -20,6 +20,8 @@ public class OI {
 	private double maxExtenderWinchSpeed = 0.0;
 	private double maxHookWinchSpeed = 0.0;
 
+	/**Constructs a new OI
+	 */
 	public OI() {
 		m_controller = new XboxController(0);
 	}
