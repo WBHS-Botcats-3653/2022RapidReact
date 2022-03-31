@@ -144,7 +144,6 @@ public class Dashboard extends SubsystemBase {
 			m_oi.setMaxPivotSpeed(0);
 			m_oi.setMaxRollerSpeed(0);
 			m_oi.setMaxIndexSpeed(0);
-			m_oi.setMaxSmartIndexSpeed(0);
 			m_oi.setMaxShootSpeed(0);
 			m_oi.setMaxClimbSpeed(0);
 			m_oi.setMaxExtenderWinchSpeed(0);

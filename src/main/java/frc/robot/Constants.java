@@ -130,15 +130,16 @@ public final class Constants {
 		public static final int kTopPivotLimitSwitchID = 1;  //DIO
 
 		//Speeds
-		public static final double kSmartIntakePivotDownSpeed = 0.15;
-		public static final double kSmartIntakePivotUpSpeed = 0.35;
+		public static final double kSmartPivotDownSpeed = 0.15;
+		public static final double kSmartPivotUpSpeed = 0.35;
 		public static final double kPivotAssistSpeed = 0.1;
 	}
 
 	//Indexer Constants
 	public static final class IndexerConstants {
 		//Motor ID
-		public static final int kIndexerMotorID = 22;  //CAN
+		public static final int kHorizontalIndexerMotorID = 22;  //CAN
+		public static final int kVerticalIndexerMotorID = 23;  //CAN
 
 		//Photoelectric sensor IDs
 		public static final int kLowerStoragePESensorID = 6;  //DIO

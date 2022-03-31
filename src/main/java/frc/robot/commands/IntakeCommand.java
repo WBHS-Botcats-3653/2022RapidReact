@@ -105,7 +105,7 @@ public class IntakeCommand extends CommandBase {
 		//If the smart intake is being called to go down and the bottom pivot limit switch is open
 		if (m_oi.getSmartIntakeDown() && !m_si.isPivotDownLimitClosed()) {
 			//Pivots the intake down at the set max speed
-			m_intake.setPivotSpeed(kSmartIntakePivotDownSpeed);
+			m_intake.setPivotSpeed(kSmartPivotDownSpeed);
 			//Prevents manual control from interferring with smart control
 			smartControl = true;
 			//Initial pivot down started
@@ -116,7 +116,7 @@ public class IntakeCommand extends CommandBase {
 		//If the smart intake is being called to go up and the top pivot limit switch is open
 		if (m_oi.getSmartIntakeUp() && smartControl && !m_si.isPivotUpLimitClosed()) {
 			//Pivots the intake up at the set max speed
-			m_intake.setPivotSpeed(-kSmartIntakePivotUpSpeed);
+			m_intake.setPivotSpeed(-kSmartPivotUpSpeed);
 			//Initial pivot up started
 			smartPivotGoingUp = true;
 			//Stop downward pivot

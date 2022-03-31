@@ -34,8 +34,9 @@ public class ShootCargoCommand extends CommandBase {
 		shooterTriggered = false;
 		//If there is cargo in the upper storage area
 		if (m_si.isUpperStorageClosed()) {
-			//Spins the indexer in reverse
-			m_indexer.setIndexerSpeed(-kAutoIndexSpeed);
+			//Spins the indexers in reverse
+			m_indexer.setHorizontalIndexerSpeed(-kAutoIndexSpeed);
+			m_indexer.setVerticalIndexerSpeed(-kAutoIndexSpeed);
 		}
 	}
 
@@ -44,8 +45,9 @@ public class ShootCargoCommand extends CommandBase {
 	public void execute() {
 		//If there is cargo in the intake or lower storage area
 		if (!m_si.isUpperStorageClosed() && (m_si.isIntakeClosed() || m_si.isLowerStorageClosed())) {
-			//Spins the indexer
-			m_indexer.setIndexerSpeed(kAutoIndexSpeed);
+			//Spins the indexers
+			m_indexer.setHorizontalIndexerSpeed(kAutoIndexSpeed);
+			m_indexer.setVerticalIndexerSpeed(kAutoIndexSpeed);
 		}
 		if (m_si.isShooterClosed()) {  //If cargo has moved into the shooter
 			//The shooter photoelectric sensor has been triggered
@@ -61,8 +63,9 @@ public class ShootCargoCommand extends CommandBase {
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
-		//Stops the indexer
-		m_indexer.setIndexerSpeed(0);
+		//Stops the indexers
+		m_indexer.setHorizontalIndexerSpeed(0);
+		m_indexer.setVerticalIndexerSpeed(0);
 		//Stops the shooter
 		m_shooter.setShootSpeed(0);
 	}

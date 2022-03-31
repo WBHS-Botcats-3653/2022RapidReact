@@ -4,7 +4,7 @@
 
 package frc.robot.subsystems;
 
-import static frc.robot.Constants.IndexerConstants.kIndexerMotorID;
+import static frc.robot.Constants.IndexerConstants.*;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
@@ -14,13 +14,18 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Indexer extends SubsystemBase {
 	private static Indexer m_singleton = null;
 
-	private WPI_VictorSPX indexer;
+	private WPI_VictorSPX horizontalIndexer, verticalIndexer;
 
 	/** Creates a new Indexer. */
 	public Indexer() {
-		indexer = new WPI_VictorSPX(kIndexerMotorID);
-		indexer.setInverted(true);
-		indexer.setNeutralMode(NeutralMode.Brake);
+		horizontalIndexer = new WPI_VictorSPX(kHorizontalIndexerMotorID);
+		verticalIndexer = new WPI_VictorSPX(kVerticalIndexerMotorID);
+
+		horizontalIndexer.setInverted(false);
+		verticalIndexer.setInverted(true);
+
+		horizontalIndexer.setNeutralMode(NeutralMode.Coast);
+		verticalIndexer.setNeutralMode(NeutralMode.Brake);
 	}
 
 	//Returns an instance of Indexer, creating an instance only when one does not already exist (singleton)
@@ -31,16 +36,26 @@ public class Indexer extends SubsystemBase {
 		return m_singleton;
 	}
 
-	/**Raises the cargo up the storage system
-	 * --This is the indexer--
+	/**Moves the cargo from the intake to the vertical indexer
+	 * @param speed to spin the motor
 	 */
-	public void setIndexerSpeed(double speed) {
-		//Sets the indexer speed
-		indexer.set(speed);
+	public void setHorizontalIndexerSpeed(double speed) {
+		//Sets the horizontal indexer speed
+		horizontalIndexer.set(speed);
+	}
+
+	/**Raises the cargo up the storage system
+	 * @param speed to spin the motor
+	 */
+	public void setVerticalIndexerSpeed(double speed) {
+		//Sets the vertical indexer speed
+		verticalIndexer.set(speed);
 	}
 
 	//Enable or disable the neutral brake on the motor
 	public void enableBrake(boolean enable) {
-		indexer.setNeutralMode(enable ? NeutralMode.Brake : NeutralMode.Coast);
+		NeutralMode mode = enable ? NeutralMode.Brake : NeutralMode.Coast;
+		verticalIndexer.setNeutralMode(mode);
+		horizontalIndexer.setNeutralMode(mode);
 	}
 }

@@ -40,8 +40,9 @@ public class IndexerCommand extends CommandBase {
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
-		//Stop the indexer
-		m_indexer.setIndexerSpeed(0);
+		//Stop the indexers
+		m_indexer.setHorizontalIndexerSpeed(0);
+		m_indexer.setVerticalIndexerSpeed(0);
 	}
 
 	// Returns true when the command should end.
@@ -52,19 +53,22 @@ public class IndexerCommand extends CommandBase {
 
 	//Manual control indexer logic
 	public void manualIndexerLogic() {
-		if (m_oi.getIndexerIn()) {  //If the index in button is being pressed
-			//Sets the indexer speed to the set max
-			m_indexer.setIndexerSpeed(m_oi.getMaxIndexSpeed());
+		if (m_oi.getIndexIn()) {  //If the index in button is being pressed
+			//Sets the indexer speeds to the set max
+			m_indexer.setHorizontalIndexerSpeed(m_oi.getMaxIndexSpeed());
+			m_indexer.setVerticalIndexerSpeed(m_oi.getMaxIndexSpeed());
 			//Not under smart control
 			smartControl = false;
-		} else if (m_oi.getIndexerOut()) {  //If the index out button is being pressed
-			//Sets the indexer speed to the negative set max
-			m_indexer.setIndexerSpeed(-m_oi.getMaxIndexSpeed());  //Reverse indexer
+		} else if (m_oi.getIndexOut()) {  //If the index out button is being pressed
+			//Sets the indexer speeds to the negative set max
+			m_indexer.setHorizontalIndexerSpeed(-m_oi.getMaxIndexSpeed());  //Reverse indexer
+			m_indexer.setVerticalIndexerSpeed(-m_oi.getMaxIndexSpeed());  //Reverse indexer
 			//Not under smart control
 			smartControl = false;
 		} else if (!smartControl) {  //If the indexer is not under smart control
-			//Stops the indexer
-			m_indexer.setIndexerSpeed(0);
+			//Stops the indexers
+			m_indexer.setHorizontalIndexerSpeed(0);
+			m_indexer.setVerticalIndexerSpeed(0);
 			//Under smart control
 			smartControl = true;
 		}
@@ -76,24 +80,30 @@ public class IndexerCommand extends CommandBase {
 		if (ShooterCommand.isGivingInput()) {
 			//If there is no cargo in the upper storage but there is cargo in the lower storage or intake
 			if (!m_si.isUpperStorageClosed() && (m_si.isIntakeClosed() || m_si.isLowerStorageClosed())) {
-				//Spin the indexer
-				m_indexer.setIndexerSpeed(kSmartIndexSpeed);
+				//Spin the indexers
+				m_indexer.setHorizontalIndexerSpeed(kSmartIndexSpeed);
+				m_indexer.setVerticalIndexerSpeed(kSmartIndexSpeed);
 			}
 		} else if (m_si.isUpperStorageClosed()) {  //If there is cargo in the upper storage
 			//If there is cargo in the lower storage area
 			if (m_si.isLowerStorageClosed()) {
-				//Stops the indexer
-				m_indexer.setIndexerSpeed(0);
+				//Stops the indexers
+				m_indexer.setHorizontalIndexerSpeed(0);
+				m_indexer.setVerticalIndexerSpeed(0);
 			} else {  //If there is no cargo in the lower storage area
-				//Spins the indexer in reverse
-				m_indexer.setIndexerSpeed(-kSmartIndexSpeed);
+				//Stops the horizontal indexer
+				m_indexer.setHorizontalIndexerSpeed(0);
+				//Spins the vertical indexer in reverse
+				m_indexer.setVerticalIndexerSpeed(-kSmartIndexSpeed);
 			}
 		} else if (m_si.isIntakeClosed()) {  //If there is cargo in the intake but not in the upper storage area
-			//Spins the indexer
-			m_indexer.setIndexerSpeed(kSmartIndexSpeed);
+			//Spins the indexers
+			m_indexer.setHorizontalIndexerSpeed(kSmartIndexSpeed);
+			m_indexer.setVerticalIndexerSpeed(kSmartIndexSpeed);
 		} else if (m_si.isLowerStorageClosed()) {  //If there is cargo only in the lower storage area
-			//Stops the indexer
-			m_indexer.setIndexerSpeed(0);
+			//Stops the indexers
+			m_indexer.setHorizontalIndexerSpeed(0);
+			m_indexer.setVerticalIndexerSpeed(0);
 		}
 	}
 }

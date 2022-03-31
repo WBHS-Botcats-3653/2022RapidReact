@@ -11,15 +11,14 @@ public class OI {
 	private XboxController m_controller = null;
 	
 	//Max speeds
-	private double maxDriveSpeed = 0;
-	private double maxPivotSpeed = 0;
-	private double maxRollerSpeed = 0;
-	private double maxIndexSpeed = 0;
-	private double maxSmartIndexSpeed = 0;
-	private double maxShootSpeed = 0;
-	private double maxClimbSpeed = 0;
-	private double maxExtenderWinchSpeed = 0;
-	private double maxHookWinchSpeed = 0;
+	private double maxDriveSpeed = 0.0;
+	private double maxPivotSpeed = 0.0;
+	private double maxRollerSpeed = 0.0;
+	private double maxIndexSpeed = 0.0;
+	private double maxShootSpeed = 0.0;
+	private double maxClimbSpeed = 0.0;
+	private double maxExtenderWinchSpeed = 0.0;
+	private double maxHookWinchSpeed = 0.0;
 
 	public OI() {
 		m_controller = new XboxController(0);
@@ -35,9 +34,7 @@ public class OI {
 
 	//Sets the max drive speed
 	public void setMaxDriveSpeed(double speed) {
-		if (0.0 < speed && speed <= 1.0) {
-			maxDriveSpeed = speed;
-		}
+		if (0.0 < speed && speed <= 1.0) maxDriveSpeed = speed;
 	}
 
 	//Returns the max drive speed
@@ -47,9 +44,7 @@ public class OI {
 
 	//Sets the max arm speed
 	public void setMaxClimbSpeed(double speed) {
-		if (0.0 < speed && speed <= 1.0) {
-			maxClimbSpeed = speed;
-		}
+		if (0.0 < speed && speed <= 1.0) maxClimbSpeed = speed;
 	}
 
 	//Returns the max arm speed
@@ -59,9 +54,7 @@ public class OI {
 
 	//Sets the max extender winch speed
 	public void setMaxExtenderWinchSpeed(double speed) {
-		if (0.0 < speed && speed <= 1.0) {
-			maxExtenderWinchSpeed = speed;
-		}
+		if (0.0 < speed && speed <= 1.0) maxExtenderWinchSpeed = speed;
 	}
 
 	//Returns the max extender winch speed
@@ -71,9 +64,7 @@ public class OI {
 
 	//Sets the max hook winch speed
 	public void setMaxHookWinchSpeed(double speed) {
-		if (0.0 < speed && speed <= 1.0) {
-			maxHookWinchSpeed = speed;
-		}
+		if (0.0 < speed && speed <= 1.0) maxHookWinchSpeed = speed;
 	}
 
 	//Returns the max hook winch speed
@@ -83,9 +74,7 @@ public class OI {
 
 	//Sets the max pivot speed
 	public void setMaxPivotSpeed(double speed) {
-		if (0.0 < speed && speed <= 1.0) {
-			maxPivotSpeed = speed;
-		}
+		if (0.0 < speed && speed <= 1.0) maxPivotSpeed = speed;
 	}
 
 	//Returns the max pivot speed
@@ -95,9 +84,7 @@ public class OI {
 
 	//Sets the max roller speed
 	public void setMaxRollerSpeed(double speed) {
-		if (0.0 < speed && speed <= 1.0) {
-			maxRollerSpeed = speed;
-		}
+		if (0.0 < speed && speed <= 1.0) maxRollerSpeed = speed;
 	}
 
 	//Returns the max roller speed
@@ -107,36 +94,20 @@ public class OI {
 
 	//Sets the max index speed
 	public void setMaxIndexSpeed(double speed) {
-		if (0.0 < speed && speed <= 1.0) {
-			maxIndexSpeed = speed;
-		}
+		if (0.0 < speed && speed <= 1.0) maxIndexSpeed = speed;
 	}
 
-	//Returns the max indexer speed
+	//Returns the max index speed
 	public double getMaxIndexSpeed() {
 		return maxIndexSpeed;
 	}
 
-	//Sets the max indexer speed
-	public void setMaxSmartIndexSpeed(double speed) {
-		if (0.0 < speed && speed <= 1.0) {
-			maxSmartIndexSpeed = speed;
-		}
-	}
-
-	//Returns the max indexer speed
-	public double getMaxSmartIndexSpeed() {
-		return maxSmartIndexSpeed;
-	}
-
 	//Sets the max shoot speed
 	public void setMaxShootSpeed(double speed) {
-		if (0.0 < speed && speed <= 1.0) {
-			maxShootSpeed = speed;
-		}
+		if (0.0 < speed && speed <= 1.0) maxShootSpeed = speed;
 	}
 	
-	//Returns the max shoot speed (invert after return)
+	//Returns the max shoot speed
 	public double getMaxShootSpeed() {
 		return maxShootSpeed;
 	}
@@ -153,30 +124,22 @@ public class OI {
 
 	//Returns whether the right DPad is being pressed
 	public boolean getManualIntakeUp() {
-		if (NetworkEntries.isSmartIntakeEnabled()) {
-			return POVIsRight();
-		} else {
-			return m_controller.getLeftBumper();
-		}
+		return NetworkEntries.isSmartIntakeEnabled() ? POVIsRight() : m_controller.getLeftBumper();
 	}
 
 	/**Returns whether the left DPad is being pressed */
 	public boolean getManualIntakeDown() {
-		if (NetworkEntries.isSmartIntakeEnabled()) {
-			return POVIsLeft();
-		} else {
-			return m_controller.getLeftTriggerAxis() > 0;
-		}
+		return NetworkEntries.isSmartIntakeEnabled() ? POVIsLeft() : m_controller.getLeftTriggerAxis() > 0;
 	}
 
 	/**Returns whether the B button is being pressed */
-	public boolean getIndexerIn() {
+	public boolean getIndexIn() {
 		return m_controller.getBButton();
 	}
 
 	/**Returns whether the Y button is being pressed
 	*/
-	public boolean getIndexerOut() {
+	public boolean getIndexOut() {
 		return m_controller.getYButton();
 	}
 
@@ -195,21 +158,13 @@ public class OI {
 	/**Returns whether the left trigger (bumper) is being pressed
 	 */
 	public boolean getSmartIntakeDown() {
-		if (NetworkEntries.isSmartIntakeEnabled()) {
-			return m_controller.getLeftBumper();
-		} else {
-			return false;
-		}
+		return NetworkEntries.isSmartIntakeEnabled() ? m_controller.getLeftBumper() : false;
 	}
 
 	/**Returns whether the left trigger (bumper) is not being pressed
 	 */
 	public boolean getSmartIntakeUp() {
-		if (NetworkEntries.isSmartIntakeEnabled()) {
-			return m_controller.getLeftBumperReleased();
-		} else {
-			return false;
-		}
+		return NetworkEntries.isSmartIntakeEnabled() ? m_controller.getLeftBumperReleased() : false;
 	}
 
 	//Whether the right trigger is being pressed

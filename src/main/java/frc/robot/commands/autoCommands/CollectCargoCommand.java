@@ -49,14 +49,17 @@ public class CollectCargoCommand extends CommandBase {
 		}
 		//Indexer
 		if (m_si.isUpperStorageClosed()) {  //If there is cargo in the upper storage area
-			//Spin the indexer in reverse
-			m_indexer.setIndexerSpeed(-kAutoIndexSpeed);
+			//Spin the indexers in reverse
+			m_indexer.setHorizontalIndexerSpeed(-kAutoIndexSpeed);
+			m_indexer.setVerticalIndexerSpeed(-kAutoIndexSpeed);
 		} else if (m_si.isLowerStorageClosed()) {  //If there is cargo is the lower storage area
-			//Stop the indexer
-			m_indexer.setIndexerSpeed(0);
+			//Stop the indexers
+			m_indexer.setHorizontalIndexerSpeed(0);
+			m_indexer.setVerticalIndexerSpeed(0);
 		} else if (m_si.isIntakeClosed()) {  //If there is cargo in the intake
-			//Spin the indexer
-			m_indexer.setIndexerSpeed(kAutoIndexSpeed);
+			//Spin the indexers
+			m_indexer.setHorizontalIndexerSpeed(kAutoIndexSpeed);
+			m_indexer.setVerticalIndexerSpeed(kAutoIndexSpeed);
 		}
 	}
 
@@ -67,8 +70,9 @@ public class CollectCargoCommand extends CommandBase {
 		m_intake.setPivotSpeed(0);
 		//Stops the intake rollers
 		m_intake.setRollerSpeed(0);
-		//Stops the indexer
-		m_indexer.setIndexerSpeed(0);
+		//Stops the indexers
+		m_indexer.setHorizontalIndexerSpeed(0);
+		m_indexer.setVerticalIndexerSpeed(0);
 	}
 
 	// Returns true when the command should end.
