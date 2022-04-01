@@ -128,8 +128,8 @@ public class Dashboard extends SubsystemBase {
 
 		//Relay sensor readings to the dashboard
 		//Encoders
-		NetworkEntries.m_nteDriveEncLeft.setDouble(m_direction.getLeftEncoderDistance());  //Inches
-		NetworkEntries.m_nteDriveEncRight.setDouble(m_direction.getRightEncoderDistance());  //Inches
+		NetworkEntries.m_nteDriveEncLeft.setDouble(Units.metersToInches(m_direction.getLeftEncoderDistance()));  //Inches
+		NetworkEntries.m_nteDriveEncRight.setDouble(Units.metersToInches(m_direction.getRightEncoderDistance()));  //Inches
 
 		//Distance Drived
 		NetworkEntries.m_nteDriveDistance.setDouble(Units.metersToInches(m_direction.getEncoderDistance()));  //Inches
