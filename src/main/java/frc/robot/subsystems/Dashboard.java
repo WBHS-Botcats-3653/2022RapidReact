@@ -7,7 +7,6 @@ package frc.robot.subsystems;
 import static frc.robot.Constants.AutoConstants.kTaxiDistance;
 import static frc.robot.Constants.DefaultSpeedsConstants.*;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 import edu.wpi.first.math.util.Units;
@@ -29,8 +28,7 @@ public class Dashboard extends SubsystemBase {
 
 	public ShuffleboardTab tabDrive, tabTest, tabSpeeds, tabAuto;
 
-	private boolean prevHasPreload, prevShootPreload, prevTaxi, prevCollectCargo, prevShootCollectedCargo, prevCustomTrajectory, prevTarmac, prevSmartIntake;
-	private ArrayList<String> prevCargoToTarget;
+	private boolean prevHasPreload, prevShootPreload, prevTaxi, prevCollectCargo, prevShootCollectedCargo, prevCustomTrajectory, prevSmartIntake;
 	private double genVelocity, genAcceleration, genX, genY, genEndAngle;
 
 	public boolean speedsDisabled = true;
@@ -110,8 +108,6 @@ public class Dashboard extends SubsystemBase {
 		prevTaxi = NetworkEntries.m_nteTaxiSelected.getBoolean(false);
 		prevCustomTrajectory = NetworkEntries.m_nteCustomTrajectorySelected.getBoolean(false);
 		prevCollectCargo = NetworkEntries.m_nteCollectCargoSelected.getBoolean(false);
-		prevTarmac = NetworkEntries.m_nteRightTarmac.getBoolean(false);
-		prevCargoToTarget = NetworkEntries.getCargoToTarget();
 		prevShootCollectedCargo = NetworkEntries.m_nteShootCollectedCargoSelected.getBoolean(false);
 		prevSmartIntake = NetworkEntries.m_nteIsSmartIntakeEnabled.getBoolean(false);
 	}
@@ -187,6 +183,17 @@ public class Dashboard extends SubsystemBase {
 		prevShootPreload = NetworkEntries.m_nteShootPreloadSelected.getBoolean(false);
 		prevHasPreload = NetworkEntries.m_nteHasPreload.getBoolean(false);
 
+		//If custom trajectory has been selected
+		if (NetworkEntries.m_nteCustomTrajectorySelected.getBoolean(false) && !prevCustomTrajectory) {
+			//Enable taxi
+			NetworkEntries.m_nteTaxiSelected.setBoolean(true);
+		} else if (!NetworkEntries.m_nteTaxiSelected.getBoolean(false) && prevTaxi) {
+			//Disable custom trajectory
+			NetworkEntries.m_nteCustomTrajectorySelected.setBoolean(false);
+		}
+		//Updates previous value of custom trajectory
+		prevCustomTrajectory = NetworkEntries.m_nteCustomTrajectorySelected.getBoolean(false);
+
 		//If shoot collected cargo has been enabled
 		if (NetworkEntries.m_nteShootCollectedCargoSelected.getBoolean(false) && !prevShootCollectedCargo) {
 			//Enable collect cargo
@@ -219,13 +226,10 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteTaxiSelected.setBoolean(false);
 			//Generate the collect cargo trajectory
 			NetworkEntries.m_nteGenerateCargoCollection.setBoolean(true);
-			//Disable the custom trajectory
-			NetworkEntries.m_nteCustomTrajectorySelected.setBoolean(false);
 		}
-		//Set with the current reading of the taxi, custom trajectory, and collect cargo buttons
+		//Set with the current reading of the taxi and collect cargo buttons
 		prevTaxi = NetworkEntries.m_nteTaxiSelected.getBoolean(false);
 		prevCollectCargo = NetworkEntries.m_nteCollectCargoSelected.getBoolean(false);
-		prevCustomTrajectory = NetworkEntries.m_nteCustomTrajectorySelected.getBoolean(false);
 
 		//If the generate cargo collection has been pressed
 		if (NetworkEntries.m_nteGenerateCargoCollection.getBoolean(false)) {
