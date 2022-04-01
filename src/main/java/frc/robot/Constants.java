@@ -106,7 +106,7 @@ public final class Constants {
 		//The gear ratio between the encoder shaft and the wheels
 		private static final double kEncoderGearRatio = 1.0 / 1.0;
 		//The gear ratio between the motors and the shaft
-		private static final double kGearRatio = 10.71 / 1.0;
+		private static final double kGearRatio = 10.75 / 1.0;
 		//Custom variable to adjust what units the encoder returns a value in (in this case inches) OLD
 		//private static final double kFudgefactor = 12.0 / 1.11228; OLD
 		//Encoder distance per pulse calculation
