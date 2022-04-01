@@ -57,7 +57,6 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteRLCargo = tabAuto.add("RL Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(6, 0).getEntry();
 			NetworkEntries.m_nteRRCargo = tabAuto.add("RR Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(6, 1).getEntry();
 			NetworkEntries.m_nteGenerateCargoCollection = tabAuto.add("Generate CC", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(3, 1).getEntry();
-			NetworkEntries.m_nteCargoCollectionHasGenerated = tabAuto.add("CC Generated", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(3, 2).getEntry();
 
 			NetworkEntries.m_nteMaxVelocity = tabAuto.add("Max Velocity", 2.0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(0, 2).getEntry();
 			NetworkEntries.m_nteMaxAcceleration = tabAuto.add("Max Acceleration", 2.0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(1, 2).getEntry();
@@ -65,7 +64,6 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteY = tabAuto.add("Y", kTaxiDistance).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(1, 3).getEntry();
 			NetworkEntries.m_nteEndAngle = tabAuto.add("End Angle", 0.0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(2, 3).getEntry();
 			NetworkEntries.m_nteGenerateCustomTrajectory = tabAuto.add("Generate Custom", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(0, 4).getEntry();
-			NetworkEntries.m_nteCustomTrajectoryHasGenerated = tabAuto.add("Custom Generated", false).withWidget(BuiltInWidgets.kBooleanBox).withSize(1, 1).withPosition(1, 4).getEntry();
 
 		//Drive Tab
 			NetworkEntries.m_nteIsSmartIntakeEnabled = tabDrive.add("Smart Intake", true).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 1).withPosition(0, 0).getEntry();
@@ -214,33 +212,20 @@ public class Dashboard extends SubsystemBase {
 		if (NetworkEntries.m_nteTaxiSelected.getBoolean(false) && !prevTaxi) {  //If taxi has been enabled
 			//Disable collect cargo
 			NetworkEntries.m_nteCollectCargoSelected.setBoolean(false);
+			//Disable shoot collected cargo
+			NetworkEntries.m_nteShootCollectedCargoSelected.setBoolean(false);
 		} else if (NetworkEntries.m_nteCollectCargoSelected.getBoolean(false) && !prevCollectCargo) {  //If collect cargo has been enabled
 			//Disable taxi and custom trajectory
 			NetworkEntries.m_nteTaxiSelected.setBoolean(false);
 			//Generate the collect cargo trajectory
 			NetworkEntries.m_nteGenerateCargoCollection.setBoolean(true);
+			//Disable the custom trajectory
+			NetworkEntries.m_nteCustomTrajectorySelected.setBoolean(false);
 		}
-		//Set with the current reading of the taxi and collect cargo buttons
+		//Set with the current reading of the taxi, custom trajectory, and collect cargo buttons
 		prevTaxi = NetworkEntries.m_nteTaxiSelected.getBoolean(false);
 		prevCollectCargo = NetworkEntries.m_nteCollectCargoSelected.getBoolean(false);
-
-		//If any cargo collection settings have been changed
-		if (NetworkEntries.m_nteRightTarmac.getBoolean(false) != prevTarmac || NetworkEntries.getCargoToTarget().equals(prevCargoToTarget)) {
-			//Cargo collection trajectory has not been generated
-			NetworkEntries.m_nteCargoCollectionHasGenerated.setBoolean(false);
-		}
-		//Update previous values
-		prevTarmac = NetworkEntries.m_nteRightTarmac.getBoolean(false);
-		prevCargoToTarget = NetworkEntries.getCargoToTarget();
-
-		//If any custom trajectory settings have been changed
-		if (NetworkEntries.m_nteMaxVelocity.getDouble(0) != genVelocity || NetworkEntries.m_nteMaxAcceleration.getDouble(0) != genAcceleration || NetworkEntries.m_nteX.getDouble(0) != genX || NetworkEntries.m_nteY.getDouble(0) != genY || NetworkEntries.m_nteEndAngle.getDouble(0) != genEndAngle) {
-			//Custom trajectory has not been generated
-			NetworkEntries.m_nteCustomTrajectoryHasGenerated.setBoolean(false);
-		} else {  //If no custom trajectory settings have been changed
-			//Custom trajectory has been generated
-			NetworkEntries.m_nteCustomTrajectoryHasGenerated.setBoolean(true);
-		}
+		prevCustomTrajectory = NetworkEntries.m_nteCustomTrajectorySelected.getBoolean(false);
 
 		//If the generate cargo collection has been pressed
 		if (NetworkEntries.m_nteGenerateCargoCollection.getBoolean(false)) {
@@ -248,8 +233,6 @@ public class Dashboard extends SubsystemBase {
 			AutoCommand.generateCargoCollectionTrajectory(NetworkEntries.getTarmac(), NetworkEntries.getCargoToTarget());
 			//Deselect the generate cargo collection button
 			NetworkEntries.m_nteGenerateCargoCollection.setBoolean(false);
-			//Cargo collection tracjectory has been generated
-			NetworkEntries.m_nteCargoCollectionHasGenerated.setBoolean(true);
 		}
 
 		//If the generate custom trajectory has been pressed
@@ -264,8 +247,6 @@ public class Dashboard extends SubsystemBase {
 			AutoCommand.generateCustomTrajectory(genVelocity, genAcceleration, genX, genY, genEndAngle);
 			//Deselect the generate custom trajectory button
 			NetworkEntries.m_nteGenerateCustomTrajectory.setBoolean(false);
-			//Custom trajectory has been generated
-			NetworkEntries.m_nteCustomTrajectoryHasGenerated.setBoolean(true);
 		}
 
 		//If the reset encoders button has been pressed
