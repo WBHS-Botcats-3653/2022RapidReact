@@ -21,10 +21,12 @@ import frc.robot.commands.autoCommands.ShootCargoCommand;
 import frc.robot.subsystems.*;
 
 public class AutoCommand extends CommandBase {
+	//Subsystems
 	private static final DrivePID m_drivePID = DrivePID.getInstance();
 	private static final Drivetrain m_drivetrain = Drivetrain.getInstance();
 	private static final Direction m_direction = Direction.getInstance();
 
+	//Holds Ramsete commands containing trajectories to be followed during the autonomous period (Generated before the autonomous period to avoid time lags)
 	private static final RamseteCommand taxiRamCommand = generateTrajectory(
 		Units.feetToMeters(2.0),  //Max velocity (Meters per second)
 		Units.feetToMeters(2.0),  //Max acceleration (Meters per seconds squared)
@@ -35,18 +37,25 @@ public class AutoCommand extends CommandBase {
 	);
 	private static RamseteCommand customRamCommand, collectCargoRamCommand;
 
+	//Holds the number of cargo to be collected during the autonomous period
 	private static int numCargoToCollect = 0;
 
+	//Holds a char, either 'S' for Sequential or 'P' for Parallel, indicating what command group should be scheduled next
 	private char commandToScheduleNext;
+	//Holds whether the scheduler is currently executing a command group for auto
 	private static boolean executingCommand = false;
 
+	//Holds whether certain autonomous functions have been enabled in the shuffleboard
 	private boolean shootPreloadEnabled, hasPreload, taxiEnabled, customTrajectoryEnabled, collectCargoEnabled, shootCollectedCargoEnabled;
 
+	//Holds what stage the collect cargo is currently in
 	private int collectStage = 0;
 
+	//Holds Sequential and Parallel command groups to be scheduled
 	private SequentialCommandGroup sequential;
 	private ParallelCommandGroup parallel;
 
+	//Holds whether the AutoCommand has finished all the commands it needed to execute
 	private static boolean hasFinished = false;
 		
 	/** Creates a new AutoCommand. */
@@ -155,11 +164,11 @@ public class AutoCommand extends CommandBase {
 	 */
 	public static RamseteCommand generateTrajectory(double maxVelocityMetersPerSecond, double maxAccelerationMetersPerSecondSq, List<Pose2d> waypoints) {
 		//Creates a trajectory config with the given max velocity and acceleration
-		TrajectoryConfig config = new TrajectoryConfig(maxVelocityMetersPerSecond, maxAccelerationMetersPerSecondSq);
+		final TrajectoryConfig config = new TrajectoryConfig(maxVelocityMetersPerSecond, maxAccelerationMetersPerSecondSq);
 		//Passes a Kinematics object to the trajectory config
 		config.setKinematics(m_drivePID.getKinematics());
 		//Creates a new trajectory with the given waypoints
-		Trajectory trajectory = TrajectoryGenerator.generateTrajectory(waypoints, config);
+		final Trajectory trajectory = TrajectoryGenerator.generateTrajectory(waypoints, config);
 		/**Takes the robots current position, trajectory, and wheel speeds along with other
 		 *Objects, Suppliers, and BiConsumers and calculates the linear and angular velocities to
 		 *move the robot in order to follow the path of the trajectory
@@ -185,7 +194,7 @@ public class AutoCommand extends CommandBase {
 	 * @param cargo The cargo to be targeted
 	 */
 	public static void generateCargoCollectionTrajectory(char tarmac, ArrayList<String> cargo) {
-		ArrayList<Pose2d> waypoints = new ArrayList<>();
+		final ArrayList<Pose2d> waypoints = new ArrayList<>();
 		//Starting waypoint
 		waypoints.add(new Pose2d());
 		//Traverse the cargo pieces to be targeted
@@ -235,29 +244,41 @@ public class AutoCommand extends CommandBase {
 		);
 	}
 
-	//Returns where an auto command is currently being executed
+	/** Returns where an auto command is currently being executed
+	 * @return whether a command group is currently being executed in the scheduler
+	 */
 	public boolean getExecutingCommand() {return executingCommand;}
 
-	//Sets whether an auto command is currently being executed
+	/** Sets whether an auto command is currently being executed
+	 * @param isExecuting whether a command group is currently being executed by the scheduler
+	 */
 	public static void setExecutingCommand(boolean isExecuting) {executingCommand = isExecuting;}
 
-	//Returns the type of command which is to be scheduled next
+	/** Returns the type of command which is to be scheduled next
+	 * @return either 'S' for Sequential or 'P' for Parallel indicating which command group is to be scheduled next
+	 */
 	public char getCommandToScheduleNext() {return commandToScheduleNext;}
 
-	//Returns the SequentialCommandGroup to be scheduled
+	/** Returns the SequentialCommandGroup to be scheduled
+	 * @return a SequentialCommandGroup to be scheduled
+	 */
 	public SequentialCommandGroup getSequentialCommandGroup() {
-		SequentialCommandGroup command = sequential;
+		final SequentialCommandGroup command = sequential;
 		sequential = null;
 		return command;
 	}
 
-	//Returns the ParallelCommandGroup to be scheduled
+	/** Returns the ParallelCommandGroup to be scheduled
+	 * @return a ParallelCommandGroup to be scheduled
+	 */
 	public ParallelCommandGroup getParallelCommandGroup() {
-		ParallelCommandGroup command = parallel;
+		final ParallelCommandGroup command = parallel;
 		parallel = null;
 		return command;
 	}
 
-	//Returns whether all of the auto commands have finished executing
+	/** Returns whether all of the auto commands have finished executing
+	 * @return whether all the autonomous commands have been executed
+	 */
 	public boolean hasFinished() {return hasFinished;}
 }
