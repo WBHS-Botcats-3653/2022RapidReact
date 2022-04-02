@@ -83,7 +83,7 @@ public class AutoCommand extends CommandBase {
 		//Auto commands to be scheduled sequentially
 		sequential = new SequentialCommandGroup(
 			shootPreloadEnabled ? new ShootCargoCommand(1) : new PrintCommand("Auto shoot disabled"),  //Shoot preload
-			taxiEnabled ? (customTrajectoryEnabled ? customRamCommand : taxiRamCommand) : new PrintCommand("Taxi and custom trajectory disabled"),  //Taxi and custom trajectory
+			taxiEnabled ? (customTrajectoryEnabled ? customRamCommand : taxiRamCommand) : new PrintCommand("Taxi and custom trajectory disabled"),  //Taxi or custom trajectory
 			new InstantCommand(() -> executingCommand = false)  //Has finished executing the SequentialCommandGroup
 		);
 	}
