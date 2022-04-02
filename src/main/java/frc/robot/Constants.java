@@ -15,7 +15,7 @@ import edu.wpi.first.math.util.Units;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-	//Auto Constants
+	/** Auto related constants */
 	public static final class AutoConstants {
 
 		//The distance to travel in reverse when taxiing
@@ -52,7 +52,7 @@ public final class Constants {
 		public static final double kAutoShootSpeed = 0.85;
 	}
 
-	//Drive PID Constants
+	/** DrivePID related constants */
 	public static final class DrivePIDConstants {
 		//The distance between the center line of the left and right wheels
 		public static final double kTrackWidth = 0.0;  //Inches
@@ -81,7 +81,7 @@ public final class Constants {
 		public static final double kRamseteZeta = 0.7;  //DO NOT CHANGE
 	}
 
-	//Drive Constants
+	/** Drive related constants */
 	public static final class DriveConstants {
 		//Motor IDs
 		public static final int kFrontLeftMotorID = 0;  //CAN
@@ -117,7 +117,7 @@ public final class Constants {
 		public static final double kRightDriveDistancePerPulse = kDriveWheelCircumference / kRightDrivePulsePerRevolution;
 	}
 
-	//Intake Constants
+	/** Intake related constants */
 	public static final class IntakeConstants {
 		//Motor IDs
 		public static final int kPivotMotorID = 20;  //CAN
@@ -136,7 +136,7 @@ public final class Constants {
 		public static final double kPivotAssistSpeed = 0.1;
 	}
 
-	//Indexer Constants
+	/** Indexer related constants */
 	public static final class IndexerConstants {
 		//Motor ID
 		public static final int kHorizontalIndexerMotorID = 22;  //CAN
@@ -150,7 +150,7 @@ public final class Constants {
 		public static final double kSmartIndexSpeed = 0.7;
 	}
 
-	//Shooter Constants
+	/** Shooter related constants */
 	public static final class ShooterConstants {
 		//Spinner motor ID
 		public static final int kFlywheelMotorID = 30;  //CAN
@@ -159,7 +159,7 @@ public final class Constants {
 		public static final int kShooterPESensorID = 8;  //DIO
 	}
 
-	//Climber Constants
+	/** Climber related constants */
 	public static final class ClimberConstants {
 		//Motor IDs
 		public static final int kClimberArmMotorID = 10;  //CAN
@@ -167,7 +167,7 @@ public final class Constants {
 		public static final int kHookWinchMotorID = 12;  //CAN
 	}
 
-	//Default Speeds Constants
+	/** Default speeds constants */
 	public static final class DefaultSpeedsConstants {
 		//Default Max Speeds
 		public static final double kDefaultDriveSpeed = 1.0;

@@ -14,34 +14,43 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Intake extends SubsystemBase {
 	private static Intake m_singleton = null;
 
-	private WPI_VictorSPX pivot, rollers;
+	//Motor controllers
+	private final WPI_VictorSPX pivot, rollers;
 
 	private Intake() {
-		//Creates WPI_VictorSPX motor controllers for the Pivot and Rollers in the Intake
+		//Creates motor controllers
 		pivot = new WPI_VictorSPX(kPivotMotorID);
 		rollers = new WPI_VictorSPX(kRollersMotorID);
 
+		//Sets whether the motors are inverted
 		pivot.setInverted(false);
 		rollers.setInverted(false);
 		
+		//Sets whether the motors are in brake or coast mode
 		pivot.setNeutralMode(NeutralMode.Coast);
 		rollers.setNeutralMode(NeutralMode.Coast);
 	}
 	
-	//Returns an instance of Intake, creating an instance only when one does not already exist (singleton)
+	/** Returns an instance of Intake, creating an instance only when one does not already exist (singleton)
+	 * @return an instance of Intake
+	 */
 	public static Intake getInstance() {
 		if (m_singleton == null)
 			m_singleton = new Intake();
 		return m_singleton;
 	}
 
-	//Sets the intake pivot speed
+	/** Sets the intake pivot speed
+	 * @param speed to run the motor at
+	 */
 	public void setPivotSpeed(double speed) {
 		//Sets the pivot speed
 		pivot.set(speed);
 	}
 
-	//Sets the intake roller speed
+	/** Sets the intake roller speed
+	 * @param speed to run the motor at
+	 */
 	public void setRollerSpeed(double speed) {
 		//Sets the roller speed
 		rollers.set(speed);

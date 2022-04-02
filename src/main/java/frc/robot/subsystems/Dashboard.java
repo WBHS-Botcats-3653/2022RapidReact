@@ -70,8 +70,6 @@ public class Dashboard extends SubsystemBase {
 			
 			NetworkEntries.m_nteEndSmartIntake = tabDrive.add("End Smart Intake", false).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 1).withPosition(0, 1).getEntry();
 			
-			NetworkEntries.m_nteDriveDistance = tabDrive.add("Distance Drived", 0).withWidget(BuiltInWidgets.kTextView).withSize(0, 0).withPosition(2, 1).getEntry();
-			
 			tabDrive.add("Gyro", m_direction.getGyro()).withWidget(BuiltInWidgets.kGyro).withSize(2, 2).withPosition(3, 1);
 
 			//tabDrive.add("Field View", m_cameras.getFieldCamera()).withWidget(BuiltInWidgets.kCameraStream).withSize(3, 2).withPosition(3, 2);
@@ -124,9 +122,6 @@ public class Dashboard extends SubsystemBase {
 		//Encoders
 		NetworkEntries.m_nteDriveEncLeft.setDouble(Units.metersToInches(m_direction.getLeftEncoderDistance()));  //Inches
 		NetworkEntries.m_nteDriveEncRight.setDouble(Units.metersToInches(m_direction.getRightEncoderDistance()));  //Inches
-
-		//Distance Drived
-		NetworkEntries.m_nteDriveDistance.setDouble(Units.metersToInches(m_direction.getEncoderDistance()));  //Inches
 
 		//Limit switches
 		NetworkEntries.m_nteIntakeUpLimit.setBoolean(m_si.isPivotUpLimitClosed());

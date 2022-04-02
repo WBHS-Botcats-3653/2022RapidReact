@@ -169,7 +169,7 @@ public class AutoCommand extends CommandBase {
 		config.setKinematics(m_drivePID.getKinematics());
 		//Creates a new trajectory with the given waypoints
 		final Trajectory trajectory = TrajectoryGenerator.generateTrajectory(waypoints, config);
-		/**Takes the robots current position, trajectory, and wheel speeds along with other
+		/*Takes the robots current position, trajectory, and wheel speeds along with other
 		 *Objects, Suppliers, and BiConsumers and calculates the linear and angular velocities to
 		 *move the robot in order to follow the path of the trajectory
 		 */

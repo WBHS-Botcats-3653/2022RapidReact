@@ -17,13 +17,16 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Drivetrain extends SubsystemBase {
 	private static Drivetrain m_singleton = null;
 
-	private WPI_VictorSPX driveFrontLeft, driveBackLeft, driveFrontRight, driveBackRight;
-	private DifferentialDrive diffDrive;
+	//Motor controllers
+	private final WPI_VictorSPX driveFrontLeft, driveBackLeft, driveFrontRight, driveBackRight;
+
+	//Differential drive
+	private final DifferentialDrive diffDrive;
 
 	//documentation for WPI_VictorSPX: 
 	//https://robotpy.readthedocs.io/projects/ctre/en/stable/ctre/WPI_VictorSPX.html
 
-	//Constructor
+	/** Constructs a new Drivetrain */
 	private Drivetrain() {
 		//Wheel motors
 		driveFrontLeft = new WPI_VictorSPX(kFrontLeftMotorID);
@@ -32,8 +35,8 @@ public class Drivetrain extends SubsystemBase {
 		driveBackRight = new WPI_VictorSPX(kBackRightMotorID);
 
 		//Groups the wheel motors
-		MotorControllerGroup driveLeft = new MotorControllerGroup(driveFrontLeft, driveBackLeft);
-		MotorControllerGroup driveRight = new MotorControllerGroup(driveFrontRight, driveBackRight);
+		final MotorControllerGroup driveLeft = new MotorControllerGroup(driveFrontLeft, driveBackLeft);
+		final MotorControllerGroup driveRight = new MotorControllerGroup(driveFrontRight, driveBackRight);
 
 		//Creates differential drive
 		diffDrive = new DifferentialDrive(driveLeft, driveRight);
@@ -46,7 +49,9 @@ public class Drivetrain extends SubsystemBase {
 		enableBrake(false);
 	}
 
-	//Returns an instance of DrainTrain, creating an instance only when one does not already exist
+	/** Returns an instance of Draintrain, creating an instance only when one does not already exist
+	 * @return an instance of Drivetrain
+	 */
 	public static Drivetrain getInstance() {
 		if (m_singleton == null) {
 			m_singleton = new Drivetrain();
@@ -54,7 +59,7 @@ public class Drivetrain extends SubsystemBase {
 		return m_singleton;
 	}
 
-	/**Sets the arcade drive speed and rotation
+	/** Sets the arcade drive speed and rotation
 	 * @param xSpeed The speed along the x-axis
 	 * @param zRotation The rotation rate around the z-axis
 	 */
@@ -66,7 +71,7 @@ public class Drivetrain extends SubsystemBase {
 		diffDrive.arcadeDrive(xSpeed, zRotation, false);
 	}
  
-	/**Sets the tank drive left and right drive speeds
+	/** Sets the tank drive left and right drive speeds
 	 * @param leftSpeed Speed of the left drive train
 	 * @param rightSpeed Speed of the right drive train
 	 */
@@ -78,7 +83,7 @@ public class Drivetrain extends SubsystemBase {
 		diffDrive.tankDrive(leftSpeed, rightSpeed);
 	}
 
-	/**Sets the tank drive left and right drive volts
+	/** Sets the tank drive left and right drive volts
 	 * @param leftVolts Volts of the left drive train
 	 * @param rightVolts Volts of the right drive train
 	 */
@@ -86,12 +91,16 @@ public class Drivetrain extends SubsystemBase {
 		diffDrive.tankDrive(leftVolts / 12, rightVolts / 12);
 	}
 
-	//Returns the differential drive
+	/** Returns the differential drive
+	 * @return the differential drive
+	 */
 	public DifferentialDrive getDiffDrive() {
 		return diffDrive;
 	}
 
-	//Enables or disables the neutral brake on the motors
+	/** Enables or disables the neutral brake on the motors
+	 * @param enable whether to enable or disable the brake mode
+	 */
 	public void enableBrake(boolean enable) {
 		final NeutralMode mode = enable ? NeutralMode.Brake : NeutralMode.Coast;
 		driveFrontLeft.setNeutralMode(mode);

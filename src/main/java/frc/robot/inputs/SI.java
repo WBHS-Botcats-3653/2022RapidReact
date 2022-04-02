@@ -22,6 +22,7 @@ public class SI {
 	//Limit switches
 	private static DigitalInput topPivotLimitSwitch, bottomPivotLimitSwitch;
 
+	/** Constructors a new SI */
 	public SI() {
 		//Photoelectric sensors
 		intakePE = new DigitalInput(kIntakePESensorID);
@@ -33,7 +34,9 @@ public class SI {
 		bottomPivotLimitSwitch = new DigitalInput(kBottomPivotLimitSwitchID);
 	}
 
-	//Returns an instance of SI, creating an instance only when one does not already exist (singleton)
+	/** Returns an instance of SI, creating an instance only when one does not already exist (singleton)
+	 * @return an instance of SI
+	 */
 	public static SI getInstance() {
 		if (m_singleton == null) {
 			m_singleton = new SI();
@@ -41,32 +44,44 @@ public class SI {
 		return m_singleton;
 	}
 
-	//Returns input from the intake photoelectric sensor
+	/** Returns input from the intake photoelectric sensor
+	 * input from the intake photoelectric sensor
+	 */
 	public boolean isIntakeClosed() {
 		return intakePE.get();
 	}
 
-	//Returns input from the lower storage photoelectric sensor
+	/** Returns input from the lower storage photoelectric sensor
+	 * input from the lower storage photoelectric sensor
+	 */
 	public boolean isLowerStorageClosed() {
 		return lowerStoragePE.get();
 	}
 
-	//Returns input from the upper storage photoelectric sensor
+	/** Returns input from the upper storage photoelectric sensor
+	 * input from the upper storage photoelectric sensor
+	 */
 	public boolean isUpperStorageClosed() {
 		return upperStoragePE.get();
 	}
 
-	//Returns input from the shooter photoelectric sensor
+	/** Returns input from the shooter photoelectric sensor
+	 * input from the shooter photoelectric sensor
+	 */
 	public boolean isShooterClosed() {
 		return shooterPE.get();
 	}
 
-	//Returns input from the top pivot limit switch
+	/** Returns input from the top pivot limit switch
+	 * input from the top pivot limit switch
+	 */
 	public boolean isPivotUpLimitClosed() {
 		return !topPivotLimitSwitch.get();  //Inverted (electrical issue)
 	}
 
-	//Returns input from the bottom pivot limit switch
+	/** Returns input from the bottom pivot limit switch
+	 * input from the bottom pivot limit switch
+	 */
 	public boolean isPivotDownLimitClosed() {
 		return !bottomPivotLimitSwitch.get();
 	}

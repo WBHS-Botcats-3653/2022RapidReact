@@ -41,8 +41,6 @@ public class NetworkEntries {
 
 	public static NetworkTableEntry m_nteEndSmartIntake;  //boolean
 
-	public static NetworkTableEntry m_nteDriveDistance;  //double (inches)
-
 	//Speeds Tab
 	public static NetworkTableEntry m_nteMaxDriveSpeed;  //double
 	public static NetworkTableEntry m_nteMaxPivotSpeed;  //double

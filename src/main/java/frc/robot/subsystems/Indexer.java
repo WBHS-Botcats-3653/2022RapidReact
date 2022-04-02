@@ -14,21 +14,27 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Indexer extends SubsystemBase {
 	private static Indexer m_singleton = null;
 
-	private WPI_VictorSPX horizontalIndexer, verticalIndexer;
+	//Motor controllers
+	private final WPI_VictorSPX horizontalIndexer, verticalIndexer;
 
 	/** Creates a new Indexer. */
 	public Indexer() {
+		//Creates motor controller objects
 		horizontalIndexer = new WPI_VictorSPX(kHorizontalIndexerMotorID);
 		verticalIndexer = new WPI_VictorSPX(kVerticalIndexerMotorID);
 
+		//Sets whether the motors are inverted
 		horizontalIndexer.setInverted(false);
 		verticalIndexer.setInverted(true);
 
+		//Sets whether the motors are in brake or coast mode
 		horizontalIndexer.setNeutralMode(NeutralMode.Coast);
 		verticalIndexer.setNeutralMode(NeutralMode.Brake);
 	}
 
-	//Returns an instance of Indexer, creating an instance only when one does not already exist (singleton)
+	/** Returns an instance of Indexer, creating an instance only when one does not already exist (singleton)
+	 * @return an instance of Indexer
+	 */
 	public static Indexer getInstance() {
 		if (m_singleton == null) {
 			m_singleton = new Indexer();
@@ -36,7 +42,7 @@ public class Indexer extends SubsystemBase {
 		return m_singleton;
 	}
 
-	/**Moves the cargo from the intake to the vertical indexer
+	/** Moves the cargo from the intake to the vertical indexer
 	 * @param speed to spin the motor
 	 */
 	public void setHorizontalIndexerSpeed(double speed) {
@@ -44,7 +50,7 @@ public class Indexer extends SubsystemBase {
 		horizontalIndexer.set(speed);
 	}
 
-	/**Raises the cargo up the storage system
+	/** Raises the cargo up the storage system
 	 * @param speed to spin the motor
 	 */
 	public void setVerticalIndexerSpeed(double speed) {
@@ -52,7 +58,9 @@ public class Indexer extends SubsystemBase {
 		verticalIndexer.set(speed);
 	}
 
-	//Enable or disable the neutral brake on the motor
+	/** Enable or disable the neutral brake on the motor
+	 * @param enable whether to enable or disable the brake mode
+	 */
 	public void enableBrake(boolean enable) {
 		NeutralMode mode = enable ? NeutralMode.Brake : NeutralMode.Coast;
 		verticalIndexer.setNeutralMode(mode);
