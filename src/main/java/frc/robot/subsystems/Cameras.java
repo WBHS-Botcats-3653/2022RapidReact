@@ -15,8 +15,8 @@ public class Cameras extends SubsystemBase {
 	private static Cameras m_singleton;
 
 	//Cameras
-	UsbCamera fieldCamera = null;
-	UsbCamera indexerCamera = null;
+	private UsbCamera fieldCamera = null;
+	private UsbCamera indexerCamera = null;
 
 
 	/** Creates a new Cameras. */
