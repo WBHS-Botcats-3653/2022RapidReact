@@ -42,8 +42,8 @@ public class Drivetrain extends SubsystemBase {
 		diffDrive = new DifferentialDrive(driveLeft, driveRight);
 
 		//Reverses left motor direction
-		driveLeft.setInverted(true);
-		driveRight.setInverted(false);
+		driveLeft.setInverted(false);
+		driveRight.setInverted(true);
 
 		//Sets motors to coast
 		enableBrake(false);

@@ -28,8 +28,8 @@ public class Direction extends SubsystemBase {
 		gyro = new ADXRS450_Gyro();
 
 		//Creates new encoder objects
-		leftEncoder = new Encoder(kLeftMotorGroupEncoderIDA, kLeftMotorGroupEncoderIDB, true);  //Direction reversed
-		rightEncoder = new Encoder(kRightMotorGroupEncoderIDA, kRightMotorGroupEncoderIDB, false);
+		leftEncoder = new Encoder(kLeftMotorGroupEncoderIDA, kLeftMotorGroupEncoderIDB, false);
+		rightEncoder = new Encoder(kRightMotorGroupEncoderIDA, kRightMotorGroupEncoderIDB, true);  //Direction reversed
 	}
 
 	/** Returns an instance of Direction, creating an instance only when one does not already exist

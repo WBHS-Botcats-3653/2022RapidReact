@@ -151,14 +151,14 @@ public class OI {
 	 * @return the speed to move forward/backward
 	 */
 	public double getThrottle() {
-		return m_controller.getLeftY() * maxDriveSpeed;
+		return -m_controller.getLeftY() * maxDriveSpeed;  // correct throttle (-)
 	}
 
 	/** Returns the steering input
 	 * @return the speed to rotate left/right
 	 */
 	public double getSteering() {
-		return -m_controller.getRightX() * maxDriveSpeed;  // correct stearing (-)
+		return m_controller.getRightX() * maxDriveSpeed;
 	}
 
 	/** Returns whether the right DPad is being pressed
