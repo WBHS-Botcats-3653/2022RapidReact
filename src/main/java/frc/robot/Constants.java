@@ -103,8 +103,7 @@ public final class Constants {
 		//The number of pulses per rotation of the motor (also known as the encoder resolution)
 		//private static final double kPulsePerRevolution = 360.0;  //This is not the correct value OLD
 		//private static final double kPulsePerRevolution = 400.0;
-		private static final double kLeftDrivePulsePerRevolution = 355.0;
-		private static final double kRightDrivePulsePerRevolution = 355.0;
+		private static final double kDrivePulsePerRevolution = 355.0;
 		//The gear ratio between the encoder shaft and the wheels
 		//private static final double kEncoderGearRatio = 1.0 / 1.0;
 		//The gear ratio between the motors and the shaft
@@ -113,8 +112,7 @@ public final class Constants {
 		//private static final double kFudgefactor = 12.0 / 1.11228; OLD
 		//Encoder distance per pulse calculation
 		//public static final double kDistancePerPulse = Math.PI * kWheelDiameter / kPulsePerRevolution / kEncoderGearRatio / kGearRatio * kFudgefactor; OLD
-		public static final double kLeftDriveDistancePerPulse = kDriveWheelCircumference / kLeftDrivePulsePerRevolution;
-		public static final double kRightDriveDistancePerPulse = kDriveWheelCircumference / kRightDrivePulsePerRevolution;
+		public static final double kDriveDistancePerPulse = kDriveWheelCircumference / kDrivePulsePerRevolution;
 	}
 
 	/** Intake related constants */

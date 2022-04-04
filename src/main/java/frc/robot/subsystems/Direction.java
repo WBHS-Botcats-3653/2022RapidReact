@@ -113,7 +113,7 @@ public class Direction extends SubsystemBase {
 		leftEncoder.reset();
 
 		//Sets the encoders distance per pulse
-		leftEncoder.setDistancePerPulse(kLeftDriveDistancePerPulse);
-		rightEncoder.setDistancePerPulse(kRightDriveDistancePerPulse);
+		leftEncoder.setDistancePerPulse(kDriveDistancePerPulse);
+		rightEncoder.setDistancePerPulse(kDriveDistancePerPulse);
 	}
 }
