@@ -6,14 +6,18 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.cscore.*;
+
 
 public class Cameras extends SubsystemBase {
 	private static Cameras m_singleton;
 
 	//Cameras
-	private /*final*/ UsbCamera fieldCamera;
-	private /*final*/ UsbCamera indexerCamera;
+	UsbCamera fieldCamera = null;
+	UsbCamera indexerCamera = null;
+
 
 	/** Creates a new Cameras. */
 	public Cameras() {
@@ -27,7 +31,8 @@ public class Cameras extends SubsystemBase {
 
 		//Sets the frame rate of the cameras
 		fieldCamera.setFPS(20);
-		indexerCamera.setFPS(20);*/
+		indexerCamera.setFPS(20);
+		*/
 	}
 
 	/** Returns an instance of Cameras
