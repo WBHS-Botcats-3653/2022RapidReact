@@ -4,6 +4,17 @@
 
 package frc.robot;
 
+import static frc.robot.Constants.DrivePIDConstants.*;
+
+import java.util.Arrays;
+
+import edu.wpi.first.math.controller.RamseteController;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.trajectory.Trajectory;
+import edu.wpi.first.math.trajectory.TrajectoryConfig;
+import edu.wpi.first.math.trajectory.TrajectoryGenerator;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.commands.*;
@@ -21,6 +32,7 @@ public class Robot extends TimedRobot {
 	//Subsystems
 	private final Dashboard m_dashboard = Dashboard.getInstance();
 	private final Direction m_direction = Direction.getInstance();
+	private final DrivePID m_drivePID = DrivePID.getInstance();
 	private final Drivetrain m_drivetrain = Drivetrain.getInstance();
 	private final Intake m_intake = Intake.getInstance();
 	private final Indexer m_indexer = Indexer.getInstance();
@@ -129,9 +141,6 @@ public class Robot extends TimedRobot {
 		// Cancels all running commands at the start of teleop.
 		CommandScheduler.getInstance().cancelAll();
 
-		//Ends the smart intake
-		IntakeCommand.endSmartIntake();
-
 		//Sets motors to coast or brake
 		m_drivetrain.enableBrake(false);
 		m_indexer.enableBrake(true);
@@ -162,26 +171,44 @@ public class Robot extends TimedRobot {
 		// Cancels all running commands at the start of test mode.
 		CommandScheduler.getInstance().cancelAll();
 
-		//Ends the smart intake
-		IntakeCommand.endSmartIntake();
-
 		//Sets motors to coast or brake
 		m_drivetrain.enableBrake(false);
 		m_indexer.enableBrake(true);
+		//Creates a trajectory configuration with a max velocity of 2 meters per second and a max acceleration of 2 meters per seconds squared
+		TrajectoryConfig config = new TrajectoryConfig(Units.feetToMeters(2), Units.feetToMeters(2));
+		//Passes a Kinematics object to the trajectory config
+		config.setKinematics(m_drivePID.getKinematics());
+		//Test trajectory
+		Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
+			Arrays.asList(
+				new Pose2d(),  //Starting position
+				new Pose2d(1.0, 1.0, new Rotation2d())),  //End position
+			config
+		);
+		/*Takes the robots current position, trajectory, and wheel speeds along with other
+		 *Objects, Suppliers, and BiConsumers and calculates the linear and angular velocities to
+		 *move the robot in order to follow the path of the trajectory
+		 */
+		RamseteCommand ramCommand = new RamseteCommand(
+			trajectory,  //Trajectory to follow
+			m_drivePID::getPose,  //Method to supply the current position (Supplier)
+			new RamseteController(kRamseteB, kRamseteZeta),  //Calculates the current linear and angular velocity of the robot
+			m_drivePID.getFeedForward(),  //Gets SimpleMotorFeedForward which converts left and right wheel speeds to motor voltages
+			m_drivePID.getKinematics(),  //Gets Kinematics which converts linear and angular velocity into left and right wheel speeds
+			m_drivePID::getWheelSpeeds,  //Method to supply DifferentialDriveWheelSpeeds which contains the left and right wheel speeds (Supplier)
+			m_drivePID.getLeftPIDController(),  //Gets the left drivetrain PID controller which calculates the motor voltage required to smoothly get the robot to the desired endpoint
+			m_drivePID.getRightPIDController(),  //Gets the right drivetrain PID controller which calculates the motor voltage required to smoothly get the robot to the desired endpoint
+			m_drivetrain::tankDriveVolts,  //Method which sets the left and right motor voltages of the drivetrain (BiConsumer)
+			m_drivePID,  //Required subsystem
+			m_drivetrain,  //Required subsystem
+			m_direction  //Required subsystem
+		);
 
-		CommandScheduler.getInstance().schedule(m_arcadeDriveCommand);
-		CommandScheduler.getInstance().schedule(m_intakeCommand);
-		CommandScheduler.getInstance().schedule(m_indexerCommand);
-		CommandScheduler.getInstance().schedule(m_shooterCommand);
-		CommandScheduler.getInstance().schedule(m_climberCommand);
-
-		//Enables the speeds
-		m_dashboard.disableSpeeds(false);
+		//Schedule the command
+		CommandScheduler.getInstance().schedule(ramCommand);
 	}
 
 	/** This function is called periodically during test mode. */
 	@Override
-	public void testPeriodic() {
-		//f*ck the developer that made c and lua
-	}
+	public void testPeriodic() {}
 }

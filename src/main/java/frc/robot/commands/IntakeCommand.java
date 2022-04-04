@@ -55,6 +55,8 @@ public class IntakeCommand extends CommandBase {
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
+		//End the smart intake
+		endSmartIntake();
 		//Stop the intake pivot
 		m_intake.setPivotSpeed(0);
 		//Stops the intake rollers
