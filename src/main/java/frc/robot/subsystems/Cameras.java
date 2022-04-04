@@ -12,12 +12,12 @@ public class Cameras extends SubsystemBase {
 	private static Cameras m_singleton;
 
 	//Cameras
-	private final UsbCamera fieldCamera;
-	private final UsbCamera indexerCamera;
+	private /*final*/ UsbCamera fieldCamera;
+	private /*final*/ UsbCamera indexerCamera;
 
 	/** Creates a new Cameras. */
 	public Cameras() {
-		//Creates new camera objects and starts live feed
+		/*//Creates new camera objects and starts live feed
 		fieldCamera = CameraServer.startAutomaticCapture(0);
 		indexerCamera = CameraServer.startAutomaticCapture(1);
 
@@ -27,7 +27,7 @@ public class Cameras extends SubsystemBase {
 
 		//Sets the frame rate of the cameras
 		fieldCamera.setFPS(20);
-		indexerCamera.setFPS(20);
+		indexerCamera.setFPS(20);*/
 	}
 
 	/** Returns an instance of Cameras
