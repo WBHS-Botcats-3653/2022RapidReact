@@ -137,8 +137,7 @@ public final class Constants {
 	/** Indexer related constants */
 	public static final class IndexerConstants {
 		//Motor ID
-		public static final int kHorizontalIndexerMotorID = 22;  //CAN
-		public static final int kVerticalIndexerMotorID = 23;  //CAN
+		public static final int kIndexerMotorID = 23;  //CAN
 
 		//Photoelectric sensor IDs
 		public static final int kLowerStoragePESensorID = 6;  //DIO
