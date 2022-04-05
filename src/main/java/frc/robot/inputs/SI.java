@@ -76,13 +76,13 @@ public class SI {
 	 * input from the top pivot limit switch
 	 */
 	public boolean isPivotUpLimitClosed() {
-		return !topPivotLimitSwitch.get();  //Inverted (electrical issue)
+		return !topPivotLimitSwitch.get();  //Inverted
 	}
 
 	/** Returns input from the bottom pivot limit switch
 	 * input from the bottom pivot limit switch
 	 */
 	public boolean isPivotDownLimitClosed() {
-		return !bottomPivotLimitSwitch.get();
+		return !bottomPivotLimitSwitch.get();  //Inverted
 	}
 }
