@@ -8,7 +8,6 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-
 public class Cameras extends SubsystemBase {
 	private static Cameras m_singleton;
 
@@ -43,7 +42,7 @@ public class Cameras extends SubsystemBase {
 	}
 
 	/** Returns the camera on the front of the robot
-	 * @return the field camera UsbCamera object
+	 * @return the front camera UsbCamera object
 	 */
 	public UsbCamera getFrontCamera() {
 		return frontCamera;
