@@ -6,33 +6,30 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
-import edu.wpi.first.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.cscore.*;
 
 
 public class Cameras extends SubsystemBase {
 	private static Cameras m_singleton;
 
 	//Cameras
-	private UsbCamera fieldCamera = null;
-	private UsbCamera indexerCamera = null;
+	private final UsbCamera frontCamera;
+	private final UsbCamera rearCamera;
 
 
 	/** Creates a new Cameras. */
 	public Cameras() {
-		/*//Creates new camera objects and starts live feed
-		fieldCamera = CameraServer.startAutomaticCapture(0);
-		indexerCamera = CameraServer.startAutomaticCapture(1);
+		//Creates new camera objects and starts live feed
+		frontCamera = CameraServer.startAutomaticCapture(0);
+		rearCamera = CameraServer.startAutomaticCapture(1);
 
 		//Sets the resolution of the cameras
-		fieldCamera.setResolution(142, 90);
-		indexerCamera.setResolution(142, 90);
+		frontCamera.setResolution(142, 90);
+		rearCamera.setResolution(142, 90);
 
 		//Sets the frame rate of the cameras
-		fieldCamera.setFPS(20);
-		indexerCamera.setFPS(20);
-		*/
+		frontCamera.setFPS(20);
+		rearCamera.setFPS(20);
 	}
 
 	/** Returns an instance of Cameras
@@ -45,17 +42,17 @@ public class Cameras extends SubsystemBase {
 		return m_singleton;
 	}
 
-	/** Returns the camera facing towards the field
+	/** Returns the camera on the front of the robot
 	 * @return the field camera UsbCamera object
 	 */
-	public UsbCamera getFieldCamera() {
-		return fieldCamera;
+	public UsbCamera getFrontCamera() {
+		return frontCamera;
 	}
 
-	/** Returns the camera facing into the indexer
-	 * @return the indexer camera UsbCamera object
+	/** Returns the camera on the back of the robot
+	 * @return the rear camera UsbCamera object
 	 */
-	public UsbCamera getIndexerCamera() {
-		return indexerCamera;
+	public UsbCamera getRearCamera() {
+		return rearCamera;
 	}
 }
