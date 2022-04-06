@@ -64,8 +64,8 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteGenerateCustomTrajectory = tabAuto.add("Generate Custom", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(0, 4).getEntry();
 
 		//Drive Tab
-			NetworkEntries.m_nteIsSmartIntakeEnabled = tabDrive.add("Smart Intake", true).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 1).withPosition(0, 0).getEntry();
-			NetworkEntries.m_nteIsSmartIndexerEnabled = tabDrive.add("Smart Indexer", true).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 1).withPosition(2, 0).getEntry();
+			NetworkEntries.m_nteIsSmartIntakeEnabled = tabDrive.add("Smart Intake", false).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 1).withPosition(0, 0).getEntry();
+			NetworkEntries.m_nteIsSmartIndexerEnabled = tabDrive.add("Smart Indexer", false).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 1).withPosition(2, 0).getEntry();
 			NetworkEntries.m_nteIsPivotAssistEnabled = tabDrive.add("Pivot Assist", true).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 1).withPosition(4, 0).getEntry();
 			
 			NetworkEntries.m_nteEndSmartIntake = tabDrive.add("End Smart Intake", false).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 1).withPosition(0, 1).getEntry();
