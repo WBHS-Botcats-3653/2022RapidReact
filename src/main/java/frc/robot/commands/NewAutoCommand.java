@@ -20,7 +20,7 @@ import frc.robot.commands.autoCommands.CollectCargoCommand;
 import frc.robot.commands.autoCommands.ShootCargoCommand;
 import frc.robot.subsystems.*;
 
-public class AutoCommand extends CommandBase {
+public class NewAutoCommand extends CommandBase {
 	//Subsystems
 	private static final DrivePID m_drivePID = DrivePID.getInstance();
 	private static final Drivetrain m_drivetrain = Drivetrain.getInstance();
@@ -58,8 +58,8 @@ public class AutoCommand extends CommandBase {
 	//Holds whether the AutoCommand has finished all the commands it needed to execute
 	private static boolean hasFinished = false;
 		
-	/** Creates a new AutoCommand. */
-	public AutoCommand() {}
+	/** Creates a new NewAutoCommand. */
+	public NewAutoCommand() {}
 
 	// Called when the command is initially scheduled.
 	@Override
