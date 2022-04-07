@@ -169,6 +169,10 @@ public final class Constants {
 		//private static final double kEncoderGearRatio = 1.0 / 1.0;
 		//The gear ratio between the motors and the shaft
 		//private static final double kGearRatio = 10.75 / 1.0;
+
+
+		public static final int kP = 1;
+		public static final double kThreshold = 3.0;
 	}
 
 	/** Intake related constants */

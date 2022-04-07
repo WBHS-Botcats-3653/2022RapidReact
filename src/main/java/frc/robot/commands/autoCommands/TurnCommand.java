@@ -4,10 +4,11 @@
 
 package frc.robot.commands.autoCommands;
 
+import static frc.robot.Constants.DriveConstants.*;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Direction;
 import frc.robot.subsystems.Drivetrain;
-import static frc.robot.Constants.AutoConstants.*;
 
 public class TurnCommand extends CommandBase {
 	private Drivetrain m_drivetrain;
