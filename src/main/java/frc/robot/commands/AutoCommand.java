@@ -1,12 +1,12 @@
 package frc.robot.commands;
 
-import static frc.robot.Constants.AutoConstants.kAutoDriveSpeed;
+import static frc.robot.Constants.AutoConstants.*;
 
 import java.util.ArrayList;
 
 import edu.wpi.first.wpilibj2.command.*;
-import frc.robot.commands.autoCommands.CollectCargoCommand;
-import frc.robot.commands.autoCommands.ShootCargoCommand;
+import frc.robot.NetworkEntries;
+import frc.robot.commands.autoCommands.*;
 import frc.robot.subsystems.Direction;
 
 public class AutoCommand extends CommandBase {
@@ -65,6 +65,11 @@ public class AutoCommand extends CommandBase {
 
 	@Override
 	public void initialize() {
+		//Gets user selections
+		isAutoShootOn = NetworkEntries.m_nteShootPreloadSelected.getBoolean(false);
+		isAutoTaxiOn = NetworkEntries.m_nteTaxiSelected.getBoolean(false);
+		isAutoCollectOn = NetworkEntries.m_nteCollectCargoSelected.getBoolean(false);
+
 		//Resets the encoders
 		m_direction.resetEncoders();
 		//Target first selected cargo
@@ -73,7 +78,7 @@ public class AutoCommand extends CommandBase {
 		commandToScheduleNext = 'S';
 		sequentialCommandToSchedule = new SequentialCommandGroup(
 			isAutoShootOn ? new ShootCargoCommand() : new PrintCommand("Auto shoot preload disabled"),   //Shoots Preload
-			isAutoTaxiOn || isAutoCollectOn ? new DriveCommand(kTaxiDistanceInInches, kAutoDriveSpeed, false) : new PrintCommand ("Taxi is disabled"),
+			isAutoTaxiOn || isAutoCollectOn ? new DriveCommand(kTaxiDistance, kAutoDriveSpeed, false) : new PrintCommand ("Taxi is disabled"),
 			new InstantCommand(() -> {AutoCommand.executingCommand = false;})  //Completed executing a sequential command
 		);
 	}
@@ -130,5 +135,4 @@ public class AutoCommand extends CommandBase {
 		//If auto has finished
 		return hasFinished;
 	}
-	//esteban is driving us nuts :):)
 }

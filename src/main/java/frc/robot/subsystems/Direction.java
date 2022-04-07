@@ -98,6 +98,20 @@ public class Direction extends SubsystemBase {
 		return leftEncoder.getRate();
 	}
 
+	/** Returns the mean distance of the encoders
+	 * @return the mean encoder distance
+	 */
+	public double getDistance() {
+		return (this.getRightEncoderDistance() + this.getLeftEncoderDistance()) / 2;
+	}
+
+	/** Returns the error between the left and right distances
+	 * @return the error between the left and right distances
+	 */
+	public double getError() {
+		return this.getLeftEncoderDistance() - this.getRightEncoderDistance();
+	}
+
 	/** Returns whether the robot is currently moving
 	 * @return whether the robot is currently moving
 	 */
