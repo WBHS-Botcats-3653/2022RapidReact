@@ -38,7 +38,7 @@ public class Robot extends TimedRobot {
 	private final Climber m_climber = Climber.getInstance();
 
 	//Commands
-	private AutoCommand m_autoCommand;
+	private NewAutoCommand m_autoCommand;
 	private final ArcadeDriveCommand m_arcadeDriveCommand = new ArcadeDriveCommand(m_drivetrain);
 	private final IntakeCommand m_intakeCommand = new IntakeCommand(m_intake);
 	private final IndexerCommand m_indexerCommand = new IndexerCommand(m_indexer);
@@ -125,10 +125,10 @@ public class Robot extends TimedRobot {
 		SequentialCommandGroup sequentialCommand = m_autoCommand.getSequentialCommandGroup();
 		ParallelCommandGroup parallelCommand = m_autoCommand.getParallelCommandGroup();
 		if (m_autoCommand.getCommandToScheduleNext() == 'S' && sequentialCommand != null) {
-			AutoCommand.setExecutingCommand(true);
+			NewAutoCommand.setExecutingCommand(true);
 			CommandScheduler.getInstance().schedule(sequentialCommand);
 		} else if (m_autoCommand.getCommandToScheduleNext() == 'P' && parallelCommand != null) {
-			AutoCommand.setExecutingCommand(true);
+			NewAutoCommand.setExecutingCommand(true);
 			CommandScheduler.getInstance().schedule(parallelCommand);
 		}
 	} 

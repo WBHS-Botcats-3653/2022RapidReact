@@ -13,8 +13,8 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.shuffleboard.*;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.NetworkEntries;
-import frc.robot.commands.AutoCommand;
 import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.NewAutoCommand;
 import frc.robot.inputs.OI;
 import frc.robot.inputs.SI;
 
@@ -229,7 +229,7 @@ public class Dashboard extends SubsystemBase {
 		//If the generate cargo collection has been pressed
 		if (NetworkEntries.m_nteGenerateCargoCollection.getBoolean(false)) {
 			//Generate trajectory for cargo collection
-			AutoCommand.generateCargoCollectionTrajectory(NetworkEntries.getTarmac(), NetworkEntries.getCargoToTarget());
+			NewAutoCommand.generateCargoCollectionTrajectory(NetworkEntries.getTarmac(), NetworkEntries.getCargoToTarget());
 			//Deselect the generate cargo collection button
 			NetworkEntries.m_nteGenerateCargoCollection.setBoolean(false);
 		}
@@ -243,7 +243,7 @@ public class Dashboard extends SubsystemBase {
 			genY = NetworkEntries.m_nteY.getDouble(0);
 			genEndAngle = NetworkEntries.m_nteEndAngle.getDouble(0);
 			//Generate custom trajectory
-			AutoCommand.generateCustomTrajectory(genVelocity, genAcceleration, genX, genY, genEndAngle);
+			NewAutoCommand.generateCustomTrajectory(genVelocity, genAcceleration, genX, genY, genEndAngle);
 			//Deselect the generate custom trajectory button
 			NetworkEntries.m_nteGenerateCustomTrajectory.setBoolean(false);
 		}
