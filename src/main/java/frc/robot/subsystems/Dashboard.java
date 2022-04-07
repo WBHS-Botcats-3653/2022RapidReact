@@ -27,8 +27,8 @@ public class Dashboard extends SubsystemBase {
 
 	public ShuffleboardTab tabDrive, tabTest, tabSpeeds, tabAuto;
 
-	private boolean prevHasPreload, prevShootPreload, prevTaxi, prevCollectCargo, prevShootCollectedCargo, prevCustomTrajectory, prevSmartIntake;
-	private double genVelocity, genAcceleration, genX, genY, genEndAngle;
+	private boolean /*prevHasPreload, prevShootPreload,*/ prevTaxi, prevCollectCargo, /*prevShootCollectedCargo, prevCustomTrajectory,*/ prevSmartIntake;
+	//private double genVelocity, genAcceleration, genX, genY, genEndAngle;
 
 	public boolean speedsDisabled = true;
 
@@ -39,12 +39,15 @@ public class Dashboard extends SubsystemBase {
 		tabTest = Shuffleboard.getTab("Test");
 
 		//Auto Tab
-			NetworkEntries.m_nteHasPreload = tabAuto.addPersistent("Has Preload", true).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(0, 0).getEntry();
-			NetworkEntries.m_nteShootPreloadSelected = tabAuto.addPersistent("Shoot Preload", true).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(0, 1).getEntry();
+			NetworkEntries.m_nteShootPreloadSelected = tabAuto.addPersistent("Shoot Preload", true).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(0, 0).getEntry();
 			NetworkEntries.m_nteTaxiSelected = tabAuto.addPersistent("Taxi", true).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(1, 0).getEntry();
-			NetworkEntries.m_nteCustomTrajectorySelected = tabAuto.addPersistent("Custom Trajectory", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(1, 1).getEntry();
 			NetworkEntries.m_nteCollectCargoSelected = tabAuto.addPersistent("Collect Cargo", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(2, 0).getEntry();
-			NetworkEntries.m_nteShootCollectedCargoSelected = tabAuto.addPersistent("Shoot Cargo", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(2, 1).getEntry();
+			//NetworkEntries.m_nteHasPreload = tabAuto.addPersistent("Has Preload", true).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(0, 0).getEntry();
+			//NetworkEntries.m_nteShootPreloadSelected = tabAuto.addPersistent("Shoot Preload", true).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(0, 1).getEntry();
+			//NetworkEntries.m_nteTaxiSelected = tabAuto.addPersistent("Taxi", true).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(1, 0).getEntry();
+			//NetworkEntries.m_nteCustomTrajectorySelected = tabAuto.addPersistent("Custom Trajectory", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(1, 1).getEntry();
+			//NetworkEntries.m_nteCollectCargoSelected = tabAuto.addPersistent("Collect Cargo", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(2, 0).getEntry();
+			//NetworkEntries.m_nteShootCollectedCargoSelected = tabAuto.addPersistent("Shoot Cargo", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(2, 1).getEntry();
 
 			NetworkEntries.m_nteRightTarmac = tabAuto.add("Is Right Tarmac?", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(3, 0).getEntry();
 			NetworkEntries.m_nteLLCargo = tabAuto.add("LL Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(4, 0).getEntry();
@@ -101,11 +104,11 @@ public class Dashboard extends SubsystemBase {
 			tabTest.add("Differential Drive", m_driveTrain.getDiffDrive()).withSize(4, 2).withPosition(0, 2);
 			
 		//Initialize variables
-		prevShootPreload = NetworkEntries.m_nteShootPreloadSelected.getBoolean(false);
+		//prevShootPreload = NetworkEntries.m_nteShootPreloadSelected.getBoolean(false);
 		prevTaxi = NetworkEntries.m_nteTaxiSelected.getBoolean(false);
-		prevCustomTrajectory = NetworkEntries.m_nteCustomTrajectorySelected.getBoolean(false);
+		//prevCustomTrajectory = NetworkEntries.m_nteCustomTrajectorySelected.getBoolean(false);
 		prevCollectCargo = NetworkEntries.m_nteCollectCargoSelected.getBoolean(false);
-		prevShootCollectedCargo = NetworkEntries.m_nteShootCollectedCargoSelected.getBoolean(false);
+		//prevShootCollectedCargo = NetworkEntries.m_nteShootCollectedCargoSelected.getBoolean(false);
 		prevSmartIntake = NetworkEntries.m_nteIsSmartIntakeEnabled.getBoolean(false);
 	}
 
@@ -166,7 +169,7 @@ public class Dashboard extends SubsystemBase {
 	 */
 	public void selectorLogic() {
 		//If shoot preload has been enabled
-		if (NetworkEntries.m_nteShootPreloadSelected.getBoolean(false) && !prevShootPreload) {
+		/*if (NetworkEntries.m_nteShootPreloadSelected.getBoolean(false) && !prevShootPreload) {
 			//Enable has preload
 			NetworkEntries.m_nteHasPreload.setBoolean(true);
 		} else if (!NetworkEntries.m_nteHasPreload.getBoolean(false) && prevHasPreload) {
@@ -175,10 +178,10 @@ public class Dashboard extends SubsystemBase {
 		}
 		//Updates previous value of shoot preload and has preload
 		prevShootPreload = NetworkEntries.m_nteShootPreloadSelected.getBoolean(false);
-		prevHasPreload = NetworkEntries.m_nteHasPreload.getBoolean(false);
+		prevHasPreload = NetworkEntries.m_nteHasPreload.getBoolean(false);*/
 
 		//If custom trajectory has been selected
-		if (NetworkEntries.m_nteCustomTrajectorySelected.getBoolean(false) && !prevCustomTrajectory) {
+		/*if (NetworkEntries.m_nteCustomTrajectorySelected.getBoolean(false) && !prevCustomTrajectory) {
 			//Enable taxi
 			NetworkEntries.m_nteTaxiSelected.setBoolean(true);
 		} else if (!NetworkEntries.m_nteTaxiSelected.getBoolean(false) && prevTaxi) {
@@ -186,10 +189,10 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteCustomTrajectorySelected.setBoolean(false);
 		}
 		//Updates previous value of custom trajectory
-		prevCustomTrajectory = NetworkEntries.m_nteCustomTrajectorySelected.getBoolean(false);
+		prevCustomTrajectory = NetworkEntries.m_nteCustomTrajectorySelected.getBoolean(false);*/
 
 		//If shoot collected cargo has been enabled
-		if (NetworkEntries.m_nteShootCollectedCargoSelected.getBoolean(false) && !prevShootCollectedCargo) {
+		/*if (NetworkEntries.m_nteShootCollectedCargoSelected.getBoolean(false) && !prevShootCollectedCargo) {
 			//Enable collect cargo
 			NetworkEntries.m_nteCollectCargoSelected.setBoolean(true);
 		} else if (!NetworkEntries.m_nteCollectCargoSelected.getBoolean(false) && prevCollectCargo) {
@@ -197,10 +200,10 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteShootCollectedCargoSelected.setBoolean(false);
 		}
 		//Updates previous value of shoot collected cargo
-		prevShootCollectedCargo = NetworkEntries.m_nteShootCollectedCargoSelected.getBoolean(false);
+		prevShootCollectedCargo = NetworkEntries.m_nteShootCollectedCargoSelected.getBoolean(false);*/
 
 		//If custom trajectory has been enabled
-		if (NetworkEntries.m_nteCustomTrajectorySelected.getBoolean(false) && prevCustomTrajectory) {
+		/*if (NetworkEntries.m_nteCustomTrajectorySelected.getBoolean(false) && prevCustomTrajectory) {
 			//Enable taxi
 			NetworkEntries.m_nteTaxiSelected.setBoolean(true);
 		} else if (!NetworkEntries.m_nteTaxiSelected.getBoolean(false) && prevTaxi) {
@@ -208,13 +211,13 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteCustomTrajectorySelected.setBoolean(false);
 		}
 		//Updates previous value of custom trajectory
-		prevCustomTrajectory = NetworkEntries.m_nteCustomTrajectorySelected.getBoolean(false);
+		prevCustomTrajectory = NetworkEntries.m_nteCustomTrajectorySelected.getBoolean(false);*/
 
 		if (NetworkEntries.m_nteTaxiSelected.getBoolean(false) && !prevTaxi) {  //If taxi has been enabled
 			//Disable collect cargo
 			NetworkEntries.m_nteCollectCargoSelected.setBoolean(false);
 			//Disable shoot collected cargo
-			NetworkEntries.m_nteShootCollectedCargoSelected.setBoolean(false);
+			//NetworkEntries.m_nteShootCollectedCargoSelected.setBoolean(false);
 		} else if (NetworkEntries.m_nteCollectCargoSelected.getBoolean(false) && !prevCollectCargo) {  //If collect cargo has been enabled
 			//Disable taxi and custom trajectory
 			NetworkEntries.m_nteTaxiSelected.setBoolean(false);
@@ -234,7 +237,7 @@ public class Dashboard extends SubsystemBase {
 		}
 
 		//If the generate custom trajectory has been pressed
-		if (NetworkEntries.m_nteGenerateCustomTrajectory.getBoolean(false)) {
+		/*if (NetworkEntries.m_nteGenerateCustomTrajectory.getBoolean(false)) {
 			//Update generated values
 			genVelocity = NetworkEntries.m_nteMaxVelocity.getDouble(0);
 			genAcceleration = NetworkEntries.m_nteMaxAcceleration.getDouble(0);
@@ -245,8 +248,8 @@ public class Dashboard extends SubsystemBase {
 			NewAutoCommand.generateCustomTrajectory(genVelocity, genAcceleration, genX, genY, genEndAngle);
 			//Deselect the generate custom trajectory button
 			NetworkEntries.m_nteGenerateCustomTrajectory.setBoolean(false);
-		}
-
+		}*/
+		
 		//If the reset encoders button has been pressed
 		if (NetworkEntries.m_nteResetEncoders.getBoolean(false)) {
 			//Reset the encoders

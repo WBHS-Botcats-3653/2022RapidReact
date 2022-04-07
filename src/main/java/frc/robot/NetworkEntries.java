@@ -12,11 +12,11 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 public class NetworkEntries {
 	//Auto Tab
 	public static NetworkTableEntry m_nteShootPreloadSelected;  //boolean
-	public static NetworkTableEntry m_nteHasPreload; //boolean
+	//public static NetworkTableEntry m_nteHasPreload; //boolean
 	public static NetworkTableEntry m_nteTaxiSelected;  //boolean
-	public static NetworkTableEntry m_nteCustomTrajectorySelected;  //boolean
+	//public static NetworkTableEntry m_nteCustomTrajectorySelected;  //boolean
 	public static NetworkTableEntry m_nteCollectCargoSelected;  //boolean
-	public static NetworkTableEntry m_nteShootCollectedCargoSelected; //boolean
+	//public static NetworkTableEntry m_nteShootCollectedCargoSelected; //boolean
 
 	public static NetworkTableEntry m_nteRightTarmac;  //boolean
 	public static NetworkTableEntry m_nteLLCargo;  //boolean
@@ -27,12 +27,12 @@ public class NetworkEntries {
 	public static NetworkTableEntry m_nteRRCargo;  //boolean
 	public static NetworkTableEntry m_nteGenerateCargoCollection;  //boolean
 
-	public static NetworkTableEntry m_nteMaxVelocity;  //double (meters per second)
-	public static NetworkTableEntry m_nteMaxAcceleration;  //double (meters per second squared)
-	public static NetworkTableEntry m_nteX;  //double
-	public static NetworkTableEntry m_nteY;  //double
-	public static NetworkTableEntry m_nteEndAngle;  //double
-	public static NetworkTableEntry m_nteGenerateCustomTrajectory;  //boolean
+	//public static NetworkTableEntry m_nteMaxVelocity;  //double (meters per second)
+	//public static NetworkTableEntry m_nteMaxAcceleration;  //double (meters per second squared)
+	//public static NetworkTableEntry m_nteX;  //double
+	//public static NetworkTableEntry m_nteY;  //double
+	//public static NetworkTableEntry m_nteEndAngle;  //double
+	//public static NetworkTableEntry m_nteGenerateCustomTrajectory;  //boolean
 
 	//Drive Tab
 	public static NetworkTableEntry m_nteIsSmartIntakeEnabled;  //boolean
