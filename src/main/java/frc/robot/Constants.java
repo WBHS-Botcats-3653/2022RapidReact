@@ -63,11 +63,11 @@ public final class Constants {
 		 *Instructions: https://docs.wpilib.org/en/stable/docs/software/pathplanning/system-identification/identification-routine.html#running-the-identification-routine
 		 */
 		//Static gain (voltage required to overcome static friction)
-		public static final double kS = 0.0;  //Get correct value
+		public static final double kS = 0.3;  //Get correct value
 		//Velocity gain
-		public static final double kV = 0.0;  //Get correct value
+		public static final double kV = 1.9;  //Get correct value
 		//Acceleration gain
-		public static final double kA = 0.0;  //Get correct value
+		public static final double kA = 0.2;  //Get correct value
 
 		//Proportional (multiplied to the error)
 		public static final double kP = 0.4;  //Find good value
