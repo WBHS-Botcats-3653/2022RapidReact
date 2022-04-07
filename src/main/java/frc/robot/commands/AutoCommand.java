@@ -27,7 +27,7 @@ public class AutoCommand extends CommandBase {
 	private static final Direction m_direction = Direction.getInstance();
 
 	//Holds Ramsete commands containing trajectories to be followed during the autonomous period (Generated before the autonomous period to avoid time lags)
-	private static final RamseteCommand taxiRamCommand = generateTrajectory(
+	private static RamseteCommand taxiRamCommand = generateTrajectory(
 		Units.feetToMeters(2.0),  //Max velocity (Meters per second)
 		Units.feetToMeters(2.0),  //Max acceleration (Meters per seconds squared)
 		Arrays.asList(
@@ -76,6 +76,9 @@ public class AutoCommand extends CommandBase {
 		if (customRamCommand == null) customTrajectoryEnabled = false;
 		if (collectCargoRamCommand == null) collectCargoEnabled = false;
 
+		//If the custom trajectory is enabled move the trajectory from the custom ramsete command variable to the taxi ramsete command variable
+		if (customTrajectoryEnabled) taxiRamCommand = customRamCommand;
+
 		//Resets the encoders to ensure the robot starts zeroed
 		m_direction.resetEncoders();
 		//Next command to be schedule will be a SequentialCommandGroup
@@ -83,7 +86,7 @@ public class AutoCommand extends CommandBase {
 		//Auto commands to be scheduled sequentially
 		sequential = new SequentialCommandGroup(
 			shootPreloadEnabled ? new ShootCargoCommand(1) : new PrintCommand("Auto shoot disabled"),  //Shoot preload
-			taxiEnabled ? (customTrajectoryEnabled ? customRamCommand : taxiRamCommand) : new PrintCommand("Taxi and custom trajectory disabled"),  //Taxi or custom trajectory
+			taxiEnabled ? taxiRamCommand : new PrintCommand("Taxi disabled"),  //Taxi
 			new InstantCommand(() -> executingCommand = false)  //Has finished executing the SequentialCommandGroup
 		);
 	}
