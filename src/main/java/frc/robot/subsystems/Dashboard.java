@@ -73,8 +73,8 @@ public class Dashboard extends SubsystemBase {
 			
 			tabDrive.add("Gyro", m_direction.getGyro()).withWidget(BuiltInWidgets.kGyro).withSize(2, 2).withPosition(0, 2);
 
-			tabDrive.add("Front View", m_cameras.getFrontCamera()).withWidget(BuiltInWidgets.kCameraStream).withSize(3, 2).withPosition(2, 1);
-			tabDrive.add("Rear View", m_cameras.getRearCamera()).withWidget(BuiltInWidgets.kCameraStream).withSize(3, 2).withPosition(5, 1);
+			//tabDrive.add("Front View", m_cameras.getFrontCamera()).withWidget(BuiltInWidgets.kCameraStream).withSize(3, 2).withPosition(5, 1);
+			//tabDrive.add("Rear View", m_cameras.getRearCamera()).withWidget(BuiltInWidgets.kCameraStream).withSize(3, 2).withPosition(2, 1);
 			
 		//Speeds Tab			
 			NetworkEntries.m_nteMaxDriveSpeed = tabSpeeds.addPersistent("Max Drive Speed", kDefaultDriveSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1.0)).withSize(2, 1).withPosition(0, 0).getEntry();  //double

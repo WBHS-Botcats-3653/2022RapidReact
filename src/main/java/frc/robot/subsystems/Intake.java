@@ -10,12 +10,20 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.NetworkEntries;
+import frc.robot.inputs.OI;
+import frc.robot.inputs.SI;
 
 public class Intake extends SubsystemBase {
 	private static Intake m_singleton = null;
+	private static final OI m_oi = OI.getInstance();
+	private static final SI m_si = SI.getInstance();
 
 	//Motor controllers
 	private final WPI_VictorSPX pivot, rollers;
+
+	//
+	private double prevPivotSpeed = NetworkEntries.m_nteMaxPivotSpeed.getDouble(0);
 
 	private Intake() {
 		//Creates motor controllers
@@ -29,6 +37,16 @@ public class Intake extends SubsystemBase {
 		//Sets whether the motors are in brake or coast mode
 		pivot.setNeutralMode(NeutralMode.Coast);
 		rollers.setNeutralMode(NeutralMode.Coast);
+	}
+
+	@Override
+	public void periodic() {
+		prevPivotSpeed = NetworkEntries.m_nteMaxPivotSpeed.getDouble(0);
+		if (m_si.isPivotDownLimitClosed() && m_oi.getMaxPivotSpeed() != 0) {
+			NetworkEntries.m_nteMaxPivotSpeed.setDouble(kLoweredPivotSpeed);
+		} else {
+			NetworkEntries.m_nteMaxPivotSpeed.setDouble(prevPivotSpeed);
+		}
 	}
 	
 	/** Returns an instance of Intake, creating an instance only when one does not already exist (singleton)

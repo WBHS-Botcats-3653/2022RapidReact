@@ -19,7 +19,7 @@ public final class Constants {
 	public static final class AutoConstants {
 		//The distance to travel in reverse when taxiing
 		//public static final double kTaxiDistance = Units.inchesToMeters(-86.0);  //Inches (-86.0)
-		public static final double kTaxiDistance = -80.0;  //Inches (-86.0)
+		public static final double kTaxiDistance = -75.0;  //Inches (-86.0)
 
 		/*Distances and angles to cargo after taxi during auto
 		 *<String cargoID, double[angle, distance]>
@@ -145,8 +145,8 @@ public final class Constants {
 	/** Camera related constants */
 	public static final class CameraConstants {
 		//IDs
-		public static final int kFrontCameraID = 1;
-		public static final int kRearCameraID = 0;
+		public static final int kFrontCameraID = 0;
+		public static final int kRearCameraID = 1;
 
 		//Resolution
 		public static final int kCameraResolutionWidth = 142;
@@ -213,6 +213,7 @@ public final class Constants {
 		public static final int kTopPivotLimitSwitchID = 1;  //DIO
 
 		//Speeds
+		public static final double kLoweredPivotSpeed = 0.05;
 		public static final double kSmartPivotDownSpeed = 0.15;
 		public static final double kSmartPivotUpSpeed = 0.35;
 		public static final double kPivotAssistSpeed = 0.1;
@@ -252,7 +253,7 @@ public final class Constants {
 	public static final class DefaultSpeedsConstants {
 		//Default Max Speeds
 		public static final double kDefaultDriveSpeed = 1.0;
-		public static final double kDefaultPivotSpeed = 0.30;
+		public static final double kDefaultPivotSpeed = 0.2;
 		public static final double kDefaultRollerSpeed = 1.0;
 		public static final double kDefaultIndexSpeed = 1.0;
 		public static final double kDefaultSmartIndexSpeed = 0.7;
