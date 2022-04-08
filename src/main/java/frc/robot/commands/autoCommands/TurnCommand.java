@@ -37,7 +37,7 @@ public class TurnCommand extends CommandBase {
 	public void execute() {
 		//Difference of the between the desired angle the current angle of the robot
 		double difference = targetAngle - m_direction.getGyroAngle();
-		if (Math.abs(difference) > kThreshold) {  //Robot is not within the threshold of the desired angle
+		if (Math.abs(difference) > kThreshold) {  //If the robot is not within the threshold of the desired angle
 			//Turn towards the desired angle
 			m_drivetrain.arcadeDrive(0, difference * kP);
 			//Has not finished turning
@@ -53,7 +53,7 @@ public class TurnCommand extends CommandBase {
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
-		//Stops the robot
+		//Stops the drive
 		m_drivetrain.arcadeDrive(0, 0);
 	}
 
