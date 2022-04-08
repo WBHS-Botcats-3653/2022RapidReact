@@ -8,6 +8,7 @@ import static frc.robot.Constants.AutoConstants.*;
 import static frc.robot.Constants.IntakeConstants.kPivotAssistSpeed;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.commands.AutoCommand;
 import frc.robot.inputs.SI;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
@@ -35,7 +36,7 @@ public class CollectCargoCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		//Intake pivot and rollers
+		/*//Intake pivot and rollers
 		if (endCommand) {  //If the command has been told to end
 			//Pivots the intake up
 			m_intake.setPivotSpeed(-kAutoIntakePivotUpSpeed);
@@ -57,6 +58,19 @@ public class CollectCargoCommand extends CommandBase {
 		} else if (m_si.isIntakeClosed()) {  //If there is cargo in the intake
 			//Spin the indexer
 			m_indexer.setIndexerSpeed(kAutoIndexSpeed);
+		}*/
+
+
+		if (m_si.isPivotDownLimitClosed() && !endCommand) {  //If the intake has finished it's downward pivot
+			//Stops the intake pivot
+			m_intake.setPivotSpeed(kPivotAssistSpeed);
+			//Spins the intake rollers
+			m_intake.setRollerSpeed(kAutoIntakeRollerSpeed);
+		} else if (endCommand) {  //If the command has been told to end
+			//Pivots the intake up
+			m_intake.setPivotSpeed(-kAutoIntakePivotUpSpeed);
+			//Stops the intake rollers
+			m_intake.setRollerSpeed(0);
 		}
 	}
 
@@ -69,6 +83,8 @@ public class CollectCargoCommand extends CommandBase {
 		m_intake.setRollerSpeed(0);
 		//Stops the indexer
 		m_indexer.setIndexerSpeed(0);
+		//Not currently executing a command
+		AutoCommand.setExecutingCommand(false);
 	}
 
 	// Returns true when the command should end.
