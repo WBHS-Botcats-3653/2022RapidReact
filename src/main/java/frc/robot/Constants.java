@@ -243,7 +243,7 @@ public final class Constants {
 	public static final class DefaultSpeedsConstants {
 		//Default Max Speeds
 		public static final double kDefaultDriveSpeed = 1.0;
-		public static final double kDefaultPivotSpeed = 0.45;
+		public static final double kDefaultPivotSpeed = 0.30;
 		public static final double kDefaultRollerSpeed = 1.0;
 		public static final double kDefaultIndexSpeed = 1.0;
 		public static final double kDefaultSmartIndexSpeed = 0.7;
