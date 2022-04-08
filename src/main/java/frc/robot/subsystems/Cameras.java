@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import static frc.robot.Constants.CameraConstants.*;
+
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -19,16 +21,16 @@ public class Cameras extends SubsystemBase {
 	/** Creates a new Cameras. */
 	public Cameras() {
 		//Creates new camera objects and starts live feed
-		frontCamera = CameraServer.startAutomaticCapture(0);
-		rearCamera = CameraServer.startAutomaticCapture(1);
+		frontCamera = CameraServer.startAutomaticCapture(kFrontCameraID);
+		rearCamera = CameraServer.startAutomaticCapture(kRearCameraID);
 
 		//Sets the resolution of the cameras
-		frontCamera.setResolution(142, 90);
-		rearCamera.setResolution(142, 90);
+		frontCamera.setResolution(kCameraResolutionWidth, kCameraResolutionHeight);
+		rearCamera.setResolution(kCameraResolutionWidth, kCameraResolutionHeight);
 
 		//Sets the frame rate of the cameras
-		frontCamera.setFPS(20);
-		rearCamera.setFPS(20);
+		frontCamera.setFPS(kCameraFPS);
+		rearCamera.setFPS(kCameraFPS);
 	}
 
 	/** Returns an instance of Cameras

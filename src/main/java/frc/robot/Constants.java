@@ -18,6 +18,7 @@ public final class Constants {
 	/** Auto related constants */
 	public static final class AutoConstants {
 		//The distance to travel in reverse when taxiing
+<<<<<<< Updated upstream
 		public static final double kTaxiDistance = -80.0;  //Inches (-86.0)
 
 		/*Distances and angles to cargo after taxi during auto
@@ -80,6 +81,9 @@ public final class Constants {
 			put("R MR-RR", new double[] {0.0, 0.0});
 			put("R MR-ML", new double[] {0.0, 0.0});
 		}};
+=======
+		public static final double kTaxiDistance = Units.inchesToMeters(-86.0);  //Meters (-80.0)
+>>>>>>> Stashed changes
 		
 		/*Holds the coordinates of the different pre-positioned cargo with the robot in the left or right Tarmac at x = 0, y = 0, angle = 0
 		 *<String cargoID, Pose2d(x, y, Rotation2d(angle))>
@@ -139,6 +143,20 @@ public final class Constants {
 		//Constants you don't need to understand
 		public static final double kRamseteB = 2.0;  //DO NOT CHANGE
 		public static final double kRamseteZeta = 0.7;  //DO NOT CHANGE
+	}
+
+	/** Camera related constants */
+	public static final class CameraConstants {
+		//IDs
+		public static final int kFrontCameraID = 1;
+		public static final int kRearCameraID = 0;
+
+		//Resolution
+		public static final int kCameraResolutionWidth = 142;
+		public static final int kCameraResolutionHeight = 90;
+
+		//FPS
+		public static final int kCameraFPS = 20;
 	}
 
 	/** Drive related constants */
@@ -228,7 +246,7 @@ public final class Constants {
 	public static final class DefaultSpeedsConstants {
 		//Default Max Speeds
 		public static final double kDefaultDriveSpeed = 1.0;
-		public static final double kDefaultPivotSpeed = 0.5;
+		public static final double kDefaultPivotSpeed = 0.45;
 		public static final double kDefaultRollerSpeed = 1.0;
 		public static final double kDefaultIndexSpeed = 1.0;
 		public static final double kDefaultSmartIndexSpeed = 0.7;
