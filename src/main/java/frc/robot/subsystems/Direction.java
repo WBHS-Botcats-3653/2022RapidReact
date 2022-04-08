@@ -72,16 +72,16 @@ public class Direction extends SubsystemBase {
 	 * @return the right encoder's distance
 	 */
 	public double getRightEncoderDistance() {
-		return rightEncoder.getDistance();
-		//return rightEncoder.getDistance() / 1.11437;
+		//return rightEncoder.getDistance();
+		return rightEncoder.getDistance() / 1.11437;
 	}
 
 	/** Returns the distance the left wheels of the drivetrain have mvoed
 	 * @return the left encoder's distance
 	 */
 	public double getLeftEncoderDistance() {
-		return leftEncoder.getDistance();
-		//return leftEncoder.getDistance() / 1.11019;
+		//return leftEncoder.getDistance();
+		return leftEncoder.getDistance() / 1.11019;
 	}
 
 	/** Returns the rate the right wheels of the drivetrain are moving at

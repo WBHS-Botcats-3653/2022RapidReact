@@ -170,14 +170,23 @@ public final class Constants {
 		public static final int kRightMotorGroupEncoderIDA = 3;  //DIO 1 pin
 		public static final int kRightMotorGroupEncoderIDB = 2;  //DIO 3 pin
 
-		//Diameter of the wheel directly mounted to the motor shaft
+		/*//Diameter of the wheel directly mounted to the motor shaft
 		private static final double kDriveWheelDiameter = Units.inchesToMeters(6.0);  //Meters
 		//Circumference of the wheel directly mounted to the motor shaft
 		private static final double kDriveWheelCircumference = kDriveWheelDiameter * Math.PI;  //Meters
 		//The number of pulses per rotation of the motor (also known as the encoder resolution)
 		private static final double kDrivePulsePerRevolution = 355.0;
 		//Encoder distance per pulse calculation
-		public static final double kDriveDistancePerPulse = kDriveWheelCircumference / kDrivePulsePerRevolution;
+		public static final double kDriveDistancePerPulse = kDriveWheelCircumference / kDrivePulsePerRevolution;*/
+
+		//Encoder distance per pulse
+		private static final double kWheelDiameter = 6.0;
+		private static final double kPulsePerRevolution = 360.0;
+		private static final double kEncoderGearRatio = 1.0 / 1.0;
+		private static final double kGearRatio = 10.71 / 1.0;
+		private static final double kFudgefactor = 12.0;  //Unit conversion
+		public static final double kDriveDistancePerPulse = Math.PI * kWheelDiameter / kPulsePerRevolution / kEncoderGearRatio / kGearRatio * kFudgefactor;
+		//public static final double kDistancePerPulse = 1.0/256.0;
 
 
 		//The gear ratio between the encoder shaft and the wheels
