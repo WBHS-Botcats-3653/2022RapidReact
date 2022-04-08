@@ -108,9 +108,7 @@ public class Robot extends TimedRobot {
 		m_autoCommand = m_robotContainer.getAutonomousCommand();
 
 		// Schedules the autonomous command
-		if (m_autoCommand != null) {
-			CommandScheduler.getInstance().schedule(m_autoCommand);
-		}
+		if (m_autoCommand != null) CommandScheduler.getInstance().schedule(m_autoCommand);
 
 		//Disables the speeds
 		m_dashboard.disableSpeeds(true);
@@ -120,15 +118,23 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		//Schedules sequential and parallel command groups fed from the AutoCommand
+		//If the auto command has finished break out of the method
 		if (m_autoCommand.isFinished()) return;
+		//If there is a command currently being executed break out of the method
 		if (m_autoCommand.getExecutingCommand()) return;
+		//Get any sequential or parallel command groups to be scheduled
 		SequentialCommandGroup sequentialCommand = m_autoCommand.getSequentialCommandGroup();
 		ParallelCommandGroup parallelCommand = m_autoCommand.getParallelCommandGroup();
+		//If the next command to be scheduled is sequential and there is a sequential command to be executed
 		if (m_autoCommand.getCommandToScheduleNext() == 'S' && sequentialCommand != null) {
+			//Now executing an auto command
 			AutoCommand.setExecutingCommand(true);
+			//Schedule the SequentialCommandGroup
 			CommandScheduler.getInstance().schedule(sequentialCommand);
-		} else if (m_autoCommand.getCommandToScheduleNext() == 'P' && parallelCommand != null) {
+		} else if (m_autoCommand.getCommandToScheduleNext() == 'P' && parallelCommand != null) {  //If the next command to be scheduled is parallel and there is a parallel command to be executed
+			//Now excuting an auto command
 			AutoCommand.setExecutingCommand(true);
+			//Schedule the ParallelCommandGroup
 			CommandScheduler.getInstance().schedule(parallelCommand);
 		}
 	} 
