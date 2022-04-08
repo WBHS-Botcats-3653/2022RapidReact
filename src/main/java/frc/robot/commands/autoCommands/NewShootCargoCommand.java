@@ -11,19 +11,18 @@ import frc.robot.inputs.SI;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Shooter;
 
-public class ShootCargoCommand extends CommandBase {
-	private Shooter m_shooter;
-	private Indexer m_indexer;
-	private SI m_si;
+public class NewShootCargoCommand extends CommandBase {
+	private final Indexer m_indexer = Indexer.getInstance();
+	private final Shooter m_shooter = Shooter.getInstance();
+	private final SI m_si = SI.getInstance();
 
-	private boolean hasFinished, shooterTriggered;
+	private int numCargo, numShot;
 
-	public ShootCargoCommand() {
-		m_shooter = Shooter.getInstance();
-		m_indexer = Indexer.getInstance();
-		m_si = SI.getInstance();
-		// Use addRequirements() here to declare subsystem dependencies.
-		addRequirements(m_shooter, m_indexer);
+	private boolean shooterTriggered;
+
+	public NewShootCargoCommand(int numCargo) {
+		this.numCargo = numCargo;
+		addRequirements(m_indexer, m_shooter);
 	}
 
 	// Called when the command is initially scheduled.
@@ -31,25 +30,31 @@ public class ShootCargoCommand extends CommandBase {
 	public void initialize() {
 		//Spins the shooter at max speed
 		m_shooter.setShootSpeed(kAutoShootSpeed);
-		//The command has not finished
-		hasFinished = false;
 		//The shooter photoelectric sensor has not been triggered
 		shooterTriggered = false;
+		//If there is cargo in the upper storage area
+		if (m_si.isUpperStorageClosed()) {
+			//Spins the indexer in reverse
+			m_indexer.setIndexerSpeed(-kAutoIndexSpeed);
+		}
 	}
 
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		if (m_si.isLowerStorageClosed()) {  //If there is cargo in the lower storage area
-			//Sets the indexer to max speed
+		//If there is cargo in the intake or lower storage area
+		if (!m_si.isUpperStorageClosed() && (m_si.isIntakeClosed() || m_si.isLowerStorageClosed())) {
+			//Spins the indexer
 			m_indexer.setIndexerSpeed(kAutoIndexSpeed);
 		}
 		if (m_si.isShooterClosed()) {  //If cargo has moved into the shooter
 			//The shooter photoelectric sensor has been triggered
 			shooterTriggered = true;
-		} else {  //If cargo is not in the shooter
-			//If the shooter has been previously triggered the command should finish
-			if (shooterTriggered) hasFinished = true;
+		} else if (shooterTriggered) {  //If the shooter has been previously triggered
+			//Increment the number of cargo that has been shot by 1
+			numShot++;
+			//The shooter photoelectric sensor has not been triggered
+			shooterTriggered = false;
 		}
 	}
 
@@ -65,7 +70,7 @@ public class ShootCargoCommand extends CommandBase {
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() {
-		//Stops the command when the cargo has left the shooter
-		return hasFinished;
+		//Stops the command when the correct number of cargo to be shot have left the shooter
+		return numShot >= numCargo;
 	}
 }

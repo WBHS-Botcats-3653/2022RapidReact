@@ -16,8 +16,7 @@ import edu.wpi.first.math.trajectory.*;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.NetworkEntries;
-import frc.robot.commands.autoCommands.CollectCargoCommand;
-import frc.robot.commands.autoCommands.ShootCargoCommand;
+import frc.robot.commands.autoCommands.*;
 import frc.robot.subsystems.*;
 
 public class NewAutoCommand extends CommandBase {
@@ -65,12 +64,12 @@ public class NewAutoCommand extends CommandBase {
 	@Override
 	public void initialize() {
 		//Gets user selections
-		hasPreload = NetworkEntries.m_nteHasPreload.getBoolean(false);
+		//hasPreload = NetworkEntries.m_nteHasPreload.getBoolean(false);
 		shootPreloadEnabled = NetworkEntries.m_nteShootPreloadSelected.getBoolean(false);
 		taxiEnabled = NetworkEntries.m_nteTaxiSelected.getBoolean(false);
-		customTrajectoryEnabled = NetworkEntries.m_nteCustomTrajectorySelected.getBoolean(false);
+		//customTrajectoryEnabled = NetworkEntries.m_nteCustomTrajectorySelected.getBoolean(false);
 		collectCargoEnabled = NetworkEntries.m_nteCollectCargoSelected.getBoolean(false);
-		shootCollectedCargoEnabled = NetworkEntries.m_nteShootCollectedCargoSelected.getBoolean(false);
+		//shootCollectedCargoEnabled = NetworkEntries.m_nteShootCollectedCargoSelected.getBoolean(false);
 
 		//If the custom or collect cargo trajectories have not been generated set their execution to false
 		if (customRamCommand == null) customTrajectoryEnabled = false;
@@ -85,7 +84,7 @@ public class NewAutoCommand extends CommandBase {
 		commandToScheduleNext = 'S';
 		//Auto commands to be scheduled sequentially
 		sequential = new SequentialCommandGroup(
-			shootPreloadEnabled ? new ShootCargoCommand(1) : new PrintCommand("Auto shoot disabled"),  //Shoot preload
+			shootPreloadEnabled ? new NewShootCargoCommand(1) : new PrintCommand("Auto shoot disabled"),  //Shoot preload
 			taxiEnabled ? taxiRamCommand : new PrintCommand("Taxi disabled"),  //Taxi
 			new InstantCommand(() -> executingCommand = false)  //Has finished executing the SequentialCommandGroup
 		);
@@ -136,7 +135,7 @@ public class NewAutoCommand extends CommandBase {
 				commandToScheduleNext = 'S';
 				//Auto commands to be scheduled sequentially
 				sequential = new SequentialCommandGroup(
-					new ShootCargoCommand(numCargoToCollect + ((hasPreload && !shootPreloadEnabled) ? 1 : 0)),  //Shoot cargo (The amount of cargo to shoot is the number of cargo collected plus any preloaded cargo if it has not already been shot)
+					new NewShootCargoCommand(numCargoToCollect + ((hasPreload && !shootPreloadEnabled) ? 1 : 0)),  //Shoot cargo (The amount of cargo to shoot is the number of cargo collected plus any preloaded cargo if it has not already been shot)
 					new InstantCommand(() -> hasFinished = true),  //Auto has finished
 					new InstantCommand(() -> executingCommand = false)  //Has finished executing the sequential command
 				);
