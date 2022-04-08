@@ -12,7 +12,7 @@ import frc.robot.subsystems.Direction;
 public class AutoCommand extends CommandBase {
 	private Direction m_direction;
 
-	/*Which Tarmac the robot is starting in (defaults to left tarmac)
+	/*Which Tarmac the robot is starting in
 	*"L"=Left, "R"=Right
 	*/
 	private char startingTarmac;
