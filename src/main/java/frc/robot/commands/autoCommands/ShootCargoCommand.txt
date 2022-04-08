@@ -11,7 +11,7 @@ import frc.robot.inputs.SI;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Shooter;
 
-public class NewShootCargoCommand extends CommandBase {
+public class ShootCargoCommand extends CommandBase {
 	private final Indexer m_indexer = Indexer.getInstance();
 	private final Shooter m_shooter = Shooter.getInstance();
 	private final SI m_si = SI.getInstance();
@@ -20,7 +20,7 @@ public class NewShootCargoCommand extends CommandBase {
 
 	private boolean shooterTriggered;
 
-	public NewShootCargoCommand(int numCargo) {
+	public ShootCargoCommand(int numCargo) {
 		this.numCargo = numCargo;
 		addRequirements(m_indexer, m_shooter);
 	}

@@ -25,7 +25,7 @@ public class NetworkEntries {
 	public static NetworkTableEntry m_nteMRCargo;  //boolean
 	public static NetworkTableEntry m_nteRLCargo;  //boolean
 	public static NetworkTableEntry m_nteRRCargo;  //boolean
-	public static NetworkTableEntry m_nteGenerateCargoCollection;  //boolean
+	//public static NetworkTableEntry m_nteGenerateCargoCollection;  //boolean
 
 	//public static NetworkTableEntry m_nteMaxVelocity;  //double (meters per second)
 	//public static NetworkTableEntry m_nteMaxAcceleration;  //double (meters per second squared)

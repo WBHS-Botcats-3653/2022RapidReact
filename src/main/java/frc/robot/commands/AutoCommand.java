@@ -39,30 +39,6 @@ public class AutoCommand extends CommandBase {
 		executingCommand = false;
 	}
 
-	//Returns the next SequentialCommandGroup to be scheduled
-	public SequentialCommandGroup getSequentialCommand() {
-		SequentialCommandGroup cmd = sequentialCommandToSchedule;
-		sequentialCommandToSchedule = null;
-		return cmd;
-	}
-
-	//Returns the next ParallelCommandGroup to be scheduled
-	public ParallelCommandGroup getParallelCommand() {
-		ParallelCommandGroup cmd = parallelCommandToSchedule;
-		parallelCommandToSchedule = null;
-		return cmd;
-	}
-
-	//Sets the tarmax the robot is starting in
-	public void setTarmac(char tarmac) {
-		startingTarmac = tarmac;
-	}
-
-	//Sets the cargo the robot should target during auto
-	public void setCargoToTarget(ArrayList<String> cargo) {
-		cargoToTarget = cargo;
-	}
-
 	@Override
 	public void initialize() {
 		//Gets user selections
@@ -135,4 +111,43 @@ public class AutoCommand extends CommandBase {
 		//If auto has finished
 		return hasFinished;
 	}
+
+	//Returns the next SequentialCommandGroup to be scheduled
+	public SequentialCommandGroup getSequentialCommandGroup() {
+		SequentialCommandGroup cmd = sequentialCommandToSchedule;
+		sequentialCommandToSchedule = null;
+		return cmd;
+	}
+
+	//Returns the next ParallelCommandGroup to be scheduled
+	public ParallelCommandGroup getParallelCommandGroup() {
+		ParallelCommandGroup cmd = parallelCommandToSchedule;
+		parallelCommandToSchedule = null;
+		return cmd;
+	}
+
+	//Sets the tarmax the robot is starting in
+	public void setTarmac(char tarmac) {
+		startingTarmac = tarmac;
+	}
+
+	//Sets the cargo the robot should target during auto
+	public void setCargoToTarget(ArrayList<String> cargo) {
+		cargoToTarget = cargo;
+	}
+
+	/** Returns where an auto command is currently being executed
+	 * @return whether a command group is currently being executed in the scheduler
+	 */
+	public boolean getExecutingCommand() {return executingCommand;}
+
+	/** Sets whether an auto command is currently being executed
+	 * @param isExecuting whether a command group is currently being executed by the scheduler
+	 */
+	public static void setExecutingCommand(boolean isExecuting) {executingCommand = isExecuting;}
+
+	/** Returns the type of command which is to be scheduled next
+	 * @return either 'S' for Sequential or 'P' for Parallel indicating which command group is to be scheduled next
+	 */
+	public char getCommandToScheduleNext() {return commandToScheduleNext;}
 }

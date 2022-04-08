@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.shuffleboard.*;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.NetworkEntries;
 import frc.robot.commands.IntakeCommand;
-import frc.robot.commands.NewAutoCommand;
 import frc.robot.inputs.OI;
 import frc.robot.inputs.SI;
 
@@ -213,7 +212,7 @@ public class Dashboard extends SubsystemBase {
 		//Updates previous value of custom trajectory
 		prevCustomTrajectory = NetworkEntries.m_nteCustomTrajectorySelected.getBoolean(false);*/
 
-		if (NetworkEntries.m_nteTaxiSelected.getBoolean(false) && !prevTaxi) {  //If taxi has been enabled
+		/*if (NetworkEntries.m_nteTaxiSelected.getBoolean(false) && !prevTaxi) {  //If taxi has been enabled
 			//Disable collect cargo
 			NetworkEntries.m_nteCollectCargoSelected.setBoolean(false);
 			//Disable shoot collected cargo
@@ -226,15 +225,15 @@ public class Dashboard extends SubsystemBase {
 		}
 		//Set with the current reading of the taxi and collect cargo buttons
 		prevTaxi = NetworkEntries.m_nteTaxiSelected.getBoolean(false);
-		prevCollectCargo = NetworkEntries.m_nteCollectCargoSelected.getBoolean(false);
+		prevCollectCargo = NetworkEntries.m_nteCollectCargoSelected.getBoolean(false);*/
 
 		//If the generate cargo collection has been pressed
-		if (NetworkEntries.m_nteGenerateCargoCollection.getBoolean(false)) {
+		/*if (NetworkEntries.m_nteGenerateCargoCollection.getBoolean(false)) {
 			//Generate trajectory for cargo collection
-			NewAutoCommand.generateCargoCollectionTrajectory(NetworkEntries.getTarmac(), NetworkEntries.getCargoToTarget());
+			AutoCommand.generateCargoCollectionTrajectory(NetworkEntries.getTarmac(), NetworkEntries.getCargoToTarget());
 			//Deselect the generate cargo collection button
 			NetworkEntries.m_nteGenerateCargoCollection.setBoolean(false);
-		}
+		}*/
 
 		//If the generate custom trajectory has been pressed
 		/*if (NetworkEntries.m_nteGenerateCustomTrajectory.getBoolean(false)) {
@@ -249,6 +248,18 @@ public class Dashboard extends SubsystemBase {
 			//Deselect the generate custom trajectory button
 			NetworkEntries.m_nteGenerateCustomTrajectory.setBoolean(false);
 		}*/
+
+		//If the collect cargo has been selected
+		if (NetworkEntries.m_nteCollectCargoSelected.getBoolean(false) && !prevCollectCargo) {
+			//Enable the Taxi
+			NetworkEntries.m_nteTaxiSelected.setBoolean(true);
+		} else if (!NetworkEntries.m_nteTaxiSelected.getBoolean(false) && prevTaxi) {  //If the Taxi has been disabled
+			//Disable the collect cargo
+			NetworkEntries.m_nteCollectCargoSelected.setBoolean(false);
+		}
+		//Set with the current reading of the taxi and collect cargo
+		prevTaxi = NetworkEntries.m_nteTaxiSelected.getBoolean(false);
+		prevCollectCargo = NetworkEntries.m_nteCollectCargoSelected.getBoolean(false);
 		
 		//If the reset encoders button has been pressed
 		if (NetworkEntries.m_nteResetEncoders.getBoolean(false)) {

@@ -19,7 +19,7 @@ import frc.robot.NetworkEntries;
 import frc.robot.commands.autoCommands.*;
 import frc.robot.subsystems.*;
 
-public class NewAutoCommand extends CommandBase {
+public class AutoCommand extends CommandBase {
 	//Subsystems
 	private static final DrivePID m_drivePID = DrivePID.getInstance();
 	private static final Drivetrain m_drivetrain = Drivetrain.getInstance();
@@ -57,8 +57,8 @@ public class NewAutoCommand extends CommandBase {
 	//Holds whether the AutoCommand has finished all the commands it needed to execute
 	private static boolean hasFinished = false;
 		
-	/** Creates a new NewAutoCommand. */
-	public NewAutoCommand() {}
+	/** Creates a new AutoCommand. */
+	public AutoCommand() {}
 
 	// Called when the command is initially scheduled.
 	@Override
@@ -84,7 +84,7 @@ public class NewAutoCommand extends CommandBase {
 		commandToScheduleNext = 'S';
 		//Auto commands to be scheduled sequentially
 		sequential = new SequentialCommandGroup(
-			shootPreloadEnabled ? new NewShootCargoCommand(1) : new PrintCommand("Auto shoot disabled"),  //Shoot preload
+			shootPreloadEnabled ? new ShootCargoCommand(1) : new PrintCommand("Auto shoot disabled"),  //Shoot preload
 			taxiEnabled ? taxiRamCommand : new PrintCommand("Taxi disabled"),  //Taxi
 			new InstantCommand(() -> executingCommand = false)  //Has finished executing the SequentialCommandGroup
 		);
@@ -135,7 +135,7 @@ public class NewAutoCommand extends CommandBase {
 				commandToScheduleNext = 'S';
 				//Auto commands to be scheduled sequentially
 				sequential = new SequentialCommandGroup(
-					new NewShootCargoCommand(numCargoToCollect + ((hasPreload && !shootPreloadEnabled) ? 1 : 0)),  //Shoot cargo (The amount of cargo to shoot is the number of cargo collected plus any preloaded cargo if it has not already been shot)
+					new ShootCargoCommand(numCargoToCollect + ((hasPreload && !shootPreloadEnabled) ? 1 : 0)),  //Shoot cargo (The amount of cargo to shoot is the number of cargo collected plus any preloaded cargo if it has not already been shot)
 					new InstantCommand(() -> hasFinished = true),  //Auto has finished
 					new InstantCommand(() -> executingCommand = false)  //Has finished executing the sequential command
 				);
@@ -278,9 +278,4 @@ public class NewAutoCommand extends CommandBase {
 		parallel = null;
 		return command;
 	}
-
-	/** Returns whether all of the auto commands have finished executing
-	 * @return whether all the autonomous commands have been executed
-	 */
-	public boolean hasFinished() {return hasFinished;}
 }
