@@ -57,21 +57,12 @@ public class Dashboard extends SubsystemBase {
 			NetworkEntries.m_nteRRCargo = tabAuto.add("RR Cargo", false).withWidget(BuiltInWidgets.kToggleSwitch).withSize(1, 1).withPosition(6, 1).getEntry();
 			//NetworkEntries.m_nteGenerateCargoCollection = tabAuto.add("Generate CC", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(3, 1).getEntry();
 
-<<<<<<< Updated upstream
 			//NetworkEntries.m_nteMaxVelocity = tabAuto.add("Max Velocity", 2.0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(0, 2).getEntry();
 			//NetworkEntries.m_nteMaxAcceleration = tabAuto.add("Max Acceleration", 2.0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(1, 2).getEntry();
 			//NetworkEntries.m_nteX = tabAuto.add("X", 0.0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(0, 3).getEntry();
 			//NetworkEntries.m_nteY = tabAuto.add("Y", kTaxiDistance).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(1, 3).getEntry();
 			//NetworkEntries.m_nteEndAngle = tabAuto.add("End Angle", 0.0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(2, 3).getEntry();
 			//NetworkEntries.m_nteGenerateCustomTrajectory = tabAuto.add("Generate Custom", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(0, 4).getEntry();
-=======
-			NetworkEntries.m_nteMaxVelocity = tabAuto.add("Max Velocity", 2.0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(0, 2).getEntry();
-			NetworkEntries.m_nteMaxAcceleration = tabAuto.add("Max Acceleration", 2.0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(1, 2).getEntry();
-			NetworkEntries.m_nteX = tabAuto.add("X", 0.0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(0, 3).getEntry();
-			NetworkEntries.m_nteY = tabAuto.add("Y", Units.metersToInches(kTaxiDistance)).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(1, 3).getEntry();
-			NetworkEntries.m_nteEndAngle = tabAuto.add("End Angle", 0.0).withWidget(BuiltInWidgets.kTextView).withSize(1, 1).withPosition(2, 3).getEntry();
-			NetworkEntries.m_nteGenerateCustomTrajectory = tabAuto.add("Generate Custom", false).withWidget(BuiltInWidgets.kToggleButton).withSize(1, 1).withPosition(0, 4).getEntry();
->>>>>>> Stashed changes
 
 		//Drive Tab
 			NetworkEntries.m_nteIsSmartIntakeEnabled = tabDrive.add("Smart Intake", false).withWidget(BuiltInWidgets.kToggleButton).withSize(2, 1).withPosition(0, 0).getEntry();

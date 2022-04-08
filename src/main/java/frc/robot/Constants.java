@@ -18,7 +18,7 @@ public final class Constants {
 	/** Auto related constants */
 	public static final class AutoConstants {
 		//The distance to travel in reverse when taxiing
-<<<<<<< Updated upstream
+		//public static final double kTaxiDistance = Units.inchesToMeters(-86.0);  //Inches (-86.0)
 		public static final double kTaxiDistance = -80.0;  //Inches (-86.0)
 
 		/*Distances and angles to cargo after taxi during auto
@@ -81,9 +81,6 @@ public final class Constants {
 			put("R MR-RR", new double[] {0.0, 0.0});
 			put("R MR-ML", new double[] {0.0, 0.0});
 		}};
-=======
-		public static final double kTaxiDistance = Units.inchesToMeters(-86.0);  //Meters (-80.0)
->>>>>>> Stashed changes
 		
 		/*Holds the coordinates of the different pre-positioned cargo with the robot in the left or right Tarmac at x = 0, y = 0, angle = 0
 		 *<String cargoID, Pose2d(x, y, Rotation2d(angle))>
