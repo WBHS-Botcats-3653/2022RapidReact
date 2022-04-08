@@ -63,7 +63,7 @@ public class AutoCommand extends CommandBase {
 	public void execute() {
 		//If currently executing an auto command break out of the method
 		if (executingCommand) return;
-		if (!isAutoCollectOn || cargoTargetIndex == cargoToTarget.size()) {  //If collect cargo is disabled in the Dashboard or there is no more cargo left to collect
+		if (!isAutoCollectOn || cargoTargetIndex >= cargoToTarget.size()) {  //If collect cargo is disabled in the Dashboard or there is no more cargo left to collect
 			//Ends auto command
 			hasFinished = true;
 			//Breaks out of the switch
