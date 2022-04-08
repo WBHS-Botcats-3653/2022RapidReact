@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-
 public class Drivetrain extends SubsystemBase {
 	private static Drivetrain m_singleton = null;
 
@@ -72,20 +71,20 @@ public class Drivetrain extends SubsystemBase {
 	}
  
 	/** Sets the tank drive left and right drive speeds
-	 * @param leftSpeed Speed of the left drive train
-	 * @param rightSpeed Speed of the right drive train
+	 * @param leftSpeed Speed of the left drivetrain
+	 * @param rightSpeed Speed of the right drivetrain
 	 */
 	public void tankDrive(double leftSpeed, double rightSpeed) {
 		//Prevents speeds from exceeding the maximum limit
 		if (Math.abs(leftSpeed) > 1.0) leftSpeed = Math.signum(leftSpeed);
 		if (Math.abs(rightSpeed) > 1.0) rightSpeed = Math.signum(rightSpeed);
-		//Sets the left and right drive train speeds
+		//Sets the left and right drivetrain speeds
 		diffDrive.tankDrive(leftSpeed, rightSpeed);
 	}
 
 	/** Sets the tank drive left and right drive volts
-	 * @param leftVolts Volts of the left drive train
-	 * @param rightVolts Volts of the right drive train
+	 * @param leftVolts Volts of the left drivetrain
+	 * @param rightVolts Volts of the right drivetrain
 	 */
 	public void tankDriveVolts(double leftVolts, double rightVolts) {
 		diffDrive.tankDrive(leftVolts / 12, rightVolts / 12);
