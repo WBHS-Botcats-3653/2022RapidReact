@@ -42,6 +42,7 @@ public class Intake extends SubsystemBase {
 
 	@Override
 	public void periodic() {
+		//Decreases the speed of the pivot when the lower limit is triggered
 		//If the speed is 0 break out of the method
 		if (m_oi.getMaxPivotSpeed() == 0) return;
 		//If the pivot down limit is closed
