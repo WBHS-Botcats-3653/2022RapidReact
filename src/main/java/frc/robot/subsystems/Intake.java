@@ -21,7 +21,7 @@ public class Intake extends SubsystemBase {
 
 	//Motor controllers
 	private final WPI_VictorSPX pivot, rollers;
-	private  boolean isLowered = false;
+	private boolean isLowered = false;
 
 	//The previous speed of the pivot when the speed has been lowered
 	private double prevPivotSpeed;
@@ -37,16 +37,15 @@ public class Intake extends SubsystemBase {
 		
 		//Sets whether the motors are in brake or coast mode
 		pivot.setNeutralMode(NeutralMode.Coast);
-		rollers.setNeutralMode(NeutralMode.Coast);
 	}
 
 	@Override
 	public void periodic() {
 		//Decreases the speed of the pivot when the lower limit is triggered
-		//If the speed is less than the lowered pivot speed break out of the method
-		if (m_oi.getMaxPivotSpeed() < kLoweredPivotSpeed) return;
+		//If the pivot speed is less than the lowered pivot speed break out of the method
+		if (NetworkEntries.m_nteMaxPivotSpeed.getDouble(0) < kLoweredPivotSpeed) return;
 		//If the pivot down limit is closed
-		if (m_si.isPivotDownLimitClosed()) {
+		if (m_si.isPivotDownLimitClosed() && !m_oi.getManualIntakeUp()) {
 			//If the pivot is already lowered break out of the method
 			if (isLowered) return;
 			//Set the previous pivot speed to the current pivot speed
