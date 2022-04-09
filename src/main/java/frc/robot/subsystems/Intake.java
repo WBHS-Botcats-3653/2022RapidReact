@@ -23,8 +23,8 @@ public class Intake extends SubsystemBase {
 	private final WPI_VictorSPX pivot, rollers;
 	private  boolean isLowered = false;
 
-	//
-	private double prevPivotSpeed = NetworkEntries.m_nteMaxPivotSpeed.getDouble(0);
+	//The previous speed of the pivot when the speed has been lowered
+	private double prevPivotSpeed;
 
 	private Intake() {
 		//Creates motor controllers
@@ -43,8 +43,8 @@ public class Intake extends SubsystemBase {
 	@Override
 	public void periodic() {
 		//Decreases the speed of the pivot when the lower limit is triggered
-		//If the speed is 0 break out of the method
-		if (m_oi.getMaxPivotSpeed() == 0) return;
+		//If the speed is less than the lowered pivot speed break out of the method
+		if (m_oi.getMaxPivotSpeed() < kLoweredPivotSpeed) return;
 		//If the pivot down limit is closed
 		if (m_si.isPivotDownLimitClosed()) {
 			//If the pivot is already lowered break out of the method
