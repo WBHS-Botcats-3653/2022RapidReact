@@ -63,7 +63,7 @@ public class Drivetrain extends SubsystemBase {
 	 * @param zRotation The rotation rate around the z-axis
 	 */
 	public void arcadeDrive(double xSpeed, double zRotation) {
-		//Prevents speed and rotation from exceeding maximum limit
+		//Prevents speed and rotation from exceeding maximum or minimum limit
 		if (Math.abs(xSpeed) > 1.0) xSpeed = Math.signum(xSpeed);
 		if (Math.abs(zRotation) > 1.0) zRotation = Math.signum(zRotation);
 		//Sets the differential drive speed and rotation
@@ -75,7 +75,7 @@ public class Drivetrain extends SubsystemBase {
 	 * @param rightSpeed Speed of the right drivetrain
 	 */
 	public void tankDrive(double leftSpeed, double rightSpeed) {
-		//Prevents speeds from exceeding the maximum limit
+		//Prevents speeds from exceeding the maximum or minimum limit
 		if (Math.abs(leftSpeed) > 1.0) leftSpeed = Math.signum(leftSpeed);
 		if (Math.abs(rightSpeed) > 1.0) rightSpeed = Math.signum(rightSpeed);
 		//Sets the left and right drivetrain speeds
