@@ -117,12 +117,7 @@ public final class Constants {
 	public static final class DrivePIDConstants {
 		//The distance between the center line of the left and right wheels
 		public static final double kTrackWidth = 0.0;  //Inches
-
-		/*You can get kS, kV, kA, and kP from the frc robot characterization tool (sysId)
-		 *The tool can be found in the WPILib Tools desktop folder (Windows)
-		 *The characterization should be performed while the robot in on a surface similar to that of the game field for the most accurate results
-		 *Instructions: https://docs.wpilib.org/en/stable/docs/software/pathplanning/system-identification/identification-routine.html#running-the-identification-routine
-		 */
+		
 		//Static gain (voltage required to overcome static friction)
 		public static final double kS = 0.3;  //Get correct value
 		//Velocity gain
