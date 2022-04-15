@@ -278,27 +278,31 @@ public class OI {
 	 * @return whether the up button on the DPad is being pressed
 	 */
 	public boolean POVIsUp() {
-		return m_controller.getPOV() != -1 && (m_controller.getPOV() >= 310 || m_controller.getPOV() <= 50);
+		final int pov = m_controller.getPOV();
+		return pov != -1 && (pov >= 310 || pov <= 50);
 	}
 
 	/** Returns whether the down button on the DPad is being pressed
 	 * @return whether the down button on the DPad is being pressed
 	 */
 	public boolean POVIsDown() {
-		return m_controller.getPOV() >= 130 && m_controller.getPOV() <= 230;
+		final int pov = m_controller.getPOV();
+		return pov >= 130 && pov <= 230;
 	}
 
 	/** Returns whether the right button on the DPad is being pressed
 	 * @return whether the right button on the DPad is being pressed
 	 */
 	public boolean POVIsRight() {
-		return m_controller.getPOV() >= 40 && m_controller.getPOV() <= 140;
+		final int pov = m_controller.getPOV();
+		return pov >= 40 && pov <= 140;
 	}
 
 	/** Returns whether the left button on the DPad is being pressed
 	 * @return whether the left button on the DPad is being pressed
 	 */
 	public boolean POVIsLeft() {
-		return m_controller.getPOV() >= 220 && m_controller.getPOV() <= 320;
+		final int pov = m_controller.getPOV();
+		return pov >= 220 && pov <= 320;
 	}
 }
